@@ -620,11 +620,12 @@ function transform(data){
   var free = /[Ff][Rr][Ee]{2}/;
   var freeShipping = /(?i)free\sshipping/;
   var freeOnOrdersOf = /(?i)free\son\sorders\sof\s\$/;
-  var buyNumberGetNumberFree = /(?i)buy\s(one|two|three|\d),?\sget\s(one|two|three|\d)\s(free|\d{1,2}% off)/
+  var buyNumberGetNumberFree = /(?i)buy\s(one|two|three|\d),?\sget\s(one|two|three|\d)\s(free|\d{1,2}% off)/;
+  var cashback = /(?i)cash\s?back/;
 
   //$
   var dollarOff = /\$\d+(\.\d{1,2})?\s([Oo][Ff]{2})/;
-  var saveDollarNum = /(?i)save\s((over|more\sthan|up\sto)\s)?\$\d+/;
+  var saveDollarNum = /(?i)save\s((over|more\sthan|up\sto(\san\sextra)?)\s)?\$\d+/;
   var savingsOfDollar = /(?i)savings\sof\s\$/;
   var dollarReward = /(?i)\$\d{1,3}\sreward/;
   var downToAmmount = /(?i)down\sto\s\$\d{1,}(\.\d{2})?/i;
@@ -652,6 +653,8 @@ function transform(data){
   //Coupon
   var couponColon = /(?i)coupon:/i;
   var couponCodeColon = /(?i)coupon\scode:/i;
+
+  var urlCouponRoot = /https?:\/\/(www\.)?/ //plus the url extension PLUS .*
 }
 
 
@@ -908,9 +911,68 @@ function transform(data){
 
 
 
+
 //PRESET RULE FOR PAYMENTSTATUS TO PUT IN THE ROOT OF THE INVOICE
 function transform (data){
   var status =  Util.getSchemaAttributeFirstValue(data, "http://schema.org/paymentStatus");
   if (status) return data;
   return null;
+}
+
+
+
+
+
+//Minimize the size of the text to 100 characters or less
+function minimizeMe(data){
+
+  //Replace the dots (.) and the percentages (%) with other characters
+  data = data.replace(/%/g, "###").replace(/(\d+)(\.)?(\d{2})/g, "$1~~~$3").replace(/\$/g, "@@@");
+
+  //Iterate with a while loop. If the length of text is larger than 100 AND
+  //There are characters that indicate the end of a sentence (.;!/) AND
+  //There are more than one characters that indicate the end of a sentence (and therefore more than one sentences)
+  while (data.length > 100 && /[\.\?!]/.test(data[data.length-1]) && data.replace(/[^\.;\??]/g,"").length > 1) {
+    //reverse the order of the text
+    data = data.slice(0, data.length-1).split("").reverse().join("");
+    console.log("BEFORE THE IF STATEMENTS:", data);
+
+    //If there are monetary values or % values in string
+    if (data.indexOf("~~~") !== -1 || data.indexOf("###") !== -1 || data.indexOf("@@@") !== -1) {
+      //Define variable with value that equals to the value of the index of the closest symbol
+      //that represents $ or % or . (for decimal)
+      var closestSymbol = +Infinity;
+      if (closestSymbol > data.indexOf("###")) closestSymbol = data.indexOf("###");
+      if (closestSymbol > data.indexOf("###")) closestSymbol = data.indexOf("~~~");
+      if (closestSymbol > data.indexOf("###")) closestSymbol = data.indexOf("@@@");
+
+      //If there is an end of sentence before a $ or % or a num.num, then eliminate the text
+      if (data.search(/[\.\?!]/) < closestSymbol) {
+        data = data.slice(data.search(/[\.\?!]/)).split("").reverse().join("");
+      } //End of inner if statement
+      //else If there is a $ or % or a num.num before the next sentence's end, then break out of while loop
+      else {
+        data = data.split("").reverse().join("");
+        break;
+      } //End of inner else
+    }//End of if statement
+    //If there are no monerary values in the loop then just slice and reverse the sentence
+    else {
+      data = data.slice(data.search(/[\.\?!]/)).split("").reverse().join("");
+    } //end of else
+  }//End of while loop
+
+  return data.replace(/###/g, "%").replace(/(\d+)(~~~)?(\d{2})/g, "$1.$3").replace(/@@@/g, "$");
+}
+
+
+
+
+
+//Minimize the size of the text (LITE VERSION)
+function minimizeMe(data){
+  while (data.length > 100 && /[\.\?!]/.test(data[data.length-1]) && data.replace(/[^\.;\??]/g,"").length > 1) {
+    data = data.slice(0, data.length-1).split("").reverse().join("");
+    data = data.slice(data.search(/[\.\?!]/)).split("").reverse().join("");
+  }
 }

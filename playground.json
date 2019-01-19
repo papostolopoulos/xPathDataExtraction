@@ -1,470 +1,378 @@
 {
   "extract": {
-    "edgeRules": [],
-    "entityNS": null,
+    "extractEmbedded": false,
+    "source": null,
+    "schema": [
+      {
+        "url": "http://ws.rmf.yahoo.com:4080/rmf/v1/schema?type=schema.org&name=y.2.0&format=json",
+        "ns": "http://schema.org",
+        "context": {
+          "@type": [
+            "Invoice"
+          ]
+        }
+      }
+    ],
     "entityRules": [
       {
-        "attributes": [],
-        "entityIdRef": "",
-        "id": "f66018c8-423b-459b-b55a-c639d92daf68",
-        "javascript": null,
+        "id": "931e95e6-6011-491a-81b9-ee2246fb0554",
+        "repeating": true,
         "locations": [
           "/"
         ],
-        "repeating": true,
-        "type": "http://schema.org/Coupon"
-      }
-    ],
-    "extractEmbedded": false,
-    "schema": [
+        "type": "http://schema.org/Invoice",
+        "javascript": "function transform (data){\n\t  var status =  Util.getSchemaAttributeFirstValue(data, \"http://schema.org/paymentStatus\");\n  \tif (status){\n    \treturn data;\n    }\n  \telse return null;\n}",
+        "entityIdRef": "",
+        "attributes": [
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "./descendant::p[contains(.,\"Customer #\") or contains(.,\"Account #\") or contains(.,\"Customer ID#\") or contains(.,\"Customer ID #\")][not (contains(text(),\"CashNetUSA\"))]",
+                  "regex": "\\d+"
+                }
+              ]
+            },
+            "name": "http://schema.org/accountId",
+            "relative": true,
+            "transient": false,
+            "javascript": null,
+            "dataTypes": [
+              "Text"
+            ],
+            "mandatory": false
+          },
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "."
+                }
+              ]
+            },
+            "name": "http://schema.org/paymentStatus",
+            "relative": true,
+            "transient": false,
+            "javascript": "function transform(data) {\n  var textMatchObj = {\n    'The remaining payments set up on your account': 'PaymentDue',\n    'This is a reminder about your minimum payment': 'PaymentDue',\n    'You are late in making your payment': 'PaymentPastDue',\n    'Amount Past Due:': 'PaymentPastDue',\n    'Thank you for your recent payment': 'PaymentComplete',\n    'This is confirmation of your recent payment': 'PaymentComplete',\n    //'keyword4': 'PaymentDeclined',\n    //'keyword5': 'PaymentAutomaticallyApplied',\n    //'keyword6': 'PaymentScheduled'\n  };\n  for(var key in textMatchObj){\n  if(data.trim().indexOf(key) !== -1) return textMatchObj[key];\n}\nreturn \"\";\n}",
+            "dataTypes": [
+              "Text"
+            ],
+            "mandatory": false
+          },
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "\"http//:www.CashNetUSA.com\""
+                }
+              ]
+            },
+            "name": "http://schema.org/url",
+            "relative": true,
+            "transient": false,
+            "javascript": null,
+            "dataTypes": [
+              "URL"
+            ],
+            "mandatory": false
+          },
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "/descendant::td[contains(.,\"Date\")]/following::td[contains(.,\"-\")]"
+                },
+                {
+                  "xpath": "substring-after(./descendant::*[contains(text(),'due')],\"on\")"
+                },
+                {
+                  "xpath": "substring-after(./descendant::p[contains(text(),'is due')], \"On\")"
+                },
+                {
+                  "xpath": "/descendant::td[contains(text(),\"Bank Account\")]/preceding-sibling::td[1]"
+                },
+                {
+                  "xpath": "/descendant::td[contains(.,\"-\")][following::td[2][contains(.,\"Bank Account\")]]"
+                }
+              ]
+            },
+            "name": "http://schema.org/paymentDue",
+            "relative": true,
+            "transient": false,
+            "javascript": null,
+            "dataTypes": [
+              "DateTime"
+            ],
+            "mandatory": false
+          }
+        ],
+        "hints": {
+          "domain": "'email.cashnetusa.com'"
+        }
+      },
       {
-        "context": {
-          "@type": [
-            "Coupon"
-          ]
-        },
-        "ns": "http://schema.org",
-        "url": "http://ws.rmf.yahoo.com:4080/rmf/v1/schema?type=schema.org&name=y.2.0&format=json"
+        "id": "21d6d9d2-73d1-450e-83c6-9fd9bf601d24",
+        "repeating": true,
+        "locations": [
+          "/"
+        ],
+        "type": "http://schema.org/PriceSpecification",
+        "javascript": null,
+        "entityIdRef": "",
+        "attributes": [
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "./descendant::*[contains(text(),'Minimum')]/following::text()"
+                }
+              ]
+            },
+            "name": "http://schema.org/price",
+            "relative": true,
+            "transient": false,
+            "javascript": "function transform(data){\n  if(data.match(/\\$[\\d\\,\\.]{4,}/)){\n    var price = data.replace(/\\$/,'')\n    var amt = parseFloat(price.match(/[\\$\\d\\,\\.]+/)[0].replace(/,/,'')).toFixed(2);\n    return amt;\n  } else {\n    return null;\n  }\n}",
+            "dataTypes": [
+              "Number"
+            ],
+            "mandatory": false
+          },
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "./descendant::*[contains(text(),'Minimum')]/following::text()"
+                }
+              ]
+            },
+            "name": "http://schema.org/priceCurrency",
+            "relative": true,
+            "transient": false,
+            "javascript": "function transform(data){\n  var currencies = [\n    {name: \"AUD\", symbol: \"A$\"},\n    {name: \"AUD\", symbol: \"AU$\"},\n    {name: \"AUD\", symbol: \"AUD\"},\n    {name: \"EGP\", symbol: \"ج.م\"},\n    {name: \"EUR\", symbol: \"€\"},\n    {name: \"GBP\", symbol: \"£\"},\n    {name: \"HUF\", symbol: \"Ft\"},\n     {name: \"IDR\", symbol: \"Rp\"},\n    {name: \"IND\", symbol: \"Rs\"},\n    {name: \"INR\", symbol: \"₹\"},\n    {name: \"MYR\", symbol: \"RM\"},\n    {name: \"NOK\", symbol: \"kr\"},\n    {name: \"PEN\", symbol: \"S/\"},\n    {name: \"PHP\", symbol: \"₱\"},\n    {name: \"PLN\", symbol: \"zł\"},\n    {name: \"QAR\", symbol: \"ر.ق\"},\n    {name: \"RON\", symbol: \"lei\"},\n    {name: \"THB\", symbol: \"฿\"},\n    {name: \"TRY\", symbol: \"TL\"},\n    {name: \"USD\", symbol: \"$\"},\n    {name: \"UGX\", symbol: \"Ush\"},\n    {name: \"VND\", symbol: \"₫\"},\n    {name: \"USD\", symbol: \"USD\"}\n  ];\n\n  for (var i = 0; i < currencies.length; i++) {\n    if (data.indexOf(currencies[i].symbol) !== -1) return currencies[i].name;\n  }\n\n  return \"\";\n}",
+            "dataTypes": [
+              "Text"
+            ],
+            "mandatory": false
+          }
+        ]
+      },
+      {
+        "id": "d5f6938e-6765-404f-b8c7-b5748c0d0858",
+        "repeating": true,
+        "locations": [
+          "/"
+        ],
+        "type": "http://schema.org/Organization",
+        "javascript": null,
+        "entityIdRef": null,
+        "attributes": [
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "./descendant::img[contains(@src,'logo')]/@src"
+                }
+              ]
+            },
+            "name": "http://schema.org/image",
+            "relative": true,
+            "transient": false,
+            "javascript": null,
+            "dataTypes": [
+              "URL"
+            ],
+            "mandatory": false
+          },
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "./descendant::img[contains(@src,'logo')]/@alt"
+                }
+              ]
+            },
+            "name": "http://schema.org/name",
+            "relative": true,
+            "transient": false,
+            "javascript": null,
+            "dataTypes": [
+              "Text"
+            ],
+            "mandatory": false
+          },
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "./descendant::img[contains(@src,'logo')]/parent::a/@href"
+                }
+              ]
+            },
+            "name": "http://schema.org/url",
+            "relative": true,
+            "transient": false,
+            "javascript": null,
+            "dataTypes": [
+              "URL"
+            ],
+            "mandatory": false
+          }
+        ]
+      },
+      {
+        "id": "fb8e35e4-0fed-4967-8b91-05020aebfce6",
+        "repeating": true,
+        "locations": [
+          "/"
+        ],
+        "type": "http://schema.org/PriceSpecification",
+        "javascript": null,
+        "entityIdRef": "",
+        "attributes": [
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "substring-after(/descendant::p[contains(.,\"AMOUNT DUE NOW:\")], \"AMOUNT DUE NOW:\")"
+                },
+                {
+                  "xpath": "substring-after(/descendant::p[contains(.,\"amount of $\")], \"amount of\")"
+                },
+                {
+                  "xpath": "substring-after(/descendant::p[contains(.,\"payment of $\")], \"payment of\")"
+                },
+                {
+                  "xpath": "substring-after(/descendant::p[contains(.,\"Amount Past Due:\")], \"Amount Past Due:\")"
+                },
+                {
+                  "xpath": "/descendant::tr[contains(.,\"Amount\")][2]/following::tr/descendant::td[2]"
+                }
+              ]
+            },
+            "name": "http://schema.org/price",
+            "relative": true,
+            "transient": false,
+            "javascript": "function transform(data){\n  if(data.match(/\\$[\\d\\,\\.]{4,}/)){\n    var price = data.replace(/\\$/,'')\n    var amt = parseFloat(price.match(/[\\$\\d\\,\\.]+/)[0].replace(/,/,'')).toFixed(2);\n    return amt;\n  }\n  \n  if (data.match(/\\d{1,}\\.\\d{2}/)) return data;\n  \n  return null;\n}",
+            "dataTypes": [
+              "Number"
+            ],
+            "mandatory": false
+          },
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "\"USD\""
+                }
+              ]
+            },
+            "name": "http://schema.org/priceCurrency",
+            "relative": true,
+            "transient": false,
+            "javascript": null,
+            "dataTypes": [
+              "Text"
+            ],
+            "mandatory": false
+          }
+        ]
+      },
+      {
+        "id": "0f742efb-194f-4680-8d5d-c46e93e85966",
+        "repeating": true,
+        "locations": [
+          "/"
+        ],
+        "type": "http://schema.org/Person",
+        "javascript": null,
+        "entityIdRef": "",
+        "attributes": [
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "./descendant::p[contains(.,'Dear')]"
+                }
+              ]
+            },
+            "name": "http://schema.org/name",
+            "relative": true,
+            "transient": false,
+            "javascript": "function transform (data){\n  \tif (data.match(/,/)){\n\t\treturn data.replace(/Hello|Hi|Dear/,\"\").split(/,/)[0].trim();\n    }\n  \telse return data;\n}",
+            "dataTypes": [
+              "Text"
+            ],
+            "mandatory": false
+          }
+        ]
       }
     ],
-    "source": null
-  },
-  "extractLn": {
     "edgeRules": [
       {
-        "cardinality": "ONE_TO_ONE",
         "from": {
-          "entityRule": "b4917ca5-ee83-4569-87c7-37feef5474af",
-          "matchAttr": null
+          "entityRule": "931e95e6-6011-491a-81b9-ee2246fb0554",
+          "matchAttr": ""
         },
-        "predicate": "http://schema.org/broker",
         "to": {
-          "entityRule": "b4917ca5-ee83-4569-87c7-37feef5474au",
-          "matchAttr": null
-        }
+          "entityRule": "21d6d9d2-73d1-450e-83c6-9fd9bf601d24",
+          "matchAttr": ""
+        },
+        "predicate": "http://schema.org/minimumPaymentDue",
+        "cardinality": "ONE_TO_ONE"
       },
       {
-        "cardinality": "ONE_TO_ONE",
         "from": {
-          "entityRule": "b4917ca5-ee83-4569-87c7-37feef5474af",
-          "matchAttr": null
+          "entityRule": "931e95e6-6011-491a-81b9-ee2246fb0554",
+          "matchAttr": ""
         },
-        "predicate": "http://schema.org/image",
         "to": {
-          "entityRule": "b4917ca5-ee83-4569-87c7-37feef5474aj",
-          "matchAttr": null
-        }
+          "entityRule": "d5f6938e-6765-404f-b8c7-b5748c0d0858",
+          "matchAttr": ""
+        },
+        "predicate": "http://schema.org/provider",
+        "cardinality": "ONE_TO_ONE"
+      },
+      {
+        "from": {
+          "entityRule": "931e95e6-6011-491a-81b9-ee2246fb0554",
+          "matchAttr": ""
+        },
+        "to": {
+          "entityRule": "0f742efb-194f-4680-8d5d-c46e93e85966",
+          "matchAttr": ""
+        },
+        "predicate": "http://schema.org/customer",
+        "cardinality": "ONE_TO_ONE"
+      },
+      {
+        "from": {
+          "entityRule": "931e95e6-6011-491a-81b9-ee2246fb0554",
+          "matchAttr": ""
+        },
+        "to": {
+          "entityRule": "fb8e35e4-0fed-4967-8b91-05020aebfce6",
+          "matchAttr": ""
+        },
+        "predicate": "http://schema.org/totalPaymentDue",
+        "cardinality": "ONE_TO_ONE"
       }
     ],
-    "entityRules": [
-      {
-        "attributes": [
-          {
-            "blackList": [
-              {
-                "value": "view deal",
-                "type": "SUBSTRING"
-              },
-              {
-                "value": "shop now",
-                "type": "SUBSTRING"
-              },
-              {
-                "value": "over\\s[0-9,]+\\sbought",
-                "type": "REGEX"
-              },
-              {
-                "value": "ends\\s+[0-2]{0,2}/[0-3]{0,2}",
-                "type": "REGEX"
-              },
-              {
-                "value": "deal$",
-                "type": "REGEX"
-              },
-              {
-                "value": "Use coupon",
-                "type": "SUBSTRING"
-              },
-              {
-                "value": "Calypso Surf nd Dive. Our big Jungle House await U",
-                "type": "REGEX"
-              },
-              {
-                "value": "Pilgrimage Village Boutique Resort & Spa",
-                "type": "REGEX"
-              },
-              {
-                "value": "Resorts World Genting - First World Hotel",
-                "type": "REGEX"
-              },
-              {
-                "value": "Sunset & Seaview Vacation Condos @ Marina Court Resort Condominium Central Business District, Kota Kinabalu",
-                "type": "REGEX"
-              },
-              {
-                "value": "Sukhumvit Park, Bangkok - Marriott Executive Apartments",
-                "type": "REGEX"
-              },
-              {
-                "value": "Stay Together 4, 5 & 6 Bedroom Apartments@ Marina Court Resort Condominium Central Business District, Kota Kinabalu",
-                "type": "REGEX"
-              },
-              {
-                "value": "Sah untuk daftar masuk dari sekarang hingga 1 Mei 2018 sahaja. Destinations Perfect For Your Songkran Holiday:",
-                "type": "REGEX"
-              }
-            ],
-            "concat": "true",
-            "dataTypes": [
-              "Text"
-            ],
-            "javascript": "function transform(data) {\n  if(!data || data.length >= 140) return null;\n\n\n  var replaceStrings = [\n    {oldStr: /[\\*©®ǂ‡†±→§™¹›]/g, newStr: \"\"},\n    {oldStr: /(Use\\scode.*at\\scheckout).*/i, newStr: \"$1\"},\n    {oldStr: /\\s(\\dstar|Excep|Very).*?(reviews|score)\\s*(\\$\\d+)\\s(\\$\\d+)\\s.*/i, newStr: \" Now only: $3 Was: $4\"},\n    {oldStr: /\\s(\\d\\.\\dstar|Excep|Very).*?(reviews|score)\\s*(\\$\\d+)\\s(\\$\\d+)\\s.*/i, newStr: \" Now only: $3 Was: $4\"},\n    {oldStr: /\\s(\\dstar|Excep|Very).*?(reviews|score)\\s*(\\d+)\\s(\\$\\d+)\\s.*/i, newStr: \" Now only: $ $3 Was: $4\"},\n    {oldStr: /\\d\\.\\dstar.*\\s((?:\\d+\\,)?\\d+)\\s(\\d+)\\s.*Discover\\smore/i, newStr: \" Now only: $ $2 Was: $ $1\"},\n    {oldStr: /\\d\\.\\dstar.*\\s((?:\\d+\\,)?\\d+)\\s(\\d+)\\s.*(SEE\\sTHIS|Check).*/i, newStr: \" Now only: $ $2 Was: $ $1\"},\n    {oldStr: /\\d+\\sreviews.*\\s((?:\\d+\\,)?\\d+)\\s(\\d+)\\s.*(SEE\\sTHIS|Check).*/i, newStr: \" Now only: $ $2 Was: $ $1\"},\n    {oldStr: /Book\\snow.*\\s((?:\\d+\\,)?\\d+)\\s(\\d+)\\s.*(SEE\\sTHIS|Check).*/i, newStr: \" Now only: $ $2 Was: $ $1\"},\n    {oldStr: /(\\$\\d+\\sGift\\sCard).*\\s((?:\\d+\\,)?\\d+)\\s(\\d+)\\s.*(SEE\\sTHIS|Check).*/i, newStr: \"$1 Now only: $ $3 Was: $ $2\"},\n    // {oldStr: /(([A-Z฿\\$€£¥¢₹₨₱₩฿₫₪]{1,3})?\\s?\\d+([,\\.]\\d+)?)\\s(([A-Z฿\\$€£¥¢₹₨₱₩฿₫₪]{1,3})\\s?\\d+([,\\.]\\d+)?)/, newStr: \" Was: $1 Now only: $4\"},\n    {oldStr: /.*, you’re so close! /i, newStr: \"\"},\n    {oldStr: /.*To welcome you back, here’s an exclusive/i, newStr: \"Here’s an exclusive\"},\n    {oldStr: /(Book (now to get up to |your room (in .* )?)(today for up to)?.*off( today)?!).*/i, newStr: \"$1\"},\n    {oldStr: /You can list your apartment, vacation rental.*/i, newStr: \"\"},\n    {oldStr: /(no minimum booking value.) Click to redeem!/i, newStr: \"$1\"},\n    {oldStr: /Now until (January|February|March|April|May|June|July|August|September|Octomber|November|december) \\d{1,2}, \\d{4}, get/i, newStr: \"Get\"},\n    {oldStr: /Requires more reviews to calculate score/i, newStr: \"\"},\n    {oldStr: /For our travelers only: \\d+([,.]?\\d+) Insider Deals.*/i, newStr: \"\"},\n    //{oldStr: /i, newStr: \"\"},\n    //{oldStr: //i, newStr: \"\"},\n    //{oldStr: //i, newStr: \"\"},\n    //{oldStr: //i, newStr: \"\"},\n    //{oldStr: //i, newStr: \"\"},\n    //{oldStr: //i, newStr: \"\"},\n    //{oldStr: //i, newStr: \"\"},\n    //{oldStr: //i, newStr: \"\"},\n    //{oldStr: //i, newStr: \"\"},\n    //{oldStr: //i, newStr: \"\"},\n    //{oldStr: //i, newStr: \"\"},\n    //{oldStr: //i, newStr: \"\"},\n    //{oldStr: //i, newStr: \"\"},\n    //{oldStr: //i, newStr: \"\"},\n    {oldStr: /.*得分自.*/i, newStr: \"\"},\n    {oldStr: /\\%\\s*\\%/i, newStr: \"%\"},\n    {oldStr: /(\\$)\\s(\\d+)/g, newStr: \"$1$2\"},\n    {oldStr: /\\%(\\S)/i, newStr: \"% $1\"},\n    //{oldStr: //i, newStr: \"\"},\n  ];\n\n  replaceStrings.forEach(function(el) {\n    data = data.replace(el.oldStr, el.newStr);\n  });\n\n return data.trim();\n}",
-            "listOfValidNodeTypes": [
-              {
-                "name": "TEXT",
-                "type": "node"
-              },
-              {
-                "name": "ALT",
-                "type": "attr"
-              },
-              {
-                "name": "HREF",
-                "type": "attr"
-              },
-              {
-                "name": "A",
-                "type": "attr"
-              }
-            ],
-            "location": [
-              {
-                "xpath": ""
-              }
-            ],
-            "mandatory": "true",
-            "maxLength": "140",
-            "minLength": "40",
-            "passThroughout": "true",
-            "name": "http://schema.org/description",
-            "whiteList": [
-              {
-                "value": "$",
-                "type": "REGEX"
-              },
-              {
-                "value": "%",
-                "type": "SUBSTRING"
-              },
-              {
-                "value": "off",
-                "type": "SUBSTRING"
-              },
-              {
-                "value": "[đ¢€£¥₹₨₱₩฿₪]",
-                "type": "REGEX"
-              },
-              {
-                "value": "[Ff][Rr][Ee]{2}",
-                "type": "REGEX"
-              },
-              {
-                "value": "%\\s([Oo][Ff]{2})",
-                "type": "REGEX"
-              }
-            ]
-          },
-          {
-            "blackList": [],
-            "dataTypes": [
-              "DateTime"
-            ],
-            "javascript": "function transform(data) {if (data) {var monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];var regex = /(\\s*\\d+)\\/(\\s*\\d+)/i;var match = regex.exec(data);if (match && match[1]) {return monthNames[match[1] - 1] + ', ' + match[2];}else{return data;}}return null;}",
-            "listOfValidNodeTypes": [
-              {
-                "name": "text",
-                "type": "node"
-              },
-              {
-                "name": "TD",
-                "type": "attr"
-              },
-              {
-                "name": "text",
-                "type": "attr"
-              }
-            ],
-            "location": [
-              {
-                "xpath": ""
-              }
-            ],
-            "mandatory": "true",
-            "maxLength": "-1",
-            "minLength": "-1",
-            "name": "http://schema.org/validThrough",
-            "whiteList": [
-              {
-                "value": "Valid for bookings made between",
-                "type": "SUBSTRING"
-              },
-              {
-                "value": "Now until",
-                "type": "SUBSTRING"
-              },
-              {
-                "value": "MMMM dd, yyyy",
-                "type": "DATEFORMAT"
-              }
-            ]
-          },
-          {
-            "blackList": [
-              {
-                "type": "SUBSTRING",
-                "value": "sale ends"
-              },
-              {
-                "type": "SUBSTRING",
-                "value": "valid through"
-              },
-              {
-                "type": "SUBSTRING",
-                "value": "ends"
-              }
-            ],
-            "dataTypes": [
-              "DateTime"
-            ],
-            "javascript": "function transform(data) {if (data) {var monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];var regex = /(\\s*\\d+)\\/(\\s*\\d+)/i;var match = regex.exec(data);if (match && match[1]) {return monthNames[match[1] - 1] + ', ' + match[2];}else{return data;}}return null;}",
-            "listOfValidNodeTypes": null,
-            "location": null,
-            "mandatory": "true",
-            "maxLength": -1,
-            "minLength": -1,
-            "name": "http://schema.org/validFrom"
-          },
-          {
-            "blackList": [],
-            "dataTypes": [
-              "Number"
-            ],
-            "javascript": null,
-            "listOfValidNodeTypes": [],
-            "location": [
-              {
-                "xpath": ""
-              }
-            ],
-            "mandatory": "true",
-            "maxLength": "-1",
-            "minLength": "-1",
-            "name": "http://schema.org/offerPrice",
-            "whiteList": [
-              {
-                "value": "Free shipping",
-                "type": "SUBSTRING"
-              }
-            ]
-          },
-          {
-            "blackList": [],
-            "dataTypes": [
-              "Number"
-            ],
-            "javascript": null,
-            "listOfValidNodeTypes": [],
-            "location": [
-              {
-                "xpath": ""
-              }
-            ],
-            "mandatory": "true",
-            "maxLength": "-1",
-            "minLength": "-1",
-            "name": "http://schema.org/originalPrice",
-            "whiteList": [
-              {
-                "value": "Free shipping",
-                "type": "SUBSTRING"
-              }
-            ]
-          },
-          {
-            "blackList": null,
-            "dataTypes": [
-              "Text"
-            ],
-            "javascript": "function transform(data){content=data.trim();if(content&&content.startsWith('C$')){return'CAD'}else if(content&&content.startsWith('$')){return'USD'}else{return null}};",
-            "listOfValidNodeTypes": null,
-            "location": null,
-            "mandatory": "true",
-            "maxLength": -1,
-            "minLength": -1,
-            "name": "http://schema.org/priceCurrency",
-            "whiteList": null
-          },
-          {
-            "blackList": [],
-            "dataTypes": [
-              "Text"
-            ],
-            "javascript": "",
-            "listOfValidNodeTypes": [],
-            "location": [
-              {
-                "xpath": ""
-              }
-            ],
-            "mandatory": "true",
-            "maxLength": "-1",
-            "minLength": "-1",
-            "name": "http://schema.org/url",
-            "whiteList": [
-              {
-                "value": "coupon",
-                "type": "SUBSTRING"
-              },
-              {
-                "value": "Rates",
-                "type": "SUBSTRING"
-              },
-              {
-                "value": "DISCOVER",
-                "type": "SUBSTRING"
-              }
-            ]
-          }
-        ],
-        "bundleInfo": {
-          "minBundleSize": "-1",
-          "maxBundleSize": "-1",
-          "minLeafNodesSize": "-1",
-          "maxLeafNodesSize": "-1",
-          "maxDepth": "-1",
-          "defaultPatternAnnotationThreshold": "0.8",
-          "linkThreshold": "2",
-          "listOfValidNodeTypes": [],
-          "linkMatcher": [
-            {
-              "regex": ".{0,150}"
-            }
-          ]
-        },
-        "id": "b4917ca5-ee83-4569-87c7-37feef5474af",
-        "javascript": null,
-        "type": "http://schema.org/Coupon"
-      },
-      {
-        "attributes": [
-          {
-            "dataTypes": [
-              "Text"
-            ],
-            "javascript": null,
-            "location": [
-              {
-                "xpath": "concat(\"agoda\",\"\")"
-              }
-            ],
-            "mandatory": "true",
-            "name": "http://schema.org/name",
-            "minLength": "",
-            "maxLength": "",
-            "whiteList": [],
-            "blackList": [],
-            "listOfValidNodeTypes": []
-          }
-        ],
-        "bundleInfo": {
-          "clusterAlgo": {
-            "endIdx": -1,
-            "regex": "",
-            "replaceInfo": [
-              {
-                "regexStr": "",
-                "replaceAll": "true",
-                "replacement": ""
-              }
-            ],
-            "startIdx": 0,
-            "type": "SUBSTRING"
-          },
-          "linkMatcher": [
-            {
-              "regex": ".*"
-            }
-          ],
-          "listOfValidNodeTypes": null,
-          "maxBundleSize": -1,
-          "maxDepth": -1,
-          "maxLeafNodesSize": -1,
-          "minBundleSize": -1,
-          "minLeafNodesSize": -1,
-          "defaultPatternAnnotationThreshold": 0.8,
-          "linkThreshold": 2
-        },
-        "id": "b4917ca5-ee83-4569-87c7-37feef5474au",
-        "javascript": null,
-        "type": "http://schema.org/Organization"
-      },
-      {
-        "attributes": [
-          {
-            "blackList": [],
-            "dataTypes": [
-              "Text"
-            ],
-            "javascript": "",
-            "listOfValidNodeTypes": [],
-            "location": [
-              {
-                "xpath": ""
-              }
-            ],
-            "mandatory": "true",
-            "maxLength": "-1",
-            "minLength": "-1",
-            "name": "http://schema.org/url",
-            "whiteList": []
-          }
-        ],
-        "bundleInfo": {
-          "clusterAlgo": {
-            "endIdx": -1,
-            "regex": "",
-            "replaceInfo": [
-              {
-                "regexStr": "",
-                "replaceAll": "true",
-                "replacement": ""
-              }
-            ],
-            "startIdx": 0,
-            "type": "SUBSTRING"
-          },
-          "linkMatcher": null,
-          "listOfValidNodeTypes": null,
-          "maxBundleSize": -1,
-          "maxDepth": -1,
-          "maxLeafNodesSize": -1,
-          "minBundleSize": -1,
-          "minLeafNodesSize": -1,
-          "linkThreshold": 2,
-          "footerPercentage": 0.9,
-          "overRideValidThroughFromFooter": false,
-          "defaultPatternAnnotationThreshold": 0.8
-        },
-        "id": "b4917ca5-ee83-4569-87c7-37feef5474aj",
-        "javascript": null,
-        "type": "http://schema.org/ImageObject"
-      }
-    ]
+    "entityNS": null
   },
   "metaData": {
-    "debug": "true",
-    "linkAlgoHandler": "LinkExtractor15",
-    "decodeHtmlEntity": "true",
-    "useVTDXML": "false"
+    "useVTDXML": "true",
+    "ignoredValidations": null
   }
 }
