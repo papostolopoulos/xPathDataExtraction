@@ -606,7 +606,7 @@ function transform(data) {
 // SPECIAL CHARACTERS
 //List of unicode characters: https://en.wikipedia.org/wiki/List_of_Unicode_characters
 function transform(data) {
-  data = data.replace(/[\*©®ǂ†±→§™¹>]/g, "");
+  data = data.replace(/[\*©®ǂ†±→§™¹>❯]/g, "");
   return data || "";
 }
 
@@ -924,45 +924,51 @@ function transform (data){
 
 
 //Minimize the size of the text to 100 characters or less
-function minimizeMe(data){
+function minimizeMe(str){
 
-  //Replace the dots (.) and the percentages (%) with other characters
-  data = data.replace(/%/g, "###").replace(/(\d+)(\.)?(\d{2})/g, "$1~~~$3").replace(/\$/g, "@@@");
+  var replaceArr = [
+    {oldStr: /(\d+)(\.)?(\d{2})/g, newStr: "$1~~~$3"},
+    {oldStr: /(www)\.([A-z]+)/g, newStr: "$1~~~$2"},
+    {oldStr: /(\w)\.(com)/g, newStr: "$1~~~$2"},
+    {oldStr: /(11:59 p)\.(m)\./gi, newStr: "$1~~~$2~~~"},
+  ];
 
-  //Iterate with a while loop. If the length of text is larger than 100 AND
-  //There are characters that indicate the end of a sentence (.;!/) AND
-  //There are more than one characters that indicate the end of a sentence (and therefore more than one sentences)
-  while (data.length > 100 && /[\.\?!]/.test(data[data.length-1]) && data.replace(/[^\.;\??]/g,"").length > 1) {
-    //reverse the order of the text
-    data = data.slice(0, data.length-1).split("").reverse().join("");
-    console.log("BEFORE THE IF STATEMENTS:", data);
 
-    //If there are monetary values or % values in string
-    if (data.indexOf("~~~") !== -1 || data.indexOf("###") !== -1 || data.indexOf("@@@") !== -1) {
-      //Define variable with value that equals to the value of the index of the closest symbol
-      //that represents $ or % or . (for decimal)
+  replaceArr.forEach(function(el) {
+    str = str.replace(el.oldStr, el.newStr);
+  });
+  str = str.trim();
+
+  if (str.split("").reverse().join("").search(/[\.\?!]/) ) {
+
+  }
+
+  while (str.length > 100 && /[\.\?!]/.test(str[str.length-1]) && str.replace(/[^\.;\??]/g,"").length > 1) {
+    str = str.split("").reverse().join("");
+
+    if (str.indexOf("~~~") !== -1 || str.indexOf("%") !== -1 || str.indexOf("$") !== -1) {
+
       var closestSymbol = +Infinity;
-      if (closestSymbol > data.indexOf("###")) closestSymbol = data.indexOf("###");
-      if (closestSymbol > data.indexOf("###")) closestSymbol = data.indexOf("~~~");
-      if (closestSymbol > data.indexOf("###")) closestSymbol = data.indexOf("@@@");
+      if (closestSymbol > str.indexOf("%")) closestSymbol = str.indexOf("%");
+      if (closestSymbol > str.indexOf("~~~")) closestSymbol = str.indexOf("~~~");
+      if (closestSymbol > str.indexOf("$")) closestSymbol = str.indexOf("$");
 
-      //If there is an end of sentence before a $ or % or a num.num, then eliminate the text
-      if (data.search(/[\.\?!]/) < closestSymbol) {
-        data = data.slice(data.search(/[\.\?!]/)).split("").reverse().join("");
-      } //End of inner if statement
-      //else If there is a $ or % or a num.num before the next sentence's end, then break out of while loop
+
+      if (str.search(/[\.\?!]/) < closestSymbol && str.substring(str.search(/[\.\?!]/) + 1).search(/[\.\?!]/) < closestSymbol && str.substring(str.search(/[\.\?!]/) + 1).search(/[\.\?!]/) !== -1) {
+        str = str.slice(str.substring(str.search(/[\.\?!]/) + 1).search(/[\.\?!]/)).split("").reverse().join("");
+      }
       else {
-        data = data.split("").reverse().join("");
+        str = str.split("").reverse().join("");
         break;
-      } //End of inner else
-    }//End of if statement
-    //If there are no monerary values in the loop then just slice and reverse the sentence
-    else {
-      data = data.slice(data.search(/[\.\?!]/)).split("").reverse().join("");
-    } //end of else
-  }//End of while loop
+      }
+    }
 
-  return data.replace(/###/g, "%").replace(/(\d+)(~~~)?(\d{2})/g, "$1.$3").replace(/@@@/g, "$");
+    else {
+      str = str.slice(str.search(/[\.\?!]/)).split("").reverse().join("");
+    }
+  }
+
+  return str.replace(/~~~/g, ".").replace(/$/g, "$");
 }
 
 
@@ -970,9 +976,18 @@ function minimizeMe(data){
 
 
 //Minimize the size of the text (LITE VERSION)
-function minimizeMe(data){
-  while (data.length > 100 && /[\.\?!]/.test(data[data.length-1]) && data.replace(/[^\.;\??]/g,"").length > 1) {
-    data = data.slice(0, data.length-1).split("").reverse().join("");
-    data = data.slice(data.search(/[\.\?!]/)).split("").reverse().join("");
+function minimizeMe(str){
+  while (str.length > 100 && /[\.\?!]/.test(str[str.length-1]) && str.replace(/[^\.;\??]/g,"").length > 1) {
+    str = str.slice(0, str.length-1).split("").reverse().join("");
+    str = str.slice(str.search(/[\.\?!]/)).split("").reverse().join("");
   }
+  return str;
+}
+
+//Milene's version
+function transform(data){
+    return data.replace(/(\.)(\d)/g,"~~~$2")
+    .match(/[^\.\?\!]*((\$\d)|(free)|(redeem)|(\%))[^\.\?\!]*/ig)
+    .join(". ")
+    .replace(/(\~\~\~)(\d)/g,".$2") + ".";
 }

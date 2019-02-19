@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>xPath Generator</title>
+
+    <style media="screen">
+      body{
+        padding: 20px;
+      }
+
+    </style>
+
+  </head>
+
+
+
+
+
+
+
+  <body>
+    <main id="container">
+      <form class="">
+        <label>
+          Node:
+          <input type="text" name="pathNodes" value="" @keyup.enter="addNode($event)">
+        </label>
+
+        <label>
+          Contains:
+          <input type="text" name="containValues" value="" @keyup.enter="addContainsValues($event)">
+        </label>
+        <p>{{contains}}</p>
+
+      </form>
+      <p>{{fullPath}}</p>
+      <xpath-rule></xpath-rule>
+
+    </main>
+
+  </body>
+
+
+
+
+
+
+
+
+
+  <script>
+    var rule = Vue.component('xpath-rule', {
+      template: `
+      <form class="">
+        <label>
+          Node:
+          <input type="text" name="pathNodes" value="" @keyup.enter="addNode($event)">
+        </label>
+
+        <label>
+          Parameter:
+          <input type="text" name="containValues" value="" @keyup.enter="addContainsValues($event)">
+        </label>
+      </form>
+      <p>Path: {{path}}</p>
+      <p>{{contains}}</p>
+      ancestor
+      ancestor-or-self
+      attribute
+      child
+      descendant
+      descendant-or-self
+      following
+      following-sibling
+      namespace
+      parent
+      preceding
+      preceding-sibling
+      self
+      `,
+      data(){
+        return {
+          path: [],
+          contains: [],
+        };
+      }, //End of data
+      methods:{
+        addNode(){
+          console.log("Add node:", event.target.value);
+          this.path.push(event.target.value);
+          event.target.value = "";
+        },
+
+        addContainsValues(){
+          console.log("Add contains value:", event.target.value);
+          this.contains.push(event.target.value);
+          event.target.value = "";
+        }
+      }, //End of methods
+      computed: {
+        fullPath(){
+          let endStr = "";
+          this.path.forEach((el)=>{
+            endStr += "/descendant::" + el;
+          });
+          return endStr;
+        }
+      } //end of computed properties
+    });
+
+    var app = new Vue({
+      el: "#container",
+      data: {
+        path: [],
+        contains: [],
+
+      }, //End of data
+      methods:{
+        addNode(){
+          console.log("Add node:", event.target.value);
+          this.path.push(event.target.value);
+          event.target.value = "";
+        },
+
+        addContainsValues(){
+          console.log("Add contains value:", event.target.value);
+          this.contains.push(event.target.value);
+          event.target.value = "";
+        }
+      }, //End of methods
+      computed: {
+        fullPath(){
+          let endStr = "";
+          this.path.forEach((el)=>{
+            endStr += "/descendant::" + el;
+          });
+          return endStr;
+        }
+      } //end of computed properties
+    });
+
+  </script>
+
+</html>

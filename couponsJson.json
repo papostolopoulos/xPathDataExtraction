@@ -3852,6 +3852,188 @@
   }
 }
 
+/* OLD NAVY email.oldnavy.com */
+{
+  "extract": {
+    "extractEmbedded": false,
+    "source": null,
+    "schema": [
+      {
+        "url": "http://ws.rmf.yahoo.com:4080/rmf/v1/schema?type=schema.org&name=y.2.0&format=json",
+        "ns": "http://schema.org",
+        "context": {
+          "@type": [
+            "Coupon"
+          ]
+        }
+      }
+    ],
+    "entityRules": [
+      {
+        "id": "6090ac3a-250c-46c8-b207-dbbcbf2e2f83",
+        "repeating": true,
+        "locations": [
+          "/descendant::img[contains(@alt,\"%\") or \ncontains(translate(@alt,\"FRE\", \"fre\"), \"free\") or \ncontains(translate(@alt,\"POINTS\", \"points\"), \"points\") and contains(@alt, \"$\")]\n|\n/descendant::b[contains(translate(.,\"REWARDS\",\"rewards\"),\"rewards\")]\n/ancestor::td[1]\n[not (contains(translate(.,\"GAPINC\",\"gapinc\"),\"gap inc\"))]\n|\n//b[contains(translate(text(), \"FORTHEAM\", \"fortheam\"),\"for the fam\") or\ncontains(translate(text(), \"CLEARN\", \"clearn\"),\"clearance\") and (contains(text(),\"$\")  or contains(text(), \"%\")) or\ncontains(translate(text(), \"POINTS\", \"points\"),\"points\") or\ncontains(translate(text(), \"SUPERCAH\", \"supercah\"),\"super cash\") or\ncontains(translate(.,\"OF\",\"of\"),\"off\") and contains(.,\"$\")]\n[not (contains(translate(text(),\"NOTVALID\",\"notvalid\"),\"not valid\") or contains(translate(text(),\"EXCLUDS\",\"excluds\"),\"excludes\"))]\n|\n//a[contains(translate(.,\"OF\",\"of\"),\"% off\") or\ncontains(translate(.,\"SALE\",\"sale\"),\"sale\")]\n"
+        ],
+        "type": "http://schema.org/Coupon",
+        "javascript": null,
+        "entityIdRef": "",
+        "attributes": [
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "./@alt | ."
+                }
+              ]
+            },
+            "name": "http://schema.org/description",
+            "relative": true,
+            "transient": false,
+            "javascript": "function transform(data){\n  var replaceArr = [\n    {oldStr: /REWARDSEXPIRES/i, newStr: \"REWARDS. EXPIRES\"},\n    {oldStr: /[±\\*:]/gi, newStr: \"\"},\n    {oldStr: /SHOP NOW/i, newStr: \"\"},\n    {oldStr: /^(OH & btw,|AND|PLUS[,!])/i, newStr: \"\"},\n  ];\n  \n  replaceArr.forEach(function(el){\n    data = data.replace(el.oldStr, el.newStr);\n  });\n  \n  return data.trim();\n}",
+            "dataTypes": [
+              "Text"
+            ],
+            "mandatory": false
+          },
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "concat(., ./@alt, \"###\", //text()[contains(translate(.,\"OFERVALID\",\"ofervalid\"),\"offer valid\")]/ancestor::td[1])"
+                }
+              ]
+            },
+            "name": "http://schema.org/validThrough",
+            "relative": true,
+            "transient": false,
+            "javascript": "function transform(data){\n  if(/EXPIRES\\s*(\\d{1,2}\\/\\d{1,2})/.test(data)) return data.replace(/.*EXPIRES\\s*(\\d{1,2}\\/\\d{1,2}).*/, \"$1\") + \"/1970\";\n  var splitData = data.split(\"###\");\n\n  var keywords = [\n    /\\d{1,2}% off/i,\n    /2X Points/i,\n    /FREE SHIPPING/i,\n    /Super Cash:/i,\n    /$15 OFF $50:/i,\n    /Clearance/i\n  ];\n\n  keywords.forEach(function(el){\n    if (el.test(splitData[0])) splitData[0] = el.exec(splitData[0])[0];\n  });\n\n  splitData[1] = splitData[1].slice(splitData[1].toLowerCase().indexOf(splitData[0].toLowerCase()));\n  splitData[1] = splitData[1].slice(0, splitData[1].search(/11:59 pm/i));\n\n  return /(through|to|-)\\s+(\\d{1,2}\\/){2}\\d{2,4}/i.test(splitData[1]) ? /(through|to|-)\\s+(\\d{1,2}\\/){2}\\d{2,4}/i.exec(splitData[1])[0].replace(/(through|to|-)\\s+/, \"\") : \"\";\n}",
+            "dataTypes": [
+              "DateTime"
+            ],
+            "mandatory": false
+          },
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "../@href | /descendant::a[contains(translate(.,\"WEBROWSR\",\"webrowsr\"),\"web browser\")]/@href"
+                }
+              ]
+            },
+            "name": "http://schema.org/url",
+            "relative": true,
+            "transient": false,
+            "javascript": null,
+            "dataTypes": [
+              "URL"
+            ],
+            "mandatory": false
+          }
+        ],
+        "hints": {
+          "_footer": "/descendant::text()[contains(translate(.,\"GAPINC\",\"gapinc\"),\"gap inc\")]/ancestor::td[1]",
+          "_raw_validThrough": "//text()[contains(translate(.,\"OFERVALID\",\"ofervalid\"),\"offer valid\")]/ancestor::td[1] |\n/descendant::b[contains(translate(.,\"REWARDS\",\"rewards\"),\"rewards\")]\n/ancestor::td[1]\n[not (contains(translate(.,\"GAPINC\",\"gapinc\"),\"gap inc\"))]"
+        }
+      },
+      {
+        "id": "2a9923fa-4efe-4635-8aaa-79f33f2123b6",
+        "repeating": true,
+        "locations": [
+          "/descendant::img[contains(@alt,\"%\") or contains(@alt,\"FREE SHIPPING\")]\n|\n/descendant::b[contains(.,\"for the fam\") or contains(.,\"Clearance. Women\") or contains(.,\"Free shipping\")]\n|\n/descendant::a[contains(.,\"You have\") and contains(.,\"in Rewards\")]/ancestor::td[1]\n|\n/descendant::b[contains(.,\" REWARDS\")]/ancestor::td[1]"
+        ],
+        "type": "http://schema.org/ImageObject",
+        "javascript": null,
+        "entityIdRef": "",
+        "attributes": [
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "./@src"
+                }
+              ]
+            },
+            "name": "http://schema.org/url",
+            "relative": true,
+            "transient": false,
+            "javascript": null,
+            "dataTypes": [
+              "URL"
+            ],
+            "mandatory": false
+          }
+        ]
+      },
+      {
+        "id": "c0d7d87b-883e-461d-9c98-1ea2bdb19083",
+        "repeating": true,
+        "locations": [
+          "/descendant::img[contains(@alt,\"%\") or contains(@alt,\"FREE SHIPPING\")]\n|\n/descendant::b[contains(.,\"for the fam\") or contains(.,\"Clearance. Women\") or contains(.,\"Free shipping\")]\n|\n/descendant::a[contains(.,\"You have\") and contains(.,\"in Rewards\")]/ancestor::td[1]\n|\n/descendant::b[contains(.,\" REWARDS\")]/ancestor::td[1]"
+        ],
+        "type": "http://schema.org/Organization",
+        "javascript": null,
+        "entityIdRef": "",
+        "attributes": [
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "\"OLD NAVY\""
+                }
+              ]
+            },
+            "name": "http://schema.org/name",
+            "relative": true,
+            "transient": false,
+            "javascript": null,
+            "dataTypes": [
+              "Text"
+            ],
+            "mandatory": false
+          }
+        ]
+      }
+    ],
+    "edgeRules": [
+      {
+        "from": {
+          "entityRule": "6090ac3a-250c-46c8-b207-dbbcbf2e2f83",
+          "matchAttr": ""
+        },
+        "to": {
+          "entityRule": "c0d7d87b-883e-461d-9c98-1ea2bdb19083",
+          "matchAttr": ""
+        },
+        "predicate": "http://schema.org/broker",
+        "cardinality": "ONE_TO_ONE"
+      },
+      {
+        "from": {
+          "entityRule": "6090ac3a-250c-46c8-b207-dbbcbf2e2f83",
+          "matchAttr": ""
+        },
+        "to": {
+          "entityRule": "2a9923fa-4efe-4635-8aaa-79f33f2123b6",
+          "matchAttr": ""
+        },
+        "predicate": "http://schema.org/image",
+        "cardinality": "ONE_TO_ONE"
+      }
+    ],
+    "entityNS": null
+  },
+  "metaData": {
+    "useVTDXML": "true",
+    "ignoredValidations": null
+  }
+}
+
 /* SAFEWAY email.safeway.com */
 {
   "extract": {
@@ -4014,7 +4196,7 @@
         "id": "f5a298ac-6358-4606-82fb-a1e4f1639819",
         "repeating": true,
         "locations": [
-          "/descendant::img[contains(@alt,\"% OFF\") or\ncontains(@alt,\"Sale\") or \ncontains(@alt,\"BLOWOUT\") or \ncontains(@alt,\"GET IT BY CHRISTMAS\") or \ncontains(@alt,\"FREE SHIPPING\") or\ncontains(@alt,\"Free Shipping\") or \ncontains(@alt,\"freestorepickup\") or \ncontains(@alt,\"IN-VEHICLE PICKUP\") or \ncontains(@alt,\"CASHBACK\") or \ncontains(@alt, \"exclusive\") or \ncontains(@alt, \"Reg.\") or \n(contains(@alt, \"$\") and contains(@alt, \"off\"))]\n[not (contains(@alt,\"Exclusions apply\") or contains(@alt, \"valid until\") or contains(@alt, \"SHOP FREE SHIPPING\"))]\n"
+          "/descendant::img[contains(translate(@alt,\"OF\",\"of\"),\"% off\") or\ncontains(translate(@alt,\"SALE\",\"sale\"),\"sale\") or \ncontains(translate(@alt,\"BLOWUT\",\"blowut\"),\"blowout\") or  \ncontains(translate(@alt,\"FRESHIPING\",\"freshiping\"),\"free shipping\") or\ncontains(translate(@alt,\"CASHBCK\",\"cashbck\"),\"cashback\") or \ncontains(translate(@alt,\"EXCLUSIV\",\"exclusiv\"), \"exclusive\") or \ncontains(translate(@alt,\"REG\",\"reg\"), \"reg.\") or \n(contains(@alt, \"$\") and contains(translate(@alt,\"OF\",\"of\"), \"off\"))]\n[not (contains(translate(@alt,\"EXCLUSIONSAPY\",\"exclusionsapy\"),\"exclusions apply\") or contains(translate(@alt,\"VALIDUNTL\",\"validuntl\"), \"valid until\") or contains(translate(@alt,\"SHOPFREING\",\"shopfreing\"), \"shop free shipping\"))]"
         ],
         "type": "http://schema.org/Coupon",
         "javascript": null,
@@ -4196,7 +4378,7 @@
         "id": "259fa107-ae46-4563-8ec8-86d9275d2492",
         "repeating": true,
         "locations": [
-          "/descendant::img[contains(@alt, \"Rewards Bazaar\") or \ncontains(@alt, \"REWARDS BAZAAR\") or \ncontains(@alt,\"POINT REWARDS\") or \ncontains(@alt,\"shipping\") or \ncontains(@alt,\"points per\") or \ncontains(@alt,\"Points per\") or \ncontains(@alt,\"SHIPPING\") or \ncontains(@alt,\"Free\")  or \ncontains(@alt,\"free\") or \ncontains(@alt,\"FREE\") or \ncontains(@alt,\"Use code\") or \ncontains(@alt, \"rouge reward\") or \ncontains(@alt,\"% Off\") or \ncontains(@alt,\"% OFF\") or \ncontains(@alt,\"% off\") or\n(contains(@alt,\"$\") and contains(@alt,\"Off\"))]\n"
+          "//div[@id = \"DESKTOP\"]/descendant::img[contains(translate(@alt,\"XPERDOLA\",\"xperdola\"), \"2x per dollar\") or \ncontains(translate(@alt,\"TRIALSZE\",\"trialsze\"), \"trial size\") or \ncontains(translate(@alt,\"REWADSBZ\",\"rewardsbz\"), \"rewards bazaar\") or \ncontains(translate(@alt,\"POINTREWADS\",\"pointrewads\"),\"point rewards\") or \ncontains(translate(@alt,\"SHIPING\",\"shiping\"),\"shipping\") or \ncontains(translate(@alt,\"POINTSER\",\"pointser\"),\"points per\") or \ncontains(translate(@alt,\"FRE\",\"fre\"),\"free\")  or \ncontains(translate(@alt,\"USECOD\",\"usecod\"),\"Use code\") or \ncontains(translate(@alt,\"ROUGEWAD\",\"rougewad\"), \"rouge reward\") or \ncontains(translate(@alt,\"OF\",\"of\"),\"% off\") or\ncontains(translate(@alt,\"OF\",\"of\"),\"off\" and (contains(@alt,\"$\") or contains(@alt,\"%\")))]"
         ],
         "type": "http://schema.org/Coupon",
         "javascript": null,
@@ -4214,7 +4396,7 @@
             "name": "http://schema.org/description",
             "relative": true,
             "transient": false,
-            "javascript": "function transform(data){\n  var replaceStrArr = [\n    {oldStr: /[\\*©®ǂ†→§™¹]/g, newStr: \"\"},\n    //{oldStr: /Shop\\sNow$/i, newStr: \"\"},\n    //{oldStr: /Welcome\\skit\\sis\\sredeemable.*/, newStr: \"\"},\n    {oldStr: /POINT REWARDS\\s\\|.*/, newStr: \"POINT REWARDS\"},\n    {oldStr: /([A-z]+\\s(\\d{1,2}-?){2},\\s\\d{0,4}\\.)\\s\\|.*/, newStr: \"$1\"},\n    {oldStr: /^[1234]\\s/, newStr: \"\"},\n    {oldStr: /In\\sstore\\sand\\sonline,\\sEnds\\s(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)\\s\\d{1,2}\\/\\d{1,2}(\\d{2,4})?/, newStr: \"\"}\n  ];\n\n  replaceStrArr.forEach(function(el) {\n    data = data.replace(el.oldStr, el.newStr);\n  });\n\n  return data.trim() || \"\";\n}",
+            "javascript": "function transform(data){\n  var replaceStrArr = [\n    {oldStr: /[\\*©®ǂ†→§™¹>]/g, newStr: \"\"},\n    //{oldStr: //i, newStr: \"\"},\n    //{oldStr: //i, newStr: \"\"},\n  ];\n\n  replaceStrArr.forEach(function(el) {\n    data = data.replace(el.oldStr, el.newStr);\n  });\n\n  return data.trim() || \"\";\n}",
             "dataTypes": [
               "Text"
             ],
@@ -4297,7 +4479,7 @@
         "id": "5dcbab78-f12a-49b6-95e0-9fb23fd7c56f",
         "repeating": true,
         "locations": [
-          "/descendant::img[contains(@alt, \"Rewards Bazaar\") or contains(@alt, \"REWARDS BAZAAR\") or contains(@alt,\"POINT REWARDS\") or contains(@alt,\"shipping\") or contains(@alt,\"points per\") or contains(@alt,\"Points per\") or contains(@alt,\"SHIPPING\") or contains(@alt,\"Free\")  or contains(@alt,\"free\") or contains(@alt,\"FREE\") or contains(@alt,\"Use code\") or contains(@alt, \"rouge reward\") or contains(@alt,\"% Off\") or contains(@alt,\"% OFF\") or (contains(@alt,\"$\") and contains(@alt,\"Off\"))]"
+          "//div[@id = \"DESKTOP\"]/descendant::img[contains(translate(@alt,\"XPERDOLA\",\"xperdola\"), \"2x per dollar\") or \ncontains(translate(@alt,\"TRIALSZE\",\"trialsze\"), \"trial size\") or \ncontains(translate(@alt,\"REWADSBZ\",\"rewardsbz\"), \"rewards bazaar\") or \ncontains(translate(@alt,\"POINTREWADS\",\"pointrewads\"),\"point rewards\") or \ncontains(translate(@alt,\"SHIPING\",\"shiping\"),\"shipping\") or \ncontains(translate(@alt,\"POINTSER\",\"pointser\"),\"points per\") or \ncontains(translate(@alt,\"FRE\",\"fre\"),\"free\")  or \ncontains(translate(@alt,\"USECOD\",\"usecod\"),\"Use code\") or \ncontains(translate(@alt,\"ROUGEWAD\",\"rougewad\"), \"rouge reward\") or \ncontains(translate(@alt,\"OF\",\"of\"),\"% off\") or\ncontains(translate(@alt,\"OF\",\"of\"),\"off\" and (contains(@alt,\"$\") or contains(@alt,\"%\")))]"
         ],
         "type": "http://schema.org/Organization",
         "javascript": null,
@@ -4332,10 +4514,10 @@
           "matchAttr": ""
         },
         "to": {
-          "entityRule": "53021d0e-c463-4bbb-b845-4c9bd73232a0",
-          "matchAttr": null
+          "entityRule": "5dcbab78-f12a-49b6-95e0-9fb23fd7c56f",
+          "matchAttr": ""
         },
-        "predicate": "http://schema.org/image",
+        "predicate": "http://schema.org/broker",
         "cardinality": "ONE_TO_ONE"
       },
       {
@@ -4344,10 +4526,10 @@
           "matchAttr": ""
         },
         "to": {
-          "entityRule": "5dcbab78-f12a-49b6-95e0-9fb23fd7c56f",
+          "entityRule": "53021d0e-c463-4bbb-b845-4c9bd73232a0",
           "matchAttr": ""
         },
-        "predicate": "http://schema.org/broker",
+        "predicate": "http://schema.org/image",
         "cardinality": "ONE_TO_ONE"
       }
     ],
