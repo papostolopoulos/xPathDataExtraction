@@ -23,21 +23,84 @@
 
   <body>
     <main id="container">
-      <form class="">
+      <div class="" id="divBranch">
+        <h3>Add path</h3>
+        <label>
+          <input type="radio" value="//" name="axisOption" v-model="axis">
+        </label>
+        <label>
+          <input type="radio" value="/ancestor::" name="axisOption" v-model="axis">
+          ancestor::
+        </label>
+        <label>
+          <input type="radio" value="/ancestor-or-self::" name="axisOption" v-model="axis">
+          ancestor-or-self::
+        </label>
+        <label>
+          <input type="radio" value="/attribute::" name="axisOption" v-model="axis">
+          attribute::
+        </label>
+        <label>
+          <input type="radio" value="/child::" name="axisOption" v-model="axis">
+          child::
+        </label>
+        <label>
+          <input type="radio" value="/descendant::" name="axisOption" v-model="axis" checked>
+          descendant::
+        </label>
+        <label>
+          <input type="radio" value="/descendant-or-self::" name="axisOption" v-model="axis">
+          descendant-or-self::
+        </label>
+        <label>
+          <input type="radio" value="/following::" name="axisOption" v-model="axis">
+          following::
+        </label>
+        <label>
+          <input type="radio" value="/following-sibling::" name="axisOption" v-model="axis">
+          following-sibling::
+        </label>
+        <label>
+          <input type="radio" value="/namespace::" name="axisOption" v-model="axis">
+          namespace::
+        </label>
+        <label>
+          <input type="radio" value="/parent::" name="axisOption" v-model="axis">
+          parent::
+        </label>
+        <label>
+          <input type="radio" value="/preceding::" name="axisOption" v-model="axis">
+          preceding::
+        </label>
+        <label>
+          <input type="radio" value="/preceding-sibling::" name="axisOption" v-model="axis">
+          preceding-sibling::
+        </label>
+        <label>
+          <input type="radio" value="/self::" name="axisOption" v-model="axis">
+          self::
+        </label>
+
         <label>
           Node:
-          <input type="text" name="pathNodes" value="" @keyup.enter="addNode($event)">
+          <input type="text" name="pathNodes" @keyup.enter="addPath($event)">
         </label>
 
+      </div>
+
+
+
+      <form class="" id="formParameters">
+        <h4>Form Parameters</h4>
         <label>
-          Contains:
-          <input type="text" name="containValues" value="" @keyup.enter="addContainsValues($event)">
+          value:
+          <input type="text" name="containValues" @keyup.enter="addAxis($event)">
         </label>
-        <p>{{contains}}</p>
 
       </form>
-      <p>{{fullPath}}</p>
-      <xpath-rule></xpath-rule>
+      <p>Contains: {{contains}}</p>
+      <p>fullPath: {{fullPath}}</p>
+
 
     </main>
 
@@ -52,80 +115,22 @@
 
 
   <script>
-    var rule = Vue.component('xpath-rule', {
-      template: `
-      <form class="">
-        <label>
-          Node:
-          <input type="text" name="pathNodes" value="" @keyup.enter="addNode($event)">
-        </label>
-
-        <label>
-          Parameter:
-          <input type="text" name="containValues" value="" @keyup.enter="addContainsValues($event)">
-        </label>
-      </form>
-      <p>Path: {{path}}</p>
-      <p>{{contains}}</p>
-      ancestor
-      ancestor-or-self
-      attribute
-      child
-      descendant
-      descendant-or-self
-      following
-      following-sibling
-      namespace
-      parent
-      preceding
-      preceding-sibling
-      self
-      `,
-      data(){
-        return {
-          path: [],
-          contains: [],
-        };
-      }, //End of data
-      methods:{
-        addNode(){
-          console.log("Add node:", event.target.value);
-          this.path.push(event.target.value);
-          event.target.value = "";
-        },
-
-        addContainsValues(){
-          console.log("Add contains value:", event.target.value);
-          this.contains.push(event.target.value);
-          event.target.value = "";
-        }
-      }, //End of methods
-      computed: {
-        fullPath(){
-          let endStr = "";
-          this.path.forEach((el)=>{
-            endStr += "/descendant::" + el;
-          });
-          return endStr;
-        }
-      } //end of computed properties
-    });
 
     var app = new Vue({
       el: "#container",
       data: {
-        path: [],
+        axis:"/dscendant::",
+        path: "",
         contains: [],
 
       }, //End of data
       methods:{
-        addNode(){
-          console.log("Add node:", event.target.value);
-          this.path.push(event.target.value);
-          event.target.value = "";
+        addPath(event){
+
+          this.path += event.target.value;
         },
 
-        addContainsValues(){
+        addAxis(){
           console.log("Add contains value:", event.target.value);
           this.contains.push(event.target.value);
           event.target.value = "";
@@ -133,11 +138,7 @@
       }, //End of methods
       computed: {
         fullPath(){
-          let endStr = "";
-          this.path.forEach((el)=>{
-            endStr += "/descendant::" + el;
-          });
-          return endStr;
+          return this.axis + this.path;
         }
       } //end of computed properties
     });
