@@ -24,61 +24,62 @@
   <body>
     <main id="container">
       <div class="" id="divBranch">
-        <h3>Add path</h3>
+        <h3>Add branch</h3>
         <label>
           <input type="radio" value="//" name="axisOption" v-model="axis">
+          //
         </label>
         <label>
           <input type="radio" value="/ancestor::" name="axisOption" v-model="axis">
-          ancestor::
+          /ancestor::
         </label>
         <label>
           <input type="radio" value="/ancestor-or-self::" name="axisOption" v-model="axis">
-          ancestor-or-self::
+          /ancestor-or-self::
         </label>
         <label>
           <input type="radio" value="/attribute::" name="axisOption" v-model="axis">
-          attribute::
+          /attribute::
         </label>
         <label>
           <input type="radio" value="/child::" name="axisOption" v-model="axis">
-          child::
+          /child::
         </label>
         <label>
-          <input type="radio" value="/descendant::" name="axisOption" v-model="axis" checked>
-          descendant::
+          <input type="radio" value="/descendant::" name="axisOption" v-model="axis">
+          /descendant::
         </label>
         <label>
           <input type="radio" value="/descendant-or-self::" name="axisOption" v-model="axis">
-          descendant-or-self::
+          /descendant-or-self::
         </label>
         <label>
           <input type="radio" value="/following::" name="axisOption" v-model="axis">
-          following::
+          /following::
         </label>
         <label>
           <input type="radio" value="/following-sibling::" name="axisOption" v-model="axis">
-          following-sibling::
+          /following-sibling::
         </label>
         <label>
           <input type="radio" value="/namespace::" name="axisOption" v-model="axis">
-          namespace::
+          /namespace::
         </label>
         <label>
           <input type="radio" value="/parent::" name="axisOption" v-model="axis">
-          parent::
+          /parent::
         </label>
         <label>
           <input type="radio" value="/preceding::" name="axisOption" v-model="axis">
-          preceding::
+          /preceding::
         </label>
         <label>
           <input type="radio" value="/preceding-sibling::" name="axisOption" v-model="axis">
-          preceding-sibling::
+          /preceding-sibling::
         </label>
         <label>
           <input type="radio" value="/self::" name="axisOption" v-model="axis">
-          self::
+          /self::
         </label>
 
         <label>
@@ -90,15 +91,23 @@
 
 
 
-      <form class="" id="formParameters">
-        <h4>Form Parameters</h4>
+      <div class="" id="divBrackets">
+        <h3>Add brackets</h3>
         <label>
-          value:
-          <input type="text" name="containValues" @keyup.enter="addAxis($event)">
+          <input type="checkbox" name="addBrackets">
+          [ - Open bracket
+        </label>
+        <label>
+          <input type="checkbox" name="addBrackets">
+          ] - Close bracket
         </label>
 
-      </form>
-      <p>Contains: {{contains}}</p>
+      </div>
+
+      <div class="" id="divFunctions">
+        add radio buttons with functions
+      </div>
+      <p>Contents: {{contents}}</p>
       <p>fullPath: {{fullPath}}</p>
 
 
@@ -119,26 +128,23 @@
     var app = new Vue({
       el: "#container",
       data: {
-        axis:"/dscendant::",
+        axis:"//",
         path: "",
-        contains: [],
+        contents: [],
 
       }, //End of data
       methods:{
         addPath(event){
+          console.log(event);
 
-          this.path += event.target.value;
+          this.contains.push(this.axis + event.target.value);
+          event.target.value = "";
         },
 
-        addAxis(){
-          console.log("Add contains value:", event.target.value);
-          this.contains.push(event.target.value);
-          event.target.value = "";
-        }
       }, //End of methods
       computed: {
         fullPath(){
-          return this.axis + this.path;
+          return this.contents.join("");
         }
       } //end of computed properties
     });
