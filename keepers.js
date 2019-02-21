@@ -986,8 +986,8 @@ function minimizeMe(str){
 
 //Milene's version
 function transform(data){
-    return data.replace(/(\.)(\d)/g,"~~~$2")
-    .match(/[^\.\?\!]*((\$\d)|(free)|(redeem)|(\%))[^\.\?\!]*/ig)
-    .join(". ")
-    .replace(/(\~\~\~)(\d)/g,".$2") + ".";
+  return data.replace(/(\.)(\d|com)/gi,"~~~$2")
+  .match(/[^\.\?\!\:]*(\$\d|free|%)[^\.\?\!\:]*/ig)
+  .join(". ")
+  .replace(/~~~/g,".");
 }

@@ -84,7 +84,7 @@
 
         <label>
           Node:
-          <input type="text" name="pathNodes" @keyup.enter="addPath($event)">
+          <input type="text" name="addPathNode" @keyup.enter="addToPath($event)">
         </label>
 
       </div>
@@ -94,20 +94,93 @@
       <div class="" id="divBrackets">
         <h3>Add brackets</h3>
         <label>
-          <input type="checkbox" name="addBrackets">
+          <input type="checkbox" name="addBrackets" value="[" @click="addToPath($event)">
           [ - Open bracket
         </label>
         <label>
-          <input type="checkbox" name="addBrackets">
+          <input type="checkbox" name="addBrackets" value="]" @click="addToPath($event)">
           ] - Close bracket
         </label>
-
       </div>
 
       <div class="" id="divFunctions">
-        add radio buttons with functions
+        <h3>Add functions</h3>
+        <label>
+          <input type="radio" name="addFunction" value="concat()" v-model="xFunction">
+          concat()
+        </label>
+        <label>
+          <input type="radio" name="addFunction" value="contains()" v-model="xFunction">
+          contains()
+        </label>
+        <label>
+          <input type="radio" name="addFunction" value="normalize-space()" v-model="xFunction">
+          normalize-space()
+        </label>
+        <label>
+          <input type="radio" name="addFunction" value="substring()" v-model="xFunction">
+          substring()
+        </label>
+        <label>
+          <input type="radio" name="addFunction" value="substring-after()" v-model="xFunction">
+          substring-after()
+        </label>
+        <label>
+          <input type="radio" name="addFunction" value="substring-before()" v-model="xFunction">
+          substring-before()
+        </label>
+        <label>
+          <input type="radio" name="addFunction" value="translate()" v-model="xFunction">
+          translate()
+        </label>
+
+        <h4>Add function path</h4>
+        <label>
+          <input type="radio" name="functionPath" value="." v-model="functionPath">
+          .
+        </label>
+        <label>
+          <input type="radio" name="functionPath" value="text()" v-model="functionPath">
+          text()
+        </label>
+        <label>
+          <input type="radio" name="functionPath" value="@alt" v-model="functionPath">
+          @alt
+        </label>
+        <label>
+          <input type="radio" name="functionPath" value="@title" v-model="functionPath">
+          @title
+        </label>
+        <label>
+          <input type="radio" name="functionPath" value="@id" v-model="functionPath">
+          @id
+        </label>
+        <label>
+        <label>
+          <input type="radio" name="functionPath" value="@class" v-model="functionPath">
+          @class
+        </label>
+        <label>
+          <input type="radio" name="functionPath" value="@name" v-model="functionPath">
+          @name
+        </label>
+        <label>
+          <input type="text" name="functionPath" value="" v-model="functionPath">
+          Custom path
+        </label>
+
+
+
+        <label>
+          Add string
+          <input type="text" name="functionString" value="" @keyup.enter="addToPath($event)">
+        </label>
+        <label>
+          <input type="checkbox" name="translateString" value="">
+          Translate the string
+        </label>
       </div>
-      <p>Contents: {{contents}}</p>
+      <p>Contents: {{pathArray}}</p>
       <p>fullPath: {{fullPath}}</p>
 
 
@@ -130,21 +203,36 @@
       data: {
         axis:"//",
         path: "",
-        contents: [],
+        xFunction: "",
+        functionPath: "",
+        pathArray: [],
 
       }, //End of data
       methods:{
-        addPath(event){
+        addToPath(event){
+          console.log("event.target.value", event.target.value);
+          console.log("event.target.name", event.target.name);
+          if (event.target.name === "addPathNode") {
+            this.pathArray.push(this.axis + event.target.value);
+            event.target.value = "";
+          }
+          if (event.target.name === "addBrackets"){
+            this.pathArray.push(event.target.value);
+            setTimeout(function () {
+              event.target.checked = false;
+            }, 1000);
+          }
+
           console.log(event);
+          if (event.target.name === "addFunction") {
 
-          this.contains.push(this.axis + event.target.value);
-          event.target.value = "";
+          }
+
         },
-
       }, //End of methods
       computed: {
         fullPath(){
-          return this.contents.join("");
+          return this.pathArray.join("");
         }
       } //end of computed properties
     });
