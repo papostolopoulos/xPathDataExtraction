@@ -59,14 +59,3 @@ function transform (data){
 
   return data.trim() || null;
 }
-
-
-
-function transform(str){
-  while("*©®ǂ‡†±→§™¹›".indexOf(str[str.length-1]) !== -1){
-    str = str.slice(0, str.length-1);
-    console.log(str);
-  }
-
-  return str;
-}

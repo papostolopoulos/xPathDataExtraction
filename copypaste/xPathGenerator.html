@@ -10,7 +10,7 @@
 
       .sectionOptions{
         display: grid;
-        grid-template-rows: 40vh 40vh 20vh;
+        grid-template-rows: 35vh 45vh 20vh;
         grid-template-columns: 50vw 50vw;
         grid-template-areas:
         "divBranch divElements"
@@ -26,10 +26,10 @@
       }
 
       #divBranch, #divFunctions, #divElements, #divResult{
-        padding: 20px;
+        padding: 10px 20px;
       }
 
-      h3{
+      h3, h4{
         margin: auto;
       }
 
@@ -45,6 +45,9 @@
       #divFunctions{
         grid-area: divFunctions;
         background: lightblue;
+        display: flex;
+        flex-flow: column;
+        flex-wrap: wrap;
       }
 
       #divElements{
@@ -56,6 +59,20 @@
         grid-area: divResult;
         background: lightgray;
       }
+
+      .divFunctionInputs, .divFunctionAttribute, .divFunctionParams{
+        display: flex;
+        flex-flow: column;
+      }
+
+      .divParametersToggle{
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        background: yellow;
+      }
+
+      
 
     </style>
 
@@ -71,7 +88,7 @@
     <main id="mainSlot">
       <section class="sectionOptions">
         <div class="" id="divBranch">
-          <h3>Add branch</h3>
+          <h3>Branch</h3>
           <div class="divBranchInputs">
             <label>
               <input type="radio" value="//" name="axisOption" v-model="axis">
@@ -152,8 +169,8 @@
         </div> -->
 
         <div class="" id="divFunctions">
-          <h3>Add functions</h3>
           <div class="divFunctionInputs">
+            <h3>Function</h3>
             <label>
               <input type="radio" name="addFunction" value="concat" v-model="xFunction">
               concat()
@@ -184,8 +201,8 @@
             </label>
           </div>
 
-          <h4>Add function path</h4>
-          <div class="divFunctionParams">
+          <div class="divFunctionAttribute">
+            <h3>Attribute</h3>
             <label>
               <input type="radio" name="functionPath" value="." v-model="functionPath">
               .
@@ -215,17 +232,24 @@
               @name
             </label>
             <label>
+              Custom path:
               <input type="text" name="functionPath" value="" v-model="functionPath">
-              Custom path
             </label>
-            <label>
-              Add string
-              <input type="text" name="functionString" value="" @keyup.enter="addToPath($event)">
-            </label>
-            <label>
-              <input type="checkbox" name="translateString" value="">
-              Translate the string
-            </label>
+          </div>
+
+          <div class="divFunctionParams">
+            <h3>Parameters</h3>
+            <div class="divParametersToggle">
+              <label>
+                Add string
+                <input type="text" name="functionString" value="" @keyup.enter="addToPath($event)">
+              </label>
+              <label>
+                <input type="checkbox" name="translateString" value="">
+                Translate the string <br>
+              </label>
+
+            </div>
           </div>
         </div>
 
