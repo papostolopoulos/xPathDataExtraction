@@ -8,10 +8,14 @@
 
     <style media="screen">
 
+      *{
+        box-sizing: border-box;
+      }
+
       .sectionOptions{
         display: grid;
         grid-template-rows: 35vh 45vh 20vh;
-        grid-template-columns: 50vw 50vw;
+        grid-template-columns: 60vw 40vw;
         grid-template-areas:
         "divBranch divElements"
         "divFunctions divElements"
@@ -63,16 +67,23 @@
       .divFunctionInputs, .divFunctionAttribute, .divFunctionParams{
         display: flex;
         flex-flow: column;
+        width: 33.3%;
+      }
+
+      .divFunctionParams{
+        height: 100%;
+
       }
 
       .divParametersToggle{
         display: flex;
         flex-flow: column;
-        align-items: center;
+        justify-content: center;
+        height: 100%;
         background: yellow;
       }
 
-      
+
 
     </style>
 
@@ -232,13 +243,14 @@
               @name
             </label>
             <label>
-              Custom path:
+              Custom:
               <input type="text" name="functionPath" value="" v-model="functionPath">
             </label>
           </div>
 
           <div class="divFunctionParams">
             <h3>Parameters</h3>
+
             <div class="divParametersToggle">
               <label>
                 Add string
