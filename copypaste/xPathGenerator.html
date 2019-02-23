@@ -7,8 +7,54 @@
     <title>xPath Generator</title>
 
     <style media="screen">
-      body{
+
+      .sectionOptions{
+        display: grid;
+        grid-template-rows: 40vh 40vh 20vh;
+        grid-template-columns: 50vw 50vw;
+        grid-template-areas:
+        "divBranch divElements"
+        "divFunctions divElements"
+        "divResult divResult"
+      }
+
+      #divBranch, #divFunctions{
+        display: flex;
+        flex-wrap: wrap;
+        align-content: flex-start;
+        height: 40vh;
+      }
+
+      #divBranch, #divFunctions, #divElements, #divResult{
         padding: 20px;
+      }
+
+      h3{
+        margin: auto;
+      }
+
+      label{
+        margin-right: 10px;
+      }
+
+      #divBranch{
+        grid-area: divBranch;
+        background: lightgreen;
+      }
+
+      #divFunctions{
+        grid-area: divFunctions;
+        background: lightblue;
+      }
+
+      #divElements{
+        grid-area: divElements;
+        background: lightyellow;
+      }
+
+      #divResult{
+        grid-area: divResult;
+        background: lightgray;
       }
 
     </style>
@@ -22,166 +68,178 @@
 
 
   <body>
-    <main id="container">
-      <div class="" id="divBranch">
-        <h3>Add branch</h3>
-        <label>
-          <input type="radio" value="//" name="axisOption" v-model="axis">
-          //
-        </label>
-        <label>
-          <input type="radio" value="/ancestor::" name="axisOption" v-model="axis">
-          /ancestor::
-        </label>
-        <label>
-          <input type="radio" value="/ancestor-or-self::" name="axisOption" v-model="axis">
-          /ancestor-or-self::
-        </label>
-        <label>
-          <input type="radio" value="/attribute::" name="axisOption" v-model="axis">
-          /attribute::
-        </label>
-        <label>
-          <input type="radio" value="/child::" name="axisOption" v-model="axis">
-          /child::
-        </label>
-        <label>
-          <input type="radio" value="/descendant::" name="axisOption" v-model="axis">
-          /descendant::
-        </label>
-        <label>
-          <input type="radio" value="/descendant-or-self::" name="axisOption" v-model="axis">
-          /descendant-or-self::
-        </label>
-        <label>
-          <input type="radio" value="/following::" name="axisOption" v-model="axis">
-          /following::
-        </label>
-        <label>
-          <input type="radio" value="/following-sibling::" name="axisOption" v-model="axis">
-          /following-sibling::
-        </label>
-        <label>
-          <input type="radio" value="/namespace::" name="axisOption" v-model="axis">
-          /namespace::
-        </label>
-        <label>
-          <input type="radio" value="/parent::" name="axisOption" v-model="axis">
-          /parent::
-        </label>
-        <label>
-          <input type="radio" value="/preceding::" name="axisOption" v-model="axis">
-          /preceding::
-        </label>
-        <label>
-          <input type="radio" value="/preceding-sibling::" name="axisOption" v-model="axis">
-          /preceding-sibling::
-        </label>
-        <label>
-          <input type="radio" value="/self::" name="axisOption" v-model="axis">
-          /self::
-        </label>
+    <main id="mainSlot">
+      <section class="sectionOptions">
+        <div class="" id="divBranch">
+          <h3>Add branch</h3>
+          <div class="divBranchInputs">
+            <label>
+              <input type="radio" value="//" name="axisOption" v-model="axis">
+              //
+            </label>
+            <label>
+              <input type="radio" value="/ancestor::" name="axisOption" v-model="axis">
+              /ancestor::
+            </label>
+            <label>
+              <input type="radio" value="/ancestor-or-self::" name="axisOption" v-model="axis">
+              /ancestor-or-self::
+            </label>
+            <label>
+              <input type="radio" value="/attribute::" name="axisOption" v-model="axis">
+              /attribute::
+            </label>
+            <label>
+              <input type="radio" value="/child::" name="axisOption" v-model="axis">
+              /child::
+            </label>
+            <label>
+              <input type="radio" value="/descendant::" name="axisOption" v-model="axis">
+              /descendant::
+            </label>
+            <label>
+              <input type="radio" value="/descendant-or-self::" name="axisOption" v-model="axis">
+              /descendant-or-self::
+            </label>
+            <label>
+              <input type="radio" value="/following::" name="axisOption" v-model="axis">
+              /following::
+            </label>
+            <label>
+              <input type="radio" value="/following-sibling::" name="axisOption" v-model="axis">
+              /following-sibling::
+            </label>
+            <label>
+              <input type="radio" value="/namespace::" name="axisOption" v-model="axis">
+              /namespace::
+            </label>
+            <label>
+              <input type="radio" value="/parent::" name="axisOption" v-model="axis">
+              /parent::
+            </label>
+            <label>
+              <input type="radio" value="/preceding::" name="axisOption" v-model="axis">
+              /preceding::
+            </label>
+            <label>
+              <input type="radio" value="/preceding-sibling::" name="axisOption" v-model="axis">
+              /preceding-sibling::
+            </label>
+            <label>
+              <input type="radio" value="/self::" name="axisOption" v-model="axis">
+              /self::
+            </label>
 
-        <label>
-          Node:
-          <input type="text" name="addPathNode" @keyup.enter="addToPath($event)">
-        </label>
+            <label>
+              Node:
+              <input type="text" name="addPathNode" @keyup.enter="addToPath($event)">
+            </label>
 
-      </div>
+          </div>
 
+        </div>
 
+        <!-- <div class="" id="divBrackets">
+          <h3>Add brackets</h3>
+          <label>
+            <input type="checkbox" name="addBrackets" value="[" @click="addToPath($event)">
+            [ - Open bracket
+          </label>
+          <label>
+            <input type="checkbox" name="addBrackets" value="]" @click="addToPath($event)">
+            ] - Close bracket
+          </label>
+        </div> -->
 
-      <div class="" id="divBrackets">
-        <h3>Add brackets</h3>
-        <label>
-          <input type="checkbox" name="addBrackets" value="[" @click="addToPath($event)">
-          [ - Open bracket
-        </label>
-        <label>
-          <input type="checkbox" name="addBrackets" value="]" @click="addToPath($event)">
-          ] - Close bracket
-        </label>
-      </div>
+        <div class="" id="divFunctions">
+          <h3>Add functions</h3>
+          <div class="divFunctionInputs">
+            <label>
+              <input type="radio" name="addFunction" value="concat" v-model="xFunction">
+              concat()
+            </label>
+            <label>
+              <input type="radio" name="addFunction" value="contains" v-model="xFunction" checked>
+              contains()
+            </label>
+            <label>
+              <input type="radio" name="addFunction" value="normalize-space" v-model="xFunction">
+              normalize-space()
+            </label>
+            <label>
+              <input type="radio" name="addFunction" value="substring" v-model="xFunction">
+              substring()
+            </label>
+            <label>
+              <input type="radio" name="addFunction" value="substring-after" v-model="xFunction">
+              substring-after()
+            </label>
+            <label>
+              <input type="radio" name="addFunction" value="substring-before" v-model="xFunction">
+              substring-before()
+            </label>
+            <label>
+              <input type="radio" name="addFunction" value="translate" v-model="xFunction">
+              translate()
+            </label>
+          </div>
 
-      <div class="" id="divFunctions">
-        <h3>Add functions</h3>
-        <label>
-          <input type="radio" name="addFunction" value="concat()" v-model="xFunction">
-          concat()
-        </label>
-        <label>
-          <input type="radio" name="addFunction" value="contains()" v-model="xFunction">
-          contains()
-        </label>
-        <label>
-          <input type="radio" name="addFunction" value="normalize-space()" v-model="xFunction">
-          normalize-space()
-        </label>
-        <label>
-          <input type="radio" name="addFunction" value="substring()" v-model="xFunction">
-          substring()
-        </label>
-        <label>
-          <input type="radio" name="addFunction" value="substring-after()" v-model="xFunction">
-          substring-after()
-        </label>
-        <label>
-          <input type="radio" name="addFunction" value="substring-before()" v-model="xFunction">
-          substring-before()
-        </label>
-        <label>
-          <input type="radio" name="addFunction" value="translate()" v-model="xFunction">
-          translate()
-        </label>
+          <h4>Add function path</h4>
+          <div class="divFunctionParams">
+            <label>
+              <input type="radio" name="functionPath" value="." v-model="functionPath">
+              .
+            </label>
+            <label>
+              <input type="radio" name="functionPath" value="text()" v-model="functionPath">
+              text()
+            </label>
+            <label>
+              <input type="radio" name="functionPath" value="@alt" v-model="functionPath">
+              @alt
+            </label>
+            <label>
+              <input type="radio" name="functionPath" value="@title" v-model="functionPath">
+              @title
+            </label>
+            <label>
+              <input type="radio" name="functionPath" value="@id" v-model="functionPath">
+              @id
+            </label>
+            <label>
+              <input type="radio" name="functionPath" value="@class" v-model="functionPath">
+              @class
+            </label>
+            <label>
+              <input type="radio" name="functionPath" value="@name" v-model="functionPath">
+              @name
+            </label>
+            <label>
+              <input type="text" name="functionPath" value="" v-model="functionPath">
+              Custom path
+            </label>
+            <label>
+              Add string
+              <input type="text" name="functionString" value="" @keyup.enter="addToPath($event)">
+            </label>
+            <label>
+              <input type="checkbox" name="translateString" value="">
+              Translate the string
+            </label>
+          </div>
+        </div>
 
-        <h4>Add function path</h4>
-        <label>
-          <input type="radio" name="functionPath" value="." v-model="functionPath">
-          .
-        </label>
-        <label>
-          <input type="radio" name="functionPath" value="text()" v-model="functionPath">
-          text()
-        </label>
-        <label>
-          <input type="radio" name="functionPath" value="@alt" v-model="functionPath">
-          @alt
-        </label>
-        <label>
-          <input type="radio" name="functionPath" value="@title" v-model="functionPath">
-          @title
-        </label>
-        <label>
-          <input type="radio" name="functionPath" value="@id" v-model="functionPath">
-          @id
-        </label>
-        <label>
-        <label>
-          <input type="radio" name="functionPath" value="@class" v-model="functionPath">
-          @class
-        </label>
-        <label>
-          <input type="radio" name="functionPath" value="@name" v-model="functionPath">
-          @name
-        </label>
-        <label>
-          <input type="text" name="functionPath" value="" v-model="functionPath">
-          Custom path
-        </label>
+        <div id="divElements">
+          The elements will be displayed here
+        </div>
 
+        <div id="divResult">
+          Result displayed here: {{fullPath}}
+        </div>
 
-
-        <label>
-          Add string
-          <input type="text" name="functionString" value="" @keyup.enter="addToPath($event)">
-        </label>
-        <label>
-          <input type="checkbox" name="translateString" value="">
-          Translate the string
-        </label>
-      </div>
-      <p>Contents: {{pathArray}}</p>
-      <p>fullPath: {{fullPath}}</p>
+      </section>
+      <!-- <p>Contents: {{pathArray}}</p>
+      <p>fullPath: {{fullPath}}</p> -->
 
 
     </main>
@@ -199,11 +257,11 @@
   <script>
 
     var app = new Vue({
-      el: "#container",
+      el: "#mainSlot",
       data: {
         axis:"//",
         path: "",
-        xFunction: "",
+        xFunction: "contains",
         functionPath: "",
         pathArray: [],
 

@@ -1,42 +1,72 @@
-function transform(data){
-  var regexArr = [
-    // 10% off | 10% (in )savings | 10% discount | 10% (cash)back | 10% reward | 10% gift | 10% value | 10% credit | 10% (promotional )coupon
-    // $10 off | $10 (in )savings | $10 discount | $10 (cash)back | $10 reward | $10 gift | $10 value | $10 credit | $10 (promotional )coupon
-    /(\d{1,2}%|\$\d+)\s+(off|(in )?savings|discount|(cash)?back|reward|gift|value|credit|(promotional\s+)?coupon)/i,
-    // extra 10% | up to 10% | save 10% | over 10% | more than 10% | discount of 10% | discounted by 10% | savings of 10% | at least 10% | gift of 10% | down to 10% | as low as 10%
-    // extra $10 | up to $10 | save $10 | over $10 | more than $10 | discount of $10 | discounted by $10 | savings of $10 | at least $10 | gift of $10 | down to $10 | as low as $10
-    /(extra|up\s+to|sav(e|ings\s+of)|over|more\s+than|discount(ed)?\s+(of|by)|at\s+least|gift\s+of|down\s+to|as\s+low\s+as)\s+(\d{1,2}%|\$\d+)/i,
-    //free ship | free on orders of
-    /free\s+(ship|on\s+orders\s+of)/i,
-    //buy one / two / three, get one, two. three free
-    /buy\s+(one|two|three|\d),?\sget\s+(one|two|three|\d)\s+free/i
+function transform (data){
+
+  var replaceStrings = [
+    {oldStr:/[\*©®ǂ‡†±→§™¹›]/gi, newStr: ""},
+    {oldStr: /See Details$/i, newStr: ""},
+    {oldStr: /shop\s*now|\-\s*learn\s*more/ig, newStr: ""},
+    {oldStr: /Details below/i, newStr: ""},
+    {oldStr: /See Details/i, newStr: ""},
+    {oldStr: /Find Your Store/i, newStr: ""},
+    {oldStr: /Plus, /i, newStr: ""},
+    {oldStr: /Restrictions apply/i, newStr: ""},
+    {oldStr: /Get\s+on\s+it\.?/i, newStr: ""},
+    {oldStr: /In-Store Only/i, newStr: ""},
+    {oldStr: /Plus, you'll get amazing benefits like.*/i, newStr: ""},
+    {oldStr: /Find Your Store/i, newStr: ""},
+    {oldStr: /^NORDSTROM REWARDS$/i, newStr: ""},
+    {oldStr: /(Expires|Now-)(\s+)?(Jan|Fev|Mar|Arp|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[A-z]*\.?\s+\d{1,2}.*/gi, newStr: ""},
+    {oldStr: /.*(Schedule your Personal 10 Points Day\.).*/i, newStr: "$1"},
+    {oldStr: /Promo code required.*/i, newStr: ""},
+    {oldStr: /Get on it/i, newStr: ""},
+    {oldStr: /Sale ends.*/i, newStr: ""},
+    {oldStr: /(\$\d{1,}(\.\d{2})?)(\$\d{1,}(\.\d{2})?)/gi, newStr: "$1 - Was $3"},
+    {oldStr: /Shop ClothingShop Shoes/i, newStr: ""},
+    {oldStr: /\| (Shop Women's Sale)/i, newStr: "$1"},
+    {oldStr: /Hi,? [A-z]+\.?\s(You've got \$\d+ in Nordstrom Notes)/i, newStr: "$1"},
+    {oldStr: /(You have 1 Personal Triple Points Day\(s\) expiring (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\. 31\.).*/i, newStr: "$1"},
+    {oldStr: / or$/i, newStr: ""},
+    //{oldStr: //i, newStr: ""},
+    //{oldStr: //i, newStr: ""},
+    //{oldStr: //i, newStr: ""},
+    //{oldStr: //i, newStr: ""},
+    //{oldStr: //i, newStr: ""},
+    //{oldStr: //i, newStr: ""},
+    //{oldStr: //i, newStr: ""},
+    //{oldStr: //i, newStr: ""},
+    //{oldStr: //i, newStr: ""},
+    {oldStr: /\|\s+\|/i, newStr: "|"},
+    {oldStr: /\.\†/gi, newStr: "."},
+    {oldStr: /[\†\|-](\s+)?$/gi, newStr: ""},
+    {oldStr: /\.\s+\./gi, newStr: "."},
   ];
+
+  for (var i = 0; i < replaceStrings.length; i++) {
+    var el = replaceStrings[i];
+    if (el.oldStr.test(data)) data = data.replace(el.oldStr, el.newStr);
+  }
+
+  data = data.trim();
+
+  if (data.lastIndexOf("†") === data.length - 1) data = data.slice(0, data.length-1);
+
+  if(data.length > 100)
+    return data.replace(/(\.)(\d)/g,"~~~$2")
+    .match(/[^\.\?\!]*((\$\d)|(free)|(redeem)|(house \/d0)|(\%))[^\.\?\!]*/ig)
+    .join(". ")
+    .replace(/(\~\~\~)(\d)/g,".$2") + ".";
+
+
+
+  return data.trim() || null;
 }
 
 
-//Free
 
-var buyNumberGetNumberFree = /(?i)buy\s(one|two|three|\d),?\sget\s(one|two|three|\d)\s(free|\d{1,2}% off)/;
-var cashback = /(?i)cash\s?back/;
+function transform(str){
+  while("*©®ǂ‡†±→§™¹›".indexOf(str[str.length-1]) !== -1){
+    str = str.slice(0, str.length-1);
+    console.log(str);
+  }
 
-
-
-//Points
-var numberPoints = /\d+\s?[Pp][Oo][Ii][Nn][Tt][Ss]/;
-var earnNumberPoints = /(?i)earn\s\d+\spoints/;
-
-//Coupon
-var couponColon = /(?i)coupon:/i;
-var couponCodeColon = /(?i)coupon\scode:/i;
-
-var offers = /\s+offer[s]?\s+/i;
-var promoCode = /promo(?:tion)\s+code\s+/i;
-var negPromoCode = /^into\sthe/i;
-
-var redeem = /\sredeem\s/i;
-var redeem2 = /\.[^.]*?\sredeem\s/i;
-
-var earnedReward = /\sbody\sworks\sreward/i;
-
-// find index of match and find the last index of the full stop in the preceding string
-// and the first index of the full stop in the following string.
+  return str;
+}

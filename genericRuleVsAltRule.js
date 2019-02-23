@@ -189,11 +189,14 @@ function transform (data){
   }
 
   if(data.length > 100)
-    return data.replace(/(\.)(\d)/g,"~~~$2")
-    .match(/[^\.\?\!]*((\$\d)|(free)|(redeem)|(house \/d0)|(\%))[^\.\?\!]*/ig)
-    .join(". ")
-    .replace(/(\~\~\~)(\d)/g,".$2") + ".";
+    return data..match(/[^\.\?\!]*((\$\d)|(free)|(redeem)|(house \/d0)|(\%))[^\.\?\!]*/ig).join(". ");
 
 
   return data.trim() || null;
 }
+
+
+"Sale begins today. Sweaters only $10.99. Valid until 10/19/2019"
+"Sale begins today. Sweaters only $10~~~99. Valid until 10/19/2019"
+Sweaters only $10~~~99
+Sweaters only $10.99

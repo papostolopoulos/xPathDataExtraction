@@ -616,6 +616,25 @@ function transform(data) {
 //REGEX $OFF
 // For linkbased when ignoring casing, put this at the front: (?i)
 function transform(data){
+
+  var posRegexArr = [
+    // 10% off | 10% (in )savings | 10% discount | 10% (cash)back | 10% reward | 10% gift | 10% value | 10% credit | 10% (promotional )coupon | 10% (mail-in )rebate
+    // $10 off | $10 (in )savings | $10 discount | $10 (cash)back | $10 reward | $10 gift | $10 value | $10 credit | $10 (promotional )coupon | $10 (mail-in )rebate
+    /(\d{1,2}%|\$\d+)\s*(off|(in )?savings|discount|(cash(\s*)?)?back|reward|gift|value|credit|(promotional\s*)?coupon|(mail-in\s*)?rebate)/i,
+    //free ship | free on orders of
+    /free\s*(ship|on\s*orders\s*of)/i,
+    // buy one / two / three, get
+    /buy\s*(one|two|three|\d+),?\sget/i,
+    // 100 points | earn points | get points | gather points | collect points | your points | redeem points
+    // 1000 rewards | earn rewards | get rewards | gather rewards | collect rewards | your rewards | redeem rewards
+    // 1000 gift | earn gift | get gift | gather gift | collect gift | your gift | redeem gift
+    // 1000 coupon | earn coupon | get coupon | gather coupon | collect coupon | your coupon | redeem coupon
+    /(\d+|earn|get|gather|collect|your|redeem)\s*(points|rewards?|gift|coupon)/i,
+    //promo(tion) code
+    /promo(?:tion)\s*code\s*/i,
+  ];
+
+
   //Free
   var free = /[Ff][Rr][Ee]{2}/;
   var freeShipping = /(?i)free\sshipping/;
