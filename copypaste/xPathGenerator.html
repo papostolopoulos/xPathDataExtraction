@@ -14,7 +14,7 @@
 
       .sectionOptions{
         display: grid;
-        grid-template-rows: 35vh 45vh 20vh;
+        grid-template-rows: 40vh 45vh 15vh;
         grid-template-columns: 60vw 40vw;
         grid-template-areas:
         "divBranch divElements"
@@ -25,8 +25,14 @@
       #divBranch, #divFunctions{
         display: flex;
         flex-wrap: wrap;
+      }
+
+      #divBranch{
+        flex-flow: column;
+      }
+
+      #divFunctions{
         align-content: flex-start;
-        height: 40vh;
       }
 
       #divBranch, #divFunctions, #divElements, #divResult{
@@ -160,9 +166,36 @@
 
             <label>
               Node:
-              <input type="text" name="addPathNode" @keyup.enter="addToPath($event)">
+              <input type="text" name="addPathNode" v-model="node" @keyup.enter="addToPath($event)">
             </label>
+          </div>
 
+          <div class="">
+            Display branch: {{axis + node}}
+          </div>
+
+          <h3>Connectors</h3>
+          <div class="divConnectors">
+            <label>
+              <input type="radio" name="addConnector" value="[]" v-model="connector">
+              Brackets []
+            </label>
+            <label>
+              <input type="radio" name="addConnector" value="or" v-model="connector">
+              or
+            </label>
+            <label>
+              <input type="radio" name="addConnector" value="and" v-model="connector">
+              and
+            </label>
+            <label>
+              <input type="radio" name="addConnector" value="not()" v-model="connector">
+              not()
+            </label>
+            <label>
+              <input type="radio" name="addConnector" value="and not()" v-model="connector">
+              and not()
+            </label>
           </div>
 
         </div>
@@ -215,36 +248,40 @@
           <div class="divFunctionAttribute">
             <h3>Attribute</h3>
             <label>
-              <input type="radio" name="functionPath" value="." v-model="functionPath">
-              .
-            </label>
-            <label>
-              <input type="radio" name="functionPath" value="text()" v-model="functionPath">
-              text()
-            </label>
-            <label>
-              <input type="radio" name="functionPath" value="@alt" v-model="functionPath">
+              <input type="radio" name="attribute" value="@alt" v-model="attribute">
               @alt
             </label>
             <label>
-              <input type="radio" name="functionPath" value="@title" v-model="functionPath">
-              @title
-            </label>
-            <label>
-              <input type="radio" name="functionPath" value="@id" v-model="functionPath">
-              @id
-            </label>
-            <label>
-              <input type="radio" name="functionPath" value="@class" v-model="functionPath">
+              <input type="radio" name="attribute" value="@class" v-model="attribute">
               @class
             </label>
             <label>
-              <input type="radio" name="functionPath" value="@name" v-model="functionPath">
+              <input type="radio" name="attribute" value="@id" v-model="attribute">
+              @id
+            </label>
+            <label>
+              <input type="radio" name="attribute" value="@name" v-model="attribute">
               @name
             </label>
             <label>
+              <input type="radio" name="attribute" v-model="attribute" value="@src" >
+              @src
+            </label>
+            <label>
+              <input type="radio" name="attribute" value="@title" v-model="attribute">
+              @title
+            </label>
+            <label>
+              <input type="radio" name="attribute" value="text()" v-model="attribute">
+              text()
+            </label>
+            <label>
+              <input type="radio" name="attribute" value="." v-model="attribute">
+              .
+            </label>
+            <label>
+              <input type="text" name="attribute" value="" v-model="attribute" @keyup.enter="addToPath($event)">
               Custom:
-              <input type="text" name="functionPath" value="" v-model="functionPath">
             </label>
           </div>
 
@@ -252,6 +289,27 @@
             <h3>Parameters</h3>
 
             <div class="divParametersToggle">
+              <div class="divParameters" v-show="xFunction === 'concat'">
+                concat parameters
+              </div>
+              <div class="divParameters" v-show="xFunction === 'contains'">
+                contains parameters
+              </div>
+              <div class="divParameters" v-show="xFunction === 'normalize-space'">
+                normalize-space parameters
+              </div>
+              <div class="divParameters" v-show="xFunction === 'substring'">
+                substring parameters
+              </div>
+              <div class="divParameters" v-show="xFunction === 'substring-after'">
+                substring-after parameters
+              </div>
+              <div class="divParameters" v-show="xFunction === 'substring-before'">
+                substring-before parameters
+              </div>
+              <div class="divParameters" v-show="xFunction === 'translate'">
+                translate parameters
+              </div>
               <label>
                 Add string
                 <input type="text" name="functionString" value="" @keyup.enter="addToPath($event)">
@@ -266,7 +324,8 @@
         </div>
 
         <div id="divElements">
-          The elements will be displayed here
+          The elements will be displayed here <br>
+          {{pathArray}}
         </div>
 
         <div id="divResult">
@@ -295,10 +354,12 @@
     var app = new Vue({
       el: "#mainSlot",
       data: {
-        axis:"//",
+        axis:"/descendant::",
+        node: "",
         path: "",
+        connector: "[]",
         xFunction: "contains",
-        functionPath: "",
+        attribute: "",
         pathArray: [],
 
       }, //End of data
@@ -310,14 +371,21 @@
             this.pathArray.push(this.axis + event.target.value);
             event.target.value = "";
           }
-          if (event.target.name === "addBrackets"){
-            this.pathArray.push(event.target.value);
-            setTimeout(function () {
-              event.target.checked = false;
-            }, 1000);
+          // if (event.target.name === "addBrackets"){
+          //   this.pathArray.push(event.target.value);
+          //   setTimeout(function () {
+          //     event.target.checked = false;
+          //   }, 1000);
+          // }
+
+          if (event.target.name === "attribute") {
+            let lastPathArrayElement = this.pathArray[this.pathArray.length-1];
+            console.log(lastPathArrayElement[lastPathArrayElement.length-1]);
+            // if (this.pathArray[this.pathArray.length-1]) {
+            //
+            // }
           }
 
-          console.log(event);
           if (event.target.name === "addFunction") {
 
           }
