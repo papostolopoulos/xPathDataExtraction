@@ -14,28 +14,30 @@
 
       .sectionOptions{
         display: grid;
-        grid-template-rows: 40vh 45vh 15vh;
-        grid-template-columns: 60vw 40vw;
+        grid-template-rows: 35vh 50vh 15vh;
+        grid-template-columns: 55vw 45vw;
         grid-template-areas:
         "divBranch divElements"
         "divFunctions divElements"
         "divResult divResult"
       }
 
-      #divBranch, #divFunctions{
+      .divBranch, .divFunctions{
         display: flex;
         flex-wrap: wrap;
       }
 
-      #divBranch{
+      .divBranch{
         flex-flow: column;
+        grid-area: divBranch;
+        background: lightgreen;
       }
 
-      #divFunctions{
+      .divFunctions{
         align-content: flex-start;
       }
 
-      #divBranch, #divFunctions, #divElements, #divResult{
+      .divBranch, .divFunctions, .divElements, .divResult{
         padding: 10px 20px;
       }
 
@@ -47,12 +49,7 @@
         margin-right: 10px;
       }
 
-      #divBranch{
-        grid-area: divBranch;
-        background: lightgreen;
-      }
-
-      #divFunctions{
+      .divFunctions{
         grid-area: divFunctions;
         background: lightblue;
         display: flex;
@@ -60,12 +57,12 @@
         flex-wrap: wrap;
       }
 
-      #divElements{
+      .divElements{
         grid-area: divElements;
         background: lightyellow;
       }
 
-      #divResult{
+      .divResult{
         grid-area: divResult;
         background: lightgray;
       }
@@ -73,6 +70,14 @@
       .divBracketsOperators{
         display: grid;
         grid-template-columns: 30% 70%;
+      }
+
+      .divBracketsContainer, .divOperatorsContainer{
+        text-align: center;
+      }
+
+      .divBrackets, .divOperators{
+        text-align: justify;
       }
 
       .divFunctionInputs, .divFunctionAttribute, .divFunctionParams{
@@ -113,7 +118,7 @@
   <body>
     <main id="mainSlot">
       <section class="sectionOptions">
-        <div class="" id="divBranch">
+        <div class="divBranch">
           <h3>Branch</h3>
           <div class="divBranchInputs">
             <label>
@@ -183,92 +188,95 @@
           </div>
 
           <div class="divBracketsOperators">
-            <div class="" id="divBrackets">
+            <div class="divBracketsContainer">
               <h3>Brackets</h3>
-              <label>
-                <input type="radio" name="brackets" value="" v-model="brackets">
-                No brackets
-              </label>
-              <label>
-                <input type="radio" name="brackets" value="[]" v-model="brackets" @click="addToPath($event)">
-                Brackets []
-              </label>
+              <div class="divBrackets">
+                <label>
+                  <input type="radio" name="brackets" value="" v-model="brackets">
+                  No
+                </label>
+                <label>
+                  <input type="radio" name="brackets" value="[]" v-model="brackets" @click="addToPath($event)">
+                  Brackets []
+                </label>
+              </div>
             </div>
 
-            <div class="divOperators">
+            <div class="divOperatorsContainer">
               <h3>Operators</h3>
-              <label>
-                <input type="radio" name="addOperator" value="" v-model="operator">
-                None
-              </label>
-              <label>
-                <input type="radio" name="addOperator" value="and" v-model="operator">
-                and
-              </label>
-              <label>
-                <input type="radio" name="addOperator" value="and not()" v-model="operator">
-                and not()
-              </label>
-              <label>
-                <input type="radio" name="addOperator" value="not()" v-model="operator">
-                not()
-              </label>
-              <label>
-                <input type="radio" name="addOperator" value="or" v-model="operator">
-                or
-              </label>
-              <label>
-                <input type="radio" name="addOperator" value="|" v-model="operator">
-                |
-              </label>
-              <label>
-                <input type="radio" name="addOperator" value="=" v-model="operator">
-                =
-              </label>
-              <label>
-                <input type="radio" name="addOperator" value="!=" v-model="operator">
-                !=
-              </label>
-              <label>
-                <input type="radio" name="addOperator" value="+" v-model="operator">
-                +
-              </label>
-              <label>
-                <input type="radio" name="addOperator" value="-" v-model="operator">
-                -
-              </label>
-              <label>
-                <input type="radio" name="addOperator" value="*" v-model="operator">
-                *
-              </label>
-              <label>
-                <input type="radio" name="addOperator" value="div" v-model="operator">
-                div
-              </label>
-              <label>
-                <input type="radio" name="addOperator" value="<" v-model="operator">
-                &lt;
-              </label>
-              <label>
-                <input type="radio" name="addOperator" value="<=" v-model="operator">
-                &lt;=
-              </label>
-              <label>
-                <input type="radio" name="addOperator" value=">" v-model="operator">
-                &gt;
-              </label>
-              <label>
-                <input type="radio" name="addOperator" value=">=" v-model="operator">
-                &gt;=
-              </label>
-              <label>
-                <input type="radio" name="addOperator" value="mod" v-model="operator">
-                mod
-              </label>
-
-
-
+              <div class="divOperators">
+                <label>
+                  <input type="radio" name="addOperator" value="" v-model="operator">
+                  None
+                </label>
+                <label>
+                  <input type="radio" name="addOperator" value="and" v-model="operator">
+                  and
+                </label>
+                <label>
+                  <input type="radio" name="addOperator" value="and not" v-model="operator">
+                  and not()
+                </label>
+                <label>
+                  <input type="radio" name="addOperator" value="not" v-model="operator">
+                  not()
+                </label>
+                <label>
+                  <input type="radio" name="addOperator" value="or" v-model="operator">
+                  or
+                </label>
+                <label>
+                  <input type="radio" name="addOperator" value="|" v-model="operator">
+                  |
+                </label>
+                <label>
+                  <input type="radio" name="addOperator" value="=" v-model="operator">
+                  =
+                </label>
+                <label>
+                  <input type="radio" name="addOperator" value="!=" v-model="operator">
+                  !=
+                </label>
+                <label>
+                  <input type="radio" name="addOperator" value="+" v-model="operator">
+                  +
+                </label>
+                <label>
+                  <input type="radio" name="addOperator" value="-" v-model="operator">
+                  -
+                </label>
+                <label>
+                  <input type="radio" name="addOperator" value="*" v-model="operator">
+                  *
+                </label>
+                <label>
+                  <input type="radio" name="addOperator" value="div" v-model="operator">
+                  div
+                </label>
+                <label>
+                  <input type="radio" name="addOperator" value="<" v-model="operator">
+                  &lt;
+                </label>
+                <label>
+                  <input type="radio" name="addOperator" value="<=" v-model="operator">
+                  &lt;=
+                </label>
+                <label>
+                  <input type="radio" name="addOperator" value=">" v-model="operator">
+                  &gt;
+                </label>
+                <label>
+                  <input type="radio" name="addOperator" value=">=" v-model="operator">
+                  &gt;=
+                </label>
+                <label>
+                  <input type="radio" name="addOperator" value="mod" v-model="operator">
+                  mod
+                </label>
+              </div>
             </div>
+
+
           </div>
 
 
@@ -276,7 +284,7 @@
 
         </div>
 
-        <div class="" id="divFunctions">
+        <div class="divFunctions">
           <div class="divFunctionInputs">
             <h3>Function</h3>
             <label>
@@ -310,10 +318,6 @@
             <label>
               <input type="radio" name="addFunction" value="translate" v-model="xFunction">
               translate()
-            </label>
-            <label>
-              <input type="radio" name="addFunction" value="=" v-model="xFunction">
-              =
             </label>
           </div>
 
@@ -367,12 +371,12 @@
               <div class="divParameters" v-show="xFunction === 'contains'">
                 <h3>for contains()</h3>
                 <label>
-                  <input type="checkbox" name="translateString" value="" checked>
+                  <input type="checkbox" name="translateString" v-model="translateString">
                   Translate the string
                 </label>
                 <label>
                   Add string
-                  <input type="text" name="functionString" value="" @keyup.enter="addToPath($event)">
+                  <input type="text" name="functionString" value="" v-model="functionString" @keyup.enter="addToPath($event)">
                 </label>
 
               </div>
@@ -396,12 +400,12 @@
           </div>
         </div>
 
-        <div id="divElements">
+        <div class="divElements">
           The elements will be displayed here <br>
           {{pathArray}}
         </div>
 
-        <div id="divResult">
+        <div class="divResult">
           Result displayed here: {{fullPath}}
         </div>
 
@@ -432,35 +436,51 @@
         brackets: "", // If new brackets are opening or not
         operator: "", //or, and, and not, not
         xFunction: "",
+        translateString: true,
+        functionString: "",
         attribute: "",
         pathArray: [],
 
       }, //End of data
       methods:{
         addToPath(event){
-          console.log("event.target.value", event.target.value);
-          console.log("event.target.name", event.target.name);
+          //Variable used to check on the last element of the pathArray. Needed for splicing
+          let lastPathArrayElement = this.pathArray[this.pathArray.length-1];
+
+          console.log("event.target.value:", event.target.value);
+          console.log("event.target.name:", event.target.name);
+
+          //Add an axis with the node name
           if (event.target.name === "addPathNode") {
             this.pathArray.push(this.axis + event.target.value);
             this.node = "";
           }
 
+          //Add brackets
           if (event.target.name === "brackets" && event.target.value === "[]"){
             console.log(this.brackets);
             this.pathArray.push(event.target.value[0]);
             this.pathArray.push(event.target.value[1]);
           }
 
+          if (event.target.name === "addFunction") {
+
+          }
+
+          //Add attribute by itself
           if (event.target.name === "attribute") {
-            let lastPathArrayElement = this.pathArray[this.pathArray.length-1];
-            console.log(lastPathArrayElement[lastPathArrayElement.length-1]);
+            //If the last element of array is a bracket, then push the attribute as extension
             if (lastPathArrayElement[lastPathArrayElement.length-1] === "]") {
               this.pathArray.push("/" + event.target.name);
             }
           }
 
-          if (event.target.name === "addFunction") {
+          //Add a function with all it's parameters
+          if (event.target.name === "functionString") {
+            if (lastPathArrayElement[lastPathArrayElement.length-1] === "]") {
+              let concatString = `this.xFunction:${this.xFunction}(${this.attribute}, '${this.functionString}')`;
 
+            }
           }
 
         },

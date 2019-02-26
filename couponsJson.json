@@ -5455,3 +5455,6 @@
     "ignoredValidations": null
   }
 }
+
+domain:*sephora.com or domain:*hm.com or domain:*jcpenney.com or domain:*michaels.com or domain:*buybuybaby.com or domain:*childrensplace.com or domain:*costco.com or domain:*gnc.com or domain:*goldstar.com or domain:*hottopic.com and status:todo
+domain:*jcpenney.com or domain:*krogermail.com or domain:*landsend.com or domain:*macys.com or domain:*officedepot.com or domain:*oldnavy.com  or domain:*sears.com or domain:*safeway.com and status:todo

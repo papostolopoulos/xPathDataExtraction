@@ -91,14 +91,14 @@ function transform(data){
 
 
   var posRegexArr = [
-    // (10% | $10 | percent) (off | (in )savings | discount | (cash)back | reward | gift | value | credit | (promotional )coupon | (mail-in )rebate | (e-)certificate | bonus)
-    /(\d{1,2}%|\$\d+|percent)\s*(off|(in )?savings|discount|(cash(\s*)?)?back|reward|gift|value|credit|(promotional\s*)?coupon|(mail-in\s*)?rebate|(e-)?certificate|bonus)/i,
+    // (10% | $10 | percent) (off | (in )savings | discount | (cash)back | reward | gift | value | credit | (promotional )coupon | (mail-in )rebate | (e-)certificate | bonus | sale)
+    /(\d{1,2}%|\$\d+(\.\d{2})?|percent)\s*(off|(in )?savings|discount|(cash(\s*)?)?back|reward|gift|value|credit|(promotional\s*)?coupon|(mail-in\s*)?rebate|(e-)?certificate|bonus|sale)/i,
     // (extra | up to | save | over | more than | discount of | discounted by | savings of | at least | gift of | down to | as low as | bonus of) (10% | $10)
-    /(extra|up\s*to|sav(e|ings\s*of)|over|more\s*than|discount(ed)?\s*(of|by)|at\s*least|gift\s*of|down\s*to|as\s*low\s*as|bonus of)\s*(\d{1,2}%|\$\d+)/i,
+    /(extra|up\s*to|sav(e|ings\s*of)|over|more\s*than|discount(ed)?\s*(of|by)|at\s*least|gift\s*of|down\s*to|as\s*low\s*as|bonus of)\s*(\d{1,2}%|\$\d+(\.\d{2})?)/i,
     // was $10.99 | start at $10.99
     /(was:?|start\s*at)\s*\$\d+/i,
-    // free ship | free on orders of | free $5 | free 10% | free delivery | free standard
-    /free\s*(ship|on\s*orders\s*of|\$\d|\d+%|standard|delivery)/i,
+    // free ship | free on orders of | free $5 | free 10% | free delivery | free standard | free gift
+    /free\s*(ship|on\s*orders\s*of|\$\d|\d+%|standard|delivery|gift)/i,
     // buy one / two / three texttexttext, get
     /buy\s*(one|two|three|\d+),?.*\sget/i,
     // (100 | earn | get | gather | collect | your | redeem | reward) (points | rewards | gift | coupon | (e-)certificate)
@@ -156,8 +156,8 @@ function minimizeMe(str, reg){
 
 
 function cleanMe(string) {
-  while("*©®ǂ‡†±→§™¹›∞•◊Δ".indexOf(string[string.length-1]) !== -1) string = string.slice(0, string.length-1);
-  while("*©®ǂ‡†±→§™¹›∞•◊Δ".indexOf(string[0]) !== -1) string = string.slice(1);
+  while("*©®ǂ‡†±→§™¹›∞•◊ΔÐð_".indexOf(string[string.length-1]) !== -1) string = string.slice(0, string.length-1);
+  while("*©®ǂ‡†±→§™¹›∞•◊ΔÐð_".indexOf(string[0]) !== -1) string = string.slice(1);
 
   return string;
 }
