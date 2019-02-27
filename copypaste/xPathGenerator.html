@@ -15,7 +15,7 @@
       .sectionOptions{
         display: grid;
         grid-template-rows: 35vh 50vh 15vh;
-        grid-template-columns: 55vw 45vw;
+        grid-template-columns: 60vw 40vw;
         grid-template-areas:
         "divBranch divElements"
         "divFunctions divElements"
@@ -82,12 +82,20 @@
 
       .divFunctionInputs, .divFunctionAttribute, .divFunctionParams{
         display: flex;
-        flex-flow: column;
-        width: 33.3%;
+        flex-direction: column;
       }
 
-      .divFunctionParams{
-        /* height: 100%; */
+      .divFunctionInputs{
+        width: 50%;
+      }
+
+      .functionInputs{
+        display: flex;
+        flex-flow: column wrap;
+      }
+
+      .divFunctionAttribute, .divFunctionParams{
+        width: 25%;
       }
 
       .divParametersToggle{
@@ -184,8 +192,6 @@
             </label>
           </div>
 
-          <div class="">
-          </div>
 
           <div class="divBracketsOperators">
             <div class="divBracketsContainer">
@@ -206,71 +212,71 @@
               <h3>Operators</h3>
               <div class="divOperators">
                 <label>
-                  <input type="radio" name="addOperator" value="" v-model="operator">
+                  <input type="radio" name="inputOperator" value="" v-model="operator">
                   None
                 </label>
                 <label>
-                  <input type="radio" name="addOperator" value="and" v-model="operator">
+                  <input type="radio" name="inputOperator" value="and" v-model="operator">
                   and
                 </label>
                 <label>
-                  <input type="radio" name="addOperator" value="and not" v-model="operator">
+                  <input type="radio" name="inputOperator" value="and not" v-model="operator">
                   and not()
                 </label>
                 <label>
-                  <input type="radio" name="addOperator" value="not" v-model="operator">
+                  <input type="radio" name="inputOperator" value="not" v-model="operator">
                   not()
                 </label>
                 <label>
-                  <input type="radio" name="addOperator" value="or" v-model="operator">
+                  <input type="radio" name="inputOperator" value="or" v-model="operator">
                   or
                 </label>
                 <label>
-                  <input type="radio" name="addOperator" value="|" v-model="operator">
+                  <input type="radio" name="inputOperator" value="|" v-model="operator">
                   |
                 </label>
                 <label>
-                  <input type="radio" name="addOperator" value="=" v-model="operator">
+                  <input type="radio" name="inputOperator" value="=" v-model="operator">
                   =
                 </label>
                 <label>
-                  <input type="radio" name="addOperator" value="!=" v-model="operator">
+                  <input type="radio" name="inputOperator" value="!=" v-model="operator">
                   !=
                 </label>
                 <label>
-                  <input type="radio" name="addOperator" value="+" v-model="operator">
+                  <input type="radio" name="inputOperator" value="+" v-model="operator">
                   +
                 </label>
                 <label>
-                  <input type="radio" name="addOperator" value="-" v-model="operator">
+                  <input type="radio" name="inputOperator" value="-" v-model="operator">
                   -
                 </label>
                 <label>
-                  <input type="radio" name="addOperator" value="*" v-model="operator">
+                  <input type="radio" name="inputOperator" value="*" v-model="operator">
                   *
                 </label>
                 <label>
-                  <input type="radio" name="addOperator" value="div" v-model="operator">
+                  <input type="radio" name="inputOperator" value="div" v-model="operator">
                   div
                 </label>
                 <label>
-                  <input type="radio" name="addOperator" value="<" v-model="operator">
+                  <input type="radio" name="inputOperator" value="<" v-model="operator">
                   &lt;
                 </label>
                 <label>
-                  <input type="radio" name="addOperator" value="<=" v-model="operator">
+                  <input type="radio" name="inputOperator" value="<=" v-model="operator">
                   &lt;=
                 </label>
                 <label>
-                  <input type="radio" name="addOperator" value=">" v-model="operator">
+                  <input type="radio" name="inputOperator" value=">" v-model="operator">
                   &gt;
                 </label>
                 <label>
-                  <input type="radio" name="addOperator" value=">=" v-model="operator">
+                  <input type="radio" name="inputOperator" value=">=" v-model="operator">
                   &gt;=
                 </label>
                 <label>
-                  <input type="radio" name="addOperator" value="mod" v-model="operator">
+                  <input type="radio" name="inputOperator" value="mod" v-model="operator">
                   mod
                 </label>
               </div>
@@ -287,38 +293,116 @@
         <div class="divFunctions">
           <div class="divFunctionInputs">
             <h3>Function</h3>
-            <label>
-              <input type="radio" name="addFunction" value="" v-model="xFunction">
-              None
-            </label>
-            <label>
-              <input type="radio" name="addFunction" value="concat" v-model="xFunction">
-              concat()
-            </label>
-            <label>
-              <input type="radio" name="addFunction" value="contains" v-model="xFunction">
-              contains()
-            </label>
-            <label>
-              <input type="radio" name="addFunction" value="normalize-space" v-model="xFunction">
-              normalize-space()
-            </label>
-            <label>
-              <input type="radio" name="addFunction" value="substring" v-model="xFunction">
-              substring()
-            </label>
-            <label>
-              <input type="radio" name="addFunction" value="substring-after" v-model="xFunction">
-              substring-after()
-            </label>
-            <label>
-              <input type="radio" name="addFunction" value="substring-before" v-model="xFunction">
-              substring-before()
-            </label>
-            <label>
-              <input type="radio" name="addFunction" value="translate" v-model="xFunction">
-              translate()
-            </label>
+            <div class="functionInputs">
+              <label>
+                <input type="radio" name="inputFunction" value="" v-model="inputFunction">
+                None
+              </label>
+              <label>
+                <input type="radio" name="inputFunction" value="count" v-model="inputFunction">
+                count()
+              </label>
+              <label>
+                <input type="radio" name="inputFunction" value="concat" v-model="inputFunction">
+                concat()
+              </label>
+              <label>
+                <input type="radio" name="inputFunction" value="contains" v-model="inputFunction">
+                contains()
+              </label>
+              <label>
+                <input type="radio" name="inputFunction" value="element-available" v-model="inputFunction">
+                element-available()
+              </label>
+              <label>
+                <input type="radio" name="inputFunction" value="false" v-model="inputFunction">
+                false()
+              </label>
+              <label>
+                <input type="radio" name="inputFunction" value="floor" v-model="inputFunction">
+                floor()
+              </label>
+              <label>
+                <input type="radio" name="inputFunction" value="function-available" v-model="inputFunction">
+                function-available()
+              </label>
+              <label>
+                <input type="radio" name="inputFunction" value="lang" v-model="inputFunction">
+                lang()
+              </label>
+              <label>
+                <input type="radio" name="inputFunction" value="last" v-model="inputFunction">
+                last()
+              </label>
+              <label>
+                <input type="radio" name="inputFunction" value="local-name" v-model="inputFunction">
+                local-name()
+              </label>
+              <label>
+                <input type="radio" name="inputFunction" value="name" v-model="inputFunction">
+                name()
+              </label>
+              <label>
+                <input type="radio" name="inputFunction" value="namespace-url" v-model="inputFunction">
+                namespace-url()
+              </label>
+              <label>
+                <input type="radio" name="inputFunction" value="normalize-space" v-model="inputFunction">
+                normalize-space()
+              </label>
+              <label>
+                <input type="radio" name="inputFunction" value="not" v-model="inputFunction">
+                not()
+              </label>
+              <label>
+                <input type="radio" name="inputFunction" value="number" v-model="inputFunction">
+                number()
+              </label>
+              <label>
+                <input type="radio" name="inputFunction" value="position" v-model="inputFunction">
+                position()
+              </label>
+              <label>
+                <input type="radio" name="inputFunction" value="round" v-model="inputFunction">
+                round()
+              </label>
+              <label>
+                <input type="radio" name="inputFunction" value="starts-with" v-model="inputFunction">
+                starts-with()
+              </label>
+              <label>
+                <input type="radio" name="inputFunction" value="string" v-model="inputFunction">
+                string()
+              </label>
+              <label>
+                <input type="radio" name="inputFunction" value="string-length" v-model="inputFunction">
+                string-length()
+              </label>
+              <label>
+                <input type="radio" name="inputFunction" value="substring" v-model="inputFunction">
+                substring()
+              </label>
+              <label>
+                <input type="radio" name="inputFunction" value="substring-after" v-model="inputFunction">
+                substring-after()
+              </label>
+              <label>
+                <input type="radio" name="inputFunction" value="substring-before" v-model="inputFunction">
+                substring-before()
+              </label>
+              <label>
+                <input type="radio" name="inputFunction" value="sum" v-model="inputFunction">
+                sum()
+              </label>
+              <label>
+                <input type="radio" name="inputFunction" value="translate" v-model="inputFunction">
+                translate()
+              </label>
+              <label>
+                <input type="radio" name="inputFunction" value="true" v-model="inputFunction">
+                true()
+              </label>
+            </div>
           </div>
 
           <div class="divFunctionAttribute">
@@ -365,10 +449,10 @@
             <h3>Parameters</h3>
 
             <div class="divParametersToggle">
-              <div class="divParameters" v-show="xFunction === 'concat'">
+              <div class="divParameters" v-show="inputFunction === 'concat'">
                 <h3>for concat()</h3>
               </div>
-              <div class="divParameters" v-show="xFunction === 'contains'">
+              <div class="divParameters" v-show="inputFunction === 'contains'">
                 <h3>for contains()</h3>
                 <label>
                   <input type="checkbox" name="translateString" v-model="translateString">
@@ -380,19 +464,19 @@
                 </label>
 
               </div>
-              <div class="divParameters" v-show="xFunction === 'normalize-space'">
+              <div class="divParameters" v-show="inputFunction === 'normalize-space'">
                 <h3>for normalize-space()</h3>
               </div>
-              <div class="divParameters" v-show="xFunction === 'substring'">
+              <div class="divParameters" v-show="inputFunction === 'substring'">
                 <h3>for substring()</h3>
               </div>
-              <div class="divParameters" v-show="xFunction === 'substring-after'">
+              <div class="divParameters" v-show="inputFunction === 'substring-after'">
                 <h3>for substring-after()</h3>
               </div>
-              <div class="divParameters" v-show="xFunction === 'substring-before'">
+              <div class="divParameters" v-show="inputFunction === 'substring-before'">
                 <h3>for substring-before()</h3>
               </div>
-              <div class="divParameters" v-show="xFunction === 'translate'">
+              <div class="divParameters" v-show="inputFunction === 'translate'">
                 <h3>for translate()</h3>
               </div>
 
@@ -435,7 +519,7 @@
         node: "", //The node that is added after the axis
         brackets: "", // If new brackets are opening or not
         operator: "", //or, and, and not, not
-        xFunction: "",
+        inputFunction: "",
         translateString: true,
         functionString: "",
         attribute: "",
@@ -445,7 +529,7 @@
       methods:{
         addToPath(event){
           //Variable used to check on the last element of the pathArray. Needed for splicing
-          let lastPathArrayElement = this.pathArray[this.pathArray.length-1];
+          let pathArrayLastElement = this.pathArray[this.pathArray.length-1];
 
           console.log("event.target.value:", event.target.value);
           console.log("event.target.name:", event.target.name);
@@ -463,27 +547,95 @@
             this.pathArray.push(event.target.value[1]);
           }
 
-          if (event.target.name === "addFunction") {
-
-          }
-
           //Add attribute by itself
           if (event.target.name === "attribute") {
             //If the last element of array is a bracket, then push the attribute as extension
-            if (lastPathArrayElement[lastPathArrayElement.length-1] === "]") {
+            if (pathArrayLastElement[pathArrayLastElement.length-1] === "]") {
               this.pathArray.push("/" + event.target.name);
             }
           }
 
           //Add a function with all it's parameters
-          if (event.target.name === "functionString") {
-            if (lastPathArrayElement[lastPathArrayElement.length-1] === "]") {
-              let concatString = `this.xFunction:${this.xFunction}(${this.attribute}, '${this.functionString}')`;
-
-            }
-          }
+          if (event.target.name === "functionString") return this.addFunction();
 
         },
+
+
+        addFunction(event){
+          console.log("In add function");
+          let pathArrayLastElement = this.pathArray[this.pathArray.length-1];
+          let functionParams;
+
+          //boolean function
+          //ceiling function
+          // choose function
+
+          // concat function
+          if(this.inputFunction === "concat"){
+
+          }
+
+          // contains function
+          if (this.inputFunction === "contains" && pathArrayLastElement[pathArrayLastElement.length-1] === "]") {
+            if(!this.translateString){ //If the translate option is not selected
+              this.operator.includes("not") ?
+              functionParams = `${this.operator} (${this.inputFunction}(${this.attribute}, '${this.functionString}')) ` :
+              functionParams = `${this.operator} ${this.inputFunction}(${this.attribute}, '${this.functionString}') `;
+            }
+            else {
+              let translateString = "";
+              for (let i = 0; i < this.functionString.length; i++) {
+                if(!translateString.includes(this.functionString[i].toLowerCase()) && /\w/.test(this.functionString[i]))
+                translateString += this.functionString[i].toLowerCase();
+              }
+
+              this.operator.includes("not") ?
+              functionParams = `${this.operator} (${this.inputFunction}(translate(${this.attribute}, '${translateString.toUpperCase()}', '${translateString}'), '${this.functionString.toLowerCase()}')) ` :
+              functionParams = `${this.operator} ${this.inputFunction}(translate(${this.attribute}, '${translateString.toUpperCase()}', '${translateString}'), '${this.functionString.toLowerCase()}') `;
+              console.log("TranslatedString:", translateString);
+            }
+
+            this.pathArray.splice(this.pathArray.length-1, 0, functionParams);
+            return this.zeroProperties();
+          }
+
+          //count function
+          //element-available function
+          //false function
+          //floor function
+          //function available function
+          //lang function
+          //last function
+          //local-name function
+          // name function
+          // namespace-url function
+          //normalize-space function
+          //not function
+          //number function
+          //position function
+          //round function
+          //starts-with function
+          //string function
+          //string-length function
+          //substring function
+          //substring-after function
+          // substring-before function
+          //sum function
+          //translate function
+          //true function
+
+        },
+
+        zeroProperties(){
+          this.brackets = "";
+          this.operator = "";
+          this.inputFunction = "";
+          this.translateString = true;
+          this.attribute = "";
+          this.functionString = "";
+        }
+
+
       }, //End of methods
       computed: {
         fullPath(){
