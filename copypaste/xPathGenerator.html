@@ -12,103 +12,113 @@
         box-sizing: border-box;
       }
 
-      .sectionOptions{
+      .divContainer{
         display: grid;
-        grid-template-rows: 35vh 50vh 15vh;
+        grid-template-rows: 85vh 15vh;
         grid-template-columns: 60vw 40vw;
         grid-template-areas:
-        "divBranch divElements"
-        "divFunctions divElements"
-        "divResult divResult"
+        "sectionOptions sectionElements"
+        "sectionResult sectionResult";
       }
 
-      .divBranch, .divFunctions{
+      .sectionOptions{
+        display: grid;
+        grid-template-columns: 45% 55%;
+        grid-template-rows: 60% 13% 7% 20%;
+        grid-template-areas:
+        "branches functions"
+        "brackets attributes"
+        "operators attributes"
+        "operators parameters";
+        font-size: 0.9rem;
+      }
+
+      .branches, .functions, .brackets, .operators, .attributes, .parameters{
+        padding: 10px;
+      }
+
+      .branches{
+        grid-area: branches;
+      }
+
+      .divBranchesInputs{
         display: flex;
-        flex-wrap: wrap;
+        flex-flow: column wrap;
+        height: 95%;
       }
 
-      .divBranch{
-        flex-flow: column;
-        grid-area: divBranch;
-        background: lightgreen;
+      .brackets{
+        grid-area: brackets;
       }
 
-      .divFunctions{
-        align-content: flex-start;
+      .divBracketsInputs{
+
       }
 
-      .divBranch, .divFunctions, .divElements, .divResult{
+      .operators{
+        grid-area: operators;
+      }
+
+      .divOperatorsInputs{
+        display: flex;
+        flex-flow: column wrap;
+        height: 95%;
+      }
+
+      .functions{
+        grid-area: functions;
+      }
+
+      .divFunctionsInputs{
+        display: flex;
+        flex-flow: column wrap;
+        height: 95%;
+        /* flex-wrap: wrap; */
+      }
+
+      .attributes{
+        grid-area: attributes;
+      }
+
+      .divAttributesInputs{
+
+      }
+
+      .parameters{
+        grid-area: parameters;
+      }
+
+      .divParametersInputs{
+
+      }
+
+
+
+      .sectionElements, .sectionResult{
         padding: 10px 20px;
       }
 
       h3, h4{
-        margin: auto;
+        text-align: center;
       }
 
       label{
         margin-right: 10px;
       }
 
-      .divFunctions{
-        grid-area: divFunctions;
-        background: lightblue;
-        display: flex;
-        flex-flow: column;
-        flex-wrap: wrap;
-      }
-
-      .divElements{
-        grid-area: divElements;
+      .sectionElements{
+        grid-area: sectionElements;
         background: lightyellow;
       }
 
-      .divResult{
-        grid-area: divResult;
+      .sectionResult{
+        grid-area: sectionResult;
         background: lightgray;
       }
 
-      .divBracketsOperators{
-        display: grid;
-        grid-template-columns: 30% 70%;
-      }
-
-      .divBracketsContainer, .divOperatorsContainer{
-        text-align: center;
-      }
-
-      .divBrackets, .divOperators{
-        text-align: justify;
-      }
-
-      .divFunctionInputs, .divFunctionAttribute, .divFunctionParams{
-        display: flex;
-        flex-direction: column;
-      }
-
-      .divFunctionInputs{
-        width: 50%;
-      }
-
-      .functionInputs{
-        display: flex;
-        flex-flow: column wrap;
-      }
-
-      .divFunctionAttribute, .divFunctionParams{
-        width: 25%;
-      }
-
-      .divParametersToggle{
-        display: flex;
-        flex-flow: column;
-        /* justify-content: center; */
-        /* height: 100%; */
-        background: yellow;
-      }
-
+      /* This is for the v-show parameters */
       .divParameters{
-        display: flex;
-        flex-flow: column;
+
       }
 
 
@@ -125,330 +135,358 @@
 
   <body>
     <main id="mainSlot">
-      <section class="sectionOptions">
-        <div class="divBranch">
-          <h3>Branch</h3>
-          <div class="divBranchInputs">
-            <label>
-              <input type="radio" value="//" name="axisOption" v-model="axis">
-              //
-            </label>
-            <label>
-              <input type="radio" value="/ancestor::" name="axisOption" v-model="axis">
-              /ancestor::
-            </label>
-            <label>
-              <input type="radio" value="/ancestor-or-self::" name="axisOption" v-model="axis">
-              /ancestor-or-self::
-            </label>
-            <label>
-              <input type="radio" value="/attribute::" name="axisOption" v-model="axis">
-              /attribute::
-            </label>
-            <label>
-              <input type="radio" value="/child::" name="axisOption" v-model="axis">
-              /child::
-            </label>
-            <label>
-              <input type="radio" value="/descendant::" name="axisOption" v-model="axis">
-              /descendant::
-            </label>
-            <label>
-              <input type="radio" value="/descendant-or-self::" name="axisOption" v-model="axis">
-              /descendant-or-self::
-            </label>
-            <label>
-              <input type="radio" value="/following::" name="axisOption" v-model="axis">
-              /following::
-            </label>
-            <label>
-              <input type="radio" value="/following-sibling::" name="axisOption" v-model="axis">
-              /following-sibling::
-            </label>
-            <label>
-              <input type="radio" value="/namespace::" name="axisOption" v-model="axis">
-              /namespace::
-            </label>
-            <label>
-              <input type="radio" value="/parent::" name="axisOption" v-model="axis">
-              /parent::
-            </label>
-            <label>
-              <input type="radio" value="/preceding::" name="axisOption" v-model="axis">
-              /preceding::
-            </label>
-            <label>
-              <input type="radio" value="/preceding-sibling::" name="axisOption" v-model="axis">
-              /preceding-sibling::
-            </label>
-            <label>
-              <input type="radio" value="/self::" name="axisOption" v-model="axis">
-              /self::
-            </label>
+      <div class="divContainer">
 
-            <label>
-              Node:
-              <input type="text" name="addPathNode" v-model="node" @keyup.enter="addToPath($event)">
-            </label>
-          </div>
-
-
-          <div class="divBracketsOperators">
-            <div class="divBracketsContainer">
-              <h3>Brackets</h3>
-              <div class="divBrackets">
-                <label>
-                  <input type="radio" name="brackets" value="" v-model="brackets">
-                  No
-                </label>
-                <label>
-                  <input type="radio" name="brackets" value="[]" v-model="brackets" @click="addToPath($event)">
-                  Brackets []
-                </label>
-              </div>
+        <section class="sectionOptions">
+          <div class="branches" style="background:pink;">
+            <h3>Branch</h3>
+            <div class="divBranchesInputs">
+              <label>
+                <input type="radio" value="" name="axisOption" v-model="axis">
+                None
+              </label>
+              <label>
+                <input type="radio" value="//" name="axisOption" v-model="axis">
+                //
+              </label>
+              <label>
+                <input type="radio" value="/ancestor::" name="axisOption" v-model="axis">
+                /ancestor::
+              </label>
+              <label>
+                <input type="radio" value="/ancestor-or-self::" name="axisOption" v-model="axis">
+                /ancestor-or-self::
+              </label>
+              <label>
+                <input type="radio" value="/attribute::" name="axisOption" v-model="axis">
+                /attribute::
+              </label>
+              <label>
+                <input type="radio" value="/child::" name="axisOption" v-model="axis">
+                /child::
+              </label>
+              <label>
+                <input type="radio" value="/descendant::" name="axisOption" v-model="axis">
+                /descendant::
+              </label>
+              <label>
+                <input type="radio" value="/descendant-or-self::" name="axisOption" v-model="axis">
+                /descendant-or-self::
+              </label>
+              <label>
+                <input type="radio" value="/following::" name="axisOption" v-model="axis">
+                /following::
+              </label>
+              <label>
+                <input type="radio" value="/following-sibling::" name="axisOption" v-model="axis">
+                /following-sibling::
+              </label>
+              <label>
+                <input type="radio" value="/namespace::" name="axisOption" v-model="axis">
+                /namespace::
+              </label>
+              <label>
+                <input type="radio" value="/parent::" name="axisOption" v-model="axis">
+                /parent::
+              </label>
+              <label>
+                <input type="radio" value="/preceding::" name="axisOption" v-model="axis">
+                /preceding::
+              </label>
+              <label>
+                <input type="radio" value="/preceding-sibling::" name="axisOption" v-model="axis">
+                /preceding-sibling::
+              </label>
+              <label>
+                <input type="radio" value="/self::" name="axisOption" v-model="axis">
+                /self::
+              </label>
+              <label>
+                Node: <br>
+                <input type="text" name="addPathNode" v-model="node" @keyup.enter="addToPath($event)">
+              </label>
+              <input type="button" name="" value="Push in function">
             </div>
-
-            <div class="divOperatorsContainer">
-              <h3>Operators</h3>
-              <div class="divOperators">
-                <label>
-                  <input type="radio" name="inputOperator" value="" v-model="operator">
-                  None
-                </label>
-                <label>
-                  <input type="radio" name="inputOperator" value="and" v-model="operator">
-                  and
-                </label>
-                <label>
-                  <input type="radio" name="inputOperator" value="and not" v-model="operator">
-                  and not()
-                </label>
-                <label>
-                  <input type="radio" name="inputOperator" value="not" v-model="operator">
-                  not()
-                </label>
-                <label>
-                  <input type="radio" name="inputOperator" value="or" v-model="operator">
-                  or
-                </label>
-                <label>
-                  <input type="radio" name="inputOperator" value="|" v-model="operator">
-                  |
-                </label>
-                <label>
-                  <input type="radio" name="inputOperator" value="=" v-model="operator">
-                  =
-                </label>
-                <label>
-                  <input type="radio" name="inputOperator" value="!=" v-model="operator">
-                  !=
-                </label>
-                <label>
-                  <input type="radio" name="inputOperator" value="+" v-model="operator">
-                  +
-                </label>
-                <label>
-                  <input type="radio" name="inputOperator" value="-" v-model="operator">
-                  -
-                </label>
-                <label>
-                  <input type="radio" name="inputOperator" value="*" v-model="operator">
-                  *
-                </label>
-                <label>
-                  <input type="radio" name="inputOperator" value="div" v-model="operator">
-                  div
-                </label>
-                <label>
-                  <input type="radio" name="inputOperator" value="<" v-model="operator">
-                  &lt;
-                </label>
-                <label>
-                  <input type="radio" name="inputOperator" value="<=" v-model="operator">
-                  &lt;=
-                </label>
-                <label>
-                  <input type="radio" name="inputOperator" value=">" v-model="operator">
-                  &gt;
-                </label>
-                <label>
-                  <input type="radio" name="inputOperator" value=">=" v-model="operator">
-                  &gt;=
-                </label>
-                <label>
-                  <input type="radio" name="inputOperator" value="mod" v-model="operator">
-                  mod
-                </label>
-              </div>
-            </div>
-
-
           </div>
 
 
 
 
-        </div>
+          <div class="brackets" style="background:lightblue;">
+            <h3>Brackets</h3>
+            <div class="divBracketsInputs">
+              <label>
+                <input type="radio" name="brackets" value="" v-model="brackets">
+                None
+              </label>
+              <label>
+                <input type="radio" name="brackets" value="[" v-model="brackets" @click="addToPath($event)">
+                Bracket [
+              </label>
+              <label>
+                <input type="radio" name="brackets" value="]" v-model="brackets" @click="addToPath($event)">
+                Bracket ]
+              </label>
+              <label>
+                <input type="radio" name="brackets" value=")" v-model="brackets" @click="addToPath($event)">
+                End function )
+              </label>
+            </div>
+          </div>
 
-        <div class="divFunctions">
-          <div class="divFunctionInputs">
+
+
+
+          <div class="operators" style="background:lightgray;">
+            <h3>Operators</h3>
+            <div class="divOperatorsInputs">
+              <label>
+                <input type="radio" name="inputOperator" value="" v-model="operator">
+                None
+              </label>
+              <label>
+                <input type="radio" name="inputOperator" value="and" v-model="operator">
+                and
+              </label>
+              <label>
+                <input type="radio" name="inputOperator" value="or" v-model="operator">
+                or
+              </label>
+              <label>
+                <input type="radio" name="inputOperator" value="|" v-model="operator">
+                |
+              </label>
+              <label>
+                <input type="radio" name="inputOperator" value="=" v-model="operator">
+                =
+              </label>
+              <label>
+                <input type="radio" name="inputOperator" value="!=" v-model="operator">
+                !=
+              </label>
+              <label>
+                <input type="radio" name="inputOperator" value="+" v-model="operator">
+                +
+              </label>
+              <label>
+                <input type="radio" name="inputOperator" value="-" v-model="operator">
+                -
+              </label>
+              <label>
+                <input type="radio" name="inputOperator" value="*" v-model="operator">
+                *
+              </label>
+              <label>
+                <input type="radio" name="inputOperator" value="div" v-model="operator">
+                div
+              </label>
+              <label>
+                <input type="radio" name="inputOperator" value="<" v-model="operator">
+                &lt;
+              </label>
+              <label>
+                <input type="radio" name="inputOperator" value="<=" v-model="operator">
+                &lt;=
+              </label>
+              <label>
+                <input type="radio" name="inputOperator" value=">" v-model="operator">
+                &gt;
+              </label>
+              <label>
+                <input type="radio" name="inputOperator" value=">=" v-model="operator">
+                &gt;=
+              </label>
+              <label>
+                <input type="radio" name="inputOperator" value="mod" v-model="operator">
+                mod
+              </label>
+            </div>
+          </div>
+
+
+
+
+          <div class="functions"style="background:lightgreen;">
             <h3>Function</h3>
-            <div class="functionInputs">
+            <div class="divFunctionsInputs">
               <label>
                 <input type="radio" name="inputFunction" value="" v-model="inputFunction">
                 None
               </label>
               <label>
-                <input type="radio" name="inputFunction" value="count" v-model="inputFunction">
-                count()
+                <input type="radio" name="inputFunction" value="boolean" v-model="inputFunction" @click="addFunction($event)">
+                boolean()
               </label>
               <label>
-                <input type="radio" name="inputFunction" value="concat" v-model="inputFunction">
+                <input type="radio" name="inputFunction" value="ceiling" v-model="inputFunction" @click="addFunction($event)">
+                ceiling()
+              </label>
+              <label>
+                <input type="radio" name="inputFunction" value="choose" v-model="inputFunction" @click="addFunction($event)">
+                choose()
+              </label>
+              <label>
+                <input type="radio" name="inputFunction" value="concat" v-model="inputFunction" @click="addFunction($event)">
                 concat()
               </label>
               <label>
-                <input type="radio" name="inputFunction" value="contains" v-model="inputFunction">
+                <input type="radio" name="inputFunction" value="contains" v-model="inputFunction" @click="addFunction($event)">
                 contains()
               </label>
               <label>
-                <input type="radio" name="inputFunction" value="element-available" v-model="inputFunction">
+                <input type="radio" name="inputFunction" value="count" v-model="inputFunction" @click="addFunction($event)">
+                count()
+              </label>
+              <label>
+                <input type="radio" name="inputFunction" value="element-available" v-model="inputFunction" @click="addFunction($event)">
                 element-available()
               </label>
               <label>
-                <input type="radio" name="inputFunction" value="false" v-model="inputFunction">
+                <input type="radio" name="inputFunction" value="false" v-model="inputFunction" @click="addFunction($event)">
                 false()
               </label>
               <label>
-                <input type="radio" name="inputFunction" value="floor" v-model="inputFunction">
+                <input type="radio" name="inputFunction" value="floor" v-model="inputFunction" @click="addFunction($event)">
                 floor()
               </label>
               <label>
-                <input type="radio" name="inputFunction" value="function-available" v-model="inputFunction">
+                <input type="radio" name="inputFunction" value="function-available" v-model="inputFunction" @click="addFunction($event)">
                 function-available()
               </label>
               <label>
-                <input type="radio" name="inputFunction" value="lang" v-model="inputFunction">
+                <input type="radio" name="inputFunction" value="lang" v-model="inputFunction" @click="addFunction($event)">
                 lang()
               </label>
               <label>
-                <input type="radio" name="inputFunction" value="last" v-model="inputFunction">
+                <input type="radio" name="inputFunction" value="last" v-model="inputFunction" @click="addFunction($event)">
                 last()
               </label>
               <label>
-                <input type="radio" name="inputFunction" value="local-name" v-model="inputFunction">
+                <input type="radio" name="inputFunction" value="local-name" v-model="inputFunction" @click="addFunction($event)">
                 local-name()
               </label>
               <label>
-                <input type="radio" name="inputFunction" value="name" v-model="inputFunction">
+                <input type="radio" name="inputFunction" value="name" v-model="inputFunction" @click="addFunction($event)">
                 name()
               </label>
               <label>
-                <input type="radio" name="inputFunction" value="namespace-url" v-model="inputFunction">
+                <input type="radio" name="inputFunction" value="namespace-url" v-model="inputFunction" @click="addFunction($event)">
                 namespace-url()
               </label>
               <label>
-                <input type="radio" name="inputFunction" value="normalize-space" v-model="inputFunction">
+                <input type="radio" name="inputFunction" value="normalize-space" v-model="inputFunction" @click="addFunction($event)">
                 normalize-space()
               </label>
               <label>
-                <input type="radio" name="inputFunction" value="not" v-model="inputFunction">
+                <input type="radio" name="inputFunction" value="not" v-model="inputFunction" @click="addFunction($event)">
                 not()
               </label>
               <label>
-                <input type="radio" name="inputFunction" value="number" v-model="inputFunction">
+                <input type="radio" name="inputFunction" value="number" v-model="inputFunction" @click="addFunction($event)">
                 number()
               </label>
               <label>
-                <input type="radio" name="inputFunction" value="position" v-model="inputFunction">
+                <input type="radio" name="inputFunction" value="position" v-model="inputFunction" @click="addFunction($event)">
                 position()
               </label>
               <label>
-                <input type="radio" name="inputFunction" value="round" v-model="inputFunction">
+                <input type="radio" name="inputFunction" value="round" v-model="inputFunction" @click="addFunction($event)">
                 round()
               </label>
               <label>
-                <input type="radio" name="inputFunction" value="starts-with" v-model="inputFunction">
+                <input type="radio" name="inputFunction" value="starts-with" v-model="inputFunction" @click="addFunction($event)">
                 starts-with()
               </label>
               <label>
-                <input type="radio" name="inputFunction" value="string" v-model="inputFunction">
+                <input type="radio" name="inputFunction" value="string" v-model="inputFunction" @click="addFunction($event)">
                 string()
               </label>
               <label>
-                <input type="radio" name="inputFunction" value="string-length" v-model="inputFunction">
+                <input type="radio" name="inputFunction" value="string-length" v-model="inputFunction" @click="addFunction($event)">
                 string-length()
               </label>
               <label>
-                <input type="radio" name="inputFunction" value="substring" v-model="inputFunction">
+                <input type="radio" name="inputFunction" value="substring" v-model="inputFunction" @click="addFunction($event)">
                 substring()
               </label>
               <label>
-                <input type="radio" name="inputFunction" value="substring-after" v-model="inputFunction">
+                <input type="radio" name="inputFunction" value="substring-after" v-model="inputFunction" @click="addFunction($event)">
                 substring-after()
               </label>
               <label>
-                <input type="radio" name="inputFunction" value="substring-before" v-model="inputFunction">
+                <input type="radio" name="inputFunction" value="substring-before" v-model="inputFunction" @click="addFunction($event)">
                 substring-before()
               </label>
               <label>
-                <input type="radio" name="inputFunction" value="sum" v-model="inputFunction">
+                <input type="radio" name="inputFunction" value="sum" v-model="inputFunction" @click="addFunction($event)">
                 sum()
               </label>
               <label>
-                <input type="radio" name="inputFunction" value="translate" v-model="inputFunction">
+                <input type="radio" name="inputFunction" value="translate" v-model="inputFunction" @click="addFunction($event)">
                 translate()
               </label>
               <label>
-                <input type="radio" name="inputFunction" value="true" v-model="inputFunction">
+                <input type="radio" name="inputFunction" value="true" v-model="inputFunction" @click="addFunction($event)">
                 true()
               </label>
             </div>
           </div>
 
-          <div class="divFunctionAttribute">
-            <h3>Attribute</h3>
-            <label>
-              <input type="radio" name="attribute" value="@alt" v-model="attribute">
-              @alt
-            </label>
-            <label>
-              <input type="radio" name="attribute" value="@class" v-model="attribute">
-              @class
-            </label>
-            <label>
-              <input type="radio" name="attribute" value="@id" v-model="attribute">
-              @id
-            </label>
-            <label>
-              <input type="radio" name="attribute" value="@name" v-model="attribute">
-              @name
-            </label>
-            <label>
-              <input type="radio" name="attribute" v-model="attribute" value="@src" >
-              @src
-            </label>
-            <label>
-              <input type="radio" name="attribute" value="@title" v-model="attribute">
-              @title
-            </label>
-            <label>
-              <input type="radio" name="attribute" value="text()" v-model="attribute">
-              text()
-            </label>
-            <label>
-              <input type="radio" name="attribute" value="." v-model="attribute">
-              .
-            </label>
-            <label>
-              <input type="text" name="attribute" value="" v-model="attribute" @keyup.enter="addToPath($event)">
-              Custom:
-            </label>
+
+
+
+          <div class="attributes"style="background:lightyellow;">
+            <h3>Attributes</h3>
+            <div class="divAttributesInputs">
+              <label>
+                <input type="radio" name="attribute" value="@alt" v-model="attribute">
+                @alt
+              </label>
+              <label>
+                <input type="radio" name="attribute" value="@class" v-model="attribute">
+                @class
+              </label>
+              <label>
+                <input type="radio" name="attribute" value="@href" v-model="attribute">
+                @href
+              </label>
+              <label>
+                <input type="radio" name="attribute" value="@id" v-model="attribute">
+                @id
+              </label>
+              <label>
+                <input type="radio" name="attribute" value="@name" v-model="attribute">
+                @name
+              </label>
+              <label>
+                <input type="radio" name="attribute" v-model="attribute" value="@src" >
+                @src
+              </label>
+              <label>
+                <input type="radio" name="attribute" v-model="attribute" value="@style" >
+                @style
+              </label>
+              <label>
+                <input type="radio" name="attribute" value="@title" v-model="attribute">
+                @title
+              </label>
+              <label>
+                <input type="radio" name="attribute" value="@value" v-model="attribute">
+                @value
+              </label>
+              <label>
+                <input type="text" name="attribute" value="" v-model="attribute" @keyup.enter="addToPath($event)">
+                Other
+              </label>
+            </div>
           </div>
 
-          <div class="divFunctionParams">
-            <h3>Parameters</h3>
 
-            <div class="divParametersToggle">
+
+
+          <div class="parameters"style="background:beige;">
+            <h3>Function String Parameters</h3>
+            <div class="divParametersInputs">
               <div class="divParameters" v-show="inputFunction === 'concat'">
                 <h3>for concat()</h3>
               </div>
@@ -482,22 +520,34 @@
 
             </div>
           </div>
-        </div>
 
-        <div class="divElements">
-          The elements will be displayed here <br>
-          {{pathArray}}
-        </div>
+        </section>
+        <!-- End of section Options -->
 
-        <div class="divResult">
+
+        <section class="sectionElements">
+          <div class="">
+            The functionsArr is displayed here
+            {{functionsArr}}
+          </div>
+
+          <div class="">
+            The pathArray is displayed here <br>
+            {{pathArray}}
+          </div>
+
+          <div class="">
+            Active function: {{functionsArr[functionsArr.length-1]}}
+          </div>
+        </section>
+        <!-- End of section Elements -->
+
+        <section class="sectionResult">
           Result displayed here: {{fullPath}}
-        </div>
+        </section>
+        <!-- End of section Result -->
 
-      </section>
-      <!-- <p>Contents: {{pathArray}}</p>
-      <p>fullPath: {{fullPath}}</p> -->
-
-
+      </div><!-- End of divContainer -->
     </main>
 
   </body>
@@ -515,15 +565,17 @@
     var app = new Vue({
       el: "#mainSlot",
       data: {
-        axis:"/descendant::",
+        axis:"",
         node: "", //The node that is added after the axis
         brackets: "", // If new brackets are opening or not
         operator: "", //or, and, and not, not
-        inputFunction: "",
-        translateString: true,
-        functionString: "",
-        attribute: "",
-        pathArray: [],
+        inputFunction: "", //populated when a function is selected
+        translateString: true, //checkbox for when the 'translate' option is selected
+        functionString: "", //populated when a string is entered in the inpout slot for each function (in parameters)
+        attribute: "", //Attributes that are inside functions or brackets
+        pathArray: [], //array with full path of all different additions
+        functionsArr: [], //array of all functions that are selected
+        functionsCounter: 0
 
       }, //End of data
       methods:{
@@ -536,19 +588,49 @@
 
           //Add an axis with the node name
           if (event.target.name === "addPathNode") {
-            this.pathArray.push(this.axis + event.target.value);
-            this.node = "";
+            console.log("target name equals addPathNode");
+            //Add the string to the function array without a comma
+            if (this.functionsCounter !== 0) {
+              let functionStr = this.functionsArr[this.functionsArr.length-1]
+              console.log("firstIf");
+              console.log(functionStr[functionStr.length-1]);
+              if(functionStr[functionStr.length-1] === "("){
+                console.log("second if");
+                this.functionsArr[this.functionsArr.length-1] += this.axis + event.target.value;
+                this.node = "";
+              }
+              // Add the string to the functions array with a comma
+              else{
+                this.functionsArr[this.functionsArr.length-1] += ", " + this.axis + event.target.value;
+                this.node = "";
+              }
+            }
+            else {
+              console.log("else to push in the pathArray");
+              this.pathArray.push(this.axis + event.target.value);
+              this.node = "";
+            }
+            return;
           }
 
           //Add brackets
-          if (event.target.name === "brackets" && event.target.value === "[]"){
-            console.log(this.brackets);
-            this.pathArray.push(event.target.value[0]);
-            this.pathArray.push(event.target.value[1]);
+          if (event.target.name === "brackets"){
+            console.log("In the brackets if");
+            if(!event.target.value === ")") this.pathArray.push(event.target.value);
+            else {
+
+            }
+             //I NEED TO FIX THIS.
+            //IF PARENTHESIS, THEN ADD TO THE FUNCTIONS ARRAY AND NOT THE PATH Array
+            //PUSH IN THE PATH ARRAY WHEN THE ) PARENTHESES ARE EQUAL TO THE NUMBER OF
+            // FUNCTIONS IN THE FUNCTIONS ARRAY
+            if (event.target.value === ")") this.functionsArr.pop();
           }
 
           //Add attribute by itself
           if (event.target.name === "attribute") {
+            console.log("In the attribute if");
+
             //If the last element of array is a bracket, then push the attribute as extension
             if (pathArrayLastElement[pathArrayLastElement.length-1] === "]") {
               this.pathArray.push("/" + event.target.name);
@@ -562,13 +644,31 @@
 
 
         addFunction(event){
+          this.functionsArr.push(event.target.value + "(");
+          this.functionsCounter ++;
           console.log("In add function");
           let pathArrayLastElement = this.pathArray[this.pathArray.length-1];
           let functionParams;
 
           //boolean function
+          if(this.inputFunction === "boolean"){
+
+          }
+
+          //count function
+          if (this.inputFunction === "count") {
+
+          }
+
           //ceiling function
+          if(this.inputFunction === "ceiling"){
+
+          }
+
           // choose function
+          if(this.inputFunction === "choose"){
+
+          }
 
           // concat function
           if(this.inputFunction === "concat"){
@@ -576,13 +676,13 @@
           }
 
           // contains function
-          if (this.inputFunction === "contains" && pathArrayLastElement[pathArrayLastElement.length-1] === "]") {
+          if (this.inputFunction === "contains") {
             if(!this.translateString){ //If the translate option is not selected
               this.operator.includes("not") ?
               functionParams = `${this.operator} (${this.inputFunction}(${this.attribute}, '${this.functionString}')) ` :
               functionParams = `${this.operator} ${this.inputFunction}(${this.attribute}, '${this.functionString}') `;
             }
-            else {
+            else { //If the translate option is selected
               let translateString = "";
               for (let i = 0; i < this.functionString.length; i++) {
                 if(!translateString.includes(this.functionString[i].toLowerCase()) && /\w/.test(this.functionString[i]))
@@ -627,6 +727,7 @@
         },
 
         zeroProperties(){
+          this.axis = "";
           this.brackets = "";
           this.operator = "";
           this.inputFunction = "";

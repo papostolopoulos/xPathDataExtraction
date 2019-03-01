@@ -1,682 +1,677 @@
 
-
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
 <head>
-  <title>CVS</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="format-detection" content="date=no" />
-  <style type="text/css">
-/*<![CDATA[*/
- .appleLinkswhiteul a {
-color:#ffffff !important;
-text-decoration: underline !important;
-}
-.appleLinksblackul a {
-color:#000000 !important;
-text-decoration: none !important;
-}
-.appleLinksdisc a {
-	color: #646464 !important;
-	text-decoration: none !important;
-}
-.appleLinkswhite a {
-	color: #ffffff !important;
-	text-decoration: none !important;
-}
-.appleLinksredlink a {
-	color: #cc0000 !important;
-	text-decoration: underline !important;
-}
-html {
-	width: 100%;
-}
-body {
-	-webkit-text-size-adjust: 100%;
-	-ms-text-size-adjust: 100%;
-	-webkit-font-smoothing: antialiased;
-	margin: 0;
-	padding: 0;
-}
-.ReadMsgBody {
-	width: 100%;
-}
-.ExternalClass {
-	width: 100%;
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width" />
+	<title></title>
+
+
+
+
+<style type="text/css">
+* {
+	-webkit-text-size-adjust: none; /* prevent iOS font upsizing */
 }
 .ExternalClass * {
 	line-height: 100%;
-}
-table td {
-	border-collapse: collapse;
-}
-table {
-	border-collapse: collapse;
-	mso-table-lspace: 0pt;
-	mso-table-rspace: 0pt;
-}
-/* This set of classes defines the color */
+} /* force Outlook.com to honor line-height */
 
-.redText, .redText a, .redTextNoUl, .redTextNoUl a {
-	color: #cc0000 !important;
+a[x-apple-data-detectors] { color: inherit !important; text-decoration: none !important; font-size: inherit !important; font-family: inherit !important; font-weight: inherit !important; line-height: inherit !important; }
+
+td {mso-line-height-rule: exactly; }
+
+/* prevent iOS auto-linking */
+.applefix1 a {color:#000000; text-decoration:none;} /* use on all gray body copy */
+.applefix2 a {color:#ffffff; text-decoration:none;} /* use on white footer */
+.applefix3 a {color:#333333; text-decoration:none;} /* use on 05B copy */
+
+/* prevent Outlook purple links */
+.navbarlink a:link {color:#333333;}
+.navstack a:link {color:#000000;}
+.ctaText a:link {color:#ffffff;}
+.preheader a:link {color:#000000;}
+.headline a:link {color:#000000;}
+.bodycopy a:link {color:#000000;}
+.legalfooter a:link {color:#000000;}
+
+/** use on colored copy, update per campaign **/
+.colorlink a:link {color:#ed008c;}
+
+a[x-apple-data-detectors] { color: inherit !important; text-decoration: none !important; font-size: inherit !important; font-family: inherit !important; font-weight: inherit !important; line-height: inherit !important; }
+
+@media only screen and (max-width: 480px) {
+/**********************
+SAMSUNG FIX
+set media query to
+max-width: 480px
+for testing in browser
+
+set media query to
+max-device-width: 480px
+for production
+**********************/
+
+/***** specific module styles *****/
+
+/** 02A - Feature All Image Swap **/
+.mod02AImg { background-image:url(http://media.4at5.net/email_domains/gnc/153419/images/aspotsport01_mobile.jpg); width:320px !important; height:260px !important; display:block !important; }
+.mod02AImg2 { background-image:url(http://media.4at5.net/email_domains/gnc/153419/images/aspotsport02_mobile.jpg); width:320px !important; height:70px !important; display:block !important; }
+.mod02AImg3 { background-image:url(http://media.4at5.net/email_domains/gnc/153419/images/aspotsport03_mobile.jpg); width:320px !important; height:77px !important; display:block !important; }
+.mod02AImgw{ background-image:url(http://media.4at5.net/email_domains/gnc/153419/images/aspotwell01_mobile.jpg); width:320px !important; height:243px !important; display:block !important; }
+.mod02AImg2w { background-image:url(http://media.4at5.net/email_domains/gnc/153419/images/aspotwell02_mobile.jpg); width:320px !important; height:91px !important; display:block !important; }
+.mod02AImg3w { background-image:url(http://media.4at5.net/email_domains/gnc/153419/images/aspotwell03_mobile.jpg); width:320px !important; height:62px !important; display:block !important; }
+
+/** 02A1 - Image Grid Image Swaps **/
+.mod02A1Img { background-image:url(http://placehold.it/160x53&text=160px); width:160px !important; height:53px !important; display:block !important; }
+.mod02A1ImgB { background-image:url(http://placehold.it/160x53&text=160px); width:160px !important; height:53px !important; display:block !important; }
+
+/** 03A - Image Grid Image Swaps **/
+.mod03AImg { background-image:url(http://placehold.it/320x412&text=320px); width:320px !important; height:412px !important; display:block !important; }
+.mod03AImg2 { background-image:url(http://placehold.it/160x53&text=160px); width:160px !important; height:53px !important; display:block !important; }
+.mod03AImg3 { background-image:url(http://placehold.it/160x53&text=160px); width:160px !important; height:53px !important; display:block !important; }
+
+/** 02G - Image Grid Image Swaps **/
+.mod02GImg { background-image:url(http://placehold.it/160x98&text=160px); width:160px !important; height:98px !important; display:block !important; }
+.mod02GImgB { background-image:url(http://placehold.it/160x98&text=160px); width:160px !important; height:98px !important; display:block !important; }
+.mod02GImgC { background-image:url(http://placehold.it/320x78&text=320px); width:320px !important; height:78px !important; display:block !important; }
+
+/** 02A2 - Image Grid Image Swaps **/
+.mod02A2Img { background-image:url(http://media.4at5.net/email_domains/gnc/139263/images/askGNC_sports_mob.jpg); width:320px !important; height:422px !important; display:block !important; }
+
+.simplicity_topbanner { background-image:url(http://media.4at5.net/email_domains/gnc/139283/simplicity_banner_mobile.jpg); width:320px !important; height:109px !important; display:block !important; }
+
+/** Simplicity Banner Image Swap **/
+.simplicityBanner { background-image:url(http://media.4at5.net/email_domains/gnc/139283/banner_mobile.gif); width:320px !important; height:100px !important; display:block !important; background-position:center !important; background-size:contain !important; }
+.simplicityBannerFR { background-image:url(http://media.4at5.net/email_domains/gnc/139283/banner_mobile_FR.gif); width:320px !important; height:100px !important; display:block !important; background-position:center !important; background-size:contain !important; }
+
+/** Insider Sports, wellness coupon images  **/
+.mod02AImgBSportsYes { background-image:url(http://media.4at5.net/email_domains/gnc/139283/coupon_mobile.jpg); width:320px !important; height:33px !important; display:block !important; }
+.mod02AImgBWellYes { background-image:url(http://media.4at5.net/email_domains/gnc/139283/coupon_mobile.jpg); width:320px !important; height:33px !important; display:block !important; }
+
+/** Logo image swaps -- Do not remove **/
+.logo { background-image:url(http://media.4at5.net/email_domains/gnc/166001/images/GNClogoSm.jpg); width:150px !important; height:60px !important; display:block !important; }
+.logoNonMem { background-image:url(http://media.4at5.net/email_domains/gnc/166001/images/GNClogoNonMemSm.jpg); width:183px !important; float:left !important; height:60px !important; display:block !important; }
+.logonoGC { background-image:url(http://media.4at5.net/email_domains/gnc/166001/images/GNClogoNoGC.jpg); width:183px !important; float:left !important; height:60px !important; display:block !important; }
+.logoFr { background-image:url(http://media.4at5.net/email_domains/gnc/166477/images/GNClogoFRmob.jpg); width:150px !important; height:60px !important; display:block !important; }
+.logoCA { background-image:url(http://media.4at5.net/email_domains/gnc/139283/GNClogoSm.jpg); width:150px !important; height:60px !important; display:block !important; }
+.logoCAFr { background-image:url(http://media.4at5.net/email_domains/gnc/139283/GNClogoFRmob.jpg); width:148px !important; height:62px !important; display:block !important; }
+.logoJoinpr { background-image:url(http://media.4at5.net/email_domains/gnc/168779/GNClogoJoinSm_pr.jpg); width:319px !important; height:60px !important; display:block !important; float:right !important;}
+.logoJoin { background-image:url(http://media.4at5.net/email_domains/gnc/template/GNClogoJoinSm.jpg); width:319px !important; float:right !important; height:60px !important; display:block !important; }
+.logoInsider { background-image:url(http://media.4at5.net/email_domains/gnc/166001/images/GNClogoInsiderSm.jpg); width:319px !important; float:right !important;  height:60px !important; display:block !important; }
+.logoSource { background-image:url(http://media.4at5.net/email_domains/gnc/166001/images/GNClogoSourceSm.jpg); width:319px !important; float:right !important; height:76px !important; display:block !important; }
+.logoSource { background-image:url(http://media.4at5.net/email_domains/gnc/166001/images/GNClogoSourceSm.jpg); width:319px !important; float:right !important; height:76px !important; display:block !important; }
+.USFooterBanner { background-image:url(http://media.4at5.net/email_domains/gnc/template/US-Header_mob_footer_banner.jpg); width:320px !important; height:78px !important; display:block !important; background-position:center !important; background-size:contain !important; }
+
+/** GMAIL Banner image swaps **/
+.GMailEN { background-image:url(http://media.4at5.net/email_domains/gnc/166001/images/GmailBanner_mobileEN.jpg); width:320px !important; height:139px !important; display:block !important; }
+.GMailFR { background-image:url(http://media.4at5.net/email_domains/gnc/166001/images/GmailBanner_mobileFR.jpg); width:320px !important; height:147px !important; display:block !important; }
+
+
+/** navigation **/
+.navstack {
+	display:block !important;
+	border-bottom:1px solid #ffffff !important;
 }
-.blackText, .blackText a, .blackTextNoUl, .blackTextNoUl a {
-	color: #000000 !important;
+.nav2 {
+	text-align:center !important;
+	width:150px !important;
 }
-.blackText2, .blackText2 a, .blackTextNoUl2, .blackTextNoUl2 a {
-	color: #1b1b1b !important;
+.nav3 {
+	text-align:center !important;
+	width:100px !important;
 }
-.greyText, .greyText a, .greyTextNoUl, .greyTextNoUl a {
-	color: #646464 !important;
+.border-top {
+	border-top:1px solid #ffffff !important;
 }
-.greyText2, .greyText2 a, .greyTextNoUl2, .greyTextNoUl2 a {
-	color: #4b4c4c !important;
+.border-left {
+	border-left:1px solid #ffffff !important;
 }
-.greyTextPreheader, .greyTextPreheader a, .greyTextPreheaderNoUl, .greyTextPreheaderNoUl a {
-	color: #56595c !important;
+.border-right {
+	border-right:1px solid #ffffff !important;
 }
-.grey333, .grey333 a, .grey333NoUl, .grey333NoUl a {
-	color: #333333 !important;
+.rearrange { display:table !important; width:100% !important; }
+.nav { }
+.content { display:table-header-group !important; }
+.footer { display:table-footer-group !important; }
+
+/** reverse table **/
+tr.table-cell {
+	display:table-cell !important;
+	vertical-align:top !important;
 }
-.yellowText, .yellowText a, .yellowTextNoUl, .yellowTextNoUl a {
-	color: #ffff00 !important;
-}
-.whiteText, .whiteText a, .whiteTextNoUl, .whiteTextNoUl a {
-	color: #ffffff !important;
-}
-.pinkText, .pinkText a, .pinkTextNoUl, .pinkTextNoUl a {
-	color: #e83d8b !important;
-}
-.blueText, .blueText a, .blueTextNoUl, .blueTextNoUl a {
-	color: #003366 !important;
-}
-/* This set of classes defines the underline style */
-.redTextNoUl, .redTextNoUl a, .blackTextNoUl, .blackTextNoUl a, .greyTextNoUl, .greyTextNoUl a, .greyTextPreheaderNoUl, .greyTextPreheaderNoUl a, .greyTextNoUl2, .greyTextNoUl2 a, .yellowTextNoUl, .yellowTextNoUl a, .whiteTextNoUl, .whiteTextNoUl a, .pinkTextNoUl, .pinkTextNoUl a, .blueTextNoUl, .blueTextNoUl a, .grey333NoUl, .grey333NoUl a {
-	text-decoration: none !important;
+td.table-row {
+	display:table-row !important;
 }
 
- @media screen and (max-width: 480px) {
-
-/* This set of classes is used for the headers and footers - needs updating */
-*[class].botnav {
-	padding: 14px 0 14px 0px !important;
-	text-align: center !important;
-	width: 159px !important
+/***** universal styles *****/
+.width150 { /* resize  */
+	width:150px !important;
 }
-*[class].botnavborders {
-	background-color: #d1cccc !important;
+body { /* force iOS5 to fill entire screen */
+	width: 100%;
+	min-width: 100%;
 }
-*[class].socialicons {
-	padding: 26px 0 24px 0 !important;
+.marginfix { /* to eliminate padding in iOS7 */
+	position: relative;
+	top: 0;
+	left: 0;
+	right: 0;
 }
-*[class].socialcenter {
-	padding: 0 60px 0 60px !important;
-}
-
-
-table[class=emailnomob], td[class=emailnomob], img[class=emailnomob], span[class=emailnomob] {
-	display: none !important;
-	text-decoration: none !important;
-	color: #333333 !important;
-}
-*[class].resize320 {
+.full-width-container { /* resizes entire email shell */
 	width: 320px !important;
+	min-width: 320px !important;
 }
-*[class=emailwrapto300] {
-	width: 300px !important;
-	height: auto !important;
+.full-width { /* use to resize specific table or cell */
+	width: 100% !important;
+	min-width: 100% !important;
 }
-
-*[class=emailwrapto280] {
-	width: 280px !important;
-	height: auto !important;
+.fullSizeImg { /* use to resize the image in a cell */
+	width:100% !important;
+	height:auto !important;
 }
-
- *[class=emailwrapto320] {
-  width: 320px !important;
-  height: auto !important;
-  display: block !important;
-  text-decoration: none !important;
-  color: #333333 !important;
-  }
-
-*[class].stripPadding {
-	padding: 0 0 0 0 !important;
+.halfSizeImg { /* use to resize the image in a cell */
+	width:160px !important;
+	height:auto !important;
 }
-
-*[class=showmobile] {
-	display: block!important;
-	margin: auto !important;
-	width: 320px !important;
-	height: auto !important;
-	padding: 0;
-	max-height: inherit !important;
-	overflow: visible !important;
+.section-wrapper { /* use to center sections with a gray border */
+	width:305px !important;
+	margin:0 auto !important;
 }
-
-*[class=showmobile160] {
-	display: block!important;
-	margin: auto !important;
-	width: 160px !important;
-	height: auto !important;
-	padding: 0;
-	max-height: inherit !important;
-	overflow: visible !important;
-}
-
-*[class=showmobile300] {
-	display: block!important;
-	margin: auto !important;
-	width: 300px !important;
-	height: auto !important;
-	padding: 0;
-	max-height: inherit !important;
-	overflow: visible !important;
-}
-
-*[class].header {
-	display: table-header-group !important;
-}
-
-*[class].footer {
-	display: table-footer-group !important;
-}
-
-*[class=textresizeto14] {
-	font-size: 14px !important;
-	line-height: 17px !important;
-}
-*[class].block {
+.stack { /* use to turn 2-column into 1-column layout */
 	display: block !important;
 }
+.stack2 { /* use to turn 2-column into 1-column layout */
+	display: block !important;
+	margin-top: 20px !important;
+}
+.stackTop { /* use to turn 2-column into 1-column layout */
+	display: table-header-group !important;
+}
+.stackBottom { /* use to turn 2-column into 1-column layout */
+	display: table-footer-group !important;
+}
+.divider {
+	width: 95% !important;
+}
+.alignL { /* use to re-align left */
+	text-align: left !important;
+}
+.alignR { /* use to re-align right */
+	text-align: right !important;
+	padding-left: 10px !important
+}
+.hide { /* use to hide entire table cell */
+	width: 0px !important;
+	height: 0px !important;
+	display: none !important;
+}
+.hide-img img { /* use to hide the image in a cell - use for image swap */
+	width: 0px !important;
+	height: 0px !important;
+	display: none !important;
+}
+.no-padding { /* eliminate all padding */
+	padding: 0px !important
+}
+.top-padding { /* add top padding */
+	padding-top: 15px !important
+}
+.top-padding-only { /* leave ONLY top padding */
+	padding: 15px 0px 0px 0px !important
+}
+.bottom-padding { /* add bottom padding */
+	padding-bottom: 15px !important
+}
+.padLR { /* add side padding */
+	padding-left: 10px !important;
+	padding-right: 10px !important;
+}
+.padL { /* add side padding left */
+	padding-left: 10px !important
+}
+.padR { /* add side padding right */
+	padding-right: 10px !important
+}
+.center { /* use to center an element */
+	margin: 0px auto !important;
+	text-align: center !important;
+}
+.font80{ /* reduce coupon fontsizes */
+	font-size: 100px !important;
+
+}
+.font50{ /* reduce coupon fontsizes */
+	font-size: 50px !important;
+	line-height: 110px !important;
+}
+.font20{ /* reduce coupon fontsizes */
+	font-size: 20px !important;
+	line-height: 90px !important;
+}
+.threeAcrossImg {
+	width:140px !important;
+	height:auto !important;
+}
+.imgFloatLeft {
+	float:left !important;
+}
+.font40a{ /* reduce coupon fontsizes */
+	font-size: 37px !important;
+	line-height: 40px !important;
+}
+.font16a{ /* reduce coupon fontsizes */
+	font-size: 17px !important;
+	line-height: 20px !important;
+	 padding: 0 30px 0 30px !important;
 }
 
-  /*]]>*/
-  </style>
+/* Campaign-Specific Styles */
+
+span.diet:before {content: attr(data-alt);}
+
+/* end responsive styles */
+}
+</style>
+
 </head>
+<body style="margin:0px; padding:0px;"><img src="http://link.mail.gnc.com/1x1.dyn?1UkGD0VODOi1mh26nP4mGejnu=0" width=1 height=1  width="1" height="1" border="0">
+<!-- Conversant pixel -->
+<img src="http://login.dotomi.com/ucm/UCMController?dtm_com=2&dtm_cid=2262&dtm_cmagic=0233f3&dtm_fid=114&dtm_format=6&cli_promo_id=99&dtm_email_hash=37c96da8332d60632ecf23ba147004cb&dtm_user_id=2015348990000136968&dtmc_drop_id=20170315" width="1" height="1" border="0">
+<img src="http://ads.dotomi.com/cookieredir/2262/pub1.php?a37c96da8332d60632ecf23ba147004cb2015348990000136968=1" width="1" height="1" border="0">
+<img src="http://ads.dotomi.com/cookieredir/2262/pub2.php?a37c96da8332d60632ecf23ba147004cb2015348990000136968=1" width="1" height="1" border="0">
+<img src="http://ads.dotomi.com/cookieredir/2262/pub3.php?a37c96da8332d60632ecf23ba147004cb2015348990000136968=1" width="1" height="1" border="0">
+<img src="http://ads.dotomi.com/cookieredir/2262/pub4.php?a37c96da8332d60632ecf23ba147004cb2015348990000136968=1" width="1" height="1" border="0">
+<img src="http://ads.dotomi.com/cookieredir/2262/pub5.php?a37c96da8332d60632ecf23ba147004cb2015348990000136968=1" width="1" height="1" border="0">
+<img src="http://ads.dotomi.com/cookieredir/2262/pub6.php?a37c96da8332d60632ecf23ba147004cb2015348990000136968=1" width="1" height="1" border="0">
+<img src="http://ads.dotomi.com/cookieredir/2262/pub7.php?a37c96da8332d60632ecf23ba147004cb2015348990000136968=1" width="1" height="1" border="0">
+<img src="http://ads.dotomi.com/cookieredir/2262/pub8.php?a37c96da8332d60632ecf23ba147004cb2015348990000136968=1" width="1" height="1" border="0">
+<img src="http://ads.dotomi.com/cookieredir/2262/pub9.php?a37c96da8332d60632ecf23ba147004cb2015348990000136968=1" width="1" height="1" border="0">
+<img src="http://ads.dotomi.com/cookieredir/2262/pub10.php?a37c96da8332d60632ecf23ba147004cb2015348990000136968=1" width="1" height="1" border="0">
+<img width="1" height="1" border="0" style="display: none;" src="https://223-img.c3tag.com/v.gif?cid=223&c3ch=Email&c3nid=Email-CME:20170315_MCPromo20170315&c3_account_id=2015348990000136968">
+<!-- END Conversant pixel -->
 
-<body style="-webkit-text-size-adjust:none; font-family:Helvetica, Arial, sans-serif; margin:0;" bgcolor="#FFFFFF">
-  <div style="display:none;font-size:1px;color:#333333;line-height:1px;max-height:0px;max-width:0px;opacity:0;overflow:hidden;">
-    Don't hide. Stock up!
-  </div>
+<table cellpadding="0" cellspacing="0" border="0" width="100%" class="marginfix" bgcolor="#efefef">
+	<tr>
+		<td align="center">
 
-  <center>
-          <table cellpadding="0" cellspacing="0" border="0">
-          <tr>
-            <td class="emailnomob" width="640" height="1" style="font-size:0; line-height:0; min-width:640px;">&nbsp;</td>
-          </tr>
+<!-- begin preheader container -->
+<table cellpadding="0" cellspacing="0" border="0" width="100%" bgcolor="#404040">
+	<tr>
+		<td align="center">
+		<table align="center" cellpadding="0" cellspacing="0" border="0" width="640" class="full-width-container">
+		<tr><td width="640" align="center" style="min-width:640px;" class="full-width-container">
+
+<!-- 01A PRE-HEADER begins-->
+		<table cellpadding="0" cellspacing="0" border="0" width="100%" class="header">
+			<tr>
+				<td class="hide" align="left">
+				<table width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#404040">
+					<tr>
+						<td align="left" valign="middle" width="10"></td>
+
+						<td width="250" align="left" valign="middle" style="font-family:Arial, Helvetica, sans-serif; font-size:11px; line-height:14px;color:#ffffff; padding-top:8px; padding-bottom:8px;" class="ctaText">
+
+
+									<span style="text-transform: capitalize;">Kevin, </span>
+
+								Value Prices For Quality Products. Every Day.
+							</td>
+
+						<td align="right" class="ctaText">
+						<table cellpadding="0" cellspacing="0" border="0">
+							<tr>
+								<td align="left" valign="middle" style="font-family:Arial, Helvetica, sans-serif; font-size:11px; line-height:14px;color:#ffffff; padding-top:8px; padding-bottom:8px;"><a href="http://link.mail.gnc.com/u.d?JYGjWsEmBTyosw9ll5h=1&camp=CME:20170315_2MCPromo:20170315&ym=ym_2MCPromo1640382&dtm_2em=37c96da8332d60632ecf23ba147004cb&dtm_2user_2id=2015348990000136968&dtmc_2drop_2id=20170315&c3ch=Email&c3nid=Email-CME:20170315_2MCPromo:20170315" style="color:#ffffff; text-decoration:underline;"><span style="color:#ffffff">Store Locator</span></a></td>
+								<td align="left" valign="middle" style="font-family:Arial, Helvetica, sans-serif; font-size:11px; line-height:14px;color:#ffffff; padding-top:8px; padding-bottom:8px;">&nbsp;|&nbsp;</td>
+								<td align="left" valign="middle" style="font-family:Arial, Helvetica, sans-serif; font-size:11px; line-height:14px;color:#ffffff; padding-top:8px; padding-bottom:8px;"><a href="http://mail.gnc.com/ftaf-index.jsp?camp=CME:20170315_MCPromo:20170315&ym=ym_MCPromo1640382&dtm_em=37c96da8332d60632ecf23ba147004cb&dtm_user_id=2015348990000136968&dtmc_drop_id=20170315&c3ch=Email&c3nid=Email-CME:20170315_MCPromo:20170315&s=4nP2&i=2053349557244" style="color:#ffffff; text-decoration:underline;"><span style="color:#ffffff">Forward to a Friend</span></a></td>
+								<td align="left" valign="middle" style="font-family:Arial, Helvetica, sans-serif; font-size:11px; line-height:14px;color:#ffffff; padding-top:8px; padding-bottom:8px;">&nbsp;|&nbsp;</td>
+								<td align="left" valign="middle" style="font-family:Arial, Helvetica, sans-serif; font-size:11px; line-height:14px;color:#ffffff; padding-top:8px; padding-bottom:8px;"><a href="http://link.mail.gnc.com/t.d?ek9JSATi0trBO8T1_cmq6tyEOGfyqeCz30gggZn7OU_4l9J1BCmzt5SibOoXjwVOV06oNXdJKDdGqgyD2TS8NP56pQqOeYp1BZcUSOVos0UZN38_d3FAe6zjTRYGEcVl.enc&msgVersion=web" style="color:#ffffff; text-decoration:underline;"><span style="color:#ffffff">View in Browser</span></a></td>
+							</tr>
+						</table>
+						</td>
+						<td align="left" valign="middle" width="10"></td>
+					</tr>
+				</table>
+				</td>
+			</tr>
+		</table>
+<!-- 01A PRE-HEADER ends  -->
+
+
+
+		</td></tr>
+		</table>
+		</td>
+	</tr>
+</table>
+<!-- end preheader container -->
+
+<!-- begin header container -->
+<table cellpadding="0" cellspacing="0" border="0" width="100%" bgcolor="#efefef">
+	<tr>
+		<td align="center">
+		<table align="center" cellpadding="0" cellspacing="0" border="0" width="640" class="full-width-container">
+		<tr><td width="640" align="center" style="min-width:640px;" class="full-width-container">
+
+<!-- 01B USA HEADER v2 -->
+<style type="text/css">
+@media only screen and (max-width: 480px) {
+/**********************
+SAMSUNG FIX
+set media query to
+max-width: 480px
+for testing in browser
+
+set media query to
+max-device-width: 480px
+for production
+**********************/
+
+/***** specific module styles *****/
+
+/** 02A - Feature All Image Swap **/
+.logoUSMobRedOnlyOne { background-image:url("http://media.4at5.net/email_domains/gnc/template/US_header_logo_Mob_2.jpg"); width:240px !important; float:left !important; height:57px !important; display:block !important; }
+.logoUSMobRedLoyaltySplitLeft { background-image:url("http://media.4at5.net/email_domains/gnc/template/US-Header_loyalty_logo_mob_left.jpg"); width:236px !important; float:left !important; height:57px !important; display:block !important; }
+.logoUSMobRedLoyaltySplitRight { background-image:url("http://media.4at5.net/email_domains/gnc/template/US-Header_loyalty_logo_mob_right.jpg"); width:84px !important; float:left !important; height:57px !important; display:block !important; }
+
+/* end responsive styles */
+}
+</style>
+
+
+
+
+
+<table cellpadding="0" cellspacing="0" border="0" width="100%" bgcolor="#e51a38">
+	<tr>
+		<td class="alignL" align="left" valign="middle"> <a href="http://link.mail.gnc.com/u.d?G4GjWsEmBTyosw2Yr=3&camp=CME:20170315_2MCPromo:20170315&ym=ym_2MCPromo1640382&dtm_2em=37c96da8332d60632ecf23ba147004cb&dtm_2user_2id=2015348990000136968&dtmc_2drop_2id=20170315&c3ch=Email&c3nid=Email-CME:20170315_2MCPromo:20170315" target="_blank"><span class="logoUSMobRedLoyaltySplitLeft"></span><img src="http://media.4at5.net/email_domains/gnc/template/US-Header_rewards_logo_left.jpg" alt="GNC" width="430" height="72" class="hide" style="display:block"  border="0"></a></td>
+		<td class="alignL" align="right" valign="middle"> <a href="http://link.mail.gnc.com/u.d?GYGjWsEmBTyosw2Ys=13&camp=CME:20170315_2MCPromo:20170315&ym=ym_2MCPromo1640382&dtm_2em=37c96da8332d60632ecf23ba147004cb&dtm_2user_2id=2015348990000136968&dtmc_2drop_2id=20170315&c3ch=Email&c3nid=Email-CME:20170315_2MCPromo:20170315" target="_blank"><span class="logoUSMobRedLoyaltySplitRight"></span><img src="http://media.4at5.net/email_domains/gnc/template/US-Header_loyalty_logo_right.jpg" alt="GNC" width="100" height="72" class="hide" style="display:block"  border="0"></a></td>
+	</tr>
+</table>
+
+
+
+
+<!-- end headers -->
+		</td></tr>
+		</table>
+		</td>
+	</tr>
+</table>
+<!-- end header container -->
+
+<!-- begin table to rearrange content -->
+<table cellpadding="0" cellspacing="0" border="0" width="100%" class="full-width-container"><tr><td>
+<!-- place tables below to rearrange content -->
+
+<!-- begin navigation container -->
+<table cellpadding="0" cellspacing="0" border="0" width="100%" class="nav3">
+					<tr>
+						<td align="center">
+						<table align="center" cellpadding="0" cellspacing="0" border="0" width="640" class="full-width-container">
+							<tr>
+								<td width="640" align="center" style="min-width:640px;" class="full-width-container">
+<!-- 01F NAV BAR 1 -->
+								<table cellpadding="0" cellspacing="0" border="0" width="100%" bgcolor="#d6d6d6">
+									<tr>
+										<td width="10" style="line-height:1px; font-size:1px;" align="left"></td>
+										<td align="center" valign="middle" style="font-family:Arial, Helvetica, sans-serif; font-size:14px; color: #333333; line-height:18px; font-weight:bold;" class="navbarlink top-padding bottom-padding"><span class="navbarlink"><a href="http://link.mail.gnc.com/u.d?EYGjWsEmBTyosw2br=3&camp=CME:20170315_2MCPromo:20170315&ym=ym_2MCPromo1640382&dtm_2em=37c96da8332d60632ecf23ba147004cb&dtm_2user_2id=2015348990000136968&dtmc_2drop_2id=20170315&c3ch=Email&c3nid=Email-CME:20170315_2MCPromo:20170315" class="navbarlink" target="_blank" style="color:#333333; text-decoration:none;">Vitamins<span class="hide"> & Supplements</span></a></span></td>
+										<td width="6" align="center" valign="middle"><img src="http://media.4at5.net/email_domains/gnc/166001/images/navDiv.jpg" width="6" height="40" border="0" style="display:block"></td>
+										<td align="center" valign="middle" style="font-family:Arial, Helvetica, sans-serif; font-size:14px; color: #333333; line-height:18px; font-weight:bold;" class="navbarlink top-padding bottom-padding"><span class="navbarlink"><a href="http://link.mail.gnc.com/u.d?OYGjWsEmBTyosw2bs=13&camp=CME:20170315_2MCPromo:20170315&ym=ym_2MCPromo1640382&dtm_2em=37c96da8332d60632ecf23ba147004cb&dtm_2user_2id=2015348990000136968&dtmc_2drop_2id=20170315&c3ch=Email&c3nid=Email-CME:20170315_2MCPromo:20170315" class="navbarlink" target="_blank" style="color:#333333; text-decoration:none;">Protein & Fitness</a></span></td>
+										<td width="6" align="center" valign="middle"><img src="http://media.4at5.net/email_domains/gnc/166001/images/navDiv.jpg" width="6" height="40" border="0" style="display:block"></td>
+										<td align="center" valign="middle" style="font-family:Arial, Helvetica, sans-serif; font-size:14px; color: #333333; line-height:18px; font-weight:bold;" class="navbarlink"><span class="navbarlink"><a href="http://link.mail.gnc.com/u.d?E4GjWsEmBTyosw2bh=23&camp=CME:20170315_2MCPromo:20170315&ym=ym_2MCPromo1640382&dtm_2em=37c96da8332d60632ecf23ba147004cb&dtm_2user_2id=2015348990000136968&dtmc_2drop_2id=20170315&c3ch=Email&c3nid=Email-CME:20170315_2MCPromo:20170315" target="_blank" class="navbarlink" style="color:#333333; text-decoration:none;"><span class="hide">Weight Management</span><span class="diet" data-alt="Diet"></span></a></span></td>
+										<td width="10" style="line-height:1px; font-size:1px;" align="left"></td>
+									</tr>
+								</table>
+
+<!-- end 01F NAV BAR 1 -->
+								</td>
+							</tr>
+						</table>
+						</td>
+					</tr>
+				</table>
+<!-- end navigation container -->
+
+<!-- begin body container -->
+<table cellpadding="0" cellspacing="0" border="0" width="100%" class="content" bgcolor="#efefef">
+	<tr>
+		<td align="center">
+		<table align="center" cellpadding="0" cellspacing="0" border="0" width="640" class="full-width-container">
+		<tr><td width="640" align="center" style="min-width:640px;" class="full-width-container">
+
+		<!-- include all email body content in below table -->
+		<table bgcolor="#efefef" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td align="center">
+		<!-- include all email body content below -->
+
+        <!-- 20px Spacer White -->
+		<table bgcolor="#efefef" cellpadding="0" cellspacing="0" border="0" width="100%">
+			<tr>
+				<td height="20" style="font-size:1px; mso-line-height-alt:0; mso-margin-top-alt:1px;" align="left">&nbsp;</td>
+			</tr>
+		</table>
+
+
+<!-- Wellness version  -->
+
+        <!-- 02A FEATURE ALL IMAGE -->
+		<table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#efefef">
+			<tr>
+				<td align="center" valign="top"><a href="http://link.mail.gnc.com/u.d?X4GjWsEmBTyosw9ll5w-=141&camp=CME:20170315_2MCPromo:20170315&ym=ym_2MCPromo1640382&dtm_2em=37c96da8332d60632ecf23ba147004cb&dtm_2user_2id=2015348990000136968&dtmc_2drop_2id=20170315&c3ch=Email&c3nid=Email-CME:20170315_2MCPromo:20170315" target="_blank"><span class="mod02AImgw"></span><img src="http://media.4at5.net/email_domains/gnc/153419/images/aspotwell01_desktop.jpg" width="640" height="300" alt="" style="display:block" border="0" class="hide"></a></td>
+			</tr>
+            <tr>
+				<td align="center" valign="top"><a href="http://link.mail.gnc.com/u.d?dYGjWsEmBTyosw9ll5xh=51&camp=CME:20170315_2MCPromo:20170315&ym=ym_2MCPromo1640382&dtm_2em=37c96da8332d60632ecf23ba147004cb&dtm_2user_2id=2015348990000136968&dtmc_2drop_2id=20170315&c3ch=Email&c3nid=Email-CME:20170315_2MCPromo:20170315" target="_blank"><span class="mod02AImg2w"></span><img src="http://media.4at5.net/email_domains/gnc/153419/images/aspotwell02_desktop.jpg" width="641" height="96" alt="" style="display:block" border="0" class="hide"></a></td>
+			</tr>
+            <tr>
+				<td align="center" valign="top"><span class="mod02AImg3w"></span><img src="http://media.4at5.net/email_domains/gnc/153419/images/aspotwell03_desktop.jpg" width="641" height="55" alt="" style="display:block" border="0" class="hide"></td>
+			</tr>
+
+		</table>
+		<!-- END 02A FEATURE ALL IMAGE -->
+
+         <!-- 02H FEATURE 4 ACROSS -->
+		 <table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#ffffff">
+			<tr>
+				<td align="center" valign="top" class="stack">
+        	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+              <td align="center" valign="top">
+                <a href="http://link.mail.gnc.com/u.d?f4GjWsEmBTyosw9ll5wz=151&camp=CME:20170315_2MCPromo:20170315&ym=ym_2MCPromo1640382&dtm_2em=37c96da8332d60632ecf23ba147004cb&dtm_2user_2id=2015348990000136968&dtmc_2drop_2id=20170315&c3ch=Email&c3nid=Email-CME:20170315_2MCPromo:20170315" target="_blank">
+                  <img src="http://media.4at5.net/email_domains/gnc/153419/images/well1.jpg" alt="" width="143" height="267" style="display:block" border="0">
+                </a>
+              </td>
+              <td align="center" valign="top">
+                <a href="http://link.mail.gnc.com/u.d?L4GjWsEmBTyosw9ll5wn=191&camp=CME:20170315_2MCPromo:20170315&ym=ym_2MCPromo1640382&dtm_2em=37c96da8332d60632ecf23ba147004cb&dtm_2user_2id=2015348990000136968&dtmc_2drop_2id=20170315&c3ch=Email&c3nid=Email-CME:20170315_2MCPromo:20170315" target="_blank">
+                  <img src="http://media.4at5.net/email_domains/gnc/153419/images/well2.jpg" alt="" width="159" height="267" style="display:block" border="0">
+                </a>
+              </td>
+             </tr>
+          </table>
+        </td>
+        <td align="center" valign="top" class="stack">
+        	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+              <td align="center" valign="top">
+                <a href="http://link.mail.gnc.com/u.d?FYGjWsEmBTyosw9ll5wt=171&camp=CME:20170315_2MCPromo:20170315&ym=ym_2MCPromo1640382&dtm_2em=37c96da8332d60632ecf23ba147004cb&dtm_2user_2id=2015348990000136968&dtmc_2drop_2id=20170315&c3ch=Email&c3nid=Email-CME:20170315_2MCPromo:20170315" target="_blank">
+                  <img src="http://media.4at5.net/email_domains/gnc/153419/images/well3.jpg" alt="" width="138" height="267" style="display:block" border="0">
+                </a>
+              </td>
+              <td align="center" valign="top">
+                <a href="http://link.mail.gnc.com/u.d?S4GjWsEmBTyosw9ll5wi=181&camp=CME:20170315_2MCPromo:20170315&ym=ym_2MCPromo1640382&dtm_2em=37c96da8332d60632ecf23ba147004cb&dtm_2user_2id=2015348990000136968&dtmc_2drop_2id=20170315&c3ch=Email&c3nid=Email-CME:20170315_2MCPromo:20170315" target="_blank">
+                  <img src="http://media.4at5.net/email_domains/gnc/153419/images/well4.jpg" alt="" width="167" height="267" style="display:block" border="0">
+                </a>
+              </td>
+             </tr>
+          </table>
+        </td>
+      </tr>
+		</table>
+		<!-- END 02H FEATURE 4 ACROSS -->
+
+
+
+
+
+
+
+
+
+		<!-- 20px Spacer White -->
+		<table bgcolor="#efefef" cellpadding="0" cellspacing="0" border="0" width="100%">
+			<tr>
+				<td height="20" style="font-size:1px; mso-line-height-alt:0; mso-margin-top-alt:1px;" align="left">&nbsp;</td>
+			</tr>
+		</table>
+
+
+		</td></tr></table>
+		<!-- end closing table for all email body content -->
+
+
+
+		</td></tr>
+		</table>
+
+	<!-- SIMPLICITY BANNER for US Version Message  -->
+    <table cellpadding="0" cellspacing="0" border="0" width="100%" bgcolor="#e51937">
+      <tr>
+        <td align="center">
+        <table align="center" cellpadding="0" cellspacing="0" border="0" width="640" class="full-width-container">
+        <tr>
+        	<td align="center" valign="top"><span class="USFooterBanner"></span><img src="http://media.4at5.net/email_domains/gnc/template/US_footer_image.jpg" alt="" width="640" height="102" class="hide" style="display:block" border="0">
+        	</td>
+        </tr>
         </table>
-
-    <!--HEADER-->
-<center>
-
-    <table class="emailwrapto320" width="640" border="0" cellspacing="0" cellpadding="0" align="center">
-      <tr>
-        <td align="center" height="53" valign="top" style="padding: 0 45px 0 45px;"><a
- href="http://link.cvs.com/r/WLM15ON/M9MHH2/XT4PSPZ/HIBDRRM/LRN9LW/Q3/h?a=EM_ECE_2017_ALLERGY&b=cbfVjnXRC-K7GoMLzC5bHrkGEXXqBOBA1Go34SV9AvFTDmarCIowHL7HACHzY~jY" target="_blank" frontuid="1899056"
-><img src="http://img.ed4.net/cvs/common/headers2017/cvs_logo.png" width="230" height="53" alt="CVS Pharmacy&reg;" style="display:block;" border="0" /></a></td>
-      </tr>
-    </table>
-</center>
-    <table class="emailwrapto320" width="640" border="0" cellspacing="0" cellpadding="0" align="center" style="background:#cc0000;">
-      <tr>
-        <td>
-          <center>
-            <table class="emailwrapto320" width="640" border="0" cellspacing="0" cellpadding="0" align="center">
-              <tr>
-                <td valign="middle" height="50">
-                  <table class="emailnomob" border="0" cellspacing="0" cellpadding="0" align="left">
-                    <tr>
-                      <td valign="middle" align="left" width="149" height="50"><a
- href="http://link.cvs.com/r/WLM15ON/M9MHH2/XT4PSPZ/HIBDRRM/R1T36Q/Q3/h?a=EM_ECE_2017_ALLERGY&b=cbfVjnXRC-K7GoMLzC5bHrkGEXXqBOBA1Go34SV9AvFTDmarCIowHL7HACHzY~jY" target="_blank" frontuid="1899055"
-><img src="http://img.ed4.net/cvs/common/headers2017/ec_logo.png" width="149" height="26" alt="extracare&reg;" style="display:block;" border="0" /></a></td>
-                    </tr>
-                  </table>
-                </td>
-
-                <td valign="middle" height="50">
-                  <table class="emailnomob" border="0" cellspacing="0" cellpadding="0" align="right">
-                    <tr>
-                      <td height="50" valign="middle" align="right" style="font-family:Helvetica, Arial, sans-serif; font-size:13px; font-weight:bold; mso-line-height-rule: exactly; line-height: 16px; color:#ffffff; background:#cc0000; padding: 0 20px 0 15px; text-align:left;"><a href="http://link.cvs.com/r/WLM15ON/M9MHH2/XT4PSPZ/HIBDRRM/ED1O1H/Q3/h?a1=EM_ECE_2017_ALLERGY&a2=cbfVjnXRC-K7GoMLzC5bHrkGEXXqBOBA1Go34SV9AvFTDmarCIowHL7HACHzY~jY" style="color:#ffffff; text-decoration:none;" donotreport="true" target="_blank"><span class="whiteTextNoUl">Lavinia, get what you need for allergy season.</span></a></td>
-                    </tr>
-                  </table>
-
-                  <!--[if !mso]><!-->
-                  <div class="showmobile" style="display:none; width:0px; max-height:0px; line-height:0px; overflow:hidden;">
-                    <table class="showmobile" border="0" cellspacing="0" cellpadding="0" align="left" width="320">
-                      <tr>
-                        <td valign="top" align="left" style="background:#cc0000; padding:20px 0 20px 0;" ><a
- href="http://link.cvs.com/r/WLM15ON/M9MHH2/XT4PSPZ/HIBDRRM/BXD59V/Q3/h?a=EM_ECE_2017_ALLERGY&b=cbfVjnXRC-K7GoMLzC5bHrkGEXXqBOBA1Go34SV9AvFTDmarCIowHL7HACHzY~jY" target="_blank" frontuid="1899054"
-><img src="http://img.ed4.net/cvs/common/headers2017/ec_logo.png" width="149" height="26" alt="extracare&reg;" style="display:block;" border="0" /></a></td>
-                      </tr>
-
-                      <tr>
-                        <td align="left" valign="top" style="font-family:Helvetica, Arial, sans-serif; font-size:13px; font-weight:bold; mso-line-height-rule: exactly; line-height: 16px; color:#ffffff; background:#cc0000; padding: 0 20px 17px 20px;"><a href="http://link.cvs.com/r/WLM15ON/M9MHH2/XT4PSPZ/HIBDRRM/ED1O1H/Q3/h?a1=EM_ECE_2017_ALLERGY&a2=cbfVjnXRC-K7GoMLzC5bHrkGEXXqBOBA1Go34SV9AvFTDmarCIowHL7HACHzY~jY" style="color:#ffffff; text-decoration:none;" donotreport="true" target="_blank"><span class="whiteTextNoUl">Lavinia, get what you need for allergy season.</span></a></td>
-                      </tr>
-                    </table>
-                  </div>
-                  <!--<![endif]-->
-                </td>
-              </tr>
-            </table>
-          </center>
         </td>
       </tr>
-    </table>
-<!--//HEADER -->
-
-
-
-    <!-- BODY CONTENT -->
-  <table class="resize320" align="center" border="0" cellpadding="0" cellspacing="0" width="640">
-    <tr>
-      <td align="center" style="padding: 0 0 0 0;" class="stripPadding">
-
-      <!--DESKTOP-->
-<table class="emailnomob" cellpadding="0" cellspacing="0" align="center" border="0" width="640">
-<tr>
-<td style="font-size:0;line-height:0;"><a
- href="http://link.cvs.com/r/WLM15ON/M9MHH2/XT4PSPZ/HIBDRRM/X8OH2F/Q3/h?a=EM_ECE_2017_ALLERGY&b=cbfVjnXRC-K7GoMLzC5bHrkGEXXqBOBA1Go34SV9AvFTDmarCIowHL7HACHzY~jY" frontuid="1980697" target="_blank"
-><img src="http://img.ed4.net/cvs/2017/ec/EC_17_09_02_ALLERGY/prealert-promo1.jpg" alt="Hug a tree. Brush off watery eyes." width="640" border="0" style="display:block;" /></a></td>
-</tr>
-<tr>
-<td style="font-size:0;line-height:0;"><a
- href="http://link.cvs.com/r/WLM15ON/M9MHH2/XT4PSPZ/HIBDRRM/PP1FBI/Q3/h?a=EM_ECE_2017_ALLERGY&b=cbfVjnXRC-K7GoMLzC5bHrkGEXXqBOBA1Go34SV9AvFTDmarCIowHL7HACHzY~jY" frontuid="1980696" target="_blank"
-><img src="http://img.ed4.net/cvs/2017/ec/EC_17_09_02_ALLERGY/prealert-promo2.jpg" alt="Relieve your allergy symptoms and save." width="640" border="0" style="display:block;" /></a></td>
-</tr>
-<tr>
-<td style="font-size:0;line-height:0;"><a
- href="http://link.cvs.com/r/WLM15ON/M9MHH2/XT4PSPZ/HIBDRRM/O3URHI/Q3/h?a=EM_ECE_2017_ALLERGY&b=cbfVjnXRC-K7GoMLzC5bHrkGEXXqBOBA1Go34SV9AvFTDmarCIowHL7HACHzY~jY" frontuid="1980695" target="_blank"
-><img src="http://img.ed4.net/cvs/2017/ec/EC_17_09_02_ALLERGY/R1/prealert-promo3-0827.jpg" alt="See this deal**" width="640" border="0" style="display:block;" /></a></td>
-</tr>
-<tr>
-<td style="font-size:0;line-height:0;"><a
- href="http://link.cvs.com/r/WLM15ON/M9MHH2/XT4PSPZ/HIBDRRM/7M4ADO/Q3/h?a=EM_ECE_2017_ALLERGY&b=cbfVjnXRC-K7GoMLzC5bHrkGEXXqBOBA1Go34SV9AvFTDmarCIowHL7HACHzY~jY" frontuid="1980694" target="_blank"
-><img src="http://img.ed4.net/cvs/2017/ec/EC_17_09_02_ALLERGY/R1/prealert-promo4-0827.jpg" alt="See this deal**" width="640" border="0" style="display:block;" /></a></td>
-</tr>
-<tr>
-<td style="font-size:0;line-height:0;"><a
- href="http://link.cvs.com/r/WLM15ON/M9MHH2/XT4PSPZ/HIBDRRM/6752KO/Q3/h?a=EM_ECE_2017_ALLERGY&b=cbfVjnXRC-K7GoMLzC5bHrkGEXXqBOBA1Go34SV9AvFTDmarCIowHL7HACHzY~jY" frontuid="1980689" target="_blank"
-><img src="http://img.ed4.net/cvs/2017/ec/EC_17_09_02_ALLERGY/R1/prealert-promo5-0827.jpg" alt="See this deal**" width="640" border="0" style="display:block;" /></a></td>
-</tr>
-<tr>
-<td style="font-size:0;line-height:0;"><a
- href="http://link.cvs.com/r/WLM15ON/M9MHH2/XT4PSPZ/HIBDRRM/MF3SLE/Q3/h?a=EM_ECE_2017_ALLERGY&b=cbfVjnXRC-K7GoMLzC5bHrkGEXXqBOBA1Go34SV9AvFTDmarCIowHL7HACHzY~jY" frontuid="1980691" target="_blank"
-><img src="http://img.ed4.net/cvs/2017/ec/EC_17_09_02_ALLERGY/prealert-promo6.jpg" alt="Try Curbside pickup&dagger;&dagger;" width="640" border="0" style="display:block;" /></a></td>
-</tr>
-<tr>
-<td style="font-size:0;line-height:0;"><a
- href="http://link.cvs.com/r/WLM15ON/M9MHH2/XT4PSPZ/HIBDRRM/I9JIPD/Q3/h?a=EM_ECE_2017_ALLERGY&b=cbfVjnXRC-K7GoMLzC5bHrkGEXXqBOBA1Go34SV9AvFTDmarCIowHL7HACHzY~jY" frontuid="1980685" target="_blank"
-><img src="http://img.ed4.net/cvs/2017/ec/EC_17_09_02_ALLERGY/prealert-promo7.jpg" alt="Find a Minute Clinic" width="640" border="0" style="display:block;" /></a></td>
-</tr>
 </table>
-<!--//DESKTOP -->
+    <!-- END SIMPLICITY BANNER for US Version Message -->
 
 
-<!--MOBILE-->
-<!--[if !mso]><!-->
-<div style="display:none; width:0px; max-height:0px; overflow:hidden;" class="showmobile">
-<table cellpadding="0" cellspacing="0" align="center" border="0" width="320">
-<tr>
-<td style="font-size:0;line-height:0;"><a
- href="http://link.cvs.com/r/WLM15ON/M9MHH2/XT4PSPZ/HIBDRRM/4A7CX0/Q3/h?a=EM_ECE_2017_ALLERGY&b=cbfVjnXRC-K7GoMLzC5bHrkGEXXqBOBA1Go34SV9AvFTDmarCIowHL7HACHzY~jY" frontuid="1980687" target="_blank"
-><img src="http://img.ed4.net/cvs/2017/ec/EC_17_09_02_ALLERGY/prealert-promo1-mobile.jpg" alt="Hug a tree. Brush off watery eyes." width="320" border="0" style="display:block;" /></a></td>
-</tr>
-<tr>
-<td style="font-size:0;line-height:0;"><a
- href="http://link.cvs.com/r/WLM15ON/M9MHH2/XT4PSPZ/HIBDRRM/ZOCG7G/Q3/h?a=EM_ECE_2017_ALLERGY&b=cbfVjnXRC-K7GoMLzC5bHrkGEXXqBOBA1Go34SV9AvFTDmarCIowHL7HACHzY~jY" frontuid="1980693" target="_blank"
-><img src="http://img.ed4.net/cvs/2017/ec/EC_17_09_02_ALLERGY/prealert-promo2-mobile.jpg" alt="Relieve your allergy symptoms and save." width="320" border="0" style="display:block;" /></a></td>
-</tr>
-<tr>
-<td style="font-size:0;line-height:0;"><a
- href="http://link.cvs.com/r/WLM15ON/M9MHH2/XT4PSPZ/HIBDRRM/4A7CXV/Q3/h?a=EM_ECE_2017_ALLERGY&b=cbfVjnXRC-K7GoMLzC5bHrkGEXXqBOBA1Go34SV9AvFTDmarCIowHL7HACHzY~jY" frontuid="1980690" target="_blank"
-><img src="http://img.ed4.net/cvs/2017/ec/EC_17_09_02_ALLERGY/R1/prealert-promo3-0827-mobile.jpg" alt="See this deal**" width="320" border="0" style="display:block;" /></a></td>
-</tr>
-<tr>
-<td style="font-size:0;line-height:0;"><a
- href="http://link.cvs.com/r/WLM15ON/M9MHH2/XT4PSPZ/HIBDRRM/CKY4SX/Q3/h?a=EM_ECE_2017_ALLERGY&b=cbfVjnXRC-K7GoMLzC5bHrkGEXXqBOBA1Go34SV9AvFTDmarCIowHL7HACHzY~jY" frontuid="1980692" target="_blank"
-><img src="http://img.ed4.net/cvs/2017/ec/EC_17_09_02_ALLERGY/R1/prealert-promo4-0827-mobile.jpg" alt="See this deal**" width="320" border="0" style="display:block;" /></a></td>
-</tr>
-<tr>
-<td style="font-size:0;line-height:0;"><a
- href="http://link.cvs.com/r/WLM15ON/M9MHH2/XT4PSPZ/HIBDRRM/HQSY3Q/Q3/h?a=EM_ECE_2017_ALLERGY&b=cbfVjnXRC-K7GoMLzC5bHrkGEXXqBOBA1Go34SV9AvFTDmarCIowHL7HACHzY~jY" frontuid="1980686" target="_blank"
-><img src="http://img.ed4.net/cvs/2017/ec/EC_17_09_02_ALLERGY/R1/prealert-promo5-0827-mobile.jpg" alt="See this deal**" width="320" border="0" style="display:block;" /></a></td>
-</tr>
-<tr>
-<td style="font-size:0;line-height:0;"><a
- href="http://link.cvs.com/r/WLM15ON/M9MHH2/XT4PSPZ/HIBDRRM/6752DM/Q3/h?a=EM_ECE_2017_ALLERGY&b=cbfVjnXRC-K7GoMLzC5bHrkGEXXqBOBA1Go34SV9AvFTDmarCIowHL7HACHzY~jY" frontuid="1980688" target="_blank"
-><img src="http://img.ed4.net/cvs/2017/ec/EC_17_09_02_ALLERGY/prealert-promo6-mobile.jpg" alt="Try Curbside pickup&dagger;&dagger;" width="320" border="0" style="display:block;" /></a></td>
-</tr>
-<tr>
-<td style="font-size:0;line-height:0;"><a
- href="http://link.cvs.com/r/WLM15ON/M9MHH2/XT4PSPZ/HIBDRRM/7M4AY4/Q3/h?a=EM_ECE_2017_ALLERGY&b=cbfVjnXRC-K7GoMLzC5bHrkGEXXqBOBA1Go34SV9AvFTDmarCIowHL7HACHzY~jY" frontuid="1980684" target="_blank"
-><img src="http://img.ed4.net/cvs/2017/ec/EC_17_09_02_ALLERGY/prealert-promo7-mobile.jpg" alt="Find a Minute Clinic" width="320" border="0" style="display:block;" /></a></td>
-</tr>
+
+
+		</td>
+	</tr>
 </table>
-</div>
-<!--<![endif]-->
-<!--//MOBILE -->
-</td>
-    </tr>
-  </table>
-  <!-- //BODY CONTENT -->
+<!-- end body container -->
+
+<!-- begin footer container -->
+<table cellpadding="0" cellspacing="0" border="0" width="100%" bgcolor="#A8A8A8" class="footer">
+	<tr>
+		<td align="center">
+		<table align="center" cellpadding="0" cellspacing="0" border="0" width="640" class="full-width-container">
+		<tr><td width="640" align="center" style="min-width:640px;" class="full-width-container">
+
+		<!-- footer -->
+			<table cellpadding="0" cellspacing="0" border="0" width="100%">
+				<tr>
+					<td align="center">
+		<!-- 20px Spacer -->
+					<table cellpadding="0" cellspacing="0" border="0" width="100%">
+						<tr>
+							<td height="20" style="font-size:1px; mso-line-height-alt:0; mso-margin-top-alt:1px;" align="left">&nbsp;</td>
+						</tr>
+					</table>
+
+<!-- FOOTERS -->
+<!-- US English footer -->
+<!-- Social US -->
+					<table cellpadding="0" cellspacing="0" border="0" width="100%">
+						<tr>
+							<td align="center" valign="middle">
+							<table cellpadding="0" cellspacing="0" border="0" class="center" bgcolor="#a8a8a8">
+								<tr>
+									<td align="left" valign="middle" class="navlink"><a href="http://link.mail.gnc.com/u.d?CYGjWsEmBTyoswus=3&camp=CME:20170315_2MCPromo:20170315&ym=ym_2MCPromo1640382&dtm_2em=37c96da8332d60632ecf23ba147004cb&dtm_2user_2id=2015348990000136968&dtmc_2drop_2id=20170315&c3ch=Email&c3nid=Email-CME:20170315_2MCPromo:20170315" target="_blank"><img src="http://media.4at5.net/email_domains/gnc/166001/images/socFB.jpg" width="37" height="32" border="0" alt="Facebook" style="display:block"></a></td>
+									<td align="left" valign="middle" class="navlink"><a href="http://link.mail.gnc.com/u.d?G4GjWsEmBTyoswur=13&camp=CME:20170315_2MCPromo:20170315&ym=ym_2MCPromo1640382&dtm_2em=37c96da8332d60632ecf23ba147004cb&dtm_2user_2id=2015348990000136968&dtmc_2drop_2id=20170315&c3ch=Email&c3nid=Email-CME:20170315_2MCPromo:20170315" target="_blank"><img src="http://media.4at5.net/email_domains/gnc/166001/images/socTw.jpg" width="36" height="32" border="0" alt="Twitter" style="display:block"></a></td>
+									<td align="left" valign="middle" class="navlink"><a href="http://link.mail.gnc.com/u.d?NYGjWsEmBTyoswum=23&camp=CME:20170315_2MCPromo:20170315&ym=ym_2MCPromo1640382&dtm_2em=37c96da8332d60632ecf23ba147004cb&dtm_2user_2id=2015348990000136968&dtmc_2drop_2id=20170315&c3ch=Email&c3nid=Email-CME:20170315_2MCPromo:20170315" target="_blank"><img src="http://media.4at5.net/email_domains/gnc/166001/images/socIG.jpg" width="41" height="32" border="0" alt="Instagram" style="display:block"></a></td>
+									<td align="left" valign="middle" class="navlink"><a href="http://www.pinterest.com/gnclivewell?camp=CME:20170315_MCPromo:20170315&ym=ym_MCPromo1640382&dtm_em=37c96da8332d60632ecf23ba147004cb&dtm_user_id=2015348990000136968&dtmc_drop_id=20170315&c3ch=Email&c3nid=Email-CME:20170315_MCPromo:20170315" target="_blank"><img src="http://media.4at5.net/email_domains/gnc/166001/images/socPin.jpg" width="37" height="32" border="0" alt="Pintrest" style="display:block"></a></td>
+									<td align="left" valign="middle" class="navlink"><a href="http://www.youtube.com/user/GNCvids?camp=CME:20170315_MCPromo:20170315&ym=ym_MCPromo1640382&dtm_em=37c96da8332d60632ecf23ba147004cb&dtm_user_id=2015348990000136968&dtmc_drop_id=20170315&c3ch=Email&c3nid=Email-CME:20170315_MCPromo:20170315" target="_blank"><img src="http://media.4at5.net/email_domains/gnc/166001/images/socYT.jpg" width="37" height="32" border="0" alt="YouTube" style="display:block"></a></td>
+									<td align="left" valign="middle" class="navlink"><a href="http://link.mail.gnc.com/u.d?MYGjWsEmBTyoswu9w=53&camp=CME:20170315_2MCPromo:20170315&ym=ym_2MCPromo1640382&dtm_2em=37c96da8332d60632ecf23ba147004cb&dtm_2user_2id=2015348990000136968&dtmc_2drop_2id=20170315&c3ch=Email&c3nid=Email-CME:20170315_2MCPromo:20170315" target="_blank"><img src="http://media.4at5.net/email_domains/gnc/166001/images/socSS.jpg" width="37" height="32" border="0" alt="Subscribe" style="display:block"></a></td>
+								</tr>
+							</table>
+							</td>
+						</tr>
+						<tr>
+							<td height="10" style="font-size:1px; mso-line-height-alt:0; mso-margin-top-alt:1px;" align="left"></td>
+						</tr>
+					</table>
+		<!-- Contact Nav -->
+					<table cellpadding="0" cellspacing="0" border="0" align="center">
+						<tr>
+							<td class="stack legalfooter" align="right">
+							<table class="center" cellpadding="0" cellspacing="0" border="0">
+								<tr>
+									<td align="left" style="font-family:Arial, Helvetica, sans-serif; font-size:11px; line-height:16px;color:#000000;"><a href="http://www.gnc.com/storeLocator/index.jsp?camp=CME:20170315_MCPromo:20170315&ym=ym_MCPromo1640382&dtm_em=37c96da8332d60632ecf23ba147004cb&dtm_user_id=2015348990000136968&dtmc_drop_id=20170315&c3ch=Email&c3nid=Email-CME:20170315_MCPromo:20170315" style="color:#000000; text-decoration:none;"><span style="color:#000000">Locations</span></a></td>
+								</tr>
+							</table>
+							</td>
+							<td class="stack legalfooter" align="left">
+							<table class="center" cellpadding="0" cellspacing="0" border="0">
+								<tr>
+									<td width="20" style="font-size:1px; mso-line-height-alt:0; mso-margin-top-alt:1px;" align="left" class="hide"></td>
+									<td align="left" style="font-family:Arial, Helvetica, sans-serif; font-size:11px; line-height:16px;color:#000000;"><a href="http://link.mail.gnc.com/u.d?M4GjWsEmBTyoswu9E=93&camp=CME:20170315_2MCPromo:20170315&ym=ym_2MCPromo1640382&dtm_2em=37c96da8332d60632ecf23ba147004cb&dtm_2user_2id=2015348990000136968&dtmc_2drop_2id=20170315&c3ch=Email&c3nid=Email-CME:20170315_2MCPromo:20170315" style="color:#000000; text-decoration:none;"><span style="color:#000000">Franchising</span></a></td>
+									<td width="20" style="font-size:1px; mso-line-height-alt:0; mso-margin-top-alt:1px;" align="left"></td>
+									<td align="left" style="font-family:Arial, Helvetica, sans-serif; font-size:11px; line-height:16px;color:#000000;"><a href="http://www.gnc.com/helpdesk/index.jsp?camp=CME:20170315_MCPromo:20170315&ym=ym_MCPromo1640382&dtm_em=37c96da8332d60632ecf23ba147004cb&dtm_user_id=2015348990000136968&dtmc_drop_id=20170315&c3ch=Email&c3nid=Email-CME:20170315_MCPromo:20170315" style="color:#000000; text-decoration:none;"><span style="color:#000000">Contact Us</span></a></td>
+								</tr>
+							</table>
+							</td>
+						</tr>
+					</table>
+
+		<!-- 10px Spacer -->
+					<table cellpadding="0" cellspacing="0" border="0" width="100%">
+						<tr>
+							<td height="10" style="font-size:1px; mso-line-height-alt:0; mso-margin-top-alt:1px;" align="left"></td>
+						</tr>
+					</table>
+					<table cellpadding="0" cellspacing="0" border="0" width="100%">
+						<tr>
+							<td width="10" style="font-size:1px; mso-line-height-alt:0; mso-margin-top-alt:1px;" align="left"></td>
+							<td align="left" valign="middle" style="font-family:Arial, Helvetica, sans-serif; font-size:10px; color: #000000; line-height:14px; text-align:left;" class="legalfooter">
+<span class="applefix1">
+These statements have not been evaluated by the FDA. These products are not intended to diagnose, treat, cure or prevent any disease. Regular prices effective through March 29, 2017 at <a href="http://link.mail.gnc.com/u.d?b4GjWsEmBTyosw9ll5xE=121&camp=CME:20170315_2MCPromo:20170315&ym=ym_2MCPromo1640382&dtm_2em=37c96da8332d60632ecf23ba147004cb&dtm_2user_2id=2015348990000136968&dtmc_2drop_2id=20170315&c3ch=Email&c3nid=Email-CME:20170315_2MCPromo:20170315" target="_blank" style="text-decoration:none; color:#000000; ">GNC.com</a>, through phone orders via <a href="tel:1-877-GNC-4700" onclick="return false" target="_blank" style="text-decoration:none; color:#000000; ">1-877-GNC-4700</a>, and at participating GNC stores in the U.S. All products and prices may not be available at all locations.
+Pricing and promotions may not be available online. Prices may be higher in Alaska, Hawaii and Puerto Rico. Sales on select fitness equipment may not be combined with any discounts or Member Pricing. StriVectin&reg; and Under Armour&reg; products cannot be combined with any discount. Errors and omissions are not the responsibility of the advertiser. Shop one of more than 8,900 GNC stores. Call <a href="tel:1-800-477-4462" onclick="return false" target="_blank" style="text-decoration:none; color:#000000; ">1-800-477-4462</a> or visit <a href="http://link.mail.gnc.com/u.d?UYGjWsEmBTyosw9ll5w5=131&camp=CME:20170315_2MCPromo:20170315&ym=ym_2MCPromo1640382&dtm_2em=37c96da8332d60632ecf23ba147004cb&dtm_2user_2id=2015348990000136968&dtmc_2drop_2id=20170315&c3ch=Email&c3nid=Email-CME:20170315_2MCPromo:20170315" target="_blank" style="text-decoration:none; color:#000000; ">GNC.com</a> to find the store nearest you.
+
+</span>
+<br><br>
+							You have received this email at <a href="#" onclick="return false" style="color:#000000; text-decoration:none; cursor:text;" target="_blank">klangford82@gmail.com</a>. To receive fewer emails or unsubscribe, <a href="http://mail.gnc.com/unsubscribe_usa.jsp?s=4nP2&i=2053349557244" target="_blank" style="text-decoration:underline;"><font color="#000000">click here</font></a>. <br>
+							<br>
+							View our Privacy Policy: <a href="http://www.gnc.com/helpdesk/index.jsp?display=safety&subdisplay=privacy&camp=CME:20170315_MCPromo:20170315&ym=ym_MCPromo1640382&dtm_em=37c96da8332d60632ecf23ba147004cb&dtm_user_id=2015348990000136968&dtmc_drop_id=20170315&c3ch=Email&c3nid=Email-CME:20170315_MCPromo:20170315" target="_blank" style="text-decoration:underline;"><font color="#000000">click here</font></a>. <br>
+							<br>
+							To update your email address or change your personal options, visit the My Account area at <a href="http://www.gnc.com?camp=CME:20170315_MCPromo:20170315&ym=ym_MCPromo1640382&dtm_em=37c96da8332d60632ecf23ba147004cb&dtm_user_id=2015348990000136968&dtmc_drop_id=20170315&c3ch=Email&c3nid=Email-CME:20170315_MCPromo:20170315" target="_blank" style="text-decoration:none; color:#000000;">GNC.com</a> or contact GNC Customer Service at <a href="tel:1-888-462-2548" onclick="return false" style="color:#000000; text-decoration:none; cursor:text;" target="_blank"><span class="applefix1">1-888-462-2548</span></a>. You may also write to GNC at: General Nutrition Corporation / Attn: Customer Service / <span class="applefix1">300 Sixth Ave / Pittsburgh, PA 15222 USA.</span> </span></td>
+							<td width="10" style="font-size:1px; mso-line-height-alt:0; mso-margin-top-alt:1px;" align="left"></td>
+						</tr>
+					</table>
+
+		<!-- 20px Spacer -->
+					<table cellpadding="0" cellspacing="0" border="0" width="100%">
+						<tr>
+							<td height="20" style="font-size:1px; mso-line-height-alt:0; mso-margin-top-alt:1px;" align="left">&nbsp;</td>
+						</tr>
+					</table>
+		<!-- end Disclaimer -->
+
+		<!--end footer -->
+					</td>
+				</tr>
+			</table>
+		<!-- end footer -->
+
+		</td></tr>
+		</table>
+		</td>
+	</tr>
+</table>
+<!-- end footer container -->
 
 
+<!-- closing table to rearrange content -->
+</td></tr></table>
+<!-- end closing table to rearrange content -->
 
-        <!--FOOTER-->
-    <table class="emailwrapto320" width="640" border="0" cellspacing="0" cellpadding="0" align="center" style="background:#cc0000;">
-      <tr>
-        <td valign="middle">
-          <center>
-            <table class="emailnomob" width="640" border="0" cellspacing="0" cellpadding="0" align="center">
-              <tr>
-                <td valign="top" align="left" style="font-family:Helvetica, Arial, sans-serif; font-size:13px; mso-line-height-rule: exactly; line-height:15px; font-weight:bold; color:#ffffff; background:#cc0000; padding: 8px 0 4px 20px;">ExtraCare<sup>&reg;</sup> Member:&nbsp;Lavinia</td>
-              </tr>
+		</td>
+	</tr>
+</table>
 
-              <tr>
-                <td valign="top" align="left" style="font-family:Helvetica, Arial, sans-serif; font-size:13px; mso-line-height-rule: exactly; line-height: 15px; text-decoration:none; font-weight:bold; color:#ffffff; background:#cc0000; padding: 0 0 10px 20px;">Card ending in: <strong>0739</strong> | <a
- href="http://link.cvs.com/r/WLM15ON/M9MHH2/XT4PSPZ/HIBDRRM/MF3STP/Q3/h?a=EM_ECE_2017_ALLERGY&b=cbfVjnXRC-K7GoMLzC5bHrkGEXXqBOBA1Go34SV9AvFTDmarCIowHL7HACHzY~jY" style="text-decoration:underline; color:#ffffff;" frontuid="1893774" target="_blank"
-><span class="whiteText">My&nbsp;Information</span></a></td>
-              </tr>
-            </table>
-
-            <!--[if !mso]><!-->
-            <div class="showmobile300" style="display:none; width:0px; max-height:0px; line-height:0px; overflow:hidden;">
-              <table class="emailwrapto300" width="300" border="0" cellspacing="0" cellpadding="0" align="center">
-                <tr>
-                  <td valign="top" align="left" style="font-family:Helvetica, Arial, sans-serif; font-size:13px; mso-line-height-rule: exactly; line-height: 15px; text-decoration:none; font-weight:bold; color:#ffffff; background:#cc0000; padding: 8px 0 6px 20px;">ExtraCare<sup>®</sup> Member:&nbsp;Lavinia</td>
-                </tr>
-
-                <tr>
-                  <td valign="top" align="left" style="font-family:Helvetica, Arial, sans-serif; font-size:13px; mso-line-height-rule: exactly; line-height: 15px; text-decoration:none; font-weight:bold; color:#ffffff; background:#cc0000; padding: 0 0 6px 20px;">Card ending in: 0739</td>
-                </tr>
-
-                <tr>
-                  <td valign="top" align="left" style="font-family:Helvetica, Arial, sans-serif; font-size:13px; mso-line-height-rule: exactly; line-height: 15px; text-decoration:none; font-weight:bold; color:#ffffff; background:#cc0000; padding: 0 0 12px 20px;"><a
- href="http://link.cvs.com/r/WLM15ON/M9MHH2/XT4PSPZ/HIBDRRM/X8OHAC/Q3/h?a=EM_ECE_2017_ALLERGY&b=cbfVjnXRC-K7GoMLzC5bHrkGEXXqBOBA1Go34SV9AvFTDmarCIowHL7HACHzY~jY" style="text-decoration:underline; color:#ffffff;" frontuid="1893773" target="_blank"
-><span class="whiteText">My&nbsp;Information</span></a></td>
-                </tr>
-              </table>
-            </div>
-            <!--<![endif]-->
-          </center>
-        </td>
-      </tr>
-    </table>
-
-    <table class="resize320" width="640" border="0" cellspacing="0" cellpadding="0" align="center">
-      <tr>
-        <td valign="top">
-          <table class="emailnomob" width="320" border="0" cellspacing="0" cellpadding="0" align="left">
-            <tr>
-              <td width="159" align="center" class="botnav" style="font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-weight: bold; text-decoration:none; color:#4c4c4c; padding: 21px 0 21px 0;"><a
- href="http://link.cvs.com/r/WLM15ON/M9MHH2/XT4PSPZ/HIBDRRM/2VAO4M/Q3/h?a=EM_ECE_2017_ALLERGY&b=cbfVjnXRC-K7GoMLzC5bHrkGEXXqBOBA1Go34SV9AvFTDmarCIowHL7HACHzY~jY" style="text-decoration:none; color:#4c4c4c;" target="_blank" frontuid="1893772"
-><span class="greyText2">Pharmacy</span></a></td>
-
-              <td valign="top" align="left" width="1" height="1" class="botnavborders" style="background-color:#ffffff;"><img src="http://img.ed4.net/cvs/common/img_spacer.gif" alt="" width="1" height="1" style="display:block;" /></td>
-
-              <td valign="top" align="left" width="1" height="1" class="botnavborders" style="background-color:#ffffff;"><img src="http://img.ed4.net/cvs/common/img_spacer.gif" alt="" width="1" height="1" style="display:block;" /></td>
-
-              <td width="158" align="center" class="botnav" style="font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-weight: bold; color:#4c4c4c; padding: 21px 0 21px 0;"><a
- href="http://link.cvs.com/r/WLM15ON/M9MHH2/XT4PSPZ/HIBDRRM/7M4AYD/Q3/h?a=EM_ECE_2017_ALLERGY&b=cbfVjnXRC-K7GoMLzC5bHrkGEXXqBOBA1Go34SV9AvFTDmarCIowHL7HACHzY~jY" style="text-decoration:none; color:#4c4c4c;" target="_blank" frontuid="1893771"
-><span class="greyText2">Shop</span></a></td>
-            </tr>
-          </table>
-
-          <!--[if !mso]><!-->
-          <div class="showmobile" style="display:none; width:0px; max-height:0px; overflow:hidden;">
-          <table class="resize320 block" width="320" border="0" cellspacing="0" cellpadding="0" align="left">
-            <tr>
-              <td width="159" align="center" class="botnav" style="font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-weight: bold; text-decoration:none; color:#4c4c4c; padding: 21px 0 21px 0;"><a
- href="http://link.cvs.com/r/WLM15ON/M9MHH2/XT4PSPZ/HIBDRRM/BXD599/Q3/h?a=EM_ECE_2017_ALLERGY&b=cbfVjnXRC-K7GoMLzC5bHrkGEXXqBOBA1Go34SV9AvFTDmarCIowHL7HACHzY~jY" style="text-decoration:none; color:#4c4c4c;" target="_blank" frontuid="1893765"
-><span class="greyText2">Pharmacy</span></a></td>
-
-              <td valign="top" align="left" width="1" height="1" class="botnavborders" style="background-color:#ffffff;"><img src="http://img.ed4.net/cvs/common/img_spacer.gif" alt="" width="1" height="1" style="display:block;" /></td>
-
-              <td class="botnav" width="159" style="text-align:center; font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-weight: bold; text-decoration:none; color:#4c4c4c;"><a
- href="http://link.cvs.com/r/WLM15ON/M9MHH2/XT4PSPZ/HIBDRRM/MF3STH/Q3/h?a=EM_ECE_2017_ALLERGY&b=cbfVjnXRC-K7GoMLzC5bHrkGEXXqBOBA1Go34SV9AvFTDmarCIowHL7HACHzY~jY" style="text-decoration:none; color:#4c4c4c;" target="_blank" frontuid="1893767"
-><span class="greyText2">Shop</span></a></td>
-            </tr>
-          </table>
-          </div>
-          <!--<![endif]-->
-
-        <!--[if gte mso 9]>
-        </td><td valign="top">
-        <![endif]-->
-
-          <table class="resize320" width="1" border="0" cellspacing="0" cellpadding="0" align="left">
-            <tr>
-              <td valign="top" align="left" width="1" height="1" class="botnavborders" style="background-color:#ffffff; line-height:1px;"><img src="http://img.ed4.net/cvs/common/img_spacer.gif" alt="" width="1" height="1" style="display:block;" /></td>
-            </tr>
-          </table>
-
-        <!--[if gte mso 9]>
-        </td><td valign="top">
-        <![endif]-->
-
-          <table class="resize320 block" width="320" border="0" cellspacing="0" cellpadding="0" align="right">
-            <tr>
-              <td width="159" align="center" class="botnav" style="font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-weight: bold; text-decoration:none; color:#4c4c4c; padding: 21px 0 21px 0;"><a
- href="http://link.cvs.com/r/WLM15ON/M9MHH2/XT4PSPZ/HIBDRRM/94X7E9/Q3/h?a=EM_ECE_2017_ALLERGY&b=cbfVjnXRC-K7GoMLzC5bHrkGEXXqBOBA1Go34SV9AvFTDmarCIowHL7HACHzY~jY" style="font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-weight: bold; text-decoration:none; color:#4c4c4c;" target="_blank" frontuid="1893760"
-><span class="greyText2">Deals</span></a></td>
-
-              <td valign="top" align="left" width="1" height="1" class="botnavborders" style="background-color:#ffffff;"><img src="http://img.ed4.net/cvs/common/img_spacer.gif" alt="" width="1" height="1" style="display:block;" /></td>
-
-              <td valign="top" align="left" width="1" height="1" class="emailnomob" style="background-color:#ffffff;"><img src="http://img.ed4.net/cvs/common/img_spacer.gif" alt="" width="1" height="1" style="display:block;" /></td>
-
-              <td width="159" align="center" class="botnav" style="font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-weight: bold; text-decoration:none; color:#4c4c4c; padding: 21px 0 21px 0;"><a
- href="http://link.cvs.com/r/WLM15ON/M9MHH2/XT4PSPZ/HIBDRRM/BXD59R/Q3/h?a=EM_ECE_2017_ALLERGY&b=cbfVjnXRC-K7GoMLzC5bHrkGEXXqBOBA1Go34SV9AvFTDmarCIowHL7HACHzY~jY" style="font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-weight: bold; text-decoration:none; color:#4c4c4c;" target="_blank" frontuid="1893763"
-><span class="greyText2">ExtraCare</span></a></td>
-            </tr>
-          </table>
-        </td>
-      </tr>
-    </table>
-
-    <table width="320" border="0" cellspacing="0" cellpadding="0" align="center">
-      <tr>
-        <td valign="top" align="left" width="1" height="1" class="botnavborders" style="background-color:#ffffff; line-height:1px;"><img src="http://img.ed4.net/cvs/common/img_spacer.gif" alt="" width="1" height="1" style="display:block;" /></td>
-      </tr>
-    </table>
-
-    <table class="emailnomob" width="640" border="0" cellspacing="0" cellpadding="0" align="center">
-      <tr>
-        <td class="emailnomob" align="center" valign="top" style="line-height:1px; background-color:#d1cccc;"><img src="http://img.ed4.net/cvs/common/img_spacer.gif" alt="" width="1" height="1" style="display:block;" /></td>
-      </tr>
-    </table>
-
-    <table class="emailwrapto320" width="640" border="0" cellspacing="0" cellpadding="0" align="center">
-      <tr>
-        <td valign="middle" class="socialcenter">
-          <table width="200" border="0" cellspacing="0" cellpadding="0" align="left">
-            <tr>
-              <td align="left" valign="middle" style="font-family: Helvetica, Arial, sans-serif; font-size: 12px; font-weight: bold; text-decoration:none; color:#000000; padding: 30px 0 30px 20px;">Stay Connected</td>
-
-              <td valign="top" align="left" width="11" height="14" class="socialicons" style="padding: 30px 0 30px 0; line-height:14px;"><a
- href="http://link.cvs.com/r/WLM15ON/M9MHH2/XT4PSPZ/HIBDRRM/BXD59F/Q3/h" target="_blank" frontuid="1893769"
-><img src="http://img.ed4.net/cvs/common/headers2016/facebook.gif" alt="" width="11" height="14" style="display:block;" border="0" /></a></td>
-
-              <td valign="top" align="left" width="12" height="1" style="line-height:1px;"><img src="http://img.ed4.net/cvs/common/img_spacer.gif" alt="" width="12" height="1" style="display:block;" /></td>
-
-              <td valign="top" align="left" width="16" height="14" class="socialicons" style="padding: 30px 0 30px 0; line-height:14px;"><a
- href="http://link.cvs.com/r/WLM15ON/M9MHH2/XT4PSPZ/HIBDRRM/PP1FGC/Q3/h" target="_blank" frontuid="1893766"
-><img src="http://img.ed4.net/cvs/common/headers2016/twitter.gif" alt="" width="16" height="14" style="display:block;" border="0" /></a></td>
-
-              <td valign="top" align="left" width="17" height="1" style="line-height:1px;"><img src="http://img.ed4.net/cvs/common/img_spacer.gif" alt="" width="17" height="1" style="display:block;" /></td>
-
-              <td valign="top" align="left" width="14" height="14" class="socialicons" style="padding: 30px 0 30px 0; line-height:14px;"><a
- href="http://link.cvs.com/r/WLM15ON/M9MHH2/XT4PSPZ/HIBDRRM/TTBU07/Q3/h" target="_blank" frontuid="1893768"
-><img src="http://img.ed4.net/cvs/common/headers2016/youtube.gif" alt="" width="14" height="14" style="display:block;" border="0" /></a></td>
-            </tr>
-          </table>
-
-        <!--[if gte mso 9]>
-        </td><td valign="top">
-        <![endif]-->
-
-          <table width="180" class="emailnomob" border="0" cellspacing="0" cellpadding="0" align="right">
-            <tr>
-              <td align="right" valign="middle" style="font-family: Helvetica, Arial, sans-serif; font-size: 12px; font-weight: bold; text-decoration:none; color:#000000; padding: 30px 0 30px 0;"><a
- href="http://link.cvs.com/r/WLM15ON/M9MHH2/XT4PSPZ/HIBDRRM/85WZIF/Q3/h?a=EM_ECE_2017_ALLERGY&b=cbfVjnXRC-K7GoMLzC5bHrkGEXXqBOBA1Go34SV9AvFTDmarCIowHL7HACHzY~jY" style="font-family: Helvetica, Arial, sans-serif; font-size: 12px; font-weight: bold; text-decoration:none; color:#000000;" target="_blank" frontuid="1893761"
-><span class="blackText">Download Our App</span></a></td>
-
-              <td valign="top" align="left" width="13" height="1" style="padding: line-height:1px;"><img src="http://img.ed4.net/cvs/common/img_spacer.gif" alt="" width="13" height="1" style="display:block;" /></td>
-
-              <td valign="top" align="left" width="15" height="26" style="padding: 23px 20px 24px 0; line-height:14px;"><a
- href="http://link.cvs.com/r/WLM15ON/M9MHH2/XT4PSPZ/HIBDRRM/85WZIN/Q3/h?a=EM_ECE_2017_ALLERGY&b=cbfVjnXRC-K7GoMLzC5bHrkGEXXqBOBA1Go34SV9AvFTDmarCIowHL7HACHzY~jY" target="_blank" frontuid="1893764"
-><img src="http://img.ed4.net/cvs/common/headers2016/phonedesktop.gif" alt="" width="15" height="26" style="display:block;" border="0" /></a></td>
-            </tr>
-          </table>
-        </td>
-      </tr>
-    </table>
-
-    <!--[if !mso]><!-->
-    <div class="showmobile300" style="display:none; width:0px; max-height:0px; line-height:0px; overflow:hidden;">
-      <table width="300" class="" border="0" cellspacing="0" cellpadding="0" align="center">
-        <tr>
-          <td valign="top" align="left" width="15" height="26" style="line-height:14px;"><a
- href="http://link.cvs.com/r/WLM15ON/M9MHH2/XT4PSPZ/HIBDRRM/WG6T2K/Q3/h?a=EM_ECE_2017_ALLERGY&b=cbfVjnXRC-K7GoMLzC5bHrkGEXXqBOBA1Go34SV9AvFTDmarCIowHL7HACHzY~jY" target="_blank" frontuid="1893757"
-><img src="http://img.ed4.net/cvs/common/headers2016/phonemobile.gif" alt="" width="26" height="44" style="display:block;" border="0" /></a></td>
-
-          <td valign="top" align="left" width="17" height="1" style="line-height:1px;"><img src="http://img.ed4.net/cvs/common/img_spacer.gif" alt="" width="17" height="1" style="display:block;" /></td>
-
-          <td align="center" style="font-family: Helvetica, Arial, sans-serif; font-size: 12px; font-weight: bold; text-decoration:none; color:#000000; padding: 14px 0 14px 0; border:2px solid #000000;"><a
- href="http://link.cvs.com/r/WLM15ON/M9MHH2/XT4PSPZ/HIBDRRM/X8OHAY/Q3/h?a=EM_ECE_2017_ALLERGY&b=cbfVjnXRC-K7GoMLzC5bHrkGEXXqBOBA1Go34SV9AvFTDmarCIowHL7HACHzY~jY" style="font-family: Helvetica, Arial, sans-serif; font-size: 12px; font-weight: bold; text-decoration:none; color:#000000; padding: 14px 60px 14px 60px;" target="_blank" frontuid="1893758"
-><span class="blackText">Download Our App</span></a></td>
-        </tr>
-      </table>
-    </div>
-
-    <div class="showmobile300" style="display:none; width:0px; max-height:0px; line-height:0px; overflow:hidden;">
-      <table width="300" class="" border="0" cellspacing="0" cellpadding="0" align="center">
-        <tr>
-          <td valign="top" align="left" width="1" height="24" style="line-height:1px;"><img src="http://img.ed4.net/cvs/common/img_spacer.gif" alt="" width="1" height="24" style="display:block;" /></td>
-        </tr>
-      </table>
-    </div>
-    <!--<![endif]-->
-
-    <table width="640" border="0" cellspacing="0" cellpadding="0" align="center" class="resize320">
-      <tr>
-        <td align="center" valign="top" style="line-height:1px; background-color:#d1cccc;"><img src="http://img.ed4.net/cvs/common/img_spacer.gif" alt="" width="1" height="1" style="display:block;" /></td>
-      </tr>
-    </table>
-
-    <table class="emailwrapto320" width="640" border="0" cellspacing="0" cellpadding="0" align="center">
-      <tr>
-        <td align="left" height="21" valign="top">&nbsp;</td>
-      </tr>
-
-      <tr>
-        <td style="text-align:left; font-family:Helvetica, Arial, sans-serif; font-size:12px; text-decoration:none; color:#000000; font-weight:bold; padding-left:20px;"><span class="blackText"><a
- href="http://link.cvs.com/r/WLM15ON/M9MHH2/XT4PSPZ/HIBDRRM/6752D3/Q3/h?a=EM_ECE_2017_ALLERGY&b=cbfVjnXRC-K7GoMLzC5bHrkGEXXqBOBA1Go34SV9AvFTDmarCIowHL7HACHzY~jY" style="color:#000000; text-decoration:none; font-weight:bold;" target="_blank" frontuid="1893755"
->My&nbsp;Account</a></span> &nbsp;|&nbsp; <span class="blackText"><a
- href="http://link.cvs.com/r/WLM15ON/M9MHH2/XT4PSPZ/HIBDRRM/MF3STZ/Q3/h?a=EM_ECE_2017_ALLERGY&b=cbfVjnXRC-K7GoMLzC5bHrkGEXXqBOBA1Go34SV9AvFTDmarCIowHL7HACHzY~jY" style="color:#000000; text-decoration:none; font-weight:bold;" target="_blank" frontuid="1893756"
->Store&nbsp;Locator</a></span> &nbsp;|&nbsp; <span class="blackText"><a
- href="http://link.cvs.com/r/WLM15ON/M9MHH2/XT4PSPZ/HIBDRRM/85WZIL/Q3/h?a=EM_ECE_2017_ALLERGY&b=cbfVjnXRC-K7GoMLzC5bHrkGEXXqBOBA1Go34SV9AvFTDmarCIowHL7HACHzY~jY" style="color:#000000; text-decoration:none; font-weight:bold;" target="_blank" frontuid="1893753"
->Return&nbsp;Policy</a></span> &nbsp;|&nbsp; <span class="blackText"><a
- href="http://link.cvs.com/r/WLM15ON/M9MHH2/XT4PSPZ/HIBDRRM/VB8LVE/Q3/h?a=EM_ECE_2017_ALLERGY&b=cbfVjnXRC-K7GoMLzC5bHrkGEXXqBOBA1Go34SV9AvFTDmarCIowHL7HACHzY~jY" style="color:#000000; text-decoration:none; font-weight:bold;" target="_blank" frontuid="1893754"
->Contact&nbsp;Us</a></span> &nbsp;|&nbsp; <span class="blackText"><a
- href="http://link.cvs.com/r/WLM15ON/M9MHH2/XT4PSPZ/HIBDRRM/EYEXR0/Q3/h?a=WLM15ON&b=JSSF8Y&c=VGWV5VC&d=9ZRCBCQ&e=1&f=5e957d7cafebf0e2529a" style="color:#000000; text-decoration:none; font-weight:bold;" target="_blank" frontuid="1893770"
->View&nbsp;this&nbsp;on&nbsp;the&nbsp;web</a></span> &nbsp;|&nbsp; <span class="blackText"><a
- href="http://link.cvs.com/r/WLM15ON/M9MHH2/XT4PSPZ/HIBDRRM/Y60BZR/Q3/h?a=https%3A%2F%2Fsecure.opinionlab.com%2Fccc01%2Fo.asp%3Fid%3DAsSgigjJ%26referer%3Dhttp%3A%2F%2Fomail.cvs.com%2FConversion" style="color:#000000; text-decoration:none; font-weight:bold;" target="_blank" frontuid="1893759"
->+&nbsp;Rate&nbsp;this&nbsp;Email</a></span></td>
-      </tr>
-    </table>
-
-    <table class="emailwrapto320" width="640" border="0" cellspacing="0" cellpadding="0" align="center">
-      <tr>
-        <td align="left" width="320" height="32" valign="top" style="font-size:0;line-height:0;">&nbsp;</td>
-      </tr>
-
-      <tr>
-        <td align="left" height="29" valign="top" style="padding-left:20px;"><a
- href="http://link.cvs.com/r/WLM15ON/M9MHH2/XT4PSPZ/HIBDRRM/BXD59O/Q3/h?a=EM_ECE_2017_ALLERGY&b=cbfVjnXRC-K7GoMLzC5bHrkGEXXqBOBA1Go34SV9AvFTDmarCIowHL7HACHzY~jY" target="_blank" frontuid="1893762"
-><img src="http://img.ed4.net/cvs/common/headers2016/logofooter.gif" width="148" height="29" alt="CVS Pharmacy&trade;" style="display:block;" border="0" /></a></td>
-      </tr>
-
-      <tr>
-        <td valign="top" align="left" style="padding-left:20px; font-family:Helvetica, Arial, sans-serif; font-size:12px; mso-line-height-rule: exactly; line-height: 14px; text-decoration:none; color:#000000; font-weight:bold;">&copy; 2017 CVS Health&trade;</td>
-      </tr>
-
-      <tr>
-        <td valign="top" align="left" style="padding-left:20px; font-family:Helvetica, Arial, sans-serif; font-size:12px; mso-line-height-rule: exactly; line-height: 14px; text-decoration:none; color:#000000; font-weight:bold;"><span class="blackTextNoUl">One CVS Drive, Woonsocket, RI 02895</span></td>
-      </tr>
-
-      <tr>
-        <td align="left" width="320" height="28" valign="top" style="font-size:0;line-height:0;">&nbsp;</td>
-      </tr>
-    </table>
-    <!--//FOOTER -->
-
-    <table class="emailwrapto300" width="640" border="0" cellspacing="0" cellpadding="0" align="center">
-
-      <tr>
-        <td class="textresizeto14" valign="top" align="left" style="padding-left:20px; padding-right:20px; font-family:Helvetica, Arial, sans-serif; font-size:11px; mso-line-height-rule: exactly; line-height: 13px; color:#646464;"><span class="greyTextNoUl">*Based on data from IMS Health Incorporated as of 8/30/17.
-<br>
-<br>
-
-**In store only. Valid through 9/2/17. See 8/27/17 weekly ad for full product description on sale items shown such as quantities, sizes and limitations. Discount applies to item(s) of equal or lesser value. Product selection and offers may vary in select locations. Your ExtraBucks&reg; Rewards will print as a coupon on your receipt immediately following qualifying purchase(s) and are good for use on your next purchase.
-<br>
-<br>
-
-&dagger;Excludes all products with pseudoephedrine or ephedrine.
-<br>
-<br>
-
-&dagger;&dagger;Available in select stores and on select products. See CVS Pharmacy® app for details.
- <br>
-<br>
-
-&sect;Ages 24 months and older. Visit minuteclinic.com for details.</span></td>
-      </tr>
-
-
-      <tr>
-        <td class="textresizeto14" align="left" valign="top" style="padding-left:20px; padding-right:20px; font-family:Helvetica, Arial, sans-serif; font-size:11px; mso-line-height-rule: exactly; line-height: 13px; color:#646464;"><table class="emailwrapto280" width="600" border="0" cellspacing="0" cellpadding="0" align="center">
-          <tr>
-        <td align="left" height="12" valign="top" style="font-size:0;line-height:0;">&nbsp;</td>
-      </tr>
-    <tr>
-        <td valign="top" align="left" style="font-family:Helvetica, Arial, sans-serif; font-size:11px; mso-line-height-rule: exactly; line-height: 13px; text-decoration:none; color:#646464;" class="textresizeto14">Add <span class="redTextNoUl"><a
- href="mailto:email@extracare.cvs.com" style="color:#cc0000; text-decoration:none !important; font-weight:bold;" frontuid="1822432"
->email@extracare.cvs.com</a></span><span class="greyText"> to your address book to continue receiving our emails.</span></td>
-      </tr>
-      <tr>
-        <td align="left" height="12" valign="top" style="font-size:0;line-height:0;">&nbsp;</td>
-      </tr>
-
-          <tr>
-        <td valign="top" align="left" style="font-family:Helvetica, Arial, sans-serif; font-size:11px; mso-line-height-rule: exactly; line-height: 13px; text-decoration:none; color:#646464;" class="textresizeto14">View our privacy policy  <span class="redTextNoUl"><a
- href="http://link.cvs.com/r/WLM15ON/M9MHH2/XT4PSPZ/HIBDRRM/HQSYN2/Q3/h?a=EM_ECE_2017_ALLERGY&b=cbfVjnXRC-K7GoMLzC5bHrkGEXXqBOBA1Go34SV9AvFTDmarCIowHL7HACHzY~jY" style="color:#cc0000; text-decoration:none !important; font-weight:bold;" frontuid="1822431"
->here</a>.</span></td>
-      </tr>
-    <tr>
-        <td align="left" height="12" valign="top" style="font-size:0;line-height:0;">&nbsp;</td>
-      </tr>
-    <tr>
-        <td class="textresizeto14" align="left" valign="top" style="font-family:Helvetica, Arial, sans-serif; font-size:11px; mso-line-height-rule: exactly; line-height: 13px; text-decoration:none; color:#646464;">You are receiving this email because you indicated you wanted to be informed of the latest news and specials from CVS Pharmacy&reg; ExtraCare&reg;. You can <a
- href="http://link.cvs.com/r/WLM15ON/M9MHH2/XT4PSPZ/HIBDRRM/TTBUOE/Q3/h?a=laddyredd81@gmail.com&b=9ZRCBCQ" style="color:#cc0000; font-weight:bold; text-decoration:none !important;" target="_blank" frontuid="1822430"
-><span class="redTextNoUl">update your email address profile here</span></a>. If you prefer not to receive future emails from CVS Pharmacy ExtraCare, you can <a
- href="http://link.cvs.com/r/WLM15ON/M9MHH2/XT4PSPZ/HIBDRRM/1C26MP/Q3/h?a=laddyredd81@gmail.com&b=9ZRCBCQ&c=JSSF8Y" style="color:#cc0000; font-weight:bold; text-decoration:none !important;" target="_blank" frontuid="1822429"
-><span class="redTextNoUl">unsubscribe here</span></a>, <span class="appleLinksdisc" style=" color:#646464; text-decoration:none !important;">call 1-800-746-7287</span> or mail us at CVS Health, Customer Relations, <span class="appleLinksdisc" style=" color:#646464; text-decoration:none !important;">One CVS Drive, Woonsocket, RI 02895</span>. Please note: If you have opted in to receive other CVS Pharmacy email communications, you will continue to receive them unless you opt
-out specifically for those.
-
-</td>
-      </tr>
-  </table></td>
-      </tr>
-    </table>
-
-
-
-  </center>
 </body>
-</html><!-- [[WLM15ON-JSSF8Y-M9MHH2-XT4PSPZ-HIBDRRM-H-M2-20170902-85b5d5717401]] --><img height="1" width="1" src="http://link.cvs.com/o/WLM15ON/M9MHH2/XT4PSPZ/HIBDRRM/5APH/52">
+</html>

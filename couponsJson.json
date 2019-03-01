@@ -526,7 +526,7 @@
         "id": "7b8e5864-8d73-42da-8292-40dfdc4a9847",
         "repeating": true,
         "locations": [
-          "/descendant::a[contains(text(),\"%\") or\ncontains(text(),\"Save\") or\ncontains(text(),\"half price\") or\ncontains(text(),\"Up to £\") and contains(text(),\"off\") or\ncontains(text(),\"Lowest ever price\") or\ncontains(text(),\"Delivery\") and contains(text(),\"Free\")] \n"
+          "/descendant::img[contains(translate(@alt, \"SALE\", \"sale\"),\"sale\") or\ncontains(translate(@alt, \"FRE\", \"fre\"),\"free\") or\ncontains(translate(@alt, \"SAVE\", \"save\"),\"save\")]\n|\n/descendant::text()[contains(translate(.,\"ONLY\",\"only\"),\"only £\") or \ncontains(translate(.,\"SAVE\",\"save\"),\"save\") or\ncontains(translate(.,\"DELIVRY\",\"delivry\"),\"delivery\") and contains(.,\"Free\")]/ancestor::table[1]\n"
         ],
         "type": "http://schema.org/Coupon",
         "javascript": null,
@@ -537,14 +537,17 @@
             "locations": {
               "-1": [
                 {
-                  "xpath": "concat(., \" \", ./parent::td/parent::tr/following-sibling::tr/descendant::a)"
+                  "xpath": "normalize-space(./@alt)"
+                },
+                {
+                  "xpath": "normalize-space(.)"
                 }
               ]
             },
             "name": "http://schema.org/description",
             "relative": true,
             "transient": false,
-            "javascript": "function transform(data) {\n  data = data.replace(/[\\*©®ǂ†→§¹]/g, \"\");\n  return data.replace(/Find\\sout\\smore/, \"\").trim() || \"\";\n}",
+            "javascript": "function transform(data) {\n  var replaceArr = [\n    {oldStr: /[\\*©®ǂ†→§¹]/g, newStr: \"\"},\n    {oldStr: /buy\\s*(or\\s*reserve|now).*/i, newStr: \"\"},\n    {oldStr: /view\\s*range.*/i, newStr: \"\"},\n    {oldStr:/(Only £\\d+)(Was £\\d+)/, newStr: \" $1 $2\"}\n  ];\n  \n  for(var i = 0; i < replaceArr.length; i++){\n    data = data.replace(replaceArr[i].oldStr, replaceArr[i].newStr);\n  }\n\n  return data.trim();\n}",
             "dataTypes": [
               "Text"
             ],
@@ -555,14 +558,14 @@
             "locations": {
               "-1": [
                 {
-                  "xpath": "concat(., ./parent::td/parent::tr/following::tr[contains(.,\"+\") and contains(.,\"¹\")],  /descendant::a[contains(.,\"customer.services@currys.co.uk\")]/parent::td)"
+                  "xpath": "/descendant::a[contains(translate(.,\"HURYENDS\",\"huryends\"),\"hurry, ends\")]"
                 }
               ]
             },
             "name": "http://schema.org/validThrough",
             "relative": true,
             "transient": false,
-            "javascript": "function transform(data) {\n  if (!data) return \"\";\n  if (data.match(/¹/) && data.indexOf(\"¹\") !== data.lastIndexOf(\"¹\")) {\n\n\n\t\t//---PHASE 1---\n\t  //Regular expression strings and array with all string scenarios\n\t  var regEx1 = new RegExp(\"valid\\\\sthrough:?\\\\s\"); //valid through(:)\n\t  var regEx2 = new RegExp(\"expires:?\\\\s\"); //expires(:)\n\t  var regEx3 = new RegExp(\"until:?\\\\s\"); //until(:)\n\t  var regEx4 = new RegExp(\"offer\\\\sends:?\\\\s\"); //offer ends(:)\n\t  var regEx5 = new RegExp(\"valid\\\\suntil:?\\\\s\"); //valid until(:)\n\t  var regExArr = [regEx1, regEx2, regEx3, regEx4];\n\n\t  var dateRegEx = new RegExp(\"([\\\\d\\\\/?\\\\.?]{2,3}){2}([\\\\d]{2,4})?\"); // (N)N/(N)N/(NNNN)\n\t  var flags = \"i\"; //Can be i, gi, g\n\n\n\n\t  //---PHASE 2---\n\t  //Create the new Array -> expirTextArr. Push all the regular expressions inside\n\t  var expirTextArr = [];\n\t  for (var i = 0; i < regExArr.length; i++) {\n\t    expirTextArr.push(new RegExp (regExArr[i].source + dateRegEx.source, flags));\n\t  }\n\n\n\n\t  //---PHASE 3---\n\t  //String where the extracted (N)N/(N)N/(NNNN) is added. Then the string is split to an array.\n\t  var finalStrArr = \"\";\n\t  //loop through all the regular expressions inside the expirTextArr to see if there is a match\n\t  //If there is a match, then add the (N)N/(N)N/(NNNN) in finalStrArr and split it.\n\t  for (var i = 0; i < expirTextArr.length; i++) {\n\t   var el = expirTextArr[i];\n\n\t   if (data.match(el)) {\n\t    finalStrArr= data.match(el)[0].replace(/[A-Za-z]/g,\"\").trim().split(\"/\");\n\t     break;\n\t   }\n\t  }\n\n\t  if (finalStrArr.length === 0) return null;\n\n\t  //---PHASE 4---\n\t  //Return a concatenation (this can be expanded based on other information like currency data)\n\t  return new Date(finalStrArr[1] + \"/\" + finalStrArr[0] + \"/\" + finalStrArr[2] || \"1970\");\n\n  }\n\n  return null;\n}",
+            "javascript": "function transform(data,node,headers){\n  var todayToDay = /Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday/i\n  if(todayToDay.exec(data)) {\n    var daysOfWeek = [\"sunday\", \"monday\", \"tuesday\", \"wednesday\", \"thursday\", \"friday\", \"saturday\"];\n    var emailDate = new Date(headers.Date * 1000);\n    var emailDay = emailDate.getDay();\n    var expirDay = daysOfWeek.indexOf(todayToDay.exec(data)[0].toLowerCase());\n    var addedDays = expirDay > emailDay ? expirDay - emailDay : expirDay < emailDay ? expirDay + 7 - emailDay : 0;\n\n    var finalDay = emailDate.getDate() + addedDays;\n    var month = emailDate.getMonth();\n\n    return new Date(\"1970\", month, finalDay);\n  }\n  return \"\";\n}",
             "dataTypes": [
               "DateTime"
             ],
@@ -573,7 +576,7 @@
             "locations": {
               "-1": [
                 {
-                  "xpath": "./@href"
+                  "xpath": "./parent::a/@href | ./descendant::a/@href"
                 }
               ]
             },
@@ -588,15 +591,15 @@
           }
         ],
         "hints": {
-          "_footer": "/descendant::a[contains(.,\"customer.services@currys.co.uk\")]/parent::td/parent::tr/parent::tbody",
-          "_raw_validThrough": "concat(., ./parent::td/parent::tr/following::tr[contains(.,\"+\") and contains(.,\"¹\")],  /descendant::a[contains(.,\"customer.services@currys.co.uk\")]/parent::td)"
+          "_raw_validThrough": "concat(., ./parent::td/parent::tr/following::tr[contains(.,\"+\") and contains(.,\"¹\")],  /descendant::a[contains(.,\"customer.services@currys.co.uk\")]/parent::td)",
+          "_footer": "/descendant::a[contains(.,\"customer.services@currys.co.uk\")]/parent::td/parent::tr/parent::tbody"
         }
       },
       {
         "id": "4ebdc7cf-7c5d-4ece-bb24-16bfabca8a31",
         "repeating": true,
         "locations": [
-          "/descendant::a[contains(text(),\"%\") or\ncontains(text(),\"Save\") or\ncontains(text(),\"half price\") or\ncontains(text(),\"Up to £\") and contains(text(),\"off\") or\ncontains(text(),\"Lowest ever price\") or\ncontains(text(),\"Delivery\") and contains(text(),\"Free\")] \n"
+          "/descendant::img[contains(translate(@alt, \"SALE\", \"sale\"),\"sale\") or\ncontains(translate(@alt, \"FRE\", \"fre\"),\"free\") or\ncontains(translate(@alt, \"SAVE\", \"save\"),\"save\")]\n|\n/descendant::text()[contains(translate(.,\"ONLY\",\"only\"),\"only £\") or \ncontains(translate(.,\"SAVE\",\"save\"),\"save\") or\ncontains(translate(.,\"DELIVRY\",\"delivry\"),\"delivery\") and contains(.,\"Free\")]/ancestor::table[1]\n"
         ],
         "type": "http://schema.org/Organization",
         "javascript": null,
