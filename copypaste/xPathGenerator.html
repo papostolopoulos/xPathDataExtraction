@@ -203,9 +203,8 @@
               </label>
               <label>
                 Node: <br>
-                <input type="text" name="addPathNode" v-model="node" @keyup.enter="addToPath($event)">
+                <input type="text" name="addNode" v-model="node" @keyup.enter="addToPath($event)">
               </label>
-              <input type="button" name="" value="Push in function">
             </div>
           </div>
 
@@ -530,6 +529,7 @@
             The functionsArr is displayed here
             {{functionsArr}}
           </div>
+          <input type="button" name="" value="Concat last two elements" @click="concatFunctionElements()">
 
           <div class="">
             The pathArray is displayed here <br>
@@ -579,6 +579,8 @@
 
       }, //End of data
       methods:{
+        //Adds strings to the pathArray OR
+        //If there are strings in the functionsArr then it adds to the functionsArr instead
         addToPath(event){
           //Variable used to check on the last element of the pathArray. Needed for splicing
           let pathArrayLastElement = this.pathArray[this.pathArray.length-1];
@@ -586,22 +588,25 @@
           console.log("event.target.value:", event.target.value);
           console.log("event.target.name:", event.target.name);
 
-          //Add an axis with the node name
-          if (event.target.name === "addPathNode") {
-            console.log("target name equals addPathNode");
+          //--------------------------------|
+          //Add an axis with the node name--|
+          //--------------------------------|
+          if (event.target.name === "addNode") {
+            console.log("target name equals addNode");
             //Add the string to the function array without a comma
             if (this.functionsCounter !== 0) {
-              let functionStr = this.functionsArr[this.functionsArr.length-1]
+              let functionStr = this.functionsArr[this.functionsArr.length-1];
               console.log("firstIf");
               console.log(functionStr[functionStr.length-1]);
               if(functionStr[functionStr.length-1] === "("){
                 console.log("second if");
-                this.functionsArr[this.functionsArr.length-1] += this.axis + event.target.value;
+                this.functionsArr.push(this.axis + event.target.value);
                 this.node = "";
               }
               // Add the string to the functions array with a comma
               else{
-                this.functionsArr[this.functionsArr.length-1] += ", " + this.axis + event.target.value;
+                this.functionsArr.push(", ");
+                this.functionsArr.push(this.axis + event.target.value);
                 this.node = "";
               }
             }
@@ -613,19 +618,34 @@
             return;
           }
 
-          //Add brackets
+          //--------------|
+          //Add brackets--|
+          //--------------|
           if (event.target.name === "brackets"){
-            console.log("In the brackets if");
-            if(!event.target.value === ")") this.pathArray.push(event.target.value);
-            else {
-
+            console.log("in brackets");
+            console.log(this.pathArray.length);
+            console.log(event.target.value !== ")");
+            if (this.functionsCounter > 0) {
+              this.functionsArr.push(event.target.value);
+              if (event.target.value === ")") {
+                this.functionsCounter --;
+                if (this.functionsCounter === 0) {
+                  this.pathArray.push(this.functionsArr.join(""));
+                  this.functionsArr = [];
+                }
+              }
+              return this.zeroProperties();
             }
-             //I NEED TO FIX THIS.
-            //IF PARENTHESIS, THEN ADD TO THE FUNCTIONS ARRAY AND NOT THE PATH Array
-            //PUSH IN THE PATH ARRAY WHEN THE ) PARENTHESES ARE EQUAL TO THE NUMBER OF
-            // FUNCTIONS IN THE FUNCTIONS ARRAY
-            if (event.target.value === ")") this.functionsArr.pop();
+            else if(this.pathArray.length > 0 && event.target.value !== ")"){
+              console.log("in else");
+              this.pathArray.push(event.target.value);
+              return this.zeroProperties();
+            }
           }
+
+
+
+
 
           //Add attribute by itself
           if (event.target.name === "attribute") {
@@ -637,16 +657,38 @@
             }
           }
 
+
+
+
           //Add a function with all it's parameters
-          if (event.target.name === "functionString") return this.addFunction();
+          if (event.target.name === "functionString") return this.addFunctionParams();
 
         },
 
 
+
+        //Concatenates the last elements that are in the functionsArr and are separated by a comma
+        concatFunctionElements(){
+          console.log(this.functionsArr);
+          if (this.functionsArr.length > 3 && this.functionsArr[this.functionsArr.length-2] === ", ") {
+            this.functionsArr[this.functionsArr.length-3] += this.functionsArr.pop();
+            this.functionsArr.pop();
+          }
+          else {
+            console.log("The array is not big enough or the element before the last is not a comma.");
+          }
+        },
+
+
+
+        //Adds a function name with parenthesis ( in the functionsArr
         addFunction(event){
           this.functionsArr.push(event.target.value + "(");
           this.functionsCounter ++;
-          console.log("In add function");
+          console.log("In add function. The counter is ", this.functionsCounter);
+        },
+
+        addFunctionParams(){
           let pathArrayLastElement = this.pathArray[this.pathArray.length-1];
           let functionParams;
 
@@ -723,9 +765,10 @@
           //sum function
           //translate function
           //true function
-
         },
 
+
+        //Zero all the properties of the data object
         zeroProperties(){
           this.axis = "";
           this.brackets = "";

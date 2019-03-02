@@ -1458,6 +1458,187 @@
   }
 }
 
+/* EXPRESS b.express.com */
+{
+  "extract": {
+    "extractEmbedded": false,
+    "source": null,
+    "schema": [
+      {
+        "url": "http://ws.rmf.yahoo.com:4080/rmf/v1/schema?type=schema.org&name=y.2.0&format=json",
+        "ns": "http://schema.org",
+        "context": {
+          "@type": [
+            "Coupon"
+          ]
+        }
+      }
+    ],
+    "entityRules": [
+      {
+        "id": "e78e2b2c-a03e-4ae9-a2f8-08c1134a5044",
+        "repeating": true,
+        "locations": [
+          "//text()[contains(translate(.,\"OF\",\"of\"),\"% off\")]"
+        ],
+        "type": "http://schema.org/Coupon",
+        "javascript": null,
+        "entityIdRef": "",
+        "attributes": [
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "."
+                }
+              ]
+            },
+            "name": "http://schema.org/description",
+            "relative": true,
+            "transient": false,
+            "javascript": null,
+            "dataTypes": [
+              "Text"
+            ],
+            "mandatory": false
+          },
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "//text()[contains(translate(.,\"VALID\",\"valid\"),\"valid\") and contains(translate(.,\"THROUG\",\"throug\"),\"through\")]/ancestor::table[1]"
+                }
+              ]
+            },
+            "name": "http://schema.org/validThrough",
+            "relative": true,
+            "transient": false,
+            "javascript": "function transform(data){\n  return data.match(/through (January|February|March|April|May|June|Jule|August|September|October|November|December) \\d{1,2},? \\d{2,4}/)[0].replace(/through /,\"\");\n}",
+            "dataTypes": [
+              "DateTime"
+            ],
+            "mandatory": false
+          },
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "//img[@alt = \"express\"]/parent::a/@href"
+                }
+              ]
+            },
+            "name": "http://schema.org/url",
+            "relative": true,
+            "transient": false,
+            "javascript": null,
+            "dataTypes": [
+              "URL"
+            ],
+            "mandatory": false
+          }
+        ],
+        "hints": {
+          "_footer": "//text()[contains(translate(.,\"EXPRSLC\",\"exprslc\"),\"express, llc\")]/ancestor::table[1]"
+        }
+      },
+      {
+        "id": "5d7475a4-e074-49ee-9e0b-1ed2043a57e7",
+        "repeating": true,
+        "locations": [
+          "//text()[contains(translate(.,\"OF\",\"of\"),\"% off\")]"
+        ],
+        "type": "http://schema.org/Organization",
+        "javascript": null,
+        "entityIdRef": null,
+        "attributes": [
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "\"EXPRESS\""
+                }
+              ]
+            },
+            "name": "http://schema.org/name",
+            "relative": true,
+            "transient": false,
+            "javascript": null,
+            "dataTypes": [
+              "Text"
+            ],
+            "mandatory": false
+          }
+        ]
+      },
+      {
+        "id": "866b53a5-7e78-4fca-8740-816c476c7faa",
+        "repeating": true,
+        "locations": [
+          "//img[@alt = \"express\"]"
+        ],
+        "type": "http://schema.org/ImageObject",
+        "javascript": null,
+        "entityIdRef": "",
+        "attributes": [
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "./@src"
+                }
+              ]
+            },
+            "name": "http://schema.org/url",
+            "relative": true,
+            "transient": false,
+            "javascript": null,
+            "dataTypes": [
+              "URL"
+            ],
+            "mandatory": false
+          }
+        ]
+      }
+    ],
+    "edgeRules": [
+      {
+        "from": {
+          "entityRule": "e78e2b2c-a03e-4ae9-a2f8-08c1134a5044",
+          "matchAttr": ""
+        },
+        "to": {
+          "entityRule": "5d7475a4-e074-49ee-9e0b-1ed2043a57e7",
+          "matchAttr": ""
+        },
+        "predicate": "http://schema.org/broker",
+        "cardinality": "ONE_TO_ONE"
+      },
+      {
+        "from": {
+          "entityRule": "e78e2b2c-a03e-4ae9-a2f8-08c1134a5044",
+          "matchAttr": ""
+        },
+        "to": {
+          "entityRule": "866b53a5-7e78-4fca-8740-816c476c7faa",
+          "matchAttr": ""
+        },
+        "predicate": "http://schema.org/image",
+        "cardinality": "ONE_TO_ONE"
+      }
+    ],
+    "entityNS": null
+  },
+  "metaData": {
+    "useVTDXML": "true",
+    "ignoredValidations": null
+  }
+}
+
 /* FITBIT e.fitbit.com */
 {
   "extract": {
@@ -4037,6 +4218,188 @@
   }
 }
 
+/* PRINCESS CRUISES em.princess.com */
+{
+  "extract": {
+    "extractEmbedded": false,
+    "source": null,
+    "schema": [
+      {
+        "url": "http://ws.rmf.yahoo.com:4080/rmf/v1/schema?type=schema.org&name=y.2.0&format=json",
+        "ns": "http://schema.org",
+        "context": {
+          "@type": [
+            "Coupon"
+          ]
+        }
+      }
+    ],
+    "entityRules": [
+      {
+        "id": "2ce1e250-07f0-44c2-8a8b-b24a277f2d57",
+        "repeating": true,
+        "locations": [
+          "//text()[contains(translate(.,\"NOW\",\"now\"),\"now $\")]/ancestor::table[2] | \n//img[contains(translate(@alt,\"BOKNW\",\"boknw\"),\"book now\")]"
+        ],
+        "type": "http://schema.org/Coupon",
+        "javascript": null,
+        "entityIdRef": "",
+        "attributes": [
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "./@alt | ."
+                }
+              ]
+            },
+            "name": "http://schema.org/description",
+            "relative": true,
+            "transient": false,
+            "javascript": "function transform(data){\n  var replaceArr = [\n    {oldStr: /.*\\| (Up to \\$|exclusive offer:)/, newStr: \"$1\"}, \n    {oldStr: / from\\*(Was)/g, newStr: \": $1\"},\n    {oldStr: /([a-z])\\*([A-Z])/, newStr: \"$1. $2\"},\n    {oldStr: /(\\d)([A-z])/g, newStr: \"$1 $2\"},\n    {oldStr: /([a-z]|\\W)([A-Z])/g, newStr: \"$1 $2\"},\n    {oldStr: /[\\*†]/g, newStr: \"\"},\n    {oldStr: /BOOK\\s*NOW.*/, newStr: \"\"},\n    {oldStr: /‡.*/, newStr: \"\"},\n    \n  ];\n  \n  replaceArr.forEach(function(el){\n    data = data.replace(el.oldStr, el.newStr);\n  });\n  \n  return data;\n}",
+            "dataTypes": [
+              "Text"
+            ],
+            "mandatory": false
+          },
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "./descendant::a/@href | ./parent::a/@href"
+                }
+              ]
+            },
+            "name": "http://schema.org/url",
+            "relative": true,
+            "transient": false,
+            "javascript": null,
+            "dataTypes": [
+              "URL"
+            ],
+            "mandatory": false
+          },
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "substring-after(/descendant::text()[contains(translate(.,\"OFERXPIRS\",\"oferxpirs\"),\"offer expires:\")], \":\")"
+                }
+              ]
+            },
+            "name": "http://schema.org/validThrough",
+            "relative": true,
+            "transient": false,
+            "javascript": null,
+            "dataTypes": [
+              "DateTime"
+            ],
+            "mandatory": false
+          }
+        ],
+        "hints": {
+          "_footer": "/descendant::text()[contains(translate(.,\"PRINCESCULTD\",\"princescultd\"),\"princess cruise lines, ltd\")]/ancestor::table[1]",
+          "_raw_validThrough": "substring-after(/descendant::text()[contains(translate(.,\"OFERXPIRS\",\"oferxpirs\"),\"offer expires:\")], \":\")"
+        }
+      },
+      {
+        "id": "f517622f-f496-496f-83b5-f0b585dedf8a",
+        "repeating": true,
+        "locations": [
+          "//text()[contains(translate(.,\"NOW\",\"now\"),\"now $\")]/ancestor::table[2] | \n//img[contains(translate(@alt,\"BOKNW\",\"boknw\"),\"book now\")]"
+        ],
+        "type": "http://schema.org/Organization",
+        "javascript": null,
+        "entityIdRef": null,
+        "attributes": [
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "'Princess Cruises'"
+                }
+              ]
+            },
+            "name": "http://schema.org/name",
+            "relative": true,
+            "transient": false,
+            "javascript": null,
+            "dataTypes": [
+              "Text"
+            ],
+            "mandatory": false
+          }
+        ]
+      },
+      {
+        "id": "2e312d90-cd73-4f91-bbe1-0c1b1872eba3",
+        "repeating": true,
+        "locations": [
+          "//img"
+        ],
+        "type": "http://schema.org/ImageObject",
+        "javascript": null,
+        "entityIdRef": "",
+        "attributes": [
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "./@src"
+                }
+              ]
+            },
+            "name": "http://schema.org/url",
+            "relative": true,
+            "transient": false,
+            "javascript": null,
+            "dataTypes": [
+              "URL"
+            ],
+            "mandatory": false
+          }
+        ]
+      }
+    ],
+    "edgeRules": [
+      {
+        "from": {
+          "entityRule": "2ce1e250-07f0-44c2-8a8b-b24a277f2d57",
+          "matchAttr": ""
+        },
+        "to": {
+          "entityRule": "f517622f-f496-496f-83b5-f0b585dedf8a",
+          "matchAttr": ""
+        },
+        "predicate": "http://schema.org/broker",
+        "cardinality": "ONE_TO_ONE"
+      },
+      {
+        "from": {
+          "entityRule": "2ce1e250-07f0-44c2-8a8b-b24a277f2d57",
+          "matchAttr": ""
+        },
+        "to": {
+          "entityRule": "2e312d90-cd73-4f91-bbe1-0c1b1872eba3",
+          "matchAttr": ""
+        },
+        "predicate": "http://schema.org/image",
+        "cardinality": "ONE_TO_ONE"
+      }
+    ],
+    "entityNS": null
+  },
+  "metaData": {
+    "useVTDXML": "true",
+    "ignoredValidations": null
+  }
+}
+
 /* SAFEWAY email.safeway.com */
 {
   "extract": {
@@ -5458,6 +5821,7 @@
     "ignoredValidations": null
   }
 }
+
 
 domain:*sephora.com or domain:*hm.com or domain:*jcpenney.com or domain:*michaels.com or domain:*buybuybaby.com or domain:*childrensplace.com or domain:*costco.com or domain:*gnc.com or domain:*goldstar.com or domain:*hottopic.com and status:todo
 domain:*jcpenney.com or domain:*krogermail.com or domain:*landsend.com or domain:*macys.com or domain:*officedepot.com or domain:*oldnavy.com  or domain:*sears.com or domain:*safeway.com and status:todo
