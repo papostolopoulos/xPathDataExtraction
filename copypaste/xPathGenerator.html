@@ -24,9 +24,10 @@
       .sectionOptions{
         display: grid;
         grid-template-columns: 45% 55%;
-        grid-template-rows: 60% 13% 7% 20%;
+        grid-template-rows: 55% 5% 13% 7% 20%;
         grid-template-areas:
         "branches functions"
+        "brackets functions"
         "brackets attributes"
         "operators attributes"
         "operators parameters";
@@ -62,7 +63,7 @@
       .divOperatorsInputs{
         display: flex;
         flex-flow: column wrap;
-        height: 95%;
+        height: 80%;
       }
 
       .functions{
@@ -212,7 +213,7 @@
 
 
           <div class="brackets" style="background:lightblue;">
-            <h3>Brackets</h3>
+            <h3>Brackets / Parenthesis</h3>
             <div class="divBracketsInputs">
               <label>
                 <input type="radio" name="brackets" value="" v-model="brackets">
@@ -227,8 +228,12 @@
                 Bracket ]
               </label>
               <label>
+                <input type="radio" name="brackets" value="(" v-model="brackets" @click="addToPath($event)">
+                Parenthesis (
+              </label>
+              <label>
                 <input type="radio" name="brackets" value=")" v-model="brackets" @click="addToPath($event)">
-                End function )
+                Parenthesis )
               </label>
             </div>
           </div>
