@@ -489,7 +489,7 @@
 
 
           <div class="parameters"style="background:beige;">
-            <h3>Function String Parameters</h3>
+            <h3>Function Parameters</h3>
             <div class="divParametersInputs">
               <div class="divParameters" v-show="inputFunction === 'concat'">
                 <h3>for concat()</h3>
@@ -502,7 +502,7 @@
                 </label>
                 <label>
                   Add string
-                  <input type="text" name="functionString" value="" v-model="functionString" @keyup.enter="addToPath($event)">
+                  <input type="text" name="functionString" value="" v-model="functionString" @keyup.enter="addFunctionParams($event)">
                 </label>
 
               </div>
@@ -531,10 +531,10 @@
 
         <section class="sectionElements">
           <div class="">
-            The functionsArr is displayed here
-            {{functionsArr}}
+            The functionsSequenceArr is displayed here
+            {{functionsSequenceArr}}
           </div>
-          <input type="button" name="" value="Concat last two elements" @click="concatFunctionElements()">
+          <input type="button" name="" value="Concat last two parameters" @click="concatFunctionElements()">
 
           <div class="">
             The pathArray is displayed here <br>
@@ -542,7 +542,7 @@
           </div>
 
           <div class="">
-            Active function: {{functionsArr[functionsArr.length-1]}}
+            Active function: {{functionString}}
           </div>
         </section>
         <!-- End of section Elements -->
@@ -574,18 +574,19 @@
         node: "", //The node that is added after the axis
         brackets: "", // If new brackets are opening or not
         operator: "", //or, and, and not, not
-        inputFunction: "", //populated when a function is selected
+        inputFunction: "", //populated when a function is selected - convert into array!!!
         translateString: true, //checkbox for when the 'translate' option is selected
-        functionString: "", //populated when a string is entered in the inpout slot for each function (in parameters)
+        functionString: "", //populated when a string is entered in the input slot for each function (in parameters)
+        //Not sure if I should use the above
         attribute: "", //Attributes that are inside functions or brackets
         pathArray: [], //array with full path of all different additions
-        functionsArr: [], //array of all functions that are selected
+        functionsSequenceArr: [], //array of all functions that are selected
         functionsCounter: 0
 
       }, //End of data
       methods:{
         //Adds strings to the pathArray OR
-        //If there are strings in the functionsArr then it adds to the functionsArr instead
+        //If there are strings in the functionsSequenceArr then it adds to the functionsSequenceArr instead
         addToPath(event){
           //Variable used to check on the last element of the pathArray. Needed for splicing
           let pathArrayLastElement = this.pathArray[this.pathArray.length-1];
@@ -600,18 +601,18 @@
             console.log("target name equals addNode");
             //Add the string to the function array without a comma
             if (this.functionsCounter !== 0) {
-              let functionStr = this.functionsArr[this.functionsArr.length-1];
+              let functionStr = this.functionsSequenceArr[this.functionsSequenceArr.length-1];
               console.log("firstIf");
               console.log(functionStr[functionStr.length-1]);
               if(functionStr[functionStr.length-1] === "("){
                 console.log("second if");
-                this.functionsArr.push(this.axis + event.target.value);
+                this.functionsSequenceArr.push(this.axis + event.target.value);
                 this.node = "";
               }
               // Add the string to the functions array with a comma
               else{
-                this.functionsArr.push(", ");
-                this.functionsArr.push(this.axis + event.target.value);
+                this.functionsSequenceArr.push(", ");
+                this.functionsSequenceArr.push(this.axis + event.target.value);
                 this.node = "";
               }
             }
@@ -631,12 +632,12 @@
             console.log(this.pathArray.length);
             console.log(event.target.value !== ")");
             if (this.functionsCounter > 0) {
-              this.functionsArr.push(event.target.value);
+              this.functionsSequenceArr.push(event.target.value);
               if (event.target.value === ")") {
                 this.functionsCounter --;
                 if (this.functionsCounter === 0) {
-                  this.pathArray.push(this.functionsArr.join(""));
-                  this.functionsArr = [];
+                  this.pathArray.push(this.functionsSequenceArr.join(""));
+                  this.functionsSequenceArr = [];
                 }
               }
               return this.zeroProperties();
@@ -672,12 +673,12 @@
 
 
 
-        //Concatenates the last elements that are in the functionsArr and are separated by a comma
+        //Concatenates the last elements that are in the functionsSequenceArr and are separated by a comma
         concatFunctionElements(){
-          console.log(this.functionsArr);
-          if (this.functionsArr.length > 3 && this.functionsArr[this.functionsArr.length-2] === ", ") {
-            this.functionsArr[this.functionsArr.length-3] += this.functionsArr.pop();
-            this.functionsArr.pop();
+          console.log(this.functionsSequenceArr);
+          if (this.functionsSequenceArr.length > 3 && this.functionsSequenceArr[this.functionsSequenceArr.length-2] === ", ") {
+            this.functionsSequenceArr[this.functionsSequenceArr.length-3] += this.functionsSequenceArr.pop();
+            this.functionsSequenceArr.pop();
           }
           else {
             console.log("The array is not big enough or the element before the last is not a comma.");
@@ -686,9 +687,9 @@
 
 
 
-        //Adds a function name with parenthesis ( in the functionsArr
+        //Adds a function name with parenthesis ( in the functionsSequenceArr
         addFunction(event){
-          this.functionsArr.push(event.target.value + "(");
+          this.functionsSequenceArr.push(event.target.value + "(");
           this.functionsCounter ++;
           console.log("In add function. The counter is ", this.functionsCounter);
         },
@@ -725,8 +726,6 @@
           // contains function
           if (this.inputFunction === "contains") {
             if(!this.translateString){ //If the translate option is not selected
-              this.operator.includes("not") ?
-              functionParams = `${this.operator} (${this.inputFunction}(${this.attribute}, '${this.functionString}')) ` :
               functionParams = `${this.operator} ${this.inputFunction}(${this.attribute}, '${this.functionString}') `;
             }
             else { //If the translate option is selected
