@@ -120,6 +120,187 @@
   }
 }
 
+/* BON-TON shopbonton.com */
+{
+  "extract": {
+    "extractEmbedded": false,
+    "source": null,
+    "schema": [
+      {
+        "url": "http://ws.rmf.yahoo.com:4080/rmf/v1/schema?type=schema.org&name=y.2.0&format=json",
+        "ns": "http://schema.org",
+        "context": {
+          "@type": [
+            "Coupon"
+          ]
+        }
+      }
+    ],
+    "entityRules": [
+      {
+        "id": "b8363bc8-c57d-4a09-bd23-b27762d39c26",
+        "repeating": true,
+        "locations": [
+          "//img[contains(translate(@alt,\"FRE\",\"fre\"),\"free\")  or \n\ncontains(translate(@alt,\"SALE\",\"sale\"),\"sale\") or \n\n(contains(@alt, \"%\") or contains(@alt, \"$\")) and \n(contains(translate(@alt,\"OFF\",\"of\"),\" off\") or\ncontains(translate(@alt,\"SAVE\",\"save\"),\"save\") or contains(translate(@alt,\"WIN\",\"win\"),\"win\")) or\n\ncontains(translate(@alt,\"COUPN\",\"coupn\"),\"coupon\") or \ncontains(translate(@alt,\"DORBUSTE\",\"dorbuste\"),\"door busters\") or\n(contains(@src,\"shipping\") or contains(@src, \"freeship\"))\n]\n"
+        ],
+        "type": "http://schema.org/Coupon",
+        "javascript": null,
+        "entityIdRef": "",
+        "attributes": [
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "./@alt | ./@title | ./@src"
+                }
+              ]
+            },
+            "name": "http://schema.org/description",
+            "relative": true,
+            "transient": false,
+            "javascript": "function transform(data){\n  if(/http:\\/\\/.*ship.*\\.(jpg|gif)/.test(data)) return \"Free standard shipping\";\n  \n  var replaceArr = [\n    {oldStr: /\\*/ig, newStr: \"\"},\n    {oldStr: /(While supplies last|Print coupon|Shop now|Register now|Check it out|Learn more|Enter now).*/i, newStr: \"\"},\n    {oldStr: /^Plus, /i, newStr: \"\"}\n  ];\n     \n  replaceArr.forEach(function(el){\n    data = data.replace(el.oldStr, el.newStr);\n  });\n  \n  return data || \"\";\n}",
+            "dataTypes": [
+              "Text"
+            ],
+            "mandatory": false
+          },
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "concat(./@alt,\"~~~\",//text()[contains(translate(.,\"PRIVACYOLI\",\"privacyoli\"),\"privacy policy\") or contains(translate(.,\"UNSUBCRIE\",\"unsubcrie\"),\"unsubscribe\")]/ancestor::table)"
+                }
+              ]
+            },
+            "name": "http://schema.org/validThrough",
+            "relative": true,
+            "transient": false,
+            "javascript": "function transform(data){\n  var dataSplit = data.split(\"~~~\");\n  var dateStr = \"\";\n  var matchDatesArr = [\n    {oldStr: /(?:valid|today,?|through(?: 1AM ES?T)?)\\s*(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday),?\\s*((?:January|February|March|April|May|June|July|August|September|October|November|December)\\s*\\d{1,2})/i, newStr: \"$1\"},\n    {oldStr: /Ends today.*((?:January|February|March|April|May|June|July|August|September|October|November|December) \\d{1,2})/i, newStr: \"$1\"}\n  ];\n  \n  \n  //When the coupon is created from a url source (see description - free standard shipping)\n  if(dataSplit[0].length === 0) return dataSplit[1].match(/(?:valid|today,?|through(?: 1AM ES?T)?)\\s*(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday),?\\s*((?:January|February|March|April|May|June|July|August|September|October|November|December)\\s*\\d{1,2})/)[0].replace(/(?:valid|today,?|through(?: 1AM ES?T)?)\\s*(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday),?\\s*((?:January|February|March|April|May|June|July|August|September|October|November|December)\\s*\\d{1,2})/, \"$1\");\n\n  \n  \n  //When there is a VT date in the description of the coupon\n  for(var j = 0; j < matchDatesArr.length; j++){\n    if(matchDatesArr[j].oldStr.test(dataSplit[0])) return dataSplit[0].match(matchDatesArr[j].oldStr)[0].replace(matchDatesArr[j].oldStr, matchDatesArr[j].newStr);\n  }\n\n\n\n  //If the footer has ***\n  if(dataSplit[0].indexOf(\"***\") !== -1){\n    dataStr = dataSplit[1].match(/\\*\\*\\*.*/)[0];\n    return matchDates(dateStr, matchDatesArr);\n  }\n\n\n  //If the footer has **\n  if(dataSplit[0].indexOf(\"**\") !== -1){\n    dateStr = dataSplit[1].match(/\\*\\*.*/)[0];\n    return matchDates(dateStr, matchDatesArr);\n  }\n\n\n  //If the footer has *\n  if(dataSplit[0].indexOf(\"*\") !== -1){\n    dateStr = dataSplit[1].match(/\\*.*/)[0];\n    return matchDates(dateStr, matchDatesArr);\n  }\n\n\n\n  return \"The first function\";\n}\n\n\n\nfunction matchDates(returnDate, datesArr){\n  for(var i = 0; i < datesArr.length; i++){\n    if(datesArr[i].oldStr.test(returnDate))\n    return returnDate.match(datesArr[i].oldStr)[0].replace(datesArr[i].oldStr, datesArr[i].newStr);\n  }\n\n  return \"Did not make it\";\n}",
+            "dataTypes": [
+              "DateTime"
+            ],
+            "mandatory": false
+          },
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "./parent::a/@href"
+                }
+              ]
+            },
+            "name": "http://schema.org/url",
+            "relative": true,
+            "transient": false,
+            "javascript": null,
+            "dataTypes": [
+              "URL"
+            ],
+            "mandatory": false
+          }
+        ],
+        "hints": {
+          "_footer": "//text()[contains(translate(.,\"BONT\",\"bont\"),\"bon-ton\")]/ancestor::table"
+        }
+      },
+      {
+        "id": "d40ff439-b71d-4e0d-8419-2bb981712afc",
+        "repeating": true,
+        "locations": [
+          "//img[contains(translate(@alt,\"FRE\",\"fre\"),\"free\")  or \n\ncontains(translate(@alt,\"SALE\",\"sale\"),\"sale\") or \n\n(contains(@alt, \"%\") or contains(@alt, \"$\")) and \n(contains(translate(@alt,\"OFF\",\"of\"),\" off\") or\ncontains(translate(@alt,\"SAVE\",\"save\"),\"save\") or contains(translate(@alt,\"WIN\",\"win\"),\"win\")) or\n\ncontains(translate(@alt,\"COUPN\",\"coupn\"),\"coupon\") or \ncontains(translate(@alt,\"DORBUSTE\",\"dorbuste\"),\"door busters\") or\n(contains(@src,\"shipping\") or contains(@src, \"freeship\"))\n]\n"
+        ],
+        "type": "http://schema.org/Organization",
+        "javascript": null,
+        "entityIdRef": null,
+        "attributes": [
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "\"BON-TON\""
+                }
+              ]
+            },
+            "name": "http://schema.org/name",
+            "relative": true,
+            "transient": false,
+            "javascript": null,
+            "dataTypes": [
+              "Text"
+            ],
+            "mandatory": false
+          }
+        ]
+      },
+      {
+        "id": "5715844c-58dd-4104-8fda-fdea4635c8c3",
+        "repeating": true,
+        "locations": [
+          "//img[contains(translate(@alt,\"FRE\",\"fre\"),\"free\")  or \n\ncontains(translate(@alt,\"SALE\",\"sale\"),\"sale\") or \n\n(contains(@alt, \"%\") or contains(@alt, \"$\")) and \n(contains(translate(@alt,\"OFF\",\"of\"),\" off\") or\ncontains(translate(@alt,\"SAVE\",\"save\"),\"save\") or contains(translate(@alt,\"WIN\",\"win\"),\"win\")) or\n\ncontains(translate(@alt,\"COUPN\",\"coupn\"),\"coupon\") or \ncontains(translate(@alt,\"DORBUSTE\",\"dorbuste\"),\"door busters\") or\n(contains(@src,\"shipping\") or contains(@src, \"freeship\"))\n]\n"
+        ],
+        "type": "http://schema.org/ImageObject",
+        "javascript": null,
+        "entityIdRef": null,
+        "attributes": [
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "./@src"
+                }
+              ]
+            },
+            "name": "http://schema.org/url",
+            "relative": true,
+            "transient": false,
+            "javascript": null,
+            "dataTypes": [
+              "URL"
+            ],
+            "mandatory": false
+          }
+        ]
+      }
+    ],
+    "edgeRules": [
+      {
+        "from": {
+          "entityRule": "b8363bc8-c57d-4a09-bd23-b27762d39c26",
+          "matchAttr": ""
+        },
+        "to": {
+          "entityRule": "d40ff439-b71d-4e0d-8419-2bb981712afc",
+          "matchAttr": ""
+        },
+        "predicate": "http://schema.org/broker",
+        "cardinality": "ONE_TO_ONE"
+      },
+      {
+        "from": {
+          "entityRule": "b8363bc8-c57d-4a09-bd23-b27762d39c26",
+          "matchAttr": ""
+        },
+        "to": {
+          "entityRule": "5715844c-58dd-4104-8fda-fdea4635c8c3",
+          "matchAttr": ""
+        },
+        "predicate": "http://schema.org/image",
+        "cardinality": "ONE_TO_ONE"
+      }
+    ],
+    "entityNS": null
+  },
+  "metaData": {
+    "useVTDXML": "true",
+    "ignoredValidations": null
+  }
+}
+
 /* BUYBUY BABY emailbuybuybaby.com */
 {
   "extract": {

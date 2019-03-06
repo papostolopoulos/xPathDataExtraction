@@ -140,7 +140,7 @@
 
         <section class="sectionOptions">
           <div class="branches" style="background:pink;">
-            <h3>Branch</h3>
+            <h3>Branch / Axes</h3>
             <div class="divBranchesInputs">
               <label>
                 <input type="radio" value="" name="axisOption" v-model="axis">
@@ -204,7 +204,7 @@
               </label>
               <label>
                 Node: <br>
-                <input type="text" name="addNode" v-model="node" @keyup.enter="addToPath($event)">
+                <input type="text" name="addNode" v-model="node" @keyup.enter="addBranch($event)">
               </label>
             </div>
           </div>
@@ -220,19 +220,19 @@
                 None
               </label>
               <label>
-                <input type="radio" name="brackets" value="[" v-model="brackets" @click="addToPath($event)">
+                <input type="radio" name="brackets" value="[" v-model="brackets" @click="addBrackets($event)">
                 Bracket [
               </label>
               <label>
-                <input type="radio" name="brackets" value="]" v-model="brackets" @click="addToPath($event)">
+                <input type="radio" name="brackets" value="]" v-model="brackets" @click="addBrackets($event)">
                 Bracket ]
               </label>
               <label>
-                <input type="radio" name="brackets" value="(" v-model="brackets" @click="addToPath($event)">
+                <input type="radio" name="brackets" value="(" v-model="brackets" @click="addBrackets($event)">
                 Parenthesis (
               </label>
               <label>
-                <input type="radio" name="brackets" value=")" v-model="brackets" @click="addToPath($event)">
+                <input type="radio" name="brackets" value=")" v-model="brackets" @click="addBrackets($event)">
                 Parenthesis )
               </label>
             </div>
@@ -314,123 +314,123 @@
             <h3>Function</h3>
             <div class="divFunctionsInputs">
               <label>
-                <input type="radio" name="inputFunction" value="" v-model="inputFunction">
+                <input type="radio" name="activeFunction" value="" v-model="activeFunction">
                 None
               </label>
               <label>
-                <input type="radio" name="inputFunction" value="boolean" v-model="inputFunction" @click="addFunction($event)">
+                <input type="radio" name="activeFunction" value="boolean" v-model="activeFunction" @click="addFunction($event)">
                 boolean()
               </label>
               <label>
-                <input type="radio" name="inputFunction" value="ceiling" v-model="inputFunction" @click="addFunction($event)">
+                <input type="radio" name="activeFunction" value="ceiling" v-model="activeFunction" @click="addFunction($event)">
                 ceiling()
               </label>
               <label>
-                <input type="radio" name="inputFunction" value="choose" v-model="inputFunction" @click="addFunction($event)">
+                <input type="radio" name="activeFunction" value="choose" v-model="activeFunction" @click="addFunction($event)">
                 choose()
               </label>
               <label>
-                <input type="radio" name="inputFunction" value="concat" v-model="inputFunction" @click="addFunction($event)">
+                <input type="radio" name="activeFunction" value="concat" v-model="activeFunction" @click="addFunction($event)">
                 concat()
               </label>
               <label>
-                <input type="radio" name="inputFunction" value="contains" v-model="inputFunction" @click="addFunction($event)">
+                <input type="radio" name="activeFunction" value="contains" v-model="activeFunction" @click="addFunction($event)">
                 contains()
               </label>
               <label>
-                <input type="radio" name="inputFunction" value="count" v-model="inputFunction" @click="addFunction($event)">
+                <input type="radio" name="activeFunction" value="count" v-model="activeFunction" @click="addFunction($event)">
                 count()
               </label>
               <label>
-                <input type="radio" name="inputFunction" value="element-available" v-model="inputFunction" @click="addFunction($event)">
+                <input type="radio" name="activeFunction" value="element-available" v-model="activeFunction" @click="addFunction($event)">
                 element-available()
               </label>
               <label>
-                <input type="radio" name="inputFunction" value="false" v-model="inputFunction" @click="addFunction($event)">
+                <input type="radio" name="activeFunction" value="false" v-model="activeFunction" @click="addFunction($event)">
                 false()
               </label>
               <label>
-                <input type="radio" name="inputFunction" value="floor" v-model="inputFunction" @click="addFunction($event)">
+                <input type="radio" name="activeFunction" value="floor" v-model="activeFunction" @click="addFunction($event)">
                 floor()
               </label>
               <label>
-                <input type="radio" name="inputFunction" value="function-available" v-model="inputFunction" @click="addFunction($event)">
+                <input type="radio" name="activeFunction" value="function-available" v-model="activeFunction" @click="addFunction($event)">
                 function-available()
               </label>
               <label>
-                <input type="radio" name="inputFunction" value="lang" v-model="inputFunction" @click="addFunction($event)">
+                <input type="radio" name="activeFunction" value="lang" v-model="activeFunction" @click="addFunction($event)">
                 lang()
               </label>
               <label>
-                <input type="radio" name="inputFunction" value="last" v-model="inputFunction" @click="addFunction($event)">
+                <input type="radio" name="activeFunction" value="last" v-model="activeFunction" @click="addFunction($event)">
                 last()
               </label>
               <label>
-                <input type="radio" name="inputFunction" value="local-name" v-model="inputFunction" @click="addFunction($event)">
+                <input type="radio" name="activeFunction" value="local-name" v-model="activeFunction" @click="addFunction($event)">
                 local-name()
               </label>
               <label>
-                <input type="radio" name="inputFunction" value="name" v-model="inputFunction" @click="addFunction($event)">
+                <input type="radio" name="activeFunction" value="name" v-model="activeFunction" @click="addFunction($event)">
                 name()
               </label>
               <label>
-                <input type="radio" name="inputFunction" value="namespace-url" v-model="inputFunction" @click="addFunction($event)">
+                <input type="radio" name="activeFunction" value="namespace-url" v-model="activeFunction" @click="addFunction($event)">
                 namespace-url()
               </label>
               <label>
-                <input type="radio" name="inputFunction" value="normalize-space" v-model="inputFunction" @click="addFunction($event)">
+                <input type="radio" name="activeFunction" value="normalize-space" v-model="activeFunction" @click="addFunction($event)">
                 normalize-space()
               </label>
               <label>
-                <input type="radio" name="inputFunction" value="not" v-model="inputFunction" @click="addFunction($event)">
+                <input type="radio" name="activeFunction" value="not" v-model="activeFunction" @click="addFunction($event)">
                 not()
               </label>
               <label>
-                <input type="radio" name="inputFunction" value="number" v-model="inputFunction" @click="addFunction($event)">
+                <input type="radio" name="activeFunction" value="number" v-model="activeFunction" @click="addFunction($event)">
                 number()
               </label>
               <label>
-                <input type="radio" name="inputFunction" value="position" v-model="inputFunction" @click="addFunction($event)">
+                <input type="radio" name="activeFunction" value="position" v-model="activeFunction" @click="addFunction($event)">
                 position()
               </label>
               <label>
-                <input type="radio" name="inputFunction" value="round" v-model="inputFunction" @click="addFunction($event)">
+                <input type="radio" name="activeFunction" value="round" v-model="activeFunction" @click="addFunction($event)">
                 round()
               </label>
               <label>
-                <input type="radio" name="inputFunction" value="starts-with" v-model="inputFunction" @click="addFunction($event)">
+                <input type="radio" name="activeFunction" value="starts-with" v-model="activeFunction" @click="addFunction($event)">
                 starts-with()
               </label>
               <label>
-                <input type="radio" name="inputFunction" value="string" v-model="inputFunction" @click="addFunction($event)">
+                <input type="radio" name="activeFunction" value="string" v-model="activeFunction" @click="addFunction($event)">
                 string()
               </label>
               <label>
-                <input type="radio" name="inputFunction" value="string-length" v-model="inputFunction" @click="addFunction($event)">
+                <input type="radio" name="activeFunction" value="string-length" v-model="activeFunction" @click="addFunction($event)">
                 string-length()
               </label>
               <label>
-                <input type="radio" name="inputFunction" value="substring" v-model="inputFunction" @click="addFunction($event)">
+                <input type="radio" name="activeFunction" value="substring" v-model="activeFunction" @click="addFunction($event)">
                 substring()
               </label>
               <label>
-                <input type="radio" name="inputFunction" value="substring-after" v-model="inputFunction" @click="addFunction($event)">
+                <input type="radio" name="activeFunction" value="substring-after" v-model="activeFunction" @click="addFunction($event)">
                 substring-after()
               </label>
               <label>
-                <input type="radio" name="inputFunction" value="substring-before" v-model="inputFunction" @click="addFunction($event)">
+                <input type="radio" name="activeFunction" value="substring-before" v-model="activeFunction" @click="addFunction($event)">
                 substring-before()
               </label>
               <label>
-                <input type="radio" name="inputFunction" value="sum" v-model="inputFunction" @click="addFunction($event)">
+                <input type="radio" name="activeFunction" value="sum" v-model="activeFunction" @click="addFunction($event)">
                 sum()
               </label>
               <label>
-                <input type="radio" name="inputFunction" value="translate" v-model="inputFunction" @click="addFunction($event)">
+                <input type="radio" name="activeFunction" value="translate" v-model="activeFunction" @click="addFunction($event)">
                 translate()
               </label>
               <label>
-                <input type="radio" name="inputFunction" value="true" v-model="inputFunction" @click="addFunction($event)">
+                <input type="radio" name="activeFunction" value="true" v-model="activeFunction" @click="addFunction($event)">
                 true()
               </label>
             </div>
@@ -479,7 +479,7 @@
                 @value
               </label>
               <label>
-                <input type="text" name="attribute" value="" v-model="attribute" @keyup.enter="addToPath($event)">
+                <input type="text" name="attribute" value="" v-model="attribute" @keyup.enter="addBranch($event)">
                 Other
               </label>
             </div>
@@ -489,13 +489,13 @@
 
 
           <div class="parameters"style="background:beige;">
-            <h3>Function Parameters</h3>
+            <h3>{{activeFunction}} Parameters</h3>
             <div class="divParametersInputs">
-              <div class="divParameters" v-show="inputFunction === 'concat'">
+              <div class="divParameters" v-show="activeFunction === 'concat'">
                 <h3>for concat()</h3>
               </div>
-              <div class="divParameters" v-show="inputFunction === 'contains'">
-                <h3>for contains()</h3>
+              <div class="divParameters" v-show="activeFunction === 'contains'">
+                in contains slot
                 <label>
                   <input type="checkbox" name="translateString" v-model="translateString">
                   Translate the string
@@ -506,19 +506,19 @@
                 </label>
 
               </div>
-              <div class="divParameters" v-show="inputFunction === 'normalize-space'">
+              <div class="divParameters" v-show="activeFunction === 'normalize-space'">
                 <h3>for normalize-space()</h3>
               </div>
-              <div class="divParameters" v-show="inputFunction === 'substring'">
+              <div class="divParameters" v-show="activeFunction === 'substring'">
                 <h3>for substring()</h3>
               </div>
-              <div class="divParameters" v-show="inputFunction === 'substring-after'">
+              <div class="divParameters" v-show="activeFunction === 'substring-after'">
                 <h3>for substring-after()</h3>
               </div>
-              <div class="divParameters" v-show="inputFunction === 'substring-before'">
+              <div class="divParameters" v-show="activeFunction === 'substring-before'">
                 <h3>for substring-before()</h3>
               </div>
-              <div class="divParameters" v-show="inputFunction === 'translate'">
+              <div class="divParameters" v-show="activeFunction === 'translate'">
                 <h3>for translate()</h3>
               </div>
 
@@ -531,18 +531,20 @@
 
         <section class="sectionElements">
           <div class="">
+            Active function: {{activeFunction}}
+          </div>
+          <br><br><br><br>
+
+          <div class="">
             The functionsSequenceArr is displayed here
             {{functionsSequenceArr}}
+            <input type="button" name="" value="Concat last two parameters" @click="concatFunctionElements()">
           </div>
-          <input type="button" name="" value="Concat last two parameters" @click="concatFunctionElements()">
+          <br><br><br>
 
           <div class="">
             The pathArray is displayed here <br>
             {{pathArray}}
-          </div>
-
-          <div class="">
-            Active function: {{functionString}}
           </div>
         </section>
         <!-- End of section Elements -->
@@ -574,159 +576,114 @@
         node: "", //The node that is added after the axis
         brackets: "", // If new brackets are opening or not
         operator: "", //or, and, and not, not
-        inputFunction: "", //populated when a function is selected - convert into array!!!
+        activeFunction: "", //populated when a function is selected - convert into array?
+        activeFunctionArr: [],
         translateString: true, //checkbox for when the 'translate' option is selected
         functionString: "", //populated when a string is entered in the input slot for each function (in parameters)
+        //Perhaps need to modify this to get multiple values
         //Not sure if I should use the above
         attribute: "", //Attributes that are inside functions or brackets
         pathArray: [], //array with full path of all different additions
-        functionsSequenceArr: [], //array of all functions that are selected
+        functionsSequenceArr: [], //array of all functions and parameters that are selected
         functionsCounter: 0
 
       }, //End of data
       methods:{
         //Adds strings to the pathArray OR
         //If there are strings in the functionsSequenceArr then it adds to the functionsSequenceArr instead
-        addToPath(event){
-          //Variable used to check on the last element of the pathArray. Needed for splicing
-          let pathArrayLastElement = this.pathArray[this.pathArray.length-1];
+        addBranch(event){
+          //Add the string to the function array
+          if (this.functionsCounter !== 0) {
+            let functionStr = this.functionsSequenceArr[this.functionsSequenceArr.length-1];
+            // Add a comma if this is not the beginning of the function
+            if(functionStr[functionStr.length-1] !== "(") this.functionsSequenceArr.push(", ");
 
-          console.log("event.target.value:", event.target.value);
-          console.log("event.target.name:", event.target.name);
-
-          //--------------------------------|
-          //Add an axis with the node name--|
-          //--------------------------------|
-          if (event.target.name === "addNode") {
-            console.log("target name equals addNode");
-            //Add the string to the function array without a comma
-            if (this.functionsCounter !== 0) {
-              let functionStr = this.functionsSequenceArr[this.functionsSequenceArr.length-1];
-              console.log("firstIf");
-              console.log(functionStr[functionStr.length-1]);
-              if(functionStr[functionStr.length-1] === "("){
-                console.log("second if");
-                this.functionsSequenceArr.push(this.axis + event.target.value);
-                this.node = "";
-              }
-              // Add the string to the functions array with a comma
-              else{
-                this.functionsSequenceArr.push(", ");
-                this.functionsSequenceArr.push(this.axis + event.target.value);
-                this.node = "";
-              }
-            }
-            else {
-              console.log("else to push in the pathArray");
-              this.pathArray.push(this.axis + event.target.value);
-              this.node = "";
-            }
-            return;
+            this.functionsSequenceArr.push(this.axis + event.target.value);
+            this.node = "";
           }
-
-          //--------------|
-          //Add brackets--|
-          //--------------|
-          if (event.target.name === "brackets"){
-            console.log("in brackets");
-            console.log(this.pathArray.length);
-            console.log(event.target.value !== ")");
-            if (this.functionsCounter > 0) {
-              this.functionsSequenceArr.push(event.target.value);
-              if (event.target.value === ")") {
-                this.functionsCounter --;
-                if (this.functionsCounter === 0) {
-                  this.pathArray.push(this.functionsSequenceArr.join(""));
-                  this.functionsSequenceArr = [];
-                }
-              }
-              return this.zeroProperties();
-            }
-            else if(this.pathArray.length > 0 && event.target.value !== ")"){
-              console.log("in else");
-              this.pathArray.push(event.target.value);
-              return this.zeroProperties();
-            }
-          }
-
-
-
-
-
-          //Add attribute by itself
-          if (event.target.name === "attribute") {
-            console.log("In the attribute if");
-
-            //If the last element of array is a bracket, then push the attribute as extension
-            if (pathArrayLastElement[pathArrayLastElement.length-1] === "]") {
-              this.pathArray.push("/" + event.target.name);
-            }
-          }
-
-
-
-
-          //Add a function with all it's parameters
-          if (event.target.name === "functionString") return this.addFunctionParams();
-
-        },
-
-
-
-        //Concatenates the last elements that are in the functionsSequenceArr and are separated by a comma
-        concatFunctionElements(){
-          console.log(this.functionsSequenceArr);
-          if (this.functionsSequenceArr.length > 3 && this.functionsSequenceArr[this.functionsSequenceArr.length-2] === ", ") {
-            this.functionsSequenceArr[this.functionsSequenceArr.length-3] += this.functionsSequenceArr.pop();
-            this.functionsSequenceArr.pop();
-          }
+          //Add string to the path array
           else {
-            console.log("The array is not big enough or the element before the last is not a comma.");
+            this.pathArray.push(this.axis + event.target.value);
+            this.node = "";
           }
+        }, //End of AddBranch
+
+
+
+        addBrackets(event){
+          if (this.functionsCounter > 0) {
+            this.functionsSequenceArr.push(event.target.value);
+            if (event.target.value === ")") {
+              this.functionsCounter --;
+              this.activeFunction = this.activeFunctionArr.pop() || "";
+              if (this.functionsCounter === 0) {
+                this.pathArray.push(this.functionsSequenceArr.join(""));
+                this.functionsSequenceArr = [];
+              }
+            }
+            return this.zeroProperties();
+          }
+          else if(this.pathArray.length > 0 && event.target.value !== ")"){
+            this.pathArray.push(event.target.value);
+            return this.zeroProperties();
+          }
+        }, //End of addBrackets
+
+
+
+        addOperators(){
+
         },
+
+
+
+        addAttributes(){
+
+        },
+
 
 
 
         //Adds a function name with parenthesis ( in the functionsSequenceArr
         addFunction(event){
-          this.functionsSequenceArr.push(event.target.value + "(");
+          console.log("In add function. The counter before the addition is:", this.functionsCounter);
+          this.functionsSequenceArr.push(event.target.value + "("); //Array with all the functions and params
+          this.activeFunctionArr.push(event.target.value); //Array with the functions sequence
           this.functionsCounter ++;
-          console.log("In add function. The counter is ", this.functionsCounter);
         },
 
         addFunctionParams(){
-          let pathArrayLastElement = this.pathArray[this.pathArray.length-1];
           let functionParams;
 
           //boolean function
-          if(this.inputFunction === "boolean"){
+          if(this.activeFunction === "boolean"){
 
           }
 
           //count function
-          if (this.inputFunction === "count") {
+          if (this.activeFunction === "count") {
 
           }
 
           //ceiling function
-          if(this.inputFunction === "ceiling"){
+          if(this.activeFunction === "ceiling"){
 
           }
 
           // choose function
-          if(this.inputFunction === "choose"){
+          if(this.activeFunction === "choose"){
 
           }
 
           // concat function
-          if(this.inputFunction === "concat"){
+          if(this.activeFunction === "concat"){
 
           }
 
           // contains function
-          if (this.inputFunction === "contains") {
+          if (this.activeFunction === "contains") {
             if(!this.translateString){ //If the translate option is not selected
-              functionParams = `${this.operator} ${this.inputFunction}(${this.attribute}, '${this.functionString}') `;
+              functionParams = `${this.operator} ${this.activeFunction}(${this.attribute}, '${this.functionString}') `;
             }
             else { //If the translate option is selected
               let translateString = "";
@@ -736,8 +693,8 @@
               }
 
               this.operator.includes("not") ?
-              functionParams = `${this.operator} (${this.inputFunction}(translate(${this.attribute}, '${translateString.toUpperCase()}', '${translateString}'), '${this.functionString.toLowerCase()}')) ` :
-              functionParams = `${this.operator} ${this.inputFunction}(translate(${this.attribute}, '${translateString.toUpperCase()}', '${translateString}'), '${this.functionString.toLowerCase()}') `;
+              functionParams = `${this.operator} (${this.activeFunction}(translate(${this.attribute}, '${translateString.toUpperCase()}', '${translateString}'), '${this.functionString.toLowerCase()}')) ` :
+              functionParams = `${this.operator} ${this.activeFunction}(translate(${this.attribute}, '${translateString.toUpperCase()}', '${translateString}'), '${this.functionString.toLowerCase()}') `;
               console.log("TranslatedString:", translateString);
             }
 
@@ -772,16 +729,31 @@
         },
 
 
+
+        //Concatenates the last elements that are in the functionsSequenceArr and are separated by a comma
+        concatFunctionElements(){
+          console.log(this.functionsSequenceArr);
+          if (this.functionsSequenceArr.length > 3 && this.functionsSequenceArr[this.functionsSequenceArr.length-2] === ", ") {
+            this.functionsSequenceArr[this.functionsSequenceArr.length-3] += this.functionsSequenceArr.pop();
+            this.functionsSequenceArr.pop();
+          }
+          else {
+            console.log("The array is not big enough or the element before the last is not a comma.");
+          }
+        }, //End of concat Function Elements
+
+
+
         //Zero all the properties of the data object
         zeroProperties(){
           this.axis = "";
           this.brackets = "";
           this.operator = "";
-          this.inputFunction = "";
+          this.activeFunction = "";
           this.translateString = true;
           this.attribute = "";
           this.functionString = "";
-        }
+        } //End of zero properties
 
 
       }, //End of methods
