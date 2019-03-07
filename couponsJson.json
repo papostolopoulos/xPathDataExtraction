@@ -1820,7 +1820,7 @@
   }
 }
 
-FAVE myfave.com
+/* FAVE myfave.com */
 {
   "extract": {
     "extractEmbedded": false,
@@ -3411,7 +3411,7 @@ FAVE myfave.com
   }
 }
 
-/* LANDSEND */
+/* LANDS' END email.landsend.com*/
 {
   "extract": {
     "extractEmbedded": false,
@@ -3432,7 +3432,7 @@ FAVE myfave.com
         "id": "d0ebaf19-eb36-448f-92d0-2f1fe2b81936",
         "repeating": true,
         "locations": [
-          "/descendant::a[contains(.,\"%\") and not (contains(.,\"Last day!\") or contains(.,\"Take\")) \nor contains(.,\"FREE SHIPPING\")]\n"
+          "//text()[contains(translate(.,\"OF\",\"of\"),\"% off\")]/ancestor::table[1][following::table[1][contains(translate(.,\"SHOP\",\"shop\"),\"shop\")]]\n|\n//img[contains(translate(@alt,\"SALE\",\"sale\"),\"sale\")]\n"
         ],
         "type": "http://schema.org/Coupon",
         "javascript": null,
@@ -3443,14 +3443,14 @@ FAVE myfave.com
             "locations": {
               "-1": [
                 {
-                  "xpath": "."
+                  "xpath": "./@alt | ."
                 }
               ]
             },
             "name": "http://schema.org/description",
             "relative": true,
             "transient": false,
-            "javascript": "function transform(data) {\n return data.replace(/^\\+/, \"\").trim() || \"\";\n}",
+            "javascript": "function transform(data) {\n  var replaceArr = [\n    {oldStr: /\\*/, newStr: \"\"},\n    {oldStr: /\\+/, newStr: \"\"},\n    {oldStr: /\\|\\s*Shop\\s*now\\s*$/i, newStr: \"\"},\n    //{oldStr: //, newStr: \"\"},\n  ];\n  \n  replaceArr.forEach(function(el){\n    data = data.replace(el.oldStr, el.newStr);\n  });\n  \n return data;\n}",
             "dataTypes": [
               "Text"
             ],
@@ -3461,14 +3461,14 @@ FAVE myfave.com
             "locations": {
               "-1": [
                 {
-                  "xpath": "/descendant::span[contains(text(),\"valid through\") or contains(text(),\"Valid through\")]\n|\n/descendant::p[contains(text(),\"valid through\") or contains(text(),\"Valid through\")]"
+                  "xpath": "concat(., ./@alt, \"~~~\", /descendant::text()[contains(translate(.,\"VALIDTHROUG\",\"validthroug\"),\"valid through\")])"
                 }
               ]
             },
             "name": "http://schema.org/validThrough",
             "relative": true,
             "transient": false,
-            "javascript": "function transform(data) {\n\tdata = data.match(/valid\\sthrough[\\w\\s:]+p\\.m\\.[\\w\\s,]+\\./gi)[0].split(\",\");\n\tvar result = data[1] + \",\" + data[2];\n\treturn result || \"\";\n}",
+            "javascript": "function transform(data) {\n  var dataSplit = data.split(\"~~~\");\n  if(dataSplit[0].indexOf(\"*\") !== -1)\n    return dataSplit[1].match(/(January|February|March|April|May|June|July|August|September|October|November|December)\\s*\\d{1,2},?\\s*\\d{2,4}/)[0];\n      \n  return \"\";\n}",
             "dataTypes": [
               "DateTime"
             ],
@@ -3479,7 +3479,7 @@ FAVE myfave.com
             "locations": {
               "-1": [
                 {
-                  "xpath": "/descendant::a[contains(.,\"%\") or contains(.,\"FREE SHIPPING\")]/@href"
+                  "xpath": "./following::table[1][contains(translate(.,\"SHOP\",\"shop\"),\"shop\")]/descendant::a/@href \n|\n./parent::a/@href"
                 }
               ]
             },
@@ -3494,15 +3494,15 @@ FAVE myfave.com
           }
         ],
         "hints": {
-          "_raw_validThrough": "/descendant::span[contains(text(),\"valid through\") or contains(text(),\"Valid through\")]\n|\n/descendant::p[contains(text(),\"valid through\") or contains(text(),\"Valid through\")]",
-          "_footer": "/descendant::p[contains(.,\"landsend.com\")]/parent::div"
+          "_footer": "/descendant::p[contains(.,\"landsend.com\")]/parent::div",
+          "_raw_validThrough": "concat(., ./@alt, \"~~~\", /descendant::text()[contains(translate(.,\"VALIDTHROUG\",\"validthroug\"),\"valid through\")])"
         }
       },
       {
         "id": "51009acc-e604-4bb0-83c1-ba5ec5e44e33",
         "repeating": true,
         "locations": [
-          "/descendant::a[contains(.,\"%\") or contains(.,\"FREE SHIPPING\")]\n"
+          "//text()[contains(translate(.,\"OF\",\"of\"),\"% off\")]/ancestor::table[1][following::table[1][contains(translate(.,\"SHOP\",\"shop\"),\"shop\")]]\n|\n//img[contains(translate(@alt,\"SALE\",\"sale\"),\"sale\")]\n"
         ],
         "type": "http://schema.org/Organization",
         "javascript": null,
@@ -3527,6 +3527,54 @@ FAVE myfave.com
             "mandatory": false
           }
         ]
+      },
+      {
+        "id": "ce39fb9e-d66d-4164-ace8-1f1c9551fdba",
+        "repeating": true,
+        "locations": [
+          "//img\n"
+        ],
+        "type": "http://schema.org/ImageObject",
+        "javascript": null,
+        "entityIdRef": "",
+        "attributes": [
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "./@src"
+                }
+              ]
+            },
+            "name": "http://schema.org/url",
+            "relative": true,
+            "transient": false,
+            "javascript": null,
+            "dataTypes": [
+              "URL"
+            ],
+            "mandatory": false
+          },
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "./@alt | ./@title"
+                }
+              ]
+            },
+            "name": "http://schema.org/_imgtext",
+            "relative": true,
+            "transient": true,
+            "javascript": null,
+            "dataTypes": [
+              "Text"
+            ],
+            "mandatory": false
+          }
+        ]
       }
     ],
     "edgeRules": [
@@ -3540,6 +3588,201 @@ FAVE myfave.com
           "matchAttr": ""
         },
         "predicate": "http://schema.org/broker",
+        "cardinality": "ONE_TO_ONE"
+      },
+      {
+        "from": {
+          "entityRule": "d0ebaf19-eb36-448f-92d0-2f1fe2b81936",
+          "matchAttr": "http://schema.org/description"
+        },
+        "to": {
+          "entityRule": "ce39fb9e-d66d-4164-ace8-1f1c9551fdba",
+          "matchAttr": "http://schema.org/_imgtext"
+        },
+        "predicate": "http://schema.org/image",
+        "cardinality": "ONE_TO_ONE",
+        "matchThreshold": "0.3"
+      }
+    ],
+    "entityNS": null
+  },
+  "metaData": {
+    "useVTDXML": "true",
+    "ignoredValidations": null
+  }
+}
+
+LEVI'S e.levi.com
+{
+  "extract": {
+    "extractEmbedded": false,
+    "source": null,
+    "schema": [
+      {
+        "url": "http://ws.rmf.yahoo.com:4080/rmf/v1/schema?type=schema.org&name=y.2.0&format=json",
+        "ns": "http://schema.org",
+        "context": {
+          "@type": [
+            "Coupon"
+          ]
+        }
+      }
+    ],
+    "entityRules": [
+      {
+        "id": "93970394-c64e-4f0a-807a-4b31b0c0f617",
+        "repeating": true,
+        "locations": [
+          "//img[contains(translate(@alt,\"OF\",\"of\"),\"% off\")]"
+        ],
+        "type": "http://schema.org/Coupon",
+        "javascript": null,
+        "entityIdRef": "",
+        "attributes": [
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "./@alt"
+                }
+              ]
+            },
+            "name": "http://schema.org/description",
+            "relative": true,
+            "transient": false,
+            "javascript": null,
+            "dataTypes": [
+              "Text"
+            ],
+            "mandatory": false
+          },
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "./parent::a/@href"
+                }
+              ]
+            },
+            "name": "http://schema.org/url",
+            "relative": true,
+            "transient": false,
+            "javascript": null,
+            "dataTypes": [
+              "URL"
+            ],
+            "mandatory": false
+          },
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "//text()[contains(translate(.,\"OFERNDS\",\"ofernds\"),\"offer ends\")]"
+                }
+              ]
+            },
+            "name": "http://schema.org/validThrough",
+            "relative": true,
+            "transient": false,
+            "javascript": "function transform(data){\n  return data.match(/(\\d{1,2}\\/){2}\\d{2,4}/)[0];\n}",
+            "dataTypes": [
+              "DateTime"
+            ],
+            "mandatory": false
+          }
+        ],
+        "hints": {
+          "_raw_validThrough": "//text()[contains(translate(.,\"OFERNDS\",\"ofernds\"),\"offer ends\")]",
+          "_footer": "//text()[contains(translate(.,\"LEVISTRAU\",\"levistrau\"),\"levi strauss\")]/ancestor::table[1]"
+        }
+      },
+      {
+        "id": "7ae36339-93fe-46aa-ad59-5ba3620b4a26",
+        "repeating": true,
+        "locations": [
+          "//img[contains(translate(@alt,\"OF\",\"of\"),\"% off\")]"
+        ],
+        "type": "http://schema.org/Organization",
+        "javascript": null,
+        "entityIdRef": "",
+        "attributes": [
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "\"LEVI'S\""
+                }
+              ]
+            },
+            "name": "http://schema.org/name",
+            "relative": true,
+            "transient": false,
+            "javascript": null,
+            "dataTypes": [
+              "Text"
+            ],
+            "mandatory": false
+          }
+        ]
+      },
+      {
+        "id": "789503d7-bf97-48b9-b1b8-a1957905e01f",
+        "repeating": true,
+        "locations": [
+          "//img[contains(translate(@alt,\"OF\",\"of\"),\"% off\")]"
+        ],
+        "type": "http://schema.org/ImageObject",
+        "javascript": null,
+        "entityIdRef": null,
+        "attributes": [
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "./@src"
+                }
+              ]
+            },
+            "name": "http://schema.org/url",
+            "relative": true,
+            "transient": false,
+            "javascript": null,
+            "dataTypes": [
+              "URL"
+            ],
+            "mandatory": false
+          }
+        ]
+      }
+    ],
+    "edgeRules": [
+      {
+        "from": {
+          "entityRule": "93970394-c64e-4f0a-807a-4b31b0c0f617",
+          "matchAttr": ""
+        },
+        "to": {
+          "entityRule": "7ae36339-93fe-46aa-ad59-5ba3620b4a26",
+          "matchAttr": ""
+        },
+        "predicate": "http://schema.org/broker",
+        "cardinality": "ONE_TO_ONE"
+      },
+      {
+        "from": {
+          "entityRule": "93970394-c64e-4f0a-807a-4b31b0c0f617",
+          "matchAttr": ""
+        },
+        "to": {
+          "entityRule": "789503d7-bf97-48b9-b1b8-a1957905e01f",
+          "matchAttr": ""
+        },
+        "predicate": "http://schema.org/image",
         "cardinality": "ONE_TO_ONE"
       }
     ],
@@ -3870,7 +4113,7 @@ FAVE myfave.com
         "id": "c497c926-0231-4a60-bb9b-56fe6a97d247",
         "repeating": true,
         "locations": [
-          "/descendant::img[contains(@alt,\"%\")][not (preceding::tr/following-sibling::tr[3]/descendant::a[contains(text(),\"Exclusions apply\")])]\n|\n/descendant::b[contains(text(),\"% OFF\") or contains(text(), \"FREE\")]\n|\n/descendant::text()[contains(.,\"DISCOUNT\")]"
+          "/descendant::img[contains(@alt,\"%\") or contains(translate(@alt,\"CUSTOM\",\"custom\"),\"custom\")][ancestor::tr[1]/following-sibling::tr[1]\n/descendant::a[1][contains(translate(.,\"VALID\",\"valid\"),\"valid\")]]"
         ],
         "type": "http://schema.org/Coupon",
         "javascript": null,
@@ -3881,9 +4124,6 @@ FAVE myfave.com
             "locations": {
               "-1": [
                 {
-                  "xpath": "concat(., ./following-sibling::text())"
-                },
-                {
                   "xpath": "./@alt"
                 }
               ]
@@ -3891,7 +4131,7 @@ FAVE myfave.com
             "name": "http://schema.org/description",
             "relative": true,
             "transient": false,
-            "javascript": "function transform(data){\n  var replaceArr = [\n    {oldStr: /Excludes\\sclearance\\./, newStr: \"\"},\n    {oldStr: /:\\sMust\\spresent\\soffer\\sto\\sredeem./, newStr: \"\"}\n  ];\n  \n  replaceArr.forEach(function(el){\n    data = data.replace(el.oldStr, el.newStr);\n  });\n  \n  return data.trim() || \"\";\n}",
+            "javascript": null,
             "dataTypes": [
               "Text"
             ],
@@ -3902,7 +4142,7 @@ FAVE myfave.com
             "locations": {
               "-1": [
                 {
-                  "xpath": "./parent::a/@href | /descendant::a[contains(text(),\"View in Browser\")]/@href"
+                  "xpath": "./parent::a/@href"
                 }
               ]
             },
@@ -3920,14 +4160,14 @@ FAVE myfave.com
             "locations": {
               "-1": [
                 {
-                  "xpath": "/descendant::text()[contains(.,\"Offers and pricing listed in this email are valid\")]"
+                  "xpath": "./following::a[1]"
                 }
               ]
             },
             "name": "http://schema.org/validThrough",
             "relative": true,
             "transient": false,
-            "javascript": "function transform(data) {\n\tif(!data) return \"\";\n\tvar months = [\"January\", \"February\", \"March\", \"April\", \"May\", \"June\", \"July\", \"August\", \"September\", \"October\", \"November\", \"December\"];\n\n\tfor (var i = 0; i < months.length; i++) {\n\t\tif (data.indexOf(months[i]) !== -1) return data.slice(data.lastIndexOf(months[i])).match(/[A-z\\s]+\\s\\d{1,2}\\s?(-?\\s?\\d{1,2})?,?(\\s\\d{4})?/i)[0].replace(/\\d{1,2}\\s?-/, \"\") + \" 1970\";\n\t}\n}",
+            "javascript": "function transform(data){\n  return data.match(/(\\d{1,2}\\/){2}\\d{2,4}/)[0];\n}",
             "dataTypes": [
               "DateTime"
             ],
@@ -3935,63 +4175,15 @@ FAVE myfave.com
           }
         ],
         "hints": {
-          "_footer": "/descendant::span[contains(text(),\"Michaels Stores\")]/parent::td/parent::tr/parent::tbody",
-          "_raw_validThrough": "/descendant::text()[contains(.,\"Offers and pricing listed in this email are valid\")]"
+          "_raw_validThrough": "./following::a[1]",
+          "_footer": "/descendant::text()[contains(.,\"Michaels Stores\")]/ancestor::table[1]"
         }
-      },
-      {
-        "id": "760974c1-36d9-44e4-9bf8-6e1c81a82e9d",
-        "repeating": true,
-        "locations": [
-          "/descendant::img"
-        ],
-        "type": "http://schema.org/ImageObject",
-        "javascript": null,
-        "entityIdRef": "",
-        "attributes": [
-          {
-            "repeating": false,
-            "locations": {
-              "-1": [
-                {
-                  "xpath": "./@src"
-                }
-              ]
-            },
-            "name": "http://schema.org/url",
-            "relative": true,
-            "transient": false,
-            "javascript": null,
-            "dataTypes": [
-              "URL"
-            ],
-            "mandatory": false
-          },
-          {
-            "repeating": false,
-            "locations": {
-              "-1": [
-                {
-                  "xpath": "./@alt | ./@title"
-                }
-              ]
-            },
-            "name": "http://schema.org/_imgtext",
-            "relative": true,
-            "transient": true,
-            "javascript": null,
-            "dataTypes": [
-              "Text"
-            ],
-            "mandatory": false
-          }
-        ]
       },
       {
         "id": "bbd9cd3c-f13a-45dd-84b1-c7483c48949f",
         "repeating": true,
         "locations": [
-          "/descendant::img[contains(@alt,\"%\")][not (preceding::tr/following-sibling::tr[3]/descendant::a[contains(text(),\"Exclusions apply\")])]\n|\n/descendant::b[contains(text(),\"% OFF\") or contains(text(), \"FREE\")]"
+          "/descendant::img[contains(@alt,\"%\") or contains(translate(@alt,\"CUSTOM\",\"custom\"),\"custom\")][ancestor::tr[1]/following-sibling::tr[1]\n/descendant::a[1][contains(translate(.,\"VALID\",\"valid\"),\"valid\")]]"
         ],
         "type": "http://schema.org/Organization",
         "javascript": null,
@@ -4016,22 +4208,39 @@ FAVE myfave.com
             "mandatory": false
           }
         ]
+      },
+      {
+        "id": "ad40fe57-2b07-4f44-981d-958779c8facf",
+        "repeating": true,
+        "locations": [
+          "/descendant::img[contains(@alt,\"%\") or contains(translate(@alt,\"CUSTOM\",\"custom\"),\"custom\")][ancestor::tr[1]/following-sibling::tr[1]\n/descendant::a[1][contains(translate(.,\"VALID\",\"valid\"),\"valid\")]]"
+        ],
+        "type": "http://schema.org/ImageObject",
+        "javascript": null,
+        "entityIdRef": null,
+        "attributes": [
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "./@src"
+                }
+              ]
+            },
+            "name": "http://schema.org/url",
+            "relative": true,
+            "transient": false,
+            "javascript": null,
+            "dataTypes": [
+              "URL"
+            ],
+            "mandatory": false
+          }
+        ]
       }
     ],
     "edgeRules": [
-      {
-        "from": {
-          "entityRule": "c497c926-0231-4a60-bb9b-56fe6a97d247",
-          "matchAttr": "http://schema.org/description"
-        },
-        "to": {
-          "entityRule": "760974c1-36d9-44e4-9bf8-6e1c81a82e9d",
-          "matchAttr": "http://schema.org/_imgtext"
-        },
-        "predicate": "http://schema.org/image",
-        "cardinality": "ONE_TO_ONE",
-        "matchThreshold": "0.7"
-      },
       {
         "from": {
           "entityRule": "c497c926-0231-4a60-bb9b-56fe6a97d247",
@@ -4042,6 +4251,18 @@ FAVE myfave.com
           "matchAttr": ""
         },
         "predicate": "http://schema.org/broker",
+        "cardinality": "ONE_TO_ONE"
+      },
+      {
+        "from": {
+          "entityRule": "c497c926-0231-4a60-bb9b-56fe6a97d247",
+          "matchAttr": ""
+        },
+        "to": {
+          "entityRule": "ad40fe57-2b07-4f44-981d-958779c8facf",
+          "matchAttr": ""
+        },
+        "predicate": "http://schema.org/image",
         "cardinality": "ONE_TO_ONE"
       }
     ],
@@ -4622,7 +4843,7 @@ FAVE myfave.com
         "id": "2ce1e250-07f0-44c2-8a8b-b24a277f2d57",
         "repeating": true,
         "locations": [
-          "//text()[contains(translate(.,\"NOW\",\"now\"),\"now $\")]/ancestor::table[2] | \n//img[contains(translate(@alt,\"BOKNW\",\"boknw\"),\"book now\")]"
+          "//img[contains(@alt,\"$\")]"
         ],
         "type": "http://schema.org/Coupon",
         "javascript": null,
@@ -4633,14 +4854,14 @@ FAVE myfave.com
             "locations": {
               "-1": [
                 {
-                  "xpath": "./@alt | ."
+                  "xpath": "concat(./ancestor::table[2], \"~~~\", ./@alt)"
                 }
               ]
             },
             "name": "http://schema.org/description",
             "relative": true,
             "transient": false,
-            "javascript": "function transform(data){\n  var replaceArr = [\n    {oldStr: /.*\\| (Up to \\$|exclusive offer:)/, newStr: \"$1\"}, \n    {oldStr: / from\\*(Was)/g, newStr: \": $1\"},\n    {oldStr: /([a-z])\\*([A-Z])/, newStr: \"$1. $2\"},\n    {oldStr: /(\\d)([A-z])/g, newStr: \"$1 $2\"},\n    {oldStr: /([a-z]|\\W)([A-Z])/g, newStr: \"$1 $2\"},\n    {oldStr: /[\\*†]/g, newStr: \"\"},\n    {oldStr: /BOOK\\s*NOW.*/, newStr: \"\"},\n    {oldStr: /‡.*/, newStr: \"\"},\n    \n  ];\n  \n  replaceArr.forEach(function(el){\n    data = data.replace(el.oldStr, el.newStr);\n  });\n  \n  return data;\n}",
+            "javascript": "function transform(data){\n  var replaceArr = [\n    {oldStr: /.*\\| exclusive offer:/, newStr: \"Exclusive offer:\"}, \n    {oldStr: /~~~.*\\|/, newStr: \"\"},\n    {oldStr: / from\\*(Was)/g, newStr: \": $1\"},\n    {oldStr: /(\\d)([A-z])/g, newStr: \"$1 $2\"},\n    {oldStr: /([a-z]|\\W)([A-Z])/g, newStr: \"$1 $2\"},\n    {oldStr: /\\s*BOOK\\s*NOW\\*\\s*Taxes,\\s*Fees\\s*\\&\\s*Port\\s*Expenses\\s*of\\s*\\$\\d+-\\$\\d+\\s*are\\s*additional\\.\\s*Up/, newStr: \". Also, up\"},\n    {oldStr: /‡.*/, newStr: \".\"},\n    {oldStr: /\\( /, newStr: \"(\"},\n    {oldStr:/[\\*©®ǂ‡†±→§™¹›]/g, newStr: \"\"},\n    \n  ];\n  \n  replaceArr.forEach(function(el){\n    data = data.replace(el.oldStr, el.newStr);\n  });\n  \n  return data;\n}",
             "dataTypes": [
               "Text"
             ],
@@ -4651,7 +4872,7 @@ FAVE myfave.com
             "locations": {
               "-1": [
                 {
-                  "xpath": "./descendant::a/@href | ./parent::a/@href"
+                  "xpath": "./parent::a/@href"
                 }
               ]
             },
@@ -4684,19 +4905,20 @@ FAVE myfave.com
           }
         ],
         "hints": {
-          "_footer": "/descendant::text()[contains(translate(.,\"PRINCESCULTD\",\"princescultd\"),\"princess cruise lines, ltd\")]/ancestor::table[1]",
-          "_raw_validThrough": "substring-after(/descendant::text()[contains(translate(.,\"OFERXPIRS\",\"oferxpirs\"),\"offer expires:\")], \":\")"
-        }
+          "_raw_validThrough": "substring-after(/descendant::text()[contains(translate(.,\"OFERXPIRS\",\"oferxpirs\"),\"offer expires:\")], \":\")",
+          "_footer": "/descendant::text()[contains(translate(.,\"PRINCESCULTD\",\"princescultd\"),\"princess cruise lines, ltd\")]/ancestor::table[1]"
+        },
+        "hintsJavascript": "function transform(data) {\n  var ftr = data.get(\"_footer\")[0].replace(/[A-z0-9.%+-_]{2,64}\\@[A-z0-9.]{2,64}/g,'');\n  var rvt = data.get(\"_raw_validThrough\")[0];\n\n  return {\n    '_footer': [ftr],\n    '_raw_validThrough': [rvt]\n  };\n}"
       },
       {
         "id": "f517622f-f496-496f-83b5-f0b585dedf8a",
         "repeating": true,
         "locations": [
-          "//text()[contains(translate(.,\"NOW\",\"now\"),\"now $\")]/ancestor::table[2] | \n//img[contains(translate(@alt,\"BOKNW\",\"boknw\"),\"book now\")]"
+          "//img[contains(@alt,\"$\")]"
         ],
         "type": "http://schema.org/Organization",
         "javascript": null,
-        "entityIdRef": null,
+        "entityIdRef": "",
         "attributes": [
           {
             "repeating": false,
@@ -4719,14 +4941,14 @@ FAVE myfave.com
         ]
       },
       {
-        "id": "2e312d90-cd73-4f91-bbe1-0c1b1872eba3",
+        "id": "018a79d7-c8c6-43d0-80db-a98125846b10",
         "repeating": true,
         "locations": [
-          "//img"
+          "//img[contains(@alt,\"$\")]"
         ],
         "type": "http://schema.org/ImageObject",
         "javascript": null,
-        "entityIdRef": "",
+        "entityIdRef": null,
         "attributes": [
           {
             "repeating": false,
@@ -4768,7 +4990,7 @@ FAVE myfave.com
           "matchAttr": ""
         },
         "to": {
-          "entityRule": "2e312d90-cd73-4f91-bbe1-0c1b1872eba3",
+          "entityRule": "018a79d7-c8c6-43d0-80db-a98125846b10",
           "matchAttr": ""
         },
         "predicate": "http://schema.org/image",

@@ -127,8 +127,9 @@ function minimizeMe(str, reg){
 
 
   //Iterate through the punctuation symbols.
-  //If the punctuation is larger than the sliceStart variable, then make the variable equal to the index position.
-  //That will be later used to slice the string from its beginning
+  //If the last Index position of the punctuation is larger than the sliceStart variable,
+  //then make the variable equal to the last index position.
+  //That will be later used to slice the string at its beginning
   for (var i = 0; i < punctuation.length; i++) {
     if(sliceStr.lastIndexOf(punctuation[i]) > sliceStart) sliceStart = sliceStr.lastIndexOf(punctuation[i]);
   }
@@ -140,6 +141,10 @@ function minimizeMe(str, reg){
 
   //STAGE 2 - Slice text at the end of string
   var sliceEnd = +Infinity;
+  //Iterate through the punctuation symbols.
+  //If the punctuation symbol's index position is smaller than the sliceEnd variable, then
+  //make the sliceEnd variable equal to the index position of the punctuation.
+  //The sliceEnd will be used as the position where the slicing of the string will happen at it's end.
   for (var j = 0; j < punctuation.length; j++) {
     if (str.indexOf(punctuation[j]) < sliceEnd && str.indexOf(punctuation[j]) !== -1) sliceEnd = str.indexOf(punctuation[j]);
   }

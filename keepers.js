@@ -632,6 +632,9 @@ function transform(data){
     /(\d+|earn|get|gather|collect|your|redeem)\s*(points|rewards?|gift|coupon)/i,
     //promo(tion) code
     /promo(?:tion)\s*code\s*/i,
+    //January|February|March|April|May|June|July|August|September|October|November|December
+    /January|February|March|April|May|June|July|August|September|October|November|December/
+
   ];
 
 
