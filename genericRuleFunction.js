@@ -101,6 +101,8 @@ function transform(data){
     /free\s*(ship|on\s*orders\s*of|\$\d|\d+%|standard|delivery|gift)/i,
     // buy one / two / three texttexttext, get
     /buy\s*(one|two|three|\d+),?.*\sget/i,
+    //BOGO
+    /BOGO/,
     // (100 | earn | get | gather | collect | your | redeem | reward) (points | rewards | gift | coupon | (e-)certificate)
     /(\d+|earn|get|gather|collect|your|redeem|reward)\s*(points|rewards?|gift|coupon|(e-)?certificate)/i,
     //promo(tion) code

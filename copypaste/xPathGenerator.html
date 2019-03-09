@@ -147,8 +147,16 @@
                 None
               </label>
               <label>
+                <input type="radio" value="/self::" name="axisOption" v-model="axis" @click="node = 'node()'">
+                . (/self::node())
+              </label>
+              <label>
+                <input type="radio" value="/parent::" name="axisOption" v-model="axis" @click="node = 'node()'">
+                .. (/parent::node())
+              </label>
+              <label>
                 <input type="radio" value="//" name="axisOption" v-model="axis">
-                //
+                // (descendant-or-self:node())
               </label>
               <label>
                 <input type="radio" value="/ancestor::" name="axisOption" v-model="axis">
@@ -160,7 +168,7 @@
               </label>
               <label>
                 <input type="radio" value="/attribute::" name="axisOption" v-model="axis">
-                /attribute::
+                /attribute:: (@)
               </label>
               <label>
                 <input type="radio" value="/child::" name="axisOption" v-model="axis">
@@ -483,7 +491,7 @@
                 @value
               </label>
               <label>
-                <input type="text" name="attribute" value="" v-model="attribute" @keyup.enter="addAttributes($event)">
+                <input type="text" name="attribute" value="" v-model="attribute" @keyup.enter="addAttributes($event)" size="12">
                 Other
               </label>
             </div>
@@ -495,15 +503,36 @@
           <div class="parameters"style="background:beige;">
             <h3>{{activeFunctionArr[activeFunctionArr.length - 1]}} Parameters</h3>
             <div class="divParametersInputs">
-              <div class="divParameters" v-show="operator === ''">
+              <!-- Show when operator is empty -->
+              <div class="divParameters" v-show="operator !== ''">
                 <label>
-                  <input type="text" name="functionString" v-model="functionString">
-                  Add string
+                  <input type="text" name="parameterString" v-model="parameterString"  @keyup.enter="addParameters($event)">
+                  String
+                </label>
+                <label>
+                  <input type="checkbox" name="numberEntry" value="">
+                  Entry is a number
                 </label>
               </div>
+
+              <!-- Show when function is boolean -->
+              <div class="divParameters" v-show="activeFunction === 'boolean'">
+                <label>
+                  <input type="text" name="parameterString" v-model="parameterString" @keyup.enter="addParameters($event)">
+                  Parameter value
+                </label>
+                <label>
+                  <input type="checkbox" name="numberEntry" v-model="numberEntry">
+                  Entry is a number
+                </label>
+              </div>
+
+
               <div class="divParameters" v-show="activeFunction === 'concat'">
                 <h3>for concat()</h3>
               </div>
+
+              <!-- Show when function is contains -->
               <div class="divParameters" v-show="activeFunction === 'contains'">
                 in contains slot
                 <label>
@@ -512,7 +541,7 @@
                 </label>
                 <label>
                   Add string
-                  <input type="text" name="functionString" value="" v-model="functionString" @keyup.enter="addFunctionParams($event)">
+                  <input type="text" name="parameterString" value="" v-model="parameterString" @keyup.enter="addParameters($event)">
                 </label>
 
               </div>
@@ -591,7 +620,9 @@
         activeFunction: "", //populated when a function is selected - convert into array?
         activeFunctionArr: [],
         translateString: true, //checkbox for when the 'translate' option is selected
-        functionString: "", //populated when a string is entered in the input slot for each function (in parameters)
+        numberEntry: false, //When true, the submited entry will not be in quotes
+        parameterString: "", //populated when a string is entered in the input slot for each function (in parameters)
+        parameterNumber: "",
         //Perhaps need to modify this to get multiple values
         //Not sure if I should use the above
         attribute: "", //Attributes that are inside functions or brackets
@@ -604,7 +635,7 @@
         //Adds strings to the pathArray OR
         //If there are strings in the functionsSequenceArr then it adds to the functionsSequenceArr instead
         addBranch(event){
-          this.zeroProperties();
+          this.zeroProperties(event.target.name);
           //Add the string to the function array
           if (this.functionsCounter !== 0) {
             let functionStr = this.functionsSequenceArr[this.functionsSequenceArr.length-1];
@@ -630,7 +661,7 @@
 
 
         addBrackets(event){
-          this.zeroProperties();
+          this.zeroProperties(event.target.name);
           if (this.functionsCounter > 0) {
             this.functionsSequenceArr.push(event.target.value);
             if (event.target.value === ")") {
@@ -655,7 +686,7 @@
 
 
         addOperators(){
-          this.zeroProperties();
+          this.zeroProperties(event.target.name);
           let operatorsRegex = /and|or|\||=|!=|\+|-|\*|div|<|<=|>|>=|mod/;
           if (this.functionsCounter !== 0 && !operatorsRegex.test(this.functionsSequenceArr[this.functionsSequenceArr.length - 1])) {
             this.functionsSequenceArr.push(event.target.value);
@@ -666,19 +697,20 @@
           console.log("about to hit zero", this.operator);
           this.operator = "";
           console.log(this.operator);
-          // this.zeroProperties();
+          // this.zeroProperties(event.target.name);
         },
 
 
 
         addAttributes(event){
-          this.zeroProperties();
           if (this.functionsCounter !== 0 &&
           !this.functionsSequenceArr[this.functionsSequenceArr.length - 1].startsWith("@")) {
-            console.log("in the functions if");
+
             //If the previous element in the array is a branch, then push the attribute with a forward
             //slash, otherwise just push the attribute
-            this.functionsSequenceArr[this.functionsSequenceArr.length - 1].includes("::") ?
+            this.functionsSequenceArr[this.functionsSequenceArr.length - 1].includes("::") ||
+            this.functionsSequenceArr[this.functionsSequenceArr.length - 1].includes("//") ||
+            this.functionsSequenceArr[this.functionsSequenceArr.length - 1] === "." ?
             this.functionsSequenceArr.push("/" + event.target.value) :
             this.functionsSequenceArr.push(event.target.value);
           }
@@ -686,10 +718,13 @@
           !this.pathArray[this.pathArray.length - 1].startsWith("@")) {
             //If the previous element in the array is a branch, then push the attribute with a forward
             //slash, otherwise just push the attribute
-            this.pathArray[this.pathArray.length - 1].includes("::") ?
+            this.pathArray[this.pathArray.length - 1].includes("::") ||
+            this.pathArray[this.pathArray.length - 1].includes("//") ||
+            this.pathArray[this.pathArray.length - 1] === "."?
             this.pathArray.push("/" + event.target.value) :
             this.pathArray.push(event.target.value);
           }
+          return this.zeroProperties(event.target.name);
         },
 
 
@@ -697,20 +732,39 @@
 
         //Adds a function name with parenthesis ( in the functionsSequenceArr
         addFunction(event){
-          this.zeroProperties();
+          this.zeroProperties(event.target.name);
           console.log("In add function. The counter before the addition is:", this.functionsCounter);
           this.functionsSequenceArr.push(event.target.value + "("); //Array with all the functions and params
           this.activeFunctionArr.push(event.target.value); //Array with the functions sequence
           this.functionsCounter ++;
         },
 
-        addFunctionParams(){
-          this.zeroProperties();
-          let functionParams;
+
+
+        addParameters(){
+
+          if (this.operator !== "") {
+            if(this.functionsCounter > 0){
+              this.functionsSequenceArr.push("'" + event.target.value + "'");
+            }
+            else {
+              this.pathArray.push("'" + event.target.value + "'");
+            }
+            return this.zeroProperties(event.target.name);
+          }
 
           //boolean function
           if(this.activeFunction === "boolean"){
-
+              if(this.numberEntry){
+                if (!Number(event.target.value)) {
+                  this.parameterString = "";
+                  this.numberEntry = false;
+                  return(alert("Enter e valid number"));
+                }
+                else {
+                  console.log("This is a number");
+                }
+              }
           }
 
           //count function
@@ -735,51 +789,47 @@
 
           // contains function
           if (this.activeFunction === "contains") {
-            if(!this.translateString){ //If the translate option is not selected
-              functionParams = `${this.operator} ${this.activeFunction}(${this.attribute}, '${this.functionString}') `;
-            }
-            else { //If the translate option is selected
-              let translateString = "";
-              for (let i = 0; i < this.functionString.length; i++) {
-                if(!translateString.includes(this.functionString[i].toLowerCase()) && /\w/.test(this.functionString[i]))
-                translateString += this.functionString[i].toLowerCase();
+            let translateStringElements = "";
+            if(this.functionsCounter > 0){
+              if(!this.translateString && this.functionsSequenceArr[this.functionsSequenceArr.length -1] !== "contains("){
+                this.functionsSequenceArr.push("'" + event.target.value + "'");
               }
-
-              this.operator.includes("not") ?
-              functionParams = `${this.operator} (${this.activeFunction}(translate(${this.attribute}, '${translateString.toUpperCase()}', '${translateString}'), '${this.functionString.toLowerCase()}')) ` :
-              functionParams = `${this.operator} ${this.activeFunction}(translate(${this.attribute}, '${translateString.toUpperCase()}', '${translateString}'), '${this.functionString.toLowerCase()}') `;
-              console.log("TranslatedString:", translateString);
+              else if (this.translateString && this.functionsSequenceArr[this.functionsSequenceArr.length -1] !== "contains("){
+                for (let i = 0; i < this.parameterString.length; i++) {
+                  if(!translateStringElements.includes(this.parameterString[i].toLowerCase()) && /\w/.test(this.parameterString[i]))
+                  translateStringElements += this.parameterString[i].toLowerCase();
+                }
+              }
+              this.functionsSequenceArr.push(`translate(${this.functionsSequenceArr.pop()}, '${translateStringElements.toUpperCase()}', '${translateStringElements}'), ${event.target.value.toLowerCase()}`);
             }
+            this.zeroProperties(event.target.name);
+          } //End of if contains
 
-            this.pathArray.splice(this.pathArray.length-1, 0, functionParams);
-            return this.zeroProperties();
-          }
-
-          //count function
-          //element-available function
-          //false function
-          //floor function
-          //function available function
-          //lang function
-          //last function
-          //local-name function
-          // name function
-          // namespace-url function
-          //normalize-space function
-          //not function
-          //number function
-          //position function
-          //round function
-          //starts-with function
-          //string function
-          //string-length function
-          //substring function
-          //substring-after function
-          // substring-before function
-          //sum function
-          //translate function
-          //true function
-        },
+        //count function
+        //element-available function
+        //false function
+        //floor function
+        //function available function
+        //lang function
+        //last function
+        //local-name function
+        // name function
+        // namespace-url function
+        //normalize-space function
+        //not function
+        //number function
+        //position function
+        //round function
+        //starts-with function
+        //string function
+        //string-length function
+        //substring function
+        //substring-after function
+        // substring-before function
+        //sum function
+        //translate function
+        //true function
+      }, //End of addParameters()
 
 
 
@@ -798,14 +848,14 @@
 
 
         //Zero all the properties of the data object
-        zeroProperties(){
-          this.axis = "";
-          this.brackets = "";
-          this.operator = "";
+        zeroProperties(eventName){
+          if(eventName !== "addNode") this.axis = "";
+          if(eventName !== "brackets") this.brackets = "";
+          if(eventName !== "inputOperator") this.operator = "";
           // this.activeFunction = "";
           this.translateString = true;
-          this.attribute = "";
-          this.functionString = "";
+          if(eventName !== "attribute") this.attribute = "";
+          if(eventName !== "parameterString") this.parameterString = "";
         } //End of zero properties
 
 
