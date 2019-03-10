@@ -513,6 +513,7 @@
                   <input type="checkbox" name="numberEntry" value="">
                   Entry is a number
                 </label>
+                {{paramAlert}}
               </div>
 
               <!-- Show when function is boolean -->
@@ -525,6 +526,7 @@
                   <input type="checkbox" name="numberEntry" v-model="numberEntry">
                   Entry is a number
                 </label>
+                {{paramAlert}}
               </div>
 
 
@@ -622,7 +624,7 @@
         translateString: true, //checkbox for when the 'translate' option is selected
         numberEntry: false, //When true, the submited entry will not be in quotes
         parameterString: "", //populated when a string is entered in the input slot for each function (in parameters)
-        parameterNumber: "",
+        paramAlert: "",
         //Perhaps need to modify this to get multiple values
         //Not sure if I should use the above
         attribute: "", //Attributes that are inside functions or brackets
@@ -759,12 +761,13 @@
                 if (!Number(event.target.value)) {
                   this.parameterString = "";
                   this.numberEntry = false;
-                  return(alert("Enter e valid number"));
+                  this.paramAlert = "Invalid number entry";
                 }
-                else {
-                  console.log("This is a number");
-                }
+                else this.functionsSequenceArr.push(Number(event.target.value));
               }
+              else this.functionsSequenceArr.puah(event.target.value);
+
+              this.zeroProperties(event.target.value);
           }
 
           //count function
@@ -854,6 +857,7 @@
           if(eventName !== "inputOperator") this.operator = "";
           // this.activeFunction = "";
           this.translateString = true;
+          this.numberEntry = false;
           if(eventName !== "attribute") this.attribute = "";
           if(eventName !== "parameterString") this.parameterString = "";
         } //End of zero properties
