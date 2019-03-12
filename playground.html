@@ -1,439 +1,500 @@
 <!DOCTYPE html>
 <html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic" rel="stylesheet" type="text/css">
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700" rel="stylesheet" type="text/css">
+		<style type="text/css">
+			@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic);
+			@import url(https://fonts.googleapis.com/css?favmily=Open+Sans+Condensed:300,300italic,700);
+			[style*="Open Sans"] { font-family: 'Open Sans', Arial, sans-serif !important; }
+			[style*="Open Sans Condensed"] { font-family: 'Open Sans Condensed', Arial, sans-serif !important; }
+			/* Reset Styles */
+			#outlook a {padding:0;}
+			body {width: 100% !important;-webkit-text-size-adjust: none; -ms-text-size-adjust: none; margin: 0;padding: 0;}
+			.ReadMsgBody {width: 100%;}
+			.ExternalClass {width: 100%;}
+			.backgroundTable {margin: 0 auto;padding: 0;width: 100% !important;}
+			table td {border-collapse: collapse;}
+			.ExternalClass * {line-height: 115%;}
+			.desktopHide {display: none !important;}
+			/* Mobile Styles */
+			@media only screen and (max-width : 480px) {
+			/********** CUSTOM STYLES ***********/
+			.mobileStack th { width:100% !important; display:block !important; }
+			.mobileLogo { width:300px !important; height:auto !important; }
+			.padding2 { padding:2px !important; }
+			.padding5 { padding:5px !important; }
+			/* Footer Nav */
+			.footer-nav a {
+			display: block !important;
+			width: 100%;
+			padding: 15px 0 !important;
+			border-top: 1px solid #CCCCCC !important;
+			border-right: 0 !important;
+			border-left: 0 !important;
+			}
+			.footer-nav, .footer-nav tbody, .footer-nav tr, .footer-nav td {width: 100% !important;max-height: inherit !important;
+			overflow: visible !important;display: block !important;float: none !important;}
+			.footer-nav table {display: table !important;width:100% !important;}
+			.footer-nav tbody {display: table !important;}
+			.footer-nav tr {display: table-row !important;}
+			.footer-nav td {display: table-cell !important;}
+			/****** Add Custom Styles Here ******/
+			/* General Styles */
+			.container {width: 100% !important;overflow: hidden;}
+			.mobileHide {display: none !important;}
+			.displayInlineBlock {display: inline-block;}
+			.fullWidth {width: 100% !important;height: auto;}
+			.halfWidth {width: 50% !important;height: auto;}
+			.floatLeft {float: left;}
+			.floatRight {float: right;}
+			.heightAuto {height: auto;}
+			/* Images */
+			.fullWidthImg img {width: 100% !important;height: auto;}
+			.fullImg {width: 100% !important;}
+			/* Buttons */
+			.fullWidthBtn {width: 100% !important;height: auto;border-left: 0 none !important;
+			border-right: 0 none !important;padding-left: 0 !important;padding-right: 0 !important;}
+			/* Text */
+			.mobileAlignCenter {text-align: center !important;margin: auto;float: none;}
+			.mobileAlignLeft {text-align: left !important;}
+			.copy13 {font-size: 13px !important;line-height: 1.5 !important;}
+			.copy14 {font-size: 14px !important;line-height: 1.5 !important;}
+			.copy16 {font-size: 16px !important;line-height: 1.5 !important;}
+			.copy18 {font-size: 18px !important;line-height: 1.5 !important;}
+			.copy21 {font-size: 21px !important;line-height: 1.5 !important;}
+			.copy24 {font-size: 24px !important;line-height: 1.5 !important;}
+			.copy30 {font-size: 30px !important;line-height: 1.5 !important;}
+			.copy45 {font-size: 45px !important;line-height: 1.5 !important;}
+			.copy60 {font-size: 60px !important;line-height: 1.5 !important;}
+			.copy90 {font-size: 90px !important;line-height: 1.5 !important;}
+			/* Borders */
+			.borderTop {border-top: 1px solid #cccccc;}
+			.borderTopBold {border-top: 2px solid #559EBF;}
+			.borderBottom {border-bottom: 1px solid #cccccc;}
+			.borderBottomBold {border-bottom: 2px solid #559EBF;}
+			.borderNone {border: 0 none !important;}
+			.borderTopNone {border-top: 0 none !important;}
+			.borderRightNone {border-right: 0 none !important;}
+			.borderBottomNone {border-bottom: 0 none !important;}
+			.borderLeftNone {border-left: 0 none !important;}
+			/* Padding */
+			.contentPadding {padding-left: 10px !important;padding-right: 10px !important;}
+			.contentPadding20 {padding-left: 20px !important;padding-right: 20px !important;}
+			.contentPadding40 {padding-left: 20px !important;padding-right: 40px !important;}
+			.paddingNone {padding: 0 !important;}
+			.paddingLeft0 {padding-left: 0 !important;}
+			.paddingRight0 {padding-right: 0 !important;}
+			.paddingTop0 {padding-top: 0 !important;}
+			.paddingTop2 {padding-top: 2px !important;}
+			.paddingTop5 {padding-top: 5px !important;}
+			.paddingTop10 {padding-top: 10px !important;}
+			.paddingTop15 {padding-top: 15px !important;}
+			.paddingTop20 {padding-top: 20px !important;}
+			.paddingTop25 {padding-top: 25px !important;}
+			.paddingTop30 {padding-top: 30px !important;}
+			.paddingBottom0 {padding-bottom: 0 !important;}
+			.paddingBottom2 {padding-bottom: 2px !important;}
+			.paddingBottom5 {padding-bottom: 5px !important;}
+			.paddingBottom10 {padding-bottom: 10px !important;}
+			.paddingBottom15 {padding-bottom: 15px !important;}
+			.paddingBottom20 {padding-bottom: 20px !important;}
+			.paddingBottom25 {padding-bottom: 25px !important;}
+			.paddingBottom30 {padding-bottom: 30px !important;}
+			/* Mobile Show */
+			.mobileShow, .mobileShow tbody, .mobileShow tr, .mobileShow td {width: 100% !important;
+			max-height: inherit !important;overflow: visible !important;display: block !important;
+			float: none !important;}
+			.mobileShow table {display: table !important;width:100% !important;}
+			.mobileShow tbody {display: table !important;}
+			.mobileShow tr {display: table-row !important;}
+			.mobileShow td {display: table-cell !important;}
+			/* Reset Styles */
+			body {margin:0 !important;}
+			div[style*="margin: 16px 0"] {margin:0 !important;}
+			}
+		</style>
+		<title>Quartermaster</title>
+	</head>
+	<body style="zoom: 100%;">
+		<table width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ebebeb">
+			<tbody>
+				<tr>
+					<td class="paddingLeft0 paddingRight0" align="center">
+					<table class="container" width="600" cellspacing="0" cellpadding="0" border="0" align="center">
+						<tbody>
+							<tr>
+								<td align="center">
+								<!-- Preheader -->
+								<table class="mobileHide" width="100%" cellspacing="0" cellpadding="0" border="0">
+									<tbody>
+										<tr>
+											<td style="font-family:Arial, Helvetica, sans-serif; font-size:11px; color:#666666; padding:10px 0;" align="center">Come back today and take advantage of this offer | <a href="http://links.mail.qmuniforms.com/q/ntxry1J9gVep_WzPWTw0hUJLTAYnifpEbI6SwKaeEAq-mPDQLSAkOUHJx" title="View in Browser" target="_blank" style="color:#666666; text-decoration:underline;"><strong style="font-weight:normal;">View in Browser</strong></a></td>
+										</tr>
+									</tbody>
+								</table>
+								<!-- Preheader END -->
+								<!-- Containing Table (white background) -->
+								<table width="100%" cellspacing="0" cellpadding="0" border="0">
+									<tbody>
+										<tr>
+											<td class="" style="background-color:#ffffff;" align="center">
+											<!-- Logo -->
+											<table width="100%" cellspacing="0" cellpadding="0" border="0">
+												<tbody>
+													<tr>
+														<td style="padding:15px 0;" align="center">
+														<a href="http://links.mail.qmuniforms.com/q/NNXomyWshR70XZDqYHF2yqgfSXw_5kSdXorZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiA9ygpwCGUda2L5oSaBxq7ZEvEvKQ" title="Quartermaster" target="_blank"><img class="mobileLogo" src="http://media.email-galls.com/5167/Shared/responsive_template/qm_logo.png" alt="Quartermaster" style="font-family: Arial,Helvetica,sans-serif; font-size: 30px; display: block;" width="300" height="" border="0"></a>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+											<!-- Logo END -->
+											<!-- Navigation -->
+											<table class="mobileHide" style="background-color:#3d3e3f;" width="640px" cellspacing="0" cellpadding="0" border="0">
+												<tbody>
+													<tr>
+														<td style="background-color:#3d3e3f;" align="center">
+														<table width="600px" cellspacing="0" cellpadding="0" border="0">
+															<tbody>
+																<tr>
+																	<td style="font-family:Arial, Helvetica, sans-serif, 'Open Sans'; font-size:0px;" width="100px" align="center">
+																	<a href="http://links.mail.qmuniforms.com/q/00X1MKcplTm0XD8b1uLt1u2OQ6I7ZsZDbb6ZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiAHsLUSroMcrlL4aFF7yv1DlBjF1A" title="Categories" target="_blank" style="font-size:14px; color:#ffffff; text-decoration:none; display:inline-block; white-space:nowrap; padding:10px; border:1px solid #3d3e3f;"><strong style="font-weight:normal;">CATEGORIES</strong></a>
+																	</td>
+																	<td style="font-family:Arial, Helvetica, sans-serif, 'Open Sans'; font-size:0px;" width="100px" align="center">
+																	<a href="http://links.mail.qmuniforms.com/q/ZLARejp937l0Xv9RA9KiMP6rD0sRdMKCEFKZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiAIv6JJ4M5dZ-LvRAjfr8lKNiT5iQ" title="Brands" target="_blank" style="font-size:14px; color:#ffffff; text-decoration:none; display:inline-block; white-space:nowrap; padding:10px; border:1px solid #3d3e3f;"><strong style="font-weight:normal;">BRANDS</strong></a>
+																	</td>
+																	<td style="font-family:Arial, Helvetica, sans-serif, 'Open Sans'; font-size:0px;" width="100px" align="center">
+																	<a href="http://links.mail.qmuniforms.com/q/IlWJtEcwdLI0XSVWued1KK_kzjRwuXJ7ZchZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiA8PnkxkMQeKTL6oDxqjJgo3Pb-5A" title="Clothing" target="_blank" style="font-size:14px; color:#ffffff; text-decoration:none; display:inline-block; white-space:nowrap; padding:10px; border:1px solid #3d3e3f;"><strong style="font-weight:normal;">CLOTHING</strong></a>
+																	</td>
+																	<td style="font-family:Arial, Helvetica, sans-serif, 'Open Sans'; font-size:0px;" width="100px" align="center">
+																	<a href="http://links.mail.qmuniforms.com/q/X_oWY9g_bGO0XMaOkQFnHY32mdA2etYajaPZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiAhLzLecbccqaLxNGllhKu81IK7yw" title="Footwear" target="_blank" style="font-size:14px; color:#ffffff; text-decoration:none; display:inline-block; white-space:nowrap; padding:10px; border:1px solid #3d3e3f;"><strong style="font-weight:normal;">FOOTWEAR</strong></a>
+																	</td>
+																	<td style="font-family:Arial, Helvetica, sans-serif, 'Open Sans'; font-size:0px;" width="100px" align="center">
+																	<a href="http://links.mail.qmuniforms.com/q/6r6alj8ZM4D0X_RzcH6B7ybt3PexTLffQOdZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiARZNR4V8reo5LwoEcum9CyO0OUUQ" title="Equipment" target="_blank" style="font-size:14px; color:#ffffff; text-decoration:none; display:inline-block; white-space:nowrap; padding:10px; border:1px solid #3d3e3f;"><strong style="font-weight:normal;">EQUIPMENT</strong></a>
+																	</td>
+																	<td style="font-family:Arial, Helvetica, sans-serif, 'Open Sans'; font-size:0px;" width="100px" align="center">
+																	<a href="http://links.mail.qmuniforms.com/q/BJzFrdimlBw0XksGRo5H39jbqQ19OB6K-iSZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiAc9gfnJwWf4BLnUjOFjaI_6nXfHw" title="Web Specials" target="_blank" style="font-size:14px; color:#ffffff; text-decoration:none; display:inline-block; white-space:nowrap; padding:10px; border:1px solid #3d3e3f;"><strong style="font-weight:normal;">CLEARANCE</strong></a>
+																	</td>
+																</tr>
+															</tbody>
+														</table>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+											<!-- Navigation END -->
+											<!-- Hero -->
+											<table>
+												<tbody>
+													<tr>
+														<td>&nbsp;
+														</td>
+													</tr>
+												</tbody>
+											</table>
+											<table style="text-align: left; border-collapse: collapse;" width="600" cellspacing="0" cellpadding="0" border="0" align="center">
+												<tbody>
+													<tr>
+														<td width="600" align="center">
+														<a href="http://links.mail.qmuniforms.com/q/C2iofJrV0Ia0XJO8vySeQlRLZ0I9reJD8BKZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiAApwiufr6dJBL22Cl0mm-nkgSbIg" target="_blank" title="QMLIFE3">
+														<img src="http://media.email-galls.com/5167/Users/16328/12017/QM/LifeCycle/120day.jpg" alt="QMLIFE3" style="display: inline-block;" width="600" height="auto"></a>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+											<table width="600" cellspacing="0" cellpadding="0" border="0">
+												<tbody>
+													<tr>
+														<td>
+														<table width="0" height="460" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff">
+															<tbody>
+																<tr>
+																	<td width="600" height="20">
+																	<img src="http://recs.listrakbi.com/image/5121ba15-41b5-4aa4-9b75-f9e17be67bdb/d5ed2b0d-b0db-4095-8f66-4cd533dc0d44/b32bd125-fa54-4427-801b-105eb3c1e012/0/0/600/20/email/isomcurtis@yahoo.com" alt="Product" style="display: block;" width="600" height="20" border="0">
+																	</td>
+																</tr>
+																<tr>
+																	<td width="600" height="198">
+																	<table width="100%" height="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff">
+																		<tbody>
+																			<tr>
+																				<td width="19" height="198">
+																				<img src="http://recs.listrakbi.com/image/5121ba15-41b5-4aa4-9b75-f9e17be67bdb/d5ed2b0d-b0db-4095-8f66-4cd533dc0d44/b32bd125-fa54-4427-801b-105eb3c1e012/0/20/19/198/email/isomcurtis@yahoo.com" alt="Product" style="display: block;" width="19" height="198" border="0">
+																				</td>
+																				<td width="172" height="198">
+																				<table width="100%" height="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff">
+																					<tbody>
+																						<tr>
+																							<td width="172" height="198">
+																							<a href="http://links.mail.qmuniforms.com/q/Mgn46iJopaO0XgVy71D5q49BL6-2lzFm8ZXZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiAO4IAn4ePd6CL_dFlqHIr-1T2FAA" target="_blank" title="Product">
+																							<img src="http://recs.listrakbi.com/image/5121ba15-41b5-4aa4-9b75-f9e17be67bdb/d5ed2b0d-b0db-4095-8f66-4cd533dc0d44/b32bd125-fa54-4427-801b-105eb3c1e012/19/20/172/198/email/isomcurtis@yahoo.com" alt="Product" style="display: block;" width="172" height="198" border="0">
+																							</a>
+																							</td>
+																						</tr>
+																					</tbody>
+																				</table>
+																				</td>
+																				<td width="22" height="198">
+																				<img src="http://recs.listrakbi.com/image/5121ba15-41b5-4aa4-9b75-f9e17be67bdb/d5ed2b0d-b0db-4095-8f66-4cd533dc0d44/b32bd125-fa54-4427-801b-105eb3c1e012/191/20/22/198/email/isomcurtis@yahoo.com" alt="Product" style="display: block;" width="22" height="198" border="0">
+																				</td>
+																				<td width="172" height="198">
+																				<table width="100%" height="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff">
+																					<tbody>
+																						<tr>
+																							<td width="172" height="198">
+																							<a href="http://links.mail.qmuniforms.com/q/6jCSRLyzq4j0XKmNWJKomQ6A9yHZ1_zvcMmZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiADcaoIb6fd6YL9Ey0AESUAyAvBqA" target="_blank" title="Product">
+																							<img src="http://recs.listrakbi.com/image/5121ba15-41b5-4aa4-9b75-f9e17be67bdb/d5ed2b0d-b0db-4095-8f66-4cd533dc0d44/b32bd125-fa54-4427-801b-105eb3c1e012/213/20/172/198/email/isomcurtis@yahoo.com" alt="Product" style="display: block;" width="172" height="198" border="0">
+																							</a>
+																							</td>
+																						</tr>
+																					</tbody>
+																				</table>
+																				</td>
+																				<td width="22" height="198">
+																				<img src="http://recs.listrakbi.com/image/5121ba15-41b5-4aa4-9b75-f9e17be67bdb/d5ed2b0d-b0db-4095-8f66-4cd533dc0d44/b32bd125-fa54-4427-801b-105eb3c1e012/385/20/22/198/email/isomcurtis@yahoo.com" alt="Product" style="display: block;" width="22" height="198" border="0">
+																				</td>
+																				<td width="172" height="198">
+																				<table width="100%" height="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff">
+																					<tbody>
+																						<tr>
+																							<td width="172" height="198">
+																							<a href="http://links.mail.qmuniforms.com/q/MZybQB--Ju30XkE7PBt9HOJr2fG7tgChzPRZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiAqt745mVseYiLdi_49576maqzZ-A" target="_blank" title="Product">
+																							<img src="http://recs.listrakbi.com/image/5121ba15-41b5-4aa4-9b75-f9e17be67bdb/d5ed2b0d-b0db-4095-8f66-4cd533dc0d44/b32bd125-fa54-4427-801b-105eb3c1e012/407/20/172/198/email/isomcurtis@yahoo.com" alt="Product" style="display: block;" width="172" height="198" border="0">
+																							</a>
+																							</td>
+																						</tr>
+																					</tbody>
+																				</table>
+																				</td>
+																				<td width="21" height="198">
+																				<img src="http://recs.listrakbi.com/image/5121ba15-41b5-4aa4-9b75-f9e17be67bdb/d5ed2b0d-b0db-4095-8f66-4cd533dc0d44/b32bd125-fa54-4427-801b-105eb3c1e012/579/20/21/198/email/isomcurtis@yahoo.com" alt="Product" style="display: block;" width="21" height="198" border="0">
+																				</td>
+																			</tr>
+																		</tbody>
+																	</table>
+																	</td>
+																</tr>
+																<tr>
+																	<td width="600" height="24">
+																	<img src="http://recs.listrakbi.com/image/5121ba15-41b5-4aa4-9b75-f9e17be67bdb/d5ed2b0d-b0db-4095-8f66-4cd533dc0d44/b32bd125-fa54-4427-801b-105eb3c1e012/0/218/600/24/email/isomcurtis@yahoo.com" alt="Product" style="display: block;" width="600" height="24" border="0">
+																	</td>
+																</tr>
+																<tr>
+																	<td width="600" height="198">
+																	<table width="100%" height="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff">
+																		<tbody>
+																			<tr>
+																				<td width="19" height="198">
+																				<img src="http://recs.listrakbi.com/image/5121ba15-41b5-4aa4-9b75-f9e17be67bdb/d5ed2b0d-b0db-4095-8f66-4cd533dc0d44/b32bd125-fa54-4427-801b-105eb3c1e012/0/242/19/198/email/isomcurtis@yahoo.com" alt="Product" style="display: block;" width="19" height="198" border="0">
+																				</td>
+																				<td width="172" height="198">
+																				<table width="100%" height="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff">
+																					<tbody>
+																						<tr>
+																							<td width="172" height="198">
+																							<a href="http://links.mail.qmuniforms.com/q/pa8jDdB24fa0X9QgGe3S7jYCbNXUIzl3YY-ZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiAuTZ6p9NzcLhLohtky6GG5XL8xeg" target="_blank" title="Product">
+																							<img src="http://recs.listrakbi.com/image/5121ba15-41b5-4aa4-9b75-f9e17be67bdb/d5ed2b0d-b0db-4095-8f66-4cd533dc0d44/b32bd125-fa54-4427-801b-105eb3c1e012/19/242/172/198/email/isomcurtis@yahoo.com" alt="Product" style="display: block;" width="172" height="198" border="0">
+																							</a>
+																							</td>
+																						</tr>
+																					</tbody>
+																				</table>
+																				</td>
+																				<td width="22" height="198">
+																				<img src="http://recs.listrakbi.com/image/5121ba15-41b5-4aa4-9b75-f9e17be67bdb/d5ed2b0d-b0db-4095-8f66-4cd533dc0d44/b32bd125-fa54-4427-801b-105eb3c1e012/191/242/22/198/email/isomcurtis@yahoo.com" alt="Product" style="display: block;" width="22" height="198" border="0">
+																				</td>
+																				<td width="172" height="198">
+																				<table width="100%" height="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff">
+																					<tbody>
+																						<tr>
+																							<td width="172" height="198">
+																							<a href="http://links.mail.qmuniforms.com/q/LlQoJZgCs9y0XgKLlE2yEBH3vaYtSiFZLyfZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiArISMu7wbfL5LCUwyTw7nvMqqDjA" target="_blank" title="Product">
+																							<img src="http://recs.listrakbi.com/image/5121ba15-41b5-4aa4-9b75-f9e17be67bdb/d5ed2b0d-b0db-4095-8f66-4cd533dc0d44/b32bd125-fa54-4427-801b-105eb3c1e012/213/242/172/198/email/isomcurtis@yahoo.com" alt="Product" style="display: block;" width="172" height="198" border="0">
+																							</a>
+																							</td>
+																						</tr>
+																					</tbody>
+																				</table>
+																				</td>
+																				<td width="22" height="198">
+																				<img src="http://recs.listrakbi.com/image/5121ba15-41b5-4aa4-9b75-f9e17be67bdb/d5ed2b0d-b0db-4095-8f66-4cd533dc0d44/b32bd125-fa54-4427-801b-105eb3c1e012/385/242/22/198/email/isomcurtis@yahoo.com" alt="Product" style="display: block;" width="22" height="198" border="0">
+																				</td>
+																				<td width="172" height="198">
+																				<table width="100%" height="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff">
+																					<tbody>
+																						<tr>
+																							<td width="172" height="198">
+																							<a href="http://links.mail.qmuniforms.com/q/stunCD4OMe30XIU1sEEZJMhfSvENhsG6CRWZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiASrJlO6nEcpdLlvrds8sXpn0y1ZQ" target="_blank" title="Product">
+																							<img src="http://recs.listrakbi.com/image/5121ba15-41b5-4aa4-9b75-f9e17be67bdb/d5ed2b0d-b0db-4095-8f66-4cd533dc0d44/b32bd125-fa54-4427-801b-105eb3c1e012/407/242/172/198/email/isomcurtis@yahoo.com" alt="Product" style="display: block;" width="172" height="198" border="0">
+																							</a>
+																							</td>
+																						</tr>
+																					</tbody>
+																				</table>
+																				</td>
+																				<td width="21" height="198">
+																				<img src="http://recs.listrakbi.com/image/5121ba15-41b5-4aa4-9b75-f9e17be67bdb/d5ed2b0d-b0db-4095-8f66-4cd533dc0d44/b32bd125-fa54-4427-801b-105eb3c1e012/579/242/21/198/email/isomcurtis@yahoo.com" alt="Product" style="display: block;" width="21" height="198" border="0">
+																				</td>
+																			</tr>
+																		</tbody>
+																	</table>
+																	</td>
+																</tr>
+																<tr>
+																	<td width="600" height="20">
+																	<img src="http://recs.listrakbi.com/image/5121ba15-41b5-4aa4-9b75-f9e17be67bdb/d5ed2b0d-b0db-4095-8f66-4cd533dc0d44/b32bd125-fa54-4427-801b-105eb3c1e012/0/440/600/20/email/isomcurtis@yahoo.com" alt="Product" style="display: block;" width="600" height="20" border="0">
+																	</td>
+																</tr>
+															</tbody>
+														</table>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+											<!-- Containing Table -->
+											<table class="footer-nav" style="padding-top: 20px;" width="100%" cellspacing="0" cellpadding="0" border="0">
+												<tbody>
+													<tr>
+														<td style="background-color:#3d3e3f;" align="center">
+														<table cellspacing="0" cellpadding="0" border="0">
+															<tbody>
+																<tr>
+																	<td style="font-family:Arial, Helvetica, sans-serif, 'Open Sans'; font-size:0px;" align="center">
+																	<a href="http://links.mail.qmuniforms.com/q/EnmQgEB_nTn0XUKRl1OQM96pVVOx0HHCVyDZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiAQRlMOJXDdYQLlwqBEWG5hJ0ceTA" title="Categories" target="_blank" style="font-size:14px; color:#ffffff; text-decoration:none; display:inline-block; white-space:nowrap; padding:10px; border:1px solid #3d3e3f; box-sizing: border-box; -moz-box-sizing:border-box; -webkit-box-sizing:border-box;"><strong style="font-weight:normal;">CATEGORIES</strong></a>
+																	<a href="http://links.mail.qmuniforms.com/q/0aVlENRhmhO0X7hxgEbgYgRphDwWR8EPEX_ZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiA-8ysxFksfrvLtyk8jRc3DGv3LrA" title="Brands" target="_blank" style="font-size:14px; color:#ffffff; text-decoration:none; display:inline-block; white-space:nowrap; padding:10px; border:1px solid #3d3e3f; box-sizing: border-box; -moz-box-sizing:border-box; -webkit-box-sizing:border-box;"><strong style="font-weight:normal;">BRANDS</strong></a>
+																	<a href="http://links.mail.qmuniforms.com/q/TTp2zcbF8hE0XdqjJSnx6WoJoqOUKt3BL61ZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiAl2WPsM9Ye73Lb8oB2mjtaWZFijw" title="Clothing" target="_blank" style="font-size:14px; color:#ffffff; text-decoration:none; display:inline-block; white-space:nowrap; padding:10px; border:1px solid #3d3e3f; box-sizing: border-box; -moz-box-sizing:border-box; -webkit-box-sizing:border-box;"><strong style="font-weight:normal;">CLOTHING</strong></a>
+																	<a href="http://links.mail.qmuniforms.com/q/_s4Prr-CDz10XwMITa3vr8wn_3xL-myyXJEZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiApwtIHUiBdLXLJqOp5G5I8-KEMSA" title="Footwear" target="_blank" style="font-size:14px; color:#ffffff; text-decoration:none; display:inline-block; white-space:nowrap; padding:10px; border:1px solid #3d3e3f; box-sizing: border-box; -moz-box-sizing:border-box; -webkit-box-sizing:border-box;"><strong style="font-weight:normal;">FOOTWEAR</strong></a>
+																	<a href="http://links.mail.qmuniforms.com/q/rX48zO6DHRM0X7w_Tv7rWohVtLNCDEwBTUaZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiAILUQKFIEdYwLKbZ6yPirhiCayEA" title="Equipment" target="_blank" style="font-size:14px; color:#ffffff; text-decoration:none; display:inline-block; white-space:nowrap; padding:10px; border:1px solid #3d3e3f; box-sizing: border-box; -moz-box-sizing:border-box; -webkit-box-sizing:border-box;"><strong style="font-weight:normal;">EQUIPMENT</strong></a>
+																	<a href="http://links.mail.qmuniforms.com/q/hrpE5ySNJDS0XNoTGcoGIKh0RGhF9pi1ZziZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiACgDTI7lFeZ_LNoI1z8qHyWgwH0w" title="Web Specials" target="_blank" style="font-size:14px; color:#ffffff; text-decoration:none; display:inline-block; white-space:nowrap; padding:10px; border:1px solid #3d3e3f; box-sizing: border-box; -moz-box-sizing:border-box; -webkit-box-sizing:border-box;"><strong style="font-weight:normal;">WEB SPECIALS</strong></a>
+																	</td>
+																</tr>
+															</tbody>
+														</table>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+											<!-- Containing Table END-->
+											<!-- Call Outs: 2 col to 1 col END-->
+											<!-- Footer -->
+											<table class="mobileStack" width="640px" cellspacing="0" cellpadding="0" border="0" bgcolor="ebebeb">
+												<tbody>
+													<tr>
+														<th class="paddingTop10" style="padding-top:20px;" valign="top" width="40%" align="center">
+														<!-- Social Box -->
+														<table class="fullWidth" cellspacing="0" cellpadding="0" border="0" bgcolor="ebebeb">
+															<tbody>
+																<tr>
+																	<td class="borderNone paddingNone" style="border:1px solid #010101; padding:20px" align="center">
+																	<table width="100%" cellspacing="0" cellpadding="0" border="0">
+																		<tbody>
+																			<tr>
+																				<td class="mobileAlignCenter" style="font-family: Arial, Helvetica, sans-serif, 'Open Sans Condensed'; font-size:18px; color:#010101; padding-bottom:10px" align="left">
+																				CONNECT WITH US
+																				</td>
+																			</tr>
+																			<tr>
+																				<td class="" style="padding-bottom:10px;">
+																				<table cellspacing="0" cellpadding="0" border="0" align="center">
+																					<tbody>
+																						<tr>
+																							<td style="padding:0 10px;" align="center"><a href="http://links.mail.qmuniforms.com/q/YhQ4hf5AC5A0XARmucHy-XcO4FDCIYBDARYZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiAgrFpHvRsdZLLRcnSsHHp3sYS2aQ" title="Facebook" target="_blank"><img src="http://media.email-galls.com/5167/Shared/responsive_template/facebook.gif" alt="Facebook" style="display: block;" width="16" height="25" border="0"></a></td>
+																							<td style="padding:0 10px;" align="center"><a href="http://links.mail.qmuniforms.com/q/FzH3UUe5KKa0XzeHY6geP8L8o4cPL7nELnVZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiALkJpdDA0eIPLAZS_ouocXSShFaQ" title="Twitter" target="_blank"><img src="http://media.email-galls.com/5167/Shared/responsive_template/twitter.gif" alt="Twitter" style="display: block;" width="28" height="25" border="0"></a></td>
+																							<td style="padding:0 10px;" align="center"><a href="http://links.mail.qmuniforms.com/q/CGFmXdmfvdT0XJAnoSpst8iNTXbnPxghVhhZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiAw7zoeLIUdZxLIRafDRLWyjcW76A" title="Google+" target="_blank"><img src="http://media.email-galls.com/5167/Shared/responsive_template/google.gif" alt="Google Plus" style="display: block;" width="38" height="25" border="0"></a></td>
+																							<td style="padding:0 10px;" align="center"><a href="http://links.mail.qmuniforms.com/q/OldX9Z2Wr2y0X6h_D0OFWMhHw_4US3UiHlWZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiAe2m2Mu_BdLXLM8u0wCCjmNX1utg" title="YouTube" target="_blank"><img src="http://media.email-galls.com/5167/Shared/responsive_template/youtube.gif" alt="YouTube" style="display: block;" width="25" height="25" border="0"></a></td>
+																							<td style="padding:0 10px;" align="center"><a href="http://links.mail.qmuniforms.com/q/-3QQGoxJl_w0X_S1lmmJJshUCveENhCLhB7ZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiAWiwPS0V_c6vL4_RXzQhpdblwrDw" title="Blog" target="_blank"><img src="http://media.email-galls.com/5167/Shared/responsive_template/blog.gif" alt="Blog" style="display: block;" width="28" height="25" border="0"></a></td>
+																						</tr>
+																					</tbody>
+																				</table>
+																				</td>
+																			</tr>
+																			<tr>
+																				<td class="borderNone" style="border-top:1px solid #010101;" align="center">
+																				<!-- Containing Table -->
+																				<table width="100%" cellspacing="0" cellpadding="0" border="0">
+																					<tbody>
+																						<tr>
+																							<td class="mobileAlignCenter" style="padding-top:10px; font-family: Arial, Helvetica, sans-serif, 'Open Sans Condensed'; font-size:14px;" align="left">
+																							<a href="http://links.mail.qmuniforms.com/q/jBPFrtGCXBW0XAbGHvdR3NjtKVLaOjZeNiTZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiAXPOn2pf9dbFLEvSAEtGuQtlr0pw" title="Privacy Policy" target="_blank" style="color:#010101; text-decoration:none;"><strong>PRIVACY POLICY &raquo;</strong></a><br>
+																							<a href="http://links.mail.qmuniforms.com/q/tOv_OHj2so70XBf7nzEqHGJmgST2J7V9MmqZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiAFxGuAVsRe4rLB5hAiqiZ3DhEWrg" title="Email Preference Center" target="_blank" style="color:#010101; text-decoration:none;"><strong>EMAIL PREFERENCE CENTER &raquo;</strong></a><br>
+																							<a href="http://links.mail.qmuniforms.com/q/HiC0D3NHEwWMHebin8Bgh3Nz8X0NMh17Bv_LTCfr7JhZEi0BRmCg-3bND" title="Unsubscribe" target="_blank" style="color:#010101; text-decoration:none"><strong>UNSUBSCRIBE &raquo;</strong></a>
+																							</td>
+																						</tr>
+																					</tbody>
+																				</table>
+																				<!-- Containing Table END-->
+																				</td>
+																			</tr>
+																		</tbody>
+																	</table>
+																	</td>
+																</tr>
+															</tbody>
+														</table>
+														<!-- Social Box END-->
+														</th>
+														<th class="" style="padding-top:20px;" valign="top" width="60%" align="center">
+														<table class="fullWidth" cellspacing="0" cellpadding="0" border="0" align="center">
+															<tbody>
+																<tr>
+																	<td class="copy13 contentPadding" style="font-family:Arial, Helvetica, sans-serif; font-size:11px; line-height:14px; color:#666666; padding-left:20px; font-weight:normal;" align="left">&copy; 2018 Quartermaster, LLC.<br>
+																	<a href="http://links.mail.qmuniforms.com/q/AqehVzCPzNK0XUYsbQAtWXjxnEh8mARGetGZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiA18saD39dfa-LPPsfmH6w4l9HMGg" title="Galls" target="_blank" style="color:#666666; text-decoration:none;"><strong style="font-weight:normal;">1340 Russell Cave Road, Lexington, KY 40505</strong></a><br>
+																	<br>
+																	Use promo code: <strong>QMLIFE3</strong> <br>
+																	*Expires <a href="http://links.mail.qmuniforms.com/q/_U6arJWjI3t0XSGTRnRVIJhx4G6BzrC_Ys5ZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiAy8TVbmQcfqzLrjf3-Gjj2U83D1Q" title="Quartermaster" target="_blank" style="color:#666666; text-decoration:none;"><strong style="font-weight:normal;">12-31-18 at 11:59 PM EST</strong></a> and is valid while supplies last. Percent and dollar off promotional exclusions may apply, visit our <a href="http://links.mail.qmuniforms.com/q/lxdROxe5T6i0XWBE6FNv0xSSIITxGtSWZ66ZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiA70deOebSdasLpJ94zvV-PzulAXg" title="Quartermaster" target=
+"_blank" style="color:#666666; text-decoration:none;"><strong style="font-weight:normal;">Promotional Guidelines</strong></a> for details. Offers are valid at time of purchase and cannot be applied to the purchase of previous, future, contract pricing orders or gift cards. Promotion codes must be entered on the shopping cart page and cannot be used in combination with any other offer. Limit one promo code per order. Some exclusions apply to shipping. For more information, visit our <a href="http://links.mail.qmuniforms.com/q/Md19YEkwozC0XZBZiClsig2MXhmbdwxntVJZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiAM4V2f-jvfqPLjieHglGBCjTWCdg" title="Quartermaster" target=
+"_blank" style="color:#666666; text-decoration:none;"><strong style="font-weight:normal;">Shipping Information</strong></a>.<br>
+																	<br>
+																	Customer service is available <a href="http://links.mail.qmuniforms.com/q/6WYMC-l5IQa0Xx9gGSSh7DYAINdeaPxVTD-ZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiAOheiXhuPf5YLqllkijti5YzwQog" title="Quartermaster" target="_blank" style="color:#666666; text-decoration:none;"><strong style="font-weight:normal;">M-F 8AM-9PM ET</strong></a> at <a href="tel:+18666737645" title="1-866-673-7643" target="_blank" style="color:#666666; text-decoration:none;"><strong style="font-weight:normal;">1-866-673-7645</strong></a> <br>
+																	<br>
+																	<!-- MOBILE Browser Link -->
+																	<table class="mobileShow" width="100%" cellspacing="0" cellpadding="0" border="0">
+																		<tbody>
+																			<tr style="mso-hide:all; width:0; max-height:0; overflow:hidden; display:none; float:left;">
+																				<td style="padding-top:20px;" align="center"><a href="http://links.mail.qmuniforms.com/q/_hGh2ymwJfU3w30Hn-9dPAmM-Wq0iMt_QhrTnD6Z_WhyUHtQ67gulAdm-" title="View in browser" target="_blank" style="color:#666666;"><strong style="font-weight:normal;">View in Browser</strong></a></td>
+																			</tr>
+																		</tbody>
+																	</table>
+																	<!-- MOBILE Browser Link  END-->
+																	</td>
+																</tr>
+															</tbody>
+														</table>
+														<!-- Social Icons END-->
+														</th>
+													</tr>
+												</tbody>
+											</table>
+											<!-- Footer END -->
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<!-- Gmail Fix-->
+								<table class="mobileHide" style="display:none; width:650px; min-width:650px; max-width:650px;" width="640" cellspacing="0" cellpadding="0" border="0" align="center">
+									<tbody>
+										<tr>
+											<td><img src="http://media.mail.qmuniforms.com/1/Shared/2014/LCS/Boilerplate/spacer.gif" style="display: block; min-width: 650px; max-width: 650px;" alt="Spacer" width="650" height="20" border="0"></td>
+										</tr>
+									</tbody>
+								</table>
+								<div style="display:none; white-space:nowrap; font:15px courier; line-height:0;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+								&nbsp; &nbsp; &nbsp;
+								&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+								&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</div>
+								<!-- Gmail Fix END -->
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					</td>
+				</tr>
+			</tbody>
+		</table>
 
-<head>
-    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
-    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
-    <meta content="telephone=no" name="format-detection" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <meta name="x-apple-disable-message-reformatting" />
-    <title>Chick-fil-A</title>
-    <style type="text/css">
-    @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,600,700,700i');
-    @import url('https://fonts.googleapis.com/css?family=Allura');
-
-    .ExternalClass {
-        width: 100%;
-    }
-
-    .ExternalClass,
-    .ExternalClass p,
-    .ExternalClass span,
-    .ExternalClass font,
-    .ExternalClass td,
-    .ExternalClass div,
-    .ExternalClass b,
-    .ExternalClass br,
-    .ExternalClass img {
-        line-height: 100% !important;
-    }
-
-    body {
-        margin: 0;
-        padding: 0;
-        -webkit-text-size-adjust: 100% !important;
-        -ms-text-size-adjust: 100% !important;
-    }
-
-    body,
-    #body_style {
-        background: #fffffe;
-        min-height: 1000px;
-    }
-
-    table td {
-        border-collapse: collapse;
-        border-spacing: 0 !important
-    }
-
-    table tr {
-        border-collapse: collapse;
-        border-spacing: 0 !important
-    }
-
-    table tbody {
-        border-collapse: collapse;
-        border-spacing: 0 !important
-    }
-
-    table {
-        border-collapse: collapse;
-        border-spacing: 0 !important
-    }
-
-    span.yshortcuts,
-    a span.yshortcuts {
-        color: #000001;
-        background-color: none;
-        border: none;
-    }
-
-    span.yshortcuts:hover,
-    span.yshortcuts:active,
-    span.yshortcuts:focus {
-        color: #000001;
-        background-color: none;
-        border: none;
-    }
-
-    .yahooNone {
-        display: none;
-    }
-
-    img {
-        -ms-interpolation-mode: bicubic;
-    }
-
-    a[x-apple-data-detectors] {
-        color: inherit !important;
-        text-decoration: none !important;
-        font-size: inherit !important;
-        font-family: inherit !important;
-        font-weight: inherit !important;
-        line-height: inherit !important;
-    }
-
-    a {color:#C8102E; text-decoration:none;}
-
-    @media screen and (max-width: 599px) {
-        .stack {
-            width: 100% !important;
-        }
-        .hund {
-            width: 100% !important;
-            height: auto !important
-        }
-        .noMo {
-            display: none !important
-        }
-        .block {
-            display: block !important
-        }
-        .wrap {
-            width: 400px !important;
-        }
-        .headshot {
-            margin-left: 150px !important;
-        }
-        .copyPad {
-            padding: 55px 40px !important;
-        }
-        u + .body .gmail {
-            display: none !important;
-        }
-    }
-    </style>
-    <style type="text/css">
-      @media screen and (max-width: 480px) {
-        .wholeframe {
-            width: 100% !important;
-            padding: 0px 10px 0px 0px !important
-        }
-        .mobileNav {
-            height: 168px;
-            position: absolute;
-            transition: opacity 1300ms ease-in-out;
-            opacity: 0;
-            display: none;
-        }
-        #toggle + label {
-            position: absolute;
-            cursor: pointer;
-            padding: 10px;
-            background: url('http://www.cfacdn.com/mobile/apps/fs/email/template/spotlight/hamburger.jpg') center no-repeat;
-            background-size: 41px 35px;
-            width: 31px;
-            height: 25px;
-            cursor: pointer;
-            left: 340px;
-            top: 72px;
-        }
-        #toggle:checked ~ .mobileNav {
-            display: block;
-            opacity: 1;
-            width: 400px;
-            z-index:1 !important;
-        }
-        .menuImage {
-            height: auto !important;
-            width: 100% !important;
-        }
-      }
-      @media screen and (-webkit-min-device-pixel-ratio: 0) and (max-width: 480px) {
-        .mobilecontent {
-            display: block !important;
-            max-height: none !important;
-        }
-      }
-    </style>
-    <!-- ********* Styles for Outlook Only |START| (Code looks commented out but is live) ********* -->
-    <!--[if mso]>
-    <style type="text/css">
-    body, table, td, span, font, a, div, span {
-      font-family: Arial, Helvetica, sans-serif !important;
-    }
-    .MSO_banner {
-        padding-bottom: 25px !important;
-    }
-    </style>
-    <![endif]-->
-    <!-- Below tagets MSO version 2016 -->
-    <!--[if mso 16]>
-    <style type="text/css">
-    .msoPadTop {
-        padding-top:13px !important;
-    }
-    </style>
-    <![endif]-->
-    <!-- ********* Styles for Outlook Only |END| ********* -->
-</head>
-
-<body class="body" bgcolor="#fffffe" style="background: rgb(255, 255, 254);">
-    <div align="center" id="body_style">
-        <table align="center" border="0" cellpadding="0" cellspacing="0" class="wrap" width="720">
-            <tr>
-                <td class="noMo">
-                    <table cellpadding="0" cellspacing="0" border="0" align="center" width="720">
-                        <tr>
-                            <td cellpadding="0" cellspacing="0" border="0" style=" line-height: 0px; height: 1px; min-width: 700px;">
-                                <!-- Android 5.1 and 6.0 fix -->
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-            <tr>
-                <td style="padding:15px" bgcolor="#f4f8f9">
-                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                        <tr>
-                            <td align="left" style="font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif; color:#5B6770; font-size:12px; line-height: 18px; mso-line-height-rule: exactly;" width="50%">
-                                 Just Because
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-			<!-- ********* Top Nav |START| ********* -->
-            <tr>
-                <td class="nav">
-                    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
-                        <tr>
-                            <!-- Change bgcolor="#3CB1C8" below to bgcolor="#8E969C" for silver status and bgcolor="#C8102E" for red status -->
-                            <td class="android-pad" height="98" style="height:98px; padding:0 35px 0 30px; border-bottom:1px #e1e2e4 solid; background-color:#3CB1C8">
-                                <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
-                                    <tr>
-                                        <td align="right" class="apple-hide samsung-show">
-                                            <table class="android-center" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
-                                                <tr>
-                                                    <td class="android-center" align="right">
-                                                        <table cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
-                                                            <tr>
-                                                                <td align="center">
-                                                                    <a href="http://trk.chick-fil-a.com/c/4/?T=ODMzODUwNzI%3AMDItYjE5MDQyLTQwOTJjMzU4MzRlYzQ1ZGRhMzEzYzUxYmFlNjRiZmFk%3AYmd3Z3NzQHlhaG9vLmNvbQ%3AQ0ZBSUQtWkJQUjRaTUxTNFMxWEo1VQ%3AZmFsc2U%3AMA%3A%3AaHR0cHM6Ly9zbWFydC5saW5rLzU5NmU3NDM2YmMwYmM&K=rGaUDstSYxkB9q8hygh0zg" ><img alt="" src="http://www.cfacdn.com/img/Spotlight/Email/Icon_Rewards_One.png" height="30" width="30" style="clear:both; border:none; display:block;"></a>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td align="center" style="font-family: 'Source Sans Pro', Arial, Helvetica, sans-serif; color:#ffffff; font-size:12px; line-height:12px; font-weight:400; padding-top:7px;">
-                                                                    <a style="text-decoration:none; color:#ffffff" href="http://trk.chick-fil-a.com/c/4/?T=ODMzODUwNzI%3AMDItYjE5MDQyLTQwOTJjMzU4MzRlYzQ1ZGRhMzEzYzUxYmFlNjRiZmFk%3AYmd3Z3NzQHlhaG9vLmNvbQ%3AQ0ZBSUQtWkJQUjRaTUxTNFMxWEo1VQ%3AZmFsc2U%3AMQ%3A%3AaHR0cHM6Ly9zbWFydC5saW5rLzU5NmU3NDM2YmMwYmM&K=fQ0cp93JyCzvOIVfm77kxA">167 pts</a>
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-                                                    </td>
-                                                    <td width="45">
-
-                                                    </td>
-                                                    <td class="android-center" align="right">
-                                                        <table cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
-                                                            <tr>
-                                                                <td align="center">
-                                                                    <a href="http://trk.chick-fil-a.com/c/4/?T=ODMzODUwNzI%3AMDItYjE5MDQyLTQwOTJjMzU4MzRlYzQ1ZGRhMzEzYzUxYmFlNjRiZmFk%3AYmd3Z3NzQHlhaG9vLmNvbQ%3AQ0ZBSUQtWkJQUjRaTUxTNFMxWEo1VQ%3AZmFsc2U%3AMg%3A%3AaHR0cHM6Ly9zbWFydC5saW5rLzU5NmU3NDdmMDgyMGY&K=jJMZaAcAslg6ThmJAj1Cdw"><img alt="" src="http://www.cfacdn.com/img/Spotlight/Email/Icon_Account.png" height="30" width="30" style="clear:both; border:none; display:block;"></a>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td align="center" style="font-family: 'Source Sans Pro', Arial, Helvetica, sans-serif; color:#ffffff; font-size:12px; line-height:12px; font-weight:400; padding-top:6px;">
-                                                                    <a style="text-decoration:none; color:#ffffff;" href="http://trk.chick-fil-a.com/c/4/?T=ODMzODUwNzI%3AMDItYjE5MDQyLTQwOTJjMzU4MzRlYzQ1ZGRhMzEzYzUxYmFlNjRiZmFk%3AYmd3Z3NzQHlhaG9vLmNvbQ%3AQ0ZBSUQtWkJQUjRaTUxTNFMxWEo1VQ%3AZmFsc2U%3AMw%3A%3AaHR0cHM6Ly9zbWFydC5saW5rLzU5NmU3NDdmMDgyMGY&K=I788YiyT9u0r8BVJMExgTA">Account</a>
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-                                                    </td>
-                                                    <td width="37">
-
-                                                    </td>
-                                                    <td class="android-center" align="right" class="order">
-                                                        <table cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
-                                                            <tr>
-                                                                <td align="center">
-                                                                    <a href="http://trk.chick-fil-a.com/c/4/?T=ODMzODUwNzI%3AMDItYjE5MDQyLTQwOTJjMzU4MzRlYzQ1ZGRhMzEzYzUxYmFlNjRiZmFk%3AYmd3Z3NzQHlhaG9vLmNvbQ%3AQ0ZBSUQtWkJQUjRaTUxTNFMxWEo1VQ%3AZmFsc2U%3ANA%3A%3AaHR0cHM6Ly9zbWFydC5saW5rLzU5NmU3NGMyNWI1MTE&K=etQmoJebthmJTAFb1AyojA"><img alt="" src="http://www.cfacdn.com/img/Spotlight/Email/Icon_Order.png" height="30" width="30" style="clear:both; border:none; display:block;"></a>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td align="center" style="font-family: 'Source Sans Pro', Arial, Helvetica, sans-serif; color:#ffffff; font-size:12px; line-height:12px; font-weight:400; padding-top:6px;">
-                                                                    <a style="text-decoration:none; color:#ffffff;" href="http://trk.chick-fil-a.com/c/4/?T=ODMzODUwNzI%3AMDItYjE5MDQyLTQwOTJjMzU4MzRlYzQ1ZGRhMzEzYzUxYmFlNjRiZmFk%3AYmd3Z3NzQHlhaG9vLmNvbQ%3AQ0ZBSUQtWkJQUjRaTUxTNFMxWEo1VQ%3AZmFsc2U%3ANQ%3A%3AaHR0cHM6Ly9zbWFydC5saW5rLzU5NmU3NGMyNWI1MTE&K=Ai0Y1czx5UCLKkMQmRSvvw">Start order</a>
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-                        <!--[if !mso]><!-->
-                        <tr>
-                            <td class="apple-show yahooNone android-hide" style="display:none;">
-                                <input style="display:none;" type="checkbox" name="toggle" id="toggle" />
-                                <label for="toggle"></label>
-                                <div class="dropdown">
-                                    <a href="http://trk.chick-fil-a.com/c/4/?T=ODMzODUwNzI%3AMDItYjE5MDQyLTQwOTJjMzU4MzRlYzQ1ZGRhMzEzYzUxYmFlNjRiZmFk%3AYmd3Z3NzQHlhaG9vLmNvbQ%3AQ0ZBSUQtWkJQUjRaTUxTNFMxWEo1VQ%3AZmFsc2U%3ANg%3A%3AaHR0cHM6Ly9zbWFydC5saW5rLzU5NmU3NDM2YmMwYmM&K=obbBC1BCnQ1mUn_v3P3BPg" alias="Nav_points" class="dropdown-reward dropdown-btn" style="padding:40px 0 25px 85px;">167 pts</a>
-                                    <hr>
-                                    <a href="http://trk.chick-fil-a.com/c/4/?T=ODMzODUwNzI%3AMDItYjE5MDQyLTQwOTJjMzU4MzRlYzQ1ZGRhMzEzYzUxYmFlNjRiZmFk%3AYmd3Z3NzQHlhaG9vLmNvbQ%3AQ0ZBSUQtWkJQUjRaTUxTNFMxWEo1VQ%3AZmFsc2U%3ANw%3A%3AaHR0cHM6Ly9zbWFydC5saW5rLzU5NmU3NDdmMDgyMGY&K=O3TIFXS8biPGNLjIMSRQcg" alias="Nav_account" class="dropdown-account dropdown-btn" style="padding:25px 0 25px 85px; ">Account</a>
-                                    <hr>
-                                    <a href="http://trk.chick-fil-a.com/c/4/?T=ODMzODUwNzI%3AMDItYjE5MDQyLTQwOTJjMzU4MzRlYzQ1ZGRhMzEzYzUxYmFlNjRiZmFk%3AYmd3Z3NzQHlhaG9vLmNvbQ%3AQ0ZBSUQtWkJQUjRaTUxTNFMxWEo1VQ%3AZmFsc2U%3AOA%3A%3AaHR0cHM6Ly9zbWFydC5saW5rLzU5NmU3NGMyNWI1MTE&K=yej3OsFyJ6Y4X6WTYWT3xw" alias="Nav_startorder" class="dropdown-order dropdown-btn" style="padding:25px 0 45px 85px; ">Start order</a>
-                                </div>
-                            </td>
-                        </tr>
-                        <!--<![endif]-->
-                    </table>
-                </td>
-            </tr>
-            <!-- ********* Top Nav |END| ********* -->
-            <tr>
-              <td class="hund" align="center" valign="top" bgcolor="#f4f8f9" style="padding:10px;">
-                  <table width="100%" border="0" cellspacing="0" cellpadding="0" style="box-shadow:0 2px 2px #dddddd"  bgcolor="#ffffff">
-                      <tr style="background-color: white;">
-                          <td class="hund" style="display:block;" valign="top">
-                              <div style="max-height:0;overflow:visible!important;">
-                                  <div class="hund" style="min-height: 250px; display:inline-block;text-align:center;">
-                                      <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
-                                          <tr>
-                                              <td class="MSO_banner" style="padding:30px 0 60px; background-color:#3CB1C8">
-                                                  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
-                                                      <tr>
-                                                          <td align="left" style="font-family: 'Source Sans Pro', Arial, 'Helvetica Neue', Helvetica, sans-serif; color:#ffffff; font-size:16px; font-weight:300; text-align:center;">
-                                                              <span style="font-weight:600; font-size:18px;">Hi, it's Jason Lansdown</span><br>
-                                                              Operator at your 21st & Maize FSU Chick-fil-A®
-                                                          </td>
-                                                      </tr>
-                                                      <!-- ********* Headshot for Desktop Outlook Only |START| (Code looks commented out but is live) ********* -->
-                                                      <!--[if mso]>
-                                                      <tr>
-                                                          <td align="center" style="padding-top:15px;">
-                                                          <img alt="" src="https://static.cfacdn.com/photos/people/526342.jpg" height="99" width="76" style="border-radius: 50%; display:block;">
-                                                          </td>
-                                                      </tr>
-                                                      <![endif]-->
-                                                      <!-- ********* Headshot for Desktop Outlook Only |END| ********* -->
-                                                  </table>
-                                              </td>
-                                          </tr>
-                                          <!-- ********* Email body Content |START| ********* -->
-                                          <!-- Hero Img Begins -->
-                                          <tr>
-                                              <td class="noMo" align="center" style="height: 130px; background-color: #FFFFFF;">
-                                                 <img src="https://www.cfacdn.com/img/Spotlight/Treats/Themes_Headline_JustBecause_Desktop.png" alt="A little something from me to you" style="display:block; margin-top: 30px;" border="0" width="700"/>
-                                              </td>
-                                          </tr>
-                                          <!-- Hero Mobile Img Begins -->
-                                          <!--[if !mso]> <!-->
-                                          <tr>
-                                              <td class="yahooNone block" style="display: none; mso-hide:all; background-color: #FFFFFF;" align="center">
-                                                  <img src="https://www.cfacdn.com/img/Spotlight/Treats/Themes_Headline_JustBecause_Mobile.png" alt="A little something from me to you" class="hund" style="display:block; margin-top: 30px;" border="0" height="1" width="1">
-                                              </td>
-                                          </tr>
-                                          <!--<![endif] -->
-                                          <!-- hero End-->
-                                      </table>
-                                  </div>
-                              </div>
-                              <!-- ********* Headshot for all other email clients |START| ********* -->
-                              <!--[if !mso]> <!-->
-                              <div style="max-height:0;max-width:0;overflow:visible!important;">
-                                   <div class="headshot" style="position:relative; margin-top:93px; margin-left:310px;display:inline-block;">
-                                   	   <img alt="" src="https://static.cfacdn.com/photos/people/526342.jpg" height="99" width="76" style="border-radius: 50%; display:block;">
-                                   </div>
-                              </div>
-                              <!--<![endif] -->
-                              <!-- ********* Headshot for all other email clients |END| ********* -->
-                          </td>
-                      </tr>
-                      <!--<![endif] -->
-                      <tr>
-                          <td align="center" style="font-family: 'Source Sans Pro', Arial, 'Helvetica Neue', Helvetica, sans-serif; font-weight:400; color:#5B6770; font-size:15px; line-height:23px; padding:20px 0;" bgcolor="#ffffff">
-                              Valid for one small order of Hash Browns through 02/14/2019.
-                          </td>
-                      </tr>
-                      <!-- Item Img Begins -->
-                      <tr>
-                          <td class="noMo" align="center" bgcolor="#ffffff">
-                              <img src="https://www.cfacdn.com/img/order/menu/Mobile/Breakfast/Parent/hash_browns.png" alt="" style="max-width: 510px; display:block;" border="0"/>
-                          </td>
-                      </tr>
-                      <!-- Item Mobile Img Begins -->
-                      <!--[if !mso]> <!-->
-                      <tr>
-                          <td class="yahooNone block" style="display: none; mso-hide:all;" align="center"  bgcolor="#ffffff">
-                              <img src="https://www.cfacdn.com/img/order/menu/Mobile/Breakfast/Parent/hash_browns.png" alt="" class="hund" style="display:block;" border="0" height="1" width="1">
-                          </td>
-                      </tr>
-                      <!--<![endif] -->
-
-                      <tr>
-                          <td class="copyPad" align="center" bgcolor="#ffffff" style="padding:60px 0px;">
-                              <table class="hund" width="75%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
-                                  <tr>
-                                      <td align="left" style="font-family: 'Source Sans Pro', Arial, 'Helvetica Neue', Helvetica, sans-serif; font-weight:400; color:#5B6770; font-size:15px; line-height:23px;">
-                                          <p style="color: #434343;background-color: #ffffff;">Our delicious and crispy hash browns is this week's <u>FREE</u> App offer! Enjoy it with Chick-n-Minis, a Chick-fil-A Chicken Biscuit, or your favorite breakfast entree!</p><p style="color: #434343;background-color: #ffffff;">Your FREE order of hash browns is available only during breakfast hours, 6am-10:30am, Monday, February 11th - Thursday, February 14th.</p><p style="color: #434343;background-color: #ffffff;">Also available at our 21st and Maize location and while supplies last are heart shaped trays!  Order a 10 ct Chick-n-Minis, 30 ct Chick-fil-A Chicken Nuggets, or 6 ct Chocolate Chunk Cookies, and we will serve them in a cute heart shaped tray!  There's no additional charge and they are offered at their regular pricing:</p><p style="color: #434343;background-color: #ffffff;"></p><span></span><ul><li><span>10 ct Chick-n-Minis: $8.45</span></li><li>30 ct Chick-fil-A Nuggets: $12.85</li><li>6 pack of Chocolate Chunk Cookies: $6.99</li></ul><br/><ul><img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAASABIAAD/4QCMRXhpZgAATU0AKgAAAAgABQESAAMAAAABAAEAAAEaAAUAAAABAAAASgEbAAUAAAABAAAAUgEoAAMAAAABAAIAAIdpAAQAAAABAAAAWgAAAAAAAABIAAAAAQAAAEgAAAABAAOgAQADAAAAAQABAACgAgAEAAAAAQAAAbCgAwAEAAAAAQAAASEAAAAA/+EKCWh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8APD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iWE1QIENvcmUgNS40LjAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczpwaG90b3Nob3A9Imh0dHA6Ly9ucy5hZG9iZS5jb20vcGhvdG9zaG9wLzEuMC8iIHBob3Rvc2hvcDpUcmFuc21pc3Npb25SZWZlcmVuY2U9ImN5STJPLXZNVUNQcGNsVTVDNjRvIiBwaG90b3Nob3A6SW5zdHJ1Y3Rpb25zPSJGQk1EMDEwMDBhYzAwMzAwMDAyZDI2MDAwMDVkNTIwMDAwZTk1YTAwMDAyZjY0MDAwMDNjN2MwMDAwNWViMzAwMDBjZWJhMDAwMGVkYzQwMDAwOTdjZjAwMDBhODEwMDEwMCIvPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg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"/><br/></ul><div><br/></div> <a href="http://trk.chick-fil-a.com/c/4/?T=ODMzODUwNzI%3AMDItYjE5MDQyLTQwOTJjMzU4MzRlYzQ1ZGRhMzEzYzUxYmFlNjRiZmFk%3AYmd3Z3NzQHlhaG9vLmNvbQ%3AQ0ZBSUQtWkJQUjRaTUxTNFMxWEo1VQ%3AZmFsc2U%3AOQ%3A%3AaHR0cHM6Ly9zbWFydC5saW5rLzVhYTJiNmJjM2FhZjU_dXRtX3NvdXJjZT1wcm9tbyZ1dG1fbWVkaXVtPWVtYWlsJnV0bV9jYW1wYWlnbj1zcG90bGlnaHQ&K=4sPo3knICWL5yeHXQI-80Q" style="color:#C8102E; text-decoration:none;">View offer &#8250;</a>
-                                      </td>
-                                  </tr>
-                                  <tr>
-                                      <td align="left" style="font-family: 'Source Sans Pro', Arial, 'Helvetica Neue', Helvetica, sans-serif; font-weight:400; color:#5B6770; font-size:15px; padding-top:40px;">
-                                          See you soon,
-                                      </td>
-                                  </tr>
-                                  <tr>
-                                      <td align="left" style="font-family: 'Allura', 'Source Sans Pro', Arial, 'Helvetica Neue', Helvetica, sans-serif; font-weight:400; color:#5B6770; font-size:24px; line-height:23px; padding-top:20px;">
-                                      	  Jason Lansdown
-                                      </td>
-                                  </tr>
-                              </table>
-                          </td>
-                      </tr>
-                      <!-- ********* Email body Content |END| ********* -->
-                  </table>
-              </td>
-            </tr>
-            <!-- END HERE -->
-            <tr>
-              <td valign="top" align="center" bgcolor="#FFFFFF" style="padding:55px 50px 40px; border-top:1px #e1e2e4 solid;" class="foot_frame">
-                  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
-                      <tr>
-                          <td align="left" >
-                              <a href="http://trk.chick-fil-a.com/c/4/?T=ODMzODUwNzI%3AMDItYjE5MDQyLTQwOTJjMzU4MzRlYzQ1ZGRhMzEzYzUxYmFlNjRiZmFk%3AYmd3Z3NzQHlhaG9vLmNvbQ%3AQ0ZBSUQtWkJQUjRaTUxTNFMxWEo1VQ%3AZmFsc2U%3AMTA%3A%3AaHR0cHM6Ly93d3cuY2hpY2stZmlsLWEuY29tLz91dG1fc291cmNlPXByb21vJnV0bV9tZWRpdW09ZW1haWwmdXRtX2NhbXBhaWduPXNwb3RsaWdodA&K=Rb2-3u5__U6SwrOo23zYBA"><img alt="" src="http://www.cfacdn.com/mobile/apps/fs/email/template/spotlight/footer_cfa_logo.png" height="69" width="69" style="clear:both; border:none; display:block;"></a>
-                          </td>
-                      </tr>
-                      <tr>
-                          <td align="left" style="font-family: 'Source Sans Pro', Arial, 'Helvetica Neue', Helvetica, sans-serif; font-weight:600; color:#5B6770; font-size:13px; padding-top:50px;">
-                              <a href="http://trk.chick-fil-a.com/c/4/?T=ODMzODUwNzI%3AMDItYjE5MDQyLTQwOTJjMzU4MzRlYzQ1ZGRhMzEzYzUxYmFlNjRiZmFk%3AYmd3Z3NzQHlhaG9vLmNvbQ%3AQ0ZBSUQtWkJQUjRaTUxTNFMxWEo1VQ%3AZmFsc2U%3AMTE%3A%3AaHR0cHM6Ly93d3cuY2hpY2stZmlsLWEuY29tL0xlZ2FsP3V0bV9zb3VyY2U9cHJvbW8mdXRtX21lZGl1bT1lbWFpbCZ1dG1fY2FtcGFpZ249c3BvdGxpZ2h0&K=MeQ-NWmzx7tGzKAlT7UNfQ" style="color:#5B6770; text-decoration:none;">Terms</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight:400;">|</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://trk.chick-fil-a.com/c/4/?T=ODMzODUwNzI%3AMDItYjE5MDQyLTQwOTJjMzU4MzRlYzQ1ZGRhMzEzYzUxYmFlNjRiZmFk%3AYmd3Z3NzQHlhaG9vLmNvbQ%3AQ0ZBSUQtWkJQUjRaTUxTNFMxWEo1VQ%3AZmFsc2U%3AMTI%3A%3AaHR0cHM6Ly93d3cuY2hpY2stZmlsLWEuY29tL0xlZ2FsP3V0bV9zb3VyY2U9cHJvbW8mdXRtX21lZGl1bT1lbWFpbCZ1dG1fY2FtcGFpZ249c3BvdGxpZ2h0&K=JLsPWvzqUfPg6AKmxO0NgQ" style="color:#5B6770; text-decoration:none;">Privacy</a>
-                          </td>
-                      </tr>
-                      <tr>
-                          <td align="left" style="font-family: 'Source Sans Pro', Arial, 'Helvetica Neue', Helvetica, sans-serif; color:#5B6770; font-size:13px; padding-top:20px;">
-                              Rewards referenced in this email may have already been redeemed at the time of open. You can view all rewards, available and past, through the app or online. For more information regarding rewards please refer to <a href="http://trk.chick-fil-a.com/c/4/?T=ODMzODUwNzI%3AMDItYjE5MDQyLTQwOTJjMzU4MzRlYzQ1ZGRhMzEzYzUxYmFlNjRiZmFk%3AYmd3Z3NzQHlhaG9vLmNvbQ%3AQ0ZBSUQtWkJQUjRaTUxTNFMxWEo1VQ%3AZmFsc2U%3AMTM%3A%3AaHR0cHM6Ly93d3cuY2hpY2stZmlsLWEuY29tL0NvbnRhY3QtU3VwcG9ydCNjaGlja19maWxfYV9vbmVfdHJlYXRz&K=GVV1eYSHD_UMHiPBDSUZvQ" style="color:#C8102E; text-decoration:none;">https://www.chick-fil-a.com/Contact-Support#chick_fil_a_one_treats</a>.<br><br>
-
-                              To make sure you receive Chick&#8209;fil&#8209;A® email updates, add <a style="color:#C8102E; text-decoration:none;">no-reply@chick&#8209;fil&#8209;a.com</a> to your email address book or personal whitelist.<br><br>
-
-                              If you no longer wish to receive messages from Chick&#8209;fil&#8209;A®, you can unsubscribe by <a href="https://manage.my.chick-fil-a.com/account/preferences?accessCode=eyJhbGciOiJIUzUxMiIsImtpZCI6IkpXVFRva2VuU3ltZXRyaWNLZXkifQ.eyJzY29wZSI6Ii9tYW5hZ2VwcmVmIiwiY2xpZW50X2lkIjoiTWFuYWdlUHJlZiIsInN1YiI6InBpbmdKV1RUb2tlbiIsInVpZCI6IkNGQUlELVpCUFI0Wk1MUzRTMVhKNVUiLCJuYmYiOjE1MzgyMTU3NDgsImV4cCI6MTU5ODIxNTk4OH0.adp7BERUid05NX_mTQ4N76ufeW0YOs9DjK8-2ox9TudcGkrSwEkNtexOEj6GP9et4NYrIWAC_XO_zajoNqaicQ" style="color:#C8102E; text-decoration:none;">clicking here</a>. After unsubscribing, you will no longer receive any exclusive Chick&#8209;fil&#8209;A® email content such as special offers, event details or other marketing materials. However, you may continue to receive transactional emails such as electronic receipts. Please do not reply to this email.<br><br>
-
-                              © 2018 CFA Properties, Inc. All trademarks shown are the property of their respective owners.<br><br>
-                              Chick&#8209;fil&#8209;A, Inc., 10515 W 21st St N Wichita, KS 67205&#8209;FSU
-                          </td>
-                      </tr>
-                  </table>
-              </td>
-          </tr>
-        </table>
-    </div>
-<img src="http://trk.chick-fil-a.com/o/3/T0RNek9EVXdOekk6TURJdFlqRTVNRFF5TFRRd09USmpNelU0TXpSbFl6UTFaR1JoTXpFell6VXhZbUZsTmpSaVptRms6WW1kM1ozTnpRSGxoYUc5dkxtTnZiUTpRMFpCU1VRdFdrSlFValJhVFV4VE5GTXhXRW8xVlE/bVDpnoWpEAjtvOvl5zGgvw" width="1" height="1" /></body>
+<img src="http://links.mail.qmuniforms.com/q/uZ7lZilRSF_iqQ7mHKknpibVlBrqOdfdJL" alt="" width="20" height="1"></body>
 </html>

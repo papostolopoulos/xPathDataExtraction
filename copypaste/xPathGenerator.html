@@ -89,10 +89,6 @@
         grid-area: parameters;
       }
 
-      .divParametersInputs{
-
-      }
-
 
 
       .sectionElements, .sectionResult{
@@ -354,7 +350,7 @@
                 element-available()
               </label>
               <label>
-                <input type="radio" name="activeFunction" value="false" v-model="activeFunction" @click="addFunction($event)">
+                <input type="radio" name="activeFunction" value="false" @click="addFunction($event)">
                 false()
               </label>
               <label>
@@ -370,7 +366,7 @@
                 lang()
               </label>
               <label>
-                <input type="radio" name="activeFunction" value="last" v-model="activeFunction" @click="addFunction($event)">
+                <input type="radio" name="activeFunction" value="last" @click="addFunction($event)">
                 last()
               </label>
               <label>
@@ -398,7 +394,7 @@
                 number()
               </label>
               <label>
-                <input type="radio" name="activeFunction" value="position" v-model="activeFunction" @click="addFunction($event)">
+                <input type="radio" name="activeFunction" value="position" @click="addFunction($event)">
                 position()
               </label>
               <label>
@@ -438,7 +434,7 @@
                 translate()
               </label>
               <label>
-                <input type="radio" name="activeFunction" value="true" v-model="activeFunction" @click="addFunction($event)">
+                <input type="radio" name="activeFunction" value="true" @click="addFunction($event)">
                 true()
               </label>
             </div>
@@ -502,69 +498,28 @@
 
           <div class="parameters"style="background:beige;">
             <h3>{{activeFunctionArr[activeFunctionArr.length - 1]}} Parameters</h3>
-            <div class="divParametersInputs">
-              <!-- Show when operator is empty -->
-              <div class="divParameters" v-show="operator !== ''">
-                <label>
-                  <input type="text" name="parameterString" v-model="parameterString"  @keyup.enter="addParameters($event)">
-                  String
-                </label>
-                <label>
-                  <input type="checkbox" name="numberEntry" value="">
-                  Entry is a number
-                </label>
-                {{paramAlert}}
-              </div>
 
-              <!-- Show when function is boolean -->
-              <div class="divParameters" v-show="activeFunction === 'boolean'">
-                <label>
-                  <input type="text" name="parameterString" v-model="parameterString" @keyup.enter="addParameters($event)">
-                  Parameter value
-                </label>
-                <label>
-                  <input type="checkbox" name="numberEntry" v-model="numberEntry">
-                  Entry is a number
-                </label>
-                {{paramAlert}}
-              </div>
-
-
-              <div class="divParameters" v-show="activeFunction === 'concat'">
-                <h3>for concat()</h3>
-              </div>
-
-              <!-- Show when function is contains -->
-              <div class="divParameters" v-show="activeFunction === 'contains'">
-                in contains slot
-                <label>
-                  <input type="checkbox" name="translateString" v-model="translateString">
-                  Translate the string
-                </label>
-                <label>
-                  Add string
-                  <input type="text" name="parameterString" value="" v-model="parameterString" @keyup.enter="addParameters($event)">
-                </label>
-
-              </div>
-              <div class="divParameters" v-show="activeFunction === 'normalize-space'">
-                <h3>for normalize-space()</h3>
-              </div>
-              <div class="divParameters" v-show="activeFunction === 'substring'">
-                <h3>for substring()</h3>
-              </div>
-              <div class="divParameters" v-show="activeFunction === 'substring-after'">
-                <h3>for substring-after()</h3>
-              </div>
-              <div class="divParameters" v-show="activeFunction === 'substring-before'">
-                <h3>for substring-before()</h3>
-              </div>
-              <div class="divParameters" v-show="activeFunction === 'translate'">
-                <h3>for translate()</h3>
-              </div>
-
+            <div class="divCheckboxParams">
+              <label v-show="showNumberInput">
+                <input type="checkbox" name="numberEntry" value="" v-model="numberEntry">
+                Entry is a number
+              </label>
+              <label v-show="activeFunction === 'contains'">
+                <input type="checkbox" name="translateString" v-model="translateString">
+                Translate the string
+              </label>
             </div>
-          </div>
+            <div class="divStringParam">
+              <label>
+                <input type="text" name="parameterString" v-model="parameterString"  @keyup.enter="addParameters($event)">
+                Enter value
+              </label>
+            </div>
+            <div class="divAlert">
+              {{paramAlert}}
+            </div>
+
+          </div> <!-- End of parameters -->
 
         </section>
         <!-- End of section Options -->
@@ -687,7 +642,7 @@
 
 
 
-        addOperators(){
+        addOperators(event){
           this.zeroProperties(event.target.name);
           let operatorsRegex = /and|or|\||=|!=|\+|-|\*|div|<|<=|>|>=|mod/;
           if (this.functionsCounter !== 0 && !operatorsRegex.test(this.functionsSequenceArr[this.functionsSequenceArr.length - 1])) {
@@ -731,19 +686,57 @@
 
 
 
-
+        /*
+        boolean( expression )
+        ceiling(number )
+        choose( boolean , object1, object2 )
+        concat(string1 ,string2 [,stringn]* )
+        contains(haystack, needle)
+        count(node-set )
+        element-available(QName )
+        false()
+        floor( number )
+        function-available(name )
+        lang(string )
+        last()
+        local-name( [node-set] )
+        name( [node-set] )
+        namespace-uri( [node-set] )
+        normalize-space( [string] )
+        not(expression )
+        number( [object] )
+        position()
+        round(decimal )
+        starts-with(haystack, needle)
+        string( [object] )
+        string-length( [string] )
+        substring(string ,start [,length] )
+        substring-after(haystack ,needle )
+        substring-before(haystack ,needle )
+        sum(node-set )
+        translate(string, abc, XYZ)
+        true()
+        */
         //Adds a function name with parenthesis ( in the functionsSequenceArr
         addFunction(event){
           this.zeroProperties(event.target.name);
           console.log("In add function. The counter before the addition is:", this.functionsCounter);
-          this.functionsSequenceArr.push(event.target.value + "("); //Array with all the functions and params
-          this.activeFunctionArr.push(event.target.value); //Array with the functions sequence
-          this.functionsCounter ++;
+          if (event.target.value === "false" ||
+              event.target.value === "last" ||
+              event.target.value === "position" ||
+              event.target.value === "true") {
+            this.functionsSequenceArr.push(event.target.value + "()"); //Array with all the functions and params
+          }
+          else {
+            this.functionsSequenceArr.push(event.target.value + "(");
+            this.activeFunctionArr.push(event.target.value);
+            this.functionsCounter ++;
+          }
         },
 
 
 
-        addParameters(){
+        addParameters(event){
 
           if (this.operator !== "") {
             if(this.functionsCounter > 0){
@@ -858,6 +851,7 @@
           // this.activeFunction = "";
           this.translateString = true;
           this.numberEntry = false;
+          this.paramAlert = "";
           if(eventName !== "attribute") this.attribute = "";
           if(eventName !== "parameterString") this.parameterString = "";
         } //End of zero properties
@@ -871,6 +865,12 @@
 
         functionsSequenceArrJoin(){
           return this.functionsSequenceArr.join("");
+        },
+
+        showNumberInput(){
+          return this.activeFunction === "boolean" ||
+          this.activeFunction === "sum" ?
+          true : false;
         }
       } //end of computed properties
     });

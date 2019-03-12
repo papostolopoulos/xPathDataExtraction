@@ -2179,6 +2179,400 @@ MOTHER
   }
 }
 
+/* CHICK-FIL-A email.chick-fil-a.com */
+{
+  "extract": {
+    "edgeRules": [],
+    "entityNS": null,
+    "entityRules": [
+      {
+        "attributes": [],
+        "entityIdRef": "",
+        "id": "f66018c8-423b-459b-b55a-c639d92daf68",
+        "javascript": null,
+        "locations": [
+          "/"
+        ],
+        "repeating": true,
+        "type": "http://schema.org/Coupon"
+      }
+    ],
+    "extractEmbedded": false,
+    "schema": [
+      {
+        "context": {
+          "@type": [
+            "Coupon"
+          ]
+        },
+        "ns": "http://schema.org",
+        "url": "http://ws.rmf.yahoo.com:4080/rmf/v1/schema?type=schema.org&name=y.2.0&format=json"
+      }
+    ],
+    "source": null
+  },
+  "extractLn": {
+    "edgeRules": [
+      {
+        "cardinality": "ONE_TO_ONE",
+        "from": {
+          "entityRule": "b4917ca5-ee83-4569-87c7-37feef5474af",
+          "matchAttr": null
+        },
+        "predicate": "http://schema.org/broker",
+        "to": {
+          "entityRule": "b4917ca5-ee83-4569-87c7-37feef5474au",
+          "matchAttr": null
+        }
+      },
+      {
+        "cardinality": "ONE_TO_ONE",
+        "from": {
+          "entityRule": "b4917ca5-ee83-4569-87c7-37feef5474af",
+          "matchAttr": null
+        },
+        "predicate": "http://schema.org/image",
+        "to": {
+          "entityRule": "b4917ca5-ee83-4569-87c7-37feef5474aj",
+          "matchAttr": null
+        }
+      }
+    ],
+    "entityRules": [
+      {
+        "attributes": [
+          {
+            "blackList": [],
+            "concat": "true",
+            "dataTypes": [
+              "Text"
+            ],
+            "javascript": "function transform(data){\n  var negRegexArr = [\n    //unsubscribe\n    /unsubscribe/,\n    //offer (valid | expires | ends)\n    //offer\\s*(valid|expires|ends)/i,\n    //valid (through | until)\n    //valid\\s*(through|until|only)/i,\n    //credit approval\n    /credit\\s*approval/i\n  ];\n\n  for (var i = 0; i < negRegexArr.length; i++) {\n    if (negRegexArr[i].test(data)) return null;\n  }\n\n\n  var posRegexArr = [\n    // Valid for\n    /Valid\\s*for/,\n    // free\n    /free/i,\n    //on us\n    /on\\s*us/i,\n    //bogo | buy one, get one\n    /BOGO|Buy\\s*one,?\\s*get\\s*one/i,\n  ];\n\n  for (var j = 0; j < posRegexArr.length; j++) {\n    if (posRegexArr[j].test(data)) return data.length > 80 ? minimizeMe(data, posRegexArr[j]) : cleanMe(data);\n  }\n\n  return null;\n}\n\n\n\n\n\nfunction minimizeMe(str, reg){\n  var punctuation = [\". \", \"! \", \"| \", \"? \",\"® \",\"- \"]; //Punctuation symbols\n\n  //STAGE 1 - Slice text at the beginning of string\n  var sliceStr = str.slice(0, str.indexOf(str.match(reg)[0])); //Create a substring from the beginning of string up to the beginning of the .match()\n  var sliceStart = 0; //Define a variable where the slice at the beginning of the initial string will happen.\n\n\n  //Iterate through the punctuation symbols.\n  //If the last Index position of the punctuation is larger than the sliceStart variable,\n  //then make the variable equal to the last index position.\n  //That will be later used to slice the string at its beginning\n  for (var i = 0; i < punctuation.length; i++) {\n    if(sliceStr.lastIndexOf(punctuation[i]) > sliceStart) sliceStart = sliceStr.lastIndexOf(punctuation[i]);\n  }\n  //Slice the string from the beginning of the last punctuation mark but before the coupon description.\n  if(sliceStart > 0) str = str.slice(sliceStart + 1).trim();\n\n\n\n\n  //STAGE 2 - Slice text at the end of string\n  var sliceEnd = +Infinity;\n  //Iterate through the punctuation symbols.\n  //If the punctuation symbol's index position is smaller than the sliceEnd variable, then\n  //make the sliceEnd variable equal to the index position of the punctuation.\n  //The sliceEnd will be used as the position where the slicing of the string will happen at it's end.\n  for (var j = 0; j < punctuation.length; j++) {\n    if (str.indexOf(punctuation[j]) < sliceEnd && str.indexOf(punctuation[j]) !== -1) sliceEnd = str.indexOf(punctuation[j]);\n  }\n  //Slice the end of the string\n  str = str.slice(0, sliceEnd).trim();\n\n\n\n\n\n  //STAGE 3 - Remove unecessary characters from the end of the string.\n  return cleanMe(str);\n}\n\n\nfunction cleanMe(string) {\n  while(\"*©®ǂ‡†±→§™¹›∞•◊ΔÐð_\".indexOf(string[string.length-1]) !== -1) string = string.slice(0, string.length-1);\n  while(\"*©®ǂ‡†±→§™¹›∞•◊ΔÐð_\".indexOf(string[0]) !== -1) string = string.slice(1);\n\n  return string;\n}",
+            "listOfValidNodeTypes": [
+              {
+                "name": "TEXT",
+                "type": "node"
+              },
+              {
+                "name": "ALT",
+                "type": "attr"
+              },
+              {
+                "name": "HREF",
+                "type": "attr"
+              }
+            ],
+            "location": [
+              {
+                "xpath": ""
+              }
+            ],
+            "mandatory": "true",
+            "maxLength": "200",
+            "minLength": "4",
+            "allowEmpty": "false",
+            "name": "http://schema.org/description",
+            "whiteList": [
+              {
+                "value": "$",
+                "type": "SUBSTRING"
+              },
+              {
+                "value": "%",
+                "type": "SUBSTRING"
+              },
+              {
+                "value": "(?i)fre{2}",
+                "type": "REGEX"
+              },
+              {
+                "value": "(?i)on\\s*us",
+                "type": "REGEX"
+              },
+              {
+                "value": "(?:)earn\\s*points",
+                "type": "REGEX"
+              },
+              {
+                "value": "(?i)offer\\s*valid",
+                "type": "REGEX"
+              },
+              {
+                "value": "Valid\\s*for",
+                "type": "REGEX"
+              },
+              {
+                "value": "(?i)BOGO",
+                "type": "REGEX"
+              },
+              {
+                "value": "(?i)mobile\\s*order",
+                "type": "REGEX"
+              },
+              {
+                "value": "(?i)BUY\\s*ONE,?\\s*GET\\s*ONE\\s*FREE",
+                "type": "REGEX"
+              }
+            ]
+          },
+          {
+            "blackList": [
+              {
+                "type": "SUBSTRING",
+                "value": "sale ends"
+              },
+              {
+                "type": "SUBSTRING",
+                "value": "valid through"
+              },
+              {
+                "type": "SUBSTRING",
+                "value": "ends"
+              }
+            ],
+            "dataTypes": [
+              "DateTime"
+            ],
+            "javascript": "function transform(data) {if (data) {var monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];var regex = /(\\s*\\d+)\\/(\\s*\\d+)/i;var match = regex.exec(data);if (match && match[1]) {return monthNames[match[1] - 1] + ', ' + match[2];}else{return data;}}return null;}",
+            "listOfValidNodeTypes": null,
+            "location": null,
+            "mandatory": "true",
+            "maxLength": -1,
+            "minLength": -1,
+            "name": "http://schema.org/validThrough"
+          },
+          {
+            "blackList": [
+              {
+                "type": "SUBSTRING",
+                "value": "sale ends"
+              },
+              {
+                "type": "SUBSTRING",
+                "value": "valid through"
+              },
+              {
+                "type": "SUBSTRING",
+                "value": "ends"
+              }
+            ],
+            "dataTypes": [
+              "DateTime"
+            ],
+            "javascript": "function transform(data) {if (data) {var monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];var regex = /(\\s*\\d+)\\/(\\s*\\d+)/i;var match = regex.exec(data);if (match && match[1]) {return monthNames[match[1] - 1] + ', ' + match[2];}else{return data;}}return null;}",
+            "listOfValidNodeTypes": null,
+            "location": null,
+            "mandatory": "true",
+            "maxLength": -1,
+            "minLength": -1,
+            "name": "http://schema.org/validFrom"
+          },
+          {
+            "blackList": [
+              {
+                "type": "REGEX",
+                "value": "\\$.*off$"
+              }
+            ],
+            "dataTypes": [
+              "Number"
+            ],
+            "javascript": null,
+            "listOfValidNodeTypes": null,
+            "location": null,
+            "mandatory": "true",
+            "maxLength": -1,
+            "minLength": -1,
+            "name": "http://schema.org/offerPrice",
+            "whiteList": [
+              {
+                "type": "SUBSTRING",
+                "value": "Free shipping"
+              }
+            ]
+          },
+          {
+            "blackList": [
+              {
+                "type": "REGEX",
+                "value": "\\$.*off$"
+              }
+            ],
+            "dataTypes": [
+              "Number"
+            ],
+            "javascript": null,
+            "listOfValidNodeTypes": null,
+            "location": null,
+            "mandatory": "true",
+            "maxLength": -1,
+            "minLength": -1,
+            "name": "http://schema.org/originalPrice",
+            "whiteList": [
+              {
+                "type": "SUBSTRING",
+                "value": "Free shipping"
+              }
+            ]
+          },
+          {
+            "blackList": null,
+            "dataTypes": [
+              "Text"
+            ],
+            "javascript": "function transform(data){content=data.trim();if(content&&content.startsWith('C$')){return'CAD'}else if(content&&content.startsWith('$')){return'USD'}else{return null}};",
+            "listOfValidNodeTypes": null,
+            "location": null,
+            "mandatory": "true",
+            "maxLength": -1,
+            "minLength": -1,
+            "name": "http://schema.org/priceCurrency",
+            "whiteList": null
+          },
+          {
+            "blackList": null,
+            "dataTypes": [
+              "Text"
+            ],
+            "javascript": "",
+            "listOfValidNodeTypes": null,
+            "location": null,
+            "mandatory": "true",
+            "maxLength": -1,
+            "minLength": -1,
+            "name": "http://schema.org/url",
+            "whiteList": null
+          }
+        ],
+        "bundleInfo": {
+          "minBundleSize": "-1",
+          "maxBundleSize": "-1",
+          "minLeafNodesSize": "-1",
+          "maxLeafNodesSize": "-1",
+          "maxDepth": "-1",
+          "defaultPatternAnnotationThreshold": "0.8",
+          "linkThreshold": "5",
+          "listOfValidNodeTypes": [],
+          "linkMatcher": [
+            {
+              "regex": "http\\:\\/\\/trk\\.chick-fil-a\\.com\\/.*"
+            },
+            {
+              "regex": "https\\:\\/\\/events\\.my\\.chick-fil-a\\.com.*"
+            }
+          ]
+        },
+        "id": "b4917ca5-ee83-4569-87c7-37feef5474af",
+        "javascript": null,
+        "type": "http://schema.org/Coupon"
+      },
+      {
+        "attributes": [
+          {
+            "dataTypes": [
+              "Text"
+            ],
+            "javascript": null,
+            "location": [
+              {
+                "xpath": "\"Chick-fil-A\""
+              }
+            ],
+            "mandatory": "true",
+            "name": "http://schema.org/name",
+            "minLength": "",
+            "maxLength": "",
+            "whiteList": [],
+            "blackList": [],
+            "listOfValidNodeTypes": []
+          }
+        ],
+        "bundleInfo": {
+          "clusterAlgo": {
+            "endIdx": -1,
+            "regex": "",
+            "replaceInfo": [
+              {
+                "regexStr": "",
+                "replaceAll": "true",
+                "replacement": ""
+              }
+            ],
+            "startIdx": 0,
+            "type": "SUBSTRING"
+          },
+          "linkMatcher": [
+            {
+              "regex": ".*"
+            }
+          ],
+          "listOfValidNodeTypes": null,
+          "maxBundleSize": -1,
+          "maxDepth": -1,
+          "maxLeafNodesSize": -1,
+          "minBundleSize": -1,
+          "minLeafNodesSize": -1,
+          "defaultPatternAnnotationThreshold": 0.8,
+          "linkThreshold": 2
+        },
+        "id": "b4917ca5-ee83-4569-87c7-37feef5474au",
+        "javascript": null,
+        "type": "http://schema.org/Organization"
+      },
+      {
+        "attributes": [
+          {
+            "blackList": null,
+            "dataTypes": [
+              "Text"
+            ],
+            "javascript": "",
+            "listOfValidNodeTypes": null,
+            "location": null,
+            "mandatory": "true",
+            "maxLength": -1,
+            "minLength": -1,
+            "name": "http://schema.org/url",
+            "whiteList": null
+          }
+        ],
+        "bundleInfo": {
+          "clusterAlgo": {
+            "endIdx": -1,
+            "regex": "",
+            "replaceInfo": [
+              {
+                "regexStr": "",
+                "replaceAll": "true",
+                "replacement": ""
+              }
+            ],
+            "startIdx": 0,
+            "type": "SUBSTRING"
+          },
+          "linkMatcher": null,
+          "listOfValidNodeTypes": null,
+          "maxBundleSize": -1,
+          "maxDepth": -1,
+          "maxLeafNodesSize": -1,
+          "minBundleSize": -1,
+          "minLeafNodesSize": -1,
+          "linkThreshold": 2,
+          "defaultPatternAnnotationThreshold": 0.8
+        },
+        "id": "b4917ca5-ee83-4569-87c7-37feef5474aj",
+        "javascript": null,
+        "type": "http://schema.org/ImageObject"
+      }
+    ]
+  },
+  "metaData": {
+    "debug": "true",
+    "linkAlgoHandler": "LinkExtractor15",
+    "decodeHtmlEntity": "true"
+  }
+}
+
 /* ELF COSMETICS e.elfcosmetics.com */
 {
   "extract": {
