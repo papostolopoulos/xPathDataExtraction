@@ -1,500 +1,349 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic" rel="stylesheet" type="text/css">
-		<link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700" rel="stylesheet" type="text/css">
-		<style type="text/css">
-			@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic);
-			@import url(https://fonts.googleapis.com/css?favmily=Open+Sans+Condensed:300,300italic,700);
-			[style*="Open Sans"] { font-family: 'Open Sans', Arial, sans-serif !important; }
-			[style*="Open Sans Condensed"] { font-family: 'Open Sans Condensed', Arial, sans-serif !important; }
-			/* Reset Styles */
-			#outlook a {padding:0;}
-			body {width: 100% !important;-webkit-text-size-adjust: none; -ms-text-size-adjust: none; margin: 0;padding: 0;}
-			.ReadMsgBody {width: 100%;}
-			.ExternalClass {width: 100%;}
-			.backgroundTable {margin: 0 auto;padding: 0;width: 100% !important;}
-			table td {border-collapse: collapse;}
-			.ExternalClass * {line-height: 115%;}
-			.desktopHide {display: none !important;}
-			/* Mobile Styles */
-			@media only screen and (max-width : 480px) {
-			/********** CUSTOM STYLES ***********/
-			.mobileStack th { width:100% !important; display:block !important; }
-			.mobileLogo { width:300px !important; height:auto !important; }
-			.padding2 { padding:2px !important; }
-			.padding5 { padding:5px !important; }
-			/* Footer Nav */
-			.footer-nav a {
-			display: block !important;
-			width: 100%;
-			padding: 15px 0 !important;
-			border-top: 1px solid #CCCCCC !important;
-			border-right: 0 !important;
-			border-left: 0 !important;
-			}
-			.footer-nav, .footer-nav tbody, .footer-nav tr, .footer-nav td {width: 100% !important;max-height: inherit !important;
-			overflow: visible !important;display: block !important;float: none !important;}
-			.footer-nav table {display: table !important;width:100% !important;}
-			.footer-nav tbody {display: table !important;}
-			.footer-nav tr {display: table-row !important;}
-			.footer-nav td {display: table-cell !important;}
-			/****** Add Custom Styles Here ******/
-			/* General Styles */
-			.container {width: 100% !important;overflow: hidden;}
-			.mobileHide {display: none !important;}
-			.displayInlineBlock {display: inline-block;}
-			.fullWidth {width: 100% !important;height: auto;}
-			.halfWidth {width: 50% !important;height: auto;}
-			.floatLeft {float: left;}
-			.floatRight {float: right;}
-			.heightAuto {height: auto;}
-			/* Images */
-			.fullWidthImg img {width: 100% !important;height: auto;}
-			.fullImg {width: 100% !important;}
-			/* Buttons */
-			.fullWidthBtn {width: 100% !important;height: auto;border-left: 0 none !important;
-			border-right: 0 none !important;padding-left: 0 !important;padding-right: 0 !important;}
-			/* Text */
-			.mobileAlignCenter {text-align: center !important;margin: auto;float: none;}
-			.mobileAlignLeft {text-align: left !important;}
-			.copy13 {font-size: 13px !important;line-height: 1.5 !important;}
-			.copy14 {font-size: 14px !important;line-height: 1.5 !important;}
-			.copy16 {font-size: 16px !important;line-height: 1.5 !important;}
-			.copy18 {font-size: 18px !important;line-height: 1.5 !important;}
-			.copy21 {font-size: 21px !important;line-height: 1.5 !important;}
-			.copy24 {font-size: 24px !important;line-height: 1.5 !important;}
-			.copy30 {font-size: 30px !important;line-height: 1.5 !important;}
-			.copy45 {font-size: 45px !important;line-height: 1.5 !important;}
-			.copy60 {font-size: 60px !important;line-height: 1.5 !important;}
-			.copy90 {font-size: 90px !important;line-height: 1.5 !important;}
-			/* Borders */
-			.borderTop {border-top: 1px solid #cccccc;}
-			.borderTopBold {border-top: 2px solid #559EBF;}
-			.borderBottom {border-bottom: 1px solid #cccccc;}
-			.borderBottomBold {border-bottom: 2px solid #559EBF;}
-			.borderNone {border: 0 none !important;}
-			.borderTopNone {border-top: 0 none !important;}
-			.borderRightNone {border-right: 0 none !important;}
-			.borderBottomNone {border-bottom: 0 none !important;}
-			.borderLeftNone {border-left: 0 none !important;}
-			/* Padding */
-			.contentPadding {padding-left: 10px !important;padding-right: 10px !important;}
-			.contentPadding20 {padding-left: 20px !important;padding-right: 20px !important;}
-			.contentPadding40 {padding-left: 20px !important;padding-right: 40px !important;}
-			.paddingNone {padding: 0 !important;}
-			.paddingLeft0 {padding-left: 0 !important;}
-			.paddingRight0 {padding-right: 0 !important;}
-			.paddingTop0 {padding-top: 0 !important;}
-			.paddingTop2 {padding-top: 2px !important;}
-			.paddingTop5 {padding-top: 5px !important;}
-			.paddingTop10 {padding-top: 10px !important;}
-			.paddingTop15 {padding-top: 15px !important;}
-			.paddingTop20 {padding-top: 20px !important;}
-			.paddingTop25 {padding-top: 25px !important;}
-			.paddingTop30 {padding-top: 30px !important;}
-			.paddingBottom0 {padding-bottom: 0 !important;}
-			.paddingBottom2 {padding-bottom: 2px !important;}
-			.paddingBottom5 {padding-bottom: 5px !important;}
-			.paddingBottom10 {padding-bottom: 10px !important;}
-			.paddingBottom15 {padding-bottom: 15px !important;}
-			.paddingBottom20 {padding-bottom: 20px !important;}
-			.paddingBottom25 {padding-bottom: 25px !important;}
-			.paddingBottom30 {padding-bottom: 30px !important;}
-			/* Mobile Show */
-			.mobileShow, .mobileShow tbody, .mobileShow tr, .mobileShow td {width: 100% !important;
-			max-height: inherit !important;overflow: visible !important;display: block !important;
-			float: none !important;}
-			.mobileShow table {display: table !important;width:100% !important;}
-			.mobileShow tbody {display: table !important;}
-			.mobileShow tr {display: table-row !important;}
-			.mobileShow td {display: table-cell !important;}
-			/* Reset Styles */
-			body {margin:0 !important;}
-			div[style*="margin: 16px 0"] {margin:0 !important;}
-			}
-		</style>
-		<title>Quartermaster</title>
-	</head>
-	<body style="zoom: 100%;">
-		<table width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ebebeb">
-			<tbody>
-				<tr>
-					<td class="paddingLeft0 paddingRight0" align="center">
-					<table class="container" width="600" cellspacing="0" cellpadding="0" border="0" align="center">
-						<tbody>
-							<tr>
-								<td align="center">
-								<!-- Preheader -->
-								<table class="mobileHide" width="100%" cellspacing="0" cellpadding="0" border="0">
-									<tbody>
-										<tr>
-											<td style="font-family:Arial, Helvetica, sans-serif; font-size:11px; color:#666666; padding:10px 0;" align="center">Come back today and take advantage of this offer | <a href="http://links.mail.qmuniforms.com/q/ntxry1J9gVep_WzPWTw0hUJLTAYnifpEbI6SwKaeEAq-mPDQLSAkOUHJx" title="View in Browser" target="_blank" style="color:#666666; text-decoration:underline;"><strong style="font-weight:normal;">View in Browser</strong></a></td>
-										</tr>
-									</tbody>
-								</table>
-								<!-- Preheader END -->
-								<!-- Containing Table (white background) -->
-								<table width="100%" cellspacing="0" cellpadding="0" border="0">
-									<tbody>
-										<tr>
-											<td class="" style="background-color:#ffffff;" align="center">
-											<!-- Logo -->
-											<table width="100%" cellspacing="0" cellpadding="0" border="0">
-												<tbody>
-													<tr>
-														<td style="padding:15px 0;" align="center">
-														<a href="http://links.mail.qmuniforms.com/q/NNXomyWshR70XZDqYHF2yqgfSXw_5kSdXorZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiA9ygpwCGUda2L5oSaBxq7ZEvEvKQ" title="Quartermaster" target="_blank"><img class="mobileLogo" src="http://media.email-galls.com/5167/Shared/responsive_template/qm_logo.png" alt="Quartermaster" style="font-family: Arial,Helvetica,sans-serif; font-size: 30px; display: block;" width="300" height="" border="0"></a>
-														</td>
-													</tr>
-												</tbody>
-											</table>
-											<!-- Logo END -->
-											<!-- Navigation -->
-											<table class="mobileHide" style="background-color:#3d3e3f;" width="640px" cellspacing="0" cellpadding="0" border="0">
-												<tbody>
-													<tr>
-														<td style="background-color:#3d3e3f;" align="center">
-														<table width="600px" cellspacing="0" cellpadding="0" border="0">
-															<tbody>
-																<tr>
-																	<td style="font-family:Arial, Helvetica, sans-serif, 'Open Sans'; font-size:0px;" width="100px" align="center">
-																	<a href="http://links.mail.qmuniforms.com/q/00X1MKcplTm0XD8b1uLt1u2OQ6I7ZsZDbb6ZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiAHsLUSroMcrlL4aFF7yv1DlBjF1A" title="Categories" target="_blank" style="font-size:14px; color:#ffffff; text-decoration:none; display:inline-block; white-space:nowrap; padding:10px; border:1px solid #3d3e3f;"><strong style="font-weight:normal;">CATEGORIES</strong></a>
-																	</td>
-																	<td style="font-family:Arial, Helvetica, sans-serif, 'Open Sans'; font-size:0px;" width="100px" align="center">
-																	<a href="http://links.mail.qmuniforms.com/q/ZLARejp937l0Xv9RA9KiMP6rD0sRdMKCEFKZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiAIv6JJ4M5dZ-LvRAjfr8lKNiT5iQ" title="Brands" target="_blank" style="font-size:14px; color:#ffffff; text-decoration:none; display:inline-block; white-space:nowrap; padding:10px; border:1px solid #3d3e3f;"><strong style="font-weight:normal;">BRANDS</strong></a>
-																	</td>
-																	<td style="font-family:Arial, Helvetica, sans-serif, 'Open Sans'; font-size:0px;" width="100px" align="center">
-																	<a href="http://links.mail.qmuniforms.com/q/IlWJtEcwdLI0XSVWued1KK_kzjRwuXJ7ZchZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiA8PnkxkMQeKTL6oDxqjJgo3Pb-5A" title="Clothing" target="_blank" style="font-size:14px; color:#ffffff; text-decoration:none; display:inline-block; white-space:nowrap; padding:10px; border:1px solid #3d3e3f;"><strong style="font-weight:normal;">CLOTHING</strong></a>
-																	</td>
-																	<td style="font-family:Arial, Helvetica, sans-serif, 'Open Sans'; font-size:0px;" width="100px" align="center">
-																	<a href="http://links.mail.qmuniforms.com/q/X_oWY9g_bGO0XMaOkQFnHY32mdA2etYajaPZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiAhLzLecbccqaLxNGllhKu81IK7yw" title="Footwear" target="_blank" style="font-size:14px; color:#ffffff; text-decoration:none; display:inline-block; white-space:nowrap; padding:10px; border:1px solid #3d3e3f;"><strong style="font-weight:normal;">FOOTWEAR</strong></a>
-																	</td>
-																	<td style="font-family:Arial, Helvetica, sans-serif, 'Open Sans'; font-size:0px;" width="100px" align="center">
-																	<a href="http://links.mail.qmuniforms.com/q/6r6alj8ZM4D0X_RzcH6B7ybt3PexTLffQOdZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiARZNR4V8reo5LwoEcum9CyO0OUUQ" title="Equipment" target="_blank" style="font-size:14px; color:#ffffff; text-decoration:none; display:inline-block; white-space:nowrap; padding:10px; border:1px solid #3d3e3f;"><strong style="font-weight:normal;">EQUIPMENT</strong></a>
-																	</td>
-																	<td style="font-family:Arial, Helvetica, sans-serif, 'Open Sans'; font-size:0px;" width="100px" align="center">
-																	<a href="http://links.mail.qmuniforms.com/q/BJzFrdimlBw0XksGRo5H39jbqQ19OB6K-iSZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiAc9gfnJwWf4BLnUjOFjaI_6nXfHw" title="Web Specials" target="_blank" style="font-size:14px; color:#ffffff; text-decoration:none; display:inline-block; white-space:nowrap; padding:10px; border:1px solid #3d3e3f;"><strong style="font-weight:normal;">CLEARANCE</strong></a>
-																	</td>
-																</tr>
-															</tbody>
-														</table>
-														</td>
-													</tr>
-												</tbody>
-											</table>
-											<!-- Navigation END -->
-											<!-- Hero -->
-											<table>
-												<tbody>
-													<tr>
-														<td>&nbsp;
-														</td>
-													</tr>
-												</tbody>
-											</table>
-											<table style="text-align: left; border-collapse: collapse;" width="600" cellspacing="0" cellpadding="0" border="0" align="center">
-												<tbody>
-													<tr>
-														<td width="600" align="center">
-														<a href="http://links.mail.qmuniforms.com/q/C2iofJrV0Ia0XJO8vySeQlRLZ0I9reJD8BKZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiAApwiufr6dJBL22Cl0mm-nkgSbIg" target="_blank" title="QMLIFE3">
-														<img src="http://media.email-galls.com/5167/Users/16328/12017/QM/LifeCycle/120day.jpg" alt="QMLIFE3" style="display: inline-block;" width="600" height="auto"></a>
-														</td>
-													</tr>
-												</tbody>
-											</table>
-											<table width="600" cellspacing="0" cellpadding="0" border="0">
-												<tbody>
-													<tr>
-														<td>
-														<table width="0" height="460" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff">
-															<tbody>
-																<tr>
-																	<td width="600" height="20">
-																	<img src="http://recs.listrakbi.com/image/5121ba15-41b5-4aa4-9b75-f9e17be67bdb/d5ed2b0d-b0db-4095-8f66-4cd533dc0d44/b32bd125-fa54-4427-801b-105eb3c1e012/0/0/600/20/email/isomcurtis@yahoo.com" alt="Product" style="display: block;" width="600" height="20" border="0">
-																	</td>
-																</tr>
-																<tr>
-																	<td width="600" height="198">
-																	<table width="100%" height="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff">
-																		<tbody>
-																			<tr>
-																				<td width="19" height="198">
-																				<img src="http://recs.listrakbi.com/image/5121ba15-41b5-4aa4-9b75-f9e17be67bdb/d5ed2b0d-b0db-4095-8f66-4cd533dc0d44/b32bd125-fa54-4427-801b-105eb3c1e012/0/20/19/198/email/isomcurtis@yahoo.com" alt="Product" style="display: block;" width="19" height="198" border="0">
-																				</td>
-																				<td width="172" height="198">
-																				<table width="100%" height="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff">
-																					<tbody>
-																						<tr>
-																							<td width="172" height="198">
-																							<a href="http://links.mail.qmuniforms.com/q/Mgn46iJopaO0XgVy71D5q49BL6-2lzFm8ZXZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiAO4IAn4ePd6CL_dFlqHIr-1T2FAA" target="_blank" title="Product">
-																							<img src="http://recs.listrakbi.com/image/5121ba15-41b5-4aa4-9b75-f9e17be67bdb/d5ed2b0d-b0db-4095-8f66-4cd533dc0d44/b32bd125-fa54-4427-801b-105eb3c1e012/19/20/172/198/email/isomcurtis@yahoo.com" alt="Product" style="display: block;" width="172" height="198" border="0">
-																							</a>
-																							</td>
-																						</tr>
-																					</tbody>
-																				</table>
-																				</td>
-																				<td width="22" height="198">
-																				<img src="http://recs.listrakbi.com/image/5121ba15-41b5-4aa4-9b75-f9e17be67bdb/d5ed2b0d-b0db-4095-8f66-4cd533dc0d44/b32bd125-fa54-4427-801b-105eb3c1e012/191/20/22/198/email/isomcurtis@yahoo.com" alt="Product" style="display: block;" width="22" height="198" border="0">
-																				</td>
-																				<td width="172" height="198">
-																				<table width="100%" height="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff">
-																					<tbody>
-																						<tr>
-																							<td width="172" height="198">
-																							<a href="http://links.mail.qmuniforms.com/q/6jCSRLyzq4j0XKmNWJKomQ6A9yHZ1_zvcMmZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiADcaoIb6fd6YL9Ey0AESUAyAvBqA" target="_blank" title="Product">
-																							<img src="http://recs.listrakbi.com/image/5121ba15-41b5-4aa4-9b75-f9e17be67bdb/d5ed2b0d-b0db-4095-8f66-4cd533dc0d44/b32bd125-fa54-4427-801b-105eb3c1e012/213/20/172/198/email/isomcurtis@yahoo.com" alt="Product" style="display: block;" width="172" height="198" border="0">
-																							</a>
-																							</td>
-																						</tr>
-																					</tbody>
-																				</table>
-																				</td>
-																				<td width="22" height="198">
-																				<img src="http://recs.listrakbi.com/image/5121ba15-41b5-4aa4-9b75-f9e17be67bdb/d5ed2b0d-b0db-4095-8f66-4cd533dc0d44/b32bd125-fa54-4427-801b-105eb3c1e012/385/20/22/198/email/isomcurtis@yahoo.com" alt="Product" style="display: block;" width="22" height="198" border="0">
-																				</td>
-																				<td width="172" height="198">
-																				<table width="100%" height="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff">
-																					<tbody>
-																						<tr>
-																							<td width="172" height="198">
-																							<a href="http://links.mail.qmuniforms.com/q/MZybQB--Ju30XkE7PBt9HOJr2fG7tgChzPRZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiAqt745mVseYiLdi_49576maqzZ-A" target="_blank" title="Product">
-																							<img src="http://recs.listrakbi.com/image/5121ba15-41b5-4aa4-9b75-f9e17be67bdb/d5ed2b0d-b0db-4095-8f66-4cd533dc0d44/b32bd125-fa54-4427-801b-105eb3c1e012/407/20/172/198/email/isomcurtis@yahoo.com" alt="Product" style="display: block;" width="172" height="198" border="0">
-																							</a>
-																							</td>
-																						</tr>
-																					</tbody>
-																				</table>
-																				</td>
-																				<td width="21" height="198">
-																				<img src="http://recs.listrakbi.com/image/5121ba15-41b5-4aa4-9b75-f9e17be67bdb/d5ed2b0d-b0db-4095-8f66-4cd533dc0d44/b32bd125-fa54-4427-801b-105eb3c1e012/579/20/21/198/email/isomcurtis@yahoo.com" alt="Product" style="display: block;" width="21" height="198" border="0">
-																				</td>
-																			</tr>
-																		</tbody>
-																	</table>
-																	</td>
-																</tr>
-																<tr>
-																	<td width="600" height="24">
-																	<img src="http://recs.listrakbi.com/image/5121ba15-41b5-4aa4-9b75-f9e17be67bdb/d5ed2b0d-b0db-4095-8f66-4cd533dc0d44/b32bd125-fa54-4427-801b-105eb3c1e012/0/218/600/24/email/isomcurtis@yahoo.com" alt="Product" style="display: block;" width="600" height="24" border="0">
-																	</td>
-																</tr>
-																<tr>
-																	<td width="600" height="198">
-																	<table width="100%" height="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff">
-																		<tbody>
-																			<tr>
-																				<td width="19" height="198">
-																				<img src="http://recs.listrakbi.com/image/5121ba15-41b5-4aa4-9b75-f9e17be67bdb/d5ed2b0d-b0db-4095-8f66-4cd533dc0d44/b32bd125-fa54-4427-801b-105eb3c1e012/0/242/19/198/email/isomcurtis@yahoo.com" alt="Product" style="display: block;" width="19" height="198" border="0">
-																				</td>
-																				<td width="172" height="198">
-																				<table width="100%" height="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff">
-																					<tbody>
-																						<tr>
-																							<td width="172" height="198">
-																							<a href="http://links.mail.qmuniforms.com/q/pa8jDdB24fa0X9QgGe3S7jYCbNXUIzl3YY-ZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiAuTZ6p9NzcLhLohtky6GG5XL8xeg" target="_blank" title="Product">
-																							<img src="http://recs.listrakbi.com/image/5121ba15-41b5-4aa4-9b75-f9e17be67bdb/d5ed2b0d-b0db-4095-8f66-4cd533dc0d44/b32bd125-fa54-4427-801b-105eb3c1e012/19/242/172/198/email/isomcurtis@yahoo.com" alt="Product" style="display: block;" width="172" height="198" border="0">
-																							</a>
-																							</td>
-																						</tr>
-																					</tbody>
-																				</table>
-																				</td>
-																				<td width="22" height="198">
-																				<img src="http://recs.listrakbi.com/image/5121ba15-41b5-4aa4-9b75-f9e17be67bdb/d5ed2b0d-b0db-4095-8f66-4cd533dc0d44/b32bd125-fa54-4427-801b-105eb3c1e012/191/242/22/198/email/isomcurtis@yahoo.com" alt="Product" style="display: block;" width="22" height="198" border="0">
-																				</td>
-																				<td width="172" height="198">
-																				<table width="100%" height="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff">
-																					<tbody>
-																						<tr>
-																							<td width="172" height="198">
-																							<a href="http://links.mail.qmuniforms.com/q/LlQoJZgCs9y0XgKLlE2yEBH3vaYtSiFZLyfZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiArISMu7wbfL5LCUwyTw7nvMqqDjA" target="_blank" title="Product">
-																							<img src="http://recs.listrakbi.com/image/5121ba15-41b5-4aa4-9b75-f9e17be67bdb/d5ed2b0d-b0db-4095-8f66-4cd533dc0d44/b32bd125-fa54-4427-801b-105eb3c1e012/213/242/172/198/email/isomcurtis@yahoo.com" alt="Product" style="display: block;" width="172" height="198" border="0">
-																							</a>
-																							</td>
-																						</tr>
-																					</tbody>
-																				</table>
-																				</td>
-																				<td width="22" height="198">
-																				<img src="http://recs.listrakbi.com/image/5121ba15-41b5-4aa4-9b75-f9e17be67bdb/d5ed2b0d-b0db-4095-8f66-4cd533dc0d44/b32bd125-fa54-4427-801b-105eb3c1e012/385/242/22/198/email/isomcurtis@yahoo.com" alt="Product" style="display: block;" width="22" height="198" border="0">
-																				</td>
-																				<td width="172" height="198">
-																				<table width="100%" height="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff">
-																					<tbody>
-																						<tr>
-																							<td width="172" height="198">
-																							<a href="http://links.mail.qmuniforms.com/q/stunCD4OMe30XIU1sEEZJMhfSvENhsG6CRWZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiASrJlO6nEcpdLlvrds8sXpn0y1ZQ" target="_blank" title="Product">
-																							<img src="http://recs.listrakbi.com/image/5121ba15-41b5-4aa4-9b75-f9e17be67bdb/d5ed2b0d-b0db-4095-8f66-4cd533dc0d44/b32bd125-fa54-4427-801b-105eb3c1e012/407/242/172/198/email/isomcurtis@yahoo.com" alt="Product" style="display: block;" width="172" height="198" border="0">
-																							</a>
-																							</td>
-																						</tr>
-																					</tbody>
-																				</table>
-																				</td>
-																				<td width="21" height="198">
-																				<img src="http://recs.listrakbi.com/image/5121ba15-41b5-4aa4-9b75-f9e17be67bdb/d5ed2b0d-b0db-4095-8f66-4cd533dc0d44/b32bd125-fa54-4427-801b-105eb3c1e012/579/242/21/198/email/isomcurtis@yahoo.com" alt="Product" style="display: block;" width="21" height="198" border="0">
-																				</td>
-																			</tr>
-																		</tbody>
-																	</table>
-																	</td>
-																</tr>
-																<tr>
-																	<td width="600" height="20">
-																	<img src="http://recs.listrakbi.com/image/5121ba15-41b5-4aa4-9b75-f9e17be67bdb/d5ed2b0d-b0db-4095-8f66-4cd533dc0d44/b32bd125-fa54-4427-801b-105eb3c1e012/0/440/600/20/email/isomcurtis@yahoo.com" alt="Product" style="display: block;" width="600" height="20" border="0">
-																	</td>
-																</tr>
-															</tbody>
-														</table>
-														</td>
-													</tr>
-												</tbody>
-											</table>
-											<!-- Containing Table -->
-											<table class="footer-nav" style="padding-top: 20px;" width="100%" cellspacing="0" cellpadding="0" border="0">
-												<tbody>
-													<tr>
-														<td style="background-color:#3d3e3f;" align="center">
-														<table cellspacing="0" cellpadding="0" border="0">
-															<tbody>
-																<tr>
-																	<td style="font-family:Arial, Helvetica, sans-serif, 'Open Sans'; font-size:0px;" align="center">
-																	<a href="http://links.mail.qmuniforms.com/q/EnmQgEB_nTn0XUKRl1OQM96pVVOx0HHCVyDZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiAQRlMOJXDdYQLlwqBEWG5hJ0ceTA" title="Categories" target="_blank" style="font-size:14px; color:#ffffff; text-decoration:none; display:inline-block; white-space:nowrap; padding:10px; border:1px solid #3d3e3f; box-sizing: border-box; -moz-box-sizing:border-box; -webkit-box-sizing:border-box;"><strong style="font-weight:normal;">CATEGORIES</strong></a>
-																	<a href="http://links.mail.qmuniforms.com/q/0aVlENRhmhO0X7hxgEbgYgRphDwWR8EPEX_ZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiA-8ysxFksfrvLtyk8jRc3DGv3LrA" title="Brands" target="_blank" style="font-size:14px; color:#ffffff; text-decoration:none; display:inline-block; white-space:nowrap; padding:10px; border:1px solid #3d3e3f; box-sizing: border-box; -moz-box-sizing:border-box; -webkit-box-sizing:border-box;"><strong style="font-weight:normal;">BRANDS</strong></a>
-																	<a href="http://links.mail.qmuniforms.com/q/TTp2zcbF8hE0XdqjJSnx6WoJoqOUKt3BL61ZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiAl2WPsM9Ye73Lb8oB2mjtaWZFijw" title="Clothing" target="_blank" style="font-size:14px; color:#ffffff; text-decoration:none; display:inline-block; white-space:nowrap; padding:10px; border:1px solid #3d3e3f; box-sizing: border-box; -moz-box-sizing:border-box; -webkit-box-sizing:border-box;"><strong style="font-weight:normal;">CLOTHING</strong></a>
-																	<a href="http://links.mail.qmuniforms.com/q/_s4Prr-CDz10XwMITa3vr8wn_3xL-myyXJEZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiApwtIHUiBdLXLJqOp5G5I8-KEMSA" title="Footwear" target="_blank" style="font-size:14px; color:#ffffff; text-decoration:none; display:inline-block; white-space:nowrap; padding:10px; border:1px solid #3d3e3f; box-sizing: border-box; -moz-box-sizing:border-box; -webkit-box-sizing:border-box;"><strong style="font-weight:normal;">FOOTWEAR</strong></a>
-																	<a href="http://links.mail.qmuniforms.com/q/rX48zO6DHRM0X7w_Tv7rWohVtLNCDEwBTUaZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiAILUQKFIEdYwLKbZ6yPirhiCayEA" title="Equipment" target="_blank" style="font-size:14px; color:#ffffff; text-decoration:none; display:inline-block; white-space:nowrap; padding:10px; border:1px solid #3d3e3f; box-sizing: border-box; -moz-box-sizing:border-box; -webkit-box-sizing:border-box;"><strong style="font-weight:normal;">EQUIPMENT</strong></a>
-																	<a href="http://links.mail.qmuniforms.com/q/hrpE5ySNJDS0XNoTGcoGIKh0RGhF9pi1ZziZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiACgDTI7lFeZ_LNoI1z8qHyWgwH0w" title="Web Specials" target="_blank" style="font-size:14px; color:#ffffff; text-decoration:none; display:inline-block; white-space:nowrap; padding:10px; border:1px solid #3d3e3f; box-sizing: border-box; -moz-box-sizing:border-box; -webkit-box-sizing:border-box;"><strong style="font-weight:normal;">WEB SPECIALS</strong></a>
-																	</td>
-																</tr>
-															</tbody>
-														</table>
-														</td>
-													</tr>
-												</tbody>
-											</table>
-											<!-- Containing Table END-->
-											<!-- Call Outs: 2 col to 1 col END-->
-											<!-- Footer -->
-											<table class="mobileStack" width="640px" cellspacing="0" cellpadding="0" border="0" bgcolor="ebebeb">
-												<tbody>
-													<tr>
-														<th class="paddingTop10" style="padding-top:20px;" valign="top" width="40%" align="center">
-														<!-- Social Box -->
-														<table class="fullWidth" cellspacing="0" cellpadding="0" border="0" bgcolor="ebebeb">
-															<tbody>
-																<tr>
-																	<td class="borderNone paddingNone" style="border:1px solid #010101; padding:20px" align="center">
-																	<table width="100%" cellspacing="0" cellpadding="0" border="0">
-																		<tbody>
-																			<tr>
-																				<td class="mobileAlignCenter" style="font-family: Arial, Helvetica, sans-serif, 'Open Sans Condensed'; font-size:18px; color:#010101; padding-bottom:10px" align="left">
-																				CONNECT WITH US
-																				</td>
-																			</tr>
-																			<tr>
-																				<td class="" style="padding-bottom:10px;">
-																				<table cellspacing="0" cellpadding="0" border="0" align="center">
-																					<tbody>
-																						<tr>
-																							<td style="padding:0 10px;" align="center"><a href="http://links.mail.qmuniforms.com/q/YhQ4hf5AC5A0XARmucHy-XcO4FDCIYBDARYZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiAgrFpHvRsdZLLRcnSsHHp3sYS2aQ" title="Facebook" target="_blank"><img src="http://media.email-galls.com/5167/Shared/responsive_template/facebook.gif" alt="Facebook" style="display: block;" width="16" height="25" border="0"></a></td>
-																							<td style="padding:0 10px;" align="center"><a href="http://links.mail.qmuniforms.com/q/FzH3UUe5KKa0XzeHY6geP8L8o4cPL7nELnVZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiALkJpdDA0eIPLAZS_ouocXSShFaQ" title="Twitter" target="_blank"><img src="http://media.email-galls.com/5167/Shared/responsive_template/twitter.gif" alt="Twitter" style="display: block;" width="28" height="25" border="0"></a></td>
-																							<td style="padding:0 10px;" align="center"><a href="http://links.mail.qmuniforms.com/q/CGFmXdmfvdT0XJAnoSpst8iNTXbnPxghVhhZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiAw7zoeLIUdZxLIRafDRLWyjcW76A" title="Google+" target="_blank"><img src="http://media.email-galls.com/5167/Shared/responsive_template/google.gif" alt="Google Plus" style="display: block;" width="38" height="25" border="0"></a></td>
-																							<td style="padding:0 10px;" align="center"><a href="http://links.mail.qmuniforms.com/q/OldX9Z2Wr2y0X6h_D0OFWMhHw_4US3UiHlWZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiAe2m2Mu_BdLXLM8u0wCCjmNX1utg" title="YouTube" target="_blank"><img src="http://media.email-galls.com/5167/Shared/responsive_template/youtube.gif" alt="YouTube" style="display: block;" width="25" height="25" border="0"></a></td>
-																							<td style="padding:0 10px;" align="center"><a href="http://links.mail.qmuniforms.com/q/-3QQGoxJl_w0X_S1lmmJJshUCveENhCLhB7ZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiAWiwPS0V_c6vL4_RXzQhpdblwrDw" title="Blog" target="_blank"><img src="http://media.email-galls.com/5167/Shared/responsive_template/blog.gif" alt="Blog" style="display: block;" width="28" height="25" border="0"></a></td>
-																						</tr>
-																					</tbody>
-																				</table>
-																				</td>
-																			</tr>
-																			<tr>
-																				<td class="borderNone" style="border-top:1px solid #010101;" align="center">
-																				<!-- Containing Table -->
-																				<table width="100%" cellspacing="0" cellpadding="0" border="0">
-																					<tbody>
-																						<tr>
-																							<td class="mobileAlignCenter" style="padding-top:10px; font-family: Arial, Helvetica, sans-serif, 'Open Sans Condensed'; font-size:14px;" align="left">
-																							<a href="http://links.mail.qmuniforms.com/q/jBPFrtGCXBW0XAbGHvdR3NjtKVLaOjZeNiTZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiAXPOn2pf9dbFLEvSAEtGuQtlr0pw" title="Privacy Policy" target="_blank" style="color:#010101; text-decoration:none;"><strong>PRIVACY POLICY &raquo;</strong></a><br>
-																							<a href="http://links.mail.qmuniforms.com/q/tOv_OHj2so70XBf7nzEqHGJmgST2J7V9MmqZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiAFxGuAVsRe4rLB5hAiqiZ3DhEWrg" title="Email Preference Center" target="_blank" style="color:#010101; text-decoration:none;"><strong>EMAIL PREFERENCE CENTER &raquo;</strong></a><br>
-																							<a href="http://links.mail.qmuniforms.com/q/HiC0D3NHEwWMHebin8Bgh3Nz8X0NMh17Bv_LTCfr7JhZEi0BRmCg-3bND" title="Unsubscribe" target="_blank" style="color:#010101; text-decoration:none"><strong>UNSUBSCRIBE &raquo;</strong></a>
-																							</td>
-																						</tr>
-																					</tbody>
-																				</table>
-																				<!-- Containing Table END-->
-																				</td>
-																			</tr>
-																		</tbody>
-																	</table>
-																	</td>
-																</tr>
-															</tbody>
-														</table>
-														<!-- Social Box END-->
-														</th>
-														<th class="" style="padding-top:20px;" valign="top" width="60%" align="center">
-														<table class="fullWidth" cellspacing="0" cellpadding="0" border="0" align="center">
-															<tbody>
-																<tr>
-																	<td class="copy13 contentPadding" style="font-family:Arial, Helvetica, sans-serif; font-size:11px; line-height:14px; color:#666666; padding-left:20px; font-weight:normal;" align="left">&copy; 2018 Quartermaster, LLC.<br>
-																	<a href="http://links.mail.qmuniforms.com/q/AqehVzCPzNK0XUYsbQAtWXjxnEh8mARGetGZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiA18saD39dfa-LPPsfmH6w4l9HMGg" title="Galls" target="_blank" style="color:#666666; text-decoration:none;"><strong style="font-weight:normal;">1340 Russell Cave Road, Lexington, KY 40505</strong></a><br>
-																	<br>
-																	Use promo code: <strong>QMLIFE3</strong> <br>
-																	*Expires <a href="http://links.mail.qmuniforms.com/q/_U6arJWjI3t0XSGTRnRVIJhx4G6BzrC_Ys5ZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiAy8TVbmQcfqzLrjf3-Gjj2U83D1Q" title="Quartermaster" target="_blank" style="color:#666666; text-decoration:none;"><strong style="font-weight:normal;">12-31-18 at 11:59 PM EST</strong></a> and is valid while supplies last. Percent and dollar off promotional exclusions may apply, visit our <a href="http://links.mail.qmuniforms.com/q/lxdROxe5T6i0XWBE6FNv0xSSIITxGtSWZ66ZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiA70deOebSdasLpJ94zvV-PzulAXg" title="Quartermaster" target=
-"_blank" style="color:#666666; text-decoration:none;"><strong style="font-weight:normal;">Promotional Guidelines</strong></a> for details. Offers are valid at time of purchase and cannot be applied to the purchase of previous, future, contract pricing orders or gift cards. Promotion codes must be entered on the shopping cart page and cannot be used in combination with any other offer. Limit one promo code per order. Some exclusions apply to shipping. For more information, visit our <a href="http://links.mail.qmuniforms.com/q/Md19YEkwozC0XZBZiClsig2MXhmbdwxntVJZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiAM4V2f-jvfqPLjieHglGBCjTWCdg" title="Quartermaster" target=
-"_blank" style="color:#666666; text-decoration:none;"><strong style="font-weight:normal;">Shipping Information</strong></a>.<br>
-																	<br>
-																	Customer service is available <a href="http://links.mail.qmuniforms.com/q/6WYMC-l5IQa0Xx9gGSSh7DYAINdeaPxVTD-ZcOJaXNvbWN1cnRpc0B5YWhvby5jb23DiAOheiXhuPf5YLqllkijti5YzwQog" title="Quartermaster" target="_blank" style="color:#666666; text-decoration:none;"><strong style="font-weight:normal;">M-F 8AM-9PM ET</strong></a> at <a href="tel:+18666737645" title="1-866-673-7643" target="_blank" style="color:#666666; text-decoration:none;"><strong style="font-weight:normal;">1-866-673-7645</strong></a> <br>
-																	<br>
-																	<!-- MOBILE Browser Link -->
-																	<table class="mobileShow" width="100%" cellspacing="0" cellpadding="0" border="0">
-																		<tbody>
-																			<tr style="mso-hide:all; width:0; max-height:0; overflow:hidden; display:none; float:left;">
-																				<td style="padding-top:20px;" align="center"><a href="http://links.mail.qmuniforms.com/q/_hGh2ymwJfU3w30Hn-9dPAmM-Wq0iMt_QhrTnD6Z_WhyUHtQ67gulAdm-" title="View in browser" target="_blank" style="color:#666666;"><strong style="font-weight:normal;">View in Browser</strong></a></td>
-																			</tr>
-																		</tbody>
-																	</table>
-																	<!-- MOBILE Browser Link  END-->
-																	</td>
-																</tr>
-															</tbody>
-														</table>
-														<!-- Social Icons END-->
-														</th>
-													</tr>
-												</tbody>
-											</table>
-											<!-- Footer END -->
-											</td>
-										</tr>
-									</tbody>
-								</table>
-								<!-- Gmail Fix-->
-								<table class="mobileHide" style="display:none; width:650px; min-width:650px; max-width:650px;" width="640" cellspacing="0" cellpadding="0" border="0" align="center">
-									<tbody>
-										<tr>
-											<td><img src="http://media.mail.qmuniforms.com/1/Shared/2014/LCS/Boilerplate/spacer.gif" style="display: block; min-width: 650px; max-width: 650px;" alt="Spacer" width="650" height="20" border="0"></td>
-										</tr>
-									</tbody>
-								</table>
-								<div style="display:none; white-space:nowrap; font:15px courier; line-height:0;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-								&nbsp; &nbsp; &nbsp;
-								&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-								&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</div>
-								<!-- Gmail Fix END -->
-								</td>
-							</tr>
-						</tbody>
-					</table>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" style="margin:0px auto; padding:0px;"><!--I think we can keep this style for HTML.-->
 
-<img src="http://links.mail.qmuniforms.com/q/uZ7lZilRSF_iqQ7mHKknpibVlBrqOdfdJL" alt="" width="20" height="1"></body>
+<head>
+
+    <title>west elm</title>
+
+    <!--New meta has been added to help fix rendering issues on Outlook App-->
+    <meta name="x-apple-disable-message-reformatting" />
+    <meta name="viewport" content="initial-scale=1,width=device-width" />
+
+    <style>
+        html {
+            margin: 0px !important;
+            padding: 0px !important;
+        }
+    </style>
+
+</head>
+
+<body><img src="http://link.westelm.com/rts/open.aspx?tp=i-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ" height="1" width="1" style="display:none">
+
+    <!--This is the new style that was added, we need to keep it within the body tag.-->
+    <style>
+        a[x-apple-data-detectors] {
+            color: inherit !important;
+            text-decoration: none !important;
+            font-size: inherit !important;
+            font-family: inherit !important;
+            font-weight: inherit !important;
+            line-height: inherit !important;
+        }
+
+        .yshortcuts {
+            color: inherit;
+        }
+
+        html {
+            -webkit-text-size-adjust: none;
+            -ms-text-size-adjust: none;
+        }
+
+        body {
+            padding: 0 !important;
+        }
+
+        .ReadMsgBody {
+            width: 100%;
+        }
+
+        .ExternalClass {
+            width: 100%;
+        }
+
+        .ExternalClass * {
+            line-height: 100%
+        }
+    </style>
+
+    <center><!--I think this helps a little as well, just to keep things centered.-->
+
+    <!--You can seet the width to 100% on the main table, any nested table can be set to regular width. Declaring align="center" on all tables does help.-->
+        <table cellspacing="0" cellpadding="0" bgcolor="#ffffff" width="100%" align="center">
+
+            <tr>
+            <!--Added padding of 5px to the left and right side, looks cleaner on mobile.-->
+                <td align="center" valign="top" style="padding:0px 5px 0px 5px;">
+
+                    <table align="center" width="700" cellpadding="0" cellspacing="0" border="0" bgcolor="#FFFFFF">
+                        <tr>
+
+                            <td align="left" valign="middle" width="700" style="font-family: Arial, Helvetica, sans-serif; font-size : 9px; color: #999999; line-height: 12px; text-decoration: none;">
+
+                                <span style="font-family: Arial, Helvetica, sans-serif; font-size : 9px; color: #999999; line-height: 12px; text-decoration: none;"><a href="http://link.westelm.com/rts/go2.aspx?h=8200267&tp=i-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ&x=3948977%7ci-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ%7cTRIG%7cNEWMOVER%7cNew_PreMover_2_Imagitas%7c339742" TARGET="_blank" STYLE="color:#999999; text-decoration: underline;">Shop west elm for modern furniture + home decor</a></span>
+                                <br />
+
+                                <span style="font-family: Arial, Helvetica, sans-serif; font-size : 9px; color: #999999; line-height: 12px; text-decoration: none;"><a href="http://form.westelm.com/ats/msg.aspx?sg1=1e162b4df7502b6b9d7018acd34093be0f677af417abcc57f141c4224f392ab3" TARGET="_blank" STYLE="color:#999999; text-decoration: underline;">view this email with images</a></span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td valign="bottom"><img src="http://edm.westelm.com/we/evergreen/spacer_0.gif" width="1" height="3" border="0" alt="" /></td>
+                        </tr>
+
+                    </table>
+
+
+
+                    <!--BODY START-->
+
+                    <table width="700" border="0" bgcolor="#ffffff" cellspacing="0" cellpadding="0" align="center">
+                        <tr>
+                            <td colspan="2">
+                                <a href="http://link.westelm.com/rts/go2.aspx?h=8200268&tp=i-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ&x=3948977%7ci-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ%7cTRIG%7cNEWMOVER%7cNew_PreMover_2_Imagitas%7c339742" target="_blank"><img src="http://edm.westelm.com/we/evergreen/2016_header_footer/header.gif" alt="west elm" width="700" height="60" border="0" align="top" style="display: block"></a>
+                            </td>
+                        </tr>
+
+                        <!--
+<tr>
+<td colspan="2">
+<a href="" target="_blank"><img src="http://edm.westelm.com/we/2018/071118_new_mover2_bedding_existing/Bnr_top.jpg" width="700" height="132" alt="" style="display: block; line-height: 0;" border="0" align="top"></a></td>
+</tr>
+-->
+
+
+
+
+
+
+
+
+
+
+
+<tr>
+<td colspan="2">
+<a href="http://link.westelm.com/rts/go2.aspx?h=8200269&tp=i-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ&x=3948977%7ci-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ%7cTRIG%7cNEWMOVER%7cNew_PreMover_2_Imagitas%7c339742" target="_blank"><img src="http://edm.westelm.com/we/2018/071118_new_mover2_bedding_existing/hero_all.jpg" width="700" height="124" alt="Bedding Thats So Worth It" style="display: block; line-height: 0;" border="0" align="top"></a></td>
+</tr>
+<tr>
+<td>
+<a href="http://link.westelm.com/rts/go2.aspx?h=8200270&tp=i-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ&x=3948977%7ci-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ%7cTRIG%7cNEWMOVER%7cNew_PreMover_2_Imagitas%7c339742" target="_blank"><img src="http://edm.westelm.com/we/2018/071118_new_mover2_bedding_existing/hero_CTA_Code.jpg" width="349" height="65" alt="Shop Now" style="display: block; line-height: 0;" border="0" align="top"></a></td>
+<td>
+<a href="http://link.westelm.com/rts/go2.aspx?h=8200271&tp=i-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ&x=i-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ%7cTRIG%7cNEWMOVER%7cNew_PreMover_2_Imagitas%7c339742" target="_blank"><img src="http://edm.westelm.com/we/2018/071118_new_mover2_bedding_existing/hero_CTA_Store.jpg" width="351" height="65" alt="Find A Store" style="display: block; line-height: 0;" border="0" align="top"></a></td>
+</tr>
+<tr>
+<td colspan="2">
+<a href="http://link.westelm.com/rts/go2.aspx?h=8200272&tp=i-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ&x=3948977%7ci-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ%7cTRIG%7cNEWMOVER%7cNew_PreMover_2_Imagitas%7c339742" target="_blank"><img src="http://edm.westelm.com/we/2018/071118_new_mover2_bedding_existing/hero_btm.jpg" width="700" height="612" alt="" style="display: block; line-height: 0;" border="0" align="top"></a></td>
+</tr>
+<tr>
+<td colspan="2">
+<a href="http://link.westelm.com/rts/go2.aspx?h=8200273&tp=i-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ&x=3948977%7ci-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ%7cTRIG%7cNEWMOVER%7cNew_PreMover_2_Imagitas%7c339742" target="_blank"><img src="http://edm.westelm.com/we/2018/071118_new_mover2_bedding_existing/bnr_all1.jpg" width="700" height="384" alt="Shop Bedding Looks" style="display: block; line-height: 0;" border="0" align="top"></a></td>
+</tr>
+<tr>
+<td colspan="2">
+<a href="http://link.westelm.com/rts/go2.aspx?h=8200274&tp=i-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ&x=3948977%7ci-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ%7cTRIG%7cNEWMOVER%7cNew_PreMover_2_Imagitas%7c339742" target="_blank"><img src="http://edm.westelm.com/we/2018/071118_new_mover2_bedding_existing/bnr_all2.jpg" width="700" height="504" alt="Shop Duvets" style="display: block; line-height: 0;" border="0" align="top"></a></td>
+</tr>
+<tr>
+<td colspan="2">
+<a href="http://link.westelm.com/rts/go2.aspx?h=8200275&tp=i-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ&x=3948977%7ci-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ%7cTRIG%7cNEWMOVER%7cNew_PreMover_2_Imagitas%7c339742" target="_blank"><img src="http://edm.westelm.com/we/2018/071118_new_mover2_bedding_existing/bnr_all3.jpg" width="700" height="400" alt="Shop Sheets" style="display: block; line-height: 0;" border="0" align="top"></a></td>
+</tr>
+<tr>
+<td colspan="2">
+<a href="http://link.westelm.com/rts/go2.aspx?h=8200276&tp=i-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ&x=3948977%7ci-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ%7cTRIG%7cNEWMOVER%7cNew_PreMover_2_Imagitas%7c339742" target="_blank"><img src="http://edm.westelm.com/we/2018/071118_new_mover2_bedding_existing/bnr_all4.jpg" width="700" height="508" alt="Shop Bedding Basics" style="display: block; line-height: 0;" border="0" align="top"></a></td>
+</tr>
+<tr>
+<td colspan="2">
+<a href="http://link.westelm.com/rts/go2.aspx?h=8200277&tp=i-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ&x=3948977%7ci-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ%7cTRIG%7cNEWMOVER%7cNew_PreMover_2_Imagitas%7c339742" target="_blank"><img src="http://edm.westelm.com/we/2018/071118_new_mover2_bedding_existing/bnr_all5.jpg" width="700" height="378" alt="Shop Bedding Sets" style="display: block; line-height: 0;" border="0" align="top"></a></td>
+</tr>
+<tr>
+<td colspan="2">
+<a href="http://link.westelm.com/rts/go2.aspx?h=8200278&tp=i-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ&x=3948977%7ci-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ%7cTRIG%7cNEWMOVER%7cNew_PreMover_2_Imagitas%7c339742" target="_blank"><img src="http://edm.westelm.com/we/2018/071118_new_mover2_bedding_existing/bnr_all6.jpg" width="700" height="431" alt="Shop Baby + Kids" style="display: block; line-height: 0;" border="0" align="top"></a></td>
+</tr>
+<tr>
+<td colspan="2">
+<a href="http://link.westelm.com/rts/go2.aspx?h=8200279&tp=i-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ&x=3948977%7ci-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ%7cTRIG%7cNEWMOVER%7cNew_PreMover_2_Imagitas%7c339742" target="_blank"><img src="http://edm.westelm.com/we/2018/071118_new_mover2_bedding_existing/bnr_all7.jpg" width="700" height="431" alt="DESIGN CREW Free Design Services Find a Store" style="display: block; line-height: 0;" border="0" align="top"></a></td>
+</tr>
+<tr>
+<td>
+<a href="http://link.westelm.com/rts/go2.aspx?h=8200280&tp=i-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ&x=3948977%7ci-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ%7cTRIG%7cNEWMOVER%7cNew_PreMover_2_Imagitas%7c339742" target="_blank"><img src="http://edm.westelm.com/we/2018/071118_new_mover2_bedding_existing/scut_1.jpg" width="349" height="247" alt="west elm credit card earn 10% back in rewards* or 12 months special financing** APPLY NOW" style="display: block; line-height: 0;" border="0" align="top"></a></td>
+<td>
+<a href="http://link.westelm.com/rts/go2.aspx?h=8200281&tp=i-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ&x=3948977%7ci-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ%7cTRIG%7cNEWMOVER%7cNew_PreMover_2_Imagitas%7c339742" target="_blank"><img src="http://edm.westelm.com/we/2018/071118_new_mover2_bedding_existing/scut_2.jpg" width="351" height="247" alt="THE KEY Join for free and earn 3% back in rewards on every purchase JOIN NOW" style="display: block; line-height: 0;" border="0" align="top"></a></td>
+</tr>
+
+
+                    </table>
+<tr>  <table cellpadding="0" width="700" cellspacing="0" border="0" align="center">
+<td colspan="2">
+<img src="http://edm.westelm.com/we/2018/071118_new_mover2_bedding_existing/promo_1.jpg" width="700" height="140" alt="" style="display: block; line-height: 0;" border="0" align="top"></td>
+</tr>
+
+
+
+
+<tr>
+<td colspan="2">
+
+<table width="700" border="0" bgcolor="#ffffff" cellspacing="0" cellpadding="0" align="center">
+
+
+<tr>
+<td>
+<img src="http://edm.westelm.com/we/2018/071118_new_mover2_bedding_existing/promo_2.jpg" width="108" height="37" alt="" style="display: block; line-height: 0;" border="0" align="top"></td>
+<td width="466" height="37"  bgcolor="#1f8f93" align="center" style="width: 466px; height: 37px; font-family:Arial, Helvetica, sans-serif; font-size: 17px; color: #ffffff; line-height: 17px; font-weight: normal; text-decoration:none; text-size-adjust: none; -moz-text-size-adjust: none; -ms-text-size-adjust: none; -webkit-text-size-adjust: none;">
+<center>
+<span style="font-family:Arial, Helvetica, sans-serif; font-size: 17px; color: #ffffff; line-height: 17px; font-weight: normal; text-decoration:none; text-size-adjust: none; -moz-text-size-adjust: none; -ms-text-size-adjust: none; -webkit-text-size-adjust: none;">
+Shop With Code  97PH-JWM6-WMHR
+
+</span>
+</center>
+
+</td>
+<td>
+<img src="http://edm.westelm.com/we/2018/071118_new_mover2_bedding_existing/promo_3.jpg" width="126" height="37" alt="" style="display: block; line-height: 0;" border="0" align="top"></td>
+</tr>
+
+</table>
+
+
+</td>
+</tr>
+
+
+<tr>
+<td colspan="2">
+<img src="http://edm.westelm.com/we/2018/071118_new_mover2_bedding_existing/promo_4.jpg" width="700" height="126" alt="" style="display: block; line-height: 0;" border="0" align="top"></td>
+</table>
+</tr>
+<table cellpadding="0" width="700" cellspacing="0" border="0" align="center">
+                         <tr>
+                             <td colspan="1"  align="center" style="font-family: Arial, Helvetica, sans-serif; font-size : 9px; color: #999999; line-height: 12px; text-decoration: none;">
+
+<p>
+Offer valid from 6/6/2019. Offer valid on regular-price, in-stock merchandise only. Excludes the west elm  Pottery Barn Kids collection, Sonos electronics, Leesa mattresses, Away luggage, Bali Shades, SMEG appliances, Stikwood Adhesive Paneling, clearance items ending in .97 + .99 and other select product. Offer not valid for the purchase of gift cards, previously purchased merchandise, monogramming, taxes, shipping, handling, gift wrap and processing charges. This offer cannot be resold or otherwise bartered. west elm will not replace lost, damaged or stolen coupons. ONLINE CUSTOMERS must enter their one-time-use promo code  -  97PH-JWM6-WMHR  -  into the promo code box during check out to receive the discount.</p>
+
+                              </td>
+                         </tr>
+                     </table>
+
+
+                    <!--EXCLUSIONS SECTION-->
+
+
+
+
+
+
+                    <!--/END EXCLUSIONS SECTION-->
+<!--Make sure that each Dyanmic Banner is coded in it's own table tags and center aligned.-->
+<!-- START FOOTER -->
+<table align="center" cellpadding="0" cellspacing="0" border="0" width="700">
+
+    <tr>
+        <td>
+            <table align="center" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                    <td>
+                        <a href="http://link.westelm.com/rts/go2.aspx?h=8200282&tp=i-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ&x=3948977%7ci-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ%7cTRIG%7cNEWMOVER%7cNew_PreMover_2_Imagitas%7c339742" target="_blank"><img src="http://edm.westelm.com/we/evergreen/2017_holiday_footer/footer_design.gif" alt="Free Design Services" width="246" height="175" style="display: block" border="0" align="top"></a>
+                    </td>
+                    <td>
+                        <a href="http://link.westelm.com/rts/go2.aspx?h=8200283&tp=i-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ&x=3948977%7ci-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ%7cTRIG%7cNEWMOVER%7cNew_PreMover_2_Imagitas%7c339742" target="_blank"><img src="http://edm.westelm.com/we/evergreen/2017_holiday_footer/footer_ideas.gif" alt="Get Style Tips + Advice" width="209" height="175" style="display: block" border="0" align="top"></a>
+                    </td>
+                    <td>
+                        <a href="http://link.westelm.com/rts/go2.aspx?h=8200284&tp=i-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ&x=3948977%7ci-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ%7cTRIG%7cNEWMOVER%7cNew_PreMover_2_Imagitas%7c339742" target="_blank"><img src="http://edm.westelm.com/we/evergreen/2017_holiday_footer/footer_registry.gif" alt="Create Your Registry" width="245" height="175" style="display: block" border="0" align="top"></a>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <table align="center" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                    <td>
+                        <a href="http://link.westelm.com/rts/go2.aspx?h=8200285&tp=i-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ&x=3948977%7ci-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ%7cTRIG%7cNEWMOVER%7cNew_PreMover_2_Imagitas%7c339742" target="_blank"><img src="http://edm.westelm.com/we/evergreen/2017_holiday_footer/footer_new.gif" alt="New" width="350" height="64" style="display: block" border="0" align="top"></a>
+                    </td>
+                    <td>
+                        <a href="http://link.westelm.com/rts/go2.aspx?h=8200286&tp=i-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ&x=3948977%7ci-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ%7cTRIG%7cNEWMOVER%7cNew_PreMover_2_Imagitas%7c339742" target="_blank"><img src="http://edm.westelm.com/we/evergreen/2017_holiday_footer/footer_furn.gif" alt="Furniture" width="350" height="64" style="display: block" border="0" align="top"></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="http://link.westelm.com/rts/go2.aspx?h=8200287&tp=i-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ&x=3948977%7ci-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ%7cTRIG%7cNEWMOVER%7cNew_PreMover_2_Imagitas%7c339742" target="_blank"><img src="http://edm.westelm.com/we/evergreen/2017_holiday_footer/footer_bedd.gif" alt="Bedding" width="350" height="65" style="display: block" border="0" align="top"></a>
+                    </td>
+                    <td>
+                        <a href="http://link.westelm.com/rts/go2.aspx?h=8200288&tp=i-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ&x=3948977%7ci-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ%7cTRIG%7cNEWMOVER%7cNew_PreMover_2_Imagitas%7c339742" target="_blank"><img src="http://edm.westelm.com/we/evergreen/2017_holiday_footer/footer_sale.gif" alt="Sale" width="350" height="65" style="display: block" border="0" align="top"></a>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <table align="center" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                    <td>
+                        <a href="http://link.westelm.com/rts/go2.aspx?h=8200289&tp=i-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ&x=3948977%7ci-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ%7cTRIG%7cNEWMOVER%7cNew_PreMover_2_Imagitas%7c339742" target="_blank"><img src="http://edm.westelm.com/we/evergreen/2017_holiday_footer/footer_wegc.gif" alt="Purchase A West Elm Gift Card" width="700" height="101" style="display: block" border="0" align="top"></a>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <table align="center" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                    <td>
+                        <a href="http://link.westelm.com/rts/go2.aspx?h=8200290&tp=i-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ&x=3948977%7ci-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ%7cTRIG%7cNEWMOVER%7cNew_PreMover_2_Imagitas%7c339742" target="_blank"><img src="http://edm.westelm.com/we/evergreen/2017_holiday_footer/footer_mywestelm.gif" alt="Show us your personal style with #mywestelm" width="435" height="86" style="display: block" border="0" align="top"></a>
+                    </td>
+                    <td>
+                        <a href="http://link.westelm.com/rts/go2.aspx?h=8200291&tp=i-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ&x=3948977%7ci-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ%7cTRIG%7cNEWMOVER%7cNew_PreMover_2_Imagitas%7c339742" target="_blank"><img src="http://edm.westelm.com/we/evergreen/2017_holiday_footer/footer_pint.gif" alt="Pinterest" width="86" height="86" style="display: block" border="0" align="top"></a>
+                    </td>
+                    <td>
+                        <a href="http://link.westelm.com/rts/go2.aspx?h=8867837&tp=i-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ&x=3948977%7ci-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ%7cTRIG%7cNEWMOVER%7cNew_PreMover_2_Imagitas%7c339742" target="_blank"><img src="http://edm.westelm.com/we/evergreen/2017_holiday_footer/footer_fb.gif" alt="Facebook" width="81" height="86" style="display: block" border="0" align="top"></a>
+                    </td>
+                    <td>
+                        <a href="http://link.westelm.com/rts/go2.aspx?h=8200293&tp=i-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ&x=3948977%7ci-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ%7cTRIG%7cNEWMOVER%7cNew_PreMover_2_Imagitas%7c339742" target="_blank"><img src="http://edm.westelm.com/we/evergreen/2017_holiday_footer/footer_insta.gif" alt="Instagram" width="98" height="86" style="display: block" border="0" align="top"></a>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <table align="center" width="700" cellpadding="0" cellspacing="0" border="0" bgcolor="#FFFFFF">
+                <tr>
+                    <td colspan="3" height="10"><img src="http://edm.westelm.com/we/evergreen/spacer_0.gif" width="1" height="10" border="0" alt="" /></td>
+                </tr>
+
+                <tr>
+                    <td valign="bottom"><img src="http://edm.westelm.com/we/evergreen/spacer_0.gif" width="25" height="11" border="0" alt="" /></td>
+                    <td align="left" valign="bottom" width="600">
+
+                        <span style="font-family: Arial, Helvetica, sans-serif; font-size : 9px; color: #999999; line-height: 12px;">
+Offer valid for US orders only. For Canada and Puerto Rico, retail prices may vary from those listed in our catalog and on our website.<br />
+<br />
+</span>
+
+                        <span style="font-family: Arial, Helvetica, sans-serif; font-size : 9px; color: #666666; line-height: 12px;">
+Please <span style="font-family: Arial, Helvetica, sans-serif; font-size : 9px; color: #666666; line-height: 12px; text-decoration: none;"><a href="https://form.westelm.com/ats/show.aspx?cr=100093&fm=67&wu=7&cc=WE&ts=1&ea=cleveboy1@yahoo.com&tp=i-H55-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-Uj85-1EThLwM-1Fz4TW" TARGET="lank" STYLE="color:#666666; text-decoration: underline;">click here</a></span> to manage your email preferences.
+
+                        <br />
+                        <br />
+                        </span>
+
+                        <span style="font-family: Arial, Helvetica, sans-serif; font-size : 9px; color: #999999; line-height: 12px;">to read about our privacy policy, </span>
+                        <span style="font-family: Arial, Helvetica, sans-serif; font-size : 9px; color: #999999; line-height: 12px; text-decoration: none;"><a href="http://link.westelm.com/rts/go2.aspx?h=8200294&tp=i-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ&x=3948977%7ci-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ%7cTRIG%7cNEWMOVER%7cNew_PreMover_2_Imagitas%7c339742" TARGET="_blank" STYLE="color:#999999; text-decoration: underline;">click here</a></span>
+
+                        <span style="font-family: Arial, Helvetica, sans-serif; font-size : 9px; color: #999999; line-height: 12px;">
+<br />
+<br />
+copyright 2017 west elm, marketing, 55 Water Street, 2nd Floor, Brooklyn, NY 11201. all rights reserved.
+<br />
+<br />
+this message was sent to cleveboy1@yahoo.com
+</span>
+                    </td>
+                    <td valign="bottom"><img src="http://edm.westelm.com/we/evergreen/spacer_0.gif" width="45" height="11" border="0" alt="" /></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+<!-- /END FOOTER -->
+
+
+
+</body>
+
 </html>

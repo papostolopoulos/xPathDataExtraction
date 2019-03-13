@@ -686,37 +686,6 @@
 
 
 
-        /*
-        boolean( expression )
-        ceiling(number )
-        choose( boolean , object1, object2 )
-        concat(string1 ,string2 [,stringn]* )
-        contains(haystack, needle)
-        count(node-set )
-        element-available(QName )
-        false()
-        floor( number )
-        function-available(name )
-        lang(string )
-        last()
-        local-name( [node-set] )
-        name( [node-set] )
-        namespace-uri( [node-set] )
-        normalize-space( [string] )
-        not(expression )
-        number( [object] )
-        position()
-        round(decimal )
-        starts-with(haystack, needle)
-        string( [object] )
-        string-length( [string] )
-        substring(string ,start [,length] )
-        substring-after(haystack ,needle )
-        substring-before(haystack ,needle )
-        sum(node-set )
-        translate(string, abc, XYZ)
-        true()
-        */
         //Adds a function name with parenthesis ( in the functionsSequenceArr
         addFunction(event){
           this.zeroProperties(event.target.name);
@@ -869,11 +838,44 @@
 
         showNumberInput(){
           return this.activeFunction === "boolean" ||
-          this.activeFunction === "sum" ?
-          true : false;
+          this.activeFunction === "sum"
+          ? true : false;
         }
       } //end of computed properties
     });
+
+
+    /*
+    boolean( expression )
+    ceiling(number )
+    choose( boolean , object1, object2 )
+    concat(string1 ,string2 [,stringn]* )
+    contains(haystack, needle)
+    count(node-set )
+    element-available(QName )
+    false()
+    floor( number )
+    function-available(name )
+    lang(string )
+    last()
+    local-name( [node-set] )
+    name( [node-set] )
+    namespace-uri( [node-set] )
+    normalize-space( [string] )
+    not(expression )
+    number( [object] )
+    position()
+    round(decimal )
+    starts-with(haystack, needle)
+    string( [object] )
+    string-length( [string] )
+    substring(string ,start [,length] )
+    substring-after(haystack ,needle )
+    substring-before(haystack ,needle )
+    sum(node-set )
+    translate(string, abc, XYZ)
+    true()
+    */
 
   </script>
 

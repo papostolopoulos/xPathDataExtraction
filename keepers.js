@@ -621,6 +621,8 @@ function transform(data){
     // 10% off | 10% (in )savings | 10% discount | 10% (cash)back | 10% reward | 10% gift | 10% value | 10% credit | 10% (promotional )coupon | 10% (mail-in )rebate
     // $10 off | $10 (in )savings | $10 discount | $10 (cash)back | $10 reward | $10 gift | $10 value | $10 credit | $10 (promotional )coupon | $10 (mail-in )rebate
     /(\d{1,2}%|\$\d+)\s*(off|(in )?savings|discount|(cash(\s*)?)?back|reward|gift|value|credit|(promotional\s*)?coupon|(mail-in\s*)?rebate)/i,
+    // (extra | up to | save | over | more than | discount of | discounted by | savings of | at least | gift of | down to | as low as | bonus of) (10% | $10)
+    /(extra|up\s*to|sav(e|ings\s*of)|over|more\s*than|discount(ed)?\s*(of|by)|at\s*least|gift\s*of|down\s*to|as\s*low\s*as|bonus of)\s*(\d{1,2}%|\$\d+(\.\d{2})?)/i,
     //free ship | free on orders of
     /free\s*(ship|on\s*orders\s*of)/i,
     // buy one / two / three, get
