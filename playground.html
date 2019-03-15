@@ -1,349 +1,809 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" style="margin:0px auto; padding:0px;"><!--I think we can keep this style for HTML.-->
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+   <meta http-equiv="Content-Type" content="text/html;" charset="utf-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <meta name="x-apple-disable-message-reformatting">
 
-    <title>west elm</title>
+   <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700" rel="stylesheet">
+   <title></title>
+   <style>
+   /* /\/\/\/\/\/\/\/\/ CLIENT-SPECIFIC STYLES /\/\/\/\/\/\/\/\/ */
+   #outlook a{padding:0;} /* Force Outlook to provide a "view in browser" message */
+   .ReadMsgBody{width:100%;} .ExternalClass{width:100%;} /* Force Hotmail to display emails at full width */
+   .ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div {line-height: 100%;} /* Force Hotmail to display normal line spacing */
+   body, table, td, p, a, li, blockquote{-webkit-text-size-adjust:100%; -ms-text-size-adjust:100%;} /* Prevent WebKit and Windows mobile changing default text sizes */
+   table, td{mso-table-lspace:0pt; mso-table-rspace:0pt;} /* Remove spacing between tables in Outlook 2007 and up */
+   img{-ms-interpolation-mode:bicubic;} /* Allow smoother rendering of resized image in Internet Explorer */
+   /* /\/\/\/\/\/\/\/\/ RESET STYLES /\/\/\/\/\/\/\/\/ */
+   body{margin:0; padding:0;}
+   img{border:0; height:auto; line-height:100%; outline:none; text-decoration:none;}
+   table{border-collapse:collapse !important;}
+   body, #bodyTable, #bodyCell{height:100% !important; margin:0 !important; padding:0 !important; width:100% !important;}
+   div {
+      outline: none;
+      margin:0 !important;
+      padding:0 !important;
+   }
+   @media screen and (max-width: 600px) {
+      u + .body .topper.three-col.tiered h1 {
+         font-size:20px !important;
+         line-height:30px !important;
+      }
+      u + .body .topper.three-col.tiered h2 {
+         font-size:14px !important;
+         line-height:20px !important;
+      }
+   }
+   @media screen and (min-width: 601px) {
+      .container {
+         width: 600px !important;
+      }
+   }
+   @media screen and (min-width: 601px) {
+      .headercontainer {
+         width: 600px !important;
+      }
+   }
+   @media screen and (min-width: 601px) {
+      .desktopcontainer {
+         width: 600px !important;
+      }
+      .topper.three-col h1 {
+         font-size:38px !important;
+         line-height:36px !important;
+      }
+      .topper.three-col h2 {
+         font-size:20px !important;
+         line-height:30px !important;
+      }
+      .topper.one-col h1 {
+         font-size:29px !important;
+         line-height:36px !important;
+      }
+      .topper.one-col h2, .topper a {
+         font-size:15px !important;
+         line-height:20px !important;
+      }
+   }
+   @import url('https://fonts.googleapis.com/css?family=Work+Sans:400,600');
+   @import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400');
+   @media screen {
+      @font-face {
+         font-family: 'Work Sans';
+         font-style: normal;
+         font-weight: 400;
+         src: url(https://fonts.gstatic.com/s/worksans/v2/ElUAY9q6T0Ayx4zWzW63VJBw1xU1rKptJj_0jans920.woff2) format('woff2');
+         mso-font-alt: 'Arial';
+      }
+      @font-face {
+         font-family: 'Work Sans';
+         font-style: normal;
+         font-weight: 600;
+         src: url(https://fonts.gstatic.com/s/worksans/v2/z9rX03Xuz9ZNHTMg1_ghGRampu5_7CjHW5spxoeN3Vs.woff2) format('woff2');
+         mso-font-alt: 'Arial';
+      }
+      @font-face {
+         font-family: 'Roboto Condensed';
+         font-style: normal;
+         font-weight: 400;
+         src: url(https://fonts.gstatic.com/s/robotocondensed/v14/Zd2E9abXLFGSr9G3YK2MsH4vxAoi6d67T_UKWi0EoHQ.woff2) format('woff2');
+         unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+         mso-font-alt: 'Arial';
+      }
+      @font-face {
+         font-family: 'Roboto Condensed';
+         font-style: normal;
+         font-weight: 300;
+         src: url(https://fonts.gstatic.com/s/robotocondensed/v14/b9QBgL0iMZfDSpmcXcE8nCqOJfobX9lrC1wFVe9k15E.woff2) format('woff2');
+         mso-font-alt: 'Arial';
+      }
+   }
+   /* ======== Header Styles ======== */
+   #templatePreheader {display:none !important;} /* Hide the template preheader to save space */
+   #headerImage {
+      height:auto !important;
+      max-width:600px !important;
+      width:100% !important;
+   }
+   .headerContent {
+      font-size:20px !important;
+      line-height:125% !important;
+   }
+   /*MOBILE STYLES*/
+   @media screen and (max-width: 599px), screen and (max-device-width: 599px) {
+      table[class=container] div {width:100% !important; max-width: 599px !important; border-left:none; border-right:none; }
+      table[class=container] img {width:100% !important; max-width: 599px !important; border-left:none; border-right:none; }
+      table[class=content-table] {width:100% !important; border-left:none; border-right:none; }
+      table[class=int-table] img {width:100% !important; height: auto !important; padding:0 !important; }
+      td[class=left-right-border], table[class=pre-left], table[class=pre-right] {display: none; }
+      table[class=int-table], table[class=int-table] span[class=hero-mobile], table[class=int-gel], table[class=efooter], table[class=bottomborder], td[class=bottomborder], table[class=preheader] {width: 100% !important; clear: both !important; padding:0 !important; }
+      table[class=int-gel] {height: auto !important; }
+      table[class=int-table] td {float: left !important; clear:left !important; width: 100% !important; padding-left:0 !important; padding-top:5px !important; }
+      span[class=hero-mobile] a {display: block !important; height: 100% !important; width: 100% !important; }
+      table[class=int-table] img.hero-desktop, table[class=desktop], table[class=desktopcontainer], td[class=topborder], table[class=mobilewrap] {display: none !important; }
+      table[class=mobile-header] {display: inline-table !important; font-size: 10px !important; font-family: arial, sans-serif !important; -webkit-text-size-adjust: none !important; }
+      table[class=mobile-header] a {font-size: 10px !important; font-family: arial, sans-serif !important; }
+      table[class=mobile-nav], table[class=mobile-nav] a {font-size: 16px !important; display: inline-table !important; text-align: center !important; }
+      table[class=mobile-nav] {width: 100% !important; }
+      table[class=mobile-header], table[class=mobile-footer] img {width: 100% !important; }
+      table[class=mobile-header] img {width: 125px !important; }
+      table[class=pre-left], table[class=pre-right] {float: none !important; margin: 0 auto !important; text-align: center !important; padding:0 0 20px 0 !important; }
+      table[class=mobile-footer] {display: inline-table !important; width:100% !important; padding:10px 0; font-size: 12px !important; font-family: arial, sans-serif !important; -webkit-text-size-adjust: none; }
+      div[class=mobile-hide] {display: block !important; max-height: inherit !important; overflow: visible !important; width: 100% !important; }
+      span[class="deet"] {font-size: 10px !important; -webkit-text-size-adjust: none; }
 
-    <!--New meta has been added to help fix rendering issues on Outlook App-->
-    <meta name="x-apple-disable-message-reformatting" />
-    <meta name="viewport" content="initial-scale=1,width=device-width" />
-
-    <style>
-        html {
-            margin: 0px !important;
-            padding: 0px !important;
-        }
-    </style>
-
+      table.reset-width {width: auto !important;}
+      th.drop, td.drop {width: 100% !important;display: block !important;}
+      td.text-center {text-align: center !important;}
+      .hide-this,.hide_this {display: none !important;}
+   }
+   /*END MOBILE STYLES*/
+</style>
+<!--[if gte mso 9]> <style type="text/css"> table td,span {font-family: Arial,sans-serif !important;} .spacing-dashes {display:none;} </style> <![endif]-->
 </head>
+<body class="body" leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0" style="padding:0;">
+<div style="font-size:0; line-height:0;"><img src="https://click.belkemail.com/open.aspx?ffcb10-fe551379766d047a7412-fdc9157376650d78771171756c-fe6515707c63067d7412-fe531779736400747212-fe1c1c777266037c7d1176-ff68167171" width="1" height="1"></div>
+<div style="font-size:1px;line-height:0;"><a href="https://click.belkemail.com/?qs=b5e05f70fb716f7c01b5cd4f6c2e164d4e4f91be7a17dac145a39a36d03f93a250ce55e9f607f6a5d762bb2caa593befad22d9ec1cc07484032a9626859dc76f"  target="_blank" style="text-decoration:none !important;color:#ffffff !important;">&nbsp;</a></div>
 
-<body><img src="http://link.westelm.com/rts/open.aspx?tp=i-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ" height="1" width="1" style="display:none">
+<div style="font-size:0; line-height:0;">
+   <table cellpadding="0" cellspacing="0" width="100%" style="min-width: 100%; " class="stylingblock-content-wrapper"><tr><td class="stylingblock-content-wrapper camarker-inner"></td></tr></table>
+   <!---->
+</div>
 
-    <!--This is the new style that was added, we need to keep it within the body tag.-->
-    <style>
-        a[x-apple-data-detectors] {
-            color: inherit !important;
-            text-decoration: none !important;
-            font-size: inherit !important;
-            font-family: inherit !important;
-            font-weight: inherit !important;
-            line-height: inherit !important;
-        }
 
-        .yshortcuts {
-            color: inherit;
-        }
-
-        html {
-            -webkit-text-size-adjust: none;
-            -ms-text-size-adjust: none;
-        }
-
-        body {
-            padding: 0 !important;
-        }
-
-        .ReadMsgBody {
-            width: 100%;
-        }
-
-        .ExternalClass {
-            width: 100%;
-        }
-
-        .ExternalClass * {
-            line-height: 100%
-        }
-    </style>
-
-    <center><!--I think this helps a little as well, just to keep things centered.-->
-
-    <!--You can seet the width to 100% on the main table, any nested table can be set to regular width. Declaring align="center" on all tables does help.-->
-        <table cellspacing="0" cellpadding="0" bgcolor="#ffffff" width="100%" align="center">
-
+<!-- ****************************************-->
+<!-- ************ START HEADER   ************-->
+<!-- ****************************************-->
+<!--[if (gte mso 9)|(IE)]> <table width="600" align="center" cellpadding="0" cellspacing="0" border="0"><tr><td> <![endif]-->
+<table class="headercontainer" valign="top" align="center" width="100%" cellpadding="0" cellspacing="0" style="max-width: 600px; outline: none; background: #FFFFFF;">
+   <tr>
+      <td>
+         <!-- *************  PREHEADER  ************* -->
+         <table class="preheader" align="center" width="100%" cellpadding="0" cellspacing="0" style="max-width: 600px; outline: none; background: #FFFFFF;">
             <tr>
-            <!--Added padding of 5px to the left and right side, looks cleaner on mobile.-->
-                <td align="center" valign="top" style="padding:0px 5px 0px 5px;">
+               <td>
+                  <table style="min-width: 100%; " class="stylingblock-content-wrapper" width="100%" cellspacing="0" cellpadding="0"><tr><td class="stylingblock-content-wrapper camarker-inner"><table cellspacing="0" cellpadding="0" border="0">
+ <tr>
+  <td style="font-family:'Helvetica',Arial,sans-serif;font-size:10px;color:#000001;line-height:120%;" valign="top" align="left">
+   <a href="https://click.belkemail.com/?qs=b5e05f70fb716f7c6ce873c3bf5cf9f8c7467a6721abfd94aca4eaaf6b6f1a24b10994c8939fc86a7e0ef882c58018f15abf63ddfd644d4aa1cef7ed6d51fa99"  target="_blank" style="text-decoration:underline;color:#0073CF;"><span style="text-decoration:underline;color:#0073CF;">Buy Online, Free Pickup in Stores</span></a>
+  </td>
+  <td style="font-family:'Helvetica',Arial,sans-serif;font-size:12px;color:#000001;line-height:120%;" width="20" valign="top" align="left"></td>
+  <td style="font-family:'Helvetica',Arial,sans-serif;font-size:10px;color:#000001;line-height:120%;" valign="top" align="left">
+   Can't See Images? <a href="https://view.belkemail.com/?qs=430bf1ba5d2b698a01b4b3a56327a5355aadcfadb9004391cd77ac74be9bd46af7ee919d92047d8d6c9f0fd9d9c604c62515e2da974a479ae0df4974aa28a1e636d6edd077bd6e1ba68cbb098bf440ec3905a3655c09f75d"   target="_blank" style="text-decoration:underline;color:#0073CF;"><span style="text-decoration:underline;color:#0073CF;">Click Here</span></a>
+  </td>
+ </tr>
+</table></td></tr></table>
+               </td>
+            </tr>
+         </table>
+         <!-- ******************  END PREHEADER  *************-->
 
-                    <table align="center" width="700" cellpadding="0" cellspacing="0" border="0" bgcolor="#FFFFFF">
-                        <tr>
+         <table class="container" valign="top" align="center" width="100%" cellpadding="0" cellspacing="0" style="max-width: 600px; outline: none; background: #FFFFFF;">
+            <tr>
+               <td class="topborder" height="1" bgcolor="#FFFFFF">&nbsp;</td>
+            </tr>
+         </table>
 
-                            <td align="left" valign="middle" width="700" style="font-family: Arial, Helvetica, sans-serif; font-size : 9px; color: #999999; line-height: 12px; text-decoration: none;">
+         <!-- **************  HEADER NAV  *******************-->
+         <table border="0" cellpadding="0" cellspacing="0" align="left"  height="60">
+            <tr>
+               <td>
+                  <a href="https://click.belkemail.com/?qs=b5e05f70fb716f7cde1df8edf66f43c0dd511f5ee8afa1ebff4700ec3f83c9d9b82ab24bc91a696eb147837c8a9618d58445d0806792bb6e68283d3580ab48a7" target="_blank" >
+                     <img style="display:block; font-size: 12px;" width="102" src="https://belk.scene7.com/is/image/Belk/email_outline_logo_2017?$DWP_E_ICON$" />
+                  </a>
+               </td>
+            </tr>
+         </table>
+         <table border="0" cellpadding="0" cellspacing="0" align="right"  height="60">
+            <tr>
+               <td>
+                  <a href="https://click.belkemail.com/?qs=b5e05f70fb716f7cd9a2448ead82d2c9734f1a01e776b797625a63b05c3639704c836d2547c18dde67fe9b20ef02aa577546a7e93d3a5f9a4b55bd41d6a642f4" target="_blank" >
+                     <img border="0" src="https://belk.scene7.com/is/image/Belk/Header_Footer_EMAIL_shop?&$DWP_E_ICON$&crop=25,0,50,85" alt="Shop" width="25" style="display:block; font-size:12px;font-family:Arial,sans-serif;" />
+                  </a>
+               </td>
+               <td>
+                  <a href="https://click.belkemail.com/?qs=b5e05f70fb716f7c6d1b236bb699fe78542b9ed7b532bc4b821c04ccc26a7d2683776d5b3691e650b446b485b934edd1598a1deea3086ec03e44ebef137d35a0" target="_blank" >
+                     <img width="53" border="0" src="https://belk.scene7.com/is/image/Belk/Header_Footer_EMAIL_coupons?&$DWP_E_ICON$&crop=0,0,106,85" alt="Coupons"  style="display:block; font-size:12px;font-family:Arial,sans-serif;" />
+                  </a>
+               </td>
+               <td>
+                  <a href="https://click.belkemail.com/?qs=1a2d308eefb4f8a7807aa91dfeeeb4080cc1de6994224f09c76d395fccfa902b3d6679b7fb8fb8a3a0395144a874e5d35ff78770c558005fd76dd81fb4ef09a1" target="_blank"  >
+                     <img border="0" width="47" src="https://belk.scene7.com/is/image/Belk/Header_Footer_EMAIL_stores?&$DWP_E_ICON$" alt="Stores"  style="display:block; font-size:12px;font-family:Arial,sans-serif;"/>
+                  </a>
+               </td>
+               <td>
+                  <a  href="https://click.belkemail.com/u/?qs=1a2d308eefb4f8a7ff8f02bd43e059efb31913f7109e819a73725a4bb812596f3dfa1f3d268de34cca92b0601e4fe2be19bd1ebda531acae45ffb5167659e2cd" mc-deep-link="false" target="_blank" >
+                     <img border="0" width="53" src="https://belk.scene7.com/is/image/Belk/Header_Footer_EMAIL_clearance_1?&$DWP_E_ICON$" alt="Clearance"  style="display:block; font-size:12px;font-family:Arial,sans-serif;"/>
+                  </a>
+               </td>
+            </tr>
+         </table>
+         <!-- ***********  END HEADER NAV  ***************** -->
+      </td>
+   </tr>
+</table>
+<!--[if (gte mso 9)|(IE)]> </td></tr></table> <![endif]-->
+<table align="center" width="100%" cellpadding="0" cellspacing="0" style="max-width: 600px; outline: none;">
+   <tr>
+      <td bgcolor="#ffffff"><span style="font-size:6px">&nbsp;</span></td>
+   </tr>
+</table>
+<!--[if (gte mso 9)|(IE)]> <table width="600" align="center" cellpadding="0" cellspacing="0" border="0"><tr><td> <![endif]-->
+<table class="container" valign="bottom" align="center" width="100%" cellpadding="0" cellspacing="0" style="max-width: 600px; outline: none; background: #FFFFFF;">
+   <tr>
+      <td align="center" bgcolor="#000001" style="width: 20%; text-align: center; vertical-align: bottom; font-size: 0;" >
+         <a href="https://click.belkemail.com/?qs=1a2d308eefb4f8a77daefe4cbe6a874cd72fb34855844a25fc491f85b087ebd5f43e7ed76f55843a6497a07752a9bc3950f6b00e7a74f131702b32dedf1865e1"  target="_blank">
+            <img src="http://belk.scene7.com/is/image/Belk/wk01_corpe_2019_newheader_5C_1?$DWP_E_ARTWORK$" alt="Women" border="0" style="display:block; font-size:12px; max-width:120px; width:100%;font-family:Arial,sans-serif;" >
+         </a>
+      </td>
+      <td align="center" bgcolor="#000001" style="width: 20%; text-align: center; vertical-align: bottom; font-size: 0;">
+         <a href="https://click.belkemail.com/?qs=1a2d308eefb4f8a7ca2ed56e2627453c030572ffe9b84c23e3f802da4d1ab43dfa80fa54164f87abdecc08a12091a820e21d1739645cf3a831e8780494cf779f"  target="_blank">
+            <img src="http://belk.scene7.com/is/image/Belk/wk01_corpe_2019_newheader_5C_2?$DWP_E_ARTWORK$" alt="Men" border="0" style="display:block; font-size:12px; max-width:120px; width:100%;font-family:Arial,sans-serif;" >
+         </a>
+      </td>
+      <td align="center" bgcolor="#000001" style="width: 20%; text-align: center; vertical-align: bottom; font-size: 0;">
+         <a href="https://click.belkemail.com/?qs=1a2d308eefb4f8a75a0d8fddb5ba7b414d4456dc503fafbea82a1f6627c46e66391878f43d7934de32844648ce25a3a76f4b192d95fd04eaa833eea11459ca1b"  target="_blank">
+            <img src="http://belk.scene7.com/is/image/Belk/wk01_corpe_2019_newheader_5C_3?$DWP_E_ARTWORK$" alt="Shoes" border="0" style="display:block; font-size:12px; max-width:120px; width:100%;font-family:Arial,sans-serif;" >
+         </a>
+      </td>
+      <td align="center" bgcolor="#000001" style="width: 20%; text-align: center; vertical-align: bottom; font-size: 0;">
+         <a href="https://click.belkemail.com/?qs=1a2d308eefb4f8a729b5443332056f626223758c80490c4988ebacf67857175d47188da62d237227d51aa6d5b8ef93a27c461bd7b294447044665fd62d55fe9d"  target="_blank">
+            <img src="http://belk.scene7.com/is/image/Belk/wk01_corpe_2019_newheader_5C_4?$DWP_E_ARTWORK$" alt="For the Home" border="0" style="display:block; font-size:12px; max-width:120px; width:100%;font-family:Arial,sans-serif;" >
+         </a>
+      </td>
+      <td align="center" bgcolor="#000001" style="width: 20%; text-align: center; vertical-align: bottom; font-size: 0;">
+         <a href="https://click.belkemail.com/?qs=1a2d308eefb4f8a789538dfecefc0927fe1ed64482ef7812982aff3e091adc30b852ed77050c5cf64d7c005e3dae6fc6de1f464775abaea4587f0d763601aa47"  target="_blank">
+            <img src="http://belk.scene7.com/is/image/Belk/wk01_corpe_2019_newheader_5C_5?$DWP_E_ARTWORK$" alt="More" border="0" style="display:block; font-size:12px; max-width:120px; width:100%;font-family:Arial,sans-serif;" >
+         </a>
+      </td>
+   </tr>
+</table>
+<!--[if (gte mso 9)|(IE)]> </td></tr></table> <![endif]-->
+<!-- ***********  END HEADER   **************-->
 
-                                <span style="font-family: Arial, Helvetica, sans-serif; font-size : 9px; color: #999999; line-height: 12px; text-decoration: none;"><a href="http://link.westelm.com/rts/go2.aspx?h=8200267&tp=i-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ&x=3948977%7ci-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ%7cTRIG%7cNEWMOVER%7cNew_PreMover_2_Imagitas%7c339742" TARGET="_blank" STYLE="color:#999999; text-decoration: underline;">Shop west elm for modern furniture + home decor</a></span>
-                                <br />
+<!-- ****************************************-->
+<!-- ***********  START CONTENT  ************-->
+<!-- ****************************************-->
+<!--[if (gte mso 9)|(IE)]> <table width="600" align="center" cellpadding="0" cellspacing="0" border="0"><tr><td> <![endif]-->
+<table align="center" width="100%" cellpadding="0" cellspacing="0" style="max-width: 600px; outline: none;">
+   <tr>
+      <td valign="top" align="left">
+         <table style="min-width: 100%; " class="stylingblock-content-wrapper" width="100%" cellspacing="0" cellpadding="0"><tr><td class="stylingblock-content-wrapper camarker-inner"><!-- Start P1 -->
+<!-- ****************************************-->
+<!-- ***********  START 1 COLUMN   **********-->
+<!-- ****************************************-->
+<!--[if (gte mso 9)|(IE)]> <table width="600" align="center" cellpadding="0" cellspacing="0" border="0">     <tr>         <td> <![endif]-->
+<table class="container" style="max-width: 600px; outline: none; background: #FFFFFF;" width="100%" cellspacing="0" cellpadding="0" align="center">
+    <tr>
+        <td style="text-align: center; vertical-align: top; font-size: 0;">
+            <!--[if (gte mso 9)|(IE)]>             <table width="100%" align="center" cellpadding="0" cellspacing="0" border="0">                 <tr>                     <td>             <![endif]-->
+            <div style="width: 100%; display: inline-block; vertical-align: top;">
+                <table width="100%"><tr><td style="padding:0px;text-align:center;"><a href="https://click.belkemail.com/u/?qs=1a2d308eefb4f8a7556ce3fb950ac95496bdae597269ef8fb940e38d3d54c878df6592d5514af398f974aeaacd867db9efff2e23ec0e9090a4311157a96d8093"  ><img style="width: 100%;" src="https://belk.scene7.com/is/image/Belk/wk05_corpe_2019_springstockup_1a_030619_FH_1?$DWP_E_ARTWORK$&wid=600" alt="Up to 70% off Bonus Buys. Shop Bonus Buys." class="columnImage" mc:label="single_column_image" mc:edit="single_column_image"></a></td></tr></table>
+            </div>
+            <!--[if (gte mso 9)|(IE)]>             </td>             <td>             <![endif]-->
+        </td>
+    </tr>
+</table>
+<!--[if (gte mso 9)|(IE)]>         </td>     </tr> </table> <![endif]-->
+<!-- ***********  END 1 COLUMN   **************--> <!-- End P1 -->
 
-                                <span style="font-family: Arial, Helvetica, sans-serif; font-size : 9px; color: #999999; line-height: 12px; text-decoration: none;"><a href="http://form.westelm.com/ats/msg.aspx?sg1=1e162b4df7502b6b9d7018acd34093be0f677af417abcc57f141c4224f392ab3" TARGET="_blank" STYLE="color:#999999; text-decoration: underline;">view this email with images</a></span>
-                            </td>
-                        </tr>
+<!-- Start P2 -->
+<!-- ****************************************-->
+<!-- ***********  START 1 COLUMN   **********-->
+<!-- ****************************************-->
+<!--[if (gte mso 9)|(IE)]> <table width="600" align="center" cellpadding="0" cellspacing="0" border="0">     <tr>         <td> <![endif]-->
+<table class="container" style="max-width: 600px; outline: none; background: #FFFFFF;" width="100%" cellspacing="0" cellpadding="0" align="center">
+    <tr>
+        <td style="text-align: center; vertical-align: top; font-size: 0;">
+            <!--[if (gte mso 9)|(IE)]>             <table width="100%" align="center" cellpadding="0" cellspacing="0" border="0">                 <tr>                     <td>             <![endif]-->
+            <div style="width: 100%; display: inline-block; vertical-align: top;">
+                <table width="100%"><tr><td style="padding:0px;text-align:center;"><a href="https://click.belkemail.com/?qs=1a2d308eefb4f8a7dd781babd60cc285c918137e2b0eeb3b9336fe7154113dbf78c4774e70f01ab148706ec69fbfac530364aca7d1b62d5828e0f93c73ad9834" ><img style="width: 100%;" src="https://belk.scene7.com/is/image/Belk/wk05_corpe_2019_springstockup_1a_030619_FH_2?$DWP_E_PHOTO$&wid=600" alt="Spring Stock-Up Sale! From 29.99 Women's Sandals - Shop Now" class="columnImage" mc:label="single_column_image" mc:edit="single_column_image"></a></td></tr></table>
+            </div>
+            <!--[if (gte mso 9)|(IE)]>             </td>             <td>             <![endif]-->
+        </td>
+    </tr>
+</table>
+<!--[if (gte mso 9)|(IE)]>         </td>     </tr> </table> <![endif]-->
+<!-- ***********  END 1 COLUMN   **************--> <!-- End P2 -->
 
-                        <tr>
-                            <td valign="bottom"><img src="http://edm.westelm.com/we/evergreen/spacer_0.gif" width="1" height="3" border="0" alt="" /></td>
-                        </tr>
+<!-- Start P3 -->
+<!-- ****************************************-->
+<!-- ***********  START 1 COLUMN   **********-->
+<!-- ****************************************-->
+<!--[if (gte mso 9)|(IE)]> <table width="600" align="center" cellpadding="0" cellspacing="0" border="0">     <tr>         <td> <![endif]-->
+<table class="container" style="max-width: 600px; outline: none; background: #FFFFFF;" width="100%" cellspacing="0" cellpadding="0" align="center">
+    <tr>
+        <td style="text-align: center; vertical-align: top; font-size: 0;">
+            <!--[if (gte mso 9)|(IE)]>             <table width="100%" align="center" cellpadding="0" cellspacing="0" border="0">                 <tr>                     <td>             <![endif]-->
+            <div style="width: 100%; display: inline-block; vertical-align: top;">
+                <table width="100%"><tr><td style="padding:0px;text-align:center;"><a href="https://click.belkemail.com/?qs=1a2d308eefb4f8a7c4cca5b3f69475df89478690506c37e1766a4e02027158e84821a55583e76ef1a95e3db9e16e5c854cd8c928e289d8ad3cad823910a67219" ><img style="width: 100%;" src="https://belk.scene7.com/is/image/Belk/wk05_corpe_2019_springstockup_1a_030619_FH_3?$DWP_E_PHOTO$&wid=600" alt="Bonus Buy! Up to 50% off Fashion Jewelry ft New Directions - Shop Now" class="columnImage" mc:label="single_column_image" mc:edit="single_column_image"></a></td></tr></table>
+            </div>
+            <!--[if (gte mso 9)|(IE)]>             </td>             <td>             <![endif]-->
+        </td>
+    </tr>
+</table>
+<!--[if (gte mso 9)|(IE)]>         </td>     </tr> </table> <![endif]-->
+<!-- ***********  END 1 COLUMN   **************--> <!-- End P3 -->
 
-                    </table>
+<!-- Start P4 -->
+<!-- ****************************************-->
+<!-- ***********  START 1 COLUMN   **********-->
+<!-- ****************************************-->
+<!--[if (gte mso 9)|(IE)]> <table width="600" align="center" cellpadding="0" cellspacing="0" border="0">     <tr>         <td> <![endif]-->
+<table class="container" style="max-width: 600px; outline: none; background: #FFFFFF;" width="100%" cellspacing="0" cellpadding="0" align="center">
+    <tr>
+        <td style="text-align: center; vertical-align: top; font-size: 0;">
+            <!--[if (gte mso 9)|(IE)]>             <table width="100%" align="center" cellpadding="0" cellspacing="0" border="0">                 <tr>                     <td>             <![endif]-->
+            <div style="width: 100%; display: inline-block; vertical-align: top;">
+                <table width="100%"><tr><td style="padding:0px;text-align:center;"><a href="https://click.belkemail.com/u/?qs=1a2d308eefb4f8a72128a412661e4afde3436b5c154bcfcc48f04146efdb4cce6ae44cb7ce78391d5e6397a8618b6232f4598d7740be6689a42e11117ac3c9d2"  ><img style="width: 100%;" src="https://belk.scene7.com/is/image/Belk/wk05_corpe_2019_springstockup_1a_030619_FH_4?$DWP_E_ARTWORK$" alt="$10 off $50, $20 off $100, $30 off $150 regular &amp; sale purchases - excludes Bonus Buys. Get Shopping Pass." class="columnImage" mc:label="single_column_image" mc:edit="single_column_image"></a></td></tr></table>
+            </div>
+            <!--[if (gte mso 9)|(IE)]>             </td>             <td>             <![endif]-->
+        </td>
+    </tr>
+</table>
+<!--[if (gte mso 9)|(IE)]>         </td>     </tr> </table> <![endif]-->
+<!-- ***********  END 1 COLUMN   **************--> <!-- End P4 -->
+
+<!-- Start P5 & P6 -->
+<!-- ****************************************-->
+<!-- ***********  START 2 COLUMN   **********-->
+<!-- ****************************************-->
+<!--[if (gte mso 9)|(IE)]> <table width="600" align="center" cellpadding="0" cellspacing="0" border="0">     <tr>         <td> <![endif]-->
+<table class="container" valign="bottom" style="max-width: 600px; outline: none; background: #FFFFFF;" width="100%" cellspacing="0" cellpadding="0" align="center">
+        <tr>
+          <td style="width: 50%; text-align: center; vertical-align: bottom; font-size: 0;" align="center"><a href="https://click.belkemail.com/?qs=1a2d308eefb4f8a7271cf34c32aabebd085b968bffecbfa29dc7767403b586bbbb7b8466766ab4c5618811379c9fc2708ebeaf23866ce9e989b5e8e39ee70d9c" ><img src="http://belk.scene7.com/is/image/Belk/wk05_corpe_2019_springstockup_1a_030619_2C_1?$DWP_E_PHOTO$" alt="Bonus Buy! From 59.99 COffee Makers from Cuisinart &amp; Keurig - Shop Now" style="display:block; font-size:12px; max-width:300px; width:100%;font-family:Arial,sans-serif;" border="0"></a></td>
+
+          <td style="width: 50%; text-align: center; vertical-align: bottom; font-size: 0;" align="center"><a href="https://click.belkemail.com/?qs=1a2d308eefb4f8a72129e116c22d556be6a53eeb129c855aad6ab12fdf94a6015d7c35cb4b8e29a593ec5c4e13a92b4381678b942f9c2211ec602ed5534b59a4" ><img src="http://belk.scene7.com/is/image/Belk/wk05_corpe_2019_springstockup_1a_030619_2C_2?$DWP_E_PHOTO$" alt="Bonus Buy! From 12.99 Twin Microfiber Sheets ft. Modern.Southern.Home. - Shop now" style="display:block; font-size:12px; max-width:300px; width:100%;font-family:Arial,sans-serif;" border="0"></a></td>
+        </tr>
+      </table>
+<!--[if (gte mso 9)|(IE)]>         </td>     </tr> </table> <![endif]-->
+<!-- ***********  END 2 COLUMN   **************--> <!-- End P5 & P6 -->
+
+<!-- Start P7 -->
+<!-- ****************************************-->
+<!-- ***********  START 1 COLUMN   **********-->
+<!-- ****************************************-->
+<!--[if (gte mso 9)|(IE)]> <table width="600" align="center" cellpadding="0" cellspacing="0" border="0">     <tr>         <td> <![endif]-->
+<table class="container" style="max-width: 600px; outline: none; background: #FFFFFF;" width="100%" cellspacing="0" cellpadding="0" align="center">
+    <tr>
+        <td style="text-align: center; vertical-align: top; font-size: 0;">
+            <!--[if (gte mso 9)|(IE)]>             <table width="100%" align="center" cellpadding="0" cellspacing="0" border="0">                 <tr>                     <td>             <![endif]-->
+            <div style="width: 100%; display: inline-block; vertical-align: top;">
+                <table width="100%"><tr><td style="padding:0px;text-align:center;"><a href="https://click.belkemail.com/?qs=1a2d308eefb4f8a729c023013106fa3345a4f2c6e7923d2e9043e8f078e24a9e54e70a781c3640834df5b38e46f7507cea4d57dc6c400d2ed0ce354bb5f873c3" ><img style="width: 100%;" src="http://belk.scene7.com/is/image/Belk/wk05_corpe_2019_springstockup_1a_030619_FH_5?$DWP_E_PHOTO$&wid=600" alt="Bonus Buy! Up to 50% off Curvy Belk-Exclusives from Crown &amp; Ivy &amp; more - Shop now" class="columnImage" mc:label="single_column_image" mc:edit="single_column_image"></a></td></tr></table>
+            </div>
+            <!--[if (gte mso 9)|(IE)]>             </td>             <td>             <![endif]-->
+        </td>
+    </tr>
+</table>
+<!--[if (gte mso 9)|(IE)]>         </td>     </tr> </table> <![endif]-->
+<!-- ***********  END 1 COLUMN   **************--> <!-- End P7 -->
+
+<!-- Start P8 -->
+<!-- ****************************************-->
+<!-- ***********  START 1 COLUMN   **********-->
+<!-- ****************************************-->
+<!--[if (gte mso 9)|(IE)]> <table width="600" align="center" cellpadding="0" cellspacing="0" border="0">     <tr>         <td> <![endif]-->
+<table class="container" style="max-width: 600px; outline: none; background: #FFFFFF;" width="100%" cellspacing="0" cellpadding="0" align="center">
+    <tr>
+        <td style="text-align: center; vertical-align: top; font-size: 0;">
+            <!--[if (gte mso 9)|(IE)]>             <table width="100%" align="center" cellpadding="0" cellspacing="0" border="0">                 <tr>                     <td>             <![endif]-->
+            <div style="width: 100%; display: inline-block; vertical-align: top;">
+                <table width="100%"><tr><td style="padding:0px;text-align:center;"><a href="https://click.belkemail.com/?qs=1a2d308eefb4f8a70a069d5b0719e7c04628da636720a028e08f2cd39130324663ef94a194f19282ea5c50b500d0e4d7fc6f15900e610bcba67803830e453db6" ><img style="width: 100%;" src="http://belk.scene7.com/is/image/Belk/wk05_corpe_2019_springstockup_1a_030619_TEST_FH_6?$DWP_E_PHOTO$&wid=600" alt="Up to 40% off Juniors Fashion ft. True Craft- Shop Now" class="columnImage" mc:label="single_column_image" mc:edit="single_column_image"></a></td></tr></table>
+            </div>
+            <!--[if (gte mso 9)|(IE)]>             </td>             <td>             <![endif]-->
+        </td>
+    </tr>
+</table>
+<!--[if (gte mso 9)|(IE)]>         </td>     </tr> </table> <![endif]-->
+<!-- ***********  END 1 COLUMN   **************--> <!-- End P8 -->
+
+<!-- Start P9 -->
+<!-- ****************************************-->
+<!-- ***********  START 1 COLUMN   **********-->
+<!-- ****************************************-->
+<!--[if (gte mso 9)|(IE)]> <table width="600" align="center" cellpadding="0" cellspacing="0" border="0">     <tr>         <td> <![endif]-->
+<table class="container" style="max-width: 600px; outline: none; background: #FFFFFF;" width="100%" cellspacing="0" cellpadding="0" align="center">
+    <tr>
+        <td style="text-align: center; vertical-align: top; font-size: 0;">
+            <!--[if (gte mso 9)|(IE)]>             <table width="100%" align="center" cellpadding="0" cellspacing="0" border="0">                 <tr>                     <td>             <![endif]-->
+            <div style="width: 100%; display: inline-block; vertical-align: top;">
+                <table width="100%"><tr><td style="padding:0px;text-align:center;"><a href="https://click.belkemail.com/?qs=1a2d308eefb4f8a7666fa677ea1de583203a23626d625ea143f52b163f6b9c20e2de52242867e518ba02c1ad7eed0cb44e7deaedab8467f06043d919a58ef779" ><img style="width: 100%;" src="https://belk.scene7.com/is/image/Belk/wk01_corpe_2019_vday1a_020619_FH_9?$DWP_E_ARTWORK$" alt="Free In-Store Pickup. Most orders ready within 4 hours. See Details." class="columnImage" mc:label="single_column_image" mc:edit="single_column_image"></a></td></tr></table>
+            </div>
+            <!--[if (gte mso 9)|(IE)]>             </td>             <td>             <![endif]-->
+        </td>
+    </tr>
+</table>
+<!--[if (gte mso 9)|(IE)]>         </td>     </tr> </table> <![endif]-->
+<!-- ***********  END 1 COLUMN   **************--> <!-- End P9 -->
+
+<!-- Start P10 -->
+<!-- ****************************************-->
+<!-- ***********  START 1 COLUMN   **********-->
+<!-- ****************************************-->
+<!--[if (gte mso 9)|(IE)]> <table width="600" align="center" cellpadding="0" cellspacing="0" border="0">     <tr>         <td> <![endif]-->
+<table class="container" style="max-width: 600px; outline: none; background: #FFFFFF;" width="100%" cellspacing="0" cellpadding="0" align="center">
+    <tr>
+        <td style="text-align: center; vertical-align: top; font-size: 0;">
+            <!--[if (gte mso 9)|(IE)]>             <table width="100%" align="center" cellpadding="0" cellspacing="0" border="0">                 <tr>                     <td>             <![endif]-->
+            <div style="width: 100%; display: inline-block; vertical-align: top;">
+                <table width="100%"><tr><td style="padding:0px;text-align:center;"><a href="https://click.belkemail.com/?qs=1a2d308eefb4f8a72ecd8dd3b4aaf4c7303af65cb5921386a90ca6370ca9e516c5b853eca7ba739ae566bb6cf54bc1fb681619af01f61c90b52c6af88421868e" ><img style="width: 100%;" src="http://belk.scene7.com/is/image/Belk/wk05_corpe_2019_springstockup_1a_030619_FH_7?$DWP_E_PHOTO$&wid=600" alt="Bonus Buy! Up to 60% off Pants from Saddlebred, IZOD &amp; more - Shop Now" class="columnImage" mc:label="single_column_image" mc:edit="single_column_image"></a></td></tr></table>
+            </div>
+            <!--[if (gte mso 9)|(IE)]>             </td>             <td>             <![endif]-->
+        </td>
+    </tr>
+</table>
+<!--[if (gte mso 9)|(IE)]>         </td>     </tr> </table> <![endif]-->
+<!-- ***********  END 1 COLUMN   **************--> <!-- End P10 -->
+
+<!-- Start P11 -->
+<!-- ****************************************-->
+<!-- ***********  START 1 COLUMN   **********-->
+<!-- ****************************************-->
+<!--[if (gte mso 9)|(IE)]> <table width="600" align="center" cellpadding="0" cellspacing="0" border="0">     <tr>         <td> <![endif]-->
+<table class="container" style="max-width: 600px; outline: none; background: #FFFFFF;" width="100%" cellspacing="0" cellpadding="0" align="center">
+    <tr>
+        <td style="text-align: center; vertical-align: top; font-size: 0;">
+            <!--[if (gte mso 9)|(IE)]>             <table width="100%" align="center" cellpadding="0" cellspacing="0" border="0">                 <tr>                     <td>             <![endif]-->
+            <div style="width: 100%; display: inline-block; vertical-align: top;">
+                <table width="100%"><tr><td style="padding:0px;text-align:center;"><a href="https://click.belkemail.com/?qs=1a2d308eefb4f8a78ad8851f097e781493c4fd01ed9119e8b8e405033efc29158527ae7e2ffc4bfbda880e571df455d9b8f8575aba6d4d0885abd50ace5d6b61" ><img style="width: 100%;" src="https://belk.scene7.com/is/image/Belk/wk5_2019_corp_emails_springincolor_1_fh_4_?$DWP_E_PHOTO$&wid=600" alt="Lancome - ONLINE ONLY - Customize your free 7-piece with any $37.50 Lancome purchase. Learn More." class="columnImage" mc:label="single_column_image" mc:edit="single_column_image"></a></td></tr></table>
+            </div>
+            <!--[if (gte mso 9)|(IE)]>             </td>             <td>             <![endif]-->
+        </td>
+    </tr>
+</table>
+<!--[if (gte mso 9)|(IE)]>         </td>     </tr> </table> <![endif]-->
+<!-- ***********  END 1 COLUMN   **************--> <!-- End P11 -->
+
+<!-- Start P12 -->
+<!-- ****************************************-->
+<!-- ***********  START 1 COLUMN   **********-->
+<!-- ****************************************-->
+<!--[if (gte mso 9)|(IE)]> <table width="600" align="center" cellpadding="0" cellspacing="0" border="0">     <tr>         <td> <![endif]-->
+<table class="container" style="max-width: 600px; outline: none; background: #FFFFFF;" width="100%" cellspacing="0" cellpadding="0" align="center">
+    <tr>
+        <td style="text-align: center; vertical-align: top; font-size: 0;">
+            <!--[if (gte mso 9)|(IE)]>             <table width="100%" align="center" cellpadding="0" cellspacing="0" border="0">                 <tr>                     <td>             <![endif]-->
+            <div style="width: 100%; display: inline-block; vertical-align: top;">
+                <table width="100%"><tr><td style="padding:0px;text-align:center;"><a href="https://click.belkemail.com/?qs=1a2d308eefb4f8a7c63b36f30e8db22c8936e54341ebee1578c5d86bd812ad1fa61c5829a1e866020a310bf1a1e7e6e29cce9ee8127ba66098736e7178bb97e9" ><img style="width: 100%;" src="https://belk.scene7.com/is/image/Belk/Redeem_BelkBucks_new?$DWP_E_ARTWORK$" alt="It's time! Redeem your Belk Bucks coupon {Save even more on Doorbusters, designer brands &amp; clearance!} thru 3/12 | $15 off $75 (before tax and shipping) In store &amp; online | 2/26 - 3/12/19 | Code: 67478155. Shop Now." class="columnImage" mc:label="single_column_image" mc:edit="single_column_image"></a></td></tr></table>
+            </div>
+            <!--[if (gte mso 9)|(IE)]>             </td>             <td>             <![endif]-->
+        </td>
+    </tr>
+</table>
+<!--[if (gte mso 9)|(IE)]>         </td>     </tr> </table> <![endif]-->
+<!-- ***********  END 1 COLUMN   **************--> <!-- End P12 --></td></tr></table>
+      </td>
+   </tr>
+   <tr>
+      <td valign="top" align="left">
+
+      </td>
+   </tr>
+</table>
+<!--[if (gte mso 9)|(IE)]> </td></tr></table> <![endif]-->
+<table align="center" width="100%" cellpadding="0" cellspacing="0" style="max-width: 600px; outline: none;">
+   <tr>
+      <td bgcolor="#ffffff"><span style="font-size:6px">&nbsp;</span></td>
+   </tr>
+</table>
+<!-- ***********  END CONTENT  **************-->
 
 
+<!-- ****************************************-->
+<!-- ****************************************-->
+<!-- ***********  START FOOTER   ************-->
+<!-- ****************************************-->
+<!--[if (gte mso 9)|(IE)]> <table width="600" align="center" cellpadding="0" cellspacing="0" border="0"><tr><td> <![endif]-->
+<table class="container" valign="top" align="center" width="100%" cellpadding="0" cellspacing="0" style="max-width: 600px; outline: none; background: #FFFFFF;">
+   <tr>
+      <td>
+         <table align="center" width="100%" cellpadding="0" cellspacing="0" style="max-width: 600px; outline: none;">
+            <tr>
+               <td bgcolor="#ffffff"><span style="font-size:6px">&nbsp;</span></td>
+            </tr>
+         </table>
+         <table align="center" width="100%" cellpadding="0" cellspacing="0" style="max-width: 600px; outline: none;">
+            <tr>
+               <td>
+                  <table border="0" cellpadding="0" cellspacing="0" align="left">
+                     <tr>
+                        <td valign="bottom" height="34">&nbsp;</td>
+                     </tr>
+                  </table>
+                  <table class="efooter" align="center" width="100%" cellpadding="0" cellspacing="0" style="max-width: 600px; outline: none; background: #FFFFFF;">
+                     <tr>
+                        <td>
+                           <table cellspacing="0" cellpadding="0" width="100%" border="0" align="right">
+                              <tr>
+                                 <td align="left" style="border-bottom: 1px solid #a3a3a3;font-family: Lucida Grande, Arial, sans-serif; text-align: left; max-width: 600px;" valign="middle" bgcolor="#ffffff" height="30">
+                                    <a target="_blank" style="font-size: 10pt; font-family: Lucida Grande, Arial, sans-serif;text-decoration: none; color: #585858; margin-left: 10px; padding-right:100px;" href="https://click.belkemail.com/?qs=1a2d308eefb4f8a73ac621cb97ffcc24f34326a5806b4e807295114d242ac52e0ad399dc67e6b774dd80ffc08feec053e319f65f93882ffd62592ee66e95b813" >
+                                       Women
+                                    </a>
+                                 </td>
+                              </tr>
+                           </table>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <table cellspacing="0" cellpadding="0" width="100%" border="0" align="right">
+                              <tr>
+                                 <td align="left" style="border-bottom: 1px solid #a3a3a3;font-family: Lucida Grande, Arial, sans-serif; text-align: left; max-width: 600px;" valign="middle" bgcolor="#ffffff" height="30">
+                                    <a target="_blank"  style="font-size: 10pt; font-family: Lucida Grande, Arial, sans-serif;text-decoration: none; color: #585858; margin-left: 10px; padding-right:100px;" href="https://click.belkemail.com/?qs=1a2d308eefb4f8a78a1526abf2de427025743b10bf5add718f5799c88e8e403b7296025639dc9a2e283efe354ee7723929d7ff76fbfa7d376f52e4672b6e98cb" >
+                                       Men
+                                    </a>
+                                 </td>
+                              </tr>
+                           </table>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <table cellspacing="0" cellpadding="0" width="100%" border="0" align="right">
+                              <tr>
+                                 <td align="left" style="border-bottom: 1px solid #a3a3a3;font-family: Lucida Grande, Arial, sans-serif; text-align: left; max-width: 600px;" valign="middle" bgcolor="#ffffff" height="30">
+                                    <a target="_blank" style="font-size: 10pt; font-family: Lucida Grande, Arial, sans-serif;text-decoration: none; color: #585858; margin-left: 10px; padding-right:100px;" href="https://click.belkemail.com/?qs=1a2d308eefb4f8a7e4763acb9a2a7ba9bcf81e9154ebf2792c9c24babf9fd7ba9b5d363a3f936743128f84086f8fdb7fb668cb3d297e43c371f8f4e4c4e13281" >
+                                       Juniors
+                                    </a>
+                                 </td>
+                              </tr>
+                           </table>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <table cellspacing="0" cellpadding="0" width="100%" border="0" align="right">
+                              <tr>
+                                 <td align="left" style="border-bottom: 1px solid #a3a3a3;font-family: Lucida Grande, Arial, sans-serif; text-align: left; max-width: 600px;" valign="middle" bgcolor="#ffffff" height="30">
+                                    <a target="_blank"  style="font-size: 10pt; font-family: Lucida Grande, Arial, sans-serif;text-decoration: none; color: #585858; margin-left: 10px; padding-right:100px;" href="https://click.belkemail.com/?qs=1a2d308eefb4f8a79ef1783ade805502e028dc1cdcd0d154a8bcabb470c65eeb3563f63f5f1f5c33c60031c73aa01e52d44a11a9a60f791ec4cd2b2767735462" >
+                                       Kids
+                                    </a>
+                                 </td>
+                              </tr>
+                           </table>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <table cellspacing="0" cellpadding="0" width="100%" border="0" align="right">
+                              <tr>
+                                 <td align="left" style="border-bottom: 1px solid #a3a3a3;font-family: Lucida Grande, Arial, sans-serif; text-align: left; max-width: 600px;" valign="middle" bgcolor="#ffffff" height="30">
+                                    <a target="_blank"  style="font-size: 10pt; font-family: Lucida Grande, Arial, sans-serif;text-decoration: none; color: #585858; margin-left: 10px; padding-right:100px;" href="https://click.belkemail.com/?qs=1a2d308eefb4f8a758cc7c5567a0c7830c3f5e4657384a5bc1179ba87252993c47738608f5a4d1ade9b671a9cabd4bc892776f37fe7ac820776fb9fc07438acd" >
+                                       Beauty & Fragrance
+                                    </a>
+                                 </td>
+                              </tr>
+                           </table>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <table cellspacing="0" cellpadding="0" width="100%" border="0" align="right">
+                              <tr>
+                                 <td align="left" style="border-bottom: 1px solid #a3a3a3;font-family: Lucida Grande, Arial, sans-serif; text-align: left; max-width: 600px;" valign="middle" bgcolor="#ffffff" height="30">
+                                    <a target="_blank"  style="font-size: 10pt; font-family: Lucida Grande, Arial, sans-serif;text-decoration: none; background: #fff; color: #585858; margin-left: 10px; padding-right:100px;" href="https://click.belkemail.com/?qs=1a2d308eefb4f8a73efde6573f83e18fee7fa9293df6f296ca5c52e901c5e5c76331a0caa1dea63a774cb7eaefa394ec84b296a66fc509aa0845408ee5a0ae37" >
+                                       Shoes
+                                    </a>
+                                 </td>
+                              </tr>
+                           </table>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <table cellspacing="0" cellpadding="0" width="100%" border="0" align="right">
+                              <tr>
+                                 <td align="left" style="border-bottom: 1px solid #a3a3a3;font-family: Lucida Grande, Arial, sans-serif; text-align: left; max-width: 600px;" valign="middle" bgcolor="#ffffff" height="30">
+                                    <a target="_blank"  style="font-size: 10pt; font-family: Lucida Grande, Arial, sans-serif; text-decoration: none; color: #585858; margin-left: 10px; padding-right:100px;" href="https://click.belkemail.com/?qs=1a2d308eefb4f8a722e7a5d91156e71bd95a9058cf9afc40ab0fc67786c8ce72625e104bdc476967e94c694787ef536aeb16ba6377940f06a97df4fca837753d" >
+                                       Handbags & Accessories
+                                    </a>
+                                 </td>
+                              </tr>
+                           </table>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <table cellspacing="0" cellpadding="0" width="100%" border="0" align="right">
+                              <tr>
+                                 <td align="left" style="border-bottom: 1px solid #a3a3a3;font-family: Lucida Grande, Arial, sans-serif; text-align: left; max-width: 600px;" valign="middle" bgcolor="#ffffff" height="30">
+                                    <a target="_blank"  style="font-size: 10pt; font-family: Lucida Grande, Arial, sans-serif;text-decoration: none; color: #585858; margin-left: 10px; padding-right:100px;" href="https://click.belkemail.com/?qs=1a2d308eefb4f8a73d4cde630aee28b9db0e7c8490590fcde4da20aa588c186438d816138b5600df9f43d1925240fbb7d0c707eb89aff9b907645b15dfd52086" >
+                                       Jewelry & Watches
+                                    </a>
+                                 </td>
+                              </tr>
+                           </table>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <table cellspacing="0" cellpadding="0" width="100%" border="0" align="right">
+                              <tr>
+                                 <td align="left" style="border-bottom: 1px solid #a3a3a3;font-family: Lucida Grande, Arial, sans-serif; text-align: left; max-width: 600px;" valign="middle" bgcolor="#ffffff" height="30">
+                                    <a target="_blank" style="font-size: 10pt; font-family: Lucida Grande, Arial, sans-serif;text-decoration: none; color: #585858; margin-left: 10px; padding-right:100px;" href="https://click.belkemail.com/?qs=1a2d308eefb4f8a71d628c2e90389373f8a86557a5cacee6cee7a8843cd9e3f1d991d917e388d5d137da64403eed020ad5239f92e84a063ddd96cce4f5b87002" >
+                                       Bed & Bath
+                                    </a>
+                                 </td>
+                              </tr>
+                           </table>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <table cellspacing="0" cellpadding="0" width="100%" border="0" align="right">
+                              <tr>
+                                 <td align="left" style="border-bottom: 1px solid #a3a3a3;font-family: Lucida Grande, Arial, sans-serif; text-align: left; max-width: 600px;" valign="middle" bgcolor="#ffffff" height="30">
+                                    <a target="_blank"  style="font-size: 10pt; font-family: Lucida Grande, Arial, sans-serif;text-decoration: none; color: #585858; margin-left: 10px; padding-right:100px;" href="https://click.belkemail.com/?qs=1a2d308eefb4f8a70fccc8203f11e9dfb3ad3fa896a1ee9d3b7de6e7c7204f925f515fb0c56a12da40aa3196128535f46aac933b3e837b859ddfa81f265ac396" >
+                                       For the Home
+                                    </a>
+                                 </td>
+                              </tr>
+                           </table>
+                        </td>
+                     </tr>
+                  </table>
 
-                    <!--BODY START-->
-
-                    <table width="700" border="0" bgcolor="#ffffff" cellspacing="0" cellpadding="0" align="center">
-                        <tr>
-                            <td colspan="2">
-                                <a href="http://link.westelm.com/rts/go2.aspx?h=8200268&tp=i-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ&x=3948977%7ci-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ%7cTRIG%7cNEWMOVER%7cNew_PreMover_2_Imagitas%7c339742" target="_blank"><img src="http://edm.westelm.com/we/evergreen/2016_header_footer/header.gif" alt="west elm" width="700" height="60" border="0" align="top" style="display: block"></a>
-                            </td>
-                        </tr>
-
-                        <!--
-<tr>
-<td colspan="2">
-<a href="" target="_blank"><img src="http://edm.westelm.com/we/2018/071118_new_mover2_bedding_existing/Bnr_top.jpg" width="700" height="132" alt="" style="display: block; line-height: 0;" border="0" align="top"></a></td>
-</tr>
--->
-
-
-
-
-
+                  <!-- ****************************************-->
+                  <!-- *******  MOBILE APP   **********-->
+                  <!-- ****************************************-->
+                  <table width="100%" cellpadding="0" cellspacing="0" class="container">
+                     <tr>
+                        <td align="center" valign="top" bgcolor="#000001" style="width: 50%; text-align: center; vertical-align: bottom; font-size: 0;">
+                           <a href="https://click.belkemail.com/?qs=1a2d308eefb4f8a790243c719c28f73ab24f6adc0757bd488c91176fba2f9600b4276d04f3a6335b5f085d578a7cb49752b714e68828ac5db41d16f4aa3de5cf"  target="_blank">
+                              <img src="http://belk.scene7.com/is/image/Belk/wk42_2017DownloadAppFooter_final_R?$DWP_E_ARTWORK$" alt="Shop from your phone! Download our app today - Download on the App Store" border="0" style="display:block; font-size:12px; max-width:300px; width:100%;font-family:Arial,sans-serif;">
+                           </a>
+                        </td>
+                        <td align="center" valign="top" bgcolor="#000001" style="width: 50%; text-align: center; vertical-align: bottom; font-size: 0;">
+                           <a href="https://click.belkemail.com/?qs=1a2d308eefb4f8a79cbfef745f8110d1606551194fa7bc3db1d371dff9899ad80220f3de82b17d47cb28f0b698e15f4c057a84f7b44d5cb27a83f42f06af0ddd"  target="_blank">
+                              <img src="http://belk.scene7.com/is/image/Belk/wk42_2017DownloadAppFooter_final_L?$DWP_E_ARTWORK$" alt="Shop from your phone! Download our app today - Get it on Google Play" border="0" style="display:block; font-size:12px; max-width:300px; width:100%;font-family:Arial,sans-serif;">
+                           </a>
+                        </td>
+                     </tr>
+                  </table>
+                  <!-- ***********  END MOBILE APP  ************-->
 
 
-
-
-
-
-<tr>
-<td colspan="2">
-<a href="http://link.westelm.com/rts/go2.aspx?h=8200269&tp=i-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ&x=3948977%7ci-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ%7cTRIG%7cNEWMOVER%7cNew_PreMover_2_Imagitas%7c339742" target="_blank"><img src="http://edm.westelm.com/we/2018/071118_new_mover2_bedding_existing/hero_all.jpg" width="700" height="124" alt="Bedding Thats So Worth It" style="display: block; line-height: 0;" border="0" align="top"></a></td>
-</tr>
-<tr>
-<td>
-<a href="http://link.westelm.com/rts/go2.aspx?h=8200270&tp=i-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ&x=3948977%7ci-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ%7cTRIG%7cNEWMOVER%7cNew_PreMover_2_Imagitas%7c339742" target="_blank"><img src="http://edm.westelm.com/we/2018/071118_new_mover2_bedding_existing/hero_CTA_Code.jpg" width="349" height="65" alt="Shop Now" style="display: block; line-height: 0;" border="0" align="top"></a></td>
-<td>
-<a href="http://link.westelm.com/rts/go2.aspx?h=8200271&tp=i-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ&x=i-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ%7cTRIG%7cNEWMOVER%7cNew_PreMover_2_Imagitas%7c339742" target="_blank"><img src="http://edm.westelm.com/we/2018/071118_new_mover2_bedding_existing/hero_CTA_Store.jpg" width="351" height="65" alt="Find A Store" style="display: block; line-height: 0;" border="0" align="top"></a></td>
-</tr>
-<tr>
-<td colspan="2">
-<a href="http://link.westelm.com/rts/go2.aspx?h=8200272&tp=i-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ&x=3948977%7ci-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ%7cTRIG%7cNEWMOVER%7cNew_PreMover_2_Imagitas%7c339742" target="_blank"><img src="http://edm.westelm.com/we/2018/071118_new_mover2_bedding_existing/hero_btm.jpg" width="700" height="612" alt="" style="display: block; line-height: 0;" border="0" align="top"></a></td>
-</tr>
-<tr>
-<td colspan="2">
-<a href="http://link.westelm.com/rts/go2.aspx?h=8200273&tp=i-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ&x=3948977%7ci-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ%7cTRIG%7cNEWMOVER%7cNew_PreMover_2_Imagitas%7c339742" target="_blank"><img src="http://edm.westelm.com/we/2018/071118_new_mover2_bedding_existing/bnr_all1.jpg" width="700" height="384" alt="Shop Bedding Looks" style="display: block; line-height: 0;" border="0" align="top"></a></td>
-</tr>
-<tr>
-<td colspan="2">
-<a href="http://link.westelm.com/rts/go2.aspx?h=8200274&tp=i-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ&x=3948977%7ci-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ%7cTRIG%7cNEWMOVER%7cNew_PreMover_2_Imagitas%7c339742" target="_blank"><img src="http://edm.westelm.com/we/2018/071118_new_mover2_bedding_existing/bnr_all2.jpg" width="700" height="504" alt="Shop Duvets" style="display: block; line-height: 0;" border="0" align="top"></a></td>
-</tr>
-<tr>
-<td colspan="2">
-<a href="http://link.westelm.com/rts/go2.aspx?h=8200275&tp=i-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ&x=3948977%7ci-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ%7cTRIG%7cNEWMOVER%7cNew_PreMover_2_Imagitas%7c339742" target="_blank"><img src="http://edm.westelm.com/we/2018/071118_new_mover2_bedding_existing/bnr_all3.jpg" width="700" height="400" alt="Shop Sheets" style="display: block; line-height: 0;" border="0" align="top"></a></td>
-</tr>
-<tr>
-<td colspan="2">
-<a href="http://link.westelm.com/rts/go2.aspx?h=8200276&tp=i-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ&x=3948977%7ci-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ%7cTRIG%7cNEWMOVER%7cNew_PreMover_2_Imagitas%7c339742" target="_blank"><img src="http://edm.westelm.com/we/2018/071118_new_mover2_bedding_existing/bnr_all4.jpg" width="700" height="508" alt="Shop Bedding Basics" style="display: block; line-height: 0;" border="0" align="top"></a></td>
-</tr>
-<tr>
-<td colspan="2">
-<a href="http://link.westelm.com/rts/go2.aspx?h=8200277&tp=i-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ&x=3948977%7ci-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ%7cTRIG%7cNEWMOVER%7cNew_PreMover_2_Imagitas%7c339742" target="_blank"><img src="http://edm.westelm.com/we/2018/071118_new_mover2_bedding_existing/bnr_all5.jpg" width="700" height="378" alt="Shop Bedding Sets" style="display: block; line-height: 0;" border="0" align="top"></a></td>
-</tr>
-<tr>
-<td colspan="2">
-<a href="http://link.westelm.com/rts/go2.aspx?h=8200278&tp=i-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ&x=3948977%7ci-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ%7cTRIG%7cNEWMOVER%7cNew_PreMover_2_Imagitas%7c339742" target="_blank"><img src="http://edm.westelm.com/we/2018/071118_new_mover2_bedding_existing/bnr_all6.jpg" width="700" height="431" alt="Shop Baby + Kids" style="display: block; line-height: 0;" border="0" align="top"></a></td>
-</tr>
-<tr>
-<td colspan="2">
-<a href="http://link.westelm.com/rts/go2.aspx?h=8200279&tp=i-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ&x=3948977%7ci-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ%7cTRIG%7cNEWMOVER%7cNew_PreMover_2_Imagitas%7c339742" target="_blank"><img src="http://edm.westelm.com/we/2018/071118_new_mover2_bedding_existing/bnr_all7.jpg" width="700" height="431" alt="DESIGN CREW Free Design Services Find a Store" style="display: block; line-height: 0;" border="0" align="top"></a></td>
-</tr>
-<tr>
-<td>
-<a href="http://link.westelm.com/rts/go2.aspx?h=8200280&tp=i-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ&x=3948977%7ci-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ%7cTRIG%7cNEWMOVER%7cNew_PreMover_2_Imagitas%7c339742" target="_blank"><img src="http://edm.westelm.com/we/2018/071118_new_mover2_bedding_existing/scut_1.jpg" width="349" height="247" alt="west elm credit card earn 10% back in rewards* or 12 months special financing** APPLY NOW" style="display: block; line-height: 0;" border="0" align="top"></a></td>
-<td>
-<a href="http://link.westelm.com/rts/go2.aspx?h=8200281&tp=i-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ&x=3948977%7ci-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ%7cTRIG%7cNEWMOVER%7cNew_PreMover_2_Imagitas%7c339742" target="_blank"><img src="http://edm.westelm.com/we/2018/071118_new_mover2_bedding_existing/scut_2.jpg" width="351" height="247" alt="THE KEY Join for free and earn 3% back in rewards on every purchase JOIN NOW" style="display: block; line-height: 0;" border="0" align="top"></a></td>
-</tr>
-
-
-                    </table>
-<tr>  <table cellpadding="0" width="700" cellspacing="0" border="0" align="center">
-<td colspan="2">
-<img src="http://edm.westelm.com/we/2018/071118_new_mover2_bedding_existing/promo_1.jpg" width="700" height="140" alt="" style="display: block; line-height: 0;" border="0" align="top"></td>
-</tr>
-
-
-
-
-<tr>
-<td colspan="2">
-
-<table width="700" border="0" bgcolor="#ffffff" cellspacing="0" cellpadding="0" align="center">
-
-
-<tr>
-<td>
-<img src="http://edm.westelm.com/we/2018/071118_new_mover2_bedding_existing/promo_2.jpg" width="108" height="37" alt="" style="display: block; line-height: 0;" border="0" align="top"></td>
-<td width="466" height="37"  bgcolor="#1f8f93" align="center" style="width: 466px; height: 37px; font-family:Arial, Helvetica, sans-serif; font-size: 17px; color: #ffffff; line-height: 17px; font-weight: normal; text-decoration:none; text-size-adjust: none; -moz-text-size-adjust: none; -ms-text-size-adjust: none; -webkit-text-size-adjust: none;">
-<center>
-<span style="font-family:Arial, Helvetica, sans-serif; font-size: 17px; color: #ffffff; line-height: 17px; font-weight: normal; text-decoration:none; text-size-adjust: none; -moz-text-size-adjust: none; -ms-text-size-adjust: none; -webkit-text-size-adjust: none;">
-Shop With Code  97PH-JWM6-WMHR
-
-</span>
-</center>
-
+                  <!-- ****************************************-->
+                  <!-- *******  START SOCIAL LINKS   **********-->
+                  <!-- ****************************************-->
+<!--[if (gte mso 9)|(IE)]> <table width="600" align="center" cellpadding="0" cellspacing="0" border="0"><tr><td> <![endif]-->
+<table class="container" align="center" width="50%" cellpadding="0" cellspacing="0" style="max-width: 600px; outline: none; background: #FFFFFF;">
+   <tr>
+      <td valign="top" align="center" style="padding: 45px 0 20px 0;">
+         <table border="0" width="100%" cellpadding="0" cellspacing="0">
+            <tr>
+               <td valign="top" align="center" style="font-family: Lucida Grande, Arial, sans-serif;font-size: 20px;color: #000001;">
+                  <a  href="https://click.belkemail.com/u/?qs=1a2d308eefb4f8a715889b8d9a14cf519c12b5265d0fccacb31e28e475bf9d97eb6304058cb8c560778f2bfa5297eacee59fb589aade33c60bb9ba14535e4e7b"  target="_blank" style="text-decoration:none;color:#000001;">
+                     <span style="text-decoration:none;color:#000001;">Stay Connected</span>
+                  </a>
+               </td>
+            </tr>
+         </table>
+      </td>
+   </tr>
+   <tr>
+      <td style="text-align: center; vertical-align: top; font-size: 0;">
+<!--[if (gte mso 9)|(IE)]> <table width="100%" align="center" cellpadding="0" cellspacing="0" border="0"><tr><td> <![endif]-->
+<div style="width: 100%; display: inline-block; vertical-align: top;">
+   <table cellpadding="0" cellspacing="0" align="center" width="320" class="reset-width">
+      <tr>
+         <td style="color:#356d88; font-family:Helvetica;font-size:18px;line-height:150%;padding:0 5px;text-align:center;">
+            <a href="https://click.belkemail.com/?qs=1a2d308eefb4f8a7dfc7ff7ba1e2741a0d5df46dc895eea45f8d7d42d1f50417fc8623611b88fd173dc80c3a69d16906d3bc1f5e8dfa19662f3e9a8721984207" target="_blank" >
+               <img src="http://images.belkemail.com/lib/fe6515707c63067d7412/m/1/facebook-circle-icon.png" style="max-width:75px;" class="columnImage" mc:label="right_column_image" mc:edit="right_column_image" />
+            </a>
+         </td>
+         <td style="color:#356d88; font-family:Helvetica;font-size:18px;line-height:150%;padding:0 5px;text-align:center;">
+            <a href="https://click.belkemail.com/?qs=1a2d308eefb4f8a7c889759d37fedb64c00f78d77e441d55b0a10d89d3682137bc57086184c913d1fb9f621cc49268b9a0f4d8b1b023ceec93cd437c91874a8f" target="_blank" >
+               <img src="http://images.belkemail.com/lib/fe6515707c63067d7412/m/1/twitter-4-icon.png" style="max-width:75px;" class="columnImage" mc:label="right_column_image" mc:edit="right_column_image" />
+            </a>
+         </td>
+         <td style="color:#356d88;font-family:Helvetica;font-size:18px;line-height:150%;padding:0 5px;text-align:center;">
+            <a href="https://click.belkemail.com/?qs=1a2d308eefb4f8a7ef493ffe3ca8a6aa63048d87b6d66870149126fe8c7f0d9f915b92d4774ff1856d8562553d821497dbdd0925196b4d028fd306150ac8a764" target="_blank" >
+               <img src="http://images.belkemail.com/lib/fe6515707c63067d7412/m/1/pinterest-circle-icon.png" style="max-width:75px;" class="columnImage" mc:label="right_column_image" mc:edit="right_column_image" />
+            </a>
+         </td>
+         <td style="color:#356d88; font-family:Helvetica;font-size:18px;line-height:150%;padding:0 5px;text-align:center;">
+            <a href="https://click.belkemail.com/?qs=1a2d308eefb4f8a71df4fc797c32151305875331d58d4b15863dfc18aaceb1b4763f5f99b20698de092e735481545566ff336d88b92e442ff209a982d171219f" target="_blank" >
+               <img src="http://images.belkemail.com/lib/fe6515707c63067d7412/m/1/instagram-circle-icon.png" style="max-width:75px;" class="columnImage" mc:label="right_column_image" mc:edit="right_column_image" />
+            </a>
+         </td>
+      </tr>
+   </table>
+</div>
+<!--[if (gte mso 9)|(IE)]></td><td><![endif]-->
 </td>
-<td>
-<img src="http://edm.westelm.com/we/2018/071118_new_mover2_bedding_existing/promo_3.jpg" width="126" height="37" alt="" style="display: block; line-height: 0;" border="0" align="top"></td>
 </tr>
-
 </table>
-
-
+<!--[if (gte mso 9)|(IE)]> </td></tr></table> <![endif]-->
+<!-- ***********  END SOCIAL LINKS  ************-->
 </td>
 </tr>
-
-
-<tr>
-<td colspan="2">
-<img src="http://edm.westelm.com/we/2018/071118_new_mover2_bedding_existing/promo_4.jpg" width="700" height="126" alt="" style="display: block; line-height: 0;" border="0" align="top"></td>
 </table>
+<table align="center" width="100%" cellpadding="0" cellspacing="0" style="max-width: 600px; outline: none;">
+   <tr>
+      <td>
+         <table border="0" cellpadding="0" cellspacing="0" align="left">
+            <tr>
+               <td valign="bottom">&nbsp;</td>
+            </tr>
+         </table>
+      </td>
+   </tr>
+</table>
+</td>
 </tr>
-<table cellpadding="0" width="700" cellspacing="0" border="0" align="center">
-                         <tr>
-                             <td colspan="1"  align="center" style="font-family: Arial, Helvetica, sans-serif; font-size : 9px; color: #999999; line-height: 12px; text-decoration: none;">
-
-<p>
-Offer valid from 6/6/2019. Offer valid on regular-price, in-stock merchandise only. Excludes the west elm  Pottery Barn Kids collection, Sonos electronics, Leesa mattresses, Away luggage, Bali Shades, SMEG appliances, Stikwood Adhesive Paneling, clearance items ending in .97 + .99 and other select product. Offer not valid for the purchase of gift cards, previously purchased merchandise, monogramming, taxes, shipping, handling, gift wrap and processing charges. This offer cannot be resold or otherwise bartered. west elm will not replace lost, damaged or stolen coupons. ONLINE CUSTOMERS must enter their one-time-use promo code  -  97PH-JWM6-WMHR  -  into the promo code box during check out to receive the discount.</p>
-
-                              </td>
-                         </tr>
-                     </table>
-
-
-                    <!--EXCLUSIONS SECTION-->
-
-
-
-
-
-
-                    <!--/END EXCLUSIONS SECTION-->
-<!--Make sure that each Dyanmic Banner is coded in it's own table tags and center aligned.-->
-<!-- START FOOTER -->
-<table align="center" cellpadding="0" cellspacing="0" border="0" width="700">
-
-    <tr>
-        <td>
-            <table align="center" cellpadding="0" cellspacing="0" border="0">
-                <tr>
-                    <td>
-                        <a href="http://link.westelm.com/rts/go2.aspx?h=8200282&tp=i-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ&x=3948977%7ci-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ%7cTRIG%7cNEWMOVER%7cNew_PreMover_2_Imagitas%7c339742" target="_blank"><img src="http://edm.westelm.com/we/evergreen/2017_holiday_footer/footer_design.gif" alt="Free Design Services" width="246" height="175" style="display: block" border="0" align="top"></a>
-                    </td>
-                    <td>
-                        <a href="http://link.westelm.com/rts/go2.aspx?h=8200283&tp=i-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ&x=3948977%7ci-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ%7cTRIG%7cNEWMOVER%7cNew_PreMover_2_Imagitas%7c339742" target="_blank"><img src="http://edm.westelm.com/we/evergreen/2017_holiday_footer/footer_ideas.gif" alt="Get Style Tips + Advice" width="209" height="175" style="display: block" border="0" align="top"></a>
-                    </td>
-                    <td>
-                        <a href="http://link.westelm.com/rts/go2.aspx?h=8200284&tp=i-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ&x=3948977%7ci-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ%7cTRIG%7cNEWMOVER%7cNew_PreMover_2_Imagitas%7c339742" target="_blank"><img src="http://edm.westelm.com/we/evergreen/2017_holiday_footer/footer_registry.gif" alt="Create Your Registry" width="245" height="175" style="display: block" border="0" align="top"></a>
-                    </td>
-                </tr>
-            </table>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <table align="center" cellpadding="0" cellspacing="0" border="0">
-                <tr>
-                    <td>
-                        <a href="http://link.westelm.com/rts/go2.aspx?h=8200285&tp=i-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ&x=3948977%7ci-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ%7cTRIG%7cNEWMOVER%7cNew_PreMover_2_Imagitas%7c339742" target="_blank"><img src="http://edm.westelm.com/we/evergreen/2017_holiday_footer/footer_new.gif" alt="New" width="350" height="64" style="display: block" border="0" align="top"></a>
-                    </td>
-                    <td>
-                        <a href="http://link.westelm.com/rts/go2.aspx?h=8200286&tp=i-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ&x=3948977%7ci-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ%7cTRIG%7cNEWMOVER%7cNew_PreMover_2_Imagitas%7c339742" target="_blank"><img src="http://edm.westelm.com/we/evergreen/2017_holiday_footer/footer_furn.gif" alt="Furniture" width="350" height="64" style="display: block" border="0" align="top"></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <a href="http://link.westelm.com/rts/go2.aspx?h=8200287&tp=i-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ&x=3948977%7ci-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ%7cTRIG%7cNEWMOVER%7cNew_PreMover_2_Imagitas%7c339742" target="_blank"><img src="http://edm.westelm.com/we/evergreen/2017_holiday_footer/footer_bedd.gif" alt="Bedding" width="350" height="65" style="display: block" border="0" align="top"></a>
-                    </td>
-                    <td>
-                        <a href="http://link.westelm.com/rts/go2.aspx?h=8200288&tp=i-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ&x=3948977%7ci-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ%7cTRIG%7cNEWMOVER%7cNew_PreMover_2_Imagitas%7c339742" target="_blank"><img src="http://edm.westelm.com/we/evergreen/2017_holiday_footer/footer_sale.gif" alt="Sale" width="350" height="65" style="display: block" border="0" align="top"></a>
-                    </td>
-                </tr>
-            </table>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <table align="center" cellpadding="0" cellspacing="0" border="0">
-                <tr>
-                    <td>
-                        <a href="http://link.westelm.com/rts/go2.aspx?h=8200289&tp=i-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ&x=3948977%7ci-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ%7cTRIG%7cNEWMOVER%7cNew_PreMover_2_Imagitas%7c339742" target="_blank"><img src="http://edm.westelm.com/we/evergreen/2017_holiday_footer/footer_wegc.gif" alt="Purchase A West Elm Gift Card" width="700" height="101" style="display: block" border="0" align="top"></a>
-                    </td>
-                </tr>
-            </table>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <table align="center" cellpadding="0" cellspacing="0" border="0">
-                <tr>
-                    <td>
-                        <a href="http://link.westelm.com/rts/go2.aspx?h=8200290&tp=i-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ&x=3948977%7ci-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ%7cTRIG%7cNEWMOVER%7cNew_PreMover_2_Imagitas%7c339742" target="_blank"><img src="http://edm.westelm.com/we/evergreen/2017_holiday_footer/footer_mywestelm.gif" alt="Show us your personal style with #mywestelm" width="435" height="86" style="display: block" border="0" align="top"></a>
-                    </td>
-                    <td>
-                        <a href="http://link.westelm.com/rts/go2.aspx?h=8200291&tp=i-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ&x=3948977%7ci-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ%7cTRIG%7cNEWMOVER%7cNew_PreMover_2_Imagitas%7c339742" target="_blank"><img src="http://edm.westelm.com/we/evergreen/2017_holiday_footer/footer_pint.gif" alt="Pinterest" width="86" height="86" style="display: block" border="0" align="top"></a>
-                    </td>
-                    <td>
-                        <a href="http://link.westelm.com/rts/go2.aspx?h=8867837&tp=i-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ&x=3948977%7ci-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ%7cTRIG%7cNEWMOVER%7cNew_PreMover_2_Imagitas%7c339742" target="_blank"><img src="http://edm.westelm.com/we/evergreen/2017_holiday_footer/footer_fb.gif" alt="Facebook" width="81" height="86" style="display: block" border="0" align="top"></a>
-                    </td>
-                    <td>
-                        <a href="http://link.westelm.com/rts/go2.aspx?h=8200293&tp=i-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ&x=3948977%7ci-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ%7cTRIG%7cNEWMOVER%7cNew_PreMover_2_Imagitas%7c339742" target="_blank"><img src="http://edm.westelm.com/we/evergreen/2017_holiday_footer/footer_insta.gif" alt="Instagram" width="98" height="86" style="display: block" border="0" align="top"></a>
-                    </td>
-                </tr>
-            </table>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <table align="center" width="700" cellpadding="0" cellspacing="0" border="0" bgcolor="#FFFFFF">
-                <tr>
-                    <td colspan="3" height="10"><img src="http://edm.westelm.com/we/evergreen/spacer_0.gif" width="1" height="10" border="0" alt="" /></td>
-                </tr>
-
-                <tr>
-                    <td valign="bottom"><img src="http://edm.westelm.com/we/evergreen/spacer_0.gif" width="25" height="11" border="0" alt="" /></td>
-                    <td align="left" valign="bottom" width="600">
-
-                        <span style="font-family: Arial, Helvetica, sans-serif; font-size : 9px; color: #999999; line-height: 12px;">
-Offer valid for US orders only. For Canada and Puerto Rico, retail prices may vary from those listed in our catalog and on our website.<br />
-<br />
-</span>
-
-                        <span style="font-family: Arial, Helvetica, sans-serif; font-size : 9px; color: #666666; line-height: 12px;">
-Please <span style="font-family: Arial, Helvetica, sans-serif; font-size : 9px; color: #666666; line-height: 12px; text-decoration: none;"><a href="https://form.westelm.com/ats/show.aspx?cr=100093&fm=67&wu=7&cc=WE&ts=1&ea=cleveboy1@yahoo.com&tp=i-H55-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-Uj85-1EThLwM-1Fz4TW" TARGET="lank" STYLE="color:#666666; text-decoration: underline;">click here</a></span> to manage your email preferences.
-
-                        <br />
-                        <br />
-                        </span>
-
-                        <span style="font-family: Arial, Helvetica, sans-serif; font-size : 9px; color: #999999; line-height: 12px;">to read about our privacy policy, </span>
-                        <span style="font-family: Arial, Helvetica, sans-serif; font-size : 9px; color: #999999; line-height: 12px; text-decoration: none;"><a href="http://link.westelm.com/rts/go2.aspx?h=8200294&tp=i-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ&x=3948977%7ci-H43-Q2P-1QNi-1FoblBN-2Z-SXjp-1c-1EThLwM-1zgxPQ%7cTRIG%7cNEWMOVER%7cNew_PreMover_2_Imagitas%7c339742" TARGET="_blank" STYLE="color:#999999; text-decoration: underline;">click here</a></span>
-
-                        <span style="font-family: Arial, Helvetica, sans-serif; font-size : 9px; color: #999999; line-height: 12px;">
-<br />
-<br />
-copyright 2017 west elm, marketing, 55 Water Street, 2nd Floor, Brooklyn, NY 11201. all rights reserved.
-<br />
-<br />
-this message was sent to cleveboy1@yahoo.com
-</span>
-                    </td>
-                    <td valign="bottom"><img src="http://edm.westelm.com/we/evergreen/spacer_0.gif" width="45" height="11" border="0" alt="" /></td>
-                </tr>
-            </table>
-        </td>
-    </tr>
 </table>
-<!-- /END FOOTER -->
+<!--[if (gte mso 9)|(IE)]> </td></tr></table> <![endif]-->
+<!-- ***********  END HEADER   **************-->
 
 
 
+<table class="efooter" align="center" width="100%" cellpadding="0" cellspacing="0" style="max-width: 600px; outline: none; background: #FFFFFF;">
+   <tr>
+      <td>
+         <div style="font-family: Arial, sans-serif; text-align: center; margin: 10px auto 0 auto; max-width: 600px;">
+            <p style="font-size:10px;">
+               <a  href="https://click.belkemail.com/u/?qs=1a2d308eefb4f8a7a14577e26bd66ccfa747544dff0d7a269c93c4ed8882e760c19605d448aae7981dd691a433d69940a21045e006f552c0ce3e1078001cc58b" target="_blank"  style="text-decoration:underline; color:#0073CF;font-size:10px;">Update Preferences</a> |
+               <a  href="https://click.belkemail.com/u/?qs=1a2d308eefb4f8a7bf4392ada25c5a99822a5a66155a4181dd8048014e8611c76f7fa000440a776616d41dd1b4fd6875125baf7895a61cedb92d087fe2e10c8e" target="_blank"  style="text-decoration:underline; color:#0073CF;font-size:10px;">Unsubscribe</a> |
+               <a  href="https://click.belkemail.com/u/?qs=1a2d308eefb4f8a7a237e5c1022ad4df0c2a1068509c6e6b19bc9e85a0bd270fa87a5a716831aed34fe7a5a195daf9f62193ca9a8c4c91c36e7b3117378eac22" target="_blank"  style="text-decoration:underline; color:#0073CF;font-size:10px;">Privacy Policy</a> |
+               <a  href="https://click.belkemail.com/u/?qs=1a2d308eefb4f8a79950d0f35fc009160c8e80a309932704f3fcad7ee34c8fff35bf7e241246c87db27292afe4e738881a88f307c556df933bc56bc560689026" target="_blank"  style="text-decoration:underline; color:#0073CF;font-size:10px;">Customer Service</a> |
+               <a href="https://click.belkemail.com/?qs=1a2d308eefb4f8a7ffb973cf14c0add25681cd24eeaed094ce7345918b69eb8ba3ca3004281bd849e87f8e90bae9e7eee686e57c6aee041d2559748e3e225b18" target="_blank"  style="text-decoration:underline; color:#0073CF;font-size:10px;">My Belk Card</a> |
+               <a href="https://click.belkemail.com/?qs=1a2d308eefb4f8a7eed97c09235e5bd9b14e42981ec310c50ed364d71bab6f3f90c748f413b57536efaaee425327de871ce371a6db5b1ab447567a9830469900" target="_blank"  style="text-decoration:underline; color:#0073CF;font-size:10px;">Store Locator</a> |
+               <a  href="https://click.belkemail.com/u/?qs=1a2d308eefb4f8a71a0096fc0e10c5bc8f42eeb182d272e4e31e41bce100c7099bb56e18b9939d5d30206c4370f46d3058e88acc7cb0217a970c214f98ec3e41" target="_blank"  style="text-decoration:underline; color:#0073CF;font-size:10px;">My Belk.com Account</a>
+            </p>
+            <p style="color:#333333;font-size:10px;">&copy; 2019 Belk Inc. and Belk eCommerce LLC. All Rights reserved.</p>
+         </div>
+         <div style="font-family: Arial, sans-serif; text-align: left; margin: 10px auto 0 auto; max-width: 600px;">
+            <!-- *************** DETAILS FOOTER *************** -->
+            <div>
+               <table style="min-width: 100%; " class="stylingblock-content-wrapper" width="100%" cellspacing="0" cellpadding="0"><tr><td class="stylingblock-content-wrapper camarker-inner"><p style="text-align:justify">
+ <span class="deet" style="color:#333333;font-size:11px;">All Belk Rewards Card purchases are subject to credit approval.
+ </span>
+</p>
+<p style="text-align:justify">
+ <span class="deet" style="color:#333333;font-size:11px;">Styles and colors may vary by store and on
+  <a  href="https://click.belkemail.com/?qs=1a2d308eefb4f8a7b23b7343241c801fe4fd814fb70433e5f7f54639e7940250dcfe38bb55ebab0bda72f8f28fbc6329a0253f68e62c45444c2737e6dabbb8fc" style="text-decoration:underline;color:#0073CF;" target="_blank">belk.com</a>.
+  All items are not available in all stores and
+  <a  href="https://click.belkemail.com/?qs=1a2d308eefb4f8a7b23b7343241c801fe4fd814fb70433e5f7f54639e7940250dcfe38bb55ebab0bda72f8f28fbc6329a0253f68e62c45444c2737e6dabbb8fc" style="text-decoration:underline;color:#0073CF;" target="_blank">belk.com</a>.
+ </span>
+</p>
+<p style="text-align:justify">
+ <span class="deet" style="color:#333333;font-size:11px;">Spend $99 or more on
+  <a href="https://click.belkemail.com/?qs=1a2d308eefb4f8a7b23b7343241c801fe4fd814fb70433e5f7f54639e7940250dcfe38bb55ebab0bda72f8f28fbc6329a0253f68e62c45444c2737e6dabbb8fc"  style="text-decoration:underline;color:#0073CF;" target="_blank">belk.com</a> every day and receive Free Shipping on your order. Just place $99 of qualifying merchandise in your shopping cart and Free Shipping automatically applies. Minimum purchase amount for Free Shipping is calculated after coupons, special offers and discounts. Flat rate shipping of $8.95 applies to any order under $99. Does not include gift box charges, purchases of gift cards or tax. Receive Free Shipping on all Beauty and Fragrance purchases, no minimum amount required. Offers apply to Standard Shipping to one location.
+ </span>
+</p>
+<p style="text-align:justify">
+ <span class="deet" style="color:#333333;font-size:11px;">Belk Elite Rewards Cardholders qualify for Free Standard Shipping when the total amount of their purchase is charged to their Belk Elite Rewards Card. Does not include gift box charges, purchase of gift cards, or purchases using any other partial form of payment (including a Belk Gift Card). Offer applies to Standard Shipping to one location. Offer does not apply to returns. Cardholder can return any item to their nearest Belk store free of charge.
+ </span>
+</p></td></tr></table><table style="min-width: 100%; " class="stylingblock-content-wrapper" width="100%" cellspacing="0" cellpadding="0"><tr><td class="stylingblock-content-wrapper camarker-inner"><div><br><p style="text-align:justify"><span class="deet" style="color:#333333;font-size:11px;"></span></p><p style="text-align:justify">
+<span class="deet" style="color:#333333;font-size:11px;">  *$10 OFF $50 / $20 OFF $100 / $30 OFF $150: *Excludes Clearance, Earlybirds, Night Owls, Doorbusters, Bonus Buys, Red Dot, Super Buys, Everyday Values, Adidas, Alegria, Allen Edmonds, Baby Gear, Baggallini handbags, beauty department, Bed Stu, better & designer intimates, Birkenstock, Brahmin, Breville, Brighton, Casio, COH Man, Coach handbags, Columbia, Corso Como shoes, Dansko, designer, bridge and contemporary sportswear and dresses, designer sunglasses, Diane Von Furstenberg, Diesel watches, Donald Pliner shoes, Draper James, Eileen Fisher, Eileen Fisher Systems, Ella Moss, fine jewelry watches and service plans, Fitbit, Fossil
+ & Fossil Q watches, Free People, Frye handbags, Grayer's, Herend, Hobo, Hunter Boots, Hurley, Instant Pot, J Slides, Jack Rogers, Jo Malone, Johnston & Murphy, Jones Collection, Juliska, Kate Spade accessories, handbags, outerwear, shoes, sleepwear and smart wearables; Kenneth Cole shoes, Kork Ease, Kors Studio, La Mer, LeSportsac handbags, Levi's, Lilly Pulitzer, lucy, LXR & Co. licensed departments, Marc Jacobs watches, Melissa & Doug, Michael Kors, Miss Me, Nike, Orthaheel/Vionic, OTBT, Patricia Nash, Puma, Roan, Sail to Sable, Seven For All Mankind, Skagen, smart home department, Sole Society, Sorel, Southern Proper, Spanx, Spartina 449, Sperry Gold Cup, Superga, Tailor Vintage, TOMS
+ shoes, Tumi, Trina Turk apparel, Ugg, Under Armour, Vera Bradley, Versus watches, Victorinox, Vietri, Vince Camuto handbags, Vineyard Vines, Vintage 1946, Vitamix, Wusthof, non-merchandise depts., leased depts., salon services and Belk gift cards. Also excluded online: Sam Edelman, shoes by Born, Frye and Minnetonka Moccasin, Tommy Bahama men's apparel, and watches by Adidas, DKNY, Garmin and Guess. Not valid on prior purchases, special orders or trunk shows. Cannot be redeemed for cash, credit or refund, used in combination with any other discount or coupon offer. <b>Valid March 6-11, 2019 until 11:59PM ET.</b>   </span></p>
+
+<p style="text-align:justify">
+<span class="deet" style="color:#333333;font-size:11px;">  &Dagger;BELK BUCKS: Redeem your $15 off $75 Belk Bucks coupon from February 26 - March 12, 2019, in store or online at Belk.com. See Belk Bucks coupon for details. Belk Bucks coupon may be redeemed at participating Belk stores or online at Belk.com during redemption period with the minimum qualifying purchase as stated on the coupon before tax and shipping. Coupon can only be used once and must be presented to your sales associate at the time of purchase. Excludes beauty purchase with purchase offers, Chanel, Jo Malone, La Mer, LXR & Co. licensed depts., Tom Ford, prior purchases, gift cards, phone orders, special orders, salon
+ services, leased depts., licensed depts., trunk shows, fine jewelry services, shipping and taxes. Belk Bucks cannot be combined with any other discounts, offers, or coupons. If purchases made using Belk Bucks are returned, the value of the Belk Bucks used will not be refunded. Void if copied, reproduced, sold, or transferred. Void where prohibited. Belk Bucks are non-refundable, have no cash value, are not redeemable for cash, and will not be replaced if damaged, lost or stolen.   </span></p>
+
+<p style="text-align:justify"><span class="deet" style="color:#333333;font-size:11px;">  <sup>&loz;&loz;</sup>FREE LANCOME GIFT: While supplies last. One per customer, please.   </span></p> <br>
+</div>
+<!--<p style="text-align:justify"><span class="deet" style="color:#333333;font-size:11px;">*Rewards may only be earned up to 25 referrals. Invite your friends to sign up for Belk emails. Once they confirm, you'll receive your coupon. The more, the merrier!</span></p>-->
+<!--<p style="text-align:justify"><span class="deet" style="color:#333333;font-size:11px;">*All Belk Rewards Card purchases are Subject to Credit Approvals.  See above for applicable merchandise exclusions.  Click <a href="http://www.belk.com/AST/Featured/Promo_Details/Belk_Rewards_Card_Disclaimer.jsp">here</a> for credit details.</span></p>--></td></tr></table>
+            </div>
+            <span style="color:#333333;font-size:11px;">
+               If you received this email from a friend and would like to subscribe to our email list, <a  href="https://click.belkemail.com/u/?qs=1a2d308eefb4f8a7a91ed9174c1935e61632c73ced20de9128b207f21156cc478f529735ba7df16c24121d1df1b2dbcb6b2e1aca75c0e9ee1851139369fa9b69" style="text-decoration:underline; color:#0073CF;" target="_blank"  >click here</a><br>
+               To ensure future delivery of emails, please add <span style="color:#0073CF;">belk@reply.belkemail.com</span> to your safe sender list or address book.<br>
+               <a  href="https://click.belkemail.com/u/?qs=1a2d308eefb4f8a76707ee0cc3fb218044b11bb414a27627d589450ab72af9990b1911d4a429b9aca65e665b9609eb8bd259906297ab78f1180e37171810e1ac" target="_blank"    style="text-decoration:underline; color:#0073CF;">Get instructions</a></span> <span style="color:#333333;font-size:11px;"><br>
+                  This email was sent to:<span style="color:#0073CF;">vburrell01@yahoo.com</span><br><br>
+                  This email was sent by: Belk<br>
+                  2801 W. Tyvola Rd. Charlotte, NC 28217-4500 US<br><br>
+                  Customer Assistance <span style="color:#0073CF;">1-866-235-5443</span>
+               </span>
+            </div>
+         </td>
+      </tr>
+   </table>
 </body>
-
 </html>

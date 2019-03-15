@@ -627,6 +627,8 @@ function transform(data){
     /free\s*(ship|on\s*orders\s*of)/i,
     // buy one / two / three, get
     /buy\s*(one|two|three|\d+),?\sget/i,
+    // bogo
+    /bogo/i,
     // 100 points | earn points | get points | gather points | collect points | your points | redeem points
     // 1000 rewards | earn rewards | get rewards | gather rewards | collect rewards | your rewards | redeem rewards
     // 1000 gift | earn gift | get gift | gather gift | collect gift | your gift | redeem gift
@@ -637,7 +639,7 @@ function transform(data){
     //January|February|March|April|May|June|July|August|September|October|November|December
     /January|February|March|April|May|June|July|August|September|October|November|December/,
     //Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Friday
-    /Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Friday/
+    /Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday/
 
   ];
 

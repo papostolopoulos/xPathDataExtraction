@@ -65,7 +65,7 @@
             "dataTypes": [
               "Text"
             ],
-            "javascript": "function transform(data){\n  var replaceArr = [\n    {oldStr: /(View\\s*deal|shop\\s*now).*/i, newStr: \"\"},\n    {oldStr: /[\\*-]/g, newStr: \"\"}\n  ];\n  \n  for(var i = 0; i < replaceArr.length; i++){\n    data = data.replace(replaceArr[i].oldStr, replaceArr[i].newStr);\n  }\n  \n  return data.trim() || \"\";\n}",
+            "javascript": null,
             "listOfValidNodeTypes": [
               {
                 "name": "TEXT",
@@ -87,16 +87,28 @@
             ],
             "mandatory": "true",
             "maxLength": "200",
-            "minLength": "3",
+            "minLength": "4",
             "allowEmpty": "false",
             "name": "http://schema.org/description",
             "whiteList": [
               {
-                "value": "(?i)[£\\$]",
-                "type": "REGEX"
+                "value": "online code",
+                "type": "SUBSTRING"
               },
               {
-                "value": "(?i)%\\s*off",
+                "value": "offer valid thru",
+                "type": "SUBSTRING"
+              },
+              {
+                "value": "$",
+                "type": "SUBSTRING"
+              },
+              {
+                "value": "%",
+                "type": "SUBSTRING"
+              },
+              {
+                "value": "(?i)free",
                 "type": "REGEX"
               }
             ]
@@ -104,38 +116,28 @@
           {
             "blackList": [
               {
-                "value": "sale ends",
-                "type": "SUBSTRING"
+                "type": "SUBSTRING",
+                "value": "sale ends"
               },
               {
-                "value": "valid through",
-                "type": "SUBSTRING"
+                "type": "SUBSTRING",
+                "value": "valid through"
               },
               {
-                "value": "ends",
-                "type": "SUBSTRING"
+                "type": "SUBSTRING",
+                "value": "ends"
               }
             ],
             "dataTypes": [
               "DateTime"
             ],
-            "javascript": "function transform(data) {\n  if (data) {\n    var monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];\n\n    for (var i = 0; i < monthNames.length; i++) {\n      if(data.indexOf(monthNames[i]) !== -1) return \"1970-\" + i+1 + \"-\" + data.replace(/[A-z\\s]/g, \"\");\n    }\n    \n    var regex = /(\\s*\\d+)\\/(\\s*\\d+)/i;\n    var match = regex.exec(data);\n    if (match && match[1]) {\n      return monthNames[match[1] - 1] + ', ' + match[2];}\n    else{\n      return data;\n    }\n  }\n  return null;\n}",
-            "listOfValidNodeTypes": [],
-            "location": [
-              {
-                "xpath": ""
-              }
-            ],
+            "javascript": "function transform(data) {if (data) {var monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];var regex = /(\\s*\\d+)\\/(\\s*\\d+)/i;var match = regex.exec(data);if (match && match[1]) {return monthNames[match[1] - 1] + ', ' + match[2];}else{return data;}}return null;}",
+            "listOfValidNodeTypes": null,
+            "location": null,
             "mandatory": "true",
-            "maxLength": "-1",
-            "minLength": "-1",
-            "name": "http://schema.org/validThrough",
-            "whiteList": [
-              {
-                "value": "dd MMM",
-                "type": "DATEFORMAT"
-              }
-            ]
+            "maxLength": -1,
+            "minLength": -1,
+            "name": "http://schema.org/validThrough"
           },
           {
             "blackList": [
@@ -248,10 +250,14 @@
           "maxDepth": "-1",
           "defaultPatternAnnotationThreshold": "0.8",
           "linkThreshold": "2",
+          "dedupCondition": {
+          "matchThreshold": 0.4,
+          "stopWords": ["Wedding Samples"]
+          },
           "listOfValidNodeTypes": [],
           "linkMatcher": [
             {
-              "regex": "https\\:\\/\\/messages\\.bounty\\.com\\/pub\\/cc\\?_ri_=.*"
+              "regex": "https\\:\\/\\/sailthru\\.minted\\.com\\/click\\/.*"
             }
           ]
         },
@@ -268,7 +274,7 @@
             "javascript": null,
             "location": [
               {
-                "xpath": "\"bounty\""
+                "xpath": "\"minted\""
               }
             ],
             "mandatory": "true",
