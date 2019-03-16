@@ -24,7 +24,7 @@
       .sectionOptions{
         display: grid;
         grid-template-columns: 45% 55%;
-        grid-template-rows: 55% 5% 13% 7% 20%;
+        grid-template-rows: 52% 8% 13% 7% 20%;
         grid-template-areas:
         "branches functions"
         "brackets functions"
@@ -46,6 +46,8 @@
         display: flex;
         flex-flow: column wrap;
         height: 90%;
+        align-content: space-around;
+        /* justify-content: space-between; */
       }
 
       .brackets{
@@ -53,7 +55,20 @@
       }
 
       .divBracketsInputs{
-        height: 80%
+        height: 80%;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+      }
+
+      table{
+        width: 100%;
+        /* border: 1px solid black; */
+      }
+
+      td{
+        /* border: 2px solid black; */
+        text-align: center;
       }
 
       .operators{
@@ -64,6 +79,8 @@
         display: flex;
         flex-flow: column wrap;
         height: 80%;
+        /* align-content: space-around;
+        justify-content: space-between; */
       }
 
       .functions{
@@ -79,6 +96,13 @@
 
       .attributes{
         grid-area: attributes;
+      }
+
+      .divAttributesInputs{
+        display: flex;
+        align-content: space-around;
+        justify-content: space-between;
+        flex-wrap: wrap;
       }
 
       .parameters{
@@ -116,8 +140,8 @@
         text-align: center;
       }
 
-      label{
-        margin-right: 10px;
+      .divFunctionsInputs label, .divBranchesInputs label{
+        /* max-width: 50%; */
       }
 
       label:hover{
@@ -166,67 +190,67 @@
               </label>
               <label>
                 <input type="radio" value="/parent::" name="axisOption" v-model="axis" @click="node = 'node()'">
-                .. (/parent::node())
+                <span>.. (/parent::node())</span>
               </label>
               <label>
                 <input type="radio" value="//" name="axisOption" v-model="axis">
-                // (descendant-or-self:node())
+                <span>// (descendant-or-self:)</span>
               </label>
               <label>
                 <input type="radio" value="/ancestor::" name="axisOption" v-model="axis">
-                /ancestor::
+                <span>/ancestor::</span>
               </label>
               <label>
                 <input type="radio" value="/ancestor-or-self::" name="axisOption" v-model="axis">
-                /ancestor-or-self::
+                <span>/ancestor-or-self::</span>
               </label>
               <label>
                 <input type="radio" value="/attribute::" name="axisOption" v-model="axis">
-                /attribute:: (@)
+                <span>/attribute:: (@)</span>
               </label>
               <label>
                 <input type="radio" value="/child::" name="axisOption" v-model="axis">
-                /child::
+                <span>/child::</span>
               </label>
               <label>
                 <input type="radio" value="/descendant::" name="axisOption" v-model="axis">
-                /descendant::
+                <span>/descendant::</span>
               </label>
               <label>
                 <input type="radio" value="/descendant-or-self::" name="axisOption" v-model="axis">
-                /descendant-or-self::
+                <span>/descendant-or-self::</span>
               </label>
               <label>
                 <input type="radio" value="/following::" name="axisOption" v-model="axis">
-                /following::
+                <span>/following::</span>
               </label>
               <label>
                 <input type="radio" value="/following-sibling::" name="axisOption" v-model="axis">
-                /following-sibling::
+                <span>/following-sibling::</span>
               </label>
               <label>
                 <input type="radio" value="/namespace::" name="axisOption" v-model="axis">
-                /namespace::
+                <span>/namespace::</span>
               </label>
               <label>
                 <input type="radio" value="/parent::" name="axisOption" v-model="axis">
-                /parent::
+                <span>/parent::</span>
               </label>
               <label>
                 <input type="radio" value="/preceding::" name="axisOption" v-model="axis">
-                /preceding::
+                <span>/preceding::</span>
               </label>
               <label>
                 <input type="radio" value="/preceding-sibling::" name="axisOption" v-model="axis">
-                /preceding-sibling::
+                <span>/preceding-sibling::</span>
               </label>
               <label>
                 <input type="radio" value="/self::" name="axisOption" v-model="axis">
-                /self::
+                <span>/self::</span>
               </label>
               <label>
-                Node: <br>
-                <input type="text" name="addNode" v-model="node" @keyup.enter="addBranch($event)">
+                <input type="text" name="addNode" v-model="node" @keyup.enter="addBranch($event)" size="12">
+                <span>Node</span>
               </label>
             </div>
           </div>
@@ -237,7 +261,58 @@
           <div class="brackets" style="background:lightblue;">
             <h3>Brackets / Parenthesis</h3>
             <div class="divBracketsInputs">
-              <label>
+              <table>
+                <tr>
+                  <td>None</td>
+                  <td>Brackets</td>
+                  <td>Parenthesis</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td rowspan="2">
+                    <label>
+                      <input type="radio" name="brackets" value="" v-model="brackets">
+                      None
+                    </label>
+                  </td>
+                  <td>
+                    <label>
+                      <input type="radio" name="brackets" value="[" v-model="brackets" @click="addBrackets($event)">
+                      <span>[</span>
+                    </label>
+                  </td>
+                  <td>
+                    <label>
+                      <input type="radio" name="brackets" value="(" v-model="brackets" @click="addBrackets($event)">
+                      <span>(</span>
+                    </label>
+                  </td>
+                  <td>
+                    Open
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label>
+                      <input type="radio" name="brackets" value="]" v-model="brackets" @click="addBrackets($event)">
+                      <span>]</span>
+                    </label>
+                  </td>
+                  <td>
+                    <label>
+                      <input type="radio" name="brackets" value=")" v-model="brackets" @click="addBrackets($event)">
+                      <span>)</span>
+                    </label>
+                  </td>
+                  <td>Close</td>
+                </tr>
+              </table>
+
+
+
+
+
+              <!-- <label>
                 <input type="radio" name="brackets" value="" v-model="brackets">
                 None
               </label>
@@ -256,7 +331,7 @@
               <label>
                 <input type="radio" name="brackets" value=")" v-model="brackets" @click="addBrackets($event)">
                 <span>Parenthesis )</span>
-              </label>
+              </label> -->
             </div>
           </div>
 
@@ -836,7 +911,7 @@
               if(!translateStringElements.includes(this.parameterString[i].toLowerCase()) && /\w/.test(this.parameterString[i]))
               translateStringElements += this.parameterString[i].toLowerCase();
             }
-            this.functionsSequenceArr.push(`translate(${this.functionsSequenceArr.pop()}, '${translateStringElements.toUpperCase()}', '${translateStringElements}'), ${eventValue.toLowerCase()}`);
+            this.functionsSequenceArr.push(`translate(${this.functionsSequenceArr.pop()}, '${translateStringElements.toUpperCase()}', '${translateStringElements}'), '${eventValue.toLowerCase()}'`);
             this.zeroProperties(event.target.name);
           }
         }, //End of translateAndPush

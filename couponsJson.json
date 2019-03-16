@@ -283,7 +283,7 @@
   }
 }
 
-BELK
+/* BELK belkemail.com */
 {
   "extract": {
     "extractEmbedded": false,
@@ -317,7 +317,7 @@ BELK
             "name": "http://schema.org/description",
             "relative": true,
             "transient": false,
-            "javascript": "function transform(data){\n  data = data.replace(/^◊+/,\"\");\n  \n  return data;\n}",
+            "javascript": "function transform(data) {\n  var replaceArr = [\n    {oldStr: /^◊+/i, newStr:\"\"},\n    {oldStr: /(-Shop\\s*now|Learn\\s*more|One\\s*per\\s*customer,\\s*please)\\.?/i, newStr: \"\"}\n  ];\n\n  replaceArr.forEach(function(el) {\n    data = data.replace(el.oldStr, el.newStr);\n  });\n\n  while (data.length > 100 && data.indexOf(\".\") !== data.lastIndexOf(\".\")) {\n    data = data.slice(0, data.lastIndexOf(\".\", data.lastIndexOf(\".\") - 1) + 1);\n  }\n\n  return data.trim();\n}",
             "dataTypes": [
               "Text"
             ],
@@ -7090,7 +7090,3 @@ LEVI'S e.levi.com
     "ignoredValidations": null
   }
 }
-
-
-domain:*sephora.com or domain:*hm.com or domain:*jcpenney.com or domain:*michaels.com or domain:*buybuybaby.com or domain:*childrensplace.com or domain:*costco.com or domain:*gnc.com or domain:*goldstar.com or domain:*hottopic.com and status:todo
-domain:*jcpenney.com or domain:*krogermail.com or domain:*landsend.com or domain:*macys.com or domain:*officedepot.com or domain:*oldnavy.com  or domain:*sears.com or domain:*safeway.com and status:todo
