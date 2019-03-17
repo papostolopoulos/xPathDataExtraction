@@ -67,8 +67,8 @@
       }
 
       td{
-        /* border: 2px solid black; */
         text-align: center;
+        vertical-align: middle;
       }
 
       .operators{
@@ -142,6 +142,10 @@
 
       .divFunctionsInputs label, .divBranchesInputs label{
         /* max-width: 50%; */
+      }
+
+      .divBracketsInputs label{
+        margin: 0;
       }
 
       label:hover{
@@ -263,6 +267,51 @@
             <div class="divBracketsInputs">
               <table>
                 <tr>
+                  <td>&nbsp;</td>
+                  <td>Open</td>
+                  <td>Close</td>
+                  <td>None</td>
+                </tr>
+                <tr>
+                  <td>Brackets</td>
+                  <td>
+                    <label>
+                      <input type="radio" name="brackets" value="[" v-model="brackets" @click="addBrackets($event)">
+                      <span>[</span>
+                    </label>
+                  </td>
+                  <td>
+                    <label>
+                      <input type="radio" name="brackets" value="]" v-model="brackets" @click="addBrackets($event)">
+                      <span>]</span>
+                    </label>
+                  </td>
+                  <td rowspan="2">
+                    <label>
+                      <input type="radio" name="brackets" value="" v-model="brackets">
+
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Parenthesis</td>
+                  <td>
+                    <label>
+                      <input type="radio" name="brackets" value="(" v-model="brackets" @click="addBrackets($event)">
+                      <span>(</span>
+                    </label>
+                  </td>
+                  <td>
+                    <label>
+                      <input type="radio" name="brackets" value=")" v-model="brackets" @click="addBrackets($event)">
+                      <span>)</span>
+                    </label>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- <table>
+                <tr>
                   <td>None</td>
                   <td>Brackets</td>
                   <td>Parenthesis</td>
@@ -306,7 +355,7 @@
                   </td>
                   <td>Close</td>
                 </tr>
-              </table>
+              </table> -->
 
 
 
