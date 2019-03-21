@@ -24,13 +24,13 @@
       .sectionOptions{
         display: grid;
         grid-template-columns: 45% 55%;
-        grid-template-rows: 60% 13% 7% 20%;
+        grid-template-rows: 60% 3% 17% 20%;
         grid-template-areas:
         "branches functions"
-        "brackets operators"
+        "brackets functions"
         "brackets operators"
         "attributes parameters";
-        font-size: 0.85rem;
+        font-size: 0.85em;
       }
 
       .branches, .functions, .brackets, .operators, .attributes, .parameters{
@@ -48,8 +48,6 @@
       .divBranchesAbsoluteRelative{
         display: flex;
         justify-content: space-around;
-
-        /* text-align: center; */
       }
 
       .divBranchesInputs{
@@ -99,8 +97,15 @@
       .divFunctionsInputs{
         display: flex;
         flex-flow: column wrap;
-        height: 90%;
+        height: 95%;
+        align-content: space-around;
+        font-size: .79rem;
         /* flex-wrap: wrap; */
+      }
+
+      .functionSpansFontSize{
+        color: red;
+        /* font-size: 0.55rem; */
       }
 
       .attributes{
@@ -114,11 +119,15 @@
         flex-wrap: wrap;
       }
 
+      .divAttributesInputs label{
+        margin-right: 2px;
+      }
+
       .parameters{
         grid-area: parameters;
         display: grid;
         grid-template-columns: 100%;
-        grid-template-rows: 33.3% 33.3% 33.3;
+        grid-template-rows: 30% 30% 40%;
         grid-template-areas:
         "gridParamsHeading"
         "gridParamsLevel1"
@@ -133,6 +142,10 @@
         grid-area: gridParamsLevel1;
         display: flex;
         justify-content: center;
+      }
+
+      .gridParamsLevel1 label{
+        margin-right: 10px;
       }
 
       .gridParamsLevel2{
@@ -159,6 +172,7 @@
 
       label:hover{
         font-weight: bold;
+        cursor: pointer;
       }
 
       input:focus + span{
@@ -168,6 +182,25 @@
       .sectionElements{
         grid-area: sectionElements;
         background: lightyellow;
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-rows: 40% 10% 50%;
+        grid-template-areas:
+        "divFunctionsSequenceArrElements"
+        "divFunctionConcatenation"
+        "divPathArrayElements"
+      }
+
+      .divFunctionsSequenceArrElements{
+        grid-area: divFunctionsSequenceArrElements;
+      }
+
+      .divFunctionConcatenation{
+        grid-area: divFunctionConcatenation;
+      }
+
+      .divPathArrayElements{
+        grid-area: divPathArrayElements;
       }
 
       .sectionResult{
@@ -197,18 +230,18 @@
             <div class="divBranchesAbsoluteRelative">
               <label>
                 <input type="radio" name="absoluteRelativeAxis" v-model="absoluteRelativeAxis" value="absolute">
-                Absolute path
+                <span>Absolute path</span>
               </label>
               <label>
                 <input type="radio" name="absoluteRelativeAxis" v-model="absoluteRelativeAxis" value="relative">
-                Relative path
+                <span>Relative path</span>
               </label>
             </div>
             <hr>
             <div class="divBranchesInputs">
               <label>
                 <input type="radio" value="" name="axisOption" v-model="axis">
-                None
+                <span>None</span>
               </label>
               <label>
                 <input type="radio" value="/self::" name="axisOption" v-model="axis" @click="node = 'node()'">
@@ -220,7 +253,7 @@
               </label>
               <label>
                 <input type="radio" value="//" name="axisOption" v-model="axis">
-                <span>// (descendant-or-self:)</span>
+                <span>// (descendant-or-self::)</span>
               </label>
               <label>
                 <input type="radio" value="/ancestor::" name="axisOption" v-model="axis">
@@ -483,7 +516,7 @@
             <div class="divFunctionsInputs">
               <label>
                 <input type="radio" name="activeFunction" value="" v-model="activeFunction" disabled>
-                None
+                <span>None</span>
               </label>
               <label title="The boolean function evaluates an expression and returns true or false. | boolean(expression)">
                 <input type="radio" name="activeFunction" value="boolean" v-model="activeFunction" @click="addFunction($event)">
@@ -509,6 +542,18 @@
                 <input type="radio" name="activeFunction" value="count" v-model="activeFunction" @click="addFunction($event)">
                 <span>count()</span>
               </label>
+              <label title="The current function can be used to get the context node in an XSLT instruction. | current()">
+                <input type="radio" name="activeFunction" value="current" v-model="activeFunction" @click="addFunction($event)">
+                <span>current()</span>
+              </label>
+              <label title="The document finds a node-set in an external document, or multiple external documents, and returns the resulting node-set. | document(URI [,node-set])">
+                <input type="radio" name="activeFunction" value="document" v-model="activeFunction" @click="addFunction($event)">
+                <span>document()</span>
+              </label>
+              <label title="The count function counts the number of nodes in a node-set and returns an integer. | count(node-set)">
+                <input type="radio" name="activeFunction" value="count" v-model="activeFunction" @click="addFunction($event)">
+                <span>count()</span>
+              </label>
               <label title="The element-available function determines if an element is available and returns true or false. | element-available(QName)">
                 <input type="radio" name="activeFunction" value="element-available" v-model="activeFunction" @click="addFunction($event)">
                 <span>element-available()</span>
@@ -517,87 +562,103 @@
                 <input type="radio" name="activeFunction" value="false" @click="addFunction($event)">
                 <span>false()</span>
               </label>
-              <label>
+              <label title="The floor function evaluates a decimal number and returns the largest integer less than or equal to the decimal number. | floor(number)">
                 <input type="radio" name="activeFunction" value="floor" v-model="activeFunction" @click="addFunction($event)">
                 <span>floor()</span>
               </label>
-              <label>
+                <label title="The format-number function evaluates a number and returns a string representing the number in a given format. | format-number(number ,pattern [,decimal-format])">
+                  <input type="radio" name="activeFunction" value="format-number" v-model="activeFunction" @click="addFunction($event)">
+                  <span>format-number()</span>
+              </label>
+              <label title="The function-available function determines if a given function is available and returns boolean true or false. | function-available(name)">
                 <input type="radio" name="activeFunction" value="function-available" v-model="activeFunction" @click="addFunction($event)">
                 <span>function-available()</span>
               </label>
-              <label>
+              <label title="The generate-id function generates a unique id for the first node in a given node-set and returns a string containing that id. | generate-id( [node-set])">
+                <input type="radio" name="activeFunction" value="generate-id" v-model="activeFunction" @click="addFunction($event)">
+                <span>generate-id()</span>
+              </label>
+              <label title="The key function returns a node-set of nodes that have the given value for the given key. | key(keyname ,value)">
+                <input type="radio" name="activeFunction" value="key" v-model="activeFunction" @click="addFunction($event)">
+                <span>key()</span>
+              </label>
+              <label title="The lang function determines whether the context node matches the given language and returns boolean true or false. | lang(string)">
                 <input type="radio" name="activeFunction" value="lang" v-model="activeFunction" @click="addFunction($event)">
                 <span>lang()</span>
               </label>
-              <label>
+              <label title="The last function returns a number equal to the context size from the expression evaluation context. | last()">
                 <input type="radio" name="activeFunction" value="last" @click="addFunction($event)">
                 <span>last()</span>
               </label>
-              <label>
+              <label title="The local-name function returns a string representing the local name of the first node in a given node-set. | local-name( [node-set])">
                 <input type="radio" name="activeFunction" value="local-name" v-model="activeFunction" @click="addFunction($event)">
                 <span>local-name()</span>
               </label>
-              <label>
+              <label title="The name function returns a string representing the QName of the first node in a given node-set. | name([node-set])">
                 <input type="radio" name="activeFunction" value="name" v-model="activeFunction" @click="addFunction($event)">
                 <span>name()</span>
               </label>
-              <label>
+              <label title="The namespace-uri function returns a string representing the namespace URI of the first node in a given node-set. | namespace-uri([node-set])">
                 <input type="radio" name="activeFunction" value="namespace-url" v-model="activeFunction" @click="addFunction($event)">
                 <span>namespace-url()</span>
               </label>
-              <label>
+              <label title="The normalize-space function strips leading and trailing white-space from a string, replaces sequences of whitespace characters by a single space, and returns the resulting string. | normalize-space([string])">
                 <input type="radio" name="activeFunction" value="normalize-space" v-model="activeFunction" @click="addFunction($event)">
                 <span>normalize-space()</span>
               </label>
-              <label>
+              <label title="The not function evaluates a boolean expression and returns the opposite value. | not(expression)">
                 <input type="radio" name="activeFunction" value="not" v-model="activeFunction" @click="addFunction($event)">
                 <span>not()</span>
               </label>
-              <label>
+              <label title="The number function converts an object to a number and returns the number. | number([object])">
                 <input type="radio" name="activeFunction" value="number" v-model="activeFunction" @click="addFunction($event)">
                 <span>number()</span>
               </label>
-              <label>
+              <label title="The position function returns a number equal to the context position from the expression evaluation context. | position()">
                 <input type="radio" name="activeFunction" value="position" @click="addFunction($event)">
                 <span>position()</span>
               </label>
-              <label>
+              <label title="The round function returns a number that is the nearest integer to the given number. | round(decimal)">
                 <input type="radio" name="activeFunction" value="round" v-model="activeFunction" @click="addFunction($event)">
                 <span>round()</span>
               </label>
-              <label>
+              <label title="The starts-with checks whether the first string starts with the second string and returns true or false. | starts-with(haystack, needle)">
                 <input type="radio" name="activeFunction" value="starts-with" v-model="activeFunction" @click="addFunction($event)">
                 <span>starts-with()</span>
               </label>
-              <label>
+              <label title="The string function converts the given argument to a string. | string([object])">
                 <input type="radio" name="activeFunction" value="string" v-model="activeFunction" @click="addFunction($event)">
                 <span>string()</span>
               </label>
-              <label>
+              <label title="The string-length function returns a number equal to the number of characters in a given string. | string-length([string])">
                 <input type="radio" name="activeFunction" value="string-length" v-model="activeFunction" @click="addFunction($event)">
                 <span>string-length()</span>
               </label>
-              <label>
+              <label title="The substring function returns a part of a given string. | substring(string ,start [,length])">
                 <input type="radio" name="activeFunction" value="substring" v-model="activeFunction" @click="addFunction($event)">
                 <span>substring()</span>
               </label>
-              <label>
+              <label title="The substring-after function returns a string that is the rest of a given string after a given substring. | substring-after(haystack ,needle)">
                 <input type="radio" name="activeFunction" value="substring-after" v-model="activeFunction" @click="addFunction($event)">
                 <span>substring-after()</span>
               </label>
-              <label>
+              <label title="The substring-before function returns a string that is the part of a given string before a given substring. | substring-before(haystack ,needle)">
                 <input type="radio" name="activeFunction" value="substring-before" v-model="activeFunction" @click="addFunction($event)">
                 <span>substring-before()</span>
               </label>
-              <label>
+              <label title="The sum function returns a number that is the sum of the numeric values of each node in a given node-set. | sum(node-set)">
                 <input type="radio" name="activeFunction" value="sum" v-model="activeFunction" @click="addFunction($event)">
                 <span>sum()</span>
               </label>
-              <label>
+              <label title="The system-property function returns an object representing the given system-property. | system-property(name)">
+                <input type="radio" name="activeFunction" value="system-property" v-model="activeFunction" @click="addFunction($event)">
+                <span>system-property()</span>
+              </label>
+              <label title="The translate function evaluates a string and a set of characters to translate and returns the translated string. | translate(string, abc, XYZ)">
                 <input type="radio" name="activeFunction" value="translate" v-model="activeFunction" @click="addFunction($event)">
                 <span>translate()</span>
               </label>
-              <label>
+              <label title="The true function returns a boolean value of true. | true()">
                 <input type="radio" name="activeFunction" value="true" @click="addFunction($event)">
                 <span>true()</span>
               </label>
@@ -670,7 +731,7 @@
               <div class="divCheckboxParams">
                 <label v-show="showNumberInput">
                   <input type="checkbox" name="numberEntry" value="" v-model="numberEntry">
-                  Entry is a number
+                  Number entry
                 </label>
                 <label v-show="showTranslateInput">
                   <input type="checkbox" name="translateString" v-model="translateString">
@@ -680,7 +741,7 @@
               <div class="divStringParam">
                 <label  v-show="showParamInput">
                   <input type="text" name="parameterString" v-model="parameterString"  @keyup.enter="addParameters($event)">
-                  Enter value
+                  Value
                 </label>
               </div>
             </div>
@@ -699,21 +760,23 @@
 
 
         <section class="sectionElements">
-          <div class="">
-            Active function (Arr): {{activeFunctionArr[activeFunctionArr.length - 1]}} <br>
-            Active function (str): {{activeFunction}} <br>
-            concatenation of functions: {{functionsSequenceArrJoin}}
-          </div>
-          <br><br><br><br>
-
-          <div class="">
+          <div class="divFunctionsSequenceArrElements">
+            <h3>Active Function: {{activeFunction}}</h3>
+            <label v-for="element in functionsSequenceArr">
+              <input type="text" name="" :value="element" v-model="element">
+            </label>
             The functionsSequenceArr is displayed here
             {{functionsSequenceArr}}
             <input type="button" name="" value="Concat last two axes" @click="concatFunctionElements()">
           </div>
-          <br><br><br>
 
-          <div class="">
+          <div class="divFunctionConcatenation">
+            <h3>Concatenated Functions</h3>
+            {{functionsSequenceArrJoin}}
+          </div>
+
+          <div class="divPathArrayElements">
+            <h3>All xPath Entries</h3>
             The pathArray is displayed here <br>
             {{pathArray}}
           </div>
@@ -772,7 +835,7 @@
 
           //Add the string to the function array
           if (this.functionsCounter > 0) {
-            console.log("In functionCounter");
+            console.log("In functionsCounter");
             let functionStr = this.functionsSequenceArr[this.functionsSequenceArr.length-1];
             // Add a comma if this is not the beginning of the function
             if(functionStr[functionStr.toString().length-1] !== "(") this.functionsSequenceArr.push(", ");
@@ -818,13 +881,13 @@
           console.log("in addOperator");
           console.log(this.functionsSequenceArr[this.functionsSequenceArr.length - 1]);
           //When the functions counter is larger than 0 or
-          //when the functionsCounter is zero but there are elements in the functionsSequanceArr
+          //when the functionsCounter is zero but there are elements in the functionsSequenceArr
           if ((this.functionsCounter !== 0 ||
           /[a-z]+\(\)$/.test(this.functionsSequenceArr[this.functionsSequenceArr.length - 1])) &&
           !operatorsRegex.test(this.functionsSequenceArr[this.functionsSequenceArr.length - 1])) {
             this.functionsSequenceArr.push(event.target.value);
           }
-          //functionsCounter is 0 and functionsSequanceArr is empty so push in pathArray
+          //functionsCounter is 0 and functionsSequenceArr is empty so push in pathArray
           else if(this.pathArray.length !== 0 &&
           !operatorsRegex.test(this.pathArray[this.pathArray.length - 1])){
             console.log("else if for pushing operator in the pathArray");
@@ -838,28 +901,47 @@
 
 
         addAttributes(event){
-          if (this.functionsCounter !== 0 &&
-          !this.functionsSequenceArr[this.functionsSequenceArr.length - 1].startsWith("@")) {
 
-            //If the previous element in the array is a branch, then push the attribute with a forward
-            //slash, otherwise just push the attribute
-            this.functionsSequenceArr[this.functionsSequenceArr.length - 1].includes("::") ||
-            this.functionsSequenceArr[this.functionsSequenceArr.length - 1].includes("//") ||
-            this.functionsSequenceArr[this.functionsSequenceArr.length - 1] === "." ?
-            this.functionsSequenceArr.push("/" + event.target.value) :
-            this.functionsSequenceArr.push(event.target.value);
+          if (this.functionsCounter === 0 && this.pathArray.length === 0) {
+            this.paramAlert = "You need to enter a node path or a function first";
+            return;
           }
-          else if(this.pathArray !== 0 &&
-          !this.pathArray[this.pathArray.length - 1].startsWith("@")) {
-            //If the previous element in the array is a branch, then push the attribute with a forward
-            //slash, otherwise just push the attribute
-            this.pathArray[this.pathArray.length - 1].includes("::") ||
-            this.pathArray[this.pathArray.length - 1].includes("//") ||
-            this.pathArray[this.pathArray.length - 1] === "."?
-            this.pathArray.push("/" + event.target.value) :
-            this.pathArray.push(event.target.value);
+
+          if (this.functionsCounter !== 0 || this.functionsSequenceArr.length > 0) {
+            console.log("if statemenet for adding attribute in the functionsSequenceArr");
+            if (this.functionsSequenceArr[this.functionsSequenceArr.length - 1].includes("@")) {
+              this.paramAlert = "An attribute already exists in the previous entry.";
+            }
+            else {
+              //If the previous element in the array is a branch, then push the attribute with a forward
+              //slash, otherwise just push the attribute
+              this.functionsSequenceArr[this.functionsSequenceArr.length - 1].includes("::") ||
+              this.functionsSequenceArr[this.functionsSequenceArr.length - 1].includes("//") ||
+              this.functionsSequenceArr[this.functionsSequenceArr.length - 1] === "." ?
+              this.functionsSequenceArr.push("/" + event.target.value) :
+              this.functionsSequenceArr.push(event.target.value);
+              this.attribute = "";
+              return this.zeroProperties(event.target.name);
+            }
           }
-          return this.zeroProperties(event.target.name);
+
+          if(this.pathArray.length !== 0) {
+            if (this.pathArray[this.pathArray.length - 1].includes("@")) {
+              this.paramAlert = "An attribute already exists in the previous entry."
+            }
+            else {
+              console.log("else if for adding attribute in the pathArray");
+              //If the previous element in the array is a branch, then push the attribute with a forward
+              //slash, otherwise just push the attribute
+              this.pathArray[this.pathArray.length - 1].includes("::") ||
+              this.pathArray[this.pathArray.length - 1].includes("//") ||
+              this.pathArray[this.pathArray.length - 1] === "."?
+              this.pathArray.push("/" + event.target.value) :
+              this.pathArray.push(event.target.value);
+              this.attribute = "";
+              return this.zeroProperties(event.target.name);
+            }
+          }
         },
 
 
@@ -867,8 +949,27 @@
         //Adds a function name with parenthesis ( in the functionsSequenceArr
         addFunction(event){
           this.zeroProperties(event.target.name);
+
+          //Alert the user that the function only takes node sets
+          if (event.target.value === "count") {
+            console.log("if");
+            this.paramAlert = "This function only takes node sets";
+            return;
+          }
+
+          //Mark the number entry checkbox as selected
+          if (event.target.value === "ceiling" ||
+          event.target.value === "floor" ||
+          event.target.value === "round") {
+            this.numberEntry = true;
+            this.paramAlert = "This function only takes a number entry";
+          }
+
+
+
           console.log("In add function. The counter before the addition is:", this.functionsCounter);
-          if (event.target.value === "false" ||
+          if (event.target.value === "current" ||
+              event.target.value === "false" ||
               event.target.value === "last" ||
               event.target.value === "position" ||
               event.target.value === "true") {
@@ -879,25 +980,11 @@
             this.activeFunctionArr.push(event.target.value);
             this.functionsCounter ++;
           }
-
-          //Alert the user that the function only takes node sets
-          if (event.target.value === "count") {
-            console.log("if");
-            this.paramAlert = "This function only takes node sets";
-            return;
-          }
         }, //End of addFunction
 
 
 
         addParameters(event){
-          //Mark the number entry checkbox as selected
-          if (this.activeFunction === "ceiling" ||
-          this.activeFunction === "floor" ||
-          this.activeFunction === "round") {
-            this.numberEntry = true;
-            this.paramAlert = "This function only takes a number entry";
-          }
 
           //When a parameter is added in a function
           if (this.functionsCounter > 0) {
@@ -907,7 +994,7 @@
             if(this.numberEntry) return this.evaluateAndEnterNumberValue(event.target.value, this.functionsSequenceArr);
             //Translate option has been selected
             else if (this.translateString) return this.translateAndPush(event.target.value);
-            //The string is pushed in the functionsSequanceArr while the functionsCounter is 0
+            //The string is pushed in the functionsSequenceArr while the functionsCounter is 0
             else{
               this.functionsSequenceArr.push("\"" + event.target.value + "\"");
               this.parameterString = "";
@@ -953,13 +1040,15 @@
         //Concatenates the last elements that are in the functionsSequenceArr and are separated by a comma
         concatFunctionElements(){
           console.log(this.functionsSequenceArr);
-          if (this.functionsSequenceArr.length > 3 && this.functionsSequenceArr[this.functionsSequenceArr.length-2] === ", ") {
+
+          if (this.functionsSequenceArr.length > 3 &&
+          this.functionsSequenceArr[this.functionsSequenceArr.length-2] === ", " &&
+          this.functionsSequenceArr[this.functionsSequenceArr.length-3][0] === "/") {
             this.functionsSequenceArr[this.functionsSequenceArr.length-3] += this.functionsSequenceArr.pop();
             this.functionsSequenceArr.pop();
           }
           else {
-            this.paramAlert = "The array is not big enough for concatenation or the element before the last is not a comma."
-            console.log("The array is not big enough or the element before the last is not a comma.");
+            this.paramAlert = "The array is not big enough for concatenation or the element for concatenation is not an axis";
           }
         }, //End of concat Function Elements
 
@@ -972,8 +1061,9 @@
             this.paramAlert = "Invalid number entry";
           }
           else {
-            this.paramAlert = "";
             arr.push(Number(eventValue));
+            this.paramAlert = "";
+            this.parameterString = "";
             this.zeroProperties(event.target.name)
           }
         },
@@ -1012,7 +1102,17 @@
           this.paramAlert = "";
           if(eventName !== "attribute") this.attribute = "";
           if(eventName !== "parameterString") this.parameterString = "";
-        } //End of zero properties
+        }, //End of zero properties
+
+
+
+        adjustLabelSize(){
+          let labels = document.getElementsByClassName("divFunctionsInputs")[0].children;
+          for (var i = 0; i < labels.length; i++) {
+            let spanText = labels[i].children[1].textContent;
+            if (spanText.length > 15) labels[i].className += "functionSpansFontSize";
+          }
+        }
 
 
       }, //End of methods
@@ -1049,7 +1149,10 @@
         showParamInput(){
           return this.activeFunction !== "count"
         }
-      } //end of computed properties
+      }, //end of computed properties
+      mounted() {
+        // this.adjustLabelSize();
+      }
     });
 
 

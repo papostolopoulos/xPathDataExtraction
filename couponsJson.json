@@ -518,7 +518,7 @@
             "name": "http://schema.org/description",
             "relative": true,
             "transient": false,
-            "javascript": "function transform(data) {\n  var replaceArr = [\n    {oldStr: /^◊+/i, newStr:\"\"},\n    {oldStr: /(-Shop\\s*now|Learn\\s*more|One\\s*per\\s*customer,\\s*please)\\.?/i, newStr: \"\"}\n  ];\n\n  replaceArr.forEach(function(el) {\n    data = data.replace(el.oldStr, el.newStr);\n  });\n\n  while (data.length > 100 && data.indexOf(\".\") !== data.lastIndexOf(\".\")) {\n    data = data.slice(0, data.lastIndexOf(\".\", data.lastIndexOf(\".\") - 1) + 1);\n  }\n\n  return data.trim();\n}",
+            "javascript": "function transform(data) {\n  var replaceArr = [\n    {oldStr: /(^◊+|\\*)/gi, newStr:\"\"},\n    {oldStr: /(-?Shop\\s*now|Learn\\s*more|One\\s*per\\s*customer,\\s*please)\\.?/i, newStr: \"\"}\n  ];\n\n  replaceArr.forEach(function(el) {\n    data = data.replace(el.oldStr, el.newStr);\n  });\n\n  while (data.length > 100 && data.indexOf(\".\") !== data.lastIndexOf(\".\")) {\n    data = data.slice(0, data.lastIndexOf(\".\", data.lastIndexOf(\".\") - 1) + 1);\n  }\n\n  return data.trim();\n}",
             "dataTypes": [
               "Text"
             ],
@@ -547,14 +547,14 @@
             "locations": {
               "-1": [
                 {
-                  "xpath": "concat(./@alt, ., \"~~~\", /descendant::text()[contains(.,\"belkemail.com\")]/ancestor::table)"
+                  "xpath": "./@alt"
                 }
               ]
             },
             "name": "http://schema.org/validThrough",
             "relative": true,
             "transient": false,
-            "javascript": "function transform(data){\n  var dataSpl = data.split(\"~~~\");\n\n  if (dataSpl[0].toLowerCase().indexOf(\"$10 off $50\") !== -1) {\n    dataSpl[1] = dataSpl[1].slice(dataSpl[1].toLowerCase().indexOf(\"$10 off $50\"));\n    return dataSpl[1].match(/Valid\\s*(January|February|March|April|May|June|July|August|September|October|November|December)\\s*\\d{1,2}-(\\d{1,2}),?\\s*(\\d{2,4})/)[0].replace(/Valid\\s*(January|February|March|April|May|June|July|August|September|October|November|December)\\s*\\d{1,2}-(\\d{1,2}),?\\s*(\\d{2,4})/, \"$1 $2, $3\");\n  }\n\n  if (dataSpl[0].toLowerCase().indexOf(\"belk bucks\") !== -1){\n    dataSpl[1] = dataSpl[1].slice(dataSpl[1].toLowerCase().indexOf(\"belk bucks:\"));\n    return dataSpl[1].match(/from\\s*(?:January|February|March|April|May|June|July|August|September|October|November|December)\\s*\\d{1,2}\\s*-\\s*((?:January|February|March|April|May|June|July|August|September|October|November|December)\\s*(?:\\d{1,2}),?\\s*(?:\\d{2,4}))/)[0].replace(/from\\s*(?:January|February|March|April|May|June|July|August|September|October|November|December)\\s*\\d{1,2}\\s*-\\s*((?:January|February|March|April|May|June|July|August|September|October|November|December)\\s*(?:\\d{1,2}),?\\s*(?:\\d{2,4}))/, \"$1\");\n  }\n\n  return \"\";\n}",
+            "javascript": "function transform(data){\n  return /ends\\s*\\d{1,2}\\/\\d{1,2}/i.test(data) ? data.replace(/.*ends\\s*(\\d{1,2}\\/\\d{1,2}).*/, \"$1\") : \"\";\n}",
             "dataTypes": [
               "DateTime"
             ],
@@ -562,8 +562,8 @@
           }
         ],
         "hints": {
-          "_raw_validThrough": "concat(./@alt, ., \"~~~\", /descendant::text()[contains(.,\"belkemail.com\")]/ancestor::table)",
-          "_footer": "/descendant::text()[contains(.,\"belkemail.com\")]/ancestor::table"
+          "_footer": "/descendant::text()[contains(.,\"belkemail.com\")]/ancestor::table",
+          "_raw_validThrough": "./@alt"
         },
         "hintsJavascript": "function transform(data) {\n  var n=data.get(\"_footer\");\n  n = n.toString().replace(/[A-z0-9.%+-_]{2,64}\\@[A-z0-9.]{2,64}/g,'');\n  return {'_footer': [n]};\n}"
       },
@@ -3314,6 +3314,189 @@
           "matchAttr": ""
         },
         "predicate": "http://schema.org/broker",
+        "cardinality": "ONE_TO_ONE"
+      }
+    ],
+    "entityNS": null
+  },
+  "metaData": {
+    "useVTDXML": "true",
+    "ignoredValidations": null
+  }
+}
+
+/* SOUTHWEST  iluv.southwest.com */
+{
+  "extract": {
+    "extractEmbedded": false,
+    "source": null,
+    "schema": [
+      {
+        "url": "http://ws.rmf.yahoo.com:4080/rmf/v1/schema?type=schema.org&name=y.2.0&format=json",
+        "ns": "http://schema.org",
+        "context": {
+          "@type": [
+            "Coupon"
+          ]
+        }
+      }
+    ],
+    "entityRules": [
+      {
+        "id": "01985006-96c8-4b50-8f5b-a134010602e0",
+        "repeating": true,
+        "locations": [
+          "/descendant::img[contains(translate(@alt,\"SALE\",\"sale\"),\"sale\") and contains(@alt,\"$\")]\n|\n/descendant::text()[contains(translate(.,\"OF\",\"of\"),\" off\") and contains(.,\"$\") or\ncontains(translate(.,\"POINTS\",\"points\"),\"points\") and contains(translate(.,\"EARN\", \"earn\"),\"earn\") or \ncontains(translate(.,\"SALE\",\"sale\"),\"sale\")]\n/ancestor::table[1][not(contains(translate(., 'TERMSANDCOI', 'termsandcoi'), 'terms and conditions'))]"
+        ],
+        "type": "http://schema.org/Coupon",
+        "javascript": null,
+        "entityIdRef": "",
+        "attributes": [
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "./@alt | ."
+                }
+              ]
+            },
+            "name": "http://schema.org/description",
+            "relative": true,
+            "transient": false,
+            "javascript": "function transform(data){\n  var replaceArr = [\n    {oldStr:/[\\*©®ǂ‡†±→§™¹›]/g, newStr: \"\"},\n    {oldStr: /(\\[?Book\\s*by|Book\\s*package|Learn\\s*more).*/, newStr: \"\"},\n    {oldStr: />.*/, newStr: \"\"}\n  ];\n  \n  replaceArr.forEach(function(el){\n    data = data.replace(el.oldStr, el.newStr);\n  });\n  \n  return data.trim();\n}",
+            "dataTypes": [
+              "Text"
+            ],
+            "mandatory": false
+          },
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "concat(./@alt, ., \"~~~\", /descendant::text()[contains(translate(., 'SOUTHWEAIRLNC', 'southweairlnc'), 'southwest airlines co')]/ancestor::table[2])"
+                }
+              ]
+            },
+            "name": "http://schema.org/validThrough",
+            "relative": true,
+            "transient": false,
+            "javascript": "function transform(data){\n  var dataSplit = data.split(\"~~~\");\n  \n  if(dataSplit[0].toLowerCase().indexOf(\"spring travel\") !== -1){\n    dataSplit[1] = dataSplit[1].slice(dataSplit[1].toLowerCase().indexOf(\"domestic sale terms\"));\n    return dataSplit[1]\n      .match(/from\\s*(?:January|February|March|April|May|June|July|August|September|October|November|December)\\s*\\d{1,2}\\s*through\\s*((?:January|February|March|April|May|June|July|August|September|October|November|December)\\s*\\d{1,2},?\\s*\\d{2,4}),?\\s*11:59/i)[0]\n    .replace(/from\\s*(?:January|February|March|April|May|June|July|August|September|October|November|December)\\s*\\d{1,2}\\s*through\\s*((?:January|February|March|April|May|June|July|August|September|October|November|December)\\s*\\d{1,2},?\\s*\\d{2,4}),?\\s*11:59/i, \"$1\");\n  } \n  \n  \n  if(dataSplit[0].toLowerCase().indexOf(\"international break\") !== -1){\n    dataSplit[1] = dataSplit[1].slice(dataSplit[1].toLowerCase().indexOf(\"international sale terms\"));\n    return dataSplit[1]\n      .match(/from\\s*(?:January|February|March|April|May|June|July|August|September|October|November|December)\\s*\\d{1,2}\\s*through\\s*((?:January|February|March|April|May|June|July|August|September|October|November|December)\\s*\\d{1,2},?\\s*\\d{2,4}),?\\s*11:59/i)[0]\n    .replace(/from\\s*(?:January|February|March|April|May|June|July|August|September|October|November|December)\\s*\\d{1,2}\\s*through\\s*((?:January|February|March|April|May|June|July|August|September|October|November|December)\\s*\\d{1,2},?\\s*\\d{2,4}),?\\s*11:59/i, \"$1\");\n  }\n  \n  \n  if(/Up\\s*to\\s*\\$\\d*\\s*off/.test(dataSplit[0])){\n    dataSplit[1] = dataSplit[1].slice(dataSplit[1].toLowerCase().indexOf(\"southwest vacations® offer terms and conditions:\"));\n    return dataSplit[1]\n    .match(/if\\s*booked\\s*(?:(?:\\d{1,2}\\/){2}\\d{2,4})\\s*–\\s*((?:\\d{1,2}\\/){2}\\d{2,4})\\s*by\\s*6:00/)[0]\n    .replace(/if\\s*booked\\s*(?:(?:\\d{1,2}\\/){2}\\d{2,4})\\s*–\\s*((?:\\d{1,2}\\/){2}\\d{2,4})\\s*by\\s*6:00/,\"$1\");\n  }\n  \n  \n  return null;\n}",
+            "dataTypes": [
+              "DateTime"
+            ],
+            "mandatory": false
+          },
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "./parent::a/@href | ./descendant::a/@href"
+                }
+              ]
+            },
+            "name": "http://schema.org/url",
+            "relative": true,
+            "transient": false,
+            "javascript": null,
+            "dataTypes": [
+              "URL"
+            ],
+            "mandatory": false
+          }
+        ],
+        "hints": {
+          "_raw_validThrough": "concat(./@alt, ., \"~~~\", /descendant::text()[contains(translate(., 'SOUTHWEAIRLNC', 'southweairlnc'), 'southwest airlines co')]/ancestor::table[2])",
+          "_footer": "/descendant::text()[contains(translate(., 'SOUTHWEAIRLNC', 'southweairlnc'), 'southwest airlines co')]/ancestor::table[1]"
+        },
+        "hintsJavascript": "function transform(data) {\n  var ftr = data.get(\"_footer\")[0].replace(/[A-z0-9.%+-_]{2,64}\\@[A-z0-9.]{2,64}/g,'');\n  var rvt = data.get(\"_raw_validThrough\")[0];\n\n  return {\n    '_footer': [ftr],\n    '_raw_validThrough': [rvt]\n  };\n}"
+      },
+      {
+        "id": "2e0a8a8e-bc2c-4ab2-88fd-22395d2f0b7f",
+        "repeating": true,
+        "locations": [
+          "/descendant::img[contains(translate(@alt,\"SALE\",\"sale\"),\"sale\") and contains(@alt,\"$\")]\n|\n/descendant::text()[contains(translate(.,\"OF\",\"of\"),\" off\") and contains(.,\"$\") or\ncontains(translate(.,\"POINTS\",\"points\"),\"points\") and contains(translate(.,\"EARN\", \"earn\"),\"earn\") or \ncontains(translate(.,\"SALE\",\"sale\"),\"sale\")]\n/ancestor::table[1][not(contains(translate(., 'TERMSANDCOI', 'termsandcoi'), 'terms and conditions'))]"
+        ],
+        "type": "http://schema.org/Organization",
+        "javascript": null,
+        "entityIdRef": null,
+        "attributes": [
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "\"Southwest\""
+                }
+              ]
+            },
+            "name": "http://schema.org/name",
+            "relative": true,
+            "transient": false,
+            "javascript": null,
+            "dataTypes": [
+              "Text"
+            ],
+            "mandatory": false
+          }
+        ]
+      },
+      {
+        "id": "3d99c383-3b9c-494c-8a3e-f9ee833f22fa",
+        "repeating": true,
+        "locations": [
+          "/descendant::img[contains(translate(@alt,\"SALE\",\"sale\"),\"sale\") and contains(@alt,\"$\")]\n|\n/descendant::img[ancestor::table[2][contains(translate(.,\"OF\",\"of\"),\" off\") and contains(.,\"$\") or\ncontains(translate(.,\"POINTS\",\"points\"),\"points\") and contains(translate(.,\"EARN\", \"earn\"),\"earn\") or \ncontains(translate(.,\"SALE\",\"sale\"),\"sale\")][not(contains(translate(., 'TERMSANDCOI', 'termsandcoi'), 'terms and conditions'))]]"
+        ],
+        "type": "http://schema.org/ImageObject",
+        "javascript": null,
+        "entityIdRef": "",
+        "attributes": [
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "./@src"
+                }
+              ]
+            },
+            "name": "http://schema.org/url",
+            "relative": true,
+            "transient": false,
+            "javascript": null,
+            "dataTypes": [
+              "URL"
+            ],
+            "mandatory": false
+          }
+        ]
+      }
+    ],
+    "edgeRules": [
+      {
+        "from": {
+          "entityRule": "01985006-96c8-4b50-8f5b-a134010602e0",
+          "matchAttr": ""
+        },
+        "to": {
+          "entityRule": "2e0a8a8e-bc2c-4ab2-88fd-22395d2f0b7f",
+          "matchAttr": ""
+        },
+        "predicate": "http://schema.org/broker",
+        "cardinality": "ONE_TO_ONE"
+      },
+      {
+        "from": {
+          "entityRule": "01985006-96c8-4b50-8f5b-a134010602e0",
+          "matchAttr": ""
+        },
+        "to": {
+          "entityRule": "3d99c383-3b9c-494c-8a3e-f9ee833f22fa",
+          "matchAttr": ""
+        },
+        "predicate": "http://schema.org/image",
         "cardinality": "ONE_TO_ONE"
       }
     ],
