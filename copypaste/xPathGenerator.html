@@ -550,10 +550,6 @@
                 <input type="radio" name="activeFunction" value="document" v-model="activeFunction" @click="addFunction($event)">
                 <span>document()</span>
               </label>
-              <label title="The count function counts the number of nodes in a node-set and returns an integer. | count(node-set)">
-                <input type="radio" name="activeFunction" value="count" v-model="activeFunction" @click="addFunction($event)">
-                <span>count()</span>
-              </label>
               <label title="The element-available function determines if an element is available and returns true or false. | element-available(QName)">
                 <input type="radio" name="activeFunction" value="element-available" v-model="activeFunction" @click="addFunction($event)">
                 <span>element-available()</span>
@@ -731,11 +727,11 @@
               <div class="divCheckboxParams">
                 <label v-show="showNumberInput">
                   <input type="checkbox" name="numberEntry" value="" v-model="numberEntry">
-                  Number entry
+                  <span>Number entry</span>
                 </label>
                 <label v-show="showTranslateInput">
                   <input type="checkbox" name="translateString" v-model="translateString">
-                  Translate the string
+                  <span>Upper to lowercase</span>
                 </label>
               </div>
               <div class="divStringParam">
@@ -762,12 +758,12 @@
         <section class="sectionElements">
           <div class="divFunctionsSequenceArrElements">
             <h3>Active Function: {{activeFunction}}</h3>
-            <label v-for="element in functionsSequenceArr">
-              <input type="text" name="" :value="element" v-model="element">
+            <label v-for="(element, idx) in functionsSequenceArr">
+              <input type="text" :name="idx"  v-model="functionsSequenceArr[idx]">
             </label>
-            The functionsSequenceArr is displayed here
-            {{functionsSequenceArr}}
-            <input type="button" name="" value="Concat last two axes" @click="concatFunctionElements()">
+            <div class="">
+              <input type="button" name="" value="Concat last two axes" @click="concatFunctionElements()">
+            </div>
           </div>
 
           <div class="divFunctionConcatenation">
@@ -952,9 +948,7 @@
 
           //Alert the user that the function only takes node sets
           if (event.target.value === "count") {
-            console.log("if");
             this.paramAlert = "This function only takes node sets";
-            return;
           }
 
           //Mark the number entry checkbox as selected
@@ -994,9 +988,18 @@
             if(this.numberEntry) return this.evaluateAndEnterNumberValue(event.target.value, this.functionsSequenceArr);
             //Translate option has been selected
             else if (this.translateString) return this.translateAndPush(event.target.value);
-            //The string is pushed in the functionsSequenceArr while the functionsCounter is 0
+            //The string is pushed in the functionsSequenceArr
             else{
-              this.functionsSequenceArr.push("\"" + event.target.value + "\"");
+              let lastElement = this.functionsSequenceArr[this.functionsSequenceArr.length-1];
+              console.log("HELLLLLL");
+              if (lastElement[lastElement.length - 1] === "(") {
+                this.functionsSequenceArr.push("\"" + event.target.value + "\"")
+              }
+              else {
+                this.functionsSequenceArr.push(",");
+                this.functionsSequenceArr.push("\"" + event.target.value + "\"")
+              }
+
               this.parameterString = "";
               return this.zeroProperties(event.target.name);
             }
@@ -1112,6 +1115,14 @@
             let spanText = labels[i].children[1].textContent;
             if (spanText.length > 15) labels[i].className += "functionSpansFontSize";
           }
+        },
+
+
+
+        updateFunctionsSequenceArr(event){
+          console.log("in function");
+          console.log(event.target.value);
+          console.log(event.target.name);
         }
 
 

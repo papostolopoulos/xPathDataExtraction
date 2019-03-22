@@ -16,6 +16,31 @@ CAN YOU REMEMBER IF YOU HAVE USED IT WHILE WORKING?*/
 
 
 
+
+
+  /*
+  WHAT IS IT?
+  CAN YOU GIVE ME AN EXAMPLE OF CODE TO WRITE?
+  CAN YOU REMEMBER IF YOU HAVE USED IT WHILE WORKING?*/
+  /*
+  - OPERATORS
+    * Math operators
+    * Assignment operators
+    * Comparison operators
+    * Boolean operators
+    * String operators
+  */
+
+
+
+
+
+
+
+
+
+
+
 /*
 WHAT IS IT?
 CAN YOU GIVE ME AN EXAMPLE OF CODE TO WRITE?
@@ -26,6 +51,18 @@ CAN YOU REMEMBER IF YOU HAVE USED IT WHILE WORKING?*/
   * Object literals
   * Functions
 */
+
+console.log(transform());
+
+function transform() {
+  console.log("5." + false || true);
+}
+
+
+
+
+
+
 
 
 
@@ -64,43 +101,7 @@ NaN
 
 
 
-
-
-
-
-
-
-
-
-
-
 //https://www.sololearn.com/Play/JavaScript
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-WHAT IS IT?
-CAN YOU GIVE ME AN EXAMPLE OF CODE TO WRITE?
-CAN YOU REMEMBER IF YOU HAVE USED IT WHILE WORKING?*/
-/*
-- OPERATORS
-  * Math operators
-  * Assignment operators
-  * Comparison operators
-  * Boolean operators
-  * String operators
-*/
+// function transform(data) {
+//   return data;
+// }
