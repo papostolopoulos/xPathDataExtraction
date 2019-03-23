@@ -97,14 +97,18 @@ function transform(data){
     /(extra|up\s*to|sav(e|ings\s*of)|over|more\s*than|discount(ed)?\s*(of|by)|at\s*least|gift\s*of|down\s*to|as\s*low\s*as|bonus of)\s*(\d{1,2}%|\$\d+(\.\d{2})?)/i,
     // was $10.99 | start at $10.99
     /(was:?|start\s*at)\s*\$\d+/i,
-    // free ship | free on orders of | free $5 | free 10% | free delivery | free standard | free gift
-    /free\s*(ship|on\s*orders\s*of|\$\d|\d+%|standard|delivery|gift)/i,
+    // free ship | free on orders of | free $5 | free 10% | free delivery | free standard | free gift | free NN
+    /free\s*(ship|on\s*orders\s*of|\$\d|\d+%|standard|delivery|gift|\d)/i,
     // buy one / two / three texttexttext, get
     /buy\s*(one|two|three|\d+),?.*\sget/i,
+    //(standard | complementary | NN day) (shipping)
+    /(standard|complimentary|\d+day)\s*shipping/i,
     //BOGO
     /BOGO/,
     // (100 | earn | get | gather | collect | your | redeem | reward) (points | rewards | gift | coupon | (e-)certificate)
     /(\d+|earn|get|gather|collect|your|redeem|reward)\s*(points|rewards?|gift|coupon|(e-)?certificate)/i,
+    // (double | triple) (points)
+    /(double|triple)\s*(points)/i,
     //promo(tion) code
     /promo(?:tion)\s*code\s*/i,
   ];

@@ -97,7 +97,7 @@
       .divFunctionsInputs{
         display: flex;
         flex-flow: column wrap;
-        height: 95%;
+        height: 90%;
         align-content: space-around;
         font-size: .79rem;
         /* flex-wrap: wrap; */
@@ -193,6 +193,25 @@
 
       .divFunctionsSequenceArrElements{
         grid-area: divFunctionsSequenceArrElements;
+      }
+
+      .divFunctionsSequenceArrElements label{
+        margin: 5px;
+      }
+
+      .divFunctionsSequenceArrElements label input{
+        border: 2px solid rgb(128,0,32);
+        border-radius: 5%
+      }
+
+      .divFunctionsSequenceArrElements label input:hover{
+        background-color: rgba(128, 0, 32, .4);
+      }
+
+      .divFunctionsSequenceArrElements label input:focus{
+        background-color: rgba(128, 0, 32, .2);
+        color: rgb(128,0,32);
+        outline: none;
       }
 
       .divFunctionConcatenation{
@@ -757,7 +776,7 @@
 
         <section class="sectionElements">
           <div class="divFunctionsSequenceArrElements">
-            <h3>Active Function: {{activeFunction}}</h3>
+            <h3>Active Function elements: {{activeFunction}}</h3>
             <label v-for="(element, idx) in functionsSequenceArr">
               <input type="text" :name="idx"  v-model="functionsSequenceArr[idx]">
             </label>
@@ -772,9 +791,10 @@
           </div>
 
           <div class="divPathArrayElements">
-            <h3>All xPath Entries</h3>
-            The pathArray is displayed here <br>
-            {{pathArray}}
+            <h3>xPath elements</h3>
+            <label v-for="(element, idx) in pathArray">
+              <input type="text" :name="idx" v-model="pathArray[idx]">
+            </label>
           </div>
         </section>
         <!-- End of section Elements -->
