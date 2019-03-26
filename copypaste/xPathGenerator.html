@@ -39,6 +39,16 @@
 
       .branches{
         grid-area: branches;
+        border-right: 2px solid rgb(0,0,128);
+        border-top: 2px solid rgb(0,0,128);
+      }
+
+      .branches:hover{
+        background: rgba(0,0,128,.1);
+      }
+
+      .branches h3{
+        color: rgb(0,0,128);
       }
 
       .branches hr{
@@ -55,11 +65,20 @@
         flex-flow: column wrap;
         height: 80%;
         align-content: space-around;
-        /* justify-content: space-between; */
+      }
+
+      .divBranchesInputs input:focus + span{
+        color: rgb(0,0,128);
       }
 
       .brackets{
         grid-area: brackets;
+        border-right: 2px solid rgb(0,100,0);
+        border-top: 2px solid rgb(0,100,0);
+      }
+
+      .brackets h3{
+        color: rgb(0,100,0); /*Dark green*/
       }
 
       .divBracketsInputs{
@@ -67,6 +86,10 @@
         display: flex;
         justify-content: center;
         align-content: center;
+      }
+
+      .divBracketsInputs input:focus + span{
+        color: rgb(0,100,0);
       }
 
       table{
@@ -92,6 +115,12 @@
 
       .functions{
         grid-area: functions;
+        border-right: 2px solid rgb(128,0,32);
+        border-top: 2px solid rgb(128,0,32);
+      }
+
+      .functions h3{
+        color: rgb(128,0,32);
       }
 
       .divFunctionsInputs{
@@ -101,6 +130,10 @@
         align-content: space-around;
         font-size: .79rem;
         /* flex-wrap: wrap; */
+      }
+
+      .divFunctionsInputs input:focus + span{
+        color: rgb(128,0,32);
       }
 
       .functionSpansFontSize{
@@ -191,25 +224,26 @@
         "divPathArrayElements"
       }
 
+      .sectionElements input{
+        margin: 5px;
+        padding: 5px 0 5px 5px;
+      }
+
       .divFunctionsSequenceArrElements{
         grid-area: divFunctionsSequenceArrElements;
       }
 
-      .divFunctionsSequenceArrElements label{
-        margin: 5px;
-      }
-
       .divFunctionsSequenceArrElements label input{
-        border: 2px solid rgb(128,0,32);
+        border: 2px solid rgb(128,0,32); /*Burgundy*/
         border-radius: 5%
       }
 
       .divFunctionsSequenceArrElements label input:hover{
-        background-color: rgba(128, 0, 32, .4);
+        background-color: rgba(255,0,255, .2); /*Magenda*/
       }
 
       .divFunctionsSequenceArrElements label input:focus{
-        background-color: rgba(128, 0, 32, .2);
+        background-color: rgba(255, 0, 255, .4);
         color: rgb(128,0,32);
         outline: none;
       }
@@ -220,6 +254,21 @@
 
       .divPathArrayElements{
         grid-area: divPathArrayElements;
+      }
+
+      .divPathArrayElements label input{
+        border: 2px solid rgb(0,0,128); /*Navy blue*/
+        border-radius: 5%
+      }
+
+      .divPathArrayElements label input:hover{
+        background-color: rgba(0,255,255, .2); /*aqua*/
+      }
+
+      .divPathArrayElements label input:focus{
+        background-color: rgba(0,255,255, .4);
+        color: rgb(0,0,128);
+        outline: none;
       }
 
       .sectionResult{
@@ -242,7 +291,7 @@
       <div class="divContainer">
 
         <section class="sectionOptions">
-          <div class="branches" style="background:pink;">
+          <div class="branches">
             <h3>Axes / Node</h3>
 
 
@@ -336,7 +385,7 @@
 
 
 
-          <div class="brackets" style="background:lightblue;">
+          <div class="brackets">
             <h3>Predicates / Parenthesis</h3>
             <div class="divBracketsInputs">
               <table>
@@ -530,7 +579,7 @@
 
 
 
-          <div class="functions"style="background:lightgreen;">
+          <div class="functions">
             <h3>Function</h3>
             <div class="divFunctionsInputs">
               <label>
@@ -778,7 +827,7 @@
           <div class="divFunctionsSequenceArrElements">
             <h3>Active Function elements: {{activeFunction}}</h3>
             <label v-for="(element, idx) in functionsSequenceArr">
-              <input type="text" :name="idx"  v-model="functionsSequenceArr[idx]">
+              <input type="text" :name="idx"  :size="functionsSequenceArr[idx].length + 1" v-model="functionsSequenceArr[idx]">
             </label>
             <div class="">
               <input type="button" name="" value="Concat last two axes" @click="concatFunctionElements()">
@@ -793,7 +842,7 @@
           <div class="divPathArrayElements">
             <h3>xPath elements</h3>
             <label v-for="(element, idx) in pathArray">
-              <input type="text" :name="idx" v-model="pathArray[idx]">
+              <input type="text" :name="idx" :size="pathArray[idx].length" v-model="pathArray[idx]">
             </label>
           </div>
         </section>

@@ -1,737 +1,296 @@
-<!doctype html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
  <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>Untitled Page</title>
-  <style type="text/css">/* BEGIN DYNAMIC CSS*/
-
-/* VistaprintEmail.css */
-.act
-{
-    font-family: Tahoma, Arial, sans-serif;
-    font-size: 11px;
-    font-weight: bold;
-    color: #0066CC;
-}
-.cta
-{
-    font-family: Tahoma, Arial, sans-serif;
-    font-size: 15px;
-    font-weight: bold;
-    color: #FFFFFF;
-}
-.colhd
-{
-    font-family: Tahoma, Arial, sans-serif;
-    font-size: 16px;
-    font-weight: bold;
-    color: #FFFFFF;
-}
-.offerTable
-{
-    border-style: solid;
-    border-width: thin;
-    border-color: #0099CC;
-}
-.offerHeader
-{
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 17px;
-    font-weight: bold;
-    color: #005D31;
-}
-.offerFooter
-{
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 12px;
-    font-weight: bold;
-}
-.offerProductName
-{
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 14px;
-    font-weight: bold;
-    color: #005D31;
-}
-.offerProductNameRed
-{
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 14px;
-    font-weight: bold;
-    color: #008BC6;
-}
-.offerProductNameH
-{
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 14px;
-    font-weight: bold;
-    color: #FFFFFF;
-    background-color: #0099CC;
-}
-.offerProductDetails
-{
-    font-family: Tahoma, Arial, sans-serif;
-    font-size: 12px;
-    font-weight: normal;
-}
-.offerPricingDetails
-{
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 12px;
-    font-weight: bold;
-    color: #005D31;
-}
-.offerProductLink
-{
-    font-family: Tahoma, Arial, sans-serif;
-    font-size: 12px;
-    font-weight: bold;
-}
-.sub
-{
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 14px;
-    font-weight: bold;
-}
-.txt
-{
-    font-family: Tahoma, Arial, sans-serif;
-    font-size: 12px;
-    font-weight: normal;
-}
-.now
-{
-    font-family: Tahoma, Arial, sans-serif;
-    font-size: 14px;
-    font-weight: bold;
-}
-.foot
-{
-    font-family: Arial, sans-serif;
-    font-size: 11px;
-    font-weight: normal;
-    color: #666666;
-}
-.exp
-{
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 18px;
-    font-weight: bold;
-    color: #008BC6;
-}
-#divPPPMessageBox, #divPPPMessage
-{
-    margin-left: 30px;
-    margin-right: 30px;
-}
-/*boxed message*/#boxedmsg
-{
-    text-align: center;
-}
-.boxedMsgRegular
-{
-    text-align: center;
-}
-/*size of the blinking box*/.oneLine
-{
-    text-align: center;
-    height: 60px;
-}
-.twoLines
-{
-    text-align: center;
-    height: 80px;
-}
-.threeLines
-{
-    text-align: center;
-    height: 100px;
-}
-.moreThanThreeLines
-{
-    text-align: center;
-    height: 200px;
-}
-.breakSmall
-{
-    text-align: center;
-    height: 110px;
-}
-.breakMedium
-{
-    text-align: center;
-    height: 140px;
-}
-.breakLarge
-{
-    text-align: center;
-    height: 200px;
-}
-/*end of size of the blinking box*/Td.topleft
-{
-    background-image: url(http://www.vistaprint.com/vp/images/nns/common/background/yellow_box_yellow_stroke/yellow_box_top_lt.gif);
-    background-repeat: no-repeat;
-    background-position: bottom right;
-    width: 10px;
-    height: 10px;
-}
-td.toptile
-{
-    background-image: url(http://www.vistaprint.com/vp/images/nns/common/background/yellow_box_yellow_stroke/yellow_box_top_tl.gif);
-    background-repeat: repeat-x;
-    background-position: bottom;
-}
-Td.topright
-{
-    background-image: url(http://www.vistaprint.com/vp/images/nns/common/background/yellow_box_yellow_stroke/yellow_box_top_rt.gif);
-    background-repeat: no-repeat;
-    background-position: bottom left;
-    width: 10px;
-    height: 10px;
-}
-.middleleft
-{
-    background-image: url(http://www.vistaprint.com/vp/images/nns/common/background/yellow_box_yellow_stroke/yellow_box_tl_lt.gif);
-    background-repeat: repeat-y;
-    width: 10px;
-}
-.middletile
-{
-    background-color: #fcf4ca;
-}
-.middleright
-{
-    background-image: url(http://www.vistaprint.com/vp/images/nns/common/background/yellow_box_yellow_stroke/yellow_box_rt_tl.gif);
-    background-repeat: repeat-y;
-    width: 10px;
-}
-.bottomleft
-{
-    background-image: url(http://www.vistaprint.com/vp/images/nns/common/background/yellow_box_yellow_stroke/yellow_box_bot_lt.gif);
-    background-repeat: no-repeat;
-    width: 10px;
-    height: 10px;
-}
-.bottomtile
-{
-    background-image: url(http://www.vistaprint.com/vp/images/nns/common/background/yellow_box_yellow_stroke/yellow_box_bot_tl.gif);
-    background-repeat: repeat-x;
-}
-.bottomright
-{
-    background-image: url(http://www.vistaprint.com/vp/images/nns/common/background/yellow_box_yellow_stroke/yellow_box_bot_rt.gif);
-    background-repeat: no-repeat;
-    width: 10px;
-    height: 10px;
-}
-#noboxmsg
-{
-    text-align: center;
-    vertical-align: middle;
-    padding-bottom: 5px;
-}
-.regMsg
-{
-    font-size: 12px;
-    font-weight: bold;
-    padding-left: 2px;
-    color: #000000;
-    display: inline;
-}
-.empMsg
-{
-    font-size: 12px;
-    font-weight: bold;
-    padding-left: 2px;
-    color: #DE0000;
-    display: inline;
-}
-#noLightBulbTable, #parenthesisTable
-{
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-#noLightBulbTable tr td
-{
-    font-size: 16px;
-    color: #000000;
-}
-.highlight
-{
-    font-size: 16px;
-    font-weight: bold;
-    color: #DE0000;
-}
-.parenthesis
-{
-    font-size: 16px;
-    font-weight: bold;
-    color: #3e4db1;
-}
-.parenthesismsg
-{
-    font-size: 16px;
-    font-weight: bold;
-    color: #000000;
-    padding-left: 5px;
-    padding-right: 5px;
-}
-.normalBlack
-{
-    font-size: 12px;
-    font-weight: bold;
-    color: #000000;
-}
-.normalRed
-{
-    font-size: 12px;
-    font-weight: bold;
-    color: #DE0000;
-}
-.largerBlack
-{
-    font-size: 18px;
-    font-weight: bold;
-    color: #000000;
-}
-.largerRed
-{
-    font-size: 18px;
-    font-weight: bold;
-    color: #DE0000;
-}
-.divCopy
-{
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-.divToken
-{
-    padding-top: 5px;
-    padding-bottom: 5px;
-    background-color: #E5B753;
-    font-size: 14px;
-    font-weight: bold;
-}
-#blinkingTD
-{
-    width: 440px;
-    background-color: #fcf4ca;
-}
-.blinkMsgSmall
-{
-    font-size: 12px;
-    color: #000000;
-    font-weight: bold;
-    padding-left: 4px;
-}
-.blinkMsgLarge
-{
-    font-size: 14px;
-    color: #DE0000;
-    font-weight: bold;
-    padding-left: 4px;
-}
-.blackSmallHome
-{
-    font-size: 12px;
-    font-weight: bold;
-    color: #000000;
-    padding-left: 2px;
-}
-.redLargeHome
-{
-    font-size: 14px;
-    font-weight: bold;
-    color: #DE0000;
-    padding-left: 2px;
-}
-
-span.comparative-list-price
-{
-    text-decoration: line-through;
-}
-
-/* HTML Footer rebrand 2014*/
-.footerRebrand
-{
-    text-align: center;
-    vertical-align: middle;
-    padding-bottom: 10px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 10px;
-    color: #4d4d4f;
-    text-decoration: none;
-}
-.footer-rebrand-link
-{
-    font-size: 10px;
-    color: #4d4d4f;
-    text-decoration: none;
-}
-.pppRebrand
-{
-    width: 100%;
-}
-.footerGuaranteeImage
-{
-    border: 0;
-    padding: 10px;
-    position: relative;
-    top: -13px;
-	background-color: #FFFFFF
-}
-
-/* HTML Header rebrand 2014 */
-.headerLayoutTable
-{
-    width: 100%;
-    padding: 10px;
-    font-family: Arial, Helvetica, sans-serif;
-}
-.headerImageContainer
-{
-    width: 50%;
-}
-.headerRightContainer
-{
-    text-align: right;
-    width: 50%;
-}
-.header-myacc-link
-{
-    font-family: Arial, Helvetica, sans-serif;
-    color: #4D4D4F;
-    font-size: 11px;
-    text-decoration: none;
-}
-.header-underline-link
-{
-    font-family: Arial, Helvetica, sans-serif;
-    color: #4D4D4F;
-    font-size: 11px;
-    text-decoration: underline;
-}
-.header-img-link
-{
-    border: none;
-}
-.docPortfolioTable {
-	width:				100%;
-	margin-left: 		auto;
-	margin-right: 		auto;
-	text-align: 		left;
-    border-spacing: 	0px;
-	border:				0px;
-	table-layout:		fixed;
-	border-collapse:	collapse;
-}
-
-.docPortfolioTable td {
-	border:             #2BA8E0 0px;
-	padding:            4px;
-}
+ <title>Hybrid Generic Collections 1</title>
+ <style><!-- #outlook a {padding:0;}
+           .ReadMsgBody { width: 100%; }
+           .ExternalClass { width: 100%; }
+            .ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div {
+                line-height:100%;
+            }
 
 
-.docPortfolioTable .headerCol1 {
-	width:		        30%;
-}
+            body {  margin:0; padding:0; }
+            p{margin: 1em 0;}
+            table { border-spacing:0; }
+            table{mso-table-lspace:0pt; mso-table-rspace:0pt;}
+            table td { border-collapse:collapse; }
+            .yshortcuts, a .yshortcuts, a .yshortcuts:hover, a .yshortcuts:active, a .yshortcuts:focus {
+                background-color:transparent !important; border:none !important; color:inherit !important; border-bottom: none !important;
+            }
+            h1, h2, h3, h4, h5, h6 {line-height: 100%; margin:0; padding:0; }
+            img {border:0; height:auto; line-height:100%; outline:none; text-decoration:none; -ms-interpolation-mode: bicubic;}
+            a img {border:none;}
+            image_fix {display:block;}
+            .applelinks a {color:#0574ac; text-decoration: none;}
+            a, a:link {color:#0574ac;text-decoration: underline;}
+            p {margin:0; padding:0; margin-bottom:0;}
+            .emlBody { background: #ededed; }
+            .preheader {display:none !important;}
+            .bodyCell{padding-top:40px; }
+            #emlContainer{ width:592px;background-color:#FFFFFF;border:1px solid #DDDDDD; border-collapse:separate; border-radius:4px;  }
+            .colPadding{ padding:0px 15px 10px 15px; }
+            .contentRow{ width:100%; }
+            .table3-1{ width:362px;padding-right:20px; }
+            .rightAds { width:180px; }
+            .bulletList{ border-collapse: collapse;padding-left:20px; }
+            .bulletListContent{ padding-left: 5px;border-collapse: collapse;display:block; }
+            .mainContent {font-size:1.000em; color:#666666;font-family: Verdana;line-height: 16px;}
+            .promoGelBg { border:1px solid #d2d2d2; border-collapse:collapse; background-color:#f2f2f2; }
+            .promoGelBg td{ padding: 4px; }
+            h1, h2, h3, h4, h5, h6{color:#202020; font-family:Helvetica; font-size:1.5em; line-height:125%; text-align:Left;}
+            h1.contentHeading{ clear: both; font: inherit; font-family: Verdana; font-size: 1.5em; font-weight: normal; padding-right: 0px; padding-left: 0px; padding-bottom: 0px; margin: 0px; color: #ef6f00; padding-top: 0px;line-height:100%; }
+            h2{ clear: both; font: inherit; font-family: Verdana; font-size: 1.000em; font-weight: bold; padding-right: 0px; padding-left: 0px; padding-bottom: 5px; margin: 0px; color: #ef6f00; padding-top: 0px;line-height:100%; }
+            a, a:link {color:#0574ac;text-decoration: underline;}
+            .linkSimple{ color:#0574ac; text-decoration: none !important; }
+            .footerContainer { width:592px; }
+            .copymainContent { font-size: 1.000em;color: #0574ac;font-family: Verdana; }
+			.separator { border-top: 1px solid #cccccc; }
+            .border-c3c3c3{ border:1px solid #c3c3c3; }
+            .border-b-c3c3c3{ border-bottom: #c3c3c3 1px solid; }
+            .border-r-c3c3c3{ border-right:1px solid #c3c3c3; }
+            .borderNone{ border:none !important; }
+            .tableInContent td{ padding:2px; }
+            .breakWord{ word-break: break-all; }
+			 .tac{ text-align:center; }
+            .tableFixed{ table-layout: fixed; }
+            } -->
 
-.docPortfolioTable .headerCol2 {
-	width:		        70%;
-}
-
-.docPortfolioTable .headerRow {
-    background:  		#2BA8E0;
-    font-weight: 		bold;
-    color:       		white;
-	border-spacing: 	0px;
-	padding:			0px;
-}
-
-.docPortfolioOptionsTable {
-    font-family: 	    Tahoma, Arial, sans-serif;
-    font-size: 		    12px;
-    border-spacing:     0px;
-}
-
-.docPortfolioOptionsTable td {
-	border:             white 0px;
-	padding:            1px;
-}
+			#outlook a {padding:0;}
+           .ReadMsgBody { width: 100%; }
+           .ExternalClass { width: 100%; }
+            .ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div {
+                line-height:100%;
+            }
 
 
-.docPortfolioOptionsTable .headerCol1 {
-	width:		 	    10%;
-}
+            body {  margin:0; padding:0; }
+            p{margin: 1em 0;}
+            table { border-spacing:0; }
+            table{mso-table-lspace:0pt; mso-table-rspace:0pt;}
+            table td { border-collapse:collapse; }
+            .yshortcuts, a .yshortcuts, a .yshortcuts:hover, a .yshortcuts:active, a .yshortcuts:focus {
+                background-color:transparent !important; border:none !important; color:inherit !important; border-bottom: none !important;
+            }
+            h1, h2, h3, h4, h5, h6 {line-height: 100%; margin:0; padding:0; }
+            img {border:0; height:auto; line-height:100%; outline:none; text-decoration:none; -ms-interpolation-mode: bicubic;}
+            a img {border:none;}
+            image_fix {display:block;}
+            .applelinks a {color:#0574ac; text-decoration: none;}
+            a, a:link {color:#0574ac;text-decoration: underline;}
+            p {margin:0; padding:0; margin-bottom:0;}
+            .emlBody { background: #ededed; }
+            .preheader {display:none !important;}
+            .bodyCell{padding-top:40px; }
+            #emlContainer{ width:592px;background-color:#FFFFFF;border:1px solid #DDDDDD; border-collapse:separate; border-radius:4px;  }
+            .colPadding{ padding:0px 15px 10px 15px; }
+            .contentRow{ width:100%; }
+            .table3-1{ width:362px;padding-right:20px; }
+            .rightAds { width:180px; }
+            .bulletList{ border-collapse: collapse;padding-left:20px; }
+            .bulletListContent{ padding-left: 5px;border-collapse: collapse;display:block; }
+            .mainContent {font-size:1.000em; color:#666666;font-family: Verdana;line-height: 16px;}
+            .promoGelBg { border:1px solid #d2d2d2; border-collapse:collapse; background-color:#f2f2f2; }
+            .promoGelBg td{ padding: 4px; }
+            h1, h2, h3, h4, h5, h6{color:#202020; font-family:Helvetica; font-size:1.5em; line-height:125%; text-align:Left;}
+            h1.contentHeading{ clear: both; font: inherit; font-family: Verdana; font-size: 1.5em; font-weight: normal; padding-right: 0px; padding-left: 0px; padding-bottom: 0px; margin: 0px; color: #ef6f00; padding-top: 0px;line-height:100%; }
+            h2{ clear: both; font: inherit; font-family: Verdana; font-size: 1.000em; font-weight: bold; padding-right: 0px; padding-left: 0px; padding-bottom: 5px; margin: 0px; color: #ef6f00; padding-top: 0px;line-height:100%; }
+            a, a:link {color:#0574ac;text-decoration: underline;}
+            .linkSimple{ color:#0574ac; text-decoration: none !important; }
+            .footerContainer { width:592px; }
+			.copymainContent { font-size: 1.000em;color: #0574ac;font-family: Verdana; }
+			.separator { border-top: 1px solid #cccccc; }
+            .border-c3c3c3{ border:1px solid #c3c3c3; }
+            .border-b-c3c3c3{ border-bottom: #c3c3c3 1px solid; }
+            .border-r-c3c3c3{ border-right:1px solid #c3c3c3; }
+            .borderNone{ border:none !important; }
+            .tableInContent td{ padding:2px; }
+            .breakWord{ word-break: break-all; }
+			 .tac{ text-align:center; }
+            .tableFixed{ table-layout: fixed; }
+			.footerContent{font-size: .92em;color: #666666;font-family:Verdana;line-height: 16px;}
+            @media only screen and (max-device-width: 479px), screen and (max-width: 479px) {
+                body{width:100% !important; min-width:100% !important;}
+                body[yahoofix] #emlContainer{width:100% !important;}
+                body[yahoofix] .bodyCell{padding-top:0px !important;}
+                body[yahoofix] .rightAds{ width:100% !important;display: block !important; }
+                body[yahoofix] .table3-1{ width:100% !important; display: block !important;padding-right:0px !important; }
+                body[yahoofix] .mainContent { font-size:1.2em !important; line-height: 18px !important; }
+                body[yahoofix] .contentHeading { font-size:1.5em !important; }
+                body[yahoofix] .promoGelBg { width: 100% !important; }`
+                body[yahoofix] .fullWidth { width:100% !important; }
 
-.docPortfolioOptionsTable .headerCol2 {
-	width:		 	    90%;
-}
+                body[yahoofix] .footerContainer{ width:100% !important; }
+                h2{ font-size: 1.5em; }
+                body[yahoofix] .callToBtn { background-color: #009CD5; border: 1px solid #0089CE; border-radius: 2px; color: #FFFFFF !important; font-size: 1.000em; display:block !important; font-weight: bold; padding: 5px; text-decoration: none !important; text-shadow: 1px 1px 0 #006F97; width: 95%; }
+                body[yahoofix] .separator { width:100% !important;color:#cccccc;border-top:1px solid #cccccc; }
+				.footerContent{ -webkit-text-size-adjust:none; -ms-text-size-adjust:none; }
 
+            }
+            @media only screen and (max-device-width: 592px), screen and (max-width: 592px) and (min-width:480px) {
+                 body{width:100% !important; min-width:100% !important;}
+                body[yahoofix] #emlContainer{width:100% !important;}
+                body[yahoofix] .bodyCell{padding-top:0px !important;}
+                body[yahoofix] .rightAds{ width:100% !important;display: block !important; }
+                body[yahoofix] .table3-1{ width:100% !important; display: block !important;padding-right:0px !important; }
+                body[yahoofix] .mainContent { font-size:1.2em !important; line-height: 18px !important; }
+                body[yahoofix] .contentHeading { font-size:1.5em !important; }
+                body[yahoofix] .promoGelBg { width: 100% !important; }
+                body[yahoofix] .fullWidth { width:100% !important; }
 
-.docPortfolioKitTable {
-	margin-left: 		auto;
-	margin-right: 		auto;
-	text-align: 		left;
-    border-spacing: 	0px;
-	border:				0px;
-	table-layout:		fixed;
-	width:				100%;
-	border-collapse:	collapse;
-}
-
-.docPortfolioKitTable .headerRow {
-    background:         #2BA8E0;
-    font-weight: 		bold;
-    color:              black;
-	height:				2.0em;
-}
-
-.docPortfolioKitTable td span{
-	padding: 			4px;
-}
-/* END DYNAMIC CSS*/</style>
+                body[yahoofix] .footerContainer{ width:100% !important; }
+                h2{ font-size: 1.5em; }
+                body[yahoofix] .callToBtn { background-color: #009CD5; border: 1px solid #0089CE; border-radius: 2px; color: #FFFFFF !important; font-size: 1.000em; display:block !important; font-weight: bold; padding: 5px; text-decoration: none !important; text-shadow: 1px 1px 0 #006F97; width: 95%; }
+                body[yahoofix] .separator { width:100% !important;color:#cccccc;border-top:1px solid #cccccc; }
+				.footerContent{ -webkit-text-size-adjust:none; -ms-text-size-adjust:none; }
+            }</style>
  </head>
- <body bgcolor="#FFFFFF" text="#000000" link="#008BC6" vlink="#990000" alink="#008BC6">
-  <form name="aspnetForm" method="post" action="./BasketExpiration3DayHtml.aspx" id="aspnetForm">
-   <div>
-    <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUJOTQxNzg3NjM3ZGQ0KDi4pyMApFKfRiNMFiuS+fLKSA==">
-   </div>
-   <div>
-    <table id="ctl00_EmailContent_tblContent" cellspacing="0" cellpadding="0" border="0" align="center" style="width:600px;border-collapse:collapse;">
-     <tbody>
-      <tr id="ctl00_EmailContent_trHeader" valign="middle">
-       <td>
-        <table class="headerLayoutTable" align="center" cellpadding="0" cellspacing="0" style="font-family: arial, helvetica, sans-serif;padding: 10px;width: 100%;">
-         <tbody>
-          <tr>
-           <td class="headerImageContainer" style="width: 50%;"><a href="http://www.vistaprint.com/jt/zfnpjlt.adei?S=5673547391&amp;langid=4&amp;eeilid=6030674452&amp;eolid=2&amp;erid=3973869662&amp;shopperid=62P0N6907MK3AFBWMFT3WB0RJEJY2JJW&amp;PREURL=%2F%3Fvz_njuljwtm%3D4&amp;xnav=yxsiy35549&amp;xnid=4"><img id="newRebrandLogoImage" class="header-img-link" alt="Vistaprint. Make an impression." src="https://marketing.vistaprint.com/npfzh-mlxbf/ybgx/czzikg/phfv/ntqwdsbako-mlxbf-925-81-0272.tnp" style="border: none;"></a></td>
-           <td class="headerRightContainer" style="text-align: right;width: 50%;">
-            <table style="width:100%; text-align:right;border:none;">
-             <tbody>
-              <tr style="position:relative; top: -10px">
-               <td><a class="header-underline-link" href="mailto:vistaprint@e.vistaprint.com" style="color: #4d4d4f;font-family: arial, helvetica, sans-serif;font-size: 11px;text-decoration: underline;">Add Vistaprint to your address book</a></td>
-              </tr>
-              <tr>
-               <td><a class="header-myacc-link" href="http://www.vistaprint.com/jt/zfnpjlt.adei?S=5673547391&amp;langid=4&amp;eeilid=0971971249&amp;eolid=2&amp;erid=6181769616&amp;shopperid=H3TG9QDMNWXBFB6Y96RZ8K7RK1PRE6TT&amp;PREURL=%2Fjt%2Fze%2Fdt_vqibhnk.adei&amp;xnav=yxsiy35549&amp;xnid=6" target="_blank" style="color: #4d4d4f;font-family: arial, helvetica, sans-serif;font-size: 11px;text-decoration: none;"><span><img class="header-img-link" alt="" src="https://marketing.vistaprint.com/us/imgs/emailimages/common/my-account-icon-19x20.png" style="border: none;"></span><span style="position:relative; top:-5px;">My Pfachxz:1370-4690-8695</span></a></td>
-              </tr>
-             </tbody>
-            </table></td>
-          </tr>
-         </tbody>
-        </table></td>
-      </tr>
-      <tr id="ctl00_EmailContent_trBody" valign="middle">
-       <td>
-        <table width="600" border="1" align="center" cellpadding="1" cellspacing="0" bordercolor="#2BA8E0" bgcolor="#FFFFFF">
-         <tbody>
-          <tr>
-           <td width="225" height="35" align="center" bgcolor="#6ECFF5" class="colhd" style="color: #ffffff;font-family: tahoma, arial, sans-serif;font-size: 16px;font-weight: bold;"><font color="#0066CC">Your Special Offers</font></td>
-           <td width="370" height="35" align="center" bgcolor="#2BA8E0" class="colhd" style="color: #ffffff;font-family: tahoma, arial, sans-serif;font-size: 16px;font-weight: bold;"><span>Just a Reminder - Your Order is Waiting</span></td>
-          </tr>
-          <tr>
-           <td width="225" align="center" valign="top">
-            <table>
-             <tbody>
-              <tr>
-               <td>
-                <table style="width: 200px; border: none; border-collapse: collapse;">
-                 <tbody>
-                  <tr class="offerProductName" style="color: #005d31;font-family: arial, helvetica, sans-serif;font-size: 14px;font-weight: bold;">
-                   <td style="height: 20px; text-align: center; vertical-align: bottom; padding: 0px"><span>50% Off Calendars</span><br><br></td>
-                  </tr>
-                  <tr>
-                   <td class="offerProductDetails" style="font-family: tahoma, arial, sans-serif;font-size: 12px;font-weight: normal;padding: 0px;text-align: center;vertical-align: bottom;"><a href="http://www.vistaprint.com/jt/zfnpjlt.adei?S=5673547391&amp;langid=4&amp;eeilid=1907896327&amp;eolid=23461576287&amp;erid=2400308767&amp;shopperid=W9BZAS6N4MZ8KO79VRRVC5OUJ0A0GHLL&amp;PREURL=%2Fnstib-jxgqimydm.adei&amp;xnav=yxsiy35549&amp;xnid=Zfsgz4"><img src="http://marketing.vistaprint.com/us/imgs/email_central/409282-Christmas-FY18-WC-Laser_US.jpg" alt="Shop Calendars" style="border: 0px"></a></td>
-                  </tr>
-                  <tr>
-                   <td style="text-align: center; vertical-align: top; padding: 0px"><a class="offerProductLink" href="http://www.vistaprint.com/jt/zfnpjlt.adei?S=5673547391&amp;langid=4&amp;eeilid=1139488875&amp;eolid=51183380355&amp;erid=7483479735&amp;shopperid=9SI7X2G8JVYEU2YNDLAD8XD4LUHVRWUF&amp;PREURL=%2Fnstib-jxgqimydm.adei&amp;xnav=yxsiy35549&amp;xnid=Zfsgz4" style="font-family: tahoma, arial, sans-serif;font-size: 12px;font-weight: bold;">Promo Code HOLIDAY</a></td>
-                  </tr>
-                  <tr>
-                   <td style="font-family: tahoma, arial, sans-serif;font-size: 12px;font-weight: normal;text-align: center;" class="txt"><span></span></td>
-                  </tr>
-                 </tbody>
-                </table><br><br></td>
-              </tr>
-              <tr>
-               <td>
-                <table style="width: 200px; border: none; border-collapse: collapse;">
-                 <tbody>
-                  <tr class="offerProductName" style="color: #005d31;font-family: arial, helvetica, sans-serif;font-size: 14px;font-weight: bold;">
-                   <td style="height: 20px; text-align: center; vertical-align: bottom; padding: 0px"><span>50% Off Holiday Cards</span><br><br></td>
-                  </tr>
-                  <tr>
-                   <td class="offerProductDetails" style="font-family: tahoma, arial, sans-serif;font-size: 12px;font-weight: normal;padding: 0px;text-align: center;vertical-align: bottom;"><a href="http://www.vistaprint.com/jt/zfnpjlt.adei?S=5673547391&amp;langid=4&amp;eeilid=1187225050&amp;eolid=06555193044&amp;erid=6053996020&amp;shopperid=WDI1IEFA2NWBZMMP7A5IQI9KKPK3HB1C&amp;PREURL=%2Feqsyqengh-obhjx.adei&amp;xnav=yxsiy35549&amp;xnid=Cigmb6"><img src="http://marketing.vistaprint.com/us/imgs/email_central/409282_Christmas-FY18-HC-Laser_US.jpg" alt="Shop Holiday Cards" style="border: 0px"></a></td>
-                  </tr>
-                  <tr>
-                   <td style="text-align: center; vertical-align: top; padding: 0px"><a class="offerProductLink" href="http://www.vistaprint.com/jt/zfnpjlt.adei?S=5673547391&amp;langid=4&amp;eeilid=9052532673&amp;eolid=59974742250&amp;erid=1253826356&amp;shopperid=VOK1DTUBYN8K4G4GPNCJ06AU4QLQ67DM&amp;PREURL=%2Feqsyqengh-obhjx.adei&amp;xnav=yxsiy35549&amp;xnid=Cigmb6" style="font-family: tahoma, arial, sans-serif;font-size: 12px;font-weight: bold;">Promo Code HOLIDAY</a></td>
-                  </tr>
-                  <tr>
-                   <td style="font-family: tahoma, arial, sans-serif;font-size: 12px;font-weight: normal;text-align: center;" class="txt"><span></span></td>
-                  </tr>
-                 </tbody>
-                </table><br><br></td>
-              </tr>
-              <tr>
-               <td>
-                <table style="width: 200px; border: none; border-collapse: collapse;">
-                 <tbody>
-                  <tr class="offerProductName" style="color: #005d31;font-family: arial, helvetica, sans-serif;font-size: 14px;font-weight: bold;">
-                   <td style="height: 20px; text-align: center; vertical-align: bottom; padding: 0px"><span></span><br><br></td>
-                  </tr>
-                  <tr>
-                   <td class="offerProductDetails" style="font-family: tahoma, arial, sans-serif;font-size: 12px;font-weight: normal;padding: 0px;text-align: center;vertical-align: bottom;"><a href="http://www.vistaprint.com/jt/zfnpjlt.adei?S=5673547391&amp;langid=4&amp;eeilid=7556389325&amp;eolid=89186760793&amp;erid=1704918693&amp;shopperid=8HN3Q4C8W00KTZHDLP7UGS20NIVAUTMG&amp;PREURL=%2Ffkdcxd.adei&amp;xnav=yxsiy35549&amp;xnid=Zoahn1"><img src="http://marketing.vistaprint.com/us/imgs/email_central/222347-Christmas-Laser-Tiles_US.png" alt="Special Offers" style="border: 0px"></a></td>
-                  </tr>
-                  <tr>
-                   <td style="text-align: center; vertical-align: top; padding: 0px"><a class="offerProductLink" href="http://www.vistaprint.com/jt/zfnpjlt.adei?S=5673547391&amp;langid=4&amp;eeilid=2863694237&amp;eolid=24624970966&amp;erid=0681581284&amp;shopperid=4ZL0462QUUOCGMLZPA4KPTCD3Z4K3CNX&amp;PREURL=%2Ffkdcxd.adei&amp;xnav=yxsiy35549&amp;xnid=Zoahn1" style="font-family: tahoma, arial, sans-serif;font-size: 12px;font-weight: bold;"></a></td>
-                  </tr>
-                  <tr>
-                   <td style="font-family: tahoma, arial, sans-serif;font-size: 12px;font-weight: normal;text-align: center;" class="txt"><span></span></td>
-                  </tr>
-                 </tbody>
-                </table><br><br></td>
-              </tr>
-              <tr>
-               <td style="text-align: center; vertical-align: bottom;"><span id="mainRepeater_ctl04_offerIds" style="color: #FFFFFF; font-size: xx-small; font-family: Arial, Helvetica, sans-serif">OC<span>4609</span><span>4608</span><span>4395</span></span></td>
-              </tr>
-             </tbody>
-            </table></td>
-           <td width="370" align="center" valign="top">
-            <table width="370" border="0" cellspacing="0" cellpadding="5">
-             <tbody>
-              <tr>
-               <td class="txt" style="font-family: tahoma, arial, sans-serif;font-size: 12px;font-weight: normal;"><p><br><br>Dear Phyllis,</p><p>We noticed that your Vistaprint shopping cart contains the following items.</p>
-                <table class="docPortfolioTable txt" style="border: 0px;border-collapse: collapse;border-spacing: 0px;font-family: tahoma, arial, sans-serif;font-size: 12px;font-weight: normal;margin-left: auto;margin-right: auto;table-layout: fixed;text-align: left;width: 100%;">
-                 <colgroup>
-                  <col class="headerCol1" style="width: 30%;">
-                 </colgroup>
-                 <colgroup>
-                  <col class="headerCol2" style="width: 70%;">
-                 </colgroup>
-                 <tbody>
-                  <tr class="headerRow" style="background: #2ba8e0;border-spacing: 0px;color: white;font-weight: bold;padding: 0px;">
-                   <td style="border: #2ba8e0 0px;padding: 4px;"><span class="headerText">Documents</span></td>
-                   <td style="border: #2ba8e0 0px;padding: 4px;"><span>Details</span></td>
-                  </tr>
-                  <tr>
-                   <td style="border: #2ba8e0 0px;padding: 4px;">
-                    <div>
-                     <a id="_imageLink" href="http://www.vistaprint.com/jt/zfnpjlt.adei?S=5673547391&amp;langid=4&amp;eeilid=2402900663&amp;eolid=2&amp;erid=5815896880&amp;shopperid=T5HYP7HDHQJ76Z4M20ZRVFUJZWMJV9E0&amp;PREURL=%2Fjt%2Fze%2Fdt_vqibhnk%2Fgvd_huho.adei&amp;PREQS=zoy_plt_ia%3DC59H3-69P82-8D2&amp;xnav=yxsiy35549&amp;xnid=ZwjflexpKqxeeixlmKnudCqvj9"><img id="_livePreviewImage" src="https://rendering.documents.cimpress.io/q5/jt/abdbjuy?instructions_uri=http%3A%2F%2Fwdltnzzb.ntqwdsbako.com%2Fbnynx%2Foctxfwpax%2Fuoqlmwnsdi%2Ffqftxwhnckiucdwan.adei%3Fzoy_plt_ia%3DCX9UA-56Z63-0F2&amp;width=568&amp;category=ba&amp;ts=96610832&amp;merchant_metadata=369&amp;xnav=yxsiy35549&amp;xnid=1" alt="Click here for Larger Preview" style="width:85px;border-width:0px;"></a>
-                     <br>
-                     <br>
-                    </div></td>
-                   <td style="border: #2ba8e0 0px;padding: 4px;">
-                    <div id="_documentProductNameContainer">
-                     <b>5" e 1" rwrwrwkz - fbvhvcr wxxlgr iwasx</b>
-                    </div><span>Item :<a id="_nameLink" href="http://www.vistaprint.com/jt/zfnpjlt.adei?S=5673547391&amp;langid=4&amp;eeilid=3563016290&amp;eolid=2&amp;erid=8510245283&amp;shopperid=ISH7HV9E88RRMW8GSPL0WT2J7C4OGVIT&amp;PREURL=%2Fjt%2Fze%2Fdt_vqibhnk%2Fgvd_huho.adei&amp;PREQS=zoy_plt_ia%3DRJU1O-76L23-8V7&amp;xnav=yxsiy35549&amp;xnid=AegvamsrZqkqytcaxGohgJjre2">Wuuasw Djcug</a></span><br><br><span>Document #: ARYAW-79H98-2I4</span>
-                    <div id="_documentBasketInfo">
-                     <span>Quantity : 4</span>
-                     <div id="_documentBasketOptions">
-                      <span>Options</span>
-                      <table class="docPortfolioOptionsTable txt" style="border-spacing: 0px;font-family: tahoma, arial, sans-serif;font-size: 12px;font-weight: normal;">
-                       <colgroup>
-                        <col class="headerCol1" style="width: 10%;">
-                       </colgroup>
-                       <colgroup>
-                        <col class="headerCol2" style="width: 90%;">
-                       </colgroup>
-                      </table>
-                     </div>
-                    </div></td>
-                  </tr>
-                  <tr>
-                   <td style="border: #2ba8e0 0px;padding: 4px;">
-                    <div>
-                     <a id="_imageLink" href="http://www.vistaprint.com/jt/zfnpjlt.adei?S=5673547391&amp;langid=4&amp;eeilid=2513474405&amp;eolid=2&amp;erid=4102570263&amp;shopperid=FHH2TL81V815UB3ILGH39D1KI6XPJPO7&amp;PREURL=%2Fjt%2Fze%2Fdt_vqibhnk%2Fgvd_huho.adei&amp;PREQS=zoy_plt_ia%3DAMA8M-98L90-9J3&amp;xnav=yxsiy35549&amp;xnid=ZwjflexpKqxeeixlmKnudCqvj9"><img id="_livePreviewImage" src="https://rendering.documents.cimpress.io/q5/jt/abdbjuy?instructions_uri=http%3A%2F%2Fwdltnzzb.ntqwdsbako.com%2Fbnynx%2Foctxfwpax%2Fuoqlmwnsdi%2Ffqftxwhnckiucdwan.adei%3Fzoy_plt_ia%3DLWC87-72I48-1T0%26wnck%3Dbsi&amp;width=568&amp;scene=https%3A%2F%2Fctudm.hjgkeori.ywnnzalk.qc%2Fq5%2Fvqznyj%2F3z09d38v-d13h-3p8l-zd7j-y6h224gi5l0v&amp;category=ba-igqmvhhipgb&amp;ts=96610832&amp;merchant_metadata=QDK342625&amp;xnav=yxsiy35549&amp;xnid=5" alt="Click here for Larger Preview" style="width:85px;border-width:0px;"></a>
-                     <br>
-                     <br>
-                    </div></td>
-                   <td style="border: #2ba8e0 0px;padding: 4px;">
-                    <div id="_documentProductNameContainer">
-                     <b>fbvhvcr Bmgmlojbr Kyu - apjmq abf</b>
-                    </div><span>Item :<a id="_nameLink" href="http://www.vistaprint.com/jt/zfnpjlt.adei?S=5673547391&amp;langid=4&amp;eeilid=4106691968&amp;eolid=2&amp;erid=8289757662&amp;shopperid=KDT6NPT4S77FCG5AEBLPALFPX8IGQVDE&amp;PREURL=%2Fjt%2Fze%2Fdt_vqibhnk%2Fgvd_huho.adei&amp;PREQS=zoy_plt_ia%3DAVW75-15M46-1E1&amp;xnav=yxsiy35549&amp;xnid=AegvamsrZqkqytcaxGohgJjre2">Ubyeo Vmfyqsca</a></span><br><br><span>Document #: QYKR9-52D60-1E7</span>
-                    <div id="_documentBasketInfo">
-                     <span>Quantity : 091</span>
-                     <div id="_documentBasketOptions">
-                      <span>Options</span>
-                      <table class="docPortfolioOptionsTable txt" style="border-spacing: 0px;font-family: tahoma, arial, sans-serif;font-size: 12px;font-weight: normal;">
-                       <colgroup>
-                        <col class="headerCol1" style="width: 10%;">
-                       </colgroup>
-                       <colgroup>
-                        <col class="headerCol2" style="width: 90%;">
-                       </colgroup>
-                      </table>
-                     </div>
-                    </div></td>
-                  </tr>
-                 </tbody>
-                </table><p>As a courtesy we wanted to let you know that an order has not yet been placed for these items.</p><p>To order now,<a id="ctl00_EmailContent_BodyContent_EmailHyperLink1" href="https://www.vistaprint.com/cart.aspx?xnav=email10286&amp;xnid=BasketExpiration3DayHtml1">Click Here</a>.</p><p>Sincerely,<br><br>Vistaprint Customer Care<br><br><br><br></p></td>
-              </tr>
-             </tbody>
-            </table></td>
-          </tr>
-         </tbody>
-        </table></td>
-      </tr>
-      <tr>
-       <td id="ctl00_EmailContent_tdFooterSpacer">&nbsp;</td>
-      </tr>
-      <tr id="ctl00_EmailContent_trFooter" valign="middle">
-       <td>
-        <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
-         <tbody>
-          <tr>
-           <td>
-            <table width="100%" align="center" border="0" cellpadding="0" cellspacing="0">
-             <tbody>
-              <tr>
-               <td align="center" style="border: 0;padding: 10px; position: relative; background-color: #FFFFFF"><img class="pngfix" alt="" src="https://marketing.vistaprint.com/trans-email/imgs/common/AbsolutelyGuaranteed_footer_600px_106220_US.png" style="width:600px;"></td>
-              </tr>
-              <tr>
-               <td>
-                <table width="600" align="center" class="footerRebrand" style="color: #4d4d4f;font-family: arial, helvetica, sans-serif;font-size: 10px;padding-bottom: 10px;text-align: center;text-decoration: none;vertical-align: middle;">
-                 <tbody>
-                  <tr>
-                   <td class="footerRebrand" style="color: #4d4d4f;font-family: arial, helvetica, sans-serif;font-size: 10px;padding-bottom: 10px;text-align: center;text-decoration: none;vertical-align: middle;">
-                    <table align="center" class="footerRebrand" style="color: #4d4d4f;font-family: arial, helvetica, sans-serif;font-size: 10px;padding-bottom: 10px;text-align: center;text-decoration: none;vertical-align: middle;">
-                     <tbody>
-                      <tr>
-                       <td><a class="footer-rebrand-link" href="http://www.vistaprint.com/jt/zfnpjlt.adei?S=5673547391&amp;langid=4&amp;eeilid=6697816995&amp;eolid=2&amp;erid=2324886535&amp;shopperid=FE10FAQJL90X5URDNVFEHMG94TSL0XF1&amp;PREURL=%2Fjt%2Fze%2Fdt_vqibhnk%2Fonaujyu_kolerk.adei&amp;xnav=yxsiy35549&amp;xnid=3" style="color: #4d4d4f;font-size: 10px;text-decoration: none;">Update Email</a></td>
-                       <td>&nbsp;&nbsp;|&nbsp;&nbsp;</td>
-                       <td><a class="footer-rebrand-link" href="http://www.vistaprint.com/jt/zfnpjlt.adei?S=5673547391&amp;langid=4&amp;eeilid=3762183269&amp;eolid=2&amp;erid=6083775215&amp;shopperid=8YAVCRHK0YUBJQUWN95KCQL9WL0WJI9R&amp;PREURL=%2Fxhvzgkec-bllm%2Fjzvkrlu-nin-fjnmesyn.adei&amp;xnav=yxsiy35549&amp;xnid=1" style="color: #4d4d4f;font-size: 10px;text-decoration: none;">Privacy Policy</a></td>
-                       <td>&nbsp;&nbsp;|&nbsp;&nbsp;</td>
-                       <td><a class="footer-rebrand-link" href="http://www.vistaprint.com/jt/zfnpjlt.adei?S=5673547391&amp;langid=4&amp;eeilid=5911927499&amp;eolid=2&amp;erid=2656236972&amp;shopperid=2AUM4JS2MAMEALNS6MW37WKVGI0FTOML&amp;PREURL=%2Fxhvzgkec-bllm%2Fpnycgvj-ik.adei&amp;xnav=yxsiy35549&amp;xnid=5" style="color: #4d4d4f;font-size: 10px;text-decoration: none;">Contact Us</a></td>
-                      </tr>
-                     </tbody>
-                    </table></td>
-                  </tr>
-                  <tr>
-                   <td class="footerRebrand" style="color: #4d4d4f;font-family: arial, helvetica, sans-serif;font-size: 10px;padding-bottom: 10px;text-align: center;text-decoration: none;vertical-align: middle;"><p>This email address is unmonitored, so please don’t reply.<br><br>Offers expire 04/53/6462. at 6:02 AM (PT).</p><p>Limit one promo code per order. Savings will be reflected in your shopping cart. Discounts may vary by quantity and design and can’t be applied to shipping and processing, taxes, subscription or design services, previous purchases or products on the Vistaprint Promotional Products site, unless otherwise specified. Additional fees may apply for shipping and processing, and taxes, unless otherwise noted. Free offers valid only on the lowest quantity of each product and not valid on more than 2 items per order.</p><p>Vistaprint may change or cancel this offer at any time. See website for details.</p><p>Vistaprint, a Cimpress Company | 275 Wyman Street | Waltham, MA 02451</p></td>
-                  </tr>
-                 </tbody>
-                </table></td>
-              </tr>
-             </tbody>
-            </table>
-            <table align="center" width="600" class="footerRebrand pppRebrand" style="color: #4d4d4f;font-family: arial, helvetica, sans-serif;font-size: 10px;padding-bottom: 10px;text-align: center;text-decoration: none;vertical-align: middle;width: 100%;">
-             <tbody>
-              <tr>
-               <td>PCI<span id="incomingPppId">6240980</span>PCO<span id="outgoingPppId">1509872</span>T<span id="emailTypeId">10286</span></td>
-              </tr>
-             </tbody>
-            </table><img src="http://www.vistaprint.com/jt/nuibrkbpz.adei?id=5449106552&amp;xnav=yxsiy35549&amp;xnid=1" style="border-style:None;height:0px;width:0px;border-width:0px;"><bgsound src="http://www.vistaprint.com/jt/nuibrkbpz.adei?id=2656236972&amp;xnav=yxsiy35549&amp;xnid=2" volume="-10000"></td>
-          </tr>
-         </tbody>
-        </table></td>
-      </tr>
-     </tbody>
-    </table>
-   </div>
-   <div>
-    <input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="20F404CD">
-   </div>
-  </form>
-  <img height="0" width="0" alt="" src="http://rt3-t.tm.vistaprint.com/y?id=g535b9z3%2Cb08390o%2C4">
- </body>
+ <body bgcolor="#ededed" yahoofix="">
+<table role="presentation" lang="en" width="100%" align="center" cellpadding="10" cellspacing="0" class="emlBody" bgcolor="#ededed" style="border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;background: #ededed;">
+        <tr>
+            <td align="center" valign="top" class="bodyCell" style="border-collapse: collapse;padding-top: 40px;">
+                <span style="display:none !important;" class="preheader">Friendly reminder</span>
+                <table border="0" cellpadding="0" cellspacing="0" id="emlContainer" style="text-align: left;border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;width: 620px;background-color: #FFFFFF;border: 1px solid #DDDDDD;border-collapse: separate;border-radius: 4px;font:inherit;font-family:Verdana;font-size:12px; ">
+                    <tr>
+                        <td height="20" style="border-collapse: collapse;">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td valign="top" align="left" style="border-collapse: collapse;">
+							<table class="contentRow" cellpadding="0" cellspacing="0" style="border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;width: 100%;font:inherit;font-family:Verdana;font-size:12px;" role="presentation">
+<tr>
+<td class="colPadding mainContent" valign="middle" align="left" style="border-collapse: collapse;padding: 0px 15px 10px 15px;font-size: 1.000em;color: #666666;font-family: Verdana;line-height: 16px;">
+<a href="https://clicks.att.com/OCT/eTrac?EMAIL_ID=156456872&finalURL=https://www.att.com/olam/loginAction.olamexecute" title="Login to myAT&amp;T" class="linkSimple" target="_blank" style="color: #0574ac;text-decoration: none;">myAT&amp;T Account</a>
+| <a href="https://clicks.att.com/OCT/eTrac?EMAIL_ID=156456872&finalURL=http://www.att.com/support/" title="Online Support" class="linkSimple" target="_blank" style="color: #0574ac;text-decoration: none;">
+Support</a>
+</td>
+<td class="mainContent colPadding" align="right" style="padding-right: 15px;border-collapse: collapse;"><a href="https://clicks.att.com/OCT/eTrac?EMAIL_ID=156456872&finalURL=http://www.att.com" title="att.com" style="color: #0574ac;text-decoration: none;"><img class="img-logo" src="http://www.att.com/Common/images/email/Transactional_email/logo_rethinkposs_41.jpg" border="0" align="right" alt="AT&T Globe" width="41" height="40" style="border: none;height: auto;line-height: 100%;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;"></a></td>
+</tr>
+</table>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td height="20" style="border-collapse: collapse;">&nbsp;</td>
+                        </tr>
+
+
+
+
+  <tr>
+                            <td valign="top" align="left" class="mainContent colPadding" style="padding:15px 15px 10px 15px;border-collapse: collapse;color: #666666;font-family: Verdana;line-height: 16px;font: normal 1.000em Verdana;">
+								<table class="contentRow" cellpadding="0" cellspacing="0" border="0" align="left" style="border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;width: 100%;padding-right: 20px;font-family:Verdana;font-size:12px;color: #666666;">
+                                    <tr>
+                                        <td class="mainContent" align="left" style="border-collapse: collapse;color: #666666;font-family: Verdana;line-height: 16px;font: normal 1.000em;">
+											<br/><br/>
+										</td>
+									</tr>
+								</table>
+
+                            </td>
+                        </tr>
+
+
+                          <tr>
+							<td valign="top" align="left" class="colPadding" style="border-collapse: collapse;color: #666666;font-family: Verdana;line-height: 16px;font: normal 1.000em Verdana;padding:15px 15px 15px 15px;">
+							<table width="100%" cellspacing="0" cellpadding="0" border="0" class="border-b-c3c3c3" style="border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;border-bottom: #c3c3c3 1px solid;font:inherit;font-family:Verdana;font-size:12px;" role="presentation">
+<tr>
+<td valign="top" align="left" colspan="2" class="fullWidth mainContent" style="border-collapse: collapse;font-size: 1.000em;color: #666666;font-family: Verdana;line-height: 16px;">
+
+
+
+<h2 style="line-height: 100%;margin: 0px;padding: 0;color: #666666;font-family: Verdana;font-size: 1.2em;text-align: Left;clear: both;font-weight: bold;padding-right: 0px;padding-left: 0px;padding-bottom: 0px;padding-top: 0px;">Contact Us</h2>
+<br />
+<a  class="linkSimple" title="att.com/pay" href="https://clicks.att.com/OCT/eTrac?EMAIL_ID=156456872&finalURL=https://www.att.com/pay" style="color: #0574ac;text-decoration: none !important;">att.com/pay</a><br /><br />
+<a class="linkSimple" title="Visit AT&amp;T online support" href="https://clicks.att.com/OCT/eTrac?EMAIL_ID=156456872&finalURL=http://www.att.com/esupport/" style="color: #0574ac;text-decoration: none !important;">AT&amp;T Support</a> - quick &amp; easy support is available 24/7.
+</td>
+
+</tr>
+<tr>
+<td align="left" width="40%" class="socialPadding" style="color: #666666;font-family: Verdana;font-size:1.000em;border-collapse: collapse;padding-top: 10px;">
+<a title="Find us on Facebook" href="http://www.facebook.com/ATT" style="color: #0574ac;text-decoration: underline;padding-right: 5px;"><img  border="0" alt="Find us on Facebook" src="http://www.att.com/Common/images/email/Transactional_email/Consumer/Servicing/BRN/icn_facebook.jpg" style="border: none;height: auto;line-height: 100%;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;"></a>
+<a title="Talk to us on twitter" href="http://www.twitter.com/ATTCustomerCare" style="color: #0574ac;text-decoration: underline;padding-right: 5px;">
+	<img border="0" alt="Talk to us on twitter" src="http://www.att.com/Common/images/email/Transactional_email/Consumer/Servicing/BRN/icn_twitter.jpg" style="border: none;height: auto;line-height: 100%;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;"></a>
+<a title="AT&amp;T Community Forums" href="https://clicks.att.com/OCT/eTrac?EMAIL_ID=156456872&finalURL=http://www.att.com/forums" style="color: #0574ac;text-decoration: underline;padding-right: 5px;"><img border="0" alt="Join the AT&amp;T Community Forums" src="http://www.att.com/Common/images/email/Transactional_email/Consumer/Servicing/BRN/icn_attforums.jpg" style="border: none;height: auto;line-height: 100%;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;"></a>
+</td>
+<td class="" width="60%" valign="bottom" align="right"  style="border-collapse: collapse;color: #666666;font-family: Verdana;font-size:1.000em;">
+<img width="192" height="52" alt="" style="width: 100%;max-width: 192px;margin: 0px;border: 0;height: auto;line-height: 100%;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;"  src="http://www.att.com/Common/images/email/Transactional_email/Consumer/Servicing/BRN/img_brandcloud.jpg" class="imgContact">
+</td>
+</tr>
+</table>
+
+
+							</td>
+						</tr>
+
+
+
+
+                         <tr>
+							<td valign="top" align="left" class="colPadding" style="border-collapse: collapse;color: #666666;font-family: Verdana;line-height: 16px;font: normal 1.000em Verdana;padding:15px 15px 15px 15px;">
+							<table class="contentRow" style="clear: both; font:inherit;font-family:Verdana;font-size:12px; font-weight: normal; color: #666666;" border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation" >
+<tr><td class="mainContent" style="font-family: Verdana;font-size: 1.000em; color: #666666;">
+<h2 style="line-height: 100%;margin: 0px;padding: 0;color: #666666;font-family: Verdana;font-size: 1.2em;text-align: Left;clear: both;font-weight: bold;padding-right: 0px;padding-left: 0px;padding-bottom: 5px;padding-top: 0px; text-decoration:none;">Online Information</h2><br />
+<a style="font-family: Verdana; color:#0574ac; text-decoration: none" title="Auto Pay" href="https://clicks.att.com/OCT/eTrac?EMAIL_ID=156456872&amp;finalURL=https://www.wireless.att.com/pmt/setupRecurringPayment.do">Auto Pay</a>
+<br /><br />
+<a style="font-family: Verdana; color:#0574ac; text-decoration: none" title="Paperless Billing" href="https://clicks.att.com/OCT/eTrac?EMAIL_ID=156456872&amp;finalURL=https://www.wireless.att.com/olam/loginAction.olamexecute?pId=PassThru_Paperless_Bill_Marquee">Paperless Billing</a>
+<br />
+</td></tr></table>
+
+							</td>
+						</tr>
+
+
+
+
+
+
+
+						   <tr>
+                           <td style="border-collapse: collapse;padding: 0px 15px 10px 15px; " class="colPadding">
+                                <table  role="presentation" cellspacing="0" cellpadding="0" border="0" align="left" class="contentRow" style="border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;width: 100%;font-family:Verdana;font-size:12px;">
+
+
+                                    <tr>
+                                        <td valign="top" class="footerContent" style="border-collapse: collapse;font-size: .92em;color: #666666;font-family: Verdana;line-height: 16px;clear: both; padding: 0px 0px 5px 0px;">
+
+										<br/>
+                                            <table width="100%"  cellspacing="0" cellpadding="0" border="0" style="border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;font-size: 12px;color: #666666;font-family: Verdana;line-height: 16px;text-align: left;" role="presentation">
+<tr>
+<td class="separator"width="98%" style="border-top: 1px solid #cccccc;border-collapse: collapse;" colspan="3">&nbsp;</td>
+</tr>
+<tr>
+<td  width="33%" valign="top"  style="padding-right: 10px; border-right: 1px solid #cccccc;font-size: 1.00em;color: #666666;font-family: Verdana;"><a href="https://clicks.att.com/OCT/eTrac?EMAIL_ID=156456872&finalURL=http://www.att.com/esupport/article.jsp?sid=KB404787#fbid=CFBKhG5shDK" title="Update your email address" style="color:#0574ac; text-decoration: none;"><span class="copymainContent" style="font-size: 1.000em;color: #0574ac;font-family: Verdana;">Update your email address</a></span></td>
+
+<td width="33%" valign="top" style="padding-left: 10px; padding-right: 10px; border-right: 1px solid #cccccc;font-size: 1.00em;color: #666666;font-family: Verdana;"><a href="https://clicks.att.com/OCT/eTrac?EMAIL_ID=156456872&finalURL=http://www.att.com/esupport/article.jsp?&sid=KB409746" title="Protect yourself from fraudulent emails" style="color:#0574ac; text-decoration: none;"><span class="copymainContent" style="font-size: 1.000em;color: #0574ac;font-family: Verdana;">Protect yourself from fraudulent emails</span></a></td>
+
+<td width="33%" valign="top" style="padding-left: 10px;font-size: 1.00em;color: #666666;font-family: Verdana;"><a href="https://clicks.att.com/OCT/eTrac?EMAIL_ID=156456872&finalURL=http://att.com/econtactus" title="Contact Us" style="color:#0574ac; text-decoration: none;"><span class="copymainContent" style="font-size: 1.000em;color: #0574ac;font-family: Verdana;">Contact Us</span></a></td>
+</tr>
+</table>
+<br/>
+
+ <b>PLEASE DO NOT REPLY TO THIS MESSAGE</b>
+ <br>
+ All replies are automatically deleted. For questions regarding this message, refer to the contact information listed above.
+ <br>
+ <a class="linkSimple" href="https://clicks.att.com/OCT/eTrac?EMAIL_ID=156456872&finalURL=http://att.com/Trademark-Copyright-Privacy-Policy" title="AT&T Intellectual Property" style="color:#0574ac; text-decoration: none;">&#169;2019 AT&amp;T  Intellectual Property</a>. All rights reserved. AT&amp;T, the AT&amp;T logo and all other AT&amp;T marks contained herein are trademarks of AT&amp;T Intellectual Property and/or AT&amp;T affiliated companies. All other marks contained herein are the property of their respective owners.
+<br>
+<a class="linkSimple" href="https://clicks.att.com/OCT/eTrac?EMAIL_ID=156456872&finalURL=http://att.com/privacy" title="Privacy Policy" style="color:#0574ac; text-decoration: none;">Privacy Policy</a> <br />
+<a href="https://clicks.att.com/OCT/eTrac?EMAIL_ID=156456872&finalURL=http://www.att.com/legal/legal-policy-center.html" title="Legal Policy Center" style="color:#0574ac; text-decoration: none;">Legal Policy Center</a>
+<br />
+<img src="https://clicks.att.com/OCT/eTrac?EMAIL_ID=156456872&src=https://www.att.com/Common/images/email/Transactional_email/Spacer_White_1px.GIF" width="1" height="1" border="0" alt=""/><br/>
+<br><br>
+                                            <span style="font-size: .92em; color: #666666; font-family: Verdana;">CPAY_U017EH</span>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+
+        </table>
+
+    </body>
+
 </html>
