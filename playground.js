@@ -1,85 +1,135 @@
-function transform(data,node,headers){
-  if(/\d+\s+days\s+from/.exec(data)) {
-    var numOfDays = Number(/\d+\s+days\s+from/.exec(data)[0].replace(/[^0-9]/g, ""));
-    var n = headers.get("Date");
-    var n1 = new Date(n * 1000);
-    var day1 = n1.getDate() + numOfDays;
-    var mon1 = n1.getMonth();
-    var vt = new Date("1970", mon1, day1);
-    return vt;
+function transform(data){
+  var negRegexArr = [
+    //certificate can be used from
+    /certificate\s*can\s*be\s*used\s*from/i,
+    //Subject to credit approval
+    /Subject\s*to\s*credit\s*approval/i,
+    //$NN per month
+    /\$\d+\s*per\s*month/i,
+    //NN Points = $NN reward
+    /^\d+\s*points\s*=\s*\$\d+\s*reward\s*$/i,
+    //will appear within 90 days
+    /will\s*appear\s*within\s*90\s*days/i,
+    //Promotion restrictions
+    /Promotion\s*restrictions/i,
+    //Redeem your certificates now
+    /Redeem\s*your\s*certificates\s*now/i,
+    //The Account must remain open
+    /The\s*Account\s*must\s*remain\s*open/i,
+    //To redeem
+    /^To\s*redeem/i,
+    //You may have already redeemed your certificates
+    /You\s*may\s*have\s*already\s*redeemed\s*your\s*certificates/i,
+    //Look for your Rewards Certificates in the mai
+    /Look\s*for\s*your\s*Rewards\s*Certificates\s*in\s*the\s*mail/i,
+    //com/
+    /\.com\//i
+  ];
+
+  for (var i = 0; i < negRegexArr.length; i++) {
+    if (negRegexArr[i].test(data)) return null;
   }
-  return "";
+
+
+  var posRegexArr = [
+    // (10% | $10 | percent) (off | (in )savings | discount | (cash)back | reward | gift | value | credit | (promotional )coupon | (mail-in )rebate | (e-)certificate | bonus | sale)
+    /(\d{1,2}%|\$\d+(\.\d{2})?|percent)\s*(off|(in )?savings|discount|(cash(\s*)?)?back|reward|gift|value|credit|(promotional\s*)?coupon|(mail-in\s*)?rebate|(e-)?certificate|bonus|sale)/i,
+    // (extra | up to | save | over | more than | discount of | discounted by | savings of | at least | gift of | down to | as low as | bonus of| get a) (10% | $10)
+    /(extra|up\s*to|sav(e|ings\s*of)|over|more\s*than|discount(ed)?\s*(of|by)|at\s*least|gift\s*of|down\s*to|as\s*low\s*as|bonus\s*of|take|get(\s*a)?)\s*(\d{1,2}%|\$\d+(\.\d{2})?)/i,
+    // was $10.99 | start at $10.99 sale $10.99
+    /(sale:?|was:?|start\s*at)\s*\$\d+/i,
+    //on sale | markdown | save on | marked down
+    /on\s*sale|markdown|save\s*on|marked\s*down/i,
+    //anniversary sale
+    /anniversary\s*sale/i,
+    // free ship | free on orders of | free $5 | free 10% | free delivery | free standard | free gift | free NN
+    /free\s*(ship|on\s*orders\s*of|\$\d|\d+%|standard|delivery|gift|\d)/i,
+    // buy one / two / three texttexttext, get
+    /buy\s*(one|two|three|\d+),?.*\sget/i,
+    //(standard | complementary | NN day) (shipping)
+    /(standard|complimentary|\d+day)\s*shipping/i,
+    //BOGO
+    /BOGO/,
+    // (100 | earn | get | gather | collect | your | redeem | reward) (points | rewards | gift | coupon | (e-)certificate)
+    /(\d+|earn|get|gather|collect|your|redeem|reward)\s*(points|rewards?|gift|coupon|(e-)?certificate|a?\s*\$)/i,
+    // (double | triple | NN times the) (points)
+    /(double|triple|\d\s*times\s*the|\dx\s*the)\s*(points)/i,
+    //promo(tion) code
+    /promo(?:tion)\s*code\s*/i,
+  ];
+
+  for (var j = 0; j < posRegexArr.length; j++) {
+    if (posRegexArr[j].test(data)) return data.length > 80 ? minimizeMe(data, posRegexArr[j]) : cleanMe(data);
+  }
+
+  return null;
 }
 
 
-var str = "Get $10 Off When You Spend $85+ Now (Redeem 4/14-4/20)~~~ *Buy any full-priced bra at soma.com or at 866.768.7662 and receive free Parcel Post shipping with your order. May be upgraded to express shipping for $9.95 (estimated 2-5 business days) within the continental U.S. No adjustments on prior shipments. Two day and next day deliveries are not available for P.O. Boxes, AP/FPO, military addresses, and other certain areas UPS cannot reach. Free returns only valid on full-priced bras purchased at soma.com or at 866.768.7662. Offer not valid on purchases made in stores (including Soma Outlets). No cash value; Non-transferable; No adjustments on prior purchases or shipments. If qualified, free shipping will be reflected at checkout. Free return shipping is only available for items shipped from a U.S. address and must be made within 60 days of purchase in accordance with our Return Policy. See soma.com or call 1.866.768.7662 for Soma’s complete Return Policy. Excludes sale and clearance styles. Offer not valid on the purchase of gift cards, previously purchased merchandise or taxes. If you return a portion of your purchase, an applicable portion of your original discount will be forfeited. Valid through 04/02/19. **One time use only. Present coupon in Soma® boutiques (including outlets) or enter offer code when ordering online at Soma.com or by phone at 866.768.7662 to receive discount off your qualifying merchandise purchase (excluding taxes and shipping). Offer may not be combined with other coupons or offers, except LOVE SOMA REWARDS® certificates. Not valid on items being sold to benefit charity, purchase of gift cards, prior purchases, Anita, Barefoot Dreams, Chantelle, Le Mystère, SomaInnofit™, Wacoal, sale or clearance items, taxes or shipping. One coupon per transaction. If you return a portion of your purchase, refunded amount will reflect prorated discount from original purchase. Coupon may not be sold, auctioned, transferred or reproduced. No cash value. VALID FEBRUARY 27, 2019. ***Buy 3, get 2 free panties valid in stores, at soma.com or at 866.768.7662 on select full-priced styles only, while supplies last. Discounted item(s) will be reflected at checkout. Not valid if reproduced; No cash value; Non-transferable; No adjustments on prior purchases. Offer not valid on purchase of gift cards, previously purchased merchandise, taxes or shipping. If you return a portion of your purchase, an applicable portion of your original discount will be forfeited. Limited time only ****Free Vanishing Edge® panty ($16-27 value), while supplies last,with purchase of any full-price bra. Present coupon in Soma® boutiques and outlets. When ordering online at Soma.com or by phone at 866.768.7662, free item will be added automatically after purchase of full-price bra. One per customer. Offer may not be combined with other coupons or offers, except LOVE SOMA REWARDS® certificates. Not valid on items being sold to benefit charity, purchase of gift cards, prior purchases, sale or clearance items, taxes or shipping. One coupon per transaction. No substitution, exchange, return or credit given for free gift. Coupon may not be sold, auctioned, transferred or reproduced. No cash value. VALID FEBRUARY 27 THROUGH MARCH 9, 2019. From 2/28/19 - 4/9/19, with your $85 purchase, receive $10 off for use on your merchandise purchase (some exclusions apply). Coupon will be delivered via email within 7 days of purchase and is valid 4/14/19 -4/20/19 in Soma boutiques (including outlets), at soma.com, or by phone at 866.768.7662. No cash value. One time use only. Card must be presented and surrendered at time of purchase. Offer not valid on purchase of gift cards, previously purchased merchandise, taxes or shipping. May not be combined with other coupons, offers or event, except Love Soma Rewards certificates. Coupon will be sent via email if ordering online. For customer service, click here. To unsubscribe or update preferences, click here. To forward this email to your friends, click here. To view our privacy policy, click here. Soma Intimates Toll Free 866.768.766211215 Metro Parkway, Fort Myers, FL 33966 Soma and Soma Intimates are registered trademark’s of Chico’s Brands Investments, Inc. © 2019 Chico’s Distribution Services, LLC. All Rights Reserved.",
 
 
 
-str2 = "New Enbliss Panties Get 2 Free When You Buy 3** Shop Now~~~ *Buy any full-priced bra at soma.com or at 866.768.7662 and receive free Parcel Post shipping with your order. May be upgraded to express shipping for $9.95 (estimated 2-5 business days) within the continental U.S. No adjustments on prior shipments. Two day and next day deliveries are not available for P.O. Boxes, AP/FPO, military addresses, and other certain areas UPS cannot reach. Free returns only valid on full-priced bras purchased at soma.com or at 866.768.7662. Offer not valid on purchases made in stores (including Soma Outlets). No cash value; Non-transferable; No adjustments on prior purchases or shipments. If qualified, free shipping will be reflected at checkout. Free return shipping is only available for items shipped from a U.S. address and must be made within 60 days of purchase in accordance with our Return Policy. See soma.com or call 1.866.768.7662 for Soma’s complete Return Policy. Excludes sale and clearance styles. Offer not valid on the purchase of gift cards, previously purchased merchandise or taxes. If you return a portion of your purchase, an applicable portion of your original discount will be forfeited. Valid through 04/02/19. **One time use only. Present coupon in Soma® boutiques (including outlets) or enter offer code when ordering online at Soma.com or by phone at 866.768.7662 to receive discount off your qualifying merchandise purchase (excluding taxes and shipping). Offer may not be combined with other coupons or offers, except LOVE SOMA REWARDS® certificates. Not valid on items being sold to benefit charity, purchase of gift cards, prior purchases, Anita, Barefoot Dreams, Chantelle, Le Mystère, SomaInnofit™, Wacoal, sale or clearance items, taxes or shipping. One coupon per transaction. If you return a portion of your purchase, refunded amount will reflect prorated discount from original purchase. Coupon may not be sold, auctioned, transferred or reproduced. No cash value. VALID FEBRUARY 27, 2019. ***Buy 3, get 2 free panties valid in stores, at soma.com or at 866.768.7662 on select full-priced styles only, while supplies last. Discounted item(s) will be reflected at checkout. Not valid if reproduced; No cash value; Non-transferable; No adjustments on prior purchases. Offer not valid on purchase of gift cards, previously purchased merchandise, taxes or shipping. If you return a portion of your purchase, an applicable portion of your original discount will be forfeited. Limited time only ****Free Vanishing Edge® panty ($16-27 value), while supplies last,with purchase of any full-price bra. Present coupon in Soma® boutiques and outlets. When ordering online at Soma.com or by phone at 866.768.7662, free item will be added automatically after purchase of full-price bra. One per customer. Offer may not be combined with other coupons or offers, except LOVE SOMA REWARDS® certificates. Not valid on items being sold to benefit charity, purchase of gift cards, prior purchases, sale or clearance items, taxes or shipping. One coupon per transaction. No substitution, exchange, return or credit given for free gift. Coupon may not be sold, auctioned, transferred or reproduced. No cash value. VALID FEBRUARY 27 THROUGH MARCH 9, 2019. From 2/28/19 - 4/9/19, with your $85 purchase, receive $10 off for use on your merchandise purchase (some exclusions apply). Coupon will be delivered via email within 7 days of purchase and is valid 4/14/19 -4/20/19 in Soma boutiques (including outlets), at soma.com, or by phone at 866.768.7662. No cash value. One time use only. Card must be presented and surrendered at time of purchase. Offer not valid on purchase of gift cards, previously purchased merchandise, taxes or shipping. May not be combined with other coupons, offers or event, except Love Soma Rewards certificates. Coupon will be sent via email if ordering online. For customer service, click here. To unsubscribe or update preferences, click here. To forward this email to your friends, click here. To view our privacy policy, click here. Soma Intimates Toll Free 866.768.766211215 Metro Parkway, Fort Myers, FL 33966 Soma and Soma Intimates are registered trademark’s of Chico’s Brands Investments, Inc. © 2019 Chico’s Distribution Services, LLC. All Rights Reserved.",
+function minimizeMe(str, reg){
+  var punctuation = [". ", "! ", "| ", "? "]; //Punctuation symbols
+  str = str.replace(/(\.)([A-z])/g, "$1 $2");
+
+  //STAGE 1 - Slice text at the beginning of string
+  var sliceStr = str.slice(0, str.indexOf(str.match(reg)[0])); //Create a substring from the beginning of string up to the beginning of the .match()
+  var sliceStart = 0; //Define a variable where the slice at the beginning of the initial string will happen.
+
+
+  //Iterate through the punctuation symbols.
+  //If the last Index position of the punctuation is larger than the sliceStart variable,
+  //then make the variable equal to the last index position.
+  //That will be later used to slice the string at its beginning
+  for (var i = 0; i < punctuation.length; i++) {
+    if(sliceStr.lastIndexOf(punctuation[i]) > sliceStart) sliceStart = sliceStr.lastIndexOf(punctuation[i]);
+  }
+  //Slice the string from the beginning of the last punctuation mark but before the coupon description.
+  if(sliceStart > 0) str = str.slice(sliceStart + 1).trim();
 
 
 
-str3 = "Free Shipping + Free Returns On Full Price Bras* Limited Time VIP Exclusive 1-Day Preview 15% Off** Entire Purchase Use Code: 58848 Shop New~~~ *Buy any full-priced bra at soma.com or at 866.768.7662 and receive free Parcel Post shipping with your order. May be upgraded to express shipping for $9.95 (estimated 2-5 business days) within the continental U.S. No adjustments on prior shipments. Two day and next day deliveries are not available for P.O. Boxes, AP/FPO, military addresses, and other certain areas UPS cannot reach. Free returns only valid on full-priced bras purchased at soma.com or at 866.768.7662. Offer not valid on purchases made in stores (including Soma Outlets). No cash value; Non-transferable; No adjustments on prior purchases or shipments. If qualified, free shipping will be reflected at checkout. Free return shipping is only available for items shipped from a U.S. address and must be made within 60 days of purchase in accordance with our Return Policy. See soma.com or call 1.866.768.7662 for Soma’s complete Return Policy. Excludes sale and clearance styles. Offer not valid on the purchase of gift cards, previously purchased merchandise or taxes. If you return a portion of your purchase, an applicable portion of your original discount will be forfeited. Valid through 04/02/19. **One time use only. Present coupon in Soma® boutiques (including outlets) or enter offer code when ordering online at Soma.com or by phone at 866.768.7662 to receive discount off your qualifying merchandise purchase (excluding taxes and shipping). Offer may not be combined with other coupons or offers, except LOVE SOMA REWARDS® certificates. Not valid on items being sold to benefit charity, purchase of gift cards, prior purchases, Anita, Barefoot Dreams, Chantelle, Le Mystère, SomaInnofit™, Wacoal, sale or clearance items, taxes or shipping. One coupon per transaction. If you return a portion of your purchase, refunded amount will reflect prorated discount from original purchase. Coupon may not be sold, auctioned, transferred or reproduced. No cash value. VALID FEBRUARY 27, 2019. ***Buy 3, get 2 free panties valid in stores, at soma.com or at 866.768.7662 on select full-priced styles only, while supplies last. Discounted item(s) will be reflected at checkout. Not valid if reproduced; No cash value; Non-transferable; No adjustments on prior purchases. Offer not valid on purchase of gift cards, previously purchased merchandise, taxes or shipping. If you return a portion of your purchase, an applicable portion of your original discount will be forfeited. Limited time only ****Free Vanishing Edge® panty ($16-27 value), while supplies last,with purchase of any full-price bra. Present coupon in Soma® boutiques and outlets. When ordering online at Soma.com or by phone at 866.768.7662, free item will be added automatically after purchase of full-price bra. One per customer. Offer may not be combined with other coupons or offers, except LOVE SOMA REWARDS® certificates. Not valid on items being sold to benefit charity, purchase of gift cards, prior purchases, sale or clearance items, taxes or shipping. One coupon per transaction. No substitution, exchange, return or credit given for free gift. Coupon may not be sold, auctioned, transferred or reproduced. No cash value. VALID FEBRUARY 27 THROUGH MARCH 9, 2019. From 2/28/19 - 4/9/19, with your $85 purchase, receive $10 off for use on your merchandise purchase (some exclusions apply). Coupon will be delivered via email within 7 days of purchase and is valid 4/14/19 -4/20/19 in Soma boutiques (including outlets), at soma.com, or by phone at 866.768.7662. No cash value. One time use only. Card must be presented and surrendered at time of purchase. Offer not valid on purchase of gift cards, previously purchased merchandise, taxes or shipping. May not be combined with other coupons, offers or event, except Love Soma Rewards certificates. Coupon will be sent via email if ordering online. For customer service, click here. To unsubscribe or update preferences, click here. To forward this email to your friends, click here. To view our privacy policy, click here. Soma Intimates Toll Free 866.768.766211215 Metro Parkway, Fort Myers, FL 33966 Soma and Soma Intimates are registered trademark’s of Chico’s Brands Investments, Inc. © 2019 Chico’s Distribution Services, LLC. All Rights Reserved.",
+
+  //STAGE 2 - Slice text at the end of string
+  var sliceEnd = +Infinity;
+  //Iterate through the punctuation symbols.
+  //If the punctuation symbol's index position is smaller than the sliceEnd variable, then
+  //make the sliceEnd variable equal to the index position of the punctuation.
+  //The sliceEnd will be used as the position where the slicing of the string will happen at it's end.
+  for (var j = 0; j < punctuation.length; j++) {
+    if (str.indexOf(punctuation[j]) < sliceEnd && str.indexOf(punctuation[j]) !== -1) sliceEnd = str.indexOf(punctuation[j]);
+  }
+  //Slice the end of the string
+  str = str.slice(0, sliceEnd).trim();
 
 
 
-str4 = "New Full Coverage Enbliss Shop 50% Off~~~ *Buy any full-priced bra at soma.com or at 866.768.7662 and receive free Parcel Post shipping with your order. May be upgraded to express shipping for $9.95 (estimated 2-5 business days) within the continental U.S. No adjustments on prior shipments. Two day and next day deliveries are not available for P.O. Boxes, AP/FPO, military addresses, and other certain areas UPS cannot reach. Free returns only valid on full-priced bras purchased at soma.com or at 866.768.7662. Offer not valid on purchases made in stores (including Soma Outlets). No cash value; Non-transferable; No adjustments on prior purchases or shipments. If qualified, free shipping will be reflected at checkout. Free return shipping is only available for items shipped from a U.S. address and must be made within 60 days of purchase in accordance with our Return Policy. See soma.com or call 1.866.768.7662 for Soma’s complete Return Policy. Excludes sale and clearance styles. Offer not valid on the purchase of gift cards, previously purchased merchandise or taxes. If you return a portion of your purchase, an applicable portion of your original discount will be forfeited. Valid through 04/02/19. **50% off your highest priced item when you purchase 2 or more items (excluding clearance). Enter code when ordering at soma.com or at 866.768.7662. Offer not valid in stores. Qualifying purchase and offer excludes purchase of gift cards and charitable items (including donations), prior purchases, soma.com clearance items, Anita, Barefoot Dreams, Chantelle, Elomi, Freya, Le Mystère, and Wacoal, taxes or shipping. One time use only. Offer may not be combined with other offers except LOVE SOMA REWARDS® certificates, has no cash value, is not transferable, and may not be reproduced. Discount applied after all other promotions, before taxes and shipping, if any.​ Exclusions apply. Discount will be applied pro-rata to qualifying purchase items; refunds or credits for returns or exchanges on such items will reflect discount. Valid through 03/11/19. From 2/28/19 - 4/9/19, with your $85 purchase, receive $10 off for use on your merchandise purchase (some exclusions apply). Coupon will be delivered via email within 7 days of purchase and is valid 4/14/19 -4/20/19 in Soma boutiques (including outlets), at soma.com, or by phone at 866.768.7662. No cash value. One time use only. Card must be presented and surrendered at time of purchase. Offer not valid on purchase of gift cards, previously purchased merchandise, taxes or shipping. May not be combined with other coupons, offers or event, except Love Soma Rewards certificates. Coupon will be sent via email if ordering online. For customer service, click here. To unsubscribe or update preferences, click here. To forward this email to your friends, click here. To view our privacy policy, click here. Soma Intimates Toll Free 866.768.766211215 Metro Parkway, Fort Myers, FL 33966 Soma and Soma Intimates are registered trademark’s of Chico’s Brands Investments, Inc. © 2019 Chico’s Distribution Services, LLC. All Rights Reserved.",
 
 
+  //STAGE 3 - Remove unecessary characters from the end of the string.
+  return cleanMe(str);
+}
 
 
-str5 = "Flash Sale 25% Off* Select Swim And Apparel Shop Swim~~~ * Valid in stores, at soma.com or at 866.768.7662 on select full-priced styles only, while supplies last.Marked price reflects savings off original ticketed price. Not valid if reproduced; No cash value; Non–transferable; No adjustments on prior purchases. Offer not valid on purchase of gift cards, previously purchased merchandise, taxes, or shipping. If you return a portion of your purchase, an applicable portion of your original discount will be forfeited. Offer valid through 3/21/19 From 2/28/19 - 4/9/19, with your $85 purchase, receive $10 off for use on your merchandise purchase (some exclusions apply). Coupon will be delivered via email within 7 days of purchase and is valid 4/14/19 -4/20/19 in Soma boutiques (including outlets), at soma.com, or by phone at 866.768.7662. No cash value. One time use only. Card must be presented and surrendered at time of purchase. Offer not valid on purchase of gift cards, previously purchased merchandise, taxes or shipping. May not be combined with other coupons, offers or event, except Love Soma Rewards certificates. Coupon will be sent via email if ordering online. For customer service, click here. To unsubscribe or update preferences, click here. To forward this email to your friends, click here. To view our privacy policy, click here. Soma Intimates Toll Free 866.768.766211215 Metro Parkway, Fort Myers, FL 33966 Soma and Soma Intimates are registered trademark’s of Chico’s Brands Investments, Inc. © 2019 Chico’s Distribution Services, LLC. All Rights Reserved.",
+function cleanMe(string) {
+  var replaceStrArr = [
+    {oldStr: /[\*\©\®\ǂ\‡\†\±\+\→\§\™\¹\›\∞\•\◊\Δ\\Ð\ð\®\_\—]/g, newStr: ""},
+    {oldStr: /([A-z\.\d])\*([\$\sA-z])/, newStr: "$1 $2"},
+    {oldStr: /(See\s*terms\.?(\s*Limited\s*time\s*offer[\.—])?|Offer\s*applies\s*to\s*select\s*items\s*only|Limited\s*Exclusions\s*Apply|or|Cannot\s*be\s*combined\s*with.*|Valid\s*in\s*store\s*only|YOUR\s*PURCHASE\s*VALID.*|(:\s*)?Subject\s*to\s*credit\s*approval|\(\d\)|shop\s*now|Exclusions\s*apply.*|To\s*redeem.*|Valid\s*in\s*store\s*only.*)\s*$/i, newStr: ""},
+    {oldStr: /^(Don't\s*forget,?|To\s*redeem\s*Reward\s*Dollars\s*online\s*at\s*Belk|Plus,?|Through\s*[JFMASOND][aepuco][a-z]+\s*\d{1,2},?\s*\d{2,4},?|Reduced\s*delivery.*\.△|(Plus,?\s*\s*And\s*)?don't\s*forget,?|And|As\s*a\s*cardmember,?|Limited-?\s*time\s*(only|offer))/i, newStr: ""}
+  ];
 
-
-str6 = "Get $10 Off When You Spend $85+ Now (Redeem 4/14-4/20)~~~ From 2/28/19 - 4/9/19, with your $85 purchase, receive $10 off for use on your merchandise purchase (some exclusions apply). Coupon will be delivered via email within 7 days of purchase and is valid 4/14/19 -4/20/19 in Soma boutiques (including outlets), at soma.com, or by phone at 866.768.7662. No cash value. One time use only. Card must be presented and surrendered at time of purchase. Offer not valid on purchase of gift cards, previously purchased merchandise, taxes or shipping. May not be combined with other coupons, offers or event, except Love Soma Rewards certificates. Coupon will be sent via email if ordering online. For customer service, click here. To unsubscribe or update preferences, click here. To forward this email to your friends, click here. To view our privacy policy, click here. Soma Intimates Toll Free 866.768.766211215 Metro Parkway, Fort Myers, FL 33966 Soma and Soma Intimates are registered trademark’s of Chico’s Brands Investments, Inc. © 2019 Chico’s Distribution Services, LLC. All Rights Reserved.",
-
-
-str7 = "Feel the love by joining Love Soma Rewards $1=1 point. $5 reward for every $125 points, Birthday gifts, free shipping*, and so much more! See Your Status (gold and platinum members)~~~ From 2/28/19 - 4/9/19, with your $85 purchase, receive $10 off for use on your merchandise purchase (some exclusions apply). Coupon will be delivered via email within 7 days of purchase and is valid 4/14/19 -4/20/19 in Soma boutiques (including outlets), at soma.com, or by phone at 866.768.7662. No cash value. One time use only. Card must be presented and surrendered at time of purchase. Offer not valid on purchase of gift cards, previously purchased merchandise, taxes or shipping. May not be combined with other coupons, offers or event, except Love Soma Rewards certificates. Coupon will be sent via email if ordering online. For customer service, click here. To unsubscribe or update preferences, click here. To forward this email to your friends, click here. To view our privacy policy, click here. Soma Intimates Toll Free 866.768.766211215 Metro Parkway, Fort Myers, FL 33966 Soma and Soma Intimates are registered trademark’s of Chico’s Brands Investments, Inc. © 2019 Chico’s Distribution Services, LLC. All Rights Reserved.",
-
-
-str8 = "Get what you want 20% Off* Entire Purchase Shop Now~~~ From 2/28/19 - 4/9/19, with your $85 purchase, receive $10 off for use on your merchandise purchase (some exclusions apply). Coupon will be delivered via email within 7 days of purchase and is valid 4/14/19 -4/20/19 in Soma boutiques (including outlets), at soma.com, or by phone at 866.768.7662. No cash value. One time use only. Card must be presented and surrendered at time of purchase. Offer not valid on purchase of gift cards, previously purchased merchandise, taxes or shipping. May not be combined with other coupons, offers or event, except Love Soma Rewards certificates. Coupon will be sent via email if ordering online. For customer service, click here. To unsubscribe or update preferences, click here. To forward this email to your friends, click here. To view our privacy policy, click here. Soma Intimates Toll Free 866.768.766211215 Metro Parkway, Fort Myers, FL 33966 Soma and Soma Intimates are registered trademark’s of Chico’s Brands Investments, Inc. © 2019 Chico’s Distribution Services, LLC. All Rights Reserved.";
-
-function transform(data, node, headers){
-  var dataSpl = data.split("~~~");
-  var coupon = dataSpl[0].toLowerCase();
-  var vtDates = dataSpl[1].toLowerCase();
-  var slicer;
-
-  //When the offer "Ends today"
-  if (coupon.indexOf("ends today") !== -1) {
-    var n = headers.get("Date");
-    var n1 = new Date(n * 1000);
-    var day1 = n1.getDate();
-    var mon1 = n1.getMonth();
-    var vt = new Date("1970", mon1, day1);
-    return vt;
+  for (var i = 0; i < replaceStrArr.length; i++) {
+    if(replaceStrArr[i].oldStr.test(string)){
+      string = string.replace(replaceStrArr[i].oldStr, replaceStrArr[i].newStr).trim();
+      //break;
+    }
   }
 
-  //When coupon reads "get $10 off"
-  if(coupon.indexOf("get $10 off") !== -1) return vtDates.replace(/.*From\s*(?:\d{1,2}\/){2}\d{2,4}\s*-\s*((?:\d{1,2}\/){2}\d{2,4}).*/i,"$1");
 
+  // while("*©®ǂ‡†±+→§™¹›∞•◊ΔÐð_|".indexOf(string[string.length-1]) !== -1) string = string.slice(0, string.length-1);
+  // while("*©®ǂ‡†±+→§™¹›∞•◊ΔÐð_".indexOf(string[0]) !== -1) string = string.slice(1);
 
-
-  if (/free\s*shipping.*/i.test(coupon)) {
-    slicer = "free shipping";
-    vtDates = vtDates.slice(vtDates.indexOf(slicer))
-    vtDates = vtDates.slice(0, vtDates.indexOf("*"))
-
-    return vtDates.replace(/.*Valid\s*through\s*((?:\d{1,2}\/){2}\d{2,4}).*/i, "$1") || "";
-  }
-
-
-
-  //When coupon reads "NN% off"
-  if (/\d{1,2}%\s*off/i.test(coupon)) {
-    slicer = coupon.replace(/.*(\d{2}%\s*off).*/i, "$1"); //String
-
-    if (vtDates.indexOf(slicer) !== -1) vtDates = vtDates.slice(vtDates.indexOf(slicer));
-
-    return vtDates.replace(/.*Valid\s*through\s*((?:\d{1,2}\/){2}\d{2,4}).*/i, "$1") || "percent";
-  }
-
-  return data;
-
+  return string;
 }

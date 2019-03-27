@@ -126,7 +126,7 @@ function transform(data){
     //BOGO
     /BOGO/,
     // (100 | earn | get | gather | collect | your | redeem | reward) (points | rewards | gift | coupon | (e-)certificate)
-    /(\d+|earn|get|gather|collect|your|redeem|reward)\s*(points|rewards?|gift|coupon|(e-)?certificate|a?\s*\$)/i,
+    /(\d+|earn|get|gather|collect|your|redeem|rewards?)\s*(points|rewards?|gift|coupon|(e-)?certificate|a?\s*\$)/i,
     // (double | triple | NN times the) (points)
     /(double|triple|\d\s*times\s*the|\dx\s*the)\s*(points)/i,
     //promo(tion) code
@@ -191,8 +191,8 @@ function cleanMe(string) {
   var replaceStrArr = [
     {oldStr: /([A-z\.])\*([\$\sA-z])/, newStr: "$1 $2"},
     {oldStr: /(See\s*terms\.?(\s*Limited\s*time\s*offer\.)?|Offer\s*applies\s*to\s*select\s*items\s*only|Limited\s*Exclusions\s*Apply|or|Cannot\s*be\s*combined\s*with.*|Valid\s*in\s*store\s*only|YOUR\s*PURCHASE\s*VALID.*|(:\s*)?Subject\s*to\s*credit\s*approval)\s*$|\(\d\)|shop\s*now|Exclusions\s*apply.*/i, newStr: ""},
-    {oldStr: /[\*©®ǂ‡†±+→§™¹›∞•◊ΔÐð®_]/g, newStr: ""},
-    {oldStr: /^(To\s*redeem\s*Reward\s*Dollars\s*online\s*at\s*Belk|Plus|Through\s*[JFMASOND][aepuco][a-z]+\s*\d{1,2},?\s*\d{2,4},?|Reduced\s*delivery.*\.△|(Plus,?\s*\s*And\s*)?don't\s*forget,?|And|As\s*a\s*cardmember|Limited-?\s*time\s*(only|offer))/i, newStr: ""}
+    {oldStr: /[\*©®ǂ‡†±+→§™¹›∞•◊ΔÐð®_—]/g, newStr: ""},
+    {oldStr: /^(Don't\s*forget,?|To\s*redeem\s*Reward\s*Dollars\s*online\s*at\s*Belk|Plus|Through\s*[JFMASOND][aepuco][a-z]+\s*\d{1,2},?\s*\d{2,4},?|Reduced\s*delivery.*\.△|(Plus,?\s*\s*And\s*)?don't\s*forget,?|And|As\s*a\s*cardmember|Limited-?\s*time\s*(only|offer))/i, newStr: ""}
   ];
 
   for (var i = 0; i < replaceStrArr.length; i++) {

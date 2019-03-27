@@ -77,6 +77,10 @@
         border-top: 2px solid rgb(0,100,0);
       }
 
+      .brackets:hover{
+        background-color: rgba(0,100,0,.1);
+      }
+
       .brackets h3{
         color: rgb(0,100,0); /*Dark green*/
       }
@@ -92,17 +96,27 @@
         color: rgb(0,100,0);
       }
 
-      table{
+      .divBracketsInputs table{
         width: 100%;
       }
 
-      td{
+      .divBracketsInputs table td{
         text-align: center;
         vertical-align: middle;
       }
 
       .operators{
         grid-area: operators;
+        border-top: 2px solid rgb(255,140,0);
+        border-right: 2px solid rgb(255,140,0);
+      }
+
+      .operators:hover{
+        background-color: rgba(255,140,0,.1);
+      }
+
+      .operators h3{
+        color: rgb(255,140,0);
       }
 
       .divOperatorsInputs{
@@ -113,10 +127,18 @@
         justify-content: space-between; */
       }
 
+      .divOperatorsInputs input:focus + span{
+        color: rgb(255,140,0);
+      }
+
       .functions{
         grid-area: functions;
         border-right: 2px solid rgb(128,0,32);
         border-top: 2px solid rgb(128,0,32);
+      }
+
+      .functions:hover{
+        background-color: rgba(128,0,32,.1);
       }
 
       .functions h3{
@@ -143,6 +165,16 @@
 
       .attributes{
         grid-area: attributes;
+        border-top: 2px solid rgb(184,134,11);
+        border-right: 2px solid rgb(184,134,11);
+      }
+
+      .attributes:hover{
+        background-color: rgba(184,134,11, .1);
+      }
+
+      .attributes h3{
+        color: rgb(184,134,11);
       }
 
       .divAttributesInputs{
@@ -156,6 +188,10 @@
         margin-right: 2px;
       }
 
+      .divAttributesInputs input:focus + span{
+        color: rgb(184,134,11);
+      }
+
       .parameters{
         grid-area: parameters;
         display: grid;
@@ -165,6 +201,16 @@
         "gridParamsHeading"
         "gridParamsLevel1"
         "gridParamsLevel2";
+        border-top: 2px solid rgb(128,0,128); /*purple*/
+        border-right: 2px solid rgb(128,0,128);
+      }
+
+      .parameters:hover{
+        background-color: rgba(128,0,128, .1);
+      }
+
+      .parameters h3{
+        color: rgb(128,0,128);
       }
 
       .gridParamsHeading{
@@ -181,6 +227,10 @@
         margin-right: 10px;
       }
 
+      .gridParamsLevel1 input:focus + span{
+        color: rgb(128,0,128);
+      }
+
       .gridParamsLevel2{
         grid-area: gridParamsLevel2;
         display: flex;
@@ -193,10 +243,6 @@
 
       h3, h4{
         text-align: center;
-      }
-
-      .divFunctionsInputs label, .divBranchesInputs label{
-        /* max-width: 50%; */
       }
 
       .divBracketsInputs label{
@@ -432,85 +478,13 @@
                   </td>
                 </tr>
               </table>
-
-              <!-- <table>
-                <tr>
-                  <td>None</td>
-                  <td>Brackets</td>
-                  <td>Parenthesis</td>
-                  <td>&nbsp;</td>
-                </tr>
-                <tr>
-                  <td rowspan="2">
-                    <label>
-                      <input type="radio" name="brackets" value="" v-model="brackets">
-                      None
-                    </label>
-                  </td>
-                  <td>
-                    <label>
-                      <input type="radio" name="brackets" value="[" v-model="brackets" @click="addBrackets($event)">
-                      <span>[</span>
-                    </label>
-                  </td>
-                  <td>
-                    <label>
-                      <input type="radio" name="brackets" value="(" v-model="brackets" @click="addBrackets($event)">
-                      <span>(</span>
-                    </label>
-                  </td>
-                  <td>
-                    Open
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <label>
-                      <input type="radio" name="brackets" value="]" v-model="brackets" @click="addBrackets($event)">
-                      <span>]</span>
-                    </label>
-                  </td>
-                  <td>
-                    <label>
-                      <input type="radio" name="brackets" value=")" v-model="brackets" @click="addBrackets($event)">
-                      <span>)</span>
-                    </label>
-                  </td>
-                  <td>Close</td>
-                </tr>
-              </table> -->
-
-
-
-
-
-              <!-- <label>
-                <input type="radio" name="brackets" value="" v-model="brackets">
-                None
-              </label>
-              <label>
-                <input type="radio" name="brackets" value="[" v-model="brackets" @click="addBrackets($event)">
-                <span>Bracket [</span>
-              </label>
-              <label>
-                <input type="radio" name="brackets" value="]" v-model="brackets" @click="addBrackets($event)">
-                <span>Bracket ]</span>
-              </label>
-              <label>
-                <input type="radio" name="brackets" value="(" v-model="brackets" @click="addBrackets($event)">
-                <span>Parenthesis (</span>
-              </label>
-              <label>
-                <input type="radio" name="brackets" value=")" v-model="brackets" @click="addBrackets($event)">
-                <span>Parenthesis )</span>
-              </label> -->
             </div>
           </div>
 
 
 
 
-          <div class="operators" style="background:lightgray;">
+          <div class="operators">
             <h3>Operators</h3>
             <div class="divOperatorsInputs">
               <label>
@@ -732,52 +706,52 @@
 
 
 
-          <div class="attributes"style="background:lightyellow;">
+          <div class="attributes">
             <h3>Attributes</h3>
             <div class="divAttributesInputs">
               <label>
                 <input type="radio" name="attribute" value="" v-model="attribute">
-                None
+                <span>None</span>
               </label>
               <label>
                 <input type="radio" name="attribute" value="@alt" v-model="attribute" @click="addAttributes($event)">
-                @alt
+                <span>@alt</span>
               </label>
               <label>
                 <input type="radio" name="attribute" value="@class" v-model="attribute" @click="addAttributes($event)">
-                @class
+                <span>@class</span>
               </label>
               <label>
                 <input type="radio" name="attribute" value="@href" v-model="attribute" @click="addAttributes($event)">
-                @href
+                <span>@href</span>
               </label>
               <label>
                 <input type="radio" name="attribute" value="@id" v-model="attribute" @click="addAttributes($event)">
-                @id
+                <span>@id</span>
               </label>
               <label>
                 <input type="radio" name="attribute" value="@name" v-model="attribute" @click="addAttributes($event)">
-                @name
+                <span>@name</span>
               </label>
               <label>
                 <input type="radio" name="attribute" v-model="attribute" value="@src" @click="addAttributes($event)">
-                @src
+                <span>@src</span>
               </label>
               <label>
                 <input type="radio" name="attribute" v-model="attribute" value="@style" @click="addAttributes($event)">
-                @style
+                <span>@style</span>
               </label>
               <label>
                 <input type="radio" name="attribute" value="@title" v-model="attribute" @click="addAttributes($event)">
-                @title
+                <span>@title</span>
               </label>
               <label>
                 <input type="radio" name="attribute" value="@value" v-model="attribute" @click="addAttributes($event)">
-                @value
+                <span>@value</span>
               </label>
               <label>
                 <input type="text" name="attribute" value="" v-model="attribute" @keyup.enter="addAttributes($event)" size="12">
-                Other
+                <span>Other</span>
               </label>
             </div>
           </div>
@@ -785,7 +759,7 @@
 
 
 
-          <div class="parameters"style="background:beige;">
+          <div class="parameters">
             <div class="gridParamsHeading">
               <h3>{{activeFunctionArr[activeFunctionArr.length - 1]}} Parameters</h3>
             </div>
@@ -805,7 +779,7 @@
               <div class="divStringParam">
                 <label  v-show="showParamInput">
                   <input type="text" name="parameterString" v-model="parameterString"  @keyup.enter="addParameters($event)">
-                  Value
+                  <span>Value</span>
                 </label>
               </div>
             </div>
