@@ -1,296 +1,420 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
- <head>
- <title>Hybrid Generic Collections 1</title>
- <style><!-- #outlook a {padding:0;}
-           .ReadMsgBody { width: 100%; }
-           .ExternalClass { width: 100%; }
-            .ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div {
-                line-height:100%;
-            }
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<meta name="x-apple-disable-message-reformatting">
+<!--<meta name="viewport" content="width=320, initial-scale=0.29">-->
+<!--<meta name="viewport" content="width=1024">-->
+<meta name="viewport" content="width=600">
 
+  <title>SOMA</title>
+  <style type="text/css">
 
-            body {  margin:0; padding:0; }
-            p{margin: 1em 0;}
-            table { border-spacing:0; }
-            table{mso-table-lspace:0pt; mso-table-rspace:0pt;}
-            table td { border-collapse:collapse; }
-            .yshortcuts, a .yshortcuts, a .yshortcuts:hover, a .yshortcuts:active, a .yshortcuts:focus {
-                background-color:transparent !important; border:none !important; color:inherit !important; border-bottom: none !important;
-            }
-            h1, h2, h3, h4, h5, h6 {line-height: 100%; margin:0; padding:0; }
-            img {border:0; height:auto; line-height:100%; outline:none; text-decoration:none; -ms-interpolation-mode: bicubic;}
-            a img {border:none;}
-            image_fix {display:block;}
-            .applelinks a {color:#0574ac; text-decoration: none;}
-            a, a:link {color:#0574ac;text-decoration: underline;}
-            p {margin:0; padding:0; margin-bottom:0;}
-            .emlBody { background: #ededed; }
-            .preheader {display:none !important;}
-            .bodyCell{padding-top:40px; }
-            #emlContainer{ width:592px;background-color:#FFFFFF;border:1px solid #DDDDDD; border-collapse:separate; border-radius:4px;  }
-            .colPadding{ padding:0px 15px 10px 15px; }
-            .contentRow{ width:100%; }
-            .table3-1{ width:362px;padding-right:20px; }
-            .rightAds { width:180px; }
-            .bulletList{ border-collapse: collapse;padding-left:20px; }
-            .bulletListContent{ padding-left: 5px;border-collapse: collapse;display:block; }
-            .mainContent {font-size:1.000em; color:#666666;font-family: Verdana;line-height: 16px;}
-            .promoGelBg { border:1px solid #d2d2d2; border-collapse:collapse; background-color:#f2f2f2; }
-            .promoGelBg td{ padding: 4px; }
-            h1, h2, h3, h4, h5, h6{color:#202020; font-family:Helvetica; font-size:1.5em; line-height:125%; text-align:Left;}
-            h1.contentHeading{ clear: both; font: inherit; font-family: Verdana; font-size: 1.5em; font-weight: normal; padding-right: 0px; padding-left: 0px; padding-bottom: 0px; margin: 0px; color: #ef6f00; padding-top: 0px;line-height:100%; }
-            h2{ clear: both; font: inherit; font-family: Verdana; font-size: 1.000em; font-weight: bold; padding-right: 0px; padding-left: 0px; padding-bottom: 5px; margin: 0px; color: #ef6f00; padding-top: 0px;line-height:100%; }
-            a, a:link {color:#0574ac;text-decoration: underline;}
-            .linkSimple{ color:#0574ac; text-decoration: none !important; }
-            .footerContainer { width:592px; }
-            .copymainContent { font-size: 1.000em;color: #0574ac;font-family: Verdana; }
-			.separator { border-top: 1px solid #cccccc; }
-            .border-c3c3c3{ border:1px solid #c3c3c3; }
-            .border-b-c3c3c3{ border-bottom: #c3c3c3 1px solid; }
-            .border-r-c3c3c3{ border-right:1px solid #c3c3c3; }
-            .borderNone{ border:none !important; }
-            .tableInContent td{ padding:2px; }
-            .breakWord{ word-break: break-all; }
-			 .tac{ text-align:center; }
-            .tableFixed{ table-layout: fixed; }
-            } -->
+  a[href^="x-apple-data-detectors:"] {
+	color: inherit !important;
+	text-decoration: inherit !important;
+}
 
-			#outlook a {padding:0;}
-           .ReadMsgBody { width: 100%; }
-           .ExternalClass { width: 100%; }
-            .ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div {
-                line-height:100%;
-            }
+body {width:100% !important; -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%; margin:0 auto; padding:0;}
 
+.ReadMsgBody {width: 100%;}
+.ExternalClass p,
+.ExternalClass span,
+.ExternalClass font,
+.ExternalClass td
+{line-height: 100%}
 
-            body {  margin:0; padding:0; }
-            p{margin: 1em 0;}
-            table { border-spacing:0; }
-            table{mso-table-lspace:0pt; mso-table-rspace:0pt;}
-            table td { border-collapse:collapse; }
-            .yshortcuts, a .yshortcuts, a .yshortcuts:hover, a .yshortcuts:active, a .yshortcuts:focus {
-                background-color:transparent !important; border:none !important; color:inherit !important; border-bottom: none !important;
-            }
-            h1, h2, h3, h4, h5, h6 {line-height: 100%; margin:0; padding:0; }
-            img {border:0; height:auto; line-height:100%; outline:none; text-decoration:none; -ms-interpolation-mode: bicubic;}
-            a img {border:none;}
-            image_fix {display:block;}
-            .applelinks a {color:#0574ac; text-decoration: none;}
-            a, a:link {color:#0574ac;text-decoration: underline;}
-            p {margin:0; padding:0; margin-bottom:0;}
-            .emlBody { background: #ededed; }
-            .preheader {display:none !important;}
-            .bodyCell{padding-top:40px; }
-            #emlContainer{ width:592px;background-color:#FFFFFF;border:1px solid #DDDDDD; border-collapse:separate; border-radius:4px;  }
-            .colPadding{ padding:0px 15px 10px 15px; }
-            .contentRow{ width:100%; }
-            .table3-1{ width:362px;padding-right:20px; }
-            .rightAds { width:180px; }
-            .bulletList{ border-collapse: collapse;padding-left:20px; }
-            .bulletListContent{ padding-left: 5px;border-collapse: collapse;display:block; }
-            .mainContent {font-size:1.000em; color:#666666;font-family: Verdana;line-height: 16px;}
-            .promoGelBg { border:1px solid #d2d2d2; border-collapse:collapse; background-color:#f2f2f2; }
-            .promoGelBg td{ padding: 4px; }
-            h1, h2, h3, h4, h5, h6{color:#202020; font-family:Helvetica; font-size:1.5em; line-height:125%; text-align:Left;}
-            h1.contentHeading{ clear: both; font: inherit; font-family: Verdana; font-size: 1.5em; font-weight: normal; padding-right: 0px; padding-left: 0px; padding-bottom: 0px; margin: 0px; color: #ef6f00; padding-top: 0px;line-height:100%; }
-            h2{ clear: both; font: inherit; font-family: Verdana; font-size: 1.000em; font-weight: bold; padding-right: 0px; padding-left: 0px; padding-bottom: 5px; margin: 0px; color: #ef6f00; padding-top: 0px;line-height:100%; }
-            a, a:link {color:#0574ac;text-decoration: underline;}
-            .linkSimple{ color:#0574ac; text-decoration: none !important; }
-            .footerContainer { width:592px; }
-			.copymainContent { font-size: 1.000em;color: #0574ac;font-family: Verdana; }
-			.separator { border-top: 1px solid #cccccc; }
-            .border-c3c3c3{ border:1px solid #c3c3c3; }
-            .border-b-c3c3c3{ border-bottom: #c3c3c3 1px solid; }
-            .border-r-c3c3c3{ border-right:1px solid #c3c3c3; }
-            .borderNone{ border:none !important; }
-            .tableInContent td{ padding:2px; }
-            .breakWord{ word-break: break-all; }
-			 .tac{ text-align:center; }
-            .tableFixed{ table-layout: fixed; }
-			.footerContent{font-size: .92em;color: #666666;font-family:Verdana;line-height: 16px;}
-            @media only screen and (max-device-width: 479px), screen and (max-width: 479px) {
-                body{width:100% !important; min-width:100% !important;}
-                body[yahoofix] #emlContainer{width:100% !important;}
-                body[yahoofix] .bodyCell{padding-top:0px !important;}
-                body[yahoofix] .rightAds{ width:100% !important;display: block !important; }
-                body[yahoofix] .table3-1{ width:100% !important; display: block !important;padding-right:0px !important; }
-                body[yahoofix] .mainContent { font-size:1.2em !important; line-height: 18px !important; }
-                body[yahoofix] .contentHeading { font-size:1.5em !important; }
-                body[yahoofix] .promoGelBg { width: 100% !important; }`
-                body[yahoofix] .fullWidth { width:100% !important; }
+.gmailfix {
+display:none;
+display:none!important;
+}
 
-                body[yahoofix] .footerContainer{ width:100% !important; }
-                h2{ font-size: 1.5em; }
-                body[yahoofix] .callToBtn { background-color: #009CD5; border: 1px solid #0089CE; border-radius: 2px; color: #FFFFFF !important; font-size: 1.000em; display:block !important; font-weight: bold; padding: 5px; text-decoration: none !important; text-shadow: 1px 1px 0 #006F97; width: 95%; }
-                body[yahoofix] .separator { width:100% !important;color:#cccccc;border-top:1px solid #cccccc; }
-				.footerContent{ -webkit-text-size-adjust:none; -ms-text-size-adjust:none; }
+table { border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; padding:0;}
+table td {border-collapse: collapse;}
+p{margin:0 auto; text-align:center;}
+*{-webkit-text-size-adjust:none;-ms-text-size-adjust:none;max-height:1000000px;mso-line-height-rule:exactly; line-height: 100%}
+.appleLinks a {color: #000000 !important; text-decoration: none !important;}
+button{ margin:0 !important; padding:0 !important}
+</style>
 
-            }
-            @media only screen and (max-device-width: 592px), screen and (max-width: 592px) and (min-width:480px) {
-                 body{width:100% !important; min-width:100% !important;}
-                body[yahoofix] #emlContainer{width:100% !important;}
-                body[yahoofix] .bodyCell{padding-top:0px !important;}
-                body[yahoofix] .rightAds{ width:100% !important;display: block !important; }
-                body[yahoofix] .table3-1{ width:100% !important; display: block !important;padding-right:0px !important; }
-                body[yahoofix] .mainContent { font-size:1.2em !important; line-height: 18px !important; }
-                body[yahoofix] .contentHeading { font-size:1.5em !important; }
-                body[yahoofix] .promoGelBg { width: 100% !important; }
-                body[yahoofix] .fullWidth { width:100% !important; }
+</head>
+  <body style="padding:0 !important;"><img src="http://email.soma.com/a/hBckQP9B8LlVvB9u-NMNtYAs4Iy/spacer-0.gif" width="1" height="1" style="display:none !important; max-height:1px !important; max-width:1px !important; border:0 !important; background-color:transparent !important; padding:0 !important; outline:0 !important; min-height:1px !important; min-width:1px !important; height:1px !important; width:1px !important;" alt="">
 
-                body[yahoofix] .footerContainer{ width:100% !important; }
-                h2{ font-size: 1.5em; }
-                body[yahoofix] .callToBtn { background-color: #009CD5; border: 1px solid #0089CE; border-radius: 2px; color: #FFFFFF !important; font-size: 1.000em; display:block !important; font-weight: bold; padding: 5px; text-decoration: none !important; text-shadow: 1px 1px 0 #006F97; width: 95%; }
-                body[yahoofix] .separator { width:100% !important;color:#cccccc;border-top:1px solid #cccccc; }
-				.footerContent{ -webkit-text-size-adjust:none; -ms-text-size-adjust:none; }
-            }</style>
- </head>
- <body bgcolor="#ededed" yahoofix="">
-<table role="presentation" lang="en" width="100%" align="center" cellpadding="10" cellspacing="0" class="emlBody" bgcolor="#ededed" style="border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;background: #ededed;">
-        <tr>
-            <td align="center" valign="top" class="bodyCell" style="border-collapse: collapse;padding-top: 40px;">
-                <span style="display:none !important;" class="preheader">Friendly reminder</span>
-                <table border="0" cellpadding="0" cellspacing="0" id="emlContainer" style="text-align: left;border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;width: 620px;background-color: #FFFFFF;border: 1px solid #DDDDDD;border-collapse: separate;border-radius: 4px;font:inherit;font-family:Verdana;font-size:12px; ">
-                    <tr>
-                        <td height="20" style="border-collapse: collapse;">&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td valign="top" align="left" style="border-collapse: collapse;">
-							<table class="contentRow" cellpadding="0" cellspacing="0" style="border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;width: 100%;font:inherit;font-family:Verdana;font-size:12px;" role="presentation">
-<tr>
-<td class="colPadding mainContent" valign="middle" align="left" style="border-collapse: collapse;padding: 0px 15px 10px 15px;font-size: 1.000em;color: #666666;font-family: Verdana;line-height: 16px;">
-<a href="https://clicks.att.com/OCT/eTrac?EMAIL_ID=156456872&finalURL=https://www.att.com/olam/loginAction.olamexecute" title="Login to myAT&amp;T" class="linkSimple" target="_blank" style="color: #0574ac;text-decoration: none;">myAT&amp;T Account</a>
-| <a href="https://clicks.att.com/OCT/eTrac?EMAIL_ID=156456872&finalURL=http://www.att.com/support/" title="Online Support" class="linkSimple" target="_blank" style="color: #0574ac;text-decoration: none;">
-Support</a>
-</td>
-<td class="mainContent colPadding" align="right" style="padding-right: 15px;border-collapse: collapse;"><a href="https://clicks.att.com/OCT/eTrac?EMAIL_ID=156456872&finalURL=http://www.att.com" title="att.com" style="color: #0574ac;text-decoration: none;"><img class="img-logo" src="http://www.att.com/Common/images/email/Transactional_email/logo_rethinkposs_41.jpg" border="0" align="right" alt="AT&T Globe" width="41" height="40" style="border: none;height: auto;line-height: 100%;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;"></a></td>
-</tr>
-</table>
+   <!--Starts Gmail App fix -->
+   <!--[if !mso]><!--->
 
-                        </td>
-                    </tr>
-                        <tr>
-                            <td height="20" style="border-collapse: collapse;">&nbsp;</td>
-                        </tr>
+    <div class="gmailfix" style="white-space:nowrap; font:15px courier; line-height:0;">
+    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+    </div>
 
+    <!--<![endif]-->
+	<!--Ends Gmail App fix -->
 
+<table width="100%" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0">
+	<tbody>
+    	<tr>
+			<td align="center" valign="top">
 
-
-  <tr>
-                            <td valign="top" align="left" class="mainContent colPadding" style="padding:15px 15px 10px 15px;border-collapse: collapse;color: #666666;font-family: Verdana;line-height: 16px;font: normal 1.000em Verdana;">
-								<table class="contentRow" cellpadding="0" cellspacing="0" border="0" align="left" style="border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;width: 100%;padding-right: 20px;font-family:Verdana;font-size:12px;color: #666666;">
+<!--HEADER STARTS-->
+                        <table align="center" border="0" cellpadding="0" cellspacing="0" width="600">
+                              <tbody>
                                     <tr>
-                                        <td class="mainContent" align="left" style="border-collapse: collapse;color: #666666;font-family: Verdana;line-height: 16px;font: normal 1.000em;">
-											<br/><br/>
-										</td>
-									</tr>
-								</table>
-
-                            </td>
-                        </tr>
-
-
-                          <tr>
-							<td valign="top" align="left" class="colPadding" style="border-collapse: collapse;color: #666666;font-family: Verdana;line-height: 16px;font: normal 1.000em Verdana;padding:15px 15px 15px 15px;">
-							<table width="100%" cellspacing="0" cellpadding="0" border="0" class="border-b-c3c3c3" style="border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;border-bottom: #c3c3c3 1px solid;font:inherit;font-family:Verdana;font-size:12px;" role="presentation">
-<tr>
-<td valign="top" align="left" colspan="2" class="fullWidth mainContent" style="border-collapse: collapse;font-size: 1.000em;color: #666666;font-family: Verdana;line-height: 16px;">
-
-
-
-<h2 style="line-height: 100%;margin: 0px;padding: 0;color: #666666;font-family: Verdana;font-size: 1.2em;text-align: Left;clear: both;font-weight: bold;padding-right: 0px;padding-left: 0px;padding-bottom: 0px;padding-top: 0px;">Contact Us</h2>
-<br />
-<a  class="linkSimple" title="att.com/pay" href="https://clicks.att.com/OCT/eTrac?EMAIL_ID=156456872&finalURL=https://www.att.com/pay" style="color: #0574ac;text-decoration: none !important;">att.com/pay</a><br /><br />
-<a class="linkSimple" title="Visit AT&amp;T online support" href="https://clicks.att.com/OCT/eTrac?EMAIL_ID=156456872&finalURL=http://www.att.com/esupport/" style="color: #0574ac;text-decoration: none !important;">AT&amp;T Support</a> - quick &amp; easy support is available 24/7.
-</td>
-
-</tr>
-<tr>
-<td align="left" width="40%" class="socialPadding" style="color: #666666;font-family: Verdana;font-size:1.000em;border-collapse: collapse;padding-top: 10px;">
-<a title="Find us on Facebook" href="http://www.facebook.com/ATT" style="color: #0574ac;text-decoration: underline;padding-right: 5px;"><img  border="0" alt="Find us on Facebook" src="http://www.att.com/Common/images/email/Transactional_email/Consumer/Servicing/BRN/icn_facebook.jpg" style="border: none;height: auto;line-height: 100%;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;"></a>
-<a title="Talk to us on twitter" href="http://www.twitter.com/ATTCustomerCare" style="color: #0574ac;text-decoration: underline;padding-right: 5px;">
-	<img border="0" alt="Talk to us on twitter" src="http://www.att.com/Common/images/email/Transactional_email/Consumer/Servicing/BRN/icn_twitter.jpg" style="border: none;height: auto;line-height: 100%;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;"></a>
-<a title="AT&amp;T Community Forums" href="https://clicks.att.com/OCT/eTrac?EMAIL_ID=156456872&finalURL=http://www.att.com/forums" style="color: #0574ac;text-decoration: underline;padding-right: 5px;"><img border="0" alt="Join the AT&amp;T Community Forums" src="http://www.att.com/Common/images/email/Transactional_email/Consumer/Servicing/BRN/icn_attforums.jpg" style="border: none;height: auto;line-height: 100%;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;"></a>
-</td>
-<td class="" width="60%" valign="bottom" align="right"  style="border-collapse: collapse;color: #666666;font-family: Verdana;font-size:1.000em;">
-<img width="192" height="52" alt="" style="width: 100%;max-width: 192px;margin: 0px;border: 0;height: auto;line-height: 100%;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;"  src="http://www.att.com/Common/images/email/Transactional_email/Consumer/Servicing/BRN/img_brandcloud.jpg" class="imgContact">
-</td>
-</tr>
-</table>
-
-
-							</td>
-						</tr>
-
-
-
-
-                         <tr>
-							<td valign="top" align="left" class="colPadding" style="border-collapse: collapse;color: #666666;font-family: Verdana;line-height: 16px;font: normal 1.000em Verdana;padding:15px 15px 15px 15px;">
-							<table class="contentRow" style="clear: both; font:inherit;font-family:Verdana;font-size:12px; font-weight: normal; color: #666666;" border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation" >
-<tr><td class="mainContent" style="font-family: Verdana;font-size: 1.000em; color: #666666;">
-<h2 style="line-height: 100%;margin: 0px;padding: 0;color: #666666;font-family: Verdana;font-size: 1.2em;text-align: Left;clear: both;font-weight: bold;padding-right: 0px;padding-left: 0px;padding-bottom: 5px;padding-top: 0px; text-decoration:none;">Online Information</h2><br />
-<a style="font-family: Verdana; color:#0574ac; text-decoration: none" title="Auto Pay" href="https://clicks.att.com/OCT/eTrac?EMAIL_ID=156456872&amp;finalURL=https://www.wireless.att.com/pmt/setupRecurringPayment.do">Auto Pay</a>
-<br /><br />
-<a style="font-family: Verdana; color:#0574ac; text-decoration: none" title="Paperless Billing" href="https://clicks.att.com/OCT/eTrac?EMAIL_ID=156456872&amp;finalURL=https://www.wireless.att.com/olam/loginAction.olamexecute?pId=PassThru_Paperless_Bill_Marquee">Paperless Billing</a>
-<br />
-</td></tr></table>
-
-							</td>
-						</tr>
-
-
-
-
-
-
-
-						   <tr>
-                           <td style="border-collapse: collapse;padding: 0px 15px 10px 15px; " class="colPadding">
-                                <table  role="presentation" cellspacing="0" cellpadding="0" border="0" align="left" class="contentRow" style="border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;width: 100%;font-family:Verdana;font-size:12px;">
-
-
+                                        <td height="11" width="600">&nbsp;</td>
+                                </tr>
+                             </tbody>
+                       </table>
+                        <table align="center" border="0" cellpadding="0" cellspacing="0" width="600">
+                              <tbody>
                                     <tr>
-                                        <td valign="top" class="footerContent" style="border-collapse: collapse;font-size: .92em;color: #666666;font-family: Verdana;line-height: 16px;clear: both; padding: 0px 0px 5px 0px;">
-
-										<br/>
-                                            <table width="100%"  cellspacing="0" cellpadding="0" border="0" style="border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;font-size: 12px;color: #666666;font-family: Verdana;line-height: 16px;text-align: left;" role="presentation">
-<tr>
-<td class="separator"width="98%" style="border-top: 1px solid #cccccc;border-collapse: collapse;" colspan="3">&nbsp;</td>
-</tr>
-<tr>
-<td  width="33%" valign="top"  style="padding-right: 10px; border-right: 1px solid #cccccc;font-size: 1.00em;color: #666666;font-family: Verdana;"><a href="https://clicks.att.com/OCT/eTrac?EMAIL_ID=156456872&finalURL=http://www.att.com/esupport/article.jsp?sid=KB404787#fbid=CFBKhG5shDK" title="Update your email address" style="color:#0574ac; text-decoration: none;"><span class="copymainContent" style="font-size: 1.000em;color: #0574ac;font-family: Verdana;">Update your email address</a></span></td>
-
-<td width="33%" valign="top" style="padding-left: 10px; padding-right: 10px; border-right: 1px solid #cccccc;font-size: 1.00em;color: #666666;font-family: Verdana;"><a href="https://clicks.att.com/OCT/eTrac?EMAIL_ID=156456872&finalURL=http://www.att.com/esupport/article.jsp?&sid=KB409746" title="Protect yourself from fraudulent emails" style="color:#0574ac; text-decoration: none;"><span class="copymainContent" style="font-size: 1.000em;color: #0574ac;font-family: Verdana;">Protect yourself from fraudulent emails</span></a></td>
-
-<td width="33%" valign="top" style="padding-left: 10px;font-size: 1.00em;color: #666666;font-family: Verdana;"><a href="https://clicks.att.com/OCT/eTrac?EMAIL_ID=156456872&finalURL=http://att.com/econtactus" title="Contact Us" style="color:#0574ac; text-decoration: none;"><span class="copymainContent" style="font-size: 1.000em;color: #0574ac;font-family: Verdana;">Contact Us</span></a></td>
-</tr>
-</table>
-<br/>
-
- <b>PLEASE DO NOT REPLY TO THIS MESSAGE</b>
- <br>
- All replies are automatically deleted. For questions regarding this message, refer to the contact information listed above.
- <br>
- <a class="linkSimple" href="https://clicks.att.com/OCT/eTrac?EMAIL_ID=156456872&finalURL=http://att.com/Trademark-Copyright-Privacy-Policy" title="AT&T Intellectual Property" style="color:#0574ac; text-decoration: none;">&#169;2019 AT&amp;T  Intellectual Property</a>. All rights reserved. AT&amp;T, the AT&amp;T logo and all other AT&amp;T marks contained herein are trademarks of AT&amp;T Intellectual Property and/or AT&amp;T affiliated companies. All other marks contained herein are the property of their respective owners.
-<br>
-<a class="linkSimple" href="https://clicks.att.com/OCT/eTrac?EMAIL_ID=156456872&finalURL=http://att.com/privacy" title="Privacy Policy" style="color:#0574ac; text-decoration: none;">Privacy Policy</a> <br />
-<a href="https://clicks.att.com/OCT/eTrac?EMAIL_ID=156456872&finalURL=http://www.att.com/legal/legal-policy-center.html" title="Legal Policy Center" style="color:#0574ac; text-decoration: none;">Legal Policy Center</a>
-<br />
-<img src="https://clicks.att.com/OCT/eTrac?EMAIL_ID=156456872&src=https://www.att.com/Common/images/email/Transactional_email/Spacer_White_1px.GIF" width="1" height="1" border="0" alt=""/><br/>
-<br><br>
-                                            <span style="font-size: .92em; color: #666666; font-family: Verdana;">CPAY_U017EH</span>
+                                        <td align="center" width="600">
+                                        <font style="font-family:Arial Regular, Helvetica, sans-serif;
+                                    font-size:11px; color:#000000;">
+                                        <a href="http://email.soma.com/a/hBckQP9B8LlVvB9u-NMNtYAs4Iy/promotop-0?CUSTOMER_NO=2102008775" style="color:#000000;
+                                    line-height:15px; text-decoration:underline;">See Why Soma Is So Much More</a></font><font style="font-family:Arial, Helvetica, sans-serif;
+                                    font-size:11px; color:#000000;"><a href="http://email.soma.com/a/hBckQP9B8LlVvB9u-NMNtYAs4Iy/promotop-0?CUSTOMER_NO=2102008775" style="color:#333333; line-height:15px;
+                                    text-decoration:underline;"></a>&nbsp;&nbsp;
+                                    |&nbsp;&nbsp;&nbsp;View on a <a href="http://email.soma.com/a/hBckQP9B8LlVvB9u-NMNtYAs4Iy/html-0?RAF_TRACK=&email=munamoor2008@yahoo.com&password=B8LlVvNtYAs4BckQP9yoHgVslhS4BZ&t_sparams=uwIoxgRKipTqLWqsylipwL5HYIW0dMlZDja39b2moF1ILelFFFDSyq21$5WUzo6aHNLWtxeRKUHpnZWh7L4IidBeks13gQ2if8p64kbsjba4fu1$acp2J-1LYqgLW0ja71gT$YF4kSe2sJGx-YJGz$HbtRY8TG75K7ZygBMqgZaTAKoNm4RE-c6qtmT1dVazGHXN7GRphg4Nv2WsNw$hY4-EdrTk-2aQT2kDOkZOTFZIfBdMpXhJjJcN58yEu7YkcOTwswLZjsuYB9gGlJXJ0yFomKdVyIPKv-WaL-kJwMXFj2pYKVycf" style="color:#000000; text-decoration:underline;">web
+                                    browser</a>. </font>
                                         </td>
-                                    </tr>
-                                </table>
+                                  </tr>
+                            </tbody>
+                        </table>
+                        <table width="600" align="center" border="0" cellspacing="0" cellpadding="0">
+                              <tbody>
+                                  <tr>
+                                    <td width="600" height="50" >&nbsp;</td>
+                                  </tr>
+                            </tbody>
+                        </table>
+                      <table border="0" cellpadding="0" cellspacing="0" width="600">
+                         <tbody>
+                                <tr>
+                                    <td style="line-height:0px; font-size:0px;  mso-line-height-rule:exactly;"><img src="http://f.email.soma.com/i/20/2083411311/080818_Soma_Template_0818_02.jpg" alt="" height="72" width="185"></td>
+                                    <td style="line-height:0px; font-size:0px; mso-line-height-rule:exactly;"><a href="http://email.soma.com/a/hBckQP9B8LlVvB9u-NMNtYAs4Iy/soma-0?CUSTOMER_NO=2102008775"><img src="http://f.email.soma.com/i/20/2083411311/080818_Soma_Template_0818_03.jpg" alt="Soma" style="display:block" border="0" height="72" width="224"></a></td>
+                                     <td style="line-height:0px; font-size:0px; mso-line-height-rule:exactly;"><img src="http://f.email.soma.com/i/20/2083411311/080818_Soma_Template_0818_04.jpg" alt="" height="72" width="191"></td>
+                                </tr>
+                            </tbody>
+                       </table>
+                       <table border="0" cellpadding="0" cellspacing="0" width="600">
+                            <tbody>
+                                <tr>
+                                    <td style="line-height:0px; font-size:0px; font-size:0px;  mso-line-height-rule:exactly;"><img src="http://f.email.soma.com/i/20/2083411311/080818_Soma_Template_0818_05.jpg" alt="" style="display:block" border="0" height="21" width="600"></td>
+                                </tr>
+                            </tbody>
+                      </table>
+            <!--MAIN CONTENT STARTS-->
+
+                  <table border="0" cellpadding="0" cellspacing="0" width="600">
+                        <tbody>
+                            <tr>
+                                <td valign="top" style="line-height:0px; font-size:0px; mso-line-height-rule:exactly;"><a href="http://email.soma.com/a/hBckQP9B8LlVvB9u-NMNtYAs4Iy/f1copy-0?CUSTOMER_NO=2102008775"><img src="http://f.email.soma.com/i/20/2083411311/111518_Brand_Email_02.jpg" alt="Welcome To Soma! Thank you for your purchase. We hope you look and feel amazing. Here’s how we offer so much more. " style="display:block" border="0" height="192" width="600"></a></td>
+                            </tr>
+                        </tbody>
+                   </table>
+                   <table border="0" cellpadding="0" cellspacing="0" width="600">
+                        <tbody>
+                            <tr>
+                                <td valign="top" style="line-height:0px; font-size:0px; mso-line-height-rule:exactly;"><a href="http://email.soma.com/a/hBckQP9B8LlVvB9u-NMNtYAs4Iy/f1copy-0?CUSTOMER_NO=2102008775"><img src="http://f.email.soma.com/i/20/2083411311/111518_Brand_Email_03.jpg" alt="" style="display:block" border="0" height="327" width="600"></a></td>
+                            </tr>
+                        </tbody>
+                   </table>
+                   <table border="0" cellpadding="0" cellspacing="0" width="600">
+                        <tbody>
+                            <tr>
+                                <td valign="top" style="line-height:0px; font-size:0px; mso-line-height-rule:exactly;"><a href="http://email.soma.com/a/hBckQP9B8LlVvB9u-NMNtYAs4Iy/f2insta-0?CUSTOMER_NO=2102008775"><img src="http://f.email.soma.com/i/20/2083411311/111518_Brand_Email_04.jpg" alt="Instagram" style="display:block" border="0" height="259" width="112"></a></td>
+                                <td valign="top" style="line-height:0px; font-size:0px; mso-line-height-rule:exactly;"><a href="http://email.soma.com/a/hBckQP9B8LlVvB9u-NMNtYAs4Iy/f3pint-0?CUSTOMER_NO=2102008775"><img src="http://f.email.soma.com/i/20/2083411311/111518_Brand_Email_05.jpg" alt="Pinterest" style="display:block" border="0" height="259" width="91"></a></td>
+                                <td valign="top" style="line-height:0px; font-size:0px; mso-line-height-rule:exactly;"><a href="http://email.soma.com/a/hBckQP9B8LlVvB9u-NMNtYAs4Iy/f4fb-0?CUSTOMER_NO=2102008775"><img src="http://f.email.soma.com/i/20/2083411311/111518_Brand_Email_06.jpg" alt="Facebook" style="display:block" border="0" height="259" width="103"></a></td>
+                                <td valign="top" style="line-height:0px; font-size:0px; mso-line-height-rule:exactly;"><a href="http://email.soma.com/a/hBckQP9B8LlVvB9u-NMNtYAs4Iy/f5twitter-0?CUSTOMER_NO=2102008775"><img src="http://f.email.soma.com/i/20/2083411311/111518_Brand_Email_07.jpg" alt="Twitter" style="display:block" border="0" height="259" width="79"></a></td>
+                                <td valign="top" style="line-height:0px; font-size:0px; mso-line-height-rule:exactly;"><a href="http://email.soma.com/a/hBckQP9B8LlVvB9u-NMNtYAs4Iy/f6youtube-0?CUSTOMER_NO=2102008775"><img src="http://f.email.soma.com/i/20/2083411311/111518_Brand_Email_08.jpg" alt="Youtube" style="display:block" border="0" height="259" width="96"></a></td>
+                                <td valign="top" style="line-height:0px; font-size:0px; mso-line-height-rule:exactly;"><a href="http://email.soma.com/a/hBckQP9B8LlVvB9u-NMNtYAs4Iy/f7blog-0?CUSTOMER_NO=2102008775"><img src="http://f.email.soma.com/i/20/2083411311/111518_Brand_Email_09.jpg" alt="Blog" style="display:block" border="0" height="259" width="119"></a></td>
+                            </tr>
+                        </tbody>
+                   </table>
+                   <table border="0" cellpadding="0" cellspacing="0" width="600">
+                        <tbody>
+                            <tr>
+                                <td valign="top" style="line-height:0px; font-size:0px; mso-line-height-rule:exactly;"><a href="http://email.soma.com/a/hBckQP9B8LlVvB9u-NMNtYAs4Iy/f8rewards-0?CUSTOMER_NO=2102008775"><img src="http://f.email.soma.com/i/20/2083411311/111518_Brand_Email_10.jpg" alt="Feel the love by joining Love Soma Rewards $1=1 point. $5 reward for every $125 points, Birthday gifts, free shipping*, and so much more! See Your Status (gold and platinum members)" style="display:block" border="0" height="488" width="600"></a></td>
+                            </tr>
+                        </tbody>
+                   </table>
+                   <table border="0" cellpadding="0" cellspacing="0" width="600">
+                        <tbody>
+                            <tr>
+                                <td valign="top" style="line-height:0px; font-size:0px; mso-line-height-rule:exactly;"><a href="http://email.soma.com/a/hBckQP9B8LlVvB9u-NMNtYAs4Iy/f9solut-0?CUSTOMER_NO=2102008775"><img src="http://f.email.soma.com/i/20/2083411311/111518_Brand_Email_11.jpg" alt="See what our Innovative Products can do for you." style="display:block" border="0" height="244" width="600"></a></td>
+                            </tr>
+                        </tbody>
+                   </table>
+                   <table width="600" align="center" border="0" cellpadding="0" cellspacing="0" bgcolor="#ffffff">
+					  <tr>
+ 						<td width="600" align="left" valign="top" background="http://f.email.soma.com/i/20/2083411311/111518_Brand_Email_12.gif" bgcolor="#ffffff" style="background-image:url('http://f.email.soma.com/i/20/2083411311/111518_Brand_Email_12.gif'); background-repeat:no-repeat; background-color:#ffffff; width:600px; height:1081px; display:block">
+                  			<!--[if gte mso 9]>
+                           <v:image xmlns:v="urn:schemas-microsoft-com:vml" id="theImage" style="behavior: url(#default#VML); display: inline-block; position: absolute; width:600px; height: 1081px; top: 0; left: 0; border: 0; z-index: 1;" src="http://f.email.soma.com/i/20/2083411311/111518_Brand_Email_12.gif" />
+                            <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="display: inline-block; position: absolute; width:600px; height: 1081px; top: 0; left: 0; border: 0; z-index: 2;">
+                            <v:fill opacity="0%" style="z-index: 1;"/>
+                            <div>
+                            <![endif]-->
+                               <table border="0" cellpadding="0" cellspacing="0" width="600">
+                                    <tbody>
+                                        <tr>
+                                            <td valign="top" style="line-height:0px; font-size:0px; mso-line-height-rule:exactly;"><a href="http://email.soma.com/a/hBckQP9B8LlVvB9u-NMNtYAs4Iy/f10vb-0?CUSTOMER_NO=2102008775"><img src="http://f.email.soma.com/i/20/2083411311/111518_Brand_Email_13.gif" alt="Vanishing Back. Engineered for effortless confidence. A Soma exclusive!" style="display:block" border="0" height="364" width="600"></a></td>
+                                        </tr>
+                                    </tbody>
+                               </table>
+                               <table border="0" cellpadding="0" cellspacing="0" width="600">
+                                    <tbody>
+                                        <tr>
+                                            <td valign="top" style="line-height:0px; font-size:0px; mso-line-height-rule:exactly;"><a href="http://email.soma.com/a/hBckQP9B8LlVvB9u-NMNtYAs4Iy/f11ve-0?CUSTOMER_NO=2102008775"><img src="http://f.email.soma.com/i/20/2083411311/111518_Brand_Email_14.gif" alt="Vanishing Edge Panties that stay put-just like they should. Shop Now. " style="display:block" border="0" height="364" width="600"></a></td>
+                                        </tr>
+                                    </tbody>
+                               </table>
+                               <table border="0" cellpadding="0" cellspacing="0" width="600">
+                                    <tbody>
+                                        <tr>
+                                            <td valign="top" style="line-height:0px; font-size:0px; mso-line-height-rule:exactly;"><a href="http://email.soma.com/a/hBckQP9B8LlVvB9u-NMNtYAs4Iy/f12legging-0?CUSTOMER_NO=2102008775"><img src="http://f.email.soma.com/i/20/2083411311/111518_Brand_Email_15.gif" alt="Slimming Leggings An inch (or more) off your waist-without the squeeze. Shop Now. " style="display:block" border="0" height="353" width="600"></a></td>
+                                        </tr>
+                                    </tbody>
+                               </table>
+                                <!--[if gte mso 9]>
+         					   </div></v:fill></v:rect><![endif]-->
+          					</td>
+  						</tr>
+					</table>
+                    <table border="0" cellpadding="0" cellspacing="0" width="600">
+                        <tbody>
+                            <tr>
+                                <td valign="top" style="line-height:0px; font-size:0px; mso-line-height-rule:exactly;"><a href="http://email.soma.com/a/hBckQP9B8LlVvB9u-NMNtYAs4Iy/f13cool-0?CUSTOMER_NO=2102008775"><img src="http://f.email.soma.com/i/20/2083411311/111518_Brand_Email_17.jpg" alt="Cool Nights refreshingly comfortable for a cool night's sleep. Shop Now. " style="display:block" border="0" height="364" width="600"></a></td>
+                            </tr>
+                        </tbody>
+                   </table>
+                    <table border="0" cellpadding="0" cellspacing="0" width="600">
+                        <tbody>
+                            <tr>
+                                <td valign="top" style="line-height:0px; font-size:0px; mso-line-height-rule:exactly;"><a href="http://email.soma.com/a/hBckQP9B8LlVvB9u-NMNtYAs4Iy/f14profile-0?CUSTOMER_NO=2102008775"><img src="http://f.email.soma.com/i/20/2083411311/111518_Brand_Email_18.jpg" alt="Visit your profile to update email preferences and enter your birthday for a special gift." style="display:block" border="0" height="162" width="600"></a></td>
+                            </tr>
+                        </tbody>
+                   </table>
+                 <!--  <table border="0" cellpadding="0" cellspacing="0" width="600" bgcolor="#f0e4d7">
+                        <tbody>
+                            <tr>
+                                <td valign="top" bgcolor="#f0e4d7">
+                                		<table border="0" cellpadding="0" cellspacing="0" width="600">
+                                            <tbody>
+                                                <tr>
+                                                    <td valign="top" style="line-height:0px; font-size:0px; mso-line-height-rule:exactly;"><a href="http://email.soma.com/a/hBckQP9B8LlVvB9u-NMNtYAs4Iy/f15offer-0?CUSTOMER_NO=2102008775"><img src="http://f.email.soma.com/i/20/2083411311/111518_Brand_Email_19.jpg" alt="Get what you want 20% Off* Entire Purchase Shop Now" style="display:block" border="0" height="196" width="600"></a></td>
+                                                </tr>
+                                            </tbody>
+                                       </table>
+                                       <table border="0" cellpadding="0" cellspacing="0" width="600">
+                                            <tbody>
+                                                <tr>
+                                                    <td align="center" valign="middle" width="600" height="26"><font style="font-family:Arial Regular, Helvetica, sans-serif; font-size:20px; mso-ansi-font-size:20px; mso-line-height-rule:exactly; color:#000000;">USE CODE: XXXXX</font></td>
+                                                </tr>
+                                            </tbody>
+                                       </table>
+                                       <table border="0" cellpadding="0" cellspacing="0" width="600">
+                                            <tbody>
+                                                <tr>
+                                                    <td valign="top" style="line-height:0px; font-size:0px; mso-line-height-rule:exactly;"><a href="http://email.soma.com/a/hBckQP9B8LlVvB9u-NMNtYAs4Iy/f15offer-0?CUSTOMER_NO=2102008775"><img src="http://f.email.soma.com/i/20/2083411311/111518_Brand_Email_20.jpg" alt="" style="display:block" border="0" height="104" width="600"></a></td>
+                                                </tr>
+                                            </tbody>
+                                       </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                   </table>-->
+
+             <!-- SUC -->
+                   <table border="0" cellpadding="0" cellspacing="0" width="600" bgcolor="#f0e4d7">
+                        <tbody>
+                            <tr>
+                                <td valign="top" bgcolor="#f0e4d7">
+                                		<table border="0" cellpadding="0" cellspacing="0" width="600">
+                                            <tbody>
+                                                <tr>
+                                                    <td valign="top" style="line-height:0px; font-size:0px; mso-line-height-rule:exactly;"><a href="http://email.soma.com/a/hBckQP9B8LlVvB9u-NMNtYAs4Iy/f15offer-0?CUSTOMER_NO=2102008775"><img src="http://f.email.soma.com/i/20/2083411311/111518_Brand_Email_V3_17.jpg" alt="Get what you want 20% Off* Entire Purchase Shop Now" style="display:block" border="0" height="194" width="600"></a></td>
+                                                </tr>
+                                            </tbody>
+                                       </table>
+                                       <table border="0" cellpadding="0" cellspacing="0" width="600">
+                                                <tbody>
+                                                    <tr>
+                                                        <td valign="top" style="line-height:0px; mso-line-height-rule:exactly;"><a href="http://email.soma.com/a/hBckQP9B8LlVvB9u-NMNtYAs4Iy/f15offer-0?CUSTOMER_NO=2102008775"><img src="http://f.email.soma.com/i/20/2083411311/111518_Brand_Email_V3_18.jpg" alt="" style="display:block" border="0" height="49" width="212"></a></td>
+                                                       <td valign="top" align="center" bgcolor="#ffffff" style="text-align:center;">
+                                                         <table border="0" cellpadding="0" cellspacing="0" width="176" bgcolor="#ffffff">
+                                                              <tr>
+                                                                  <td width="176" valign="top" align="center" style="line-height:0px; mso-line-height-rule:exactly; text-align:center;"><a href="http://email.soma.com/a/hBckQP9B8LlVvB9u-NMNtYAs4Iy/f15offer-0?CUSTOMER_NO=2102008775"><img src="http://bar.cheetahmail.com/cgi-bin/barcode/BckQP9B8LlVvB9u-NMNtYAs4Iy/bar.png?encode=5&bc=76309011749902&sz=470x280&nodigits=1&nochk=1" alt="" style="display:block" border="0" height="29" width="176"></a></td>
+                                                              </tr>
+                                                               <tr>
+                                                                  <td valign="middle" align="center" width="176" height="20" bgcolor="#ffffff" style="text-align:center;"><font style="color:#000000; font-family:Times, 'Times New Roman', serif; font-size:14px; mso-line-height-rule:exactly; mso-ansi-font-size:14px;">76309011749902</font></td>
+                                                               </tr>
+                                                         </table>
+                                                       </td>
+                                                      <td valign="top" style="line-height:0px; mso-line-height-rule:exactly;"><a href="http://email.soma.com/a/hBckQP9B8LlVvB9u-NMNtYAs4Iy/f15offer-0?CUSTOMER_NO=2102008775"><img src="http://f.email.soma.com/i/20/2083411311/111518_Brand_Email_V3_20.jpg" alt="" style="display:block" border="0" height="49" width="212"></a></td>
+                                                    </tr>
+                                                </tbody>
+                                          </table>
+                                       <table border="0" cellpadding="0" cellspacing="0" width="600">
+                                            <tbody>
+                                                <tr>
+                                                    <td valign="top" style="line-height:0px; font-size:0px; mso-line-height-rule:exactly;"><a href="http://email.soma.com/a/hBckQP9B8LlVvB9u-NMNtYAs4Iy/f15offer-0?CUSTOMER_NO=2102008775"><img src="http://f.email.soma.com/i/20/2083411311/111518_Brand_Email_V3_21.jpg" alt="" style="display:block" border="0" height="83" width="600"></a></td>
+                                                </tr>
+                                            </tbody>
+                                       </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                   </table>
+                  <!-- SUC -->
+
+            <!--MAIN CONTENT ENDS-->
+
+
+            <!--Get $10 off banner-->
+                <table border="0" cellpadding="0" cellspacing="0" width="600">
+                     <tbody>
+                          <tr>
+                             <td valign="top" style="line-height:0px; font-size:0px; mso-line-height-rule:exactly;"><a href="http://email.soma.com/a/hBckQP9B8LlVvB9u-NMNtYAs4Iy/bounceback-0?CUSTOMER_NO=2102008775" target="null"><img src="http://f.email.soma.com/i/20/2083411311/022719_Template_02.jpg" alt="Get $10 Off When You Spend $85+ Now (Redeem 4/14-4/20)" height="325" width="600" title="" style="display: block;" border="0"></a></td>
+                          </tr>
+                    </tbody>
+                  </table>
+              <!--Get $10 off banner-->
+             <!--Bra Banner-->
+                <table border="0" cellpadding="0" cellspacing="0" width="600">
+                     <tbody>
+                          <tr>
+                             <td align="right" valign="top" style="line-height:0px; font-size:0px; mso-line-height-rule:exactly;"><a href="http://email.soma.com/a/hBckQP9B8LlVvB9u-NMNtYAs4Iy/innofit-0?CUSTOMER_NO=2102008775" target="null"><img src="http://f.email.soma.com/i/20/2083411311/022719_Template_03.jpg" alt="Soma Innofit. Experience Soma&rsquo;s revolutionary bra fit technology. Learn More. " height="365" width="299" title="" style="display: block;" border="0"></a></td>
+                              <td align="left" valign="top" style="line-height:0px; font-size:0px; mso-line-height-rule:exactly;"><a href="http://email.soma.com/a/hBckQP9B8LlVvB9u-NMNtYAs4Iy/brafot-0?CUSTOMER_NO=2102008775" target="null"><img src="http://f.email.soma.com/i/20/2083411311/022719_Template_04.jpg" alt="Your bra fit authority. Right bra. Right fit. We guarantee it. Learn More" height="365" width="301" title="" style="display: block;" border="0"></a></td>
+                          </tr>
+                    </tbody>
+                  </table>
+                <!--Bra Banner-->
+              <!--Black Spacer-->
+                <table border="0" cellpadding="0" cellspacing="0" width="600" bgcolor="#000000">
+                     <tbody>
+                          <tr>
+                             <td height="6" valign="top" style="line-height:0px; font-size:0px; mso-line-height-rule:exactly;" bgcolor="#000000">&nbsp;</td>
+                          </tr>
+                    </tbody>
+                  </table>
+              <!--Black Spacer-->
+       <!--TOP NAV STARTS-->
+             	 <table border="0" cellpadding="0" cellspacing="0" width="600">
+                     <tbody>
+                          <tr>
+                             <td align="right" valign="top" style="line-height:0px; font-size:0px; mso-line-height-rule:exactly;"><a href="http://email.soma.com/a/hBckQP9B8LlVvB9u-NMNtYAs4Iy/brafit-0?CUSTOMER_NO=2102008775" target="null"><img src="http://f.email.soma.com/i/20/2083411311/012319_Template_05.jpg" alt="" width="100%" title="Bra Fit" style="display: block;" border="0"></a></td>
+                             <td align="left" valign="top" style="line-height:0px; font-size:0px; mso-line-height-rule:exactly;"><a href="http://email.soma.com/a/hBckQP9B8LlVvB9u-NMNtYAs4Iy/new-0?CUSTOMER_NO=2102008775" target="null"><img src="http://f.email.soma.com/i/20/2083411311/012319_Template_06.jpg" alt="" width="100%" title="New Arrivals" style="display: block;" border="0"></a></td>
+                          </tr>
+                    </tbody>
+                  </table>
+                  <table border="0" cellpadding="0" cellspacing="0" width="600">
+                     <tbody>
+                          <tr>
+                             <td align="right" valign="top" style="line-height:0px; font-size:0px; mso-line-height-rule:exactly;"><a href="http://email.soma.com/a/hBckQP9B8LlVvB9u-NMNtYAs4Iy/bra-0?CUSTOMER_NO=2102008775" target="null"><img src="http://f.email.soma.com/i/20/2083411311/012319_Template_07.jpg" alt="" width="299" title="Bras" style="display: block;" border="0"></a></td>
+                             <td align="left" valign="top" style="line-height:0px; font-size:0px; mso-line-height-rule:exactly;"><a href="http://email.soma.com/a/hBckQP9B8LlVvB9u-NMNtYAs4Iy/sleep-0?CUSTOMER_NO=2102008775" target="null"><img src="http://f.email.soma.com/i/20/2083411311/012319_Template_08.jpg" alt="" width="301" title="Sleep" style="display: block;" border="0"></a></td>
+                          </tr>
+                    </tbody>
+                  </table>
+                  <table border="0" cellpadding="0" cellspacing="0" width="600">
+                     <tbody>
+                          <tr>
+                             <td align="right" valign="top" style="line-height:0px; font-size:0px; mso-line-height-rule:exactly;"><a href="http://email.soma.com/a/hBckQP9B8LlVvB9u-NMNtYAs4Iy/panty-0?CUSTOMER_NO=2102008775" target="null"><img src="http://f.email.soma.com/i/20/2083411311/012319_Template_09.jpg" alt="" width="299" title="Panties" style="display: block;" border="0"></a></td>
+                             <td align="left" valign="top" style="line-height:0px; font-size:0px; mso-line-height-rule:exactly;"><a href="http://email.soma.com/a/hBckQP9B8LlVvB9u-NMNtYAs4Iy/apparel-0?CUSTOMER_NO=2102008775" target="null"><img src="http://f.email.soma.com/i/20/2083411311/012319_Template_10.jpg" alt="Swim" width="301" title="" style="display: block;" border="0"></a></td>
+                          </tr>
+                    </tbody>
+                  </table>
+                     <table border="0" cellpadding="0" cellspacing="0" width="600">
+                     <tbody>
+                          <tr>
+                             <td align="right" valign="top" style="line-height:0px; font-size:0px; mso-line-height-rule:exactly;"><a href="http://email.soma.com/a/hBckQP9B8LlVvB9u-NMNtYAs4Iy/swim-0?CUSTOMER_NO=2102008775" target="null"><img src="http://f.email.soma.com/i/20/2083411311/012319_Template_11.jpg" alt="" width="299" title="Swim " style="display: block;" border="0"></a></td>
+                             <td align="left" valign="top" style="line-height:0px; font-size:0px; mso-line-height-rule:exactly;"><a href="http://email.soma.com/a/hBckQP9B8LlVvB9u-NMNtYAs4Iy/sale-0?CUSTOMER_NO=2102008775" target="null"><img src="http://f.email.soma.com/i/20/2083411311/012319_Template_12.jpg" alt="" width="301" title="Sale " style="display: block;" border="0"></a></td>
+                          </tr>
+                    </tbody>
+                  </table>
+            <!--TOP NAV ENDS-->
+            <!--BOTTOM NAV STARTS-->
+             <table border="0" cellpadding="0" cellspacing="0" width="600">
+                     <tbody>
+                          <tr>
+                             <td align="right" valign="top" style="line-height:0px; font-size:0px; mso-line-height-rule:exactly;"><img src="http://f.email.soma.com/i/20/2083411311/021019_Template_02.jpg" alt="" width="600" height="70 " title="" style="display: block;" border="0"></td>
+                          </tr>
+                    </tbody>
+                  </table>
+                    <table width="600" align="center" border="0" cellpadding="0" cellspacing="0">
+                      <tbody>
+                          <tr>
+                          		<td style="line-height:0px; font-size:0px; mso-line-height-rule:exactly;"><img src="http://f.email.soma.com/i/20/2083411311/021019_Template_03.jpg" alt="" width="187" height="70" style="display: block;" border="0"></td>
+                            <td style="line-height:0px; font-size:0px; mso-line-height-rule:exactly;"><a href="http://email.soma.com/a/hBckQP9B8LlVvB9u-NMNtYAs4Iy/facebook-0" target="null"><img src="http://f.email.soma.com/i/20/2083411311/021019_Template_04.jpg" alt="Facebook" width="77" height="70" style="display: block;" border="0"></a></td>
+                              <td style="line-height:0px; font-size:0px; mso-line-height-rule:exactly;"><a href="http://email.soma.com/a/hBckQP9B8LlVvB9u-NMNtYAs4Iy/instagram-0" target="null"><img src="http://f.email.soma.com/i/20/2083411311/021019_Template_05.jpg" alt="Instagram" width="71" height="70" style="display: block;" border="0"></a></td>
+                              <td style="line-height:0px; font-size:0px; mso-line-height-rule:exactly;"><a href="http://email.soma.com/a/hBckQP9B8LlVvB9u-NMNtYAs4Iy/twitter-0" target="null"><img src="http://f.email.soma.com/i/20/2083411311/021019_Template_06.jpg" alt="Twitter" width="79" height="70" style="display: block;" border="0"></a></td>
+                              <td style="line-height:0px; font-size:0px; mso-line-height-rule:exactly;"><img src="http://f.email.soma.com/i/20/2083411311/021019_Template_07.jpg" alt="" width="186" height="70" style="display: block;" border="0"></td>
+                           </tr>
+                    </tbody>
+                   </table>
+           		 <!--BOTTOM NAV ENDS-->
+
+           		 <!--FOOTER STARTS-->
+                  <table align="center" border="0" cellpadding="0" cellspacing="0" width="600">
+                      <tbody>
+                            <tr>
+                                 <td height="20" width="600">&nbsp;</td>
+                            </tr>
+                    </tbody>
+                  </table>
+                    <table align="center" border="0" cellpadding="0" cellspacing="0" width="600">
+                      <tbody>
+                        <tr>
+                        	<td width="10">&nbsp;</td>
+                            <td align="center" width="580">
+                             <font style="font-family:Arial, Helvetica, sans-serif; font-size:13px; line-height:17px; mso-ansi-font-size:13px; mso-line-height-rule:exactly; color:#000000;" class="appleLinks">
+<br /><br />
+From 2/28/19 - 4/9/19, with your $85 purchase, receive $10 off for use on your merchandise purchase (some exclusions apply). Coupon will be delivered via email within 7 days of purchase and is valid 4/14/19 -4/20/19 in Soma boutiques (including outlets), at soma.com, or by phone at 866.768.7662. No cash value. One time use only. Card must be presented and surrendered at time of purchase. Offer not valid on purchase of gift cards, previously purchased merchandise, taxes or shipping. May not be combined with other coupons, offers or event, except Love Soma Rewards certificates. Coupon will be sent via email if ordering online.
+       </font>
+       <font style="font-family:Arial, Helvetica, sans-serif; font-size:13px; line-height:17px; mso-ansi-font-size:13px; mso-line-height-rule:exactly; color:#000000;">       <br><br>
+                          For customer service, <a href="http://email.soma.com/a/hBckQP9B8LlVvB9u-NMNtYAs4Iy/bncustomer-0?CUSTOMER_NO=2102008775" style="color:#000000;text-decoration:none;">click here</a>.<br>
+                             To unsubscribe or update preferences, <a href="http://email.soma.com/a/hBckQP9B8LlVvB9u-NMNtYAs4Iy/unsub-0?password=B8LlVvNtYAs4BckQP9yoHgVslhS4BZ&amp;email=munamoor2008@yahoo.com" style="color:#000000;text-decoration:none;">click here</a>.
+                        <br>
+                         To forward this email to your friends, <a href="http://email.soma.com/a/hBckQP9B8LlVvB9u-NMNtYAs4Iy/friend-0?RAF_TRACK=&amp;email=munamoor2008@yahoo.com" style="color:#000000;text-decoration:none;">click here</a>.<br>
+                        <br>
+                        To view our privacy policy, <a href="http://email.soma.com/a/hBckQP9B8LlVvB9u-NMNtYAs4Iy/bnprivacy-0?CUSTOMER_NO=2102008775" style="color:#000000;text-decoration:none;">click here</a>.
+                        <br><br>
+                        Soma Intimates
+                        <br>
+                        Toll Free <a style="color:#000000; text-decoration:none;" class="appleLinks">866.768.7662</a>
+                        <br>
+                        <a style="color:#000000; text-decoration:none;" class="appleLinks">11215 Metro Parkway, Fort Myers, FL 33966</a>
+                        <br><br>
+                        Soma and Soma Intimates are registered trademark&rsquo;s of Chico&rsquo;s Brands
+                        Investments, Inc.
+                        <br>
+                        &copy; 2019 Chico&rsquo;s Distribution Services, LLC. All Rights
+                        Reserved.
+                            </font>
                             </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
+                            <td width="10">&nbsp;</td>
+                      </tr>
+                   </tbody>
+                </table>
+                <table align="center" border="0" cellpadding="0" cellspacing="0" width="600">
+                      <tbody>
+                          <tr>
+                            <td height="60" width="600">&nbsp;</td>
+                          </tr>
+                    </tbody>
+                </table>
 
-        </table>
-
-    </body>
-
-</html>
+<img src="https://pixel.app.returnpath.net/pixel.gif?r=820b1a965f34f60a2023610de3e08694d5ba1acd" width="1" height="1" />
+<!-- Start RealTime Email Embed - Patents Pending -->
+ <img src="https://em.realtime.email/service/rte?kind=duration&account_id=7343&campaign_id=1737601086&dim0=2102008775" style="width:0px; height:0px;"/>
+ <!-- End RealTime Email Embed - Patents Pending -->
+ <!-- Start RealTime Email Embed - Patents Pending -->
+ <img src="https://em.realtime.email/service/rte?kind=livedata&id=1795624385&esp_uid=2102008775&dim0=2102008775&dim1=2102008775&dim2=&dim3=link-&dim4=&dim5=&dim6=&dim7=&dim8=MUNA&dim9=1&dim10=|&dim11=&dim12=&dim13=%testing_value%&dim14=%7C%7C%7C%7C%7C%7C&dim15=198.0000&dim17=&dim18=&dim19=52.0000" alt=""/>
+ <!-- End RealTime Email Embed - Patents Pending -->
+<!--FOOTER ENDS-->
+			</td>
+		</tr>
+	</tbody>
+</table>
+</body></html>
