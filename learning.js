@@ -1,4 +1,5 @@
 /*
+console.log(transform());
 WHAT IS IT?
 CAN YOU GIVE ME AN EXAMPLE OF CODE TO WRITE?
 CAN YOU REMEMBER IF YOU HAVE USED IT WHILE WORKING?*/
@@ -11,6 +12,23 @@ CAN YOU REMEMBER IF YOU HAVE USED IT WHILE WORKING?*/
   * undefined
   * Symbols (ES6)
   */
+
+  var num = 5;
+  var str = "Sale 50%";
+  var someBullean = true;
+  var someNullVar = null;
+  var someVar;
+
+
+  str.length
+
+
+  function transform(data){
+    return data;
+  }
+
+
+
 
 
 
@@ -31,7 +49,9 @@ CAN YOU REMEMBER IF YOU HAVE USED IT WHILE WORKING?*/
     * String operators
   */
 
-
+if (false) {
+  return sdfadsgsdfhg
+}
 
 
 
@@ -52,7 +72,7 @@ CAN YOU REMEMBER IF YOU HAVE USED IT WHILE WORKING?*/
   * Functions
 */
 
-console.log(transform());
+
 
 function transform() {
   console.log("5." + false || true);
@@ -101,7 +121,7 @@ NaN
 
 
 
-//https://www.sololearn.com/Play/JavaScript
+https://www.sololearn.com/Play/JavaScript
 // function transform(data) {
 //   return data;
 // }

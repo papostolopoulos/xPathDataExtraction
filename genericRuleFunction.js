@@ -77,28 +77,7 @@ var str17 = "*Eddie Bauer Credit Cards are issued by Comenity Bank. Subject to c
 
 function transform(data){
   var negRegexArr = [
-    //certificate can be used from
-    /certificate\s*can\s*be\s*used\s*from/i,
-    //Subject to credit approval
-    /Subject\s*to\s*credit\s*approval/i,
-    //$NN per month
-    /\$\d+\s*per\s*month/i,
-    //NN Points = $NN reward
-    /^\d+\s*points\s*=\s*\$\d+\s*reward\s*$/i,
-    //will appear within 90 days
-    /will\s*appear\s*within\s*90\s*days/i,
-    //Promotion restrictions
-    /Promotion\s*restrictions/i,
-    //Redeem your certificates now
-    /Redeem\s*your\s*certificates\s*now/i,
-    //The Account must remain open
-    /The\s*Account\s*must\s*remain\s*open/i,
-    //To redeem
-    /^To\s*redeem/i,
-    //You may have already redeemed your certificates
-    /You\s*may\s*have\s*already\s*redeemed\s*your\s*certificates/i,
-    //Look for your Rewards Certificates in the mai
-    /Look\s*for\s*your\s*Rewards\s*Certificates\s*in\s*the\s*mail/i
+
   ];
 
   for (var i = 0; i < negRegexArr.length; i++) {
@@ -188,23 +167,20 @@ function minimizeMe(str, reg){
 
 
 function cleanMe(string) {
-  var replaceStrArr = [
-    {oldStr: /([A-z\.])\*([\$\sA-z])/, newStr: "$1 $2"},
-    {oldStr: /(See\s*terms\.?(\s*Limited\s*time\s*offer\.)?|Offer\s*applies\s*to\s*select\s*items\s*only|Limited\s*Exclusions\s*Apply|or|Cannot\s*be\s*combined\s*with.*|Valid\s*in\s*store\s*only|YOUR\s*PURCHASE\s*VALID.*|(:\s*)?Subject\s*to\s*credit\s*approval)\s*$|\(\d\)|shop\s*now|Exclusions\s*apply.*/i, newStr: ""},
-    {oldStr: /[\*©®ǂ‡†±+→§™¹›∞•◊ΔÐð®_—]/g, newStr: ""},
-    {oldStr: /^(Don't\s*forget,?|To\s*redeem\s*Reward\s*Dollars\s*online\s*at\s*Belk|Plus|Through\s*[JFMASOND][aepuco][a-z]+\s*\d{1,2},?\s*\d{2,4},?|Reduced\s*delivery.*\.△|(Plus,?\s*\s*And\s*)?don't\s*forget,?|And|As\s*a\s*cardmember|Limited-?\s*time\s*(only|offer))/i, newStr: ""}
-  ];
-
-  for (var i = 0; i < replaceStrArr.length; i++) {
-    if(replaceStrArr[i].oldStr.test(string)){
-      string = string.replace(replaceStrArr[i].oldStr, replaceStrArr[i].newStr).trim();
-      //break;
-    }
-  }
+  // var replaceStrArr = [
+  //   {oldStr: /([A-z\.])\*([\$\sA-z])/, newStr: "$1 $2"},
+  // ];
+  //
+  // for (var i = 0; i < replaceStrArr.length; i++) {
+  //   if(replaceStrArr[i].oldStr.test(string)){
+  //     string = string.replace(replaceStrArr[i].oldStr, replaceStrArr[i].newStr).trim();
+  //     //break;
+  //   }
+  // }
 
 
-  // while("*©®ǂ‡†±+→§™¹›∞•◊ΔÐð_|".indexOf(string[string.length-1]) !== -1) string = string.slice(0, string.length-1);
-  // while("*©®ǂ‡†±+→§™¹›∞•◊ΔÐð_".indexOf(string[0]) !== -1) string = string.slice(1);
+  while("*©®ǂ‡†±+→§™¹›∞•◊ΔÐð_|^".indexOf(string[string.length-1]) !== -1) string = string.slice(0, string.length-1);
+  while("*©®ǂ‡†±+→§™¹›∞•◊ΔÐð_^".indexOf(string[0]) !== -1) string = string.slice(1);
 
   return string;
 }

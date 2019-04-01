@@ -703,6 +703,10 @@ function transform(data) {
 
   var replaceStrings = [
     {oldStr:/[\*©®ǂ‡†±→§™¹›]/g, newStr: ""},
+    {oldStr: /[&#42;]/, newStr: ""}
+
+
+
     //{oldStr: //i, newStr: ""},
     //{oldStr: //i, newStr: ""},
     //{oldStr: //i, newStr: ""},
@@ -1019,3 +1023,10 @@ function transform(data){
   .join(". ")
   .replace(/~~~/g,".");
 }
+
+
+
+var t0 = performance.now();
+transform(str7);
+var t1 = performance.now();
+console.log("Call to doSomething took " + (t1 - t0) + " milliseconds.");

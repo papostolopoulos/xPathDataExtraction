@@ -1,180 +1,381 @@
 {
   "extract": {
+    "edgeRules": [],
+    "entityNS": null,
+    "entityRules": [
+      {
+        "attributes": [],
+        "entityIdRef": "",
+        "id": "f66018c8-423b-459b-b55a-c639d92daf68",
+        "javascript": null,
+        "locations": [
+          "/"
+        ],
+        "repeating": true,
+        "type": "http://schema.org/Coupon"
+      }
+    ],
     "extractEmbedded": false,
-    "source": null,
     "schema": [
       {
-        "url": "http://ws.rmf.yahoo.com:4080/rmf/v1/schema?type=schema.org&name=y.2.0&format=json",
-        "ns": "http://schema.org",
         "context": {
           "@type": [
             "Coupon"
           ]
+        },
+        "ns": "http://schema.org",
+        "url": "http://ws.rmf.yahoo.com:4080/rmf/v1/schema?type=schema.org&name=y.2.0&format=json"
+      }
+    ],
+    "source": null
+  },
+  "extractLn": {
+    "edgeRules": [
+      {
+        "cardinality": "ONE_TO_ONE",
+        "from": {
+          "entityRule": "b4917ca5-ee83-4569-87c7-37feef5474af",
+          "matchAttr": null
+        },
+        "predicate": "http://schema.org/broker",
+        "to": {
+          "entityRule": "b4917ca5-ee83-4569-87c7-37feef5474au",
+          "matchAttr": null
+        }
+      },
+      {
+        "cardinality": "ONE_TO_ONE",
+        "from": {
+          "entityRule": "b4917ca5-ee83-4569-87c7-37feef5474af",
+          "matchAttr": null
+        },
+        "predicate": "http://schema.org/image",
+        "to": {
+          "entityRule": "b4917ca5-ee83-4569-87c7-37feef5474aj",
+          "matchAttr": null
         }
       }
     ],
     "entityRules": [
       {
-        "id": "d9b17155-c4a3-4ced-b138-1a4034764d88",
-        "repeating": true,
-        "locations": [
-          "/descendant::img[contains(translate(@alt,\"OF\",\"of\"),\" off\") and (contains(@alt,\"%\") or contains(@alt,\"$\")) and not(contains(translate(@alt,\"FRESHIP\",\"freship\"),\"free ship\") or contains(@alt,\"BOGO\")) or\ncontains(translate(@alt,\"REWAD\",\"rewad\"),\"reward\") and contains(@alt, \"$\")]\n[not(contains(translate(@alt, \"ANULSE\", \"anulse\"), \"annual sale\"))]\n|\n/descendant::img[contains(translate(@alt, \"ANULSE\", \"anulse\"), \"annual sale\")][1]\n|\n/descendant::img[contains(translate(@alt,\"FRE\",\"fre\"),\"free\") and contains(translate(@alt,\"GET\",\"get\"),\"get\")][1]\n|\n/descendant::img[contains(@alt,\"BOGO\")][1]\n|\n/descendant::img[contains(translate(@alt,\"FRESHIP\",\"freship\"),\"free ship\") and contains(translate(@alt,\"OF\",\"of\"),\" off\")][1]\n"
-        ],
-        "type": "http://schema.org/Coupon",
-        "javascript": null,
-        "entityIdRef": "",
         "attributes": [
           {
-            "repeating": false,
-            "locations": {
-              "-1": [
-                {
-                  "xpath": "./@alt"
-                }
-              ]
-            },
-            "name": "http://schema.org/description",
-            "relative": true,
-            "transient": false,
-            "javascript": "function transform(data){\n   if (data) {\n       var v= data.replace(/\\*|\\†/g, \"\").replace(/Sho p/, \"shop\").replace(/shop now/i, \"\");\n       return v; }\nelse \n  return \"\"; }",
+            "blackList": [],
+            "concat": "true",
             "dataTypes": [
               "Text"
             ],
-            "mandatory": false
-          },
-          {
-            "repeating": false,
-            "locations": {
-              "-1": [
-                {
-                  "xpath": "./ancestor::a/@href"
-                }
-              ]
-            },
-            "name": "http://schema.org/url",
-            "relative": true,
-            "transient": false,
-            "javascript": null,
-            "dataTypes": [
-              "URL"
+            "javascript": "function transform(data){\n  var negRegexArr = [\n    /Advantage\\s*Card/i\n  ];\n\n  for (var i = 0; i < negRegexArr.length; i++) {\n    if (negRegexArr[i].test(data)) return null;\n  }\n\n\n  var posRegexArr = [\n    /[£€]\\d+\\s*worth\\s*of\\s*points/i,\n    /1\\/2\\s*price/i,\n    /\\d+\\s*points/i,\n    /triple\\s*points/i,\n    /3\\s*for\\s*two/i,\n    /\\d{1,2}%\\s*off/i,\n    /buy\\s*\\d\\s*get/i,\n    /save\\s*up\\s*to/i,\n    /save\\s*[£€]\\d/i,\n    /save\\s*\\d{1,2}%/i,\n  ];\n\n  for (var j = 0; j < posRegexArr.length; j++) {\n    if (posRegexArr[j].test(data)) return data.length > 80 ? minimizeMe(data, posRegexArr[j]) : cleanMe(data);\n  }\n\n  return null;\n}\n\n\n\n\n\nfunction minimizeMe(str, reg){\n  var punctuation = [\". \", \"! \", \"| \", \"? \",\".*\"]; //Punctuation symbols\n  str = str.replace(/(\\.)([A-z])/g, \"$1 $2\");\n\n  //STAGE 1 - Slice text at the beginning of string\n  var sliceStr = str.slice(0, str.indexOf(str.match(reg)[0])); //Create a substring from the beginning of string up to the beginning of the .match()\n  var sliceStart = 0; //Define a variable where the slice at the beginning of the initial string will happen.\n\n\n  //Iterate through the punctuation symbols.\n  //If the last Index position of the punctuation is larger than the sliceStart variable,\n  //then make the variable equal to the last index position.\n  //That will be later used to slice the string at its beginning\n  for (var i = 0; i < punctuation.length; i++) {\n    if(sliceStr.lastIndexOf(punctuation[i]) > sliceStart) sliceStart = sliceStr.lastIndexOf(punctuation[i]);\n  }\n  //Slice the string from the beginning of the last punctuation mark but before the coupon description.\n  if(sliceStart > 0) str = str.slice(sliceStart + 1).trim();\n\n\n\n\n  //STAGE 2 - Slice text at the end of string\n  var sliceEnd = +Infinity;\n  //Iterate through the punctuation symbols.\n  //If the punctuation symbol's index position is smaller than the sliceEnd variable, then\n  //make the sliceEnd variable equal to the index position of the punctuation.\n  //The sliceEnd will be used as the position where the slicing of the string will happen at it's end.\n  for (var j = 0; j < punctuation.length; j++) {\n    if (str.indexOf(punctuation[j]) < sliceEnd && str.indexOf(punctuation[j]) !== -1) sliceEnd = str.indexOf(punctuation[j]);\n  }\n  //Slice the end of the string\n  str = str.slice(0, sliceEnd).trim();\n\n\n\n  //STAGE 3 - Remove unecessary characters from the end of the string.\n  return cleanMe(str);\n}\n\n\nfunction cleanMe(string) {\n  var replaceArr = [\n    {oldStr: /(Show\\s*Menu|see\\s*how\\s*easy\\s*it\\s*is|[-\\|]\\s*online\\s*only|Hurry,\\s*ends|\\|\\s*advantage\\s*time(\\s*is\\s*here!)?|www).*/i, newStr: \"\"},\n    {oldStr: /\\*/g, newStr: \"\"},\n    {oldStr: /^Online\\s*only(\\s*-)?/i, newStr: \"\"},\n  ];\n\n  replaceArr.forEach(function(el) {\n    string = string.replace(el.oldStr, el.newStr);\n  });\n  \n  while(\"*^†\".indexOf(string[string.length-1]) !== -1) string = string.slice(0, string.length-1);\n  while(\"*^†\".indexOf(string[0]) !== -1) string = string.slice(1);\n\n  return string;\n}",
+            "listOfValidNodeTypes": [
+              {
+                "name": "TEXT",
+                "type": "node"
+              },
+              {
+                "name": "ALT",
+                "type": "attr"
+              },
+              {
+                "name": "HREF",
+                "type": "attr"
+              }
             ],
-            "mandatory": false
+            "location": [
+              {
+                "xpath": ""
+              }
+            ],
+            "mandatory": "true",
+            "maxLength": "200",
+            "minLength": "4",
+            "allowEmpty": "false",
+            "name": "http://schema.org/description",
+            "whiteList": [
+              {
+                "value": "save",
+                "type": "SUBSTRING"
+              },
+              {
+                "value": "£",
+                "type": "SUBSTRING"
+              },
+              {
+                "value": "3 for 2",
+                "type": "SUBSTRING"
+              },
+              {
+                "value": "1/2 price",
+                "type": "SUBSTRING"
+              },
+              {
+                "value": "%",
+                "type": "SUBSTRING"
+              },
+              {
+                "value": "€",
+                "type": "SUBSTRING"
+              },
+              {
+                "value": "points",
+                "type": "SUBSTRING"
+              }
+            ]
           },
           {
-            "repeating": false,
-            "locations": {
-              "-1": [
-                {
-                  "xpath": "concat(./@alt, \"~~~\", /descendant::text()[contains(translate(., \"SOMAINTE\", \"somainte\"), \"soma intimates\")]/ancestor::table[1])"
-                }
-              ]
-            },
-            "name": "http://schema.org/validThrough",
-            "relative": true,
-            "transient": false,
-            "javascript": "function transform(data, node, headers){\n  var dataSpl = data.split(\"~~~\");\n  var coupon = dataSpl[0].toLowerCase();\n  var vtDates = dataSpl[1].toLowerCase();\n  var slicer;\n  \n    \n    \n    //When coupon reads \"get $10 off when you spend $85\"\n    if(/Get\\s*\\$\\d{1,2}\\s*off\\s*when\\s*you\\s*spend\\s*\\$\\d{1,2}/i.test(coupon)) return vtDates.replace(/.*From\\s*(?:\\d{1,2}\\/){2}\\d{2,4}\\s*-\\s*((?:\\d{1,2}\\/){2}\\d{2,4}).*/i,\"$1\");\n\n\n\n  \n  //When coupon reads \"free shipping\" or reads \"NN% off\"\n  if (/free\\s*shipping.*/i.test(coupon)) slicer = /free\\s*(parcel\\s*post\\s*)?shipping/i;\n  if (/\\d{1,2}%\\s*off/i.test(coupon)) slicer = new RegExp(coupon.replace(/.*(\\d{2}%\\s*off).*/i, \"$1\"), \"i\");\n\n  if (slicer.test(vtDates)) {\n    vtDates = vtDates.slice(vtDates.search(slicer));\n    vtDates = vtDates.slice(vtDates.toLowerCase().indexOf(\"valid through\") + 14);\n    vtDates = vtDates.slice(0, vtDates.indexOf(\".\"));\n    return vtDates;\n  }\n\n\n\n  \n  //When the offer reads \"Ends today\"\n  if (coupon.toLowerCase().indexOf(\"ends today\") !== -1) {\n    var n = headers.get(\"Date\");\n    var n1 = new Date(n * 1000);\n    var day1 = n1.getDate();\n    var mon1 = n1.getMonth();\n    var vt = new Date(\"1970\", mon1, day1);\n    return vt;\n  }\n\n\n\n  return data;\n\n}",
+            "blackList": [
+              {
+                "type": "SUBSTRING",
+                "value": "sale ends"
+              },
+              {
+                "type": "SUBSTRING",
+                "value": "valid through"
+              },
+              {
+                "type": "SUBSTRING",
+                "value": "ends"
+              }
+            ],
             "dataTypes": [
               "DateTime"
             ],
-            "mandatory": false
-          }
-        ],
-        "hints": {
-          "_footer": "/descendant::text()[contains(translate(., \"SOMAINTE\", \"somainte\"), \"soma intimates\")]/ancestor::table[1]"
-        },
-        "hintsJavascript": null
-      },
-      {
-        "id": "ead2e8cf-62e1-45fc-8b93-4e6c9645a508",
-        "repeating": true,
-        "locations": [
-          "/descendant::img[contains(translate(@alt,\"OF\",\"of\"),\" off\") and (contains(@alt,\"%\") or contains(@alt,\"$\")) and not(contains(translate(@alt,\"FRESHIP\",\"freship\"),\"free ship\") or contains(@alt,\"BOGO\")) or\ncontains(translate(@alt,\"REWAD\",\"rewad\"),\"reward\") and contains(@alt, \"$\")]\n[not(contains(translate(@alt, \"ANULSE\", \"anulse\"), \"annual sale\"))]\n|\n/descendant::img[contains(translate(@alt, \"ANULSE\", \"anulse\"), \"annual sale\")][1]\n|\n/descendant::img[contains(translate(@alt,\"FRE\",\"fre\"),\"free\") and contains(translate(@alt,\"GET\",\"get\"),\"get\")][1]\n|\n/descendant::img[contains(@alt,\"BOGO\")][1]\n|\n/descendant::img[contains(translate(@alt,\"FRESHIP\",\"freship\"),\"free ship\") and contains(translate(@alt,\"OF\",\"of\"),\" off\")][1]\n"
-        ],
-        "type": "http://schema.org/Organization",
-        "javascript": null,
-        "entityIdRef": null,
-        "attributes": [
+            "javascript": "function transform(data) {if (data) {var monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];var regex = /(\\s*\\d+)\\/(\\s*\\d+)/i;var match = regex.exec(data);if (match && match[1]) {return monthNames[match[1] - 1] + ', ' + match[2];}else{return data;}}return null;}",
+            "listOfValidNodeTypes": null,
+            "location": null,
+            "mandatory": "true",
+            "maxLength": -1,
+            "minLength": -1,
+            "name": "http://schema.org/validThrough"
+          },
           {
-            "repeating": false,
-            "locations": {
-              "-1": [
-                {
-                  "xpath": "\"Soma\""
-                }
-              ]
-            },
-            "name": "http://schema.org/name",
-            "relative": true,
-            "transient": false,
+            "blackList": [
+              {
+                "type": "SUBSTRING",
+                "value": "sale ends"
+              },
+              {
+                "type": "SUBSTRING",
+                "value": "valid through"
+              },
+              {
+                "type": "SUBSTRING",
+                "value": "ends"
+              }
+            ],
+            "dataTypes": [
+              "DateTime"
+            ],
+            "javascript": "function transform(data) {if (data) {var monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];var regex = /(\\s*\\d+)\\/(\\s*\\d+)/i;var match = regex.exec(data);if (match && match[1]) {return monthNames[match[1] - 1] + ', ' + match[2];}else{return data;}}return null;}",
+            "listOfValidNodeTypes": null,
+            "location": null,
+            "mandatory": "true",
+            "maxLength": -1,
+            "minLength": -1,
+            "name": "http://schema.org/validFrom"
+          },
+          {
+            "blackList": [
+              {
+                "type": "REGEX",
+                "value": "\\$.*off$"
+              }
+            ],
+            "dataTypes": [
+              "Number"
+            ],
             "javascript": null,
+            "listOfValidNodeTypes": null,
+            "location": null,
+            "mandatory": "true",
+            "maxLength": -1,
+            "minLength": -1,
+            "name": "http://schema.org/offerPrice",
+            "whiteList": [
+              {
+                "type": "SUBSTRING",
+                "value": "Free shipping"
+              }
+            ]
+          },
+          {
+            "blackList": [
+              {
+                "type": "REGEX",
+                "value": "\\$.*off$"
+              }
+            ],
+            "dataTypes": [
+              "Number"
+            ],
+            "javascript": null,
+            "listOfValidNodeTypes": null,
+            "location": null,
+            "mandatory": "true",
+            "maxLength": -1,
+            "minLength": -1,
+            "name": "http://schema.org/originalPrice",
+            "whiteList": [
+              {
+                "type": "SUBSTRING",
+                "value": "Free shipping"
+              }
+            ]
+          },
+          {
+            "blackList": null,
             "dataTypes": [
               "Text"
             ],
-            "mandatory": false
+            "javascript": "function transform(data){content=data.trim();if(content&&content.startsWith('C$')){return'CAD'}else if(content&&content.startsWith('$')){return'USD'}else{return null}};",
+            "listOfValidNodeTypes": null,
+            "location": null,
+            "mandatory": "true",
+            "maxLength": -1,
+            "minLength": -1,
+            "name": "http://schema.org/priceCurrency",
+            "whiteList": null
+          },
+          {
+            "blackList": null,
+            "dataTypes": [
+              "Text"
+            ],
+            "javascript": "",
+            "listOfValidNodeTypes": null,
+            "location": null,
+            "mandatory": "true",
+            "maxLength": -1,
+            "minLength": -1,
+            "name": "http://schema.org/url",
+            "whiteList": null
           }
-        ]
+        ],
+        "bundleInfo": {
+          "minBundleSize": "-1",
+          "maxBundleSize": "-1",
+          "minLeafNodesSize": "-1",
+          "maxLeafNodesSize": "-1",
+          "maxDepth": "-1",
+          "defaultPatternAnnotationThreshold": "0.8",
+          "linkThreshold": "2",
+          "dedupCondition": {
+              "matchThreshold": 0.4,
+              "stopWords": ["save 10%"]
+          },
+          "listOfValidNodeTypes": [],
+          "linkMatcher": [
+            {
+              "regex": ".*boots.com.*"
+            }
+          ]
+        },
+        "id": "b4917ca5-ee83-4569-87c7-37feef5474af",
+        "javascript": null,
+        "type": "http://schema.org/Coupon"
       },
       {
-        "id": "5049508a-d05b-48e3-8c1c-b58f0f8fa4c5",
-        "repeating": true,
-        "locations": [
-          "/descendant::img[contains(translate(@alt,\"OF\",\"of\"),\" off\") and (contains(@alt,\"%\") or contains(@alt,\"$\")) and not(contains(translate(@alt,\"FRESHIP\",\"freship\"),\"free ship\") or contains(@alt,\"BOGO\")) or\ncontains(translate(@alt,\"REWAD\",\"rewad\"),\"reward\") and contains(@alt, \"$\")]\n[not(contains(translate(@alt, \"ANULSE\", \"anulse\"), \"annual sale\"))]\n|\n/descendant::img[contains(translate(@alt, \"ANULSE\", \"anulse\"), \"annual sale\")][1]\n|\n/descendant::img[contains(translate(@alt,\"FRE\",\"fre\"),\"free\") and contains(translate(@alt,\"GET\",\"get\"),\"get\")][1]\n|\n/descendant::img[contains(@alt,\"BOGO\")][1]\n|\n/descendant::img[contains(translate(@alt,\"FRESHIP\",\"freship\"),\"free ship\") and contains(translate(@alt,\"OF\",\"of\"),\" off\")][1]\n"
-        ],
-        "type": "http://schema.org/ImageObject",
-        "javascript": null,
-        "entityIdRef": null,
         "attributes": [
           {
-            "repeating": false,
-            "locations": {
-              "-1": [
-                {
-                  "xpath": "./@src"
-                }
-              ]
-            },
-            "name": "http://schema.org/url",
-            "relative": true,
-            "transient": false,
-            "javascript": null,
             "dataTypes": [
-              "URL"
+              "Text"
             ],
-            "mandatory": false
+            "javascript": null,
+            "location": [
+              {
+                "xpath": "\"Boots\""
+              }
+            ],
+            "mandatory": "true",
+            "name": "http://schema.org/name",
+            "minLength": "",
+            "maxLength": "",
+            "whiteList": [],
+            "blackList": [],
+            "listOfValidNodeTypes": []
           }
-        ]
-      }
-    ],
-    "edgeRules": [
-      {
-        "from": {
-          "entityRule": "d9b17155-c4a3-4ced-b138-1a4034764d88",
-          "matchAttr": ""
+        ],
+        "bundleInfo": {
+          "clusterAlgo": {
+            "endIdx": -1,
+            "regex": "",
+            "replaceInfo": [
+              {
+                "regexStr": "",
+                "replaceAll": "true",
+                "replacement": ""
+              }
+            ],
+            "startIdx": 0,
+            "type": "SUBSTRING"
+          },
+          "linkMatcher": [
+            {
+              "regex": ".*"
+            }
+          ],
+          "listOfValidNodeTypes": null,
+          "maxBundleSize": -1,
+          "maxDepth": -1,
+          "maxLeafNodesSize": -1,
+          "minBundleSize": -1,
+          "minLeafNodesSize": -1,
+          "defaultPatternAnnotationThreshold": 0.8,
+          "linkThreshold": 2
         },
-        "to": {
-          "entityRule": "ead2e8cf-62e1-45fc-8b93-4e6c9645a508",
-          "matchAttr": ""
-        },
-        "predicate": "http://schema.org/broker",
-        "cardinality": "ONE_TO_ONE"
+        "id": "b4917ca5-ee83-4569-87c7-37feef5474au",
+        "javascript": null,
+        "type": "http://schema.org/Organization"
       },
       {
-        "from": {
-          "entityRule": "d9b17155-c4a3-4ced-b138-1a4034764d88",
-          "matchAttr": ""
+        "attributes": [
+          {
+            "blackList": null,
+            "dataTypes": [
+              "Text"
+            ],
+            "javascript": "",
+            "listOfValidNodeTypes": null,
+            "location": null,
+            "mandatory": "true",
+            "maxLength": -1,
+            "minLength": -1,
+            "name": "http://schema.org/url",
+            "whiteList": null
+          }
+        ],
+        "bundleInfo": {
+          "clusterAlgo": {
+            "endIdx": -1,
+            "regex": "",
+            "replaceInfo": [
+              {
+                "regexStr": "",
+                "replaceAll": "true",
+                "replacement": ""
+              }
+            ],
+            "startIdx": 0,
+            "type": "SUBSTRING"
+          },
+          "linkMatcher": null,
+          "listOfValidNodeTypes": null,
+          "maxBundleSize": -1,
+          "maxDepth": -1,
+          "maxLeafNodesSize": -1,
+          "minBundleSize": -1,
+          "minLeafNodesSize": -1,
+          "linkThreshold": 2,
+          "defaultPatternAnnotationThreshold": 0.8
         },
-        "to": {
-          "entityRule": "5049508a-d05b-48e3-8c1c-b58f0f8fa4c5",
-          "matchAttr": ""
-        },
-        "predicate": "http://schema.org/image",
-        "cardinality": "ONE_TO_ONE"
+        "id": "b4917ca5-ee83-4569-87c7-37feef5474aj",
+        "javascript": null,
+        "type": "http://schema.org/ImageObject"
       }
-    ],
-    "entityNS": null
+    ]
   },
   "metaData": {
-    "useVTDXML": "true",
-    "ignoredValidations": null
+    "debug": "true",
+    "linkAlgoHandler": "LinkExtractor15",
+    "decodeHtmlEntity": "true"
   }
 }
