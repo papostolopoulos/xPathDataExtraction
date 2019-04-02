@@ -859,7 +859,7 @@
         <section class="sectionElements">
           <div class="divFunctionsSequenceArrElements">
             <div class="divFunctionsSequenceArrHeader">
-            <h3>Active Function: {{activeFunction}}</h3>
+            <h3>Active Functions</h3>
             </div>
 
             <div class="divFunctionsSequenceArrInputs">
@@ -870,13 +870,13 @@
                     <span v-once class="spanActiveFunctionTitle">
                       {{element.replace(/[/(/)]/g, "")}}:
                     </span>
-                    <input type="text" :name="idx"  :size="functionsSequenceArr[idx].toString().length + 1" v-model="functionsSequenceArr[idx]">
+                    <input type="text" :name="idx"  :size="functionsSequenceArr[idx].toString().length + 1" v-model="functionsSequenceArr[idx]" @keyup="checkAndPushToPathArray()">
                   </label>
                 </span>
 
 
                 <label v-else>
-                  <input type="text" :name="idx"  :size="functionsSequenceArr[idx].toString().length + 1" v-model="functionsSequenceArr[idx]">
+                  <input type="text" :name="idx"  :size="functionsSequenceArr[idx].toString().length + 1" v-model="functionsSequenceArr[idx]" @keyup="checkAndPushToPathArray()">
                 </label>
 
               </span>
@@ -976,7 +976,7 @@
               //this.functionsCounter --;
               this.activeFunctionArr.pop();
               this.activeFunction = this.activeFunctionArr[this.activeFunctionArr.length - 1] || "";
-              return this.checkAndPushToPathArray;
+              return this.checkAndPushToPathArray();
               // this is supposed to be added to the computed properties
               // if (this.functionsCounter === 0) {
               //   this.pathArray.push(this.functionsSequenceArr.join(""));
@@ -1092,7 +1092,7 @@
               event.target.value === "position" ||
               event.target.value === "true") {
             this.functionsSequenceArr.push(event.target.value + "()"); //Array with all the functions and params
-            return this.checkAndPushToPathArray;
+            return this.checkAndPushToPathArray();
           }
           else {
             this.functionsSequenceArr.push(event.target.value + "(");
@@ -1247,7 +1247,18 @@
           console.log("in function");
           console.log(event.target.value);
           console.log(event.target.name);
-        }
+        },
+
+
+
+
+        checkAndPushToPathArray(){
+          console.log("In checkAndPushToPathArray");
+          if (this.functionsCounter === 0) {
+            this.pathArray.push(this.functionsSequenceArr.join(""));
+            this.functionsSequenceArr = [];
+          }
+        },
 
 
       }, //End of methods
@@ -1283,14 +1294,6 @@
 
         showParamInput(){
           return this.activeFunction !== "count"
-        },
-
-        checkAndPushToPathArray(){
-          console.log("In checkAndPushToPathArray");
-          if (this.functionsCounter === 0) {
-            this.pathArray.push(this.functionsSequenceArr.join(""));
-            this.functionsSequenceArr = [];
-          }
         },
 
         functionsCounter(){
