@@ -256,7 +256,7 @@
         font-weight: bold;
       }
 
-      span::after {
+      .sectionOptions span::after {
         display: block;
         content: attr(data-bold);
         font-weight: bold;
@@ -284,8 +284,47 @@
 
       .divFunctionsSequenceArrElements{
         grid-area: divFunctionsSequenceArrElements;
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-rows: 10% 74% 6%;
+        grid-template-areas:
+        "divFunctionsSequenceArrHeader"
+        "divFunctionsSequenceArrInputs"
+        "divFunctionsConcatButton";
+        line-height: 1;
+      }
+
+      .spanActiveFunctionTitle{
+        font-weight: bold;
+        font-size: 1.3rem;
+        min-width: 450px;
+        width: 450px;
+      }
+
+      .divFunctionsSequenceArrInputs{
+        grid-area: divFunctionsSequenceArrInputs;
         overflow: auto;
         position: relative;
+      }
+
+      .divFunctionsSequenceArrInputs label input{
+        border: 2px solid rgb(128,0,32); /*Burgundy*/
+        border-radius: 5%
+      }
+
+      .divFunctionsSequenceArrInputs label input:hover{
+        background-color: rgba(255,0,255, .2); /*Magenda*/
+      }
+
+      .divFunctionsSequenceArrInputs label input:focus{
+        background-color: rgba(255, 0, 255, .4);
+        color: rgb(128,0,32);
+        outline: none;
+      }
+
+      .divFunctionsConcatButton{
+        text-align: right;
+        background-color: lightblue;
       }
 
       #buttonConcatAxes{
@@ -312,26 +351,10 @@
         outline: none;
       }
 
-      .divFunctionsSequenceArrElements label input{
-        border: 2px solid rgb(128,0,32); /*Burgundy*/
-        border-radius: 5%
-      }
-
-      .divFunctionsSequenceArrElements label input:hover{
-        background-color: rgba(255,0,255, .2); /*Magenda*/
-      }
-
-      .divFunctionsSequenceArrElements label input:focus{
-        background-color: rgba(255, 0, 255, .4);
-        color: rgb(128,0,32);
-        outline: none;
-      }
-
       .divFunctionConcatenation{
         grid-area: divFunctionConcatenation;
         word-wrap: break-word;
         overflow: auto;
-        background-color: rgb(128,0,32); /*Burgundy*/
       }
 
       .divPathArrayElements{
@@ -835,11 +858,31 @@
 
         <section class="sectionElements">
           <div class="divFunctionsSequenceArrElements">
-            <h3>Active Function elements: {{activeFunction}}</h3>
-            <label v-for="(element, idx) in functionsSequenceArr">
-              <input type="text" :name="idx"  :size="functionsSequenceArr[idx].toString().length + 1" v-model="functionsSequenceArr[idx]">
-            </label>
-            <div class="">
+            <div class="divFunctionsSequenceArrHeader">
+            <h3>Active Function: {{activeFunction}}</h3>
+            </div>
+
+            <div class="divFunctionsSequenceArrInputs">
+              <span v-for="(element, idx) in functionsSequenceArr" :key="element.id">
+                <span v-if="functionsSequenceArr[idx].toString().includes('(')">
+                  <br>
+                  <label>
+                    <span v-once class="spanActiveFunctionTitle">
+                      {{element.replace(/[/(/)]/g, "")}}:
+                    </span>
+                    <input type="text" :name="idx"  :size="functionsSequenceArr[idx].toString().length + 1" v-model="functionsSequenceArr[idx]">
+                  </label>
+                </span>
+
+
+                <label v-else>
+                  <input type="text" :name="idx"  :size="functionsSequenceArr[idx].toString().length + 1" v-model="functionsSequenceArr[idx]">
+                </label>
+
+              </span>
+            </div>
+
+            <div class="divFunctionsConcatButton">
               <input class="buttonForAction" id="buttonConcatAxes" type="button" name="" value="Concat last two axes" @click="concatFunctionElements()">
             </div>
           </div>
@@ -897,7 +940,7 @@
         attribute: "", //Attributes that are inside functions or brackets
         pathArray: [], //array with full path of all different additions
         functionsSequenceArr: [], //array of all functions and parameters that are selected
-        functionsCounter: 0
+        //functionsCounter: 0
 
       }, //End of data
       methods:{
@@ -930,7 +973,7 @@
           if (this.functionsCounter > 0) {
             this.functionsSequenceArr.push(event.target.value);
             if (event.target.value === ")") {
-              this.functionsCounter --;
+              //this.functionsCounter --;
               this.activeFunctionArr.pop();
               this.activeFunction = this.activeFunctionArr[this.activeFunctionArr.length - 1] || "";
               return this.checkAndPushToPathArray;
@@ -941,7 +984,7 @@
               // }
             }
             if(event.target.value === "("){
-              this.functionsCounter ++;
+              //this.functionsCounter ++;
               this.activeFunctionArr.push(this.activeFunctionArr[this.activeFunctionArr.length - 1]);
             }
           }
@@ -959,7 +1002,7 @@
           console.log(this.functionsSequenceArr[this.functionsSequenceArr.length - 1]);
           //When the functions counter is larger than 0 or
           //when the functionsCounter is zero but there are elements in the functionsSequenceArr
-          if ((this.functionsCounter !== 0 ||
+          if ((this.functionsCounter > 0 ||
           /[a-z]+\(\)$/.test(this.functionsSequenceArr[this.functionsSequenceArr.length - 1])) &&
           !operatorsRegex.test(this.functionsSequenceArr[this.functionsSequenceArr.length - 1])) {
             this.functionsSequenceArr.push(event.target.value);
@@ -984,7 +1027,7 @@
             return;
           }
 
-          if (this.functionsCounter !== 0 || this.functionsSequenceArr.length > 0) {
+          if (this.functionsCounter > 0 || this.functionsSequenceArr.length > 0) {
             console.log("if statemenet for adding attribute in the functionsSequenceArr");
             if (this.functionsSequenceArr[this.functionsSequenceArr.length - 1].includes("@")) {
               this.paramAlert = "An attribute already exists in the previous entry.";
@@ -1054,7 +1097,7 @@
           else {
             this.functionsSequenceArr.push(event.target.value + "(");
             this.activeFunctionArr.push(event.target.value);
-            this.functionsCounter ++;
+            //this.functionsCounter ++;
           }
         }, //End of addFunction
 
@@ -1248,6 +1291,11 @@
             this.pathArray.push(this.functionsSequenceArr.join(""));
             this.functionsSequenceArr = [];
           }
+        },
+
+        functionsCounter(){
+          return this.functionsSequenceArr.join("").replace(/[^\(]/g,"").length -
+          this.functionsSequenceArr.join("").replace(/[^\)]/g,"").length;
         }
       }, //end of computed properties
       mounted() {
@@ -1255,41 +1303,6 @@
       }
     });
 
-
-    /*
-    params input could be hidden when the following functions are running,
-    count
-
-    boolean( expression )
-    ceiling(number )
-    choose( boolean , object1, object2 )
-    concat(string1 ,string2 [,stringn]* )
-    contains(haystack, needle)
-    count(node-set )
-    element-available(QName )
-    false()
-    floor( number )
-    function-available(name )
-    lang(string )
-    last()
-    local-name( [node-set] )
-    name( [node-set] )
-    namespace-uri( [node-set] )
-    normalize-space( [string] )
-    not(expression )
-    number( [object] )
-    position()
-    round(decimal )
-    starts-with(haystack, needle)
-    string( [object] )
-    string-length( [string] )
-    substring(string ,start [,length] )
-    substring-after(haystack ,needle )
-    substring-before(haystack ,needle )
-    sum(node-set )
-    translate(string, abc, XYZ)
-    true()
-    */
 
   </script>
 
