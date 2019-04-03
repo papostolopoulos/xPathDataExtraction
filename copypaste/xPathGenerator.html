@@ -17,11 +17,13 @@
         grid-template-rows: 85vh 15vh;
         grid-template-columns: 60vw 40vw;
         grid-template-areas:
+
         "sectionOptions sectionElements"
         "sectionResult sectionResult";
       }
 
       .sectionOptions{
+        grid-area: sectionOptions;
         display: grid;
         grid-template-columns: 45% 55%;
         grid-template-rows: 60% 3% 17% 20%;
@@ -239,10 +241,6 @@
         justify-content: center;
       }
 
-      .sectionElements, .sectionResult{
-        padding: 10px;
-      }
-
       h3, h4{
         text-align: center;
       }
@@ -267,14 +265,14 @@
 
       .sectionElements{
         grid-area: sectionElements;
-        background: lightyellow;
         display: grid;
         grid-template-columns: 100%;
         grid-template-rows: 40% 15% 45%;
         grid-template-areas:
         "divFunctionsSequenceArrElements"
         "divFunctionConcatenation"
-        "divPathArrayElements"
+        "divPathArrayElements";
+        background-color: rgb(245,245,245);
       }
 
       .sectionElements input{
@@ -282,16 +280,28 @@
         padding: 5px 0 5px 5px;
       }
 
+      .divFunctionsSequenceArrElements,
+      .divFunctionConcatenation,
+      .divPathArrayElements{
+        padding: 10px;
+      }
+
       .divFunctionsSequenceArrElements{
         grid-area: divFunctionsSequenceArrElements;
         display: grid;
         grid-template-columns: 100%;
-        grid-template-rows: 10% 74% 6%;
+        grid-template-rows: 10% 75% 15%;
         grid-template-areas:
         "divFunctionsSequenceArrHeader"
         "divFunctionsSequenceArrInputs"
         "divFunctionsConcatButton";
         line-height: 1;
+        border-top: 2px solid rgb(128,0,32);
+        border-right: 2px solid rgb(128,0,32);
+      }
+
+      .divFunctionsSequenceArrElements h3{
+        color: rgb(128,0,32);
       }
 
       .spanActiveFunctionTitle{
@@ -299,6 +309,7 @@
         font-size: 1.3rem;
         min-width: 450px;
         width: 450px;
+        color: rgb(128,0,32);
       }
 
       .divFunctionsSequenceArrInputs{
@@ -309,7 +320,8 @@
 
       .divFunctionsSequenceArrInputs label input{
         border: 2px solid rgb(128,0,32); /*Burgundy*/
-        border-radius: 5%
+        border-radius: 5%;
+        margin: 2px;
       }
 
       .divFunctionsSequenceArrInputs label input:hover{
@@ -323,18 +335,17 @@
       }
 
       .divFunctionsConcatButton{
-        text-align: right;
-        background-color: lightblue;
+        display: flex;
+        justify-content: flex-end;
+        align-content: flex-end;
       }
 
       #buttonConcatAxes{
-        /* right:0;
-        bottom:0;
-        position: relative; */
-        padding: 5px;
+        padding: 3px;
         font-weight: bold;
         color: rgb(128,0,32);
         border: 2px solid rgb(128,0,32);
+        margin: 0;
       }
 
       #buttonConcatAxes:hover{
@@ -355,11 +366,23 @@
         grid-area: divFunctionConcatenation;
         word-wrap: break-word;
         overflow: auto;
+        border-top: 2px solid rgb(47,79,79); /*dark slate gray*/
+        border-right: 2px solid rgb(47,79,79);
+      }
+
+      .divFunctionConcatenation h3{
+        color: rgb(47,79,79);
       }
 
       .divPathArrayElements{
         grid-area: divPathArrayElements;
         overflow: auto;
+        border-top: 2px solid rgb(0,0,128); /*Navy blue*/
+        border-right: 2px solid rgb(0,0,128); /*Navy blue*/
+      }
+
+      .divPathArrayElements h3{
+        color: rgb(0,0,128);
       }
 
       .divPathArrayElements label input{
@@ -379,7 +402,69 @@
 
       .sectionResult{
         grid-area: sectionResult;
-        background: lightgray;
+        display: grid;
+        grid-template-columns: 18vw 82vw;
+        grid-template-rows: 100%;
+        grid-template-areas:
+        "divFooter divResult"
+      }
+
+      .divFooter{
+        background-color: black;
+        color: white;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        flex-flow: column wrap;
+      }
+
+      .divFooter a{
+        color: white;
+      }
+
+      .divResult{
+        border: 2px solid black;
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-rows: 20% 80%;
+        grid-template-areas:
+        "divResultHeader"
+        "divResultTextArea";
+        background-color: rgb(220, 220, 220);
+      }
+
+      #textAreaFullPath{
+        width: 100%;
+        height: 100%;
+        padding: 5px;
+      }
+
+      .divResultTextArea{
+        padding: 10px;
+        position: relative;
+      }
+
+      #buttonCopyxPath{
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+        border: 2px solid black;
+        font-weight: bold;
+      }
+
+      #buttonCopyxPath:hover{
+        pointer: cursor;
+        background-color: rgba(0,0,0, .4);
+
+      }
+
+      #buttonCopyxPath:active{
+        background-color: black;
+        color: white;
+      }
+
+      #buttonCopyxPath:focus{
+        outline: none;
       }
 
     </style>
@@ -613,7 +698,7 @@
 
 
           <div class="functions">
-            <h3>Function</h3>
+            <h3>Functions</h3>
             <div class="divFunctionsInputs">
               <label>
                 <input type="radio" name="activeFunction" value="" v-model="activeFunction" disabled>
@@ -809,7 +894,7 @@
                 <span data-bold="---@value">@value</span>
               </label>
               <label>
-                <input type="text" name="attribute" value="" v-model="attribute" @keyup.enter="addAttributes($event)" size="12">
+                <input type="text" name="attribute" value="" v-model="attribute" @keyup.enter="addAttributes($event)" size="8">
                 <span data-bold="---Other">Other</span>
               </label>
             </div>
@@ -864,7 +949,7 @@
 
             <div class="divFunctionsSequenceArrInputs">
               <span v-for="(element, idx) in functionsSequenceArr" :key="element.id">
-                <span v-if="functionsSequenceArr[idx].toString().includes('(')">
+                <span v-if="functionsSequenceArr[idx].toString().includes('(') && !functionsSequenceArr[idx].toString().includes('/')">
                   <br>
                   <label>
                     <span v-once class="spanActiveFunctionTitle">
@@ -888,12 +973,12 @@
           </div>
 
           <div class="divFunctionConcatenation">
-            <h3>Concatenated Functions</h3>
+            <h3>Concatenated Function elements</h3>
             {{functionsSequenceArrJoin}}
           </div>
 
           <div class="divPathArrayElements">
-            <h3>xPath elements</h3>
+            <h3>All elements</h3>
             <label v-for="(element, idx) in pathArray">
               <input type="text" :name="idx" :size="pathArray[idx].toString().length" v-model="pathArray[idx]">
             </label>
@@ -902,9 +987,31 @@
         <!-- End of section Elements -->
 
         <section class="sectionResult">
-          Result displayed here: {{fullPath}}
+
+          <div class="divFooter">
+            <h3>xPath Generator</h3>
+            <h5><a href="http://addeventlistener.xyz" target="_blank">@papostolopoulos - 2019</a></h5>
+          </div>
+
+          <div class="divResult">
+            <div class="divResultHeader">
+              <h3>xPath Result</h3>
+            </div>
+
+            <div class="divResultTextArea">
+              <!-- Result displayed here: {{fullPath}} -->
+              <textarea name="textAreaFullPath" id="textAreaFullPath" :value="fullPath"></textarea>
+              <br>
+              <label for="">
+                <input type="button" name="buttonCopyxPath" id="buttonCopyxPath" value="Copy xPath" @click="copyxPath()">
+              </label>
+            </div>
+
+          </div>
+
         </section>
         <!-- End of section Result -->
+
 
       </div><!-- End of divContainer -->
     </main>
@@ -1086,6 +1193,17 @@
 
 
           console.log("In add function. The counter before the addition is:", this.functionsCounter);
+
+          //Add a comma before if the previous entry is a parameter and not a function
+          if (this.functionsSequenceArr.length > 0) {
+            let lastElement = this.functionsSequenceArr[this.functionsSequenceArr.length-1];
+            if (!/[\(\)]/.test(lastElement[lastElement.length - 1]) &&
+            !lastElement[lastElement.length - 1].includes("node()")) {
+              this.functionsSequenceArr.push(",");
+            }
+          }
+
+          //If the functions do not take any parameters, then open and close the parenthesis
           if (event.target.value === "current" ||
               event.target.value === "false" ||
               event.target.value === "last" ||
@@ -1094,6 +1212,7 @@
             this.functionsSequenceArr.push(event.target.value + "()"); //Array with all the functions and params
             return this.checkAndPushToPathArray();
           }
+          // otherwise just open the parenthesis
           else {
             this.functionsSequenceArr.push(event.target.value + "(");
             this.activeFunctionArr.push(event.target.value);
@@ -1261,10 +1380,27 @@
         },
 
 
+
+        copyxPath(){
+          document.getElementById("textAreaFullPath").select();
+          document.execCommand("copy");
+        }
+
+
       }, //End of methods
       computed: {
         fullPath(){
-          return this.pathArray.join("");
+          let fullPath = this.pathArray.join("");
+          let replaceStrArr = [
+            {oldStr: /\)or/g, newStr: "or\n"},
+            {oldStr: /\|/g, newStr: "\n|\n"}
+          ];
+
+          replaceStrArr.forEach(function(el){
+            fullPath = fullPath.replace(el.oldStr, el.newStr);
+          });
+
+          return fullPath;
         },
 
         functionsSequenceArrJoin(){
