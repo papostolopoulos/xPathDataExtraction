@@ -456,7 +456,6 @@
       #buttonCopyxPath:hover{
         pointer: cursor;
         background-color: rgba(0,0,0, .4);
-
       }
 
       #buttonCopyxPath:active{
@@ -474,20 +473,31 @@
 
       .spanBubble{
         position: absolute;
-        max-width: 150px;
+        width: 150px;
         font-size: .8em;
         font-weight: bold;
-        background-color: #555;
         padding: 5px;
         color: white;
         border-radius: 7%;
         font-family: arial;
         /* margin-top: 10px;
         margin-left: -5px; */
-        z-index: 1;
+        z-index: 0;
         opacity: 0;
         visibility: 0;
         transition: opacity 0.3s;
+      }
+
+      .branches .spanBubble{
+        background-color: rgba(0,0,128, .8);
+      }
+
+      .divLabelContainer{
+        position: relative;
+      }
+
+      .divLabelContainer label{
+        display: inline-block;
       }
 
       .spanBubble code{
@@ -498,6 +508,7 @@
       label:hover + .spanBubble{
         visibility: visible;
         opacity: 1;
+        z-index: 1;
       }
 
     </style>
@@ -563,8 +574,7 @@
                   <input type="radio" value="//" name="axisOption" v-model="axis">
                   <span data-bold="---// (descendant-or-self::)">// (descendant-or-self::)</span>
                 </label>
-                <span class="spanBubble"></span>
-                <!-- <span class="spanBubble">Select existing node or nested nodes. Use <code></code> if you want to shortcut your xpath</span> -->
+                <span class="spanBubble">Select descendants or existing node. Use <code>//</code> if you want to shortcut your xPath</span>
               </div>
               <div class="divLabelContainer">
                 <label>
@@ -580,55 +590,91 @@
                 </label>
                 <span class="spanBubble">Select the ancestors of the current node (parents, grandparents etc) or the node itself</span>
               </div>
-              <label>
-                <input type="radio" value="/attribute::" name="axisOption" v-model="axis">
-                <span data-bold="/attribute:: (@)">/attribute:: (@)</span>
-              </label>
-              <label>
-                <input type="radio" value="/child::" name="axisOption" v-model="axis">
-                <span data-bold="---/child::">/child::</span>
-              </label>
-              <label>
-                <input type="radio" value="/descendant::" name="axisOption" v-model="axis">
-                <span data-bold="---/descendant::">/descendant::</span>
-              </label>
-              <label>
-                <input type="radio" value="/descendant-or-self::" name="axisOption" v-model="axis">
-                <span data-bold="---/descendant-or-self::">/descendant-or-self::</span>
-              </label>
-              <label>
-                <input type="radio" value="/following::" name="axisOption" v-model="axis">
-                <span data-bold="---/following::">/following::</span>
-              </label>
-              <label>
-                <input type="radio" value="/following-sibling::" name="axisOption" v-model="axis">
-                <span data-bold="---/following-sibling::">/following-sibling::</span>
-              </label>
-              <label>
-                <input type="radio" value="/namespace::" name="axisOption" v-model="axis">
-                <span data-bold="---/namespace::">/namespace::</span>
-              </label>
-              <label>
-                <input type="radio" value="/parent::" name="axisOption" v-model="axis">
-                <span data-bold="---/parent::">/parent::</span>
-              </label>
-              <label>
-                <input type="radio" value="/preceding::" name="axisOption" v-model="axis">
-                <span data-bold="---/preceding::">/preceding::</span>
-              </label>
-              <label>
-                <input type="radio" value="/preceding-sibling::" name="axisOption" v-model="axis">
-                <span data-bold="---/preceding-sibling::">/preceding-sibling::</span>
-              </label>
-              <label>
-                <input type="radio" value="/self::" name="axisOption" v-model="axis">
-                <span data-bold="---/self::">/self::</span>
-              </label>
-              <label>
-                <input type="text" name="addNode" v-model="node" @keyup.enter="addBranch($event)" size="12">
-                <span data-bold="---Node">Node</span>
-              </label>
-            </div>
+              <div class="divLabelContainer">
+                <label>
+                  <input type="radio" value="/attribute::" name="axisOption" v-model="axis">
+                  <span data-bold="/attribute:: (@)">/attribute:: (@)</span>
+                </label>
+                <span class="spanBubble">Select an attribute of the existing node. Use <code>@SomeAttribute</code> to shortcut your xpath</span>
+              </div>
+              <div class="divLabelContainer">
+                <label>
+                  <input type="radio" value="/child::" name="axisOption" v-model="axis">
+                  <span data-bold="---/child::">/child::</span>
+                </label>
+                <span class="spanBubble">Select any of the immediate children of the current node</span>
+              </div>
+              <div class="divLabelContainer">
+                <label>
+                  <input type="radio" value="/descendant::" name="axisOption" v-model="axis">
+                  <span data-bold="---/descendant::">/descendant::</span>
+                </label>
+                <span class="spanBubble">Select the descendants of the current node (children, grandchildren etc)</span>
+              </div>
+              <div class="divLabelContainer">
+                <label>
+                  <input type="radio" value="/descendant-or-self::" name="axisOption" v-model="axis">
+                  <span data-bold="---/descendant-or-self::">/descendant-or-self::</span>
+                </label>
+                <span class="spanBubble">Select the descendants of the current node (children, grandchildren etc) or the node itself</span>
+              </div>
+              <div class="divLabelContainer">
+                <label>
+                  <input type="radio" value="/following::" name="axisOption" v-model="axis">
+                  <span data-bold="---/following::">/following::</span>
+                </label>
+                <span class="spanBubble">Select the nodes that are following the current node (siblings or other branches in the document)</span>
+              </div>
+              <div class="divLabelContainer">
+                <label>
+                  <input type="radio" value="/following-sibling::" name="axisOption" v-model="axis">
+                  <span data-bold="---/following-sibling::">/following-sibling::</span>
+                </label>
+                <span class="spanBubble">Select the immediate siblings that follow the current node</span>
+              </div>
+              <div class="divLabelContainer">
+                <label>
+                  <input type="radio" value="/namespace::" name="axisOption" v-model="axis">
+                  <span data-bold="---/namespace::">/namespace::</span>
+                </label>
+                <span class="spanBubble">Select the namespace nodes of the current node</span>
+              </div>
+              <div class="divLabelContainer">
+                <label>
+                  <input type="radio" value="/parent::" name="axisOption" v-model="axis">
+                  <span data-bold="---/parent::">/parent::</span>
+                </label>
+                <span class="spanBubble">Select the parent of the current node</span>
+              </div>
+              <div class="divLabelContainer">
+                <label>
+                  <input type="radio" value="/preceding::" name="axisOption" v-model="axis">
+                  <span data-bold="---/preceding::">/preceding::</span>
+                </label>
+                <span class="spanBubble">Select all preceding nodes of the current node (parent, grandparents etc)</span>
+              </div>
+              <div class="divLabelContainer">
+                <label>
+                  <input type="radio" value="/preceding-sibling::" name="axisOption" v-model="axis">
+                  <span data-bold="---/preceding-sibling::">/preceding-sibling::</span>
+                </label>
+                <span class="spanBubble">Select the preceding siblings of the current node</span>
+              </div>
+              <div class="divLabelContainer">
+                <label>
+                  <input type="radio" value="/self::" name="axisOption" v-model="axis">
+                  <span data-bold="---/self::">/self::</span>
+                </label>
+                <span class="spanBubble">Select the current node itself</span>
+              </div>
+              <div class="divLabelContainer">
+                <label>
+                  <input type="text" name="addNode" v-model="node" @keyup.enter="addBranch($event)" size="12">
+                  <span data-bold="---Node">Node</span>
+                </label>
+                <span class="spanBubble">Enter the node's name (Use this input field to enter other xPath elements if needed)</span>
+              </div>
+            </div> <!-- End of divBranchesInputs -->
           </div>
 
 
