@@ -6,6 +6,7 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <title>xPath Generator</title>
 
+
     <style media="screen">
 
       *{
@@ -467,6 +468,38 @@
         outline: none;
       }
 
+      .divBranchesInputs label{
+        position: relative;
+      }
+
+      .spanBubble{
+        position: absolute;
+        max-width: 150px;
+        font-size: .8em;
+        font-weight: bold;
+        background-color: #555;
+        padding: 5px;
+        color: white;
+        border-radius: 7%;
+        font-family: arial;
+        /* margin-top: 10px;
+        margin-left: -5px; */
+        z-index: 1;
+        opacity: 0;
+        visibility: 0;
+        transition: opacity 0.3s;
+      }
+
+      .spanBubble code{
+        color: yellow;
+        font-size: 1em;
+      }
+
+      label:hover + .spanBubble{
+        visibility: visible;
+        opacity: 1;
+      }
+
     </style>
 
   </head>
@@ -487,41 +520,66 @@
 
 
             <div class="divBranchesAbsoluteRelative">
-              <label>
-                <input type="radio" name="absoluteRelativeAxis" v-model="absoluteRelativeAxis" value="absolute">
-                <span data-bold="---Absolute path">Absolute path</span>
-              </label>
-              <label>
-                <input type="radio" name="absoluteRelativeAxis" v-model="absoluteRelativeAxis" value="relative">
-                <span data-bold="---Relative path">Relative path</span>
-              </label>
+              <div class="divLabelContainer">
+                <label>
+                  <input type="radio" name="absoluteRelativeAxis" v-model="absoluteRelativeAxis" value="absolute">
+                  <span data-bold="---Absolute path">Absolute path</span>
+                </label>
+                <span class="spanBubble">Path starts from the root element (/ at the front)</span>
+              </div>
+              <div class="divLabelContainer">
+                <label>
+                  <input type="radio" name="absoluteRelativeAxis" v-model="absoluteRelativeAxis" value="relative">
+                  <span data-bold="---Relative path">Relative path</span>
+                </label>
+                <span class="spanBubble">Path starts from position relative to the current node (.)</span>
+              </div>
             </div>
             <hr>
             <div class="divBranchesInputs">
-              <label>
-                <input type="radio" value="" name="axisOption" v-model="axis">
-                <span data-bold="---None">None</span>
-              </label>
-              <label>
-                <input type="radio" value="/self::" name="axisOption" v-model="axis" @click="node = 'node()'">
-                <span data-bold="---. (/self::node())">. (/self::node())</span>
-              </label>
-              <label>
-                <input type="radio" value="/parent::" name="axisOption" v-model="axis" @click="node = 'node()'">
-                <span data-bold="---.. (/parent::node())">.. (/parent::node())</span>
-              </label>
-              <label>
-                <input type="radio" value="//" name="axisOption" v-model="axis">
-                <span data-bold="---// (descendant-or-self::)">// (descendant-or-self::)</span>
-              </label>
-              <label>
-                <input type="radio" value="/ancestor::" name="axisOption" v-model="axis">
-                <span data-bold="---/ancestor::">/ancestor::</span>
-              </label>
-              <label>
-                <input type="radio" value="/ancestor-or-self::" name="axisOption" v-model="axis">
-                <span data-bold="---/ancestor::">/ancestor-or-self::</span>
-              </label>
+              <div class="divLabelContainer">
+                <label>
+                  <input type="radio" value="" name="axisOption" v-model="axis">
+                  <span data-bold="---None">None</span>
+                </label>
+                <span class="spanBubble">No path expression selected</span>
+              </div>
+              <div class="divLabelContainer">
+                <label>
+                  <input type="radio" value="/self::" name="axisOption" v-model="axis" @click="node = 'node()'">
+                  <span data-bold="---. (/self::node())">. (/self::node())</span>
+                </label>
+                <span class="spanBubble">Use <code>.</code> if you want to shortcut your xPath</span>
+              </div>
+              <div class="divLabelContainer">
+                <label>
+                  <input type="radio" value="/parent::" name="axisOption" v-model="axis" @click="node = 'node()'">
+                  <span data-bold="---.. (/parent::node())">.. (/parent::node())</span>
+                </label>
+                <span class="spanBubble">Select parent node. Use <code>..</code> if you want to shortcut your xPath</span>
+              </div>
+              <div class="divLabelContainer">
+                <label>
+                  <input type="radio" value="//" name="axisOption" v-model="axis">
+                  <span data-bold="---// (descendant-or-self::)">// (descendant-or-self::)</span>
+                </label>
+                <span class="spanBubble"></span>
+                <!-- <span class="spanBubble">Select existing node or nested nodes. Use <code></code> if you want to shortcut your xpath</span> -->
+              </div>
+              <div class="divLabelContainer">
+                <label>
+                  <input type="radio" value="/ancestor::" name="axisOption" v-model="axis">
+                  <span data-bold="---/ancestor::">/ancestor::</span>
+                </label>
+                <span class="spanBubble">Select the ancestors of the current node (parents, grandparents etc)</span>
+              </div>
+              <div class="divLabelContainer">
+                <label>
+                  <input type="radio" value="/ancestor-or-self::" name="axisOption" v-model="axis">
+                  <span data-bold="---/ancestor-or-self::">/ancestor-or-self::</span>
+                </label>
+                <span class="spanBubble">Select the ancestors of the current node (parents, grandparents etc) or the node itself</span>
+              </div>
               <label>
                 <input type="radio" value="/attribute::" name="axisOption" v-model="axis">
                 <span data-bold="/attribute:: (@)">/attribute:: (@)</span>
@@ -953,7 +1011,7 @@
                   <br>
                   <label>
                     <span v-once class="spanActiveFunctionTitle">
-                      {{element.replace(/[/(/)]/g, "")}}:
+                      {{element.replace(/(\((.*)?\)?)/g, "")}}:
                     </span>
                     <input type="text" :name="idx"  :size="functionsSequenceArr[idx].toString().length + 1" v-model="functionsSequenceArr[idx]" @keyup="checkAndPushToPathArray()">
                   </label>
