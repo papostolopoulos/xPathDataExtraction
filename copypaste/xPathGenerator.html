@@ -694,7 +694,7 @@
                 </label>
                 <span class="spanBubble">Enter the node's name (Use this input field to enter other xPath elements if needed)</span>
               </div>
-            </div> <!-- End of divBranchesInputs -->
+            </div>
           </div>
 
 
@@ -763,120 +763,6 @@
               </table>
             </div>
           </div>
-
-
-
-
-          <div class="operators">
-            <h3>Operators</h3>
-            <div class="divOperatorsInputs">
-              <div class="divLabelContainer">
-                <label>
-                  <input type="radio" name="inputOperator" value="" v-model="operator">
-                  None
-                </label>
-                <span class="spanBubble">No operator selected.</span>
-              </div>
-              <div class="divLabelContainer">
-                <label>
-                  <input type="radio" name="inputOperator" value="and" v-model="operator" @click="addOperators($event)">
-                  <span data-bold="---and">and</span>
-                </label>
-                <span class="spanBubble">Boolean. Two conditions need to be true.</span>
-              </div>
-              <div class="divLabelContainer">
-                <label>
-                  <input type="radio" name="inputOperator" value="or" v-model="operator" @click="addOperators($event)">
-                  <span data-bold="---or">or</span>
-                </label>
-                <span class="spanBubble">Boolean. One of two conditions need to be true.</span>
-              </div>
-              <div class="divLabelContainer">
-                <label>
-                  <input type="radio" name="inputOperator" value="|" v-model="operator" @click="addOperators($event)">
-                  <span data-bold="---|">|</span>
-                </label>
-                <span class="spanBubble">Two node sets are computed.</span>
-              </div>
-              <div class="divLabelContainer">
-                <label>
-                  <input type="radio" name="inputOperator" value="=" v-model="operator" @click="addOperators($event)">
-                  <span data-bold="---=">=</span>
-                </label>
-                <span class="spanBubble">Boolean. Contition needs to be equal to a value.</span>
-              </div>
-              <div class="divLabelContainer">
-                <label>
-                  <input type="radio" name="inputOperator" value="!=" v-model="operator" @click="addOperators($event)">
-                  <span data-bold="---!=">!=</span>
-                </label>
-                <span class="spanBubble">Not equal. Condition needs to not be equal to a value.</span>
-              </div>
-              <div class="divLabelContainer">
-                <label>
-                  <input type="radio" name="inputOperator" value="+" v-model="operator" @click="addOperators($event)">
-                  <span data-bold="---+">+</span>
-                </label>
-                <span class="spanBubble">Addition.</span>
-              </div>
-              <div class="divLabelContainer">
-                <label>
-                  <input type="radio" name="inputOperator" value="-" v-model="operator" @click="addOperators($event)">
-                  <span data-bold="----">-</span>
-                </label>
-                <span class="spanBubble">Subtraction.</span>
-              </div>
-              <div class="divLabelContainer">
-                <label>
-                  <input type="radio" name="inputOperator" value="*" v-model="operator" @click="addOperators($event)">
-                  <span data-bold="---*">*</span>
-                </label>
-                <span class="spanBubble">Multiplication.</span>
-              </div>
-              <div class="divLabelContainer">
-                <label>
-                  <input type="radio" name="inputOperator" value="div" v-model="operator" @click="addOperators($event)">
-                  <span data-bold="---div">div</span>
-                </label>
-                <span class="spanBubble">Division</span>
-              </div>
-              <div class="divLabelContainer">
-                <label>
-                  <input type="radio" name="inputOperator" value="<" v-model="operator" @click="addOperators($event)">
-                  <span data-bold="---&lt;">&lt;</span>
-                </label>
-                <span class="spanBubble">Boolean. Smaller than.</span>
-              </div>
-              <div class="divLabelContainer">
-                <label>
-                  <input type="radio" name="inputOperator" value="<=" v-model="operator" @click="addOperators($event)">
-                  <span data-bold="---&lt;=">&lt;=</span>
-                </label>
-                <span class="spanBubble">Boolean. Smaller or equal than.</span>
-              </div>
-              <div class="divLabelContainer">
-                <label>
-                  <input type="radio" name="inputOperator" value=">" v-model="operator" @click="addOperators($event)">
-                  <span data-bold="---&gt;">&gt;</span>
-                </label>
-                <span class="spanBubble">Boolean. Greater than.</span>
-              </div>
-              <div class="divLabelContainer">
-                <label>
-                  <input type="radio" name="inputOperator" value=">=" v-model="operator" @click="addOperators($event)">
-                  <span data-bold="---&gt;=">&gt;=</span>
-                </label>
-                <span class="spanBubble">Boolean. Greater or equal than.</span>
-              </div>
-              <div class="divLabelContainer">
-                <label>
-                  <input type="radio" name="inputOperator" value="mod" v-model="operator" @click="addOperators($event)">
-                  <span data-bold="---mod">mod</span>
-                </label>
-                <span class="spanBubble">Modulus</span>
-              </div>
-            </div><!-- End of divOperatorsInputs -->
-          </div><!-- End of operators section -->
 
 
 
@@ -1259,6 +1145,120 @@
 
 
 
+          <div class="operators">
+            <h3>Operators</h3>
+            <div class="divOperatorsInputs">
+              <div class="divLabelContainer">
+                <label>
+                  <input type="radio" name="inputOperator" value="" v-model="operator">
+                  None
+                </label>
+                <span class="spanBubble">No operator selected.</span>
+              </div>
+              <div class="divLabelContainer">
+                <label>
+                  <input type="radio" name="inputOperator" value="and" v-model="operator" @click="addOperators($event)">
+                  <span data-bold="---and">and</span>
+                </label>
+                <span class="spanBubble">Boolean. Two conditions need to be true.</span>
+              </div>
+              <div class="divLabelContainer">
+                <label>
+                  <input type="radio" name="inputOperator" value="or" v-model="operator" @click="addOperators($event)">
+                  <span data-bold="---or">or</span>
+                </label>
+                <span class="spanBubble">Boolean. One of two conditions need to be true.</span>
+              </div>
+              <div class="divLabelContainer">
+                <label>
+                  <input type="radio" name="inputOperator" value="|" v-model="operator" @click="addOperators($event)">
+                  <span data-bold="---|">|</span>
+                </label>
+                <span class="spanBubble">Two node sets are computed.</span>
+              </div>
+              <div class="divLabelContainer">
+                <label>
+                  <input type="radio" name="inputOperator" value="=" v-model="operator" @click="addOperators($event)">
+                  <span data-bold="---=">=</span>
+                </label>
+                <span class="spanBubble">Boolean. Contition needs to be equal to a value.</span>
+              </div>
+              <div class="divLabelContainer">
+                <label>
+                  <input type="radio" name="inputOperator" value="!=" v-model="operator" @click="addOperators($event)">
+                  <span data-bold="---!=">!=</span>
+                </label>
+                <span class="spanBubble">Not equal. Condition needs to not be equal to a value.</span>
+              </div>
+              <div class="divLabelContainer">
+                <label>
+                  <input type="radio" name="inputOperator" value="+" v-model="operator" @click="addOperators($event)">
+                  <span data-bold="---+">+</span>
+                </label>
+                <span class="spanBubble">Addition.</span>
+              </div>
+              <div class="divLabelContainer">
+                <label>
+                  <input type="radio" name="inputOperator" value="-" v-model="operator" @click="addOperators($event)">
+                  <span data-bold="----">-</span>
+                </label>
+                <span class="spanBubble">Subtraction.</span>
+              </div>
+              <div class="divLabelContainer">
+                <label>
+                  <input type="radio" name="inputOperator" value="*" v-model="operator" @click="addOperators($event)">
+                  <span data-bold="---*">*</span>
+                </label>
+                <span class="spanBubble">Multiplication.</span>
+              </div>
+              <div class="divLabelContainer">
+                <label>
+                  <input type="radio" name="inputOperator" value="div" v-model="operator" @click="addOperators($event)">
+                  <span data-bold="---div">div</span>
+                </label>
+                <span class="spanBubble">Division</span>
+              </div>
+              <div class="divLabelContainer">
+                <label>
+                  <input type="radio" name="inputOperator" value="<" v-model="operator" @click="addOperators($event)">
+                  <span data-bold="---&lt;">&lt;</span>
+                </label>
+                <span class="spanBubble">Boolean. Smaller than.</span>
+              </div>
+              <div class="divLabelContainer">
+                <label>
+                  <input type="radio" name="inputOperator" value="<=" v-model="operator" @click="addOperators($event)">
+                  <span data-bold="---&lt;=">&lt;=</span>
+                </label>
+                <span class="spanBubble">Boolean. Smaller or equal than.</span>
+              </div>
+              <div class="divLabelContainer">
+                <label>
+                  <input type="radio" name="inputOperator" value=">" v-model="operator" @click="addOperators($event)">
+                  <span data-bold="---&gt;">&gt;</span>
+                </label>
+                <span class="spanBubble">Boolean. Greater than.</span>
+              </div>
+              <div class="divLabelContainer">
+                <label>
+                  <input type="radio" name="inputOperator" value=">=" v-model="operator" @click="addOperators($event)">
+                  <span data-bold="---&gt;=">&gt;=</span>
+                </label>
+                <span class="spanBubble">Boolean. Greater or equal than.</span>
+              </div>
+              <div class="divLabelContainer">
+                <label>
+                  <input type="radio" name="inputOperator" value="mod" v-model="operator" @click="addOperators($event)">
+                  <span data-bold="---mod">mod</span>
+                </label>
+                <span class="spanBubble">Modulus</span>
+              </div>
+            </div><!-- End of divOperatorsInputs -->
+          </div><!-- End of operators section -->
+
+
+
+
           <div class="attributes">
             <h3>Attributes</h3>
             <div class="divAttributesInputs">
@@ -1390,9 +1390,7 @@
                 {{paramAlert}}
               </div>
             </div>
-
-
-          </div> <!-- End of parameters -->
+          </div>
 
         </section>
         <!-- End of section Options -->
