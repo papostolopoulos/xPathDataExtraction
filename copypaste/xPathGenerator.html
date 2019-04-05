@@ -520,12 +520,23 @@
         display: inline-block;
       }
 
+      .divFooter .spanBubble{
+        position: absolute;
+        bottom: 30%;
+        left: 30%;
+        border: 2px solid black;
+        width: auto;
+        border-radius: 0;
+        background-color: white;
+        z-index: -1;
+      }
+
       .spanBubble code{
         color: yellow;
         font-size: 1em;
       }
 
-      label:hover + .spanBubble{
+      label:hover + .spanBubble, h3:hover + .spanBubble{
         visibility: visible;
         opacity: 1;
         z-index: 1;
@@ -1444,8 +1455,13 @@
         <section class="sectionResult">
 
           <div class="divFooter">
-            <h3>xPath Generator</h3>
-            <h5><a href="http://addeventlistener.xyz" target="_blank">@papostolopoulos - 2019</a></h5>
+            <div class="divFooterHeader">
+              <h3>xPath Generator</h3>
+              <span class="spanBubble">
+                <img src="http://infohost.nmt.edu/tcc/help/pubs/xslt/axes.jpg" alt="xPath Chart">
+              </span>
+            </div>
+            <h5><a href="http://addeventlistener.xyz" target="_blank">@papostolopoulos</a> - 2019</h5>
           </div>
 
           <div class="divResult">
@@ -1454,7 +1470,6 @@
             </div>
 
             <div class="divResultTextArea">
-              <!-- Result displayed here: {{fullPath}} -->
               <textarea name="textAreaFullPath" id="textAreaFullPath" :value="fullPath"></textarea>
               <br>
               <label for="">
