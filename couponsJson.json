@@ -283,6 +283,207 @@
   }
 }
 
+/* BANANA REPUBLIC FACTORY email.bananarepublicfactory.com */
+{
+  "extract": {
+    "extractEmbedded": false,
+    "source": null,
+    "schema": [
+      {
+        "url": "http://ws.rmf.yahoo.com:4080/rmf/v1/schema?type=schema.org&name=y.2.0&format=json",
+        "ns": "http://schema.org",
+        "context": {
+          "@type": [
+            "Coupon"
+          ]
+        }
+      }
+    ],
+    "entityRules": [
+      {
+        "id": "50363e07-21ee-4aba-993c-28d55a4d5ec8",
+        "repeating": true,
+        "locations": [
+          "/descendant::text()[(contains(translate(.,\"OF\",\"of\"),\" off\") or contains(translate(.,\"WIN\",\"win\"),\"win\") or contains(translate(.,\"CLEARN\",\"clearn\"),\"clearance\")) and \n(contains(.,\"%\") or contains(.,\"$\")) or \ncontains(translate(.,\"FROM\",\"from\"),\"from $\") or\ncontains(translate(.,\"DORBUSTE\",\"dorbuste\"),\"doorbuster\") or\ncontains(translate(.,\"FRE\",\"fre\"),\"free\") or contains(.,\"%\")][parent::b or parent::td][not(contains(translate(.,\"TRANSFERABL\",\"transferabl\"),\"transferable\"))]"
+        ],
+        "type": "http://schema.org/Coupon",
+        "javascript": null,
+        "entityIdRef": "",
+        "attributes": [
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "."
+                }
+              ]
+            },
+            "name": "http://schema.org/description",
+            "relative": true,
+            "transient": false,
+            "javascript": "function transform(data){\n  if(!data) return null;\n  \n  var replaceArr = [\n  {oldStr: /[\\*©®ǂ‡†±→§™¹›]/g, newStr: \"\"},\n  {oldStr: /^\\//i, newStr: \"\"},\n  {oldStr: /(:\\s*)?Excludes.*/, newStr: \"\"},\n  {oldStr: /^Everyday\\s*Free\\s*Shipping\\s*$/i, newStr: \"Everyday Free Shipping on orders of $100 or more\"},\n  {oldStr: /:\\s*$/i, newStr: \"\"},\n  ];\n  \n  replaceArr.forEach(function(el){\n    data = data.replace(el.oldStr, el.newStr);\n  });\n  \n  return data.trim();\n}",
+            "dataTypes": [
+              "Text"
+            ],
+            "mandatory": false
+          },
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "./following::text()[contains(translate(.,\"VALID\",\"valid\"),\"valid\")]"
+                }
+              ]
+            },
+            "name": "http://schema.org/validThrough",
+            "relative": true,
+            "transient": false,
+            "javascript": "function transform(data){\n  return data.match(/through\\s*(\\d{1,2}\\/){2}\\d{2,4}/)[0].replace(/through\\s*((\\d{1,2}\\/){2}\\d{2,4})/, \"$1\") || null;\n}",
+            "dataTypes": [
+              "DateTime"
+            ],
+            "mandatory": false
+          },
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "/descendant::a[contains(translate(.,\"BROWSE\",\"browse\"),\"browser\")]/@href"
+                }
+              ]
+            },
+            "name": "http://schema.org/url",
+            "relative": true,
+            "transient": false,
+            "javascript": null,
+            "dataTypes": [
+              "URL"
+            ],
+            "mandatory": false
+          }
+        ],
+        "hints": {
+          "_footer": "/descendant::text()[contains(translate(., 'BANREPULICFTOY', 'banrepulicftoy'), 'banana republic factory') and contains(.,\"unsubscribe\")]/ancestor::table[1]",
+          "_raw_validThrough": "./following::text()"
+        }
+      },
+      {
+        "id": "62cf8eea-1ff8-4f2e-8950-39a5988d7a3d",
+        "repeating": true,
+        "locations": [
+          "/descendant::img[contains(translate(@alt,\"OF\",\"of\"),\" off\") and (contains(@alt,\"%\") or contains(@alt,\"$\")) or\ncontains(translate(@alt,\"FRESHIP\",\"freship\"),\"free ship\") and\nancestor::td[@class=\"mobile-hidden\"] or\ncontains(translate(@alt,\"COUPN\",\"coupn\"),\"coupon\") or\ncontains(translate(@alt,\"SAVING\",\"saving\"),\"savings\") or \ncontains(translate(@alt,\"DOR\",\"dor\"),\"door\") and contains(translate(@alt,\"DEAL\",\"deal\"),\"deal\")] \n\n|\n/descendant::text()[(contains(translate(.,\"OF\",\"of\"),\" off\") or contains(translate(.,\"WIN\",\"win\"),\"win\") or contains(translate(.,\"CLEARN\",\"clearn\"),\"clearance\")) and \n(contains(.,\"%\") or contains(.,\"$\")) or \ncontains(translate(.,\"FROM\",\"from\"),\"from $\") or\ncontains(translate(.,\"DORBUSTE\",\"dorbuste\"),\"doorbuster\") or\ncontains(translate(.,\"FRE\",\"fre\"),\"free\")][parent::b]"
+        ],
+        "type": "http://schema.org/Organization",
+        "javascript": null,
+        "entityIdRef": "",
+        "attributes": [
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "\"BANANA REPUBLIC\""
+                }
+              ]
+            },
+            "name": "http://schema.org/name",
+            "relative": true,
+            "transient": false,
+            "javascript": null,
+            "dataTypes": [
+              "Text"
+            ],
+            "mandatory": false
+          }
+        ]
+      },
+      {
+        "id": "5eab43d6-3d9c-4dd8-8dc5-60a2e91898a4",
+        "repeating": true,
+        "locations": [
+          "/descendant::img"
+        ],
+        "type": "http://schema.org/ImageObject",
+        "javascript": null,
+        "entityIdRef": "",
+        "attributes": [
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "./@src"
+                }
+              ]
+            },
+            "name": "http://schema.org/url",
+            "relative": true,
+            "transient": false,
+            "javascript": null,
+            "dataTypes": [
+              "URL"
+            ],
+            "mandatory": false
+          },
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "./@title | ./@alt"
+                }
+              ]
+            },
+            "name": "http://schema.org/_imgtext",
+            "relative": true,
+            "transient": true,
+            "javascript": null,
+            "dataTypes": [
+              "Text"
+            ],
+            "mandatory": false
+          }
+        ]
+      }
+    ],
+    "edgeRules": [
+      {
+        "from": {
+          "entityRule": "50363e07-21ee-4aba-993c-28d55a4d5ec8",
+          "matchAttr": ""
+        },
+        "to": {
+          "entityRule": "62cf8eea-1ff8-4f2e-8950-39a5988d7a3d",
+          "matchAttr": ""
+        },
+        "predicate": "http://schema.org/broker",
+        "cardinality": "ONE_TO_ONE"
+      },
+      {
+        "from": {
+          "entityRule": "50363e07-21ee-4aba-993c-28d55a4d5ec8",
+          "matchAttr": "http://schema.org/description"
+        },
+        "to": {
+          "entityRule": "5eab43d6-3d9c-4dd8-8dc5-60a2e91898a4",
+          "matchAttr": "http://schema.org/_imgtext"
+        },
+        "predicate": "http://schema.org/image",
+        "cardinality": "ONE_TO_ONE",
+        "matchThreshold": "0.3"
+      }
+    ],
+    "entityNS": null
+  },
+  "metaData": {
+    "useVTDXML": "true",
+    "ignoredValidations": null
+  }
+}
+
 /* BELK belkemail.com */
 {
   "extract": {
@@ -317,7 +518,7 @@
             "name": "http://schema.org/description",
             "relative": true,
             "transient": false,
-            "javascript": "function transform(data) {\n  var replaceArr = [\n    {oldStr: /^◊+/i, newStr:\"\"},\n    {oldStr: /(-Shop\\s*now|Learn\\s*more|One\\s*per\\s*customer,\\s*please)\\.?/i, newStr: \"\"}\n  ];\n\n  replaceArr.forEach(function(el) {\n    data = data.replace(el.oldStr, el.newStr);\n  });\n\n  while (data.length > 100 && data.indexOf(\".\") !== data.lastIndexOf(\".\")) {\n    data = data.slice(0, data.lastIndexOf(\".\", data.lastIndexOf(\".\") - 1) + 1);\n  }\n\n  return data.trim();\n}",
+            "javascript": "function transform(data) {\n  var replaceArr = [\n    {oldStr: /(^◊+|\\*)/gi, newStr:\"\"},\n    {oldStr: /(-?Shop\\s*now|Learn\\s*more|One\\s*per\\s*customer,\\s*please)\\.?/i, newStr: \"\"}\n  ];\n\n  replaceArr.forEach(function(el) {\n    data = data.replace(el.oldStr, el.newStr);\n  });\n\n  while (data.length > 100 && data.indexOf(\".\") !== data.lastIndexOf(\".\")) {\n    data = data.slice(0, data.lastIndexOf(\".\", data.lastIndexOf(\".\") - 1) + 1);\n  }\n\n  return data.trim();\n}",
             "dataTypes": [
               "Text"
             ],
@@ -346,14 +547,14 @@
             "locations": {
               "-1": [
                 {
-                  "xpath": "concat(./@alt, ., \"~~~\", /descendant::text()[contains(.,\"belkemail.com\")]/ancestor::table)"
+                  "xpath": "./@alt"
                 }
               ]
             },
             "name": "http://schema.org/validThrough",
             "relative": true,
             "transient": false,
-            "javascript": "function transform(data){\n  var dataSpl = data.split(\"~~~\");\n\n  if (dataSpl[0].toLowerCase().indexOf(\"$10 off $50\") !== -1) {\n    dataSpl[1] = dataSpl[1].slice(dataSpl[1].toLowerCase().indexOf(\"$10 off $50\"));\n    return dataSpl[1].match(/Valid\\s*(January|February|March|April|May|June|July|August|September|October|November|December)\\s*\\d{1,2}-(\\d{1,2}),?\\s*(\\d{2,4})/)[0].replace(/Valid\\s*(January|February|March|April|May|June|July|August|September|October|November|December)\\s*\\d{1,2}-(\\d{1,2}),?\\s*(\\d{2,4})/, \"$1 $2, $3\");\n  }\n\n  if (dataSpl[0].toLowerCase().indexOf(\"belk bucks\") !== -1){\n    dataSpl[1] = dataSpl[1].slice(dataSpl[1].toLowerCase().indexOf(\"belk bucks:\"));\n    return dataSpl[1].match(/from\\s*(?:January|February|March|April|May|June|July|August|September|October|November|December)\\s*\\d{1,2}\\s*-\\s*((?:January|February|March|April|May|June|July|August|September|October|November|December)\\s*(?:\\d{1,2}),?\\s*(?:\\d{2,4}))/)[0].replace(/from\\s*(?:January|February|March|April|May|June|July|August|September|October|November|December)\\s*\\d{1,2}\\s*-\\s*((?:January|February|March|April|May|June|July|August|September|October|November|December)\\s*(?:\\d{1,2}),?\\s*(?:\\d{2,4}))/, \"$1\");\n  }\n\n  return \"\";\n}",
+            "javascript": "function transform(data){\n  return /ends\\s*\\d{1,2}\\/\\d{1,2}/i.test(data) ? data.replace(/.*ends\\s*(\\d{1,2}\\/\\d{1,2}).*/, \"$1\") : \"\";\n}",
             "dataTypes": [
               "DateTime"
             ],
@@ -361,8 +562,8 @@
           }
         ],
         "hints": {
-          "_raw_validThrough": "concat(./@alt, ., \"~~~\", /descendant::text()[contains(.,\"belkemail.com\")]/ancestor::table)",
-          "_footer": "/descendant::text()[contains(.,\"belkemail.com\")]/ancestor::table"
+          "_footer": "/descendant::text()[contains(.,\"belkemail.com\")]/ancestor::table",
+          "_raw_validThrough": "./@alt"
         },
         "hintsJavascript": "function transform(data) {\n  var n=data.get(\"_footer\");\n  n = n.toString().replace(/[A-z0-9.%+-_]{2,64}\\@[A-z0-9.]{2,64}/g,'');\n  return {'_footer': [n]};\n}"
       },
@@ -1371,7 +1572,7 @@
   }
 }
 
-/* DCSG  e.dcsg.com */
+/* DICK'S SPORTING GOODS e.dcsg.com */
 {
   "extract": {
     "extractEmbedded": false,
@@ -1389,10 +1590,10 @@
     ],
     "entityRules": [
       {
-        "id": "fcba0d44-1414-4762-a6e9-c830f5b0d605",
+        "id": "51c3909e-c2b1-4909-8550-568550edec26",
         "repeating": true,
         "locations": [
-          "/descendant::img[contains(@alt, \"%\") or contains(@alt, \"OFF\") or contains(@alt, \"$\") and not\n(contains(@alt,\"SCORECARD\"))]  |\n //descendant::b[contains(., \"%\")] "
+          "/descendant::img[contains(translate(@alt,\"OF\",\"of\"),\" off\")]\n|\n/descendant::text()[contains(translate(.,\"OF\",\"of\"),\" off\") and (contains(.,\"%\") or contains(.,\"$\"))]\n/ancestor::table[2]\n|\n/descendant::text()[contains(translate(.,\"FRESHIPNG\",\"freshipng\"),\"free shipping\") or\ncontains(translate(.,\"WEKLDEAS\",\"wekldeas\"),\"weekly deals\") or \ncontains(translate(.,\"CLEARNC\",\"clearnc\"),\"clearance\")  and contains(translate(ancestor::td[1],\"DEALS\",\"deals\"),\"deals\") or\ncontains(translate(.,\"POINTS\",\"points\"),\"points\") and contains(translate(.,\"EARN\",\"earn\"),\"earn\")]\n\n/ancestor::table[1]\n[not(contains(.,\"you have\") or contains(translate(.,\"MOBILEAP\",\"mobileap\"),\"mobile app\") or contains(translate(.,\"RETAILERD\",\"retaild\"),\"retailer’s ad\") or\ncontains(translate(.,\"UNITEDSA\",\"unitedsa\"),\"united states\"))]"
         ],
         "type": "http://schema.org/Coupon",
         "javascript": null,
@@ -1410,19 +1611,18 @@
             "name": "http://schema.org/description",
             "relative": true,
             "transient": false,
-            "javascript": "function transform(data) {\n  //Creating the RegExp rules and the array of the Regular expressions\n  var regEx1 = new RegExp(\"^([a-z\\\\s]+)?[0-9]{2}%\\\\s[\\\\w\\\\s,'&]+\", \"gi\"),\n      regEx2 = new RegExp(\"\\\\|\\\\s[0-9]{2}%[a-z\\\\s]+\", \"gi\"),\n      regEx3 = new RegExp(\"(.*)?free[a-z\\\\s0-9\\\\$]+\", \"gi\"),\n      regEx4 = new RegExp(\"^starting\\\\sat\\\\s\\\\$[0-9\\\\.\\\\sa-z']+\", \"gi\"),\n      regEx5 = new RegExp(\"^sale.*\\\\|\", \"gi\"),\n      regEx6 = new RegExp(\".*?or\\\\sless.*\\\\|\", \"gi\"),\n      regEx7 = new RegExp(\"(.*)?\\\\$[0-9]+\\\\soff\\\\s[a-z\\\\s\\\\$0-9]+\", \"gi\"),\n      regEx8 = new RegExp(\"[a-z\\\\s]+\\\\|[\\\\sa-z0-9%]+\", \"gi\"),\n      regExArr = [regEx1, regEx2, regEx3, regEx4, regEx5, regEx6, regEx7, regEx8],\n      matchedStr = \"\";\n\n  //Loop through the Regular Expresssions array. If a condition is true, in the if statement, then \n  //the data variable will be manipulated for the final result. Nothing else will need to run.\n  for (var i = 0; i < regExArr.length; i++) {\n    \n    if (data.match(regExArr[i])){\n      matchedStr += data.match(regExArr[i])[0].replace(/[\\|\\*]/g, \"\").trim().replace(/\\s\\s/, \". \") + \".\";\n      \n      //Running map method to lowercase all the words in the array but keep the first letter into uppercase\n      var result = matchedStr.split(\" \").map(function(el) {\n        return el.slice(0,1) + el.slice(1).toLowerCase();\n      });\n      return result.join(\" \");\n    }\n    \n  }\n\nreturn \"\";\n}",
+            "javascript": "function transform(data){\n  var replaceArr = [\n    {oldStr:/[\\*©®ǂ‡†±→§™¹›>]/g, newStr: \"\"},\n    {oldStr: /(Exclusions\\s*apply|Shop\\s*now).*/i, newStr: \"\"},\n    {oldStr: /\\|\\s*$/i, newStr: \"\"}\n  ];\n  \n    \n  \n  replaceArr.forEach(function(el){\n     data = data.replace(el.oldStr, el.newStr);\n  });\n\n  \n  \n  return data.trim() || \"\";\n}",
             "dataTypes": [
               "Text"
             ],
-            "mandatory": false,
-            "hintsJavascript": null
+            "mandatory": false
           },
           {
             "repeating": false,
             "locations": {
               "-1": [
                 {
-                  "xpath": "../@href | /descendant::u[contains(.,\"Web\")]/ancestor::a/@href"
+                  "xpath": "./descendant::a/@href | parent::a/@href"
                 }
               ]
             },
@@ -1447,7 +1647,7 @@
             "name": "http://schema.org/validThrough",
             "relative": true,
             "transient": false,
-            "javascript": "function transform(data){\n  if(data.match(/Valid\\sthrough/)){\n    var date = data.match(/Valid\\sthrough\\s[0-9]{1,2}\\/[0-9]{1,2}/)[0].slice(\"Valid through \".length) + \"/2018\";\n    return date;\n  }\n  return \"\";\n}",
+            "javascript": "function transform(data){\n  return data.match(/.*Valid\\s*through\\s*((?:\\d{1,2}\\/){2}\\d{2,4})\\s*11:59PM\\s*.*/) ? data.replace(/.*Valid\\s*through\\s*((?:\\d{1,2}\\/){2}\\d{2,4})\\s*11:59PM\\s*.*/,\"$1\") : \"\";\n}",
             "dataTypes": [
               "DateTime"
             ],
@@ -1456,15 +1656,14 @@
         ],
         "hints": {
           "_raw_validThrough": "./@alt | .",
-          "_footer": "/descendant::p[contains(.,\"Offer valid\")]"
-        },
-        "hintsJavascript": "function transform(data) {\n\tvar n=data.get(\"_footer\");\n\tn=n.toString();\n\tn= n.replace(/[A-z0-9.%+-_]{2,64}\\@[A-z0-9.]{2,64}/g,'');\n\treturn {'_footer': [n]};\n}"
+          "_footer": "/descendant::text()[contains(translate(., 'DICKSPORTNG', 'dicksportng'), \"dick's sporting goods\")]/ancestor::table[1]"
+        }
       },
       {
-        "id": "11e386da-ea13-429f-8518-2271975c8498",
+        "id": "417b457a-2545-440e-83ed-5f3a8a60afa6",
         "repeating": true,
         "locations": [
-          "/descendant::img[contains(@alt, \"%\") or contains(@alt, \"OFF\") or contains(@alt, \"$\") and not\n(contains(@alt,\"SCORECARD\"))]  |\n //descendant::b[contains(., \"%\")] "
+          "/descendant::img[contains(translate(@alt,\"OF\",\"of\"),\" off\")]\n|\n/descendant::text()[contains(translate(.,\"OF\",\"of\"),\" off\") and (contains(.,\"%\") or contains(.,\"$\"))]\n/ancestor::table[2]\n|\n/descendant::text()[contains(translate(.,\"FRESHIPNG\",\"freshipng\"),\"free shipping\") or\ncontains(translate(.,\"WEKLDEAS\",\"wekldeas\"),\"weekly deals\") or \ncontains(translate(.,\"CLEARNC\",\"clearnc\"),\"clearance\")  and contains(translate(ancestor::td[1],\"DEALS\",\"deals\"),\"deals\") or\ncontains(translate(.,\"POINTS\",\"points\"),\"points\") and contains(translate(.,\"EARN\",\"earn\"),\"earn\")]\n\n/ancestor::table[1]\n[not(contains(.,\"you have\") or contains(translate(.,\"MOBILEAP\",\"mobileap\"),\"mobile app\") or contains(translate(.,\"RETAILERD\",\"retaild\"),\"retailer’s ad\") or\ncontains(translate(.,\"UNITEDSA\",\"unitedsa\"),\"united states\"))]"
         ],
         "type": "http://schema.org/Organization",
         "javascript": null,
@@ -1491,10 +1690,10 @@
         ]
       },
       {
-        "id": "24f4be7d-4e4e-4787-8c32-dd8927c94e58",
+        "id": "af7c4b1c-17ca-4bdf-b675-8f92b9258da4",
         "repeating": true,
         "locations": [
-          "/descendant::img"
+          "/descendant::img[contains(translate(@alt,\"OF\",\"of\"),\" off\")]\n|\n/descendant::img[ancestor::table[1]/descendant::text()[contains(translate(.,\"OF\",\"of\"),\" off\") and (contains(.,\"%\") or contains(.,\"$\")) or\ncontains(translate(.,\"FRESHIPNG\",\"freshipng\"),\"free shipping\") or\ncontains(translate(.,\"WEKLDEAS\",\"wekldeas\"),\"weekly deals\") or \ncontains(translate(.,\"CLEARNC\",\"clearnc\"),\"clearance\")  and contains(translate(ancestor::td[1],\"DEALS\",\"deals\"),\"deals\") or\ncontains(translate(.,\"POINTS\",\"points\"),\"points\") and contains(translate(.,\"EARN\",\"earn\"),\"earn\")\n]\n[not(contains(.,\"you have\") or contains(translate(.,\"MOBILEAP\",\"mobileap\"),\"mobile app\") or contains(translate(.,\"RETAILERD\",\"retaild\"),\"retailer’s ad\") or\ncontains(translate(.,\"UNITEDSA\",\"unitedsa\"),\"united states\"))]\n]"
         ],
         "type": "http://schema.org/ImageObject",
         "javascript": null,
@@ -1517,24 +1716,6 @@
               "URL"
             ],
             "mandatory": false
-          },
-          {
-            "repeating": false,
-            "locations": {
-              "-1": [
-                {
-                  "xpath": "./@alt | ./@title"
-                }
-              ]
-            },
-            "name": "http://schema.org/_imgtext",
-            "relative": true,
-            "transient": true,
-            "javascript": null,
-            "dataTypes": [
-              "Text"
-            ],
-            "mandatory": false
           }
         ]
       }
@@ -1542,11 +1723,11 @@
     "edgeRules": [
       {
         "from": {
-          "entityRule": "fcba0d44-1414-4762-a6e9-c830f5b0d605",
+          "entityRule": "51c3909e-c2b1-4909-8550-568550edec26",
           "matchAttr": ""
         },
         "to": {
-          "entityRule": "11e386da-ea13-429f-8518-2271975c8498",
+          "entityRule": "417b457a-2545-440e-83ed-5f3a8a60afa6",
           "matchAttr": ""
         },
         "predicate": "http://schema.org/broker",
@@ -1554,16 +1735,15 @@
       },
       {
         "from": {
-          "entityRule": "fcba0d44-1414-4762-a6e9-c830f5b0d605",
-          "matchAttr": "http://schema.org/description"
+          "entityRule": "51c3909e-c2b1-4909-8550-568550edec26",
+          "matchAttr": ""
         },
         "to": {
-          "entityRule": "24f4be7d-4e4e-4787-8c32-dd8927c94e58",
-          "matchAttr": "http://schema.org/_imgtext"
+          "entityRule": "af7c4b1c-17ca-4bdf-b675-8f92b9258da4",
+          "matchAttr": ""
         },
         "predicate": "http://schema.org/image",
-        "cardinality": "ONE_TO_ONE",
-        "matchThreshold": "0.5"
+        "cardinality": "ONE_TO_ONE"
       }
     ],
     "entityNS": null
@@ -3145,7 +3325,7 @@
   }
 }
 
-/* HAYNEEDLE updates.hayneedle.com */
+JC WHITNEY
 {
   "extract": {
     "extractEmbedded": false,
@@ -3153,20 +3333,15 @@
     "schema": [
       {
         "url": "http://ws.rmf.yahoo.com:4080/rmf/v1/schema?type=schema.org&name=y.2.0&format=json",
-        "ns": "http://schema.org",
-        "context": {
-          "@type": [
-            "Coupon"
-          ]
-        }
+        "ns": "http://schema.org"
       }
     ],
     "entityRules": [
       {
-        "id": "35d29a63-a9ce-491f-8343-211142282b59",
+        "id": "b0fd34f8-50c9-4d6c-8b74-0485980bb64e",
         "repeating": true,
         "locations": [
-          "/descendant::img[contains(translate(@alt,\"FRESHIP\",\"freship\"),\"free ship\") or\ncontains(@src,\"freeShip49.png\")]"
+          "/descendant::img[contains(@alt,\"%\") or \ncontains(@alt,\"$\") and \n(contains(translate(@alt, \"GET\", \"get\"),\"get\") or \ncontains(translate(@alt,\"REBAT\",\"rebat\"),\"rebate\"))\n]"
         ],
         "type": "http://schema.org/Coupon",
         "javascript": null,
@@ -3184,9 +3359,27 @@
             "name": "http://schema.org/description",
             "relative": true,
             "transient": false,
-            "javascript": "function transform(data){\n  return data.replace(/Free Shipping & Easy Returns!/,\"Free Shipping on orders over $49\");\n}",
+            "javascript": "function transform(data){\n  var replaceArr = [\n    {oldStr: /\\|\\s*ENDS.*/i, newStr: \"\"},\n    {oldStr: /\\[CLICK HERE\\].*/i, newStr: \"\"},\n    {oldStr: /.*\\*\\*/g, newStr: \"\"},\n    {oldStr: /Promo\\s*expires.*/g, newStr: \"\"},\n  ];\n  \n  replaceArr.forEach(function(el){\n    data = data.replace(el.oldStr, el.newStr);\n  });\n  \n  return data;\n}",
             "dataTypes": [
               "Text"
+            ],
+            "mandatory": false
+          },
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "./@alt"
+                }
+              ]
+            },
+            "name": "http://schema.org/validThrough",
+            "relative": true,
+            "transient": false,
+            "javascript": "function transform(data){\n  return data.replace(/.*ENDS\\s*((?:\\d{1,2}\\/){2}\\d{2,4}).*/i, \"$1\") || \"\";\n}",
+            "dataTypes": [
+              "DateTime"
             ],
             "mandatory": false
           },
@@ -3210,14 +3403,15 @@
           }
         ],
         "hints": {
-          "_footer": "/descendant::text()[contains(.,\"Hayneedle Inc\")]/ancestor::table[1]"
+          "_footer": "/descendant::text()[contains(.,\"United States\")]/ancestor::table[1]",
+          "_raw_validThrough": "./@alt"
         }
       },
       {
-        "id": "0f1e3685-3c0b-4ab9-93bf-62ab4ae5b8da",
+        "id": "da69264e-22e4-4aa8-876f-cb8804584166",
         "repeating": true,
         "locations": [
-          "/descendant::img[contains(translate(@alt,\"FRESHIP\",\"freship\"),\"free ship\") or\ncontains(@src,\"freeShip49.png\")]"
+          "/descendant::img[contains(@alt,\"%\") or \ncontains(@alt,\"$\") and \n(contains(translate(@alt, \"GET\", \"get\"),\"get\") or \ncontains(translate(@alt,\"REBAT\",\"rebat\"),\"rebate\"))\n]"
         ],
         "type": "http://schema.org/Organization",
         "javascript": null,
@@ -3228,7 +3422,7 @@
             "locations": {
               "-1": [
                 {
-                  "xpath": "\"hayneedle\""
+                  "xpath": "\"JC Whitney\""
                 }
               ]
             },
@@ -3244,14 +3438,14 @@
         ]
       },
       {
-        "id": "afefdfe0-1c9e-4f05-acb7-677170cc8852",
+        "id": "8c0aa187-1e62-4514-bf8c-2382d2286445",
         "repeating": true,
         "locations": [
-          "/descendant::img[contains(translate(@alt,\"FRESHIP\",\"freship\"),\"free ship\") or\ncontains(@src,\"freeShip49.png\")]"
+          "/descendant::img[contains(@alt,\"%\") or \ncontains(@alt,\"$\") and \n(contains(translate(@alt, \"GET\", \"get\"),\"get\") or \ncontains(translate(@alt,\"REBAT\",\"rebat\"),\"rebate\"))\n]"
         ],
         "type": "http://schema.org/ImageObject",
         "javascript": null,
-        "entityIdRef": null,
+        "entityIdRef": "",
         "attributes": [
           {
             "repeating": false,
@@ -3277,6 +3471,341 @@
     "edgeRules": [
       {
         "from": {
+          "entityRule": "b0fd34f8-50c9-4d6c-8b74-0485980bb64e",
+          "matchAttr": ""
+        },
+        "to": {
+          "entityRule": "da69264e-22e4-4aa8-876f-cb8804584166",
+          "matchAttr": ""
+        },
+        "predicate": "http://schema.org/broker",
+        "cardinality": "ONE_TO_ONE"
+      },
+      {
+        "from": {
+          "entityRule": "b0fd34f8-50c9-4d6c-8b74-0485980bb64e",
+          "matchAttr": ""
+        },
+        "to": {
+          "entityRule": "8c0aa187-1e62-4514-bf8c-2382d2286445",
+          "matchAttr": ""
+        },
+        "predicate": "http://schema.org/image",
+        "cardinality": "ONE_TO_ONE"
+      }
+    ],
+    "entityNS": null
+  },
+  "metaData": {
+    "useVTDXML": "true",
+    "ignoredValidations": null
+  }
+}
+
+/* SOUTHWEST  iluv.southwest.com */
+{
+  "extract": {
+    "extractEmbedded": false,
+    "source": null,
+    "schema": [
+      {
+        "url": "http://ws.rmf.yahoo.com:4080/rmf/v1/schema?type=schema.org&name=y.2.0&format=json",
+        "ns": "http://schema.org",
+        "context": {
+          "@type": [
+            "Coupon"
+          ]
+        }
+      }
+    ],
+    "entityRules": [
+      {
+        "id": "01985006-96c8-4b50-8f5b-a134010602e0",
+        "repeating": true,
+        "locations": [
+          "/descendant::img[contains(translate(@alt,\"SALE\",\"sale\"),\"sale\") and contains(@alt,\"$\")]\n|\n/descendant::text()[contains(translate(.,\"OF\",\"of\"),\" off\") and contains(.,\"$\") or\ncontains(translate(.,\"POINTS\",\"points\"),\"points\") and contains(translate(.,\"EARN\", \"earn\"),\"earn\") or \ncontains(translate(.,\"SALE\",\"sale\"),\"sale\")]\n/ancestor::table[1][not(contains(translate(., 'TERMSANDCOI', 'termsandcoi'), 'terms and conditions'))]"
+        ],
+        "type": "http://schema.org/Coupon",
+        "javascript": null,
+        "entityIdRef": "",
+        "attributes": [
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "./@alt | ."
+                }
+              ]
+            },
+            "name": "http://schema.org/description",
+            "relative": true,
+            "transient": false,
+            "javascript": "function transform(data){\n  var replaceArr = [\n    {oldStr:/[\\*©®ǂ‡†±→§™¹›]/g, newStr: \"\"},\n    {oldStr: /(\\[?Book\\s*by|Book\\s*package|Learn\\s*more).*/, newStr: \"\"},\n    {oldStr: />.*/, newStr: \"\"}\n  ];\n  \n  replaceArr.forEach(function(el){\n    data = data.replace(el.oldStr, el.newStr);\n  });\n  \n  return data.trim();\n}",
+            "dataTypes": [
+              "Text"
+            ],
+            "mandatory": false
+          },
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "concat(./@alt, ., \"~~~\", /descendant::text()[contains(translate(., 'SOUTHWEAIRLNC', 'southweairlnc'), 'southwest airlines co')]/ancestor::table[2])"
+                }
+              ]
+            },
+            "name": "http://schema.org/validThrough",
+            "relative": true,
+            "transient": false,
+            "javascript": "function transform(data){\n  var dataSplit = data.split(\"~~~\");\n  \n  if(dataSplit[0].toLowerCase().indexOf(\"spring travel\") !== -1){\n    dataSplit[1] = dataSplit[1].slice(dataSplit[1].toLowerCase().indexOf(\"domestic sale terms\"));\n    return dataSplit[1]\n      .match(/from\\s*(?:January|February|March|April|May|June|July|August|September|October|November|December)\\s*\\d{1,2}\\s*through\\s*((?:January|February|March|April|May|June|July|August|September|October|November|December)\\s*\\d{1,2},?\\s*\\d{2,4}),?\\s*11:59/i)[0]\n    .replace(/from\\s*(?:January|February|March|April|May|June|July|August|September|October|November|December)\\s*\\d{1,2}\\s*through\\s*((?:January|February|March|April|May|June|July|August|September|October|November|December)\\s*\\d{1,2},?\\s*\\d{2,4}),?\\s*11:59/i, \"$1\");\n  } \n  \n  \n  if(dataSplit[0].toLowerCase().indexOf(\"international break\") !== -1){\n    dataSplit[1] = dataSplit[1].slice(dataSplit[1].toLowerCase().indexOf(\"international sale terms\"));\n    return dataSplit[1]\n      .match(/from\\s*(?:January|February|March|April|May|June|July|August|September|October|November|December)\\s*\\d{1,2}\\s*through\\s*((?:January|February|March|April|May|June|July|August|September|October|November|December)\\s*\\d{1,2},?\\s*\\d{2,4}),?\\s*11:59/i)[0]\n    .replace(/from\\s*(?:January|February|March|April|May|June|July|August|September|October|November|December)\\s*\\d{1,2}\\s*through\\s*((?:January|February|March|April|May|June|July|August|September|October|November|December)\\s*\\d{1,2},?\\s*\\d{2,4}),?\\s*11:59/i, \"$1\");\n  }\n  \n  \n  if(/Up\\s*to\\s*\\$\\d*\\s*off/.test(dataSplit[0])){\n    dataSplit[1] = dataSplit[1].slice(dataSplit[1].toLowerCase().indexOf(\"southwest vacations® offer terms and conditions:\"));\n    return dataSplit[1]\n    .match(/if\\s*booked\\s*(?:(?:\\d{1,2}\\/){2}\\d{2,4})\\s*–\\s*((?:\\d{1,2}\\/){2}\\d{2,4})\\s*by\\s*6:00/)[0]\n    .replace(/if\\s*booked\\s*(?:(?:\\d{1,2}\\/){2}\\d{2,4})\\s*–\\s*((?:\\d{1,2}\\/){2}\\d{2,4})\\s*by\\s*6:00/,\"$1\");\n  }\n  \n  \n  return null;\n}",
+            "dataTypes": [
+              "DateTime"
+            ],
+            "mandatory": false
+          },
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "./parent::a/@href | ./descendant::a/@href"
+                }
+              ]
+            },
+            "name": "http://schema.org/url",
+            "relative": true,
+            "transient": false,
+            "javascript": null,
+            "dataTypes": [
+              "URL"
+            ],
+            "mandatory": false
+          }
+        ],
+        "hints": {
+          "_raw_validThrough": "concat(./@alt, ., \"~~~\", /descendant::text()[contains(translate(., 'SOUTHWEAIRLNC', 'southweairlnc'), 'southwest airlines co')]/ancestor::table[2])",
+          "_footer": "/descendant::text()[contains(translate(., 'SOUTHWEAIRLNC', 'southweairlnc'), 'southwest airlines co')]/ancestor::table[1]"
+        },
+        "hintsJavascript": "function transform(data) {\n  var ftr = data.get(\"_footer\")[0].replace(/[A-z0-9.%+-_]{2,64}\\@[A-z0-9.]{2,64}/g,'');\n  var rvt = data.get(\"_raw_validThrough\")[0];\n\n  return {\n    '_footer': [ftr],\n    '_raw_validThrough': [rvt]\n  };\n}"
+      },
+      {
+        "id": "2e0a8a8e-bc2c-4ab2-88fd-22395d2f0b7f",
+        "repeating": true,
+        "locations": [
+          "/descendant::img[contains(translate(@alt,\"SALE\",\"sale\"),\"sale\") and contains(@alt,\"$\")]\n|\n/descendant::text()[contains(translate(.,\"OF\",\"of\"),\" off\") and contains(.,\"$\") or\ncontains(translate(.,\"POINTS\",\"points\"),\"points\") and contains(translate(.,\"EARN\", \"earn\"),\"earn\") or \ncontains(translate(.,\"SALE\",\"sale\"),\"sale\")]\n/ancestor::table[1][not(contains(translate(., 'TERMSANDCOI', 'termsandcoi'), 'terms and conditions'))]"
+        ],
+        "type": "http://schema.org/Organization",
+        "javascript": null,
+        "entityIdRef": null,
+        "attributes": [
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "\"Southwest\""
+                }
+              ]
+            },
+            "name": "http://schema.org/name",
+            "relative": true,
+            "transient": false,
+            "javascript": null,
+            "dataTypes": [
+              "Text"
+            ],
+            "mandatory": false
+          }
+        ]
+      },
+      {
+        "id": "3d99c383-3b9c-494c-8a3e-f9ee833f22fa",
+        "repeating": true,
+        "locations": [
+          "/descendant::img[contains(translate(@alt,\"SALE\",\"sale\"),\"sale\") and contains(@alt,\"$\")]\n|\n/descendant::img[ancestor::table[2][contains(translate(.,\"OF\",\"of\"),\" off\") and contains(.,\"$\") or\ncontains(translate(.,\"POINTS\",\"points\"),\"points\") and contains(translate(.,\"EARN\", \"earn\"),\"earn\") or \ncontains(translate(.,\"SALE\",\"sale\"),\"sale\")][not(contains(translate(., 'TERMSANDCOI', 'termsandcoi'), 'terms and conditions'))]]"
+        ],
+        "type": "http://schema.org/ImageObject",
+        "javascript": null,
+        "entityIdRef": "",
+        "attributes": [
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "./@src"
+                }
+              ]
+            },
+            "name": "http://schema.org/url",
+            "relative": true,
+            "transient": false,
+            "javascript": null,
+            "dataTypes": [
+              "URL"
+            ],
+            "mandatory": false
+          }
+        ]
+      }
+    ],
+    "edgeRules": [
+      {
+        "from": {
+          "entityRule": "01985006-96c8-4b50-8f5b-a134010602e0",
+          "matchAttr": ""
+        },
+        "to": {
+          "entityRule": "2e0a8a8e-bc2c-4ab2-88fd-22395d2f0b7f",
+          "matchAttr": ""
+        },
+        "predicate": "http://schema.org/broker",
+        "cardinality": "ONE_TO_ONE"
+      },
+      {
+        "from": {
+          "entityRule": "01985006-96c8-4b50-8f5b-a134010602e0",
+          "matchAttr": ""
+        },
+        "to": {
+          "entityRule": "3d99c383-3b9c-494c-8a3e-f9ee833f22fa",
+          "matchAttr": ""
+        },
+        "predicate": "http://schema.org/image",
+        "cardinality": "ONE_TO_ONE"
+      }
+    ],
+    "entityNS": null
+  },
+  "metaData": {
+    "useVTDXML": "true",
+    "ignoredValidations": null
+  }
+}
+
+/* HAYNEEDLE updates.hayneedle.com */
+{
+  "extract": {
+    "extractEmbedded": false,
+    "source": null,
+    "schema": [
+      {
+        "url": "http://ws.rmf.yahoo.com:4080/rmf/v1/schema?type=schema.org&name=y.2.0&format=json",
+        "ns": "http://schema.org",
+        "context": {
+          "@type": [
+            "Coupon"
+          ]
+        }
+      }
+    ],
+    "entityRules": [
+      {
+        "id": "35d29a63-a9ce-491f-8343-211142282b59",
+        "repeating": true,
+        "locations": [
+          "/"
+        ],
+        "type": "http://schema.org/Coupon",
+        "javascript": null,
+        "entityIdRef": "",
+        "attributes": [
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "__METADATA.Subject"
+                }
+              ]
+            },
+            "name": "http://schema.org/description",
+            "relative": true,
+            "transient": false,
+            "javascript": "function transform(data){\n  var evalArr = [\"% off\", \"sale\"];\n  \n  for(var i = 0; i < evalArr.length; i++){\n    if(data.toLowerCase().indexOf(evalArr[i]) !== -1) return data;\n  }\n  \n  return null;\n}",
+            "dataTypes": [
+              "Text"
+            ],
+            "mandatory": false
+          },
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "/descendant::a[contains(translate(.,\"BROWSE\",\"browse\"),\"browser\")]/@href"
+                }
+              ]
+            },
+            "name": "http://schema.org/url",
+            "relative": true,
+            "transient": false,
+            "javascript": null,
+            "dataTypes": [
+              "URL"
+            ],
+            "mandatory": false
+          },
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "__METADATA.Subject"
+                }
+              ]
+            },
+            "name": "http://schema.org/validThrough",
+            "relative": true,
+            "transient": false,
+            "javascript": "function transform(data,node,headers){\n  var expirKeywords = [\n    /ends\\s*today/i,\n    /ends\\s*tonight/i\n  ];\n  \n  for(var i = 0; i < expirKeywords.length; i++){\n    if(expirKeywords[i].test(data)){\n      var n = headers.get(\"Date\");\n      var n1 = new Date(n * 1000);\n      var day1 = n1.getDate();\n      var mon1 = n1.getMonth();\n      var vt = new Date(\"1970\", mon1, day1);\n      return vt;\n    }\n  }\n  \n  return \"\";\n}",
+            "dataTypes": [
+              "DateTime"
+            ],
+            "mandatory": false
+          }
+        ],
+        "hints": {
+          "_footer": "/descendant::text()[contains(.,\"Hayneedle Inc\")]/ancestor::table[1]",
+          "_raw_validThrough": "__METADATA.Subject"
+        }
+      },
+      {
+        "id": "0f1e3685-3c0b-4ab9-93bf-62ab4ae5b8da",
+        "repeating": true,
+        "locations": [
+          "/"
+        ],
+        "type": "http://schema.org/Organization",
+        "javascript": null,
+        "entityIdRef": "",
+        "attributes": [
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "\"hayneedle\""
+                }
+              ]
+            },
+            "name": "http://schema.org/name",
+            "relative": true,
+            "transient": false,
+            "javascript": null,
+            "dataTypes": [
+              "Text"
+            ],
+            "mandatory": false
+          }
+        ]
+      }
+    ],
+    "edgeRules": [
+      {
+        "from": {
           "entityRule": "35d29a63-a9ce-491f-8343-211142282b59",
           "matchAttr": ""
         },
@@ -3285,18 +3814,6 @@
           "matchAttr": ""
         },
         "predicate": "http://schema.org/broker",
-        "cardinality": "ONE_TO_ONE"
-      },
-      {
-        "from": {
-          "entityRule": "35d29a63-a9ce-491f-8343-211142282b59",
-          "matchAttr": ""
-        },
-        "to": {
-          "entityRule": "afefdfe0-1c9e-4f05-acb7-677170cc8852",
-          "matchAttr": ""
-        },
-        "predicate": "http://schema.org/image",
         "cardinality": "ONE_TO_ONE"
       }
     ],
@@ -5472,6 +5989,170 @@ LEVI'S e.levi.com
         },
         "to": {
           "entityRule": "2a9923fa-4efe-4635-8aaa-79f33f2123b6",
+          "matchAttr": ""
+        },
+        "predicate": "http://schema.org/image",
+        "cardinality": "ONE_TO_ONE"
+      }
+    ],
+    "entityNS": null
+  },
+  "metaData": {
+    "useVTDXML": "true",
+    "ignoredValidations": null
+  }
+}
+
+/* PIER 1 news.pier1.com */
+{
+  "extract": {
+    "extractEmbedded": false,
+    "source": null,
+    "schema": [
+      {
+        "url": "http://ws.rmf.yahoo.com:4080/rmf/v1/schema?type=schema.org&name=y.2.0&format=json",
+        "ns": "http://schema.org",
+        "context": {
+          "@type": [
+            "Coupon"
+          ]
+        }
+      }
+    ],
+    "entityRules": [
+      {
+        "id": "06943785-09e3-40e7-a55c-cccd7f22aa81",
+        "repeating": true,
+        "locations": [
+          "/descendant::text()[contains(translate(.,\"FRE\",\"fre\"),\"free\") or contains(translate(.,\"OF\",\"of\"),\"% off\")]/ancestor::table[1]\n|\n/descendant::img[contains(translate(@alt, \"PERCNTOF\", \"percntof\"), \"percent off\") or \ncontains(@alt,\"BOGO\")]"
+        ],
+        "type": "http://schema.org/Coupon",
+        "javascript": null,
+        "entityIdRef": "",
+        "attributes": [
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "./@alt | ."
+                }
+              ]
+            },
+            "name": "http://schema.org/description",
+            "relative": true,
+            "transient": false,
+            "javascript": "function transform(data){\n  var replaceArr = [\n    {oldStr: /\\*/g, newStr: \"\"},\n    {oldStr: /-bnr.*/g, newStr: \"\"},\n    {oldStr: /([a-z])(BOGO)/g, newStr: \"$1 - $2\"},\n    {oldStr: /BOGO(\\d{1,2})/g, newStr: \"Buy one, get one $1% off\"},\n    {oldStr: /BOGO([A-Z])/g, newStr: \"Buy one, get one - $1\"}\n  ];\n  \n  replaceArr.forEach(function(el){\n    data = data.replace(el.oldStr, el.newStr);\n  });\n  \n  return data;\n}",
+            "dataTypes": [
+              "Text"
+            ],
+            "mandatory": false
+          },
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "./ancestor::a/@href\n|\n/descendant::a[contains(translate(.,\"BROWSE\",\"browse\"),\"browser\")]/@href"
+                }
+              ]
+            },
+            "name": "http://schema.org/url",
+            "relative": true,
+            "transient": false,
+            "javascript": null,
+            "dataTypes": [
+              "URL"
+            ],
+            "mandatory": false
+          }
+        ],
+        "hints": {
+          "_footer": "/descendant::text()[contains(translate(., \"ALRIGHTSEVD\", \"alrightsevd\"), \"all rights reserved\")]/ancestor::table[1]"
+        },
+        "hintsJavascript": "function transform(data) {\n\tvar n=data.get('_footer');\n\tn=n.toString();\n\tn= n.replace(/[A-z0-9.%+-_]{2,64}\\@[A-z0-9.]{2,64}/g,'');\n\treturn {'_footer': [n]};\n}"
+      },
+      {
+        "id": "34f545b8-14aa-4b16-8216-0c7bc4a64010",
+        "repeating": true,
+        "locations": [
+          "/descendant::text()[contains(translate(.,\"FRE\",\"fre\"),\"free\") or contains(translate(.,\"OF\",\"of\"),\"% off\")]/ancestor::table[1]\n|\n/descendant::img[contains(translate(@alt, \"PERCNTOF\", \"percntof\"), \"percent off\") or \ncontains(@alt,\"BOGO\")]"
+        ],
+        "type": "http://schema.org/Organization",
+        "javascript": null,
+        "entityIdRef": "",
+        "attributes": [
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "\"Pier1\""
+                }
+              ]
+            },
+            "name": "http://schema.org/name",
+            "relative": true,
+            "transient": false,
+            "javascript": null,
+            "dataTypes": [
+              "Text"
+            ],
+            "mandatory": false
+          }
+        ]
+      },
+      {
+        "id": "7348d36d-eea7-4523-8d46-cada03dd4356",
+        "repeating": true,
+        "locations": [
+          "/descendant::img[ancestor::table[1]/descendant::text()[contains(translate(.,\"FRE\",\"fre\"),\"free\") or contains(translate(.,\"OF\",\"of\"),\"% off\")]] |\n/descendant::img[contains(translate(@alt, \"PERCNTOF\", \"percntof\"), \"percent off\") or \ncontains(@alt,\"BOGO\")]"
+        ],
+        "type": "http://schema.org/ImageObject",
+        "javascript": null,
+        "entityIdRef": "",
+        "attributes": [
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "./@src"
+                }
+              ]
+            },
+            "name": "http://schema.org/url",
+            "relative": true,
+            "transient": false,
+            "javascript": null,
+            "dataTypes": [
+              "URL"
+            ],
+            "mandatory": false
+          }
+        ]
+      }
+    ],
+    "edgeRules": [
+      {
+        "from": {
+          "entityRule": "06943785-09e3-40e7-a55c-cccd7f22aa81",
+          "matchAttr": ""
+        },
+        "to": {
+          "entityRule": "34f545b8-14aa-4b16-8216-0c7bc4a64010",
+          "matchAttr": ""
+        },
+        "predicate": "http://schema.org/broker",
+        "cardinality": "ONE_TO_ONE"
+      },
+      {
+        "from": {
+          "entityRule": "06943785-09e3-40e7-a55c-cccd7f22aa81",
+          "matchAttr": ""
+        },
+        "to": {
+          "entityRule": "7348d36d-eea7-4523-8d46-cada03dd4356",
           "matchAttr": ""
         },
         "predicate": "http://schema.org/image",

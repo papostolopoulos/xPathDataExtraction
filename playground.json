@@ -65,7 +65,7 @@
             "dataTypes": [
               "Text"
             ],
-            "javascript": null,
+            "javascript": "function transform(data){\n  var negRegexArr = [\n    /Advantage\\s*Card/i\n  ];\n\n  for (var i = 0; i < negRegexArr.length; i++) {\n    if (negRegexArr[i].test(data)) return null;\n  }\n\n\n  var posRegexArr = [\n    /[£€]\\d+\\s*worth\\s*of\\s*points/i,\n    /1\\/2\\s*price/i,\n    /\\d+\\s*points/i,\n    /triple\\s*points/i,\n    /3\\s*for\\s*two/i,\n    /\\d{1,2}%\\s*off/i,\n    /buy\\s*\\d\\s*get/i,\n    /save\\s*up\\s*to/i,\n    /save\\s*[£€]\\d/i,\n    /save\\s*\\d{1,2}%/i,\n  ];\n\n  for (var j = 0; j < posRegexArr.length; j++) {\n    if (posRegexArr[j].test(data)) return data.length > 80 ? minimizeMe(data, posRegexArr[j]) : cleanMe(data);\n  }\n\n  return null;\n}\n\n\n\n\n\nfunction minimizeMe(str, reg){\n  var punctuation = [\". \", \"! \", \"| \", \"? \",\".*\"]; //Punctuation symbols\n  str = str.replace(/(\\.)([A-z])/g, \"$1 $2\");\n\n  //STAGE 1 - Slice text at the beginning of string\n  var sliceStr = str.slice(0, str.indexOf(str.match(reg)[0])); //Create a substring from the beginning of string up to the beginning of the .match()\n  var sliceStart = 0; //Define a variable where the slice at the beginning of the initial string will happen.\n\n\n  //Iterate through the punctuation symbols.\n  //If the last Index position of the punctuation is larger than the sliceStart variable,\n  //then make the variable equal to the last index position.\n  //That will be later used to slice the string at its beginning\n  for (var i = 0; i < punctuation.length; i++) {\n    if(sliceStr.lastIndexOf(punctuation[i]) > sliceStart) sliceStart = sliceStr.lastIndexOf(punctuation[i]);\n  }\n  //Slice the string from the beginning of the last punctuation mark but before the coupon description.\n  if(sliceStart > 0) str = str.slice(sliceStart + 1).trim();\n\n\n\n\n  //STAGE 2 - Slice text at the end of string\n  var sliceEnd = +Infinity;\n  //Iterate through the punctuation symbols.\n  //If the punctuation symbol's index position is smaller than the sliceEnd variable, then\n  //make the sliceEnd variable equal to the index position of the punctuation.\n  //The sliceEnd will be used as the position where the slicing of the string will happen at it's end.\n  for (var j = 0; j < punctuation.length; j++) {\n    if (str.indexOf(punctuation[j]) < sliceEnd && str.indexOf(punctuation[j]) !== -1) sliceEnd = str.indexOf(punctuation[j]);\n  }\n  //Slice the end of the string\n  str = str.slice(0, sliceEnd).trim();\n\n\n\n  //STAGE 3 - Remove unecessary characters from the end of the string.\n  return cleanMe(str);\n}\n\n\nfunction cleanMe(string) {\n  var replaceArr = [\n    {oldStr: /(Show\\s*Menu|see\\s*how\\s*easy\\s*it\\s*is|[-\\|]\\s*online\\s*only|Hurry,\\s*ends|\\|\\s*advantage\\s*time(\\s*is\\s*here!)?|www).*/i, newStr: \"\"},\n    {oldStr: /\\*/g, newStr: \"\"},\n    {oldStr: /^Online\\s*only(\\s*-)?/i, newStr: \"\"},\n  ];\n\n  replaceArr.forEach(function(el) {\n    string = string.replace(el.oldStr, el.newStr);\n  });\n  \n  while(\"*^†\".indexOf(string[string.length-1]) !== -1) string = string.slice(0, string.length-1);\n  while(\"*^†\".indexOf(string[0]) !== -1) string = string.slice(1);\n\n  return string;\n}",
             "listOfValidNodeTypes": [
               {
                 "name": "TEXT",
@@ -92,15 +92,19 @@
             "name": "http://schema.org/description",
             "whiteList": [
               {
-                "value": "online code",
+                "value": "save",
                 "type": "SUBSTRING"
               },
               {
-                "value": "offer valid thru",
+                "value": "£",
                 "type": "SUBSTRING"
               },
               {
-                "value": "$",
+                "value": "3 for 2",
+                "type": "SUBSTRING"
+              },
+              {
+                "value": "1/2 price",
                 "type": "SUBSTRING"
               },
               {
@@ -108,8 +112,12 @@
                 "type": "SUBSTRING"
               },
               {
-                "value": "(?i)free",
-                "type": "REGEX"
+                "value": "€",
+                "type": "SUBSTRING"
+              },
+              {
+                "value": "points",
+                "type": "SUBSTRING"
               }
             ]
           },
@@ -251,13 +259,13 @@
           "defaultPatternAnnotationThreshold": "0.8",
           "linkThreshold": "2",
           "dedupCondition": {
-          "matchThreshold": 0.4,
-          "stopWords": ["Wedding Samples"]
+              "matchThreshold": 0.4,
+              "stopWords": ["save 10%"]
           },
           "listOfValidNodeTypes": [],
           "linkMatcher": [
             {
-              "regex": "https\\:\\/\\/sailthru\\.minted\\.com\\/click\\/.*"
+              "regex": ".*boots.com.*"
             }
           ]
         },
@@ -274,7 +282,7 @@
             "javascript": null,
             "location": [
               {
-                "xpath": "\"minted\""
+                "xpath": "\"Boots\""
               }
             ],
             "mandatory": "true",

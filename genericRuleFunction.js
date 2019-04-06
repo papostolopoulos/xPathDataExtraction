@@ -77,12 +77,7 @@ var str17 = "*Eddie Bauer Credit Cards are issued by Comenity Bank. Subject to c
 
 function transform(data){
   var negRegexArr = [
-    //offer (valid | expires | ends)
-    ///offer\s*(valid|expires|ends)/i,
-    //valid (through | until)
-    /valid\s*(through|until)/i,
-    //credit approval
-    /credit\s*approval/i
+
   ];
 
   for (var i = 0; i < negRegexArr.length; i++) {
@@ -93,18 +88,26 @@ function transform(data){
   var posRegexArr = [
     // (10% | $10 | percent) (off | (in )savings | discount | (cash)back | reward | gift | value | credit | (promotional )coupon | (mail-in )rebate | (e-)certificate | bonus | sale)
     /(\d{1,2}%|\$\d+(\.\d{2})?|percent)\s*(off|(in )?savings|discount|(cash(\s*)?)?back|reward|gift|value|credit|(promotional\s*)?coupon|(mail-in\s*)?rebate|(e-)?certificate|bonus|sale)/i,
-    // (extra | up to | save | over | more than | discount of | discounted by | savings of | at least | gift of | down to | as low as | bonus of) (10% | $10)
-    /(extra|up\s*to|sav(e|ings\s*of)|over|more\s*than|discount(ed)?\s*(of|by)|at\s*least|gift\s*of|down\s*to|as\s*low\s*as|bonus of)\s*(\d{1,2}%|\$\d+(\.\d{2})?)/i,
-    // was $10.99 | start at $10.99
-    /(was:?|start\s*at)\s*\$\d+/i,
-    // free ship | free on orders of | free $5 | free 10% | free delivery | free standard | free gift
-    /free\s*(ship|on\s*orders\s*of|\$\d|\d+%|standard|delivery|gift)/i,
+    // (extra | up to | save | over | more than | discount of | discounted by | savings of | at least | gift of | down to | as low as | bonus of| get a) (10% | $10)
+    /(extra|up\s*to|sav(e|ings\s*of)|over|more\s*than|discount(ed)?\s*(of|by)|at\s*least|gift\s*of|down\s*to|as\s*low\s*as|bonus\s*of|take|get(\s*a)?)\s*(\d{1,2}%|\$\d+(\.\d{2})?)/i,
+    // was $10.99 | start at $10.99 sale $10.99
+    /(sale:?|was:?|start\s*at)\s*\$\d+/i,
+    //on sale | markdown | save on | marked down
+    /on\s*sale|markdown|save\s*on|marked\s*down/i,
+    //anniversary sale
+    /anniversary\s*sale/i,
+    // free ship | free on orders of | free $5 | free 10% | free delivery | free standard | free gift | free NN
+    /free\s*(ship|on\s*orders\s*of|\$\d|\d+%|standard|delivery|gift|\d)/i,
     // buy one / two / three texttexttext, get
     /buy\s*(one|two|three|\d+),?.*\sget/i,
+    //(standard | complementary | NN day) (shipping)
+    /(standard|complimentary|\d+day)\s*shipping/i,
     //BOGO
     /BOGO/,
     // (100 | earn | get | gather | collect | your | redeem | reward) (points | rewards | gift | coupon | (e-)certificate)
-    /(\d+|earn|get|gather|collect|your|redeem|reward)\s*(points|rewards?|gift|coupon|(e-)?certificate)/i,
+    /(\d+|earn|get|gather|collect|your|redeem|rewards?)\s*(points|rewards?|gift|coupon|(e-)?certificate|a?\s*\$)/i,
+    // (double | triple | NN times the) (points)
+    /(double|triple|\d\s*times\s*the|\dx\s*the)\s*(points)/i,
     //promo(tion) code
     /promo(?:tion)\s*code\s*/i,
   ];
@@ -122,6 +125,7 @@ function transform(data){
 
 function minimizeMe(str, reg){
   var punctuation = [". ", "! ", "| ", "? "]; //Punctuation symbols
+  str = str.replace(/(\.)([A-z])/g, "$1 $2");
 
   //STAGE 1 - Slice text at the beginning of string
   var sliceStr = str.slice(0, str.indexOf(str.match(reg)[0])); //Create a substring from the beginning of string up to the beginning of the .match()
@@ -163,8 +167,20 @@ function minimizeMe(str, reg){
 
 
 function cleanMe(string) {
-  while("*©®ǂ‡†±→§™¹›∞•◊ΔÐð_".indexOf(string[string.length-1]) !== -1) string = string.slice(0, string.length-1);
-  while("*©®ǂ‡†±→§™¹›∞•◊ΔÐð_".indexOf(string[0]) !== -1) string = string.slice(1);
+  // var replaceStrArr = [
+  //   {oldStr: /([A-z\.])\*([\$\sA-z])/, newStr: "$1 $2"},
+  // ];
+  //
+  // for (var i = 0; i < replaceStrArr.length; i++) {
+  //   if(replaceStrArr[i].oldStr.test(string)){
+  //     string = string.replace(replaceStrArr[i].oldStr, replaceStrArr[i].newStr).trim();
+  //     //break;
+  //   }
+  // }
+
+
+  while("*©®ǂ‡†±+→§™¹›∞•◊ΔÐð_|^".indexOf(string[string.length-1]) !== -1) string = string.slice(0, string.length-1);
+  while("*©®ǂ‡†±+→§™¹›∞•◊ΔÐð_^".indexOf(string[0]) !== -1) string = string.slice(1);
 
   return string;
 }

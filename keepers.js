@@ -703,6 +703,10 @@ function transform(data) {
 
   var replaceStrings = [
     {oldStr:/[\*©®ǂ‡†±→§™¹›]/g, newStr: ""},
+    {oldStr: /[&#42;]/, newStr: ""}
+
+
+
     //{oldStr: //i, newStr: ""},
     //{oldStr: //i, newStr: ""},
     //{oldStr: //i, newStr: ""},
@@ -742,7 +746,7 @@ function transform(data) {
   n = n.toString().replace(/[A-z0-9.%+-_]{2,64}\@[A-z0-9.]{2,64}/g,'');
   return {'_footer': [n]};
 }
-//BETTER
+//BETTER - WHEN RAW VALID THROUGH IS INCLUDED
 function transform(data) {
   var ftr = data.get("_footer")[0].replace(/[A-z0-9.%+-_]{2,64}\@[A-z0-9.]{2,64}/g,'');
   var rvt = data.get("_raw_validThrough")[0];
@@ -1019,3 +1023,10 @@ function transform(data){
   .join(". ")
   .replace(/~~~/g,".");
 }
+
+
+
+var t0 = performance.now();
+transform(str7);
+var t1 = performance.now();
+console.log("Call to doSomething took " + (t1 - t0) + " milliseconds.");
