@@ -1572,6 +1572,207 @@
   }
 }
 
+DELL 
+{
+  "extract": {
+    "extractEmbedded": false,
+    "source": null,
+    "schema": [
+      {
+        "url": "http://ws.rmf.yahoo.com:4080/rmf/v1/schema?type=schema.org&name=y.2.0&format=json",
+        "ns": "http://schema.org",
+        "context": {
+          "@type": [
+            "Coupon"
+          ]
+        }
+      }
+    ],
+    "entityRules": [
+      {
+        "id": "aaa97388-bd95-42c6-8296-2be323901f76",
+        "repeating": true,
+        "locations": [
+          "/descendant::text()[contains(translate(.,\"OF\",\"of\"),\"% off\") or\ncontains(translate(.,\"SAVE\",\"save\"),\"save\")]/ancestor::table[1]\n|\n/descendant::img[contains(translate(@alt,\"SAVE\",\"save\"),\"save\")][1]"
+        ],
+        "type": "http://schema.org/Coupon",
+        "javascript": null,
+        "entityIdRef": "",
+        "attributes": [
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "./@alt | ."
+                }
+              ]
+            },
+            "name": "http://schema.org/description",
+            "relative": true,
+            "transient": false,
+            "javascript": "function transform(data){\n  return data.replace(/\\*.*/, \"\");\n}",
+            "dataTypes": [
+              "Text"
+            ],
+            "mandatory": false
+          },
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "./descendant::a/@href | ./parent::a/@href"
+                }
+              ]
+            },
+            "name": "http://schema.org/url",
+            "relative": true,
+            "transient": false,
+            "javascript": null,
+            "dataTypes": [
+              "URL"
+            ],
+            "mandatory": false
+          },
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "/descendant::text()[contains(translate(.,\"OFERVALID\",\"ofervalid\"),\"offer valid\") and contains(translate(.,\"THROUGH\",\"through\"),\"through\")]"
+                }
+              ]
+            },
+            "name": "http://schema.org/validThrough",
+            "relative": true,
+            "transient": false,
+            "javascript": "function transform(data){\n  return data.replace(/.*through\\s((?:\\d{1,2}\\/){2}\\d{2,4}).*/, \"$1\");\n}",
+            "dataTypes": [
+              "DateTime"
+            ],
+            "mandatory": false
+          }
+        ],
+        "hints": {
+          "_footer": "/descendant::text()[contains(.,\"Dell Rewards Account\")]/ancestor::table[1]",
+          "_raw_validThrough": "/descendant::text()[contains(translate(.,\"OFERVALID\",\"ofervalid\"),\"offer valid\") and contains(translate(.,\"THROUGH\",\"through\"),\"through\")]"
+        }
+      },
+      {
+        "id": "81f228b0-76a4-4969-9d6b-9796eeb33e55",
+        "repeating": true,
+        "locations": [
+          "/descendant::text()[contains(translate(.,\"OF\",\"of\"),\"% off\") or\ncontains(translate(.,\"SAVE\",\"save\"),\"save\")]/ancestor::table[1]\n|\n/descendant::img[contains(translate(@alt,\"SAVE\",\"save\"),\"save\")][1]"
+        ],
+        "type": "http://schema.org/Organization",
+        "javascript": null,
+        "entityIdRef": "",
+        "attributes": [
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "\"DELL\""
+                }
+              ]
+            },
+            "name": "http://schema.org/name",
+            "relative": true,
+            "transient": false,
+            "javascript": null,
+            "dataTypes": [
+              "Text"
+            ],
+            "mandatory": false
+          }
+        ]
+      },
+      {
+        "id": "0e9ae260-177b-4e81-8f5f-b76890b46487",
+        "repeating": true,
+        "locations": [
+          "/descendant::img"
+        ],
+        "type": "http://schema.org/ImageObject",
+        "javascript": null,
+        "entityIdRef": "",
+        "attributes": [
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "./@src"
+                }
+              ]
+            },
+            "name": "http://schema.org/url",
+            "relative": true,
+            "transient": false,
+            "javascript": null,
+            "dataTypes": [
+              "URL"
+            ],
+            "mandatory": false
+          },
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "./@title | ./@alt"
+                }
+              ]
+            },
+            "name": "http://schema.org/imgtext",
+            "relative": true,
+            "transient": true,
+            "javascript": null,
+            "dataTypes": [
+              "Text"
+            ],
+            "mandatory": false
+          }
+        ]
+      }
+    ],
+    "edgeRules": [
+      {
+        "from": {
+          "entityRule": "aaa97388-bd95-42c6-8296-2be323901f76",
+          "matchAttr": ""
+        },
+        "to": {
+          "entityRule": "81f228b0-76a4-4969-9d6b-9796eeb33e55",
+          "matchAttr": ""
+        },
+        "predicate": "http://schema.org/broker",
+        "cardinality": "ONE_TO_ONE"
+      },
+      {
+        "from": {
+          "entityRule": "aaa97388-bd95-42c6-8296-2be323901f76",
+          "matchAttr": "http://schema.org/description"
+        },
+        "to": {
+          "entityRule": "0e9ae260-177b-4e81-8f5f-b76890b46487",
+          "matchAttr": "http://schema.org/imgtext"
+        },
+        "predicate": "http://schema.org/image",
+        "cardinality": "ONE_TO_ONE",
+        "matchThreshold": "0.3"
+      }
+    ],
+    "entityNS": null
+  },
+  "metaData": {
+    "useVTDXML": "true",
+    "ignoredValidations": null
+  }
+}
+
 /* DICK'S SPORTING GOODS e.dcsg.com */
 {
   "extract": {
@@ -3325,7 +3526,7 @@
   }
 }
 
-JC WHITNEY
+/* JC WHITNEY */
 {
   "extract": {
     "extractEmbedded": false,
@@ -4793,7 +4994,7 @@ JC WHITNEY
   }
 }
 
-LEVI'S e.levi.com
+/* LEVI'S e.levi.com */
 {
   "extract": {
     "extractEmbedded": false,
@@ -6167,6 +6368,170 @@ LEVI'S e.levi.com
   }
 }
 
+/* POTTERY BARN KIDS mail.potterybarnkids.com */
+{
+  "extract": {
+    "extractEmbedded": false,
+    "source": null,
+    "schema": [
+      {
+        "url": "http://ws.rmf.yahoo.com:4080/rmf/v1/schema?type=schema.org&name=y.2.0&format=json",
+        "ns": "http://schema.org",
+        "context": {
+          "@type": [
+            "Coupon"
+          ]
+        }
+      }
+    ],
+    "entityRules": [
+      {
+        "id": "a385d5fc-3082-4537-804b-c75c92821bfc",
+        "repeating": true,
+        "locations": [
+          "/descendant::img[contains(translate(@alt,\"OF\",\"of\"),\"% off\") or\ncontains(translate(@alt,\"DEALS\", \"deals\"),\"deals\") or\ncontains(translate(@alt, \"EARN\", \"earn\"),\"earn\") or\ncontains(translate(@alt, \"COMPLIENTARY\", \"complientary\"),\"complimentary\")]"
+        ],
+        "type": "http://schema.org/Coupon",
+        "javascript": null,
+        "entityIdRef": "",
+        "attributes": [
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "./@alt"
+                }
+              ]
+            },
+            "name": "http://schema.org/description",
+            "relative": true,
+            "transient": false,
+            "javascript": "function transform(data){\n  var replaceArr = [\n    {oldStr: /[\\+\\*]/g, newStr: \"\"},\n    {oldStr: /(Learn\\smore|Apply\\s*now)$/, newStr: \"\"},\n    {oldStr: /^MORE\\s*/, newStr: \"\"}\n  ];\n  \n  replaceArr.forEach(function(el){\n    data = data.replace(el.oldStr, el.newStr);\n  });\n  \n  return data.trim();\n}",
+            "dataTypes": [
+              "Text"
+            ],
+            "mandatory": false
+          },
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "./parent::a/@href"
+                }
+              ]
+            },
+            "name": "http://schema.org/url",
+            "relative": true,
+            "transient": false,
+            "javascript": null,
+            "dataTypes": [
+              "URL"
+            ],
+            "mandatory": false
+          }
+        ],
+        "hintsJavascript": "function transform(data) {\n  var n=data.get(\"_footer\");\n  n = n.toString().replace(/[A-z0-9.%+-_]{2,64}\\@[A-z0-9.]{2,64}/g,'');\n  return {'_footer': [n]};\n}",
+        "hints": {
+          "_footer": "/descendant::text()[contains(.,\"This message was sent to\")]/ancestor::table[1]"
+        }
+      },
+      {
+        "id": "58538a1b-0f32-4ac1-8565-54f7942c97cd",
+        "repeating": true,
+        "locations": [
+          "/descendant::img[contains(translate(@alt,\"OF\",\"of\"),\"% off\") or\ncontains(translate(@alt,\"DEALS\", \"deals\"),\"deals\") or\ncontains(translate(@alt, \"EARN\", \"earn\"),\"earn\") or\ncontains(translate(@alt, \"COMPLIENTARY\", \"complientary\"),\"complimentary\")]"
+        ],
+        "type": "http://schema.org/Organization",
+        "javascript": null,
+        "entityIdRef": null,
+        "attributes": [
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "\"pottery barn kids\""
+                }
+              ]
+            },
+            "name": "http://schema.org/name",
+            "relative": true,
+            "transient": false,
+            "javascript": null,
+            "dataTypes": [
+              "Text"
+            ],
+            "mandatory": false
+          }
+        ]
+      },
+      {
+        "id": "be729911-c5bd-4acf-9279-4166c140b607",
+        "repeating": true,
+        "locations": [
+          "/descendant::img"
+        ],
+        "type": "http://schema.org/ImageObject",
+        "javascript": null,
+        "entityIdRef": "",
+        "attributes": [
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "./@src"
+                }
+              ]
+            },
+            "name": "http://schema.org/url",
+            "relative": true,
+            "transient": false,
+            "javascript": null,
+            "dataTypes": [
+              "URL"
+            ],
+            "mandatory": false
+          }
+        ]
+      }
+    ],
+    "edgeRules": [
+      {
+        "from": {
+          "entityRule": "a385d5fc-3082-4537-804b-c75c92821bfc",
+          "matchAttr": ""
+        },
+        "to": {
+          "entityRule": "58538a1b-0f32-4ac1-8565-54f7942c97cd",
+          "matchAttr": ""
+        },
+        "predicate": "http://schema.org/broker",
+        "cardinality": "ONE_TO_ONE"
+      },
+      {
+        "from": {
+          "entityRule": "a385d5fc-3082-4537-804b-c75c92821bfc",
+          "matchAttr": ""
+        },
+        "to": {
+          "entityRule": "be729911-c5bd-4acf-9279-4166c140b607",
+          "matchAttr": ""
+        },
+        "predicate": "http://schema.org/image",
+        "cardinality": "ONE_TO_ONE"
+      }
+    ],
+    "entityNS": null
+  },
+  "metaData": {
+    "useVTDXML": "true",
+    "ignoredValidations": null
+  }
+}
+
 /* PRINCESS CRUISES em.princess.com */
 {
   "extract": {
@@ -7032,6 +7397,189 @@ LEVI'S e.levi.com
         },
         "to": {
           "entityRule": "161da46f-9b05-49e9-8ff6-cf6d164814dc",
+          "matchAttr": ""
+        },
+        "predicate": "http://schema.org/image",
+        "cardinality": "ONE_TO_ONE"
+      }
+    ],
+    "entityNS": null
+  },
+  "metaData": {
+    "useVTDXML": "true",
+    "ignoredValidations": null
+  }
+}
+
+/* SOUTHWEST iluv.southwest.com */
+{
+  "extract": {
+    "extractEmbedded": false,
+    "source": null,
+    "schema": [
+      {
+        "url": "http://ws.rmf.yahoo.com:4080/rmf/v1/schema?type=schema.org&name=y.2.0&format=json",
+        "ns": "http://schema.org",
+        "context": {
+          "@type": [
+            "Coupon"
+          ]
+        }
+      }
+    ],
+    "entityRules": [
+      {
+        "id": "1f2744c8-c4c8-41d0-81d0-8a16d3d636ce",
+        "repeating": true,
+        "locations": [
+          "/descendant::text()[contains(translate(.,\"EARN\",\"earn\"),\"earn\") or\ncontains(translate(.,\"SALE\",\"sale\"),\"sale\")][not(contains(translate(.,\"LEARNMOR\",\"learnmor\"),\"learn more\"))]\n/ancestor::table[1][not(contains(translate(., \"TERMS\", \"terms\"), \"terms\"))]"
+        ],
+        "type": "http://schema.org/Coupon",
+        "javascript": null,
+        "entityIdRef": "",
+        "attributes": [
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "."
+                }
+              ]
+            },
+            "name": "http://schema.org/description",
+            "relative": true,
+            "transient": false,
+            "javascript": "function transform(data){\n  var replaceArr = [\n    {oldStr: /Book\\s*(now|package).*/, newStr: \"\"},\n    {oldStr: /Learn\\s*more.*/, newStr: \"\"},\n    {oldStr: /\\*/g, newStr: \"\"}\n  ];\n  \n  replaceArr.forEach(function(el){\n    data = data.replace(el.oldStr, el.newStr);\n  });\n  \n  return data;\n}",
+            "dataTypes": [
+              "Text"
+            ],
+            "mandatory": false
+          },
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "./descendant::a/@href"
+                }
+              ]
+            },
+            "name": "http://schema.org/url",
+            "relative": true,
+            "transient": false,
+            "javascript": null,
+            "dataTypes": [
+              "URL"
+            ],
+            "mandatory": false
+          },
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "concat(., \"~~~\", /descendant::text()[contains(translate(.,\"TERMS\",\"terms\"),\"terms\")]/ancestor::table[1])"
+                }
+              ]
+            },
+            "name": "http://schema.org/validThrough",
+            "relative": true,
+            "transient": false,
+            "javascript": "function transform(data){\n  dataSplit = data.split(\"~~~\");\n  if(/sale/.test(dataSplit[0]))  return data.replace(/.*Purchase\\s*from\\s*(?:January|February|March|April|May|June|July|August|September|October|November|December)\\s*\\d{1,2}\\s*through\\s*((?:January|February|March|April|May|June|July|August|September|October|November|December)\\s*\\d{1,2}\\s*,\\s*\\d{2,4}).*/, \"$1\");\n  \n  return \"\";\n}",
+            "dataTypes": [
+              "DateTime"
+            ],
+            "mandatory": false
+          }
+        ],
+        "hints": {
+          "_raw_validThrough": "concat(., \"~~~\", /descendant::text()[contains(translate(.,\"TERMS\",\"terms\"),\"terms\")]/ancestor::table[1])",
+          "_footer": "/descendant::text()[contains(.,\"unsubscribe\")]/ancestor::table[1]"
+        },
+        "hintsJavascript": "function transform(data) {\n  var ftr = data.get(\"_footer\")[0].replace(/[A-z0-9.%+-_]{2,64}\\@[A-z0-9.]{2,64}/g,'');\n  var rvt = data.get(\"_raw_validThrough\")[0];\n\n  return {\n    '_footer': [ftr],\n    '_raw_validThrough': [rvt]\n  };\n}"
+      },
+      {
+        "id": "924239e3-091a-492d-a4a1-14019c103f70",
+        "repeating": true,
+        "locations": [
+          "/descendant::text()[contains(translate(.,\"EARN\",\"earn\"),\"earn\") or\ncontains(translate(.,\"SALE\",\"sale\"),\"sale\")][not(contains(translate(.,\"LEARNMOR\",\"learnmor\"),\"learn more\"))]\n/ancestor::table[1][not(contains(translate(., \"TERMS\", \"terms\"), \"terms\"))]"
+        ],
+        "type": "http://schema.org/Organization",
+        "javascript": null,
+        "entityIdRef": null,
+        "attributes": [
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "\"Southwest\""
+                }
+              ]
+            },
+            "name": "http://schema.org/name",
+            "relative": true,
+            "transient": false,
+            "javascript": null,
+            "dataTypes": [
+              "Text"
+            ],
+            "mandatory": false
+          }
+        ]
+      },
+      {
+        "id": "29021793-e692-42af-a9ad-56c2edde5ec7",
+        "repeating": true,
+        "locations": [
+          "/descendant::img[ancestor::table[2]/descendant::table[2][contains(translate(.,\"EARN\",\"earn\"),\"earn\") or\ncontains(translate(.,\"SALE\",\"sale\"),\"sale\")]]"
+        ],
+        "type": "http://schema.org/ImageObject",
+        "javascript": null,
+        "entityIdRef": "",
+        "attributes": [
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "./@src"
+                }
+              ]
+            },
+            "name": "http://schema.org/url",
+            "relative": true,
+            "transient": false,
+            "javascript": null,
+            "dataTypes": [
+              "URL"
+            ],
+            "mandatory": false
+          }
+        ]
+      }
+    ],
+    "edgeRules": [
+      {
+        "from": {
+          "entityRule": "1f2744c8-c4c8-41d0-81d0-8a16d3d636ce",
+          "matchAttr": ""
+        },
+        "to": {
+          "entityRule": "924239e3-091a-492d-a4a1-14019c103f70",
+          "matchAttr": ""
+        },
+        "predicate": "http://schema.org/broker",
+        "cardinality": "ONE_TO_ONE"
+      },
+      {
+        "from": {
+          "entityRule": "1f2744c8-c4c8-41d0-81d0-8a16d3d636ce",
+          "matchAttr": ""
+        },
+        "to": {
+          "entityRule": "29021793-e692-42af-a9ad-56c2edde5ec7",
           "matchAttr": ""
         },
         "predicate": "http://schema.org/image",
