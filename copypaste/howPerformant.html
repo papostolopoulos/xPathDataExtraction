@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>How Performant - Test the performance of JavaScript functions</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <style media="screen">
+    *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: sans-serif;
+    }
+
+    #main{
+      display: grid;
+      grid-template-columns: 33.3% 66.6%;
+      grid-template-rows: 100%;
+      grid-template-areas:
+      "sectionPasteParams sectionPasteFunctions"
+      "sectionPasteParams sectionPasteFunctions";
+      height: 95vh;
+    }
+
+    .sectionPasteParams{
+      padding: 10px;
+      background-color: lightblue;
+      grid-area: sectionPasteParams;
+    }
+
+    .sectionPasteFunctions{
+      grid-area: sectionPasteFunctions;
+      display: flex;
+      align-content: center;
+      justify-content: center;
+    }
+
+    .sectionFunction1, .sectionFunction2{
+      width: 50%;
+    }
+
+    .sectionFunction1{
+      background-color: lightgreen;
+    }
+
+    .sectionFunction2{
+      background-color: pink;
+    }
+
+    #footer{
+      background: rgb(0,0,0);
+      height: 5vh;
+      line-height: 5vh;
+      text-align: center;
+      font-size: 1.4rem;
+      border-top: 3px solid black;
+      color: white;
+    }
+
+    #footer a{
+      color: white;
+    }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <main id="main">
+        <section class="sectionPasteParams">
+          <h2>Function arguments</h2>
+          <div class="divNumOfArgumentsSets">
+            <label for="">
+              Enter number of sets of arguments:
+              <input type="number" name="inputNumOfArgumentsSets" id="inputNumOfArguments" v-model="numOfArgumentsSets">
+            </label>
+          </div>
+
+          <div class="divArgumentsSets" v-for="set in Number(numOfArgumentsSets)">
+            <function-arg></function-arg>
+          </div>
+          <br>
+          this is to display the component and how it looks <br>
+          <function-arg></function-arg>
+
+          What data types
+          numbers
+          strings
+          boolean
+          array
+          NULL
+          undefined
+          object literal
+          callback function
+        </section>
+
+
+
+        <section class="sectionPasteFunctions">
+          <section class="sectionFunction1">
+            This is for function 1 - sectionFunction1 <br>
+            {{start}}
+          </section>
+
+
+
+          <section class="sectionFunction2">
+            This is for function 2 - sectionFunction2
+          </section>
+        </section>
+
+
+        </section>
+
+      </main>
+
+      <footer id="footer">
+        How Performant? Compare JavaScript functions |
+        <a href="http://addeventlistener.xyz" target="_blank">@papostolopoulos</a> |
+        2018
+      </footer>
+    </div>
+
+
+
+
+
+
+    <script type="text/javascript">
+
+      Vue.component('function-arg', {
+        data(){
+          return {
+
+          }
+        },
+        template:
+        `
+          <textarea></textarea>
+        `
+      });
+
+      let app = new Vue({
+        el: "#main",
+        data: {
+          numOfArgumentsSets: 0,
+          start: "This is the start"
+        }
+      });
+    </script>
+
+  </body>
+</html>

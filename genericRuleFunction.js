@@ -86,28 +86,32 @@ function transform(data){
 
 
   var posRegexArr = [
-    // (10% | $10 | percent) (off | (in )savings | discount | (cash)back | reward | gift | value | credit | (promotional )coupon | (mail-in )rebate | (e-)certificate | bonus | sale)
-    /(\d{1,2}%|\$\d+(\.\d{2})?|percent)\s*(off|(in )?savings|discount|(cash(\s*)?)?back|reward|gift|value|credit|(promotional\s*)?coupon|(mail-in\s*)?rebate|(e-)?certificate|bonus|sale)/i,
+    // (10% | $10 | percent | 1/3) (off | (in )savings | discount | (cash)back | reward | gift | value | credit | (promotional )coupon | (mail-in )rebate | (e-)certificate | bonus | sale)
+    /(\d{1,2}%|[\$£€]\d+(\.\d{2})?|percent|\d\/\d)\s*(off|(in )?savings?|discount|(cash(\s*)?)?back|reward|gift|value|credit|(promotional\s*)?coupon|(mail-in\s*)?rebate|(e-)?certificate|bonus|sale)/i,
     // (extra | up to | save | over | more than | discount of | discounted by | savings of | at least | gift of | down to | as low as | bonus of| get a) (10% | $10)
-    /(extra|up\s*to|sav(e|ings\s*of)|over|more\s*than|discount(ed)?\s*(of|by)|at\s*least|gift\s*of|down\s*to|as\s*low\s*as|bonus\s*of|take|get(\s*a)?)\s*(\d{1,2}%|\$\d+(\.\d{2})?)/i,
+    /(extra|up\s*to|sav(e|ings\s*of)|over|more\s*than|discount(ed)?\s*(of|by)|at\s*least|gift\s*of|down\s*to|as\s*low\s*as|bonus\s*of|take|get(\s*a)?)\s*(\d{1,2}%|[\$£€]\d+(\.\d{2})?)/i,
     // was $10.99 | start at $10.99 sale $10.99
-    /(sale:?|was:?|start\s*at)\s*\$\d+/i,
+    /(sale:?|was:?|start\s*at)\s*[\$£€]\d+/i,
     //on sale | markdown | save on | marked down
     /on\s*sale|markdown|save\s*on|marked\s*down/i,
     //anniversary sale
     /anniversary\s*sale/i,
     // free ship | free on orders of | free $5 | free 10% | free delivery | free standard | free gift | free NN
-    /free\s*(ship|on\s*orders\s*of|\$\d|\d+%|standard|delivery|gift|\d)/i,
+    /free\s*(ship|on\s*orders\s*of|[\$£€]\d|\d+%|standard|delivery|gift|\d)/i,
     // buy one / two / three texttexttext, get
     /buy\s*(one|two|three|\d+),?.*\sget/i,
     //(standard | complementary | NN day) (shipping)
     /(standard|complimentary|\d+day)\s*shipping/i,
+    //3 for 2
+    /\d\s*for\s*\d/i,
+    //(half | 1/2) (price)
+    /(half|\d\/\d)\s*(price)/i,
     //BOGO
     /BOGO/,
-    // (100 | earn | get | gather | collect | your | redeem | reward) (points | rewards | gift | coupon | (e-)certificate)
-    /(\d+|earn|get|gather|collect|your|redeem|rewards?)\s*(points|rewards?|gift|coupon|(e-)?certificate|a?\s*\$)/i,
+    // (100 | earn | get | gather | collect | your | redeem | reward | worth of) (points | rewards | gift | coupon | (e-)certificate)
+    /(\d+|earn|get|gather|collect|your|redeem|rewards?|worth\s*of)\s*(points|rewards?|gift|coupon|(e-)?certificate|a?\s*[\$£€])/i,
     // (double | triple | NN times the) (points)
-    /(double|triple|\d\s*times\s*the|\dx\s*the)\s*(points)/i,
+    /(double|triple|\d\s*times\s*the|\dx(\s*the)?)\s*(points)/i,
     //promo(tion) code
     /promo(?:tion)\s*code\s*/i,
   ];
@@ -168,7 +172,7 @@ function minimizeMe(str, reg){
 
 function cleanMe(string) {
   // var replaceStrArr = [
-  //   {oldStr: /([A-z\.])\*([\$\sA-z])/, newStr: "$1 $2"},
+  //   {oldStr: /([A-z\.])\*([[\$£€]\sA-z])/, newStr: "$1 $2"},
   // ];
   //
   // for (var i = 0; i < replaceStrArr.length; i++) {

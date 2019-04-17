@@ -8,7 +8,35 @@
 
     <style media="screen">
       body{
+
+      }
+
+      #container{
+        display: grid;
+        grid-template-columns: 100vw;
+        grid-template-rows: 95vh 5vh;
+        grid-template-areas:
+        "mainArea"
+        "footerArea";
+      }
+
+      #mainArea{
+        grid-area: mainArea;
         padding: 20px;
+      }
+
+      #footerArea{
+        grid-area: footerArea;
+        background: rgb(0,0,0);
+        line-height: 5vh;
+        text-align: center;
+        font-size: 1.4rem;
+        border-top: 3px solid black;
+        color: white;
+      }
+
+      #footerArea a{
+        color: white;
       }
 
       #sectionCopyPasteArea{
@@ -60,169 +88,169 @@
 
 
   <body>
-    <main id="container">
-      <section id="sectionCopyPasteArea">
-        <div id="divInstructionsArea">
-          <h3>Instructions</h3>
-          <ol>
-            <li>Go to "preview".</li>
-            <li>In the view option, select "raw".</li>
-            <li>Copy the JSON formated text.</li>
-            <li>Paste it at the textarea.</li>
-            <li>Use the filters to filter through the results if needed.</li>
-          </ol>
-        </div>
+    <div id="container">
+      <main id="mainArea">
+        <section id="sectionCopyPasteArea">
+          <div id="divInstructionsArea">
+            <h3>Instructions</h3>
+            <ol>
+              <li>Go to "preview".</li>
+              <li>In the view option, select "raw".</li>
+              <li>Copy the JSON formated text.</li>
+              <li>Paste it at the textarea.</li>
+              <li>Use the filters to filter through the results if needed.</li>
+            </ol>
+          </div>
 
 
 
 
-        <!-- <div id="divRadioButtonsArea">
-          <h3>Which task?</h3>
-          <form id="formScarlettTasks" name="formScarlettTasks" @click="changeTypeOfPaste($event)">
-            <input id="inputGenericCoupons" type="radio" name="inputCouponsSelect" value="genericCoupons">
-            <label for="inputGenericCoupons">Manual Coupons</label> |
+          <!-- <div id="divRadioButtonsArea">
+            <h3>Which task?</h3>
+            <form id="formScarlettTasks" name="formScarlettTasks" @click="changeTypeOfPaste($event)">
+              <input id="inputGenericCoupons" type="radio" name="inputCouponsSelect" value="genericCoupons">
+              <label for="inputGenericCoupons">Manual Coupons</label> |
 
-            <input id="inputLinkbaseCoupons" type="radio" name="inputCouponsSelect" value="linkbaseCoupons">
-            <label for="inputLinkbaseCoupons">Linkbase coupons</label> <br>
+              <input id="inputLinkbaseCoupons" type="radio" name="inputCouponsSelect" value="linkbaseCoupons">
+              <label for="inputLinkbaseCoupons">Linkbase coupons</label> <br>
 
-            <input id="inputAirplaneTickets" type="radio" name="inputCouponsSelect" value="airplaneTickets">
-            <label for="inputAirplaneTickets">Tickets</label> |
+              <input id="inputAirplaneTickets" type="radio" name="inputCouponsSelect" value="airplaneTickets">
+              <label for="inputAirplaneTickets">Tickets</label> |
 
-            <input id="inputInvoices" type="radio" name="inputCouponsSelect" value="invoices">
-            <label for="inputInvoices">Invoices</label>
-          </form>
-        </div> -->
-
-
-
-
-        <div id="divTextArea">
-          <h3>Paste the JSON file</h3>
-          <textarea
-          name="textareaCoupons"
-          id="textareaCoupons"
-          rows="10" cols="80"
-          placeholder="Paste JSON text here"
-          v-model="startStr"
-          v-once
-          ></textarea>
-        </div>
+              <input id="inputInvoices" type="radio" name="inputCouponsSelect" value="invoices">
+              <label for="inputInvoices">Invoices</label>
+            </form>
+          </div> -->
 
 
 
 
-        <div id="divFilterArea">
-          <h3>Filters</h3>
-          <h6>RegEx source:</h6>
-          <input type="text" name="" value=""
-          v-model="regExSource"
-          placeholder="Enter RegEx string"
+          <div id="divTextArea">
+            <h3>Paste the JSON file</h3>
+            <textarea
+            name="textareaCoupons"
+            id="textareaCoupons"
+            rows="10" cols="80"
+            placeholder="Paste JSON text here"
+            v-model="startStr"
+            v-once
+            ></textarea>
+          </div>
+
+
+
+
+          <div id="divFilterArea">
+            <h3>Filters</h3>
+            <h6>RegEx source:</h6>
+            <input type="text" name="" value=""
+            v-model="regExSource"
+            placeholder="Enter RegEx string"
+            >
+
+            <h6>RegEx flags:</h6>
+            <template class="">
+              <label for="inputRegExg" title="global: Don't return after first match">
+                g: <input id="inputRegExg" type="checkbox" value="g" v-model="g">
+              </label>
+              <label for="inputRegExm" title="multi line: ^ and $ match start / end of line">
+                m: <input id="inputRegExm" type="checkbox" value="m" v-model="m">
+              </label>
+              <label for="inputRegExi" title="insensitive: Case insensitive match">
+                i: <input id="inputRegExi" type="checkbox" value="i" v-model="i">
+              </label>
+              <label for="inputRegExx" title="extended: ignore whitespace">
+                x: <input id="inputRegExx" type="checkbox" value="x" v-model="x">
+              </label>
+              <label for="inputRegExX" title="extra: Disallow meaningless escapes">
+                X: <input id="inputRegExX" type="checkbox" value="X" v-model="X">
+              </label>
+              <label for="inputRegExs" title="single line: Dot matches newline">
+                s: <input id="inputRegExs" type="checkbox" value="s" v-model="s">
+              </label>
+              <label for="inputRegExu" title="unicode: Match with full unicode">
+                u: <input id="inputRegExu" type="checkbox" value="u" v-model="u">
+              </label>
+              <label for="inputRegExU" title="ungreedy: Make quantifiers lazy">
+                U: <input id="inputRegExU" type="checkbox" value="U" v-model="U">
+              </label>
+              <label for="inputRegExA" title="Anchored: Anchor to start of pattern">
+                A: <input id="inputRegExA" type="checkbox" value="A" v-model="A">
+              </label>
+              <label for="inputRegExj" title="jchanged: Allow duplicate subpattern">
+                j: <input id="inputRegExj" type="checkbox" value="j" v-model="j">
+              </label>
+              <label for="inputRegExD" title="Dollar end only: $ matches only end of pattern">
+                D: <input id="inputRegExD" type="checkbox" value="D" v-model="D">
+              </label>
+            </template>
+            <hr>
+
+            <h6>Number of characters in description:</h6>
+            Min: <input type="text" name="" value=""
+            maxlength="4" size="4"
+            v-model="minCharacters" placeholder="0">
+            Max: <input type="text" name="" value=""
+            maxlength="4" size="4"
+            v-model="maxCharacters" placeholder="0">
+            <hr>
+
+
+          </div>
+        </section>
+
+
+        <section id="sectionDebugArea" style="display: none;">
+          <h1>startStr</h1>
+          <p style="white-space: pre">{{startStr}}</p>
+          <h1>magic</h1>
+          <p style="white-space: pre">{{magic}}</p>
+        </section>
+
+
+
+        <section id="sectionExtractionArea">
+          <article
+          class="media"
+          v-for="(item, idx) in mainArray"
+          v-show="(regExSource === '' || item.description.match(new RegExp(regExSource, regExFlags))) &&
+          (minCharacters === '' || item.description.length >= minCharacters) &&
+          (maxCharacters === '' || item.description.length <= maxCharacters)"
           >
 
-          <h6>RegEx flags:</h6>
-          <template class="">
-            <label for="inputRegExg" title="global: Don't return after first match">
-              g: <input id="inputRegExg" type="checkbox" value="g" v-model="g">
-            </label>
-            <label for="inputRegExm" title="multi line: ^ and $ match start / end of line">
-              m: <input id="inputRegExm" type="checkbox" value="m" v-model="m">
-            </label>
-            <label for="inputRegExi" title="insensitive: Case insensitive match">
-              i: <input id="inputRegExi" type="checkbox" value="i" v-model="i">
-            </label>
-            <label for="inputRegExx" title="extended: ignore whitespace">
-              x: <input id="inputRegExx" type="checkbox" value="x" v-model="x">
-            </label>
-            <label for="inputRegExX" title="extra: Disallow meaningless escapes">
-              X: <input id="inputRegExX" type="checkbox" value="X" v-model="X">
-            </label>
-            <label for="inputRegExs" title="single line: Dot matches newline">
-              s: <input id="inputRegExs" type="checkbox" value="s" v-model="s">
-            </label>
-            <label for="inputRegExu" title="unicode: Match with full unicode">
-              u: <input id="inputRegExu" type="checkbox" value="u" v-model="u">
-            </label>
-            <label for="inputRegExU" title="ungreedy: Make quantifiers lazy">
-              U: <input id="inputRegExU" type="checkbox" value="U" v-model="U">
-            </label>
-            <label for="inputRegExA" title="Anchored: Anchor to start of pattern">
-              A: <input id="inputRegExA" type="checkbox" value="A" v-model="A">
-            </label>
-            <label for="inputRegExj" title="jchanged: Allow duplicate subpattern">
-              j: <input id="inputRegExj" type="checkbox" value="j" v-model="j">
-            </label>
-            <label for="inputRegExD" title="Dollar end only: $ matches only end of pattern">
-              D: <input id="inputRegExD" type="checkbox" value="D" v-model="D">
-            </label>
-          </template>
-          <hr>
+            <div class="media-left media-middle">
+              <a :href="item.url" target="_blank">
+                <img class="media-object" :src="item.imageUrl" alt="No image pulled for this item">
+              </a>
+            </div>
 
-          <h6>Number of characters in description:</h6>
-          Min: <input type="text" name="" value=""
-          maxlength="4" size="4"
-          v-model="minCharacters" placeholder="0">
-          Max: <input type="text" name="" value=""
-          maxlength="4" size="4"
-          v-model="maxCharacters" placeholder="0">
-          <hr>
+            <div class="media-body">
+              <h2>{{item.description}}</h2>
+              <ul>
+                <li>Currency and price: {{item.priceCurrency}} {{item.offerPrice}}</li>
+                <li>Valid through: {{item.validThrough}}</li>
+                <li>Original price: {{item.originalPrice}}</li>
+                <li>Valid from: {{item.validFrom}}</li>
+                <li>Organization: {{item.organization}}</li>
+                <li>url: <a :href="item.url" :title="item.url">Link - Think before you click!</a></li>
+              </ul>
+            </div>
+
+          </article>
+
+        </section>
 
 
-        </div>
-      </section>
+      </main>
 
-
-      <section id="sectionDebugArea" style="display: none;">
-        <h1>startStr</h1>
-        <p style="white-space: pre">{{startStr}}</p>
-        <h1>magic</h1>
-        <p style="white-space: pre">{{magic}}</p>
-      </section>
-
-
-
-      <section id="sectionExtractionArea">
-        <article
-        class="media"
-        v-for="(item, idx) in mainArray"
-        v-show="(regExSource === '' || item.description.match(new RegExp(regExSource, regExFlags))) &&
-        (minCharacters === '' || item.description.length >= minCharacters) &&
-        (maxCharacters === '' || item.description.length <= maxCharacters)"
-        >
-
-          <div class="media-left media-middle">
-            <a :href="item.url" target="_blank">
-              <img class="media-object" :src="item.imageUrl" alt="No image pulled for this item">
-            </a>
-          </div>
-
-          <div class="media-body">
-            <h2>{{item.description}}</h2>
-            <ul>
-              <li>Currency and price: {{item.priceCurrency}} {{item.offerPrice}}</li>
-              <li>Valid through: {{item.validThrough}}</li>
-              <li>Original price: {{item.originalPrice}}</li>
-              <li>Valid from: {{item.validFrom}}</li>
-              <li>Organization: {{item.organization}}</li>
-              <li>url: <a :href="item.url" :title="item.url">Link - Think before you click!</a></li>
-            </ul>
-          </div>
-
-        </article>
-
-      </section>
-
-
-
-
-
-    </main>
+      <footer id="footerArea">
+        Copy Paste JSON |
+        <a href="http://addeventlistener.xyz" target="_blank">@papostolopoulos</a> |
+        2018
+      </footer>
+    </div> <!-- End of main and footer -->
 
   </body>
-
-
-
-
-
 
 
 

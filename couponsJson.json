@@ -1572,7 +1572,7 @@
   }
 }
 
-DELL 
+DELL
 {
   "extract": {
     "extractEmbedded": false,
@@ -5806,6 +5806,169 @@ DELL
         },
         "to": {
           "entityRule": "03a9d9fd-70df-4b1a-a678-6e24ceea6159",
+          "matchAttr": ""
+        },
+        "predicate": "http://schema.org/image",
+        "cardinality": "ONE_TO_ONE"
+      }
+    ],
+    "entityNS": null
+  },
+  "metaData": {
+    "useVTDXML": "true",
+    "ignoredValidations": null
+  }
+}
+
+/* NORDSTROM eml.nordstrom.com */
+{
+  "extract": {
+    "extractEmbedded": false,
+    "source": null,
+    "schema": [
+      {
+        "url": "http://ws.rmf.yahoo.com:4080/rmf/v1/schema?type=schema.org&name=y.2.0&format=json",
+        "ns": "http://schema.org",
+        "context": {
+          "@type": [
+            "Coupon"
+          ]
+        }
+      }
+    ],
+    "entityRules": [
+      {
+        "id": "83693892-bde6-486f-ac5b-631f55142545",
+        "repeating": true,
+        "locations": [
+          "/descendant::img[contains(translate(@alt, \"ENDSON\", \"endson\"),\"ends soon\")]"
+        ],
+        "type": "http://schema.org/Coupon",
+        "javascript": null,
+        "entityIdRef": "",
+        "attributes": [
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "./@alt"
+                }
+              ]
+            },
+            "name": "http://schema.org/description",
+            "relative": true,
+            "transient": false,
+            "javascript": null,
+            "dataTypes": [
+              "Text"
+            ],
+            "mandatory": false
+          },
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "./parent::a/@href"
+                }
+              ]
+            },
+            "name": "http://schema.org/url",
+            "relative": true,
+            "transient": false,
+            "javascript": null,
+            "dataTypes": [
+              "URL"
+            ],
+            "mandatory": false
+          }
+        ],
+        "hints": {
+          "_footer": "/descendant::text()[contains(translate(.,\"UNSBCRIE\",\"unsbcrie\"),\"unsubscribe\")]/ancestor::table[1]"
+        }
+      },
+      {
+        "id": "e00e8a72-cd63-4ab6-8899-7237973b74e4",
+        "repeating": true,
+        "locations": [
+          "/descendant::img[contains(translate(@alt, \"ENDSON\", \"endson\"),\"ends soon\")]"
+        ],
+        "type": "http://schema.org/Organization",
+        "javascript": null,
+        "entityIdRef": null,
+        "attributes": [
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "\"NORDSTROM\""
+                }
+              ]
+            },
+            "name": "http://schema.org/name",
+            "relative": true,
+            "transient": false,
+            "javascript": null,
+            "dataTypes": [
+              "Text"
+            ],
+            "mandatory": false
+          }
+        ]
+      },
+      {
+        "id": "bdfbdcba-3a97-4519-8043-8e9d3432af23",
+        "repeating": true,
+        "locations": [
+          "/descendant::img[contains(translate(@alt, \"ENDSON\", \"endson\"),\"ends soon\")]"
+        ],
+        "type": "http://schema.org/ImageObject",
+        "javascript": null,
+        "entityIdRef": "",
+        "attributes": [
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "./@src"
+                }
+              ]
+            },
+            "name": "http://schema.org/url",
+            "relative": true,
+            "transient": false,
+            "javascript": null,
+            "dataTypes": [
+              "URL"
+            ],
+            "mandatory": false
+          }
+        ]
+      }
+    ],
+    "edgeRules": [
+      {
+        "from": {
+          "entityRule": "83693892-bde6-486f-ac5b-631f55142545",
+          "matchAttr": ""
+        },
+        "to": {
+          "entityRule": "e00e8a72-cd63-4ab6-8899-7237973b74e4",
+          "matchAttr": ""
+        },
+        "predicate": "http://schema.org/broker",
+        "cardinality": "ONE_TO_ONE"
+      },
+      {
+        "from": {
+          "entityRule": "83693892-bde6-486f-ac5b-631f55142545",
+          "matchAttr": ""
+        },
+        "to": {
+          "entityRule": "bdfbdcba-3a97-4519-8043-8e9d3432af23",
           "matchAttr": ""
         },
         "predicate": "http://schema.org/image",

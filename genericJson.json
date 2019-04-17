@@ -1,5 +1,5 @@
 MOTHER
-  {
+{
     "extract": {
       "extractEmbedded": false,
       "source": null,

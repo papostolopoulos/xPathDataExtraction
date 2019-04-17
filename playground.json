@@ -1,22 +1,4 @@
 {
-  "value": "dd'st' MMMM yyyy",
-  "type": "DATEFORMAT"
-},
-{
-  "value": "dd'nd' MMMM yyyy",
-  "type": "DATEFORMAT"
-},
-{
-  "value": "dd'rd' MMMM yyyy",
-  "type": "DATEFORMAT"
-},
-{
-  "value": "dd'th' MMMM yyyy",
-  "type": "DATEFORMAT"
-}
-
-
-{
   "extract": {
     "edgeRules": [],
     "entityNS": null,
@@ -83,7 +65,7 @@
             "dataTypes": [
               "Text"
             ],
-            "javascript": "function transform(data){\n  var negRegexArr = [\n    /Advantage\\s*Card/i\n  ];\n\n  for (var i = 0; i < negRegexArr.length; i++) {\n    if (negRegexArr[i].test(data)) return null;\n  }\n\n\n  var posRegexArr = [\n    /[£€]\\d+\\s*worth\\s*of\\s*points/i,\n    /1\\/2\\s*price/i,\n    /\\d+\\s*points/i,\n    /triple\\s*points/i,\n    /3\\s*for\\s*two/i,\n    /\\d{1,2}%\\s*off/i,\n    /buy\\s*\\d\\s*get/i,\n    /save\\s*up\\s*to/i,\n    /save\\s*[£€]\\d/i,\n    /save\\s*\\d{1,2}%/i,\n    /free\\s*gift/i,\n    /gift\\s*is\\s*free/i,\n    /\\d\\s*for\\s*[£€]?\\d/i\n  ];\n\n  for (var j = 0; j < posRegexArr.length; j++) {\n    if (posRegexArr[j].test(data)) return data.length > 80 ? minimizeMe(data, posRegexArr[j]) : cleanMe(data);\n  }\n\n  return null;\n}\n\n\n\n\n\nfunction minimizeMe(str, reg){\n  var punctuation = [\". \", \"! \", \"| \", \"? \",\".*\"]; //Punctuation symbols\n  str = str.replace(/(\\.)([A-z])/g, \"$1 $2\");\n\n  //STAGE 1 - Slice text at the beginning of string\n  var sliceStr = str.slice(0, str.indexOf(str.match(reg)[0])); //Create a substring from the beginning of string up to the beginning of the .match()\n  var sliceStart = 0; //Define a variable where the slice at the beginning of the initial string will happen.\n\n\n  //Iterate through the punctuation symbols.\n  //If the last Index position of the punctuation is larger than the sliceStart variable,\n  //then make the variable equal to the last index position.\n  //That will be later used to slice the string at its beginning\n  for (var i = 0; i < punctuation.length; i++) {\n    if(sliceStr.lastIndexOf(punctuation[i]) > sliceStart) sliceStart = sliceStr.lastIndexOf(punctuation[i]);\n  }\n  //Slice the string from the beginning of the last punctuation mark but before the coupon description.\n  if(sliceStart > 0) str = str.slice(sliceStart + 1).trim();\n\n\n\n\n  //STAGE 2 - Slice text at the end of string\n  var sliceEnd = +Infinity;\n  //Iterate through the punctuation symbols.\n  //If the punctuation symbol's index position is smaller than the sliceEnd variable, then\n  //make the sliceEnd variable equal to the index position of the punctuation.\n  //The sliceEnd will be used as the position where the slicing of the string will happen at it's end.\n  for (var j = 0; j < punctuation.length; j++) {\n    if (str.indexOf(punctuation[j]) < sliceEnd && str.indexOf(punctuation[j]) !== -1) sliceEnd = str.indexOf(punctuation[j]);\n  }\n  //Slice the end of the string\n  str = str.slice(0, sliceEnd).trim();\n\n\n\n  //STAGE 3 - Remove unecessary characters from the end of the string.\n  return cleanMe(str);\n}\n\n\nfunction cleanMe(string) {\n  var replaceArr = [\n    {oldStr: /(Show\\s*Menu|see\\s*how\\s*easy\\s*it\\s*is|[-\\|]\\s*online\\s*only|Hurry,\\s*ends|\\|\\s*advantage\\s*time(\\s*is\\s*here!)?|www).*/i, newStr: \"\"},\n    {oldStr: /\\*/g, newStr: \"\"},\n    {oldStr: /^Online\\s*only(\\s*-)?/i, newStr: \"\"},\n  ];\n\n  replaceArr.forEach(function(el) {\n    string = string.replace(el.oldStr, el.newStr);\n  });\n  \n  while(\"*^†\".indexOf(string[string.length-1]) !== -1) string = string.slice(0, string.length-1);\n  while(\"*^†\".indexOf(string[0]) !== -1) string = string.slice(1);\n\n  return string;\n}",
+            "javascript": "function transform(data){\n  var replaceArr = [\n    {oldStr: /(find\\s*my\\s*room|Hurry,?|(View|Find)\\s*deals|our\\s*offer\\s*ends|Book\\s*by).*/i, newStr: \"\"}\n  ];\n\n  replaceArr.forEach(function(el) {\n    data = data.replace(el.oldStr, el.newStr);\n  });\n\n  return data.trim();\n}",
             "listOfValidNodeTypes": [
               {
                 "name": "TEXT",
@@ -110,59 +92,11 @@
             "name": "http://schema.org/description",
             "whiteList": [
               {
-                "value": "save",
-                "type": "SUBSTRING"
-              },
-              {
-                "value": "£",
-                "type": "SUBSTRING"
-              },
-              {
-                "value": "3 for 2",
-                "type": "SUBSTRING"
-              },
-              {
-                "value": "1/2 price",
+                "value": "$",
                 "type": "SUBSTRING"
               },
               {
                 "value": "%",
-                "type": "SUBSTRING"
-              },
-              {
-                "value": "€",
-                "type": "SUBSTRING"
-              },
-              {
-                "value": "points",
-                "type": "SUBSTRING"
-              },
-              {
-                "value": "2 for £",
-                "type": "SUBSTRING"
-              },
-              {
-                "value": "free gift",
-                "type": "SUBSTRING"
-              },
-              {
-                "value": "&pound;",
-                "type": "SUBSTRING"
-              },
-              {
-                "value": "&#163;",
-                "type": "SUBSTRING"
-              },
-              {
-                "value": "&euro;",
-                "type": "SUBSTRING"
-              },
-              {
-                "value": "&#8364;",
-                "type": "SUBSTRING"
-              },
-              {
-                "value": "gift is free",
                 "type": "SUBSTRING"
               }
             ]
@@ -170,98 +104,28 @@
           {
             "blackList": [
               {
-                "value": "sale ends",
-                "type": "SUBSTRING"
+                "type": "SUBSTRING",
+                "value": "sale ends"
               },
               {
-                "value": "valid through",
-                "type": "SUBSTRING"
+                "type": "SUBSTRING",
+                "value": "valid through"
               },
               {
-                "value": "ends",
-                "type": "SUBSTRING"
-              },
-              {
-                "value": "1/2 price",
-                "type": "SUBSTRING"
-              },
-              {
-                "value": "Order today by 2pm and collect free",
-                "type": "SUBSTRING"
-              },
-              {
-                "value": "only for this weekend",
-                "type": "SUBSTRING"
-              },
-              {
-                "value": "1 Month Supply",
-                "type": "SUBSTRING"
-              },
-              {
-                "value": "Order today by 8pm and collect free",
-                "type": "SUBSTRING"
-              },
-              {
-                "value": "th",
-                "type": "SUBSTRING"
-              },
-              {
-                "value": "st",
-                "type": "SUBSTRING"
-              },
-              {
-                "value": "rd",
-                "type": "SUBSTRING"
-              },
-              {
-                "value": "nd",
-                "type": "SUBSTRING"
-              },
-              {
-                "value": "Save up to.*",
-                "type": "REGEX"
-              },
-              {
-                "value": "as of.*",
-                "type": "REGEX"
+                "type": "SUBSTRING",
+                "value": "ends"
               }
             ],
             "dataTypes": [
               "DateTime"
             ],
-            "javascript": "function transform(data) {\n  if (data) {\n    var monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];\n    var regex = /(\\s*\\d+)\\/(\\s*\\d+)/i;\n    var match = regex.exec(data);\n    if (match && match[1]) {\n      return monthNames[match[1] - 1] + ', ' + match[2];\n    }\n    else{\n      return data;\n    }\n  }\n  return null;\n}",
-            "listOfValidNodeTypes": [],
-            "location": [
-              {
-                "xpath": ""
-              }
-            ],
+            "javascript": "function transform(data) {if (data) {var monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];var regex = /(\\s*\\d+)\\/(\\s*\\d+)/i;var match = regex.exec(data);if (match && match[1]) {return monthNames[match[1] - 1] + ', ' + match[2];}else{return data;}}return null;}",
+            "listOfValidNodeTypes": null,
+            "location": null,
             "mandatory": "true",
-            "maxLength": "-1",
-            "minLength": "-1",
-            "name": "http://schema.org/validThrough",
-            "whiteList": [
-              {
-                "value": "dd'st' MMMM yyyy",
-                "type": "DATEFORMAT"
-              },
-              {
-                "value": "dd'nd' MMMM yyyy",
-                "type": "DATEFORMAT"
-              },
-              {
-                "value": "dd'rd' MMMM yyyy",
-                "type": "DATEFORMAT"
-              },
-              {
-                "value": "dd'th' MMMM yyyy",
-                "type": "DATEFORMAT"
-              },
-              {
-                "value": "dd/MM/yyyy",
-                "type": "DATEFORMAT"
-              }
-            ]
+            "maxLength": -1,
+            "minLength": -1,
+            "name": "http://schema.org/validThrough"
           },
           {
             "blackList": [
@@ -374,18 +238,10 @@
           "maxDepth": "-1",
           "defaultPatternAnnotationThreshold": "0.8",
           "linkThreshold": "2",
-          "footerPercentage": 0.8,
-          "overRideValidThroughFromFooter": false,
-          "dedupCondition": {
-            "matchThreshold": 0.4,
-            "stopWords": [
-              "save 10%"
-            ]
-          },
           "listOfValidNodeTypes": [],
           "linkMatcher": [
             {
-              "regex": ".*boots.com.*"
+              "regex": ".*ryanairemail\\.com.*"
             }
           ]
         },
@@ -402,7 +258,7 @@
             "javascript": null,
             "location": [
               {
-                "xpath": "\"Boots\""
+                "xpath": "\"RYANAIR\""
               }
             ],
             "mandatory": "true",
