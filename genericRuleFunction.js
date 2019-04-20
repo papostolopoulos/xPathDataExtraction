@@ -88,8 +88,8 @@ function transform(data){
   var posRegexArr = [
     // (10% | $10 | percent | 1/3) (off | (in )savings | discount | (cash)back | reward | gift | value | credit | (promotional )coupon | (mail-in )rebate | (e-)certificate | bonus | sale)
     /(\d{1,2}%|[\$£€]\d+(\.\d{2})?|percent|\d\/\d)\s*(off|(in )?savings?|discount|(cash(\s*)?)?back|reward|gift|value|credit|(promotional\s*)?coupon|(mail-in\s*)?rebate|(e-)?certificate|bonus|sale)/i,
-    // (extra | up to | save | over | more than | discount of | discounted by | savings of | at least | gift of | down to | as low as | bonus of| get a) (10% | $10)
-    /(extra|up\s*to|sav(e|ings\s*of)|over|more\s*than|discount(ed)?\s*(of|by)|at\s*least|gift\s*of|down\s*to|as\s*low\s*as|bonus\s*of|take|get(\s*a)?)\s*(\d{1,2}%|[\$£€]\d+(\.\d{2})?)/i,
+    // (extra | up to | save | over | more than | discount of | discounted by | savings of | at least | gift of | down to | as low as | bonus of| get a | on (any)) (10% | $10)
+    /(extra|up\s*to|sav(e|ings\s*of)|over|more\s*than|discount(ed)?\s*(of|by)|at\s*least|gift\s*of|down\s*to|as\s*low\s*as|bonus\s*of|take|get(\s*a)?|on(\s*any)?)\s*(\d{1,2}%|[\$£€]\d+(\.\d{2})?)/i,
     // was $10.99 | start at $10.99 sale $10.99
     /(sale:?|was:?|start\s*at)\s*[\$£€]\d+/i,
     //on sale | markdown | save on | marked down
@@ -128,7 +128,7 @@ function transform(data){
 
 
 function minimizeMe(str, reg){
-  var punctuation = [". ", "! ", "| ", "? "]; //Punctuation symbols
+  var punctuation = [". ", "! ", "| ", "? ", ": "]; //Punctuation symbols
   str = str.replace(/(\.)([A-z])/g, "$1 $2");
 
   //STAGE 1 - Slice text at the beginning of string
@@ -171,20 +171,21 @@ function minimizeMe(str, reg){
 
 
 function cleanMe(string) {
-  // var replaceStrArr = [
-  //   {oldStr: /([A-z\.])\*([[\$£€]\sA-z])/, newStr: "$1 $2"},
-  // ];
-  //
-  // for (var i = 0; i < replaceStrArr.length; i++) {
-  //   if(replaceStrArr[i].oldStr.test(string)){
-  //     string = string.replace(replaceStrArr[i].oldStr, replaceStrArr[i].newStr).trim();
-  //     //break;
-  //   }
-  // }
-
-
   while("*©®ǂ‡†±+→§™¹›∞•◊ΔÐð_|^".indexOf(string[string.length-1]) !== -1) string = string.slice(0, string.length-1);
   while("*©®ǂ‡†±+→§™¹›∞•◊ΔÐð_^".indexOf(string[0]) !== -1) string = string.slice(1);
+
+  var replaceStrArr = [
+    {oldStr: /([A-z\.])\*([[\$£€]\sA-z])/, newStr: "$1 $2"},
+  ];
+
+  for (var i = 0; i < replaceStrArr.length; i++) {
+    if(replaceStrArr[i].oldStr.test(string)){
+      string = string.replace(replaceStrArr[i].oldStr, replaceStrArr[i].newStr).trim();
+      //break;
+    }
+  }
+
+
 
   return string;
 }

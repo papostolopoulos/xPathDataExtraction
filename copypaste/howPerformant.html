@@ -27,6 +27,29 @@
       padding: 10px;
       background-color: lightblue;
       grid-area: sectionPasteParams;
+      overflow: auto;
+    }
+
+    .divNumOfArgumentsSets{
+      position: sticky;
+      top: 0;
+    }
+
+    .divArgumentsSets{
+      overflow: auto;
+    }
+
+    .divFunctionArgument{
+      margin-top: 10px;
+    }
+
+    .textAreaArgumentsPaste{
+      width: 100%;
+      height: 10vh;
+    }
+
+    .labelArgumentsDataTypes{
+      margin-right: 10px;
     }
 
     .sectionPasteFunctions{
@@ -67,30 +90,25 @@
     <div id="container">
       <main id="main">
         <section class="sectionPasteParams">
-          <h2>Function arguments</h2>
           <div class="divNumOfArgumentsSets">
-            <label for="">
+            <h1>Function arguments</h1>
+            <label class="labelNumOfArgumentsSets">
               Enter number of sets of arguments:
-              <input type="number" name="inputNumOfArgumentsSets" id="inputNumOfArguments" v-model="numOfArgumentsSets">
+              <input type="number"
+              name="inputNumOfArgumentsSets"
+              id="inputNumOfArguments"
+              v-model="numOfArgumentsSets"
+              @change="changeArgumentsArrLength()"
+              >
             </label>
           </div>
+
+
 
           <div class="divArgumentsSets" v-for="set in Number(numOfArgumentsSets)">
             <function-arg></function-arg>
           </div>
-          <br>
-          this is to display the component and how it looks <br>
-          <function-arg></function-arg>
 
-          What data types
-          numbers
-          strings
-          boolean
-          array
-          NULL
-          undefined
-          object literal
-          callback function
         </section>
 
 
@@ -98,7 +116,6 @@
         <section class="sectionPasteFunctions">
           <section class="sectionFunction1">
             This is for function 1 - sectionFunction1 <br>
-            {{start}}
           </section>
 
 
@@ -130,12 +147,68 @@
       Vue.component('function-arg', {
         data(){
           return {
-
+            dataType: "string",
+            textAreaValues: ""
           }
+        },
+        computed: {
+
         },
         template:
         `
-          <textarea></textarea>
+        <div class="divFunctionArgument">
+          <h2>Argument Set {{_uid}}</h2>
+          <label class="labelArgumentsDataTypes">
+            <textarea
+              class="textAreaArgumentsPaste"
+              placeholder="Paste your argument. If more than one, separate them with a line break"
+              v-model="textAreaValues">
+
+            </textarea>
+          </label>
+          <h4>Argument data type:</h4>
+          <div class="divLabelDataType">
+            <form>
+              <label class="labelArgumentsDataTypes">
+                Boolean:
+                <input type="radio" name="inputRadioDataType" value="boolean" v-model="dataType">
+              </label>
+              <label class="labelArgumentsDataTypes">
+                Null:
+                <input type="radio" name="inputRadioDataType" value="null" v-model="dataType">
+              </label>
+              <label class="labelArgumentsDataTypes">
+                Number:
+                <input type="radio" name="inputRadioDataType" value="number" v-model="dataType">
+              </label>
+              <label class="labelArgumentsDataTypes">
+                String:
+                <input type="radio" name="inputRadioDataType" value="string" v-model="dataType">
+              </label>
+              <label class="labelArgumentsDataTypes">
+                Symbol:
+                <input type="radio" name="inputRadioDataType" value="symbol" v-model="dataType">
+              </label>
+              <label class="labelArgumentsDataTypes">
+                Undefined:
+                <input type="radio" name="inputRadioDataType" value="undefined" v-model="dataType">
+              </label>
+              <label class="labelArgumentsDataTypes">
+                Array:
+                <input type="radio" name="inputRadioDataType" value="array" v-model="dataType">
+              </label>
+              <label class="labelArgumentsDataTypes">
+                Object literal:
+                <input type="radio" name="inputRadioDataType" value="object" v-model="dataType">
+              </label>
+              <label class="labelArgumentsDataTypes">
+                callback function:
+                <input type="radio" name="inputRadioDataType" value="function" v-model="dataType">
+              </label>
+            </form>
+
+          </div>
+        </div>
         `
       });
 
@@ -143,7 +216,13 @@
         el: "#main",
         data: {
           numOfArgumentsSets: 0,
-          start: "This is the start"
+          argumentsArr: []
+        },
+        methods: {
+          changeArgumentsArrLength(){
+            // Access the components through app.$children
+            Number(this.numOfArgumentsSets) > this.argumentsArr.length ? this.argumentsArr.push("") : this.argumentsArr.pop();
+          }
         }
       });
     </script>

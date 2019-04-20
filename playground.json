@@ -61,11 +61,11 @@
         "attributes": [
           {
             "blackList": [],
-            "concat": "true",
+            "concat": true,
             "dataTypes": [
               "Text"
             ],
-            "javascript": "function transform(data){\n  var replaceArr = [\n    {oldStr: /(find\\s*my\\s*room|Hurry,?|(View|Find)\\s*deals|our\\s*offer\\s*ends|Book\\s*by).*/i, newStr: \"\"}\n  ];\n\n  replaceArr.forEach(function(el) {\n    data = data.replace(el.oldStr, el.newStr);\n  });\n\n  return data.trim();\n}",
+            "javascript": "function transform(data) {\n    var replaceArr = [\n      {oldStr: /^(\\+|Plus,?|Sale\\s*Ends\\s*Today(\\s*-)?|Shop\\s*Now(\\s*-)?|We\\s*miss\\s*you[!\\.]|We’re\\s*holding\\s*on\\s*to\\s*the\\s*merchandise\\s*you\\s*added\\s*to\\s*your\\s*cart.\\s*Don’t\\s*miss\\s*out\\s*on\\s*this\\s*great\\s*item!)\\s*/i, newStr: \"\"},\n      {oldStr: /(Regular\\s*Price:\\s*Daily\\s*Drop:\\s*Today's\\s*Price:|see\\s*details|View\\s*in\\s*Browser|(-\\s*)?shop\\s*now)\\s*$/i, newStr: \"\"},\n      {oldStr: /(Use\\s*Code|.*\\.com|Click\\s*the\\s*mobile\\s*coupon|Limit\\s*one\\s*per\\s*customer|Some\\s*restrictions\\s*may\\s*apply|expires|If\\s*you\\s*no\\s*longer\\s*wish|RULES\\s*OF\\s*THE\\s*DEAL).*/i, newStr: \"\"},\n      {oldStr: /\\*/g, newStr: \"\"},\n      {oldStr: /^(Free\\s*(shipping|returns))$/i, newStr: \"\"},\n    ];\n\n\n    replaceArr.forEach(function(el) {\n      data = data.replace(el.oldStr, el.newStr);\n    });\n\n    return data.trim();\n}",
             "listOfValidNodeTypes": [
               {
                 "name": "TEXT",
@@ -92,40 +92,49 @@
             "name": "http://schema.org/description",
             "whiteList": [
               {
-                "value": "$",
+                "value": "%",
                 "type": "SUBSTRING"
               },
               {
-                "value": "%",
-                "type": "SUBSTRING"
+                "value": "(?i)\\$\\d+\\soff",
+                "type": "REGEX"
+              },
+              {
+                "value": "(?i)free",
+                "type": "REGEX"
               }
             ]
           },
           {
             "blackList": [
               {
-                "type": "SUBSTRING",
-                "value": "sale ends"
+                "value": "sale ends",
+                "type": "SUBSTRING"
               },
               {
-                "type": "SUBSTRING",
-                "value": "valid through"
+                "value": "valid through",
+                "type": "SUBSTRING"
               },
               {
-                "type": "SUBSTRING",
-                "value": "ends"
+                "value": "ends",
+                "type": "SUBSTRING"
               }
             ],
             "dataTypes": [
               "DateTime"
             ],
             "javascript": "function transform(data) {if (data) {var monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];var regex = /(\\s*\\d+)\\/(\\s*\\d+)/i;var match = regex.exec(data);if (match && match[1]) {return monthNames[match[1] - 1] + ', ' + match[2];}else{return data;}}return null;}",
-            "listOfValidNodeTypes": null,
-            "location": null,
+            "listOfValidNodeTypes": [],
+            "location": [
+              {
+                "xpath": ""
+              }
+            ],
             "mandatory": "true",
-            "maxLength": -1,
-            "minLength": -1,
-            "name": "http://schema.org/validThrough"
+            "maxLength": "-1",
+            "minLength": "-1",
+            "name": "http://schema.org/validThrough",
+            "whiteList": []
           },
           {
             "blackList": [
@@ -216,18 +225,22 @@
             "whiteList": null
           },
           {
-            "blackList": null,
+            "blackList": [],
             "dataTypes": [
               "Text"
             ],
             "javascript": "",
-            "listOfValidNodeTypes": null,
-            "location": null,
+            "listOfValidNodeTypes": [],
+            "location": [
+              {
+                "xpath": ". | ./parent::a/@href"
+              }
+            ],
             "mandatory": "true",
-            "maxLength": -1,
-            "minLength": -1,
+            "maxLength": "-1",
+            "minLength": "-1",
             "name": "http://schema.org/url",
-            "whiteList": null
+            "whiteList": []
           }
         ],
         "bundleInfo": {
@@ -238,10 +251,32 @@
           "maxDepth": "-1",
           "defaultPatternAnnotationThreshold": "0.8",
           "linkThreshold": "2",
+          "dedupCondition": {
+            "matchThreshold": 0.4,
+            "stopWords": [
+              "Haven",
+              "Bulls",
+              "Shirts",
+              "Outlet Sale",
+              "Dungeons & Dragons",
+              "INSIDE",
+              "Table Mat",
+              "Invaders",
+              "Sunglasses",
+              "Glasses",
+              "Miniatures",
+              "BOGO",
+              "Footwear",
+              "40-60% Off Sale",
+              "Lucky",
+              "Everything",
+              "Denim"
+            ]
+          },
           "listOfValidNodeTypes": [],
           "linkMatcher": [
             {
-              "regex": ".*ryanairemail\\.com.*"
+              "regex": ".*/bm5150.com.*"
             }
           ]
         },
@@ -258,7 +293,7 @@
             "javascript": null,
             "location": [
               {
-                "xpath": "\"RYANAIR\""
+                "xpath": "\"bm5150\""
               }
             ],
             "mandatory": "true",
