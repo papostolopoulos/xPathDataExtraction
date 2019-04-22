@@ -6,84 +6,84 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
     <style media="screen">
-    *{
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: sans-serif;
-    }
+      *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: sans-serif;
+      }
 
-    #main{
-      display: grid;
-      grid-template-columns: 33.3% 66.6%;
-      grid-template-rows: 100%;
-      grid-template-areas:
-      "sectionPasteParams sectionPasteFunctions"
-      "sectionPasteParams sectionPasteFunctions";
-      height: 95vh;
-    }
+      #main{
+        display: grid;
+        grid-template-columns: 33.3% 66.6%;
+        grid-template-rows: 100%;
+        grid-template-areas:
+        "sectionPasteParams sectionPasteFunctions"
+        "sectionPasteParams sectionPasteFunctions";
+        height: 95vh;
+      }
 
-    .sectionPasteParams{
-      padding: 10px;
-      background-color: lightblue;
-      grid-area: sectionPasteParams;
-      overflow: auto;
-    }
+      .sectionPasteParams{
+        padding: 10px;
+        background-color: lightblue;
+        grid-area: sectionPasteParams;
+        overflow: auto;
+      }
 
-    .divNumOfArgumentsSets{
-      position: sticky;
-      top: 0;
-    }
+      .divNumOfArgumentsSets{
+        position: sticky;
+        top: 0;
+      }
 
-    .divArgumentsSets{
-      overflow: auto;
-    }
+      .divArgumentsSets{
+        overflow: auto;
+      }
 
-    .divFunctionArgument{
-      margin-top: 10px;
-    }
+      .divFunctionArgument{
+        margin-top: 10px;
+      }
 
-    .textAreaArgumentsPaste{
-      width: 100%;
-      height: 10vh;
-    }
+      .textAreaArgumentsPaste{
+        width: 100%;
+        height: 10vh;
+      }
 
-    .labelArgumentsDataTypes{
-      margin-right: 10px;
-    }
+      .labelArgumentsDataTypes{
+        margin-right: 10px;
+      }
 
-    .sectionPasteFunctions{
-      grid-area: sectionPasteFunctions;
-      display: flex;
-      align-content: center;
-      justify-content: center;
-    }
+      .sectionPasteFunctions{
+        grid-area: sectionPasteFunctions;
+        display: flex;
+        align-content: center;
+        justify-content: center;
+      }
 
-    .sectionFunction1, .sectionFunction2{
-      width: 50%;
-    }
+      .sectionFunction1, .sectionFunction2{
+        width: 50%;
+      }
 
-    .sectionFunction1{
-      background-color: lightgreen;
-    }
+      .sectionFunction1{
+        background-color: lightgreen;
+      }
 
-    .sectionFunction2{
-      background-color: pink;
-    }
+      .sectionFunction2{
+        background-color: pink;
+      }
 
-    #footer{
-      background: rgb(0,0,0);
-      height: 5vh;
-      line-height: 5vh;
-      text-align: center;
-      font-size: 1.4rem;
-      border-top: 3px solid black;
-      color: white;
-    }
+      #footer{
+        background: rgb(0,0,0);
+        height: 5vh;
+        line-height: 5vh;
+        text-align: center;
+        font-size: 1.4rem;
+        border-top: 3px solid black;
+        color: white;
+      }
 
-    #footer a{
-      color: white;
-    }
+      #footer a{
+        color: white;
+      }
     </style>
   </head>
   <body>
@@ -126,8 +126,6 @@
         </section>
 
 
-        </section>
-
       </main>
 
       <footer id="footer">
@@ -147,8 +145,32 @@
       Vue.component('function-arg', {
         data(){
           return {
+            errorEntry: false,
             dataType: "string",
             textAreaValues: ""
+          }
+        },
+        methods:{
+          textAreaValuesSplit(){
+            this.errorEntry = false;
+            let startArr = this.textAreaValues.split("\n") || null;
+            let finalArr = [];
+
+            for (let i = 0; i < startArr.length; i++) {
+              let el = startArr[i];
+              if (this.dataType === "boolean" && startArr.length > 0) {
+                if (el === "true") finalArr.push(true);
+                else if (el === "false") finalArr.push(false);
+                else{
+                  this.errorEntry = true;
+                  return;
+                }
+              }
+
+
+            } //End of for loop
+
+            return finalArr;
           }
         },
         computed: {
@@ -161,8 +183,13 @@
           <label class="labelArgumentsDataTypes">
             <textarea
               class="textAreaArgumentsPaste"
-              placeholder="Paste your argument. If more than one, separate them with a line break"
-              v-model="textAreaValues">
+              placeholder="
+              Paste your argument.
+              If you are pasting more than one arguments,
+              - in order to run the function several times, -
+              separate them with a line break"
+              v-model="textAreaValues"
+              @keyup="textAreaValuesSplit()">
 
             </textarea>
           </label>
@@ -170,43 +197,88 @@
           <div class="divLabelDataType">
             <form>
               <label class="labelArgumentsDataTypes">
+                Array:
+                <input type="radio" name="inputRadioDataType" value="array" v-model="dataType" @change="textAreaValuesSplit()">
+              </label>
+              <label class="labelArgumentsDataTypes">
                 Boolean:
-                <input type="radio" name="inputRadioDataType" value="boolean" v-model="dataType">
+                <input type="radio" name="inputRadioDataType" value="boolean" v-model="dataType" @change="textAreaValuesSplit()">
               </label>
               <label class="labelArgumentsDataTypes">
                 Null:
-                <input type="radio" name="inputRadioDataType" value="null" v-model="dataType">
+                <input type="radio" name="inputRadioDataType" value="null" v-model="dataType" @change="textAreaValuesSplit()">
               </label>
               <label class="labelArgumentsDataTypes">
                 Number:
-                <input type="radio" name="inputRadioDataType" value="number" v-model="dataType">
-              </label>
-              <label class="labelArgumentsDataTypes">
-                String:
-                <input type="radio" name="inputRadioDataType" value="string" v-model="dataType">
-              </label>
-              <label class="labelArgumentsDataTypes">
-                Symbol:
-                <input type="radio" name="inputRadioDataType" value="symbol" v-model="dataType">
-              </label>
-              <label class="labelArgumentsDataTypes">
-                Undefined:
-                <input type="radio" name="inputRadioDataType" value="undefined" v-model="dataType">
-              </label>
-              <label class="labelArgumentsDataTypes">
-                Array:
-                <input type="radio" name="inputRadioDataType" value="array" v-model="dataType">
+                <input type="radio" name="inputRadioDataType" value="number" v-model="dataType" @change="textAreaValuesSplit()">
               </label>
               <label class="labelArgumentsDataTypes">
                 Object literal:
-                <input type="radio" name="inputRadioDataType" value="object" v-model="dataType">
+                <input type="radio" name="inputRadioDataType" value="object" v-model="dataType" @change="textAreaValuesSplit()">
+              </label>
+              <label class="labelArgumentsDataTypes">
+                RegExp:
+                <input type="radio" name="inputRadioDataType" value="regex" v-model="dataType" @change="textAreaValuesSplit()">
+              </label>
+              <label class="labelArgumentsDataTypes">
+                String:
+                <input type="radio" name="inputRadioDataType" value="string" v-model="dataType" @change="textAreaValuesSplit()">
+              </label>
+              <label class="labelArgumentsDataTypes">
+                Symbol:
+                <input type="radio" name="inputRadioDataType" value="symbol" v-model="dataType" @change="textAreaValuesSplit()">
+              </label>
+              <label class="labelArgumentsDataTypes">
+                Undefined:
+                <input type="radio" name="inputRadioDataType" value="undefined" v-model="dataType" @change="textAreaValuesSplit()">
               </label>
               <label class="labelArgumentsDataTypes">
                 callback function:
-                <input type="radio" name="inputRadioDataType" value="function" v-model="dataType">
+                <input type="radio" name="inputRadioDataType" value="function" v-model="dataType" @change="textAreaValuesSplit()">
               </label>
             </form>
 
+          </div> <!--End of divLabelDataType-->
+
+          <div class="divErrorEntries">
+            <div class="divErrorEntry" v-show="errorEntry === true && dataType === 'array'">
+              Incorrect array entry(ies). Make sure you have entered arrays that start and end with
+              square brackets - [].
+              The values should be separated by a line break and without any extra
+              line breaks at the end of the text.
+            </div>
+            <div class="divErrorEntry" v-show="errorEntry === true && dataType === 'boolean'">
+              Incorrect boolean entry(ies). Make sure you have entered only boolean values (true, false).
+              The values should be separated by a line break and without any extra
+              line breaks at the end of the text.
+            </div>
+            <div class="divErrorEntry" v-show="errorEntry === true && dataType === 'function'">
+              Incorrect function entry(ies). Make sure you have entered the function in
+              the correct format, with opening and closing curly braces.
+              The values should be separated by a line break and without any extra
+              line breaks at the end of the text.
+            </div>
+            <div class="divErrorEntry" v-show="errorEntry === true && dataType === 'null'">
+              Incorrect null entry(ies). Make sure you have entered only null values (null).
+              The values should be separated by a line break and without any extra
+              line breaks at the end of the text.
+            </div>
+            <div class="divErrorEntry" v-show="errorEntry === true && dataType === 'number'">
+              Incorrect number entry(ies). Make sure you have entered only numeric values (integers or floats).
+              The values should be separated by a line break and without any extra
+              line breaks at the end of the text.
+            </div>
+            <div class="divErrorEntry" v-show="errorEntry === true && dataType === 'object'">
+              Incorrect object literal entry(ies). Make sure you have entered
+              an object that opens and closes with curly braces - {}.
+              The values should be separated by a line break and without any extra
+              line breaks at the end of the text.
+            </div>
+            <div class="divErrorEntry" v-show="errorEntry === true && dataType === 'undefined'">
+              Incorrect undefined entry(ies). Make sure you have entered only "undefined" as a value.
+              The values should be separated by a line break and without any extra
+              line breaks at the end of the text.
+            </div>
           </div>
         </div>
         `
