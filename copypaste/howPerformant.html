@@ -156,8 +156,18 @@
             let startArr = this.textAreaValues.split("\n") || null;
             let finalArr = [];
 
+
             for (let i = 0; i < startArr.length; i++) {
               let el = startArr[i];
+
+
+              //If array selected
+              if (this.dataType === "array") {
+                console.log("Array selected");
+              }
+
+
+              //If boolean selected
               if (this.dataType === "boolean" && startArr.length > 0) {
                 if (el === "true") finalArr.push(true);
                 else if (el === "false") finalArr.push(false);
@@ -166,6 +176,10 @@
                   return;
                 }
               }
+
+
+
+
 
 
             } //End of for loop
@@ -184,8 +198,8 @@
             <textarea
               class="textAreaArgumentsPaste"
               placeholder="
-              Paste your argument.
-              If you are pasting more than one arguments,
+              Enter the function's argument.
+              If you are entering more than one arguments,
               - in order to run the function several times, -
               separate them with a line break"
               v-model="textAreaValues"

@@ -60,12 +60,21 @@
       {
         "attributes": [
           {
-            "blackList": [],
-            "concat": true,
+            "blackList": [
+              {
+                "value": "http.*",
+                "type": "REGEX"
+              },
+              {
+                "value": "(?i).*(starting\\s*at|CHECK\\s*YOUR\\s*STATUS|IN-STORE\\s*PICKUP).*",
+                "type": "REGEX"
+              }
+            ],
+            "concat": "true",
             "dataTypes": [
               "Text"
             ],
-            "javascript": "function transform(data) {\n    var replaceArr = [\n      {oldStr: /^(\\+|Plus,?|Sale\\s*Ends\\s*Today(\\s*-)?|Shop\\s*Now(\\s*-)?|We\\s*miss\\s*you[!\\.]|We’re\\s*holding\\s*on\\s*to\\s*the\\s*merchandise\\s*you\\s*added\\s*to\\s*your\\s*cart.\\s*Don’t\\s*miss\\s*out\\s*on\\s*this\\s*great\\s*item!)\\s*/i, newStr: \"\"},\n      {oldStr: /(Regular\\s*Price:\\s*Daily\\s*Drop:\\s*Today's\\s*Price:|see\\s*details|View\\s*in\\s*Browser|(-\\s*)?shop\\s*now)\\s*$/i, newStr: \"\"},\n      {oldStr: /(Use\\s*Code|.*\\.com|Click\\s*the\\s*mobile\\s*coupon|Limit\\s*one\\s*per\\s*customer|Some\\s*restrictions\\s*may\\s*apply|expires|If\\s*you\\s*no\\s*longer\\s*wish|RULES\\s*OF\\s*THE\\s*DEAL).*/i, newStr: \"\"},\n      {oldStr: /\\*/g, newStr: \"\"},\n      {oldStr: /^(Free\\s*(shipping|returns))$/i, newStr: \"\"},\n    ];\n\n\n    replaceArr.forEach(function(el) {\n      data = data.replace(el.oldStr, el.newStr);\n    });\n\n    return data.trim();\n}",
+            "javascript": "function transform(data){\n  var replaceArr = [\n    {oldStr: /\\*/g, newStr: \"\"},\n    {oldStr: /^(Ends\\s*tonight|VALID\\s*IN-STORE\\s*&\\s*ONLINE|FREE\\s*IN-STORE\\s*PICKUP|Plus)\\s*/i, newStr: \"\"},\n    {oldStr: /(EXP\\.|offer\\s*expires|Shop\\s*now|CODE:|IN-STORE\\s*&\\s*ONLINE).*/ig, newStr: \"\"},\n    {oldStr: /(\\sl|,|Offer\\s*is\\s*pre-loaded\\s*to\\s*your\\s*Rewards\\s*account\\.?|IN-STORE\\s*&\\s*ONLINE\\.?|ONLINE|Click\\s*here\\s*for\\s*more\\s*details\\.?)\\s*$/i, newStr: \"\"}\n  ];\n\n  replaceArr.forEach(function(el) {\n    data = data.replace(el.oldStr, el.newStr);\n  });\n\n  return data.trim();\n}",
             "listOfValidNodeTypes": [
               {
                 "name": "TEXT",
@@ -87,20 +96,20 @@
             ],
             "mandatory": "true",
             "maxLength": "200",
-            "minLength": "4",
+            "minLength": "8",
             "allowEmpty": "false",
             "name": "http://schema.org/description",
             "whiteList": [
               {
-                "value": "%",
-                "type": "SUBSTRING"
-              },
-              {
-                "value": "(?i)\\$\\d+\\soff",
+                "value": "(?i)$\\d+ OFF",
                 "type": "REGEX"
               },
               {
-                "value": "(?i)free",
+                "value": "(?i)% OFF",
+                "type": "REGEX"
+              },
+              {
+                "value": "(?i)sale|points|bogo|free",
                 "type": "REGEX"
               }
             ]
@@ -118,6 +127,10 @@
               {
                 "value": "ends",
                 "type": "SUBSTRING"
+              },
+              {
+                "value": "\\$\\d{1,2}\\.\\d{1,2}",
+                "type": "REGEX"
               }
             ],
             "dataTypes": [
@@ -134,7 +147,12 @@
             "maxLength": "-1",
             "minLength": "-1",
             "name": "http://schema.org/validThrough",
-            "whiteList": []
+            "whiteList": [
+              {
+                "value": "MM.dd",
+                "type": "DATEFORMAT"
+              }
+            ]
           },
           {
             "blackList": [
@@ -225,22 +243,18 @@
             "whiteList": null
           },
           {
-            "blackList": [],
+            "blackList": null,
             "dataTypes": [
               "Text"
             ],
             "javascript": "",
-            "listOfValidNodeTypes": [],
-            "location": [
-              {
-                "xpath": ". | ./parent::a/@href"
-              }
-            ],
+            "listOfValidNodeTypes": null,
+            "location": null,
             "mandatory": "true",
-            "maxLength": "-1",
-            "minLength": "-1",
+            "maxLength": -1,
+            "minLength": -1,
             "name": "http://schema.org/url",
-            "whiteList": []
+            "whiteList": null
           }
         ],
         "bundleInfo": {
@@ -254,29 +268,14 @@
           "dedupCondition": {
             "matchThreshold": 0.4,
             "stopWords": [
-              "Haven",
-              "Bulls",
-              "Shirts",
-              "Outlet Sale",
-              "Dungeons & Dragons",
-              "INSIDE",
-              "Table Mat",
-              "Invaders",
-              "Sunglasses",
-              "Glasses",
-              "Miniatures",
-              "BOGO",
-              "Footwear",
-              "40-60% Off Sale",
-              "Lucky",
-              "Everything",
-              "Denim"
+              "Gift",
+              "BOGO"
             ]
           },
           "listOfValidNodeTypes": [],
           "linkMatcher": [
             {
-              "regex": ".*/bm5150.com.*"
+              "regex": ".*rackroom-email.com.*"
             }
           ]
         },
@@ -293,7 +292,7 @@
             "javascript": null,
             "location": [
               {
-                "xpath": "\"bm5150\""
+                "xpath": "\"RACK ROOM SHOES\""
               }
             ],
             "mandatory": "true",

@@ -2057,6 +2057,189 @@ DELL
   }
 }
 
+/* DSW em.dsw.com */
+{
+  "extract": {
+    "extractEmbedded": false,
+    "source": null,
+    "schema": [
+      {
+        "url": "http://ws.rmf.yahoo.com:4080/rmf/v1/schema?type=schema.org&name=y.2.0&format=json",
+        "ns": "http://schema.org",
+        "context": {
+          "@type": [
+            "Coupon"
+          ]
+        }
+      }
+    ],
+    "entityRules": [
+      {
+        "id": "a120e9e9-63c3-48ec-8c54-15d50bc0a5fb",
+        "repeating": true,
+        "locations": [
+          "/descendant::strong[contains(translate(., \"OF\", \"of\"),\"off\") and (contains(.,\"$\") or contains(.,\"%\")) or contains(translate(., \"FRIENDSBTAMOPG\", \"friendsbtamopg\"), \"friends &amp; benefits ambassador program\")]"
+        ],
+        "type": "http://schema.org/Coupon",
+        "javascript": null,
+        "entityIdRef": "",
+        "attributes": [
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "."
+                }
+              ]
+            },
+            "name": "http://schema.org/description",
+            "relative": true,
+            "transient": false,
+            "javascript": "function transform(data){\n  return data.replace(/\\*|:|About(\\s*the)?/g, \"\").trim();\n}",
+            "dataTypes": [
+              "Text"
+            ],
+            "mandatory": false
+          },
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "./following-sibling::text()[1][contains(.,\"Valid\") and (contains(.,\"January\") or contains(.,\"February\") or contains(.,\"March\") or contains(.,\"April\") or contains(.,\"May\") or contains(.,\"June\") or contains(.,\"July\") or contains(.,\"August\") or contains(.,\"September\") or contains(.,\"October\") or contains(.,\"November\") or contains(.,\"December\"))]"
+                }
+              ]
+            },
+            "name": "http://schema.org/validThrough",
+            "relative": true,
+            "transient": false,
+            "javascript": "function transform(data){\n  return data.replace(/.*.*Valid\\s*(?:(?:January|February|March|April|May|June|July|August|September|October|November|December)\\s*\\d{1,2}–)?((?:January|February|March|April|May|June|July|August|September|October|November|December)\\s*\\d{1,2}(–\\d{1,2})?,?\\s*\\d{2,4}).*/i, \"$1\").replace(/\\d{1,2}–(\\d{1,2})/, \"$1\");\n}",
+            "dataTypes": [
+              "DateTime"
+            ],
+            "mandatory": false
+          }
+        ],
+        "hintsJavascript": "function transform(data) {\n  var ftr = data.get(\"_footer\")[0].replace(/[A-z0-9.%+-_]{2,64}\\@[A-z0-9.]{2,64}/g,'');\n  var rvt = data.get(\"_raw_validThrough\")[0];\n\n  return {\n    '_footer': [ftr],\n    '_raw_validThrough': [rvt]\n  };\n}",
+        "hints": {
+          "_footer": "/descendant::text()[contains(.,\"DSW Inc\")]/ancestor::table[2]",
+          "_raw_validThrough": "./following-sibling::text()[1][contains(.,\"Valid\") and (contains(.,\"January\") or contains(.,\"February\") or contains(.,\"March\") or contains(.,\"April\") or contains(.,\"May\") or contains(.,\"June\") or contains(.,\"July\") or contains(.,\"August\") or contains(.,\"September\") or contains(.,\"October\") or contains(.,\"November\") or contains(.,\"December\"))]"
+        }
+      },
+      {
+        "id": "f0f7ae12-6ecb-4e52-81fe-c8a0f1c8dd2c",
+        "repeating": true,
+        "locations": [
+          "/descendant::img[contains(translate(@alt, \"OF\", \"of\"),\"off\")]\n|\n/descendant::text()[contains(translate(.,\"EARN\",\"earn\"),\"earn\")]"
+        ],
+        "type": "http://schema.org/Organization",
+        "javascript": null,
+        "entityIdRef": null,
+        "attributes": [
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "\"DSW\""
+                }
+              ]
+            },
+            "name": "http://schema.org/name",
+            "relative": true,
+            "transient": false,
+            "javascript": null,
+            "dataTypes": [
+              "Text"
+            ],
+            "mandatory": false
+          }
+        ]
+      },
+      {
+        "id": "28b9879a-5c46-4194-8d1c-9481542d6ea9",
+        "repeating": true,
+        "locations": [
+          "/descendant::img"
+        ],
+        "type": "http://schema.org/ImageObject",
+        "javascript": null,
+        "entityIdRef": "",
+        "attributes": [
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "./@src"
+                }
+              ]
+            },
+            "name": "http://schema.org/url",
+            "relative": true,
+            "transient": false,
+            "javascript": null,
+            "dataTypes": [
+              "URL"
+            ],
+            "mandatory": false
+          },
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "./@title | ./@alt"
+                }
+              ]
+            },
+            "name": "http://schema.org/imgtext",
+            "relative": true,
+            "transient": true,
+            "javascript": null,
+            "dataTypes": [
+              "Text"
+            ],
+            "mandatory": false
+          }
+        ]
+      }
+    ],
+    "edgeRules": [
+      {
+        "from": {
+          "entityRule": "a120e9e9-63c3-48ec-8c54-15d50bc0a5fb",
+          "matchAttr": ""
+        },
+        "to": {
+          "entityRule": "f0f7ae12-6ecb-4e52-81fe-c8a0f1c8dd2c",
+          "matchAttr": ""
+        },
+        "predicate": "http://schema.org/broker",
+        "cardinality": "ONE_TO_ONE"
+      },
+      {
+        "from": {
+          "entityRule": "a120e9e9-63c3-48ec-8c54-15d50bc0a5fb",
+          "matchAttr": "http://schema.org/description"
+        },
+        "to": {
+          "entityRule": "28b9879a-5c46-4194-8d1c-9481542d6ea9",
+          "matchAttr": "http://schema.org/imgtext"
+        },
+        "predicate": "http://schema.org/image",
+        "cardinality": "ONE_TO_ONE"
+      }
+    ],
+    "entityNS": null
+  },
+  "metaData": {
+    "useVTDXML": "true",
+    "ignoredValidations": null
+  }
+}
+
 /* EBAY reply.ebay.com */
 {
   "extract": {

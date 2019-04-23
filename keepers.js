@@ -585,6 +585,8 @@ function transform(data) {
 
 //PAYMENT STATUS - INVOICES
 function transform(data) {
+  data = data.toLowerCase();
+
   var textMatchObj = {
     'keyword1': 'PaymentDue',
     'keyword2': 'PaymentPastDue',
@@ -1016,6 +1018,11 @@ function minimizeMe(str){
   return str;
 }
 
+while (data.length > 100 && /[\.\?!]/.test(data[data.length-1]) && data.replace(/[^\.;\??]/g,"").length > 1) {
+  data = data.slice(0, data.length-1).split("").reverse().join("");
+  data = data.slice(data.search(/[\.\?!]/)).split("").reverse().join("");
+}
+
 //Milene's version
 function transform(data){
   return data.replace(/(\.)(\d|com)/gi,"~~~$2")
@@ -1030,3 +1037,9 @@ var t0 = performance.now();
 transform(str7);
 var t1 = performance.now();
 console.log("Call to doSomething took " + (t1 - t0) + " milliseconds.");
+
+
+while (data.length > 100 && /[\.\?!]/.test(data[data.length-1]) && data.replace(/[^\.;\??]/g,"").length > 1) {
+  data = data.slice(0, data.length-1).split("").reverse().join("");
+  data = data.slice(str.search(/[\.\?!]/)).split("").reverse().join("");
+}
