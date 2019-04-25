@@ -1,13 +1,148 @@
 function transform(data){
-  var dataSpl = data.split("~~~");
+  var negRegexArr = [
 
-  return /\$10\s*off/i.test(dataSpl[0]) && /\$10\s*off/i.test(dataSpl[1]) ?
-  dataSpl[1].replace(/.*Valid\s*(?:January|February|March|April|May|June|July|August|September|October|November|December)\s*\d{1,2}–((?:January|February|March|April|May|June|July|August|September|October|November|December)\s*\d{1,2},?\s*\d{2,4}).*/i, "$1") :
-  "";
+  ];
+
+  for (var i = 0; i < negRegexArr.length; i++) {
+    if (negRegexArr[i].test(data)) return null;
+  }
+
+
+  var posRegexArr = [
+    // (10% | $10 | percent | 1/3) (off | (in )savings | discount | (cash)back | reward | gift | value | credit | (promotional )coupon | (mail-in )rebate | (e-)certificate | bonus | sale)
+    /(\d{1,2}%|[\$£€]\d+(\.\d{2})?|percent|\d\/\d)\s*([a-z]+\s*)?(off|(in )?savings|discount|(cash(\s*)?)?back|reward|gift|value|credit|(promotional\s*)?coupon|(mail-in\s*)?rebate|(e-)?certificate|bonus|sale)/i,
+    // (extra | up to | save | over | more than | discount of | discounted by | savings of | at least | gift of | down to | as low as | bonus of| get a) (10% | $10)
+    /(extra|up\s*to|sav(e|ings\s*of)|over|more\s*than|discount(ed)?\s*(of|by)|at\s*least|gift\s*of|down\s*to|as\s*low\s*as|bonus\s*of|take|get(\s*a)?)\s*(\d{1,2}%|[\$£€]\d+(\.\d{2})?)/i,
+    // was $10.99 | start at $10.99 sale $10.99
+    /(sale:?|was:?|start\s*at)\s*[\$£€]\d+/i,
+    //on sale | markdown | save on | marked down
+    /on\s*sale|markdown|save\s*on|marked\s*down/i,
+    //anniversary sale
+    /anniversary\s*sale/i,
+    // free ship | free on orders of | free $5 | free 10% | free delivery | free standard | free gift | free NN
+    /free\s*(ship|on\s*orders\s*of|[\$£€]\d|\d+%|standard|delivery|gift|\d)/i,
+    // buy one / two / three texttexttext, get
+    /buy\s*(one|two|three|\d+),?.*\sget/i,
+    //(standard | complementary | NN day) (shipping)
+    /(standard|complimentary|\d+day)\s*shipping/i,
+    //3 for 2
+    /\d\s*for\s*\d/i,
+    //(half | 1/2) (price)
+    /(half|\d\/\d)\s*(price)/i,
+    //BOGO
+    /BOGO/,
+    // (100 | earn | get | gather | collect | your | redeem | reward | worth of) (points | rewards | gift | coupon | (e-)certificate)
+    /(\d+|earn|get|gather|collect|your|redeem|rewards?|worth\s*of)\s*(points|rewards?|gift|coupon|(e-)?certificate|a?\s*[\$£€])|event/i,
+    // (double | triple | NN times the) (points)
+    /(double|triple|\d\s*times\s*the|\dx(\s*the)?)\s*(points)/i,
+    //promo(tion) code
+    /promo(?:tion)\s*code\s*/i,
+  ];
+
+  for (var j = 0; j < posRegexArr.length; j++) {
+    if (posRegexArr[j].test(data)) return data.length > 80 ? minimizeMe(data, posRegexArr[j]) : cleanMe(data);
+  }
+
+  return null;
 }
 
-var str = "$10 OFF ANYTHING*~~~About the $10 off: Valid March 21–April 21, 2019 in US stores and at dsw.com for $10 off a purchase of $10 or more. Use offer code 483332001004 to redeem online. Limit 1 per customer. One-time use. Not valid toward gift cards, past purchases, shipping, or tax. No cash back. Cannot be replaced if lost, stolen, or damaged. Value can be reused on same-day exchange only. Exclusions apply. See store or dsw.com for details. Additional details: May be combined with up to two Rewards and one offer. Excludes Birkenstock, Brooks, HUNTER, Keen, Koolaburra by UGG, Michael Michael Kors, Rainbow, Sorel, and UGG products, plus select Nike, New Balance, Converse, Steve Madden, and Under Armour styles. Excludes luggage and fragrance items. Not valid at any DSW Canada store or at www.dswcanada.ca. Associates of DSW and of other companies owned by Designer Brands are not eligible for offer. For help, contact shoephoria! Center: 1.866.DSW.SHOES or customerservice@dsw.com. About our prices:Advertised prices are available at dsw.com, but may not be available at all DSW stores. See store for details. Our COMP. VALUE prices typically refer to the manufacturer’s suggested retail price (MSRP). When an MSRP is not available, the COMP. VALUE price is our estimate of other retailers’ ticketed prices for the same or similar items."
 
 
 
-"Earn 1 point for every $1 spent in purchases made by friends and family on dsw.com using the custom link you received via email. Points can only be earned by friends & family purchases; members cannot use their own custom link to earn additional points. Points are deposited monthly. Not valid towards gift cards, past purchases, shipping, or tax. Rewards points are not redeemable for cash and cannot be replaced if lost, stolen, or damaged. Exclusions apply. See store or ~~~About the $10 off: Valid March 21–April 21, 2019 in US stores and at dsw.com for $10 off a purchase of $10 or more. Use offer code 483332001004 to redeem online. Limit 1 per customer. One-time use. Not valid toward gift cards, past purchases, shipping, or tax. No cash back. Cannot be replaced if lost, stolen, or damaged. Value can be reused on same-day exchange only. Exclusions apply. See store or dsw.com for details. Additional details: May be combined with up to two Rewards and one offer. Excludes Birkenstock, Brooks, HUNTER, Keen, Koolaburra by UGG, Michael Michael Kors, Rainbow, Sorel, and UGG products, plus select Nike, New Balance, Converse, Steve Madden, and Under Armour styles. Excludes luggage and fragrance items. Not valid at any DSW Canada store or at www.dswcanada.ca. Associates of DSW and of other companies owned by Designer Brands are not eligible for offer. For help, contact shoephoria! Center: 1.866.DSW.SHOES or customerservice@dsw.com. About our prices:Advertised prices are available at dsw.com, but may not be available at all DSW stores. See store for details. Our COMP. VALUE prices typically refer to the manufacturer’s suggested retail price (MSRP). When an MSRP is not available, the COMP. VALUE price is our estimate of other retailers’ ticketed prices for the same or similar items.";
+
+function minimizeMe(str, reg){
+  var punctuation = [". ", "! ", "| ", "? ", "| "]; //Punctuation symbols
+  str = str.replace(/(\.)([A-z])/g, "$1 $2");
+
+  //STAGE 1 - Slice text at the beginning of string
+  var sliceStr = str.slice(0, str.indexOf(str.match(reg)[0])); //Create a substring from the beginning of string up to the beginning of the .match()
+  var sliceStart = 0; //Define a variable where the slice at the beginning of the initial string will happen.
+
+
+  //Iterate through the punctuation symbols.
+  //If the last Index position of the punctuation is larger than the sliceStart variable,
+  //then make the variable equal to the last index position.
+  //That will be later used to slice the string at its beginning
+  for (var i = 0; i < punctuation.length; i++) {
+    if(sliceStr.lastIndexOf(punctuation[i]) > sliceStart) sliceStart = sliceStr.lastIndexOf(punctuation[i]);
+  }
+  //Slice the string from the beginning of the last punctuation mark but before the coupon description.
+  if(sliceStart > 0) str = str.slice(sliceStart + 1).trim();
+
+
+
+
+  //STAGE 2 - Slice text at the end of string
+  var sliceEnd = +Infinity;
+  //Iterate through the punctuation symbols.
+  //If the punctuation symbol's index position is smaller than the sliceEnd variable, then
+  //make the sliceEnd variable equal to the index position of the punctuation.
+  //The sliceEnd will be used as the position where the slicing of the string will happen at it's end.
+  for (var j = 0; j < punctuation.length; j++) {
+    if (str.indexOf(punctuation[j]) < sliceEnd && str.indexOf(punctuation[j]) !== -1) sliceEnd = str.indexOf(punctuation[j]);
+  }
+  //Slice the end of the string
+  str = str.slice(0, sliceEnd).trim();
+
+
+
+
+
+  //STAGE 3 - Remove unecessary characters from the end of the string.
+  return cleanMe(str);
+}
+
+
+function cleanMe(string) {
+  var replaceStrArr = [
+    {oldStr: /(Load\s*Offer|(-)?\s*online\s*only!?|(-)?\s*Limited\s*time\s*only|\*|\^).*/i, newStr: ""},
+    {oldStr: /(Today,.*,\s*is\s*your\s*last\s*chance\s*to|.*making\s*this\s*Easter.*\s*you\s*can)/, newStr: ""}
+  ];
+
+  for (var i = 0; i < replaceStrArr.length; i++) {
+      string = string.replace(replaceStrArr[i].oldStr, replaceStrArr[i].newStr).trim();
+  }
+
+
+  while("*©®ǂ‡†±+→§™¹›∞•◊ΔÐð_|^,".indexOf(string[string.length-1]) !== -1) string = string.slice(0, string.length-1);
+  while("*©®ǂ‡†±+→§™¹›∞•◊ΔÐð_^".indexOf(string[0]) !== -1) string = string.slice(1);
+
+  return string;
+}
+
+
+
+
+
+
+Alina,
+.*we’re\s*making\s*this\s*Easter\s*that\s*bit\s*more\s*exciting.*,\s*you\s*can
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function makeArr(str){
+
+}
+
+
+var str1 =

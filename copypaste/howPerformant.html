@@ -46,6 +46,8 @@
       .textAreaArgumentsPaste{
         width: 100%;
         height: 10vh;
+        padding: 5px;
+        font-size: 0.8em;
       }
 
       .labelArgumentsDataTypes{
@@ -106,7 +108,7 @@
 
 
           <div class="divArgumentsSets" v-for="set in Number(numOfArgumentsSets)">
-            <function-arg></function-arg>
+            <function-arg :id="'argSet' + set"></function-arg>
           </div>
 
         </section>
@@ -143,11 +145,12 @@
     <script type="text/javascript">
 
       Vue.component('function-arg', {
+        props: ["set"],
         data(){
           return {
             errorEntry: false,
             dataType: "string",
-            textAreaValues: ""
+            textAreaValues: "",
           }
         },
         methods:{
@@ -160,141 +163,242 @@
             for (let i = 0; i < startArr.length; i++) {
               let el = startArr[i];
 
-
               //If array selected
-              if (this.dataType === "array") {
-                console.log("Array selected");
-              }
-
-
+              if (this.dataType === "array")
+                this.evalArray(startArr[i]) === "error" ? this.errorEntry = true : finalArr.push(this.evalArray(startArr[i]));
               //If boolean selected
-              if (this.dataType === "boolean" && startArr.length > 0) {
-                if (el === "true") finalArr.push(true);
-                else if (el === "false") finalArr.push(false);
-                else{
-                  this.errorEntry = true;
-                  return;
-                }
-              }
-
-
-
-
-
-
+              if (this.dataType === "boolean")
+                this.evalBoolean(startArr[i]) === "error" ? this.errorEntry = true : finalArr.push(this.evalBoolean(startArr[i]));
+              //If null selected
+              if (this.dataType === "null")
+                this.evalNull(startArr[i]) === "error" ? this.errorEntry = true : finalArr.push(this.evalNull(startArr[i]));
+              //If number selected
+              if (this.dataType === "number")
+                this.evalNumber(startArr[i]) === "error" ? this.errorEntry = true : finalArr.push(this.evalNumber(startArr[i]));
+              //If object selected
+              if (this.dataType === "object")
+                this.evalObject(startArr[i]) === "error" ? this.errorEntry = true : finalArr.push(this.evalObject(startArr[i]));
+              //If regexp selected
+              if (this.dataType === "regexp")
+                this.evalRegExp(startArr[i]) === "error" ? this.errorEntry = true : finalArr.push(this.evalRegExp(startArr[i]));
+              //If string selected
+              if (this.dataType === "string")
+                this.evalString(startArr[i]) === "error" ? this.errorEntry = true : finalArr.push(this.evalString(startArr[i]));
             } //End of for loop
 
             return finalArr;
-          }
-        },
+          }, //End of textAreaValuesSplit
+
+
+          evalArray(el){
+            if (el[0] !== "[" || el[el.length-1] !== "]") this.errorEntry = true;
+            else {
+              el = el.slice(1, el.length-1);
+              let elArr = el.split(", ");
+
+              elArr.forEach(elm => {
+                // elm === "true" ? elm = true :
+                // elm === "false" ? elm = false :
+                //
+              });
+              console.log(el);
+              console.log("evaluating if this is an array");
+            }
+          },
+
+
+
+          evalBoolean(el){
+            if (el === "true") return true;
+            if (el === "false") return false;
+            return "error";
+          },
+
+
+
+          evalNull(el){
+            return el === "null" ? null : "error";
+          },
+
+
+
+          evalNumber(el){
+            return isNaN(Number(el)) ? "error" : arr.push(Number(el));
+          },
+
+
+
+
+          evalObject(el){
+            // console.log("evaluating if this is an object");
+          },
+
+
+
+
+          evalRegExp(el){
+            let elFlags = el.slice(el.lastIndexOf("/") + 1);
+            let flags = "igmsuy";
+            let source = el.slice(1, el.lastIndexOf("/"));
+            console.log(elFlags, flags, source);
+
+            //The last character is not a /
+            if (elFlags === 0 && el.length - 1 !== el.lastIndexOf("/")) return "error";
+
+
+            //some of the flag characters are incorrect
+            if (elFlags.length > 0) {
+              for (var i = 0; i < elFlags.length; i++) {
+                if (!flags.includes(elFlags[i])) return "error";
+              }
+            }
+
+            //The first character is not a /
+            if (el[0] !== "/") return "error";
+
+            let sourceCheck = source.replace(/[^\(\)\[\]\{\}]/g, "");
+            console.log(sourceCheck);
+
+            while (sourceCheck.length > 0) {
+              if (/\[\]/.test(sourceCheck) || /\(\)/.test(sourceCheck) || /\{\{/.test(sourceCheck)) {
+                sourceCheck = sourceCheck.replace(/\[\]/, "").replace(/\(\)/, "").replace(/\{\}/, "");
+              }
+              else return "error";
+            }
+
+
+
+            return new RegExp(source, elFlags);
+          },
+
+
+
+
+          evalString(el){
+            return el.replace(/^(?:["'`]+)?(.*[^"'`])(?:["'`]+)?\s*$/gm, "$1").trim();
+          },
+
+        }, //End of methods
         computed: {
+          //Create the ID for the div tag that includes the arguments textArea
+          argIdNum(){
+            return this.$attrs.id.replace(/[A-z]/g, "");
+          }
 
         },
         template:
         `
-        <div class="divFunctionArgument">
-          <h2>Argument Set {{_uid}}</h2>
-          <label class="labelArgumentsDataTypes">
-            <textarea
-              class="textAreaArgumentsPaste"
-              placeholder="
-              Enter the function's argument.
-              If you are entering more than one arguments,
-              - in order to run the function several times, -
-              separate them with a line break"
-              v-model="textAreaValues"
-              @keyup="textAreaValuesSplit()">
+          <div class="divFunctionArgument" :key="set">
+            <h2>Argument Set {{argIdNum}}</h2>
+            <label class="labelArgumentsDataTypes">
+              <textarea
+                class="textAreaArgumentsPaste"
+                placeholder="
+                Enter the function's argument.
+                If you are entering more than one arguments,
+                - in order to run the function several times, -
+                separate them with a line break"
+                v-model="textAreaValues"
+                @keyup="textAreaValuesSplit()">
 
-            </textarea>
-          </label>
-          <h4>Argument data type:</h4>
-          <div class="divLabelDataType">
-            <form>
-              <label class="labelArgumentsDataTypes">
-                Array:
-                <input type="radio" name="inputRadioDataType" value="array" v-model="dataType" @change="textAreaValuesSplit()">
-              </label>
-              <label class="labelArgumentsDataTypes">
-                Boolean:
-                <input type="radio" name="inputRadioDataType" value="boolean" v-model="dataType" @change="textAreaValuesSplit()">
-              </label>
-              <label class="labelArgumentsDataTypes">
-                Null:
-                <input type="radio" name="inputRadioDataType" value="null" v-model="dataType" @change="textAreaValuesSplit()">
-              </label>
-              <label class="labelArgumentsDataTypes">
-                Number:
-                <input type="radio" name="inputRadioDataType" value="number" v-model="dataType" @change="textAreaValuesSplit()">
-              </label>
-              <label class="labelArgumentsDataTypes">
-                Object literal:
-                <input type="radio" name="inputRadioDataType" value="object" v-model="dataType" @change="textAreaValuesSplit()">
-              </label>
-              <label class="labelArgumentsDataTypes">
-                RegExp:
-                <input type="radio" name="inputRadioDataType" value="regex" v-model="dataType" @change="textAreaValuesSplit()">
-              </label>
-              <label class="labelArgumentsDataTypes">
-                String:
-                <input type="radio" name="inputRadioDataType" value="string" v-model="dataType" @change="textAreaValuesSplit()">
-              </label>
-              <label class="labelArgumentsDataTypes">
-                Symbol:
-                <input type="radio" name="inputRadioDataType" value="symbol" v-model="dataType" @change="textAreaValuesSplit()">
-              </label>
-              <label class="labelArgumentsDataTypes">
-                Undefined:
-                <input type="radio" name="inputRadioDataType" value="undefined" v-model="dataType" @change="textAreaValuesSplit()">
-              </label>
-              <label class="labelArgumentsDataTypes">
-                callback function:
-                <input type="radio" name="inputRadioDataType" value="function" v-model="dataType" @change="textAreaValuesSplit()">
-              </label>
-            </form>
+              </textarea>
+            </label>
+            <h4>Argument data type:</h4>
+            <div class="divLabelDataType">
+              <form>
+                <label class="labelArgumentsDataTypes">
+                  Array:
+                  <input type="radio" name="inputRadioDataType" value="array" v-model="dataType" @change="textAreaValuesSplit()">
+                </label>
+                <label class="labelArgumentsDataTypes">
+                  Boolean:
+                  <input type="radio" name="inputRadioDataType" value="boolean" v-model="dataType" @change="textAreaValuesSplit()">
+                </label>
+                <label class="labelArgumentsDataTypes">
+                  Null:
+                  <input type="radio" name="inputRadioDataType" value="null" v-model="dataType" @change="textAreaValuesSplit()">
+                </label>
+                <label class="labelArgumentsDataTypes">
+                  Number:
+                  <input type="radio" name="inputRadioDataType" value="number" v-model="dataType" @change="textAreaValuesSplit()">
+                </label>
+                <label class="labelArgumentsDataTypes">
+                  Object literal:
+                  <input type="radio" name="inputRadioDataType" value="object" v-model="dataType" @change="textAreaValuesSplit()">
+                </label>
+                <label class="labelArgumentsDataTypes">
+                  RegExp:
+                  <input type="radio" name="inputRadioDataType" value="regexp" v-model="dataType" @change="textAreaValuesSplit()">
+                </label>
+                <label class="labelArgumentsDataTypes">
+                  String:
+                  <input type="radio" name="inputRadioDataType" value="string" v-model="dataType" @change="textAreaValuesSplit()">
+                </label>
+                <label class="labelArgumentsDataTypes">
+                  Symbol:
+                  <input type="radio" name="inputRadioDataType" value="symbol" v-model="dataType" @change="textAreaValuesSplit()">
+                </label>
+                <label class="labelArgumentsDataTypes">
+                  Undefined:
+                  <input type="radio" name="inputRadioDataType" value="undefined" v-model="dataType" @change="textAreaValuesSplit()">
+                </label>
+                <label class="labelArgumentsDataTypes">
+                  callback function:
+                  <input type="radio" name="inputRadioDataType" value="function" v-model="dataType" @change="textAreaValuesSplit()">
+                </label>
+              </form>
 
-          </div> <!--End of divLabelDataType-->
+            </div> <!--End of divLabelDataType-->
 
-          <div class="divErrorEntries">
-            <div class="divErrorEntry" v-show="errorEntry === true && dataType === 'array'">
-              Incorrect array entry(ies). Make sure you have entered arrays that start and end with
-              square brackets - [].
-              The values should be separated by a line break and without any extra
-              line breaks at the end of the text.
-            </div>
-            <div class="divErrorEntry" v-show="errorEntry === true && dataType === 'boolean'">
-              Incorrect boolean entry(ies). Make sure you have entered only boolean values (true, false).
-              The values should be separated by a line break and without any extra
-              line breaks at the end of the text.
-            </div>
-            <div class="divErrorEntry" v-show="errorEntry === true && dataType === 'function'">
-              Incorrect function entry(ies). Make sure you have entered the function in
-              the correct format, with opening and closing curly braces.
-              The values should be separated by a line break and without any extra
-              line breaks at the end of the text.
-            </div>
-            <div class="divErrorEntry" v-show="errorEntry === true && dataType === 'null'">
-              Incorrect null entry(ies). Make sure you have entered only null values (null).
-              The values should be separated by a line break and without any extra
-              line breaks at the end of the text.
-            </div>
-            <div class="divErrorEntry" v-show="errorEntry === true && dataType === 'number'">
-              Incorrect number entry(ies). Make sure you have entered only numeric values (integers or floats).
-              The values should be separated by a line break and without any extra
-              line breaks at the end of the text.
-            </div>
-            <div class="divErrorEntry" v-show="errorEntry === true && dataType === 'object'">
-              Incorrect object literal entry(ies). Make sure you have entered
-              an object that opens and closes with curly braces - {}.
-              The values should be separated by a line break and without any extra
-              line breaks at the end of the text.
-            </div>
-            <div class="divErrorEntry" v-show="errorEntry === true && dataType === 'undefined'">
-              Incorrect undefined entry(ies). Make sure you have entered only "undefined" as a value.
-              The values should be separated by a line break and without any extra
-              line breaks at the end of the text.
+            <div class="divErrorEntries">
+              <div class="divErrorEntry" v-show="errorEntry === true && dataType === 'array'">
+                Incorrect array entry(ies). Make sure you have entered arrays that start and end with
+                square brackets - [].
+                The values should be separated by a line break and without any extra
+                line breaks at the end of the text.
+              </div>
+              <div class="divErrorEntry" v-show="errorEntry === true && dataType === 'boolean'">
+                Incorrect boolean entry(ies). Make sure you have entered only boolean values (true, false).
+                The values should be separated by a line break and without any extra
+                line breaks at the end of the text.
+              </div>
+              <div class="divErrorEntry" v-show="errorEntry === true && dataType === 'function'">
+                Incorrect function entry(ies). Make sure you have entered the function in
+                the correct format, with opening and closing curly braces.
+                The values should be separated by a line break and without any extra
+                line breaks at the end of the text.
+              </div>
+              <div class="divErrorEntry" v-show="errorEntry === true && dataType === 'null'">
+                Incorrect null entry(ies). Make sure you have entered only null values (null).
+                The values should be separated by a line break and without any extra
+                line breaks at the end of the text.
+              </div>
+              <div class="divErrorEntry" v-show="errorEntry === true && dataType === 'number'">
+                Incorrect number entry(ies). Make sure you have entered only numeric values (integers or floats).
+                The values should be separated by a line break and without any extra
+                line breaks at the end of the text.
+              </div>
+              <div class="divErrorEntry" v-show="errorEntry === true && dataType === 'object'">
+                Incorrect object literal entry(ies). Make sure you have entered
+                an object that opens and closes with curly braces - {}.
+                The values should be separated by a line break and without any extra
+                line breaks at the end of the text.
+              </div>
+              <div class="divErrorEntry" v-show="errorEntry === true && dataType === 'regexp'">
+                Incorrect regex entry(ies). Make sure you have entered a regular
+                expression that  opens and closes with slashes.
+                Make sure that the format of the regex (parenthesis, brackets etc)
+                is correct. Make sure that the flags are correct.
+                The values should be separated by a line break and without any extra
+                line breaks at the end of the text.
+              </div>
+              <div class="divErrorEntry" v-show="errorEntry === true && dataType === 'undefined'">
+                Incorrect undefined entry(ies). Make sure you have entered only "undefined" as a value.
+                The values should be separated by a line break and without any extra
+                line breaks at the end of the text.
+              </div>
             </div>
           </div>
-        </div>
         `
       });
 
@@ -307,7 +411,9 @@
         methods: {
           changeArgumentsArrLength(){
             // Access the components through app.$children
-            Number(this.numOfArgumentsSets) > this.argumentsArr.length ? this.argumentsArr.push("") : this.argumentsArr.pop();
+            Number(this.numOfArgumentsSets) > this.argumentsArr.length ?
+            this.argumentsArr.push("") :
+            this.argumentsArr.pop();
           }
         }
       });
