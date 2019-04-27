@@ -143,6 +143,21 @@
 
 
     <script type="text/javascript">
+    /*
+    If only one array is pasted
+    do evalArray. Inside it you need to run textAreaValuesSplit to break the array elements
+
+    If a lot of arrays pasted
+    break them
+
+    If only one object pasted
+
+    if a lot of objects pasted
+
+    if one function pasted
+
+    if a lot of functions pasted
+    */
 
       Vue.component('function-arg', {
         props: ["set"],
@@ -154,8 +169,9 @@
           }
         },
         methods:{
-          textAreaValuesSplit(){
+          textAreaValuesSplit(elem){
             this.errorEntry = false;
+            console.log(elem);
             let startArr = this.textAreaValues.split("\n") || null;
             let finalArr = [];
 
@@ -194,6 +210,7 @@
             if (el[0] !== "[" || el[el.length-1] !== "]") this.errorEntry = true;
             else {
               el = el.slice(1, el.length-1);
+              // return this.textAreaValuesSplit()
               let elArr = el.split(", ");
 
               elArr.forEach(elm => {
@@ -299,7 +316,7 @@
                 - in order to run the function several times, -
                 separate them with a line break"
                 v-model="textAreaValues"
-                @keyup="textAreaValuesSplit()">
+                @keyup="textAreaValuesSplit($event.target.value)">
 
               </textarea>
             </label>
@@ -308,43 +325,43 @@
               <form>
                 <label class="labelArgumentsDataTypes">
                   Array:
-                  <input type="radio" name="inputRadioDataType" value="array" v-model="dataType" @change="textAreaValuesSplit()">
+                  <input type="radio" name="inputRadioDataType" value="array" v-model="dataType">
                 </label>
                 <label class="labelArgumentsDataTypes">
                   Boolean:
-                  <input type="radio" name="inputRadioDataType" value="boolean" v-model="dataType" @change="textAreaValuesSplit()">
+                  <input type="radio" name="inputRadioDataType" value="boolean" v-model="dataType">
                 </label>
                 <label class="labelArgumentsDataTypes">
                   Null:
-                  <input type="radio" name="inputRadioDataType" value="null" v-model="dataType" @change="textAreaValuesSplit()">
+                  <input type="radio" name="inputRadioDataType" value="null" v-model="dataType">
                 </label>
                 <label class="labelArgumentsDataTypes">
                   Number:
-                  <input type="radio" name="inputRadioDataType" value="number" v-model="dataType" @change="textAreaValuesSplit()">
+                  <input type="radio" name="inputRadioDataType" value="number" v-model="dataType">
                 </label>
                 <label class="labelArgumentsDataTypes">
                   Object literal:
-                  <input type="radio" name="inputRadioDataType" value="object" v-model="dataType" @change="textAreaValuesSplit()">
+                  <input type="radio" name="inputRadioDataType" value="object" v-model="dataType">
                 </label>
                 <label class="labelArgumentsDataTypes">
                   RegExp:
-                  <input type="radio" name="inputRadioDataType" value="regexp" v-model="dataType" @change="textAreaValuesSplit()">
+                  <input type="radio" name="inputRadioDataType" value="regexp" v-model="dataType">
                 </label>
                 <label class="labelArgumentsDataTypes">
                   String:
-                  <input type="radio" name="inputRadioDataType" value="string" v-model="dataType" @change="textAreaValuesSplit()">
+                  <input type="radio" name="inputRadioDataType" value="string" v-model="dataType">
                 </label>
                 <label class="labelArgumentsDataTypes">
                   Symbol:
-                  <input type="radio" name="inputRadioDataType" value="symbol" v-model="dataType" @change="textAreaValuesSplit()">
+                  <input type="radio" name="inputRadioDataType" value="symbol" v-model="dataType">
                 </label>
                 <label class="labelArgumentsDataTypes">
                   Undefined:
-                  <input type="radio" name="inputRadioDataType" value="undefined" v-model="dataType" @change="textAreaValuesSplit()">
+                  <input type="radio" name="inputRadioDataType" value="undefined" v-model="dataType">
                 </label>
                 <label class="labelArgumentsDataTypes">
                   callback function:
-                  <input type="radio" name="inputRadioDataType" value="function" v-model="dataType" @change="textAreaValuesSplit()">
+                  <input type="radio" name="inputRadioDataType" value="function" v-model="dataType">
                 </label>
               </form>
 
