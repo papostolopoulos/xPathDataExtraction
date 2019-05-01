@@ -5495,7 +5495,7 @@
         "id": "c497c926-0231-4a60-bb9b-56fe6a97d247",
         "repeating": true,
         "locations": [
-          "/descendant::img[contains(@alt,\"%\") or contains(translate(@alt,\"CUSTOM\",\"custom\"),\"custom\")][ancestor::tr[1]/following-sibling::tr[1]\n/descendant::a[1][contains(translate(.,\"VALID\",\"valid\"),\"valid\")]]"
+          "/descendant::a[@data-linkto=\"other\"][not(contains(translate(.,\"by\",\"by\"),\"by \") or \ncontains(translate(.,\"SALE\",\"sale\"),\"sale\") or \ncontains(translate(.,\"REG\",\"reg\"),\"reg.\") or\ntext()=\"ALL\" or contains(translate(.,\"EXCLUD\",\"exclud\"),\"exclude\"))]\n[following::text()[position()<=2][contains(translate(.,\"SALE\",\"sale\"),\"sale\")]]\n|\n/descendant::img[contains(@alt,\"%\") or contains(translate(@alt,\"CUSTOM\",\"custom\"),\"custom\")][ancestor::tr[1]/following-sibling::tr[1]\n/descendant::a[1][contains(translate(.,\"VALID\",\"valid\"),\"valid\")]]"
         ],
         "type": "http://schema.org/Coupon",
         "javascript": null,
@@ -5506,6 +5506,9 @@
             "locations": {
               "-1": [
                 {
+                  "xpath": "concat(., ./following::text()[1][contains(.,\"Sale\")])"
+                },
+                {
                   "xpath": "./@alt"
                 }
               ]
@@ -5513,7 +5516,7 @@
             "name": "http://schema.org/description",
             "relative": true,
             "transient": false,
-            "javascript": null,
+            "javascript": "function transform(data){\n  return data.replace(/Sale/, \" - Sale\");\n}",
             "dataTypes": [
               "Text"
             ],
@@ -5524,7 +5527,7 @@
             "locations": {
               "-1": [
                 {
-                  "xpath": "./parent::a/@href"
+                  "xpath": "./parent::a/@href \n| \n/descendant::a[contains(translate(.,\"BROWSE\",\"browse\"),\"browser\")]/@href"
                 }
               ]
             },
@@ -5542,14 +5545,17 @@
             "locations": {
               "-1": [
                 {
-                  "xpath": "./following::a[1]"
+                  "xpath": "./following::a[1][contains(translate(.,\"VALID\",\"valid\"),\"valid\")]"
+                },
+                {
+                  "xpath": "concat(., ./following::text()[1][contains(.,\"Sale\")], /descendant::text()[contains(.,\"are valid\")])"
                 }
               ]
             },
             "name": "http://schema.org/validThrough",
             "relative": true,
             "transient": false,
-            "javascript": "function transform(data){\n  return data.match(/(\\d{1,2}\\/){2}\\d{2,4}/)[0];\n}",
+            "javascript": "function transform(data){\n  \n  if (/(\\d{1,2}\\/){2}\\d{2,4}/.test(data)) return data.match(/(\\d{1,2}\\/){2}\\d{2,4}/)[0];\n  \n  \n  if(/sale\\s*\\d/i.test(data)){\n    return data.replace(/.*in\\s*this\\s*email\\s*are\\s*valid\\s*(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday),?\\s*((?:January|February|March|April|May|June|July|August|September|October|November|December)\\s*\\d{1,2},?\\s*\\d{4}).*/, \"$1\");\n  } \n  \n  return null;\n}",
             "dataTypes": [
               "DateTime"
             ],
@@ -5557,15 +5563,15 @@
           }
         ],
         "hints": {
-          "_raw_validThrough": "./following::a[1]",
-          "_footer": "/descendant::text()[contains(.,\"Michaels Stores\")]/ancestor::table[1]"
+          "_footer": "/descendant::text()[contains(.,\"Michaels Stores\")]/ancestor::table[1]",
+          "_raw_validThrough": "./following::a[1][contains(translate(.,\"VALID\",\"valid\"),\"valid\")]"
         }
       },
       {
         "id": "bbd9cd3c-f13a-45dd-84b1-c7483c48949f",
         "repeating": true,
         "locations": [
-          "/descendant::img[contains(@alt,\"%\") or contains(translate(@alt,\"CUSTOM\",\"custom\"),\"custom\")][ancestor::tr[1]/following-sibling::tr[1]\n/descendant::a[1][contains(translate(.,\"VALID\",\"valid\"),\"valid\")]]"
+          "/descendant::a[@data-linkto=\"other\"][not(contains(translate(.,\"by\",\"by\"),\"by \") or \ncontains(translate(.,\"SALE\",\"sale\"),\"sale\") or \ncontains(translate(.,\"REG\",\"reg\"),\"reg.\") or\ntext()=\"ALL\" or contains(translate(.,\"EXCLUD\",\"exclud\"),\"exclude\"))]\n[following::text()[position()<=2][contains(translate(.,\"SALE\",\"sale\"),\"sale\")]]\n|\n/descendant::img[contains(@alt,\"%\") or contains(translate(@alt,\"CUSTOM\",\"custom\"),\"custom\")][ancestor::tr[1]/following-sibling::tr[1]\n/descendant::a[1][contains(translate(.,\"VALID\",\"valid\"),\"valid\")]]"
         ],
         "type": "http://schema.org/Organization",
         "javascript": null,
@@ -5595,11 +5601,11 @@
         "id": "ad40fe57-2b07-4f44-981d-958779c8facf",
         "repeating": true,
         "locations": [
-          "/descendant::img[contains(@alt,\"%\") or contains(translate(@alt,\"CUSTOM\",\"custom\"),\"custom\")][ancestor::tr[1]/following-sibling::tr[1]\n/descendant::a[1][contains(translate(.,\"VALID\",\"valid\"),\"valid\")]]"
+          "/descendant::img"
         ],
         "type": "http://schema.org/ImageObject",
         "javascript": null,
-        "entityIdRef": null,
+        "entityIdRef": "",
         "attributes": [
           {
             "repeating": false,
@@ -5616,6 +5622,24 @@
             "javascript": null,
             "dataTypes": [
               "URL"
+            ],
+            "mandatory": false
+          },
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "./@alt | ./@title"
+                }
+              ]
+            },
+            "name": "http://schema.org/imgtext",
+            "relative": true,
+            "transient": true,
+            "javascript": null,
+            "dataTypes": [
+              "Text"
             ],
             "mandatory": false
           }
@@ -5638,14 +5662,15 @@
       {
         "from": {
           "entityRule": "c497c926-0231-4a60-bb9b-56fe6a97d247",
-          "matchAttr": ""
+          "matchAttr": "http://schema.org/description"
         },
         "to": {
           "entityRule": "ad40fe57-2b07-4f44-981d-958779c8facf",
-          "matchAttr": ""
+          "matchAttr": "http://schema.org/imgtext"
         },
         "predicate": "http://schema.org/image",
-        "cardinality": "ONE_TO_ONE"
+        "cardinality": "ONE_TO_ONE",
+        "matchThreshold": "0.3"
       }
     ],
     "entityNS": null
@@ -9006,6 +9031,166 @@
           "matchAttr": ""
         },
         "predicate": "http://schema.org/broker",
+        "cardinality": "ONE_TO_ONE"
+      }
+    ],
+    "entityNS": null
+  },
+  "metaData": {
+    "useVTDXML": "true",
+    "ignoredValidations": null
+  }
+}
+
+/* Perkins & Marie Callender's prkmc.fbmta.com */
+{
+  "extract": {
+    "extractEmbedded": false,
+    "source": null,
+    "schema": [
+      {
+        "url": "http://ws.rmf.yahoo.com:4080/rmf/v1/schema?type=schema.org&name=y.2.0&format=json",
+        "ns": "http://schema.org",
+        "context": {
+          "@type": [
+            "Coupon"
+          ]
+        }
+      }
+    ],
+    "entityRules": [
+      {
+        "id": "3a2754ff-918f-4492-bae7-e5e97855677d",
+        "repeating": true,
+        "locations": [
+          "/descendant::font[contains(translate(.,\"OF\",\"of\"),\"% off\") or\ncontains(translate(.,\"FRE\",\"fre\"),\"free\")][1]"
+        ],
+        "type": "http://schema.org/Coupon",
+        "javascript": null,
+        "entityIdRef": "",
+        "attributes": [
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "."
+                }
+              ]
+            },
+            "name": "http://schema.org/description",
+            "relative": true,
+            "transient": false,
+            "javascript": null,
+            "dataTypes": [
+              "Text"
+            ],
+            "mandatory": false
+          },
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "/descendant::a[contains(translate(.,\"CLICKHER\", \"clickher\"), \"click here\")]/@href"
+                }
+              ]
+            },
+            "name": "http://schema.org/url",
+            "relative": true,
+            "transient": false,
+            "javascript": null,
+            "dataTypes": [
+              "URL"
+            ],
+            "mandatory": false
+          }
+        ]
+      },
+      {
+        "id": "dbd551ba-ec2f-4ad4-8594-15700464bfd1",
+        "repeating": true,
+        "locations": [
+          "/descendant::font[contains(translate(.,\"OF\",\"of\"),\"% off\") or\ncontains(translate(.,\"FRE\",\"fre\"),\"free\")][1]"
+        ],
+        "type": "http://schema.org/Organization",
+        "javascript": null,
+        "entityIdRef": "",
+        "attributes": [
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "\"Perkins Restaurant & Bakery\""
+                }
+              ]
+            },
+            "name": "http://schema.org/name",
+            "relative": true,
+            "transient": false,
+            "javascript": null,
+            "dataTypes": [
+              "Text"
+            ],
+            "mandatory": false
+          }
+        ]
+      },
+      {
+        "id": "d875a083-0eed-45aa-9ede-cadbebaa5f98",
+        "repeating": true,
+        "locations": [
+          "/descendant::img[contains(@src,\"MAIN IMAGES\")]\n[ancestor::table[1]/preceding-sibling::table/descendant::font[contains(translate(.,\"OF\",\"of\"),\"% off\") or\ncontains(translate(.,\"FRE\",\"fre\"),\"free\")]]"
+        ],
+        "type": "http://schema.org/ImageObject",
+        "javascript": null,
+        "entityIdRef": "",
+        "attributes": [
+          {
+            "repeating": false,
+            "locations": {
+              "-1": [
+                {
+                  "xpath": "./@src"
+                }
+              ]
+            },
+            "name": "http://schema.org/url",
+            "relative": true,
+            "transient": false,
+            "javascript": null,
+            "dataTypes": [
+              "URL"
+            ],
+            "mandatory": false
+          }
+        ]
+      }
+    ],
+    "edgeRules": [
+      {
+        "from": {
+          "entityRule": "3a2754ff-918f-4492-bae7-e5e97855677d",
+          "matchAttr": ""
+        },
+        "to": {
+          "entityRule": "dbd551ba-ec2f-4ad4-8594-15700464bfd1",
+          "matchAttr": ""
+        },
+        "predicate": "http://schema.org/broker",
+        "cardinality": "ONE_TO_ONE"
+      },
+      {
+        "from": {
+          "entityRule": "3a2754ff-918f-4492-bae7-e5e97855677d",
+          "matchAttr": ""
+        },
+        "to": {
+          "entityRule": "d875a083-0eed-45aa-9ede-cadbebaa5f98",
+          "matchAttr": ""
+        },
+        "predicate": "http://schema.org/image",
         "cardinality": "ONE_TO_ONE"
       }
     ],

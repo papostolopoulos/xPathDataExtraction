@@ -172,8 +172,33 @@
           textAreaValuesSplit(elem){
             this.errorEntry = false;
             console.log(elem);
-            let startArr = this.textAreaValues.split("\n") || null;
+            let startArr = this.textAreaValues.split("\n");
             let finalArr = [];
+
+            if(this.textAreaValues.length === 0) return;
+
+            //If function selected
+            if (this.dataType === "function"){
+              console.log("selected data type = function");
+              let functionsArr = this.textAreaValues.split(/(?<=\})\s+((?=function)|(?=(var|let|const)\s[A-z_\$]\w*\s*=\s*function))/);
+              for (let i = 0; i < functionsArr.length; i++) {
+                console.log("Result from function selection before the evalFunction:", functionsArr[i]);
+                this.evalFunction(functionsArr[i]) === "error" ? this.errorEntry = true : finalArr.push(this.evalFunction(functionsArr[i]));
+              }
+            }
+
+            //If object selected
+            if (this.dataType === "object"){
+              console.log("selected dataType = object");
+              let objectsArr = this.textAreaValues.split(/(?!:\s*)\n\{/);
+              for (let i = 0; i < objectsArr.length; i++) {
+                objectsArr[i][0] === "{" ? objectsArr[i] = objectsArr[i] : objectsArr[i] = "{" + objectsArr[i];
+                console.log("Result from function selection before the evalFunction:", objectsArr[i]);
+                this.evalObject(objectsArr[i]) === "error" ? this.errorEntry = true : finalArr.push(this.evalObject(objectsArr[i]));
+              }
+            }
+
+
 
 
             for (let i = 0; i < startArr.length; i++) {
@@ -191,29 +216,76 @@
               //If number selected
               if (this.dataType === "number")
                 this.evalNumber(startArr[i]) === "error" ? this.errorEntry = true : finalArr.push(this.evalNumber(startArr[i]));
-              //If object selected
-              if (this.dataType === "object")
-                this.evalObject(startArr[i]) === "error" ? this.errorEntry = true : finalArr.push(this.evalObject(startArr[i]));
               //If regexp selected
               if (this.dataType === "regexp")
                 this.evalRegExp(startArr[i]) === "error" ? this.errorEntry = true : finalArr.push(this.evalRegExp(startArr[i]));
               //If string selected
               if (this.dataType === "string")
                 this.evalString(startArr[i]) === "error" ? this.errorEntry = true : finalArr.push(this.evalString(startArr[i]));
+              if (this.dataType === "undefined")
+                this.evalUndefined(startArr[i]) === "error" ? this.errorEntry = true : finalArr.push(this.evalUndefined(startArr[i]));
             } //End of for loop
 
             return finalArr;
           }, //End of textAreaValuesSplit
 
 
-          evalArray(el){
-            if (el[0] !== "[" || el[el.length-1] !== "]") this.errorEntry = true;
+          evalArray(arr){
+            if (arr[0] !== "[" || arr[arr.length-1] !== "]") this.errorEntry = true;
             else {
-              el = el.slice(1, el.length-1);
+              arr = arr.slice(1, arr.length-1);
               // return this.textAreaValuesSplit()
-              let elArr = el.split(", ");
+              let arrElms = arr.split(", ");
 
-              elArr.forEach(elm => {
+              for (let i = 0; i < arrElms.length; i++) {
+                if (this.evalArray(arrElms[i]) !== "error") {
+                  arrElms[i] = this.evalArray(arrElms[i]);
+                    return;
+                }
+
+                if (this.evalBoolean(arrElms[i]) !== "error") {
+                  arrElms[i] = this.evalBoolean(arrElms[i]);
+                    return;
+                }
+
+
+                if (this.evalFunction(arrElms[i]) !== "error") {
+                  arrElms[i] = this.evalFunction(arrElms[i]);
+                  return;
+                }
+
+                if (this.evalNull(arrElms[i]) !== "error") {
+                  arrElms[i] = this.evalNull(arrElms[i]);
+                    return;
+                }
+
+                if (this.evalNumber(arrElms[i]) !== "error") {
+                  arrElms[i] = this.evalNumber(arrElms[i]);
+                    return;
+                }
+
+                if (this.evalObject(arrElms[i]) !== "error") {
+                  arrElms[i] = this.evalObject(arrElms[i]);
+                    return;
+                }
+
+                if (this.evalRegExp(arrElms[i]) !== "error") {
+                  arrElms[i] = this.evalRegExp(arrElms[i]);
+                    return;
+                }
+
+                if (this.evalString(arrElms[i]) !== "error") {
+                  arrElms[i] = this.evalString(arrElms[i]);
+                    return;
+                }
+
+                if (this.evanUndefined(arrElms[i]) !== "error") {
+                  arrElms[i] = this.evanUndefined(arrElms[i]);
+                    return;
+                }
+              }
+
+              arrElms.forEach(elm => {
                 // elm === "true" ? elm = true :
                 // elm === "false" ? elm = false :
                 //
@@ -233,6 +305,24 @@
 
 
 
+          evalFunction(el){
+            el = el.trim();
+            console.log("In evalFunction. The el in the evaFunction is:", el);
+
+            if (!el.startsWith("function") ||
+            !el.search(/(var|let|const)\s[A-z_\$]\w*\s*=\s*\(([A-z_\$]\w*,?\s*)*\)\s*=>/ !== 0) ||
+            !el.endsWith("}")) return "error";
+
+            let params = el.slice(el.indexOf("(") + 1, el.indexOf(")")).split(/,\s*/);
+            params.push(el.slice(el.indexOf("{") + 1, el.indexOf("}")));
+            console.log(params);
+
+
+            return new Function(...params);
+          },
+
+
+
           evalNull(el){
             return el === "null" ? null : "error";
           },
@@ -240,14 +330,23 @@
 
 
           evalNumber(el){
-            return isNaN(Number(el)) ? "error" : arr.push(Number(el));
+            return isNaN(Number(el)) ? "error" : Number(el);
           },
 
 
 
 
           evalObject(el){
-            // console.log("evaluating if this is an object");
+            el = el.trim();
+            if (!el.startsWith("{") || !el.endsWith("}")) return "error";
+            console.log("In eval Object. el is", el, "Need to convert from string to object");
+            el = el.replace(/(\{)(\s*)(\w)/g, "$1$2\"$3")
+            .replace(/(\w)(\s*)(:)/g, "$1$2\"$3")
+            .replace(/(,)(\s*)(\w)/g, "$1$2\"$3");
+            console.log("After the replacements, the string is:", el);
+            let parsedEl = JSON.parse(el);
+            console.log(parsedEl);
+            return parsedEl;
           },
 
 
@@ -295,6 +394,10 @@
             return el.replace(/^(?:["'`]+)?(.*[^"'`])(?:["'`]+)?\s*$/gm, "$1").trim();
           },
 
+          evalUndefined(el){
+            return el === "undefined" ? undefined : "error";
+          }
+
         }, //End of methods
         computed: {
           //Create the ID for the div tag that includes the arguments textArea
@@ -325,43 +428,43 @@
               <form>
                 <label class="labelArgumentsDataTypes">
                   Array:
-                  <input type="radio" name="inputRadioDataType" value="array" v-model="dataType">
+                  <input type="radio" name="inputRadioDataType" value="array" v-model="dataType" @change="textAreaValuesSplit($event.target.value)">
                 </label>
                 <label class="labelArgumentsDataTypes">
                   Boolean:
-                  <input type="radio" name="inputRadioDataType" value="boolean" v-model="dataType">
+                  <input type="radio" name="inputRadioDataType" value="boolean" v-model="dataType" @change="textAreaValuesSplit($event.target.value)">
                 </label>
                 <label class="labelArgumentsDataTypes">
                   Null:
-                  <input type="radio" name="inputRadioDataType" value="null" v-model="dataType">
+                  <input type="radio" name="inputRadioDataType" value="null" v-model="dataType" @change="textAreaValuesSplit($event.target.value)">
                 </label>
                 <label class="labelArgumentsDataTypes">
                   Number:
-                  <input type="radio" name="inputRadioDataType" value="number" v-model="dataType">
+                  <input type="radio" name="inputRadioDataType" value="number" v-model="dataType" @change="textAreaValuesSplit($event.target.value)">
                 </label>
                 <label class="labelArgumentsDataTypes">
                   Object literal:
-                  <input type="radio" name="inputRadioDataType" value="object" v-model="dataType">
+                  <input type="radio" name="inputRadioDataType" value="object" v-model="dataType" @change="textAreaValuesSplit($event.target.value)">
                 </label>
                 <label class="labelArgumentsDataTypes">
                   RegExp:
-                  <input type="radio" name="inputRadioDataType" value="regexp" v-model="dataType">
+                  <input type="radio" name="inputRadioDataType" value="regexp" v-model="dataType" @change="textAreaValuesSplit($event.target.value)">
                 </label>
                 <label class="labelArgumentsDataTypes">
                   String:
-                  <input type="radio" name="inputRadioDataType" value="string" v-model="dataType">
+                  <input type="radio" name="inputRadioDataType" value="string" v-model="dataType" @change="textAreaValuesSplit($event.target.value)">
                 </label>
                 <label class="labelArgumentsDataTypes">
                   Symbol:
-                  <input type="radio" name="inputRadioDataType" value="symbol" v-model="dataType">
+                  <input type="radio" name="inputRadioDataType" value="symbol" v-model="dataType" @change="textAreaValuesSplit($event.target.value)">
                 </label>
                 <label class="labelArgumentsDataTypes">
                   Undefined:
-                  <input type="radio" name="inputRadioDataType" value="undefined" v-model="dataType">
+                  <input type="radio" name="inputRadioDataType" value="undefined" v-model="dataType" @change="textAreaValuesSplit($event.target.value)">
                 </label>
                 <label class="labelArgumentsDataTypes">
                   callback function:
-                  <input type="radio" name="inputRadioDataType" value="function" v-model="dataType">
+                  <input type="radio" name="inputRadioDataType" value="function" v-model="dataType" @change="textAreaValuesSplit($event.target.value)">
                 </label>
               </form>
 
