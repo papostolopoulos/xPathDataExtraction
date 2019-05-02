@@ -133,7 +133,7 @@
       <footer id="footer">
         How Performant? Compare JavaScript functions |
         <a href="http://addeventlistener.xyz" target="_blank">@papostolopoulos</a> |
-        2018
+        May 2019
       </footer>
     </div>
 
@@ -143,22 +143,8 @@
 
 
     <script type="text/javascript">
-    /*
-    If only one array is pasted
-    do evalArray. Inside it you need to run textAreaValuesSplit to break the array elements
 
-    If a lot of arrays pasted
-    break them
-
-    If only one object pasted
-
-    if a lot of objects pasted
-
-    if one function pasted
-
-    if a lot of functions pasted
-    */
-
+//----Vue component----
       Vue.component('function-arg', {
         props: ["set"],
         data(){
@@ -234,8 +220,12 @@
             if (arr[0] !== "[" || arr[arr.length-1] !== "]") this.errorEntry = true;
             else {
               arr = arr.slice(1, arr.length-1);
-              // return this.textAreaValuesSplit()
-              let arrElms = arr.split(", ");
+
+              //Split the array in commas. Do not split if the
+              let arrElms = arr
+              .split(/(?<=(true|false|undefined|null|\]|\}|\/([igmsuy]+)?|"|'|`|(?<!.)(\d+\.)?\d+))
+              ,\s*
+              (?!\[)|(?!true,)|(?!false,)|(?!null,)|(?!\d+(\.\d+)?)|(?!\{)|(?!\n\s*[A-z_\$])|(?!\/)/);
 
               for (let i = 0; i < arrElms.length; i++) {
                 if (this.evalArray(arrElms[i]) !== "error") {
@@ -340,6 +330,8 @@
             el = el.trim();
             if (!el.startsWith("{") || !el.endsWith("}")) return "error";
             console.log("In eval Object. el is", el, "Need to convert from string to object");
+
+            //Put quotes in the keys of the object so it can pass the JSON.parse
             el = el.replace(/(\{)(\s*)(\w)/g, "$1$2\"$3")
             .replace(/(\w)(\s*)(:)/g, "$1$2\"$3")
             .replace(/(,)(\s*)(\w)/g, "$1$2\"$3");
@@ -455,10 +447,6 @@
                   <input type="radio" name="inputRadioDataType" value="string" v-model="dataType" @change="textAreaValuesSplit($event.target.value)">
                 </label>
                 <label class="labelArgumentsDataTypes">
-                  Symbol:
-                  <input type="radio" name="inputRadioDataType" value="symbol" v-model="dataType" @change="textAreaValuesSplit($event.target.value)">
-                </label>
-                <label class="labelArgumentsDataTypes">
                   Undefined:
                   <input type="radio" name="inputRadioDataType" value="undefined" v-model="dataType" @change="textAreaValuesSplit($event.target.value)">
                 </label>
@@ -520,8 +508,15 @@
             </div>
           </div>
         `
-      });
+      }); //End of Vue component
 
+
+
+
+
+
+
+//----MAIN VUE INSTANCE----
       let app = new Vue({
         el: "#main",
         data: {
