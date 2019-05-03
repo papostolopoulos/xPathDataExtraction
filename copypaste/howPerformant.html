@@ -157,7 +157,7 @@
         methods:{
           textAreaValuesSplit(elem){
             this.errorEntry = false;
-            console.log(elem);
+            console.log("In the start of the textAreaValuesSplit()");
             let startArr = this.textAreaValues.split("\n");
             let finalArr = [];
 
@@ -176,7 +176,7 @@
             //If object selected
             if (this.dataType === "object"){
               console.log("selected dataType = object");
-              let objectsArr = this.textAreaValues.split(/(?!:\s*)\n\{/);
+              let objectsArr = this.textAreaValues.split(/\n(?=\{)/);
               for (let i = 0; i < objectsArr.length; i++) {
                 objectsArr[i][0] === "{" ? objectsArr[i] = objectsArr[i] : objectsArr[i] = "{" + objectsArr[i];
                 console.log("Result from function selection before the evalFunction:", objectsArr[i]);
@@ -184,7 +184,42 @@
               }
             }
 
+            //If string selected - Not sure about this
+            if (this.dataType === "string"){
+              console.log("selected dataType = string");
+              let pairTildas = this.textAreaValues.replace(/[^`]/g, "") % 2 === 0;
+              let tildaCounter = this.textAreaValues.replace(/[^`]/g, "");
+              let stringsArr = this.textAreaValues.split(/\n/);
+              if (pairTildas) {
+                for (let j = 0; j < stringsArr.length; j++) {
+                  if (stringsArr[j][0] === "`" && stringsArr[j][stringsArr[j].length - 1] !== "`") {
+                    let replaceStr = stringsArr[j];
+                    let elemsCounter = 1;
+                    for (var k = j+1; k < stringsArr.length; k++) {
+                      replaceStr += stringsArr[k];
+                      elemsCounter += 1;
+                      if (stringsArr[k][stringsArr[k].length - 1] === "`") {
+                        stringsArr.splice(j, elemsCounter, replaceStr);
+                        break;
+                      }
+                    } //Second loop (k)
 
+                  }
+                }
+              } //End of if(pairTildas)
+
+              for (let i = 0; i < stringsArr.length; i++) {
+                this.evalString(stringsArr[i]) === "error" ? this.errorEntry = true : finalArr.push(this.evalString(stringsArr[i]));
+              }
+
+
+            }
+
+var someArr = ["`I am an array", "That has separated sencences", "that have tildas`", "and I want to do the join"];
+
+for (var i = 0; i < someArr.length; i++) {
+  if(someArr[0]
+}
 
 
             for (let i = 0; i < startArr.length; i++) {
@@ -223,9 +258,7 @@
 
               //Split the array in commas. Do not split if the
               let arrElms = arr
-              .split(/(?<=(true|false|undefined|null|\]|\}|\/([igmsuy]+)?|"|'|`|(?<!.)(\d+\.)?\d+))
-              ,\s*
-              (?!\[)|(?!true,)|(?!false,)|(?!null,)|(?!\d+(\.\d+)?)|(?!\{)|(?!\n\s*[A-z_\$])|(?!\/)/);
+              .split(/(?<=(true|false|undefined|null|\]|\}|\/([igmsuy]+)?|"|'|`|(?<!.)(\d+\.)?\d+)),\s*(?=(\[|\{|true[,\]]|false[,\]]|undefined[,\/]|null[,\]]|[\/"'`]))/);
 
               for (let i = 0; i < arrElms.length; i++) {
                 if (this.evalArray(arrElms[i]) !== "error") {
@@ -383,6 +416,10 @@
 
 
           evalString(el){
+            //Should I be removing the quotes or not?
+            //How do I deal with tildas where the breaks are not indicating a
+            //line break but rather a continuation of a sentence?
+            //Get rid of extra quotation marks that might already exist at the input field
             return el.replace(/^(?:["'`]+)?(.*[^"'`])(?:["'`]+)?\s*$/gm, "$1").trim();
           },
 
