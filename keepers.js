@@ -1043,3 +1043,6 @@ while (data.length > 100 && /[\.\?!]/.test(data[data.length-1]) && data.replace(
   data = data.slice(0, data.length-1).split("").reverse().join("");
   data = data.slice(str.search(/[\.\?!]/)).split("").reverse().join("");
 }
+
+//Different hyphens
+"[-–]"

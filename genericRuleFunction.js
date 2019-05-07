@@ -129,7 +129,7 @@ function transform(data){
 
 function minimizeMe(str, reg){
   var punctuation = [". ", "! ", "| ", "? ", ": "]; //Punctuation symbols
-  str = str.replace(/(\.)(?!com)([A-z])/g, "$1 $2");
+  str = str.replace(/(\.)(?!com|\d)([A-z])/g, "$1 $2");
 
   //STAGE 1 - Slice text at the beginning of string
   var sliceStr = str.slice(0, str.indexOf(str.match(reg)[0])); //Create a substring from the beginning of string up to the beginning of the .match()
@@ -171,11 +171,9 @@ function minimizeMe(str, reg){
 
 
 function cleanMe(string) {
-  while("*©®ǂ‡†±+→§™¹›∞•◊ΔÐð_|^".indexOf(string[string.length-1]) !== -1) string = string.slice(0, string.length-1);
-  while("*©®ǂ‡†±+→§™¹›∞•◊ΔÐð_^".indexOf(string[0]) !== -1) string = string.slice(1);
 
   var replaceStrArr = [
-    {oldStr: /([A-z\.])\*([[\$£€]\sA-z])/, newStr: "$1 $2"},
+    //{oldStr: //, newStr: "$1 $2"},
   ];
 
   for (var i = 0; i < replaceStrArr.length; i++) {
@@ -185,6 +183,8 @@ function cleanMe(string) {
     }
   }
 
+  while("*©®ǂ‡†±+→§™¹›∞•◊ΔÐð_|^".indexOf(string[string.length-1]) !== -1) string = string.slice(0, string.length-1);
+  while("*©®ǂ‡†±+→§™¹›∞•◊ΔÐð_^".indexOf(string[0]) !== -1) string = string.slice(1);
 
 
   return string;

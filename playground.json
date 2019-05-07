@@ -1,120 +1,385 @@
 {
   "extract": {
+    "edgeRules": [],
+    "entityNS": null,
+    "entityRules": [
+      {
+        "attributes": [],
+        "entityIdRef": "",
+        "id": "f66018c8-423b-459b-b55a-c639d92daf68",
+        "javascript": null,
+        "locations": [
+          "/"
+        ],
+        "repeating": true,
+        "type": "http://schema.org/Coupon"
+      }
+    ],
     "extractEmbedded": false,
-    "source": null,
     "schema": [
       {
-        "url": "http://ws.rmf.yahoo.com:4080/rmf/v1/schema?type=schema.org&name=y.2.0&format=json",
-        "ns": "http://schema.org",
         "context": {
           "@type": [
             "Coupon"
           ]
+        },
+        "ns": "http://schema.org",
+        "url": "http://ws.rmf.yahoo.com:4080/rmf/v1/schema?type=schema.org&name=y.2.0&format=json"
+      }
+    ],
+    "source": null
+  },
+  "extractLn": {
+    "edgeRules": [
+      {
+        "cardinality": "ONE_TO_ONE",
+        "from": {
+          "entityRule": "b4917ca5-ee83-4569-87c7-37feef5474af",
+          "matchAttr": null
+        },
+        "predicate": "http://schema.org/broker",
+        "to": {
+          "entityRule": "b4917ca5-ee83-4569-87c7-37feef5474au",
+          "matchAttr": null
+        }
+      },
+      {
+        "cardinality": "ONE_TO_ONE",
+        "from": {
+          "entityRule": "b4917ca5-ee83-4569-87c7-37feef5474af",
+          "matchAttr": null
+        },
+        "predicate": "http://schema.org/image",
+        "to": {
+          "entityRule": "b4917ca5-ee83-4569-87c7-37feef5474aj",
+          "matchAttr": null
         }
       }
     ],
     "entityRules": [
       {
-        "id": "a0654c06-a290-40f3-b030-849adac4b48b",
-        "repeating": true,
-        "locations": [
-          "/descendant::text()[contains(translate(.,\"OFF\", \"off\"), \"off\") and\n(contains(.,\"$\") or contains(.,\"%\"))]\n[not(contains(.,\"UPC\"))]\n[following::img[contains(translate(@alt, \"OFERIMAG\", \"oferimag\"), \"offer image\")]]\n|\n/descendant::text()[contains(translate(.,\"FREGIT\",\"fregit\"),\"free gift\")][following::img[contains(translate(@alt, \"MAINGE\", \"mainge\"), \"main image\")]]"
-        ],
-        "type": "http://schema.org/Coupon",
-        "javascript": null,
-        "entityIdRef": "",
         "attributes": [
           {
-            "repeating": false,
-            "locations": {
-              "-1": [
-                {
-                  "xpath": "."
-                }
-              ]
-            },
-            "name": "http://schema.org/description",
-            "relative": true,
-            "transient": false,
-            "javascript": "function transform(data){\n  if(data){\n    return data.replace(/(needs\\!)(Cards)/,\"$1 $2\").replace(/\\s*\\*/g,\"\\,\");\n  }\n  else\n  {\n    return null;\n  }\n}",
+            "blackList": [],
+            "concat": "true",
             "dataTypes": [
               "Text"
             ],
-            "mandatory": false
+            "javascript": "function transform(data){\n  var removeArr = [\n    /.*(terms|restrictions|starbucks\\.com|(http(s)?:\\/\\/)?(w{3}\\.)?\\S+\\.com|Here's\\s*What\\s*You\\s*Can\\s*do\\s*As\\s*A\\s*Member:|Member\\s*Exclusive\\.\\s*Bonus\\s*Stars|NEW\\!\\s*Everyday\\s*joy).*/ig,\n    /rewards|Share\\s*Your\\s*Rewards|You're\\s*a\\s*step\\s*away\\s*from\\s*Stars|Collect\\s*Stars\\s*faster|Bonus\\s*Stars\\s*\\(With\\s*Whip\\)|Earn\\s*Bonus\\s*Stars\\s*when\\s*you\\s*spend|Keep\\s*earning\\s*Stars\\.\\s*Reload\\s*today\\.|Check\\s*out\\s*offers\\s*and\\s*collect\\s*Bonus\\s*Stars|…and\\s*keep\\s*earning\\s*Stars|…And\\s*earn\\s*1\\s*Bonus\\s*Star|Your\\s*reward\\s*is\\s*already\\s*loaded\\s*to\\s*your\\s*account|Your\\s*Choice\\s*Your\\s*Stars|We’ve\\s*counted\\s*all\\s*the\\s*Stars\\s*up\\s*for\\s*grabs\\s*in\\s*the\\s*dash|At\\s*participating\\s*Starbucks\\s*stores|Starbucks\\s*orders|Step\\s*1/i\n  ];\n\n  for(var i = 0; i < removeArr.length; i++){\n    if(removeArr[i].test(data)){\n      return null;\n    }\n  }\n\n\n  var replaceArr = [\n    {oldStr: /^(.*Happy\\s*Hour\\s*is\\s*starting\\s*at\\s*3\\s*p\\.m\\.|That\\s*means|You'll\\s*get|that\\s*means|Plus,?|And)/i, newStr: \"\"},\n    {oldStr: /(Order\\s*now|View\\s*online|Learn\\s*more(\\s*>)?|On\\s*any\\s*purchase|through|After\\s*2\\s*p\\.m\\.|App\\.)\\s*$/i, newStr: \"\"},\n    {oldStr: /[\\*\\|>]/g, newStr: \"\"},\n    {oldStr: /(Display\\s*images\\s*to\\s*show\\s*real-time\\s*content|Add\\s*to\\s*calendar|Activate\\s*Offer|today\\s*through|Expires|Reload\\s*Now|Pay\\s*With\\s*Your\\s*Registered\\s*Starbucks|Your\\s*free\\s*drink\\s*coupon\\s*will\\s*be\\s*valid|within\\s*app).*/i, newStr: \"\"}\n  ];\n\n  replaceArr.forEach(function(el){\n    data = data.replace(el.oldStr, el.newStr);\n  });\n\n  return data.trim();\n}",
+            "listOfValidNodeTypes": [
+              {
+                "name": "TEXT",
+                "type": "node"
+              },
+              {
+                "name": "ALT",
+                "type": "attr"
+              },
+              {
+                "name": "HREF",
+                "type": "attr"
+              }
+            ],
+            "location": [
+              {
+                "xpath": ""
+              }
+            ],
+            "mandatory": "true",
+            "maxLength": "200",
+            "minLength": "4",
+            "allowEmpty": "false",
+            "name": "http://schema.org/description",
+            "whiteList": [
+              {
+                "value": "(?i)half\\s*off|%|\\$\\d+\\s*off|stars|earn|free|reward",
+                "type": "REGEX"
+              }
+            ]
           },
           {
-            "repeating": false,
-            "locations": {
-              "-1": [
-                {
-                  "xpath": "concat(., \"~~~\", /descendant::span/parent::td[contains(.,\"through\")])"
-                }
-              ]
-            },
-            "name": "http://schema.org/validThrough",
-            "relative": true,
-            "transient": false,
-            "javascript": "function transform(data){\n  if(!data) return null;\n  \n  var splitData = data.split(\"~~~\");\n  return /(January|February|March|April|May|June|July|August|September|October|November|December)\\s*\\d{1,2},?\\s*\\d{4}/.test(splitData[0]) ?\n    splitData[0].match(/(January|February|March|April|May|June|July|August|September|October|November|December)\\s*\\d{1,2},?\\s*\\d{4}/)[0] : \n  splitData[1].match(/(\\d{1,2}\\/){2}\\d{4}/);\n}",
+            "blackList": [
+              {
+                "value": "sale ends",
+                "type": "SUBSTRING"
+              },
+              {
+                "value": "valid through",
+                "type": "SUBSTRING"
+              },
+              {
+                "value": "ends",
+                "type": "SUBSTRING"
+              },
+              {
+                "value": "(\\d{1,2}\\/){2}\\d{2}\\s*-",
+                "type": "REGEX"
+              },
+              {
+                "value": "24\\s*hours",
+                "type": "REGEX"
+              },
+              {
+                "value": "(?i)(January|February|March|April|May|June|July|August|September|October|November|December)\\s*\\d{1,2}\\s*-",
+                "type": "REGEX"
+              },
+              {
+                "value": "seven (7) days",
+                "type": "SUBSTRING"
+              },
+              {
+                "value": "\\(?7\\)?\\s*days",
+                "type": "REGEX"
+              }
+            ],
             "dataTypes": [
               "DateTime"
             ],
-            "mandatory": false
-          }
-        ],
-        "hints": {
-          "_raw_validThrough": "//descendant::span/parent::td[contains(.,\"through\")]",
-          "_footer": "/descendant::text()[contains(.,\"LLC\")]/ancestor::table[1]"
-        }
-      },
-      {
-        "id": "6ca5e5b0-6a18-4f9f-a16f-e7b67ed158b7",
-        "repeating": true,
-        "locations": [
-          "/descendant::text()[contains(translate(.,\"OFF\", \"off\"), \"off\") and\n(contains(.,\"$\") or contains(.,\"%\"))]\n[not(contains(.,\"UPC\"))]\n[following::img[contains(translate(@alt, \"OFERIMAG\", \"oferimag\"), \"offer image\")]]\n|\n/descendant::text()[contains(translate(.,\"FREGIT\",\"fregit\"),\"free gift\")][following::img[contains(translate(@alt, \"MAINGE\", \"mainge\"), \"main image\")]]"
-        ],
-        "type": "http://schema.org/Organization",
-        "javascript": null,
-        "entityIdRef": "",
-        "attributes": [
+            "javascript": "function transform(data) {if (data) {var monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];var regex = /(\\s*\\d+)\\/(\\s*\\d+)/i;var match = regex.exec(data);if (match && match[1]) {return monthNames[match[1] - 1] + ', ' + match[2];}else{return data;}}return null;}",
+            "listOfValidNodeTypes": [],
+            "location": [
+              {
+                "xpath": ""
+              }
+            ],
+            "mandatory": "true",
+            "maxLength": "-1",
+            "minLength": "-1",
+            "name": "http://schema.org/validThrough",
+            "whiteList": []
+          },
           {
-            "repeating": false,
-            "locations": {
-              "-1": [
-                {
-                  "xpath": "\"Hallmark\""
-                }
-              ]
-            },
-            "name": "http://schema.org/name",
-            "relative": true,
-            "transient": false,
+            "blackList": [
+              {
+                "type": "SUBSTRING",
+                "value": "sale ends"
+              },
+              {
+                "type": "SUBSTRING",
+                "value": "valid through"
+              },
+              {
+                "type": "SUBSTRING",
+                "value": "ends"
+              }
+            ],
+            "dataTypes": [
+              "DateTime"
+            ],
+            "javascript": "function transform(data) {if (data) {var monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];var regex = /(\\s*\\d+)\\/(\\s*\\d+)/i;var match = regex.exec(data);if (match && match[1]) {return monthNames[match[1] - 1] + ', ' + match[2];}else{return data;}}return null;}",
+            "listOfValidNodeTypes": null,
+            "location": null,
+            "mandatory": "true",
+            "maxLength": -1,
+            "minLength": -1,
+            "name": "http://schema.org/validFrom"
+          },
+          {
+            "blackList": [
+              {
+                "type": "REGEX",
+                "value": "\\$.*off$"
+              }
+            ],
+            "dataTypes": [
+              "Number"
+            ],
             "javascript": null,
+            "listOfValidNodeTypes": null,
+            "location": null,
+            "mandatory": "true",
+            "maxLength": -1,
+            "minLength": -1,
+            "name": "http://schema.org/offerPrice",
+            "whiteList": [
+              {
+                "type": "SUBSTRING",
+                "value": "Free shipping"
+              }
+            ]
+          },
+          {
+            "blackList": [
+              {
+                "type": "REGEX",
+                "value": "\\$.*off$"
+              }
+            ],
+            "dataTypes": [
+              "Number"
+            ],
+            "javascript": null,
+            "listOfValidNodeTypes": null,
+            "location": null,
+            "mandatory": "true",
+            "maxLength": -1,
+            "minLength": -1,
+            "name": "http://schema.org/originalPrice",
+            "whiteList": [
+              {
+                "type": "SUBSTRING",
+                "value": "Free shipping"
+              }
+            ]
+          },
+          {
+            "blackList": null,
             "dataTypes": [
               "Text"
             ],
-            "mandatory": false
+            "javascript": "function transform(data){content=data.trim();if(content&&content.startsWith('C$')){return'CAD'}else if(content&&content.startsWith('$')){return'USD'}else{return null}};",
+            "listOfValidNodeTypes": null,
+            "location": null,
+            "mandatory": "true",
+            "maxLength": -1,
+            "minLength": -1,
+            "name": "http://schema.org/priceCurrency",
+            "whiteList": null
+          },
+          {
+            "blackList": null,
+            "dataTypes": [
+              "Text"
+            ],
+            "javascript": "",
+            "listOfValidNodeTypes": null,
+            "location": null,
+            "mandatory": "true",
+            "maxLength": -1,
+            "minLength": -1,
+            "name": "http://schema.org/url",
+            "whiteList": null
           }
-        ]
-      }
-    ],
-    "edgeRules": [
+        ],
+        "bundleInfo": {
+          "minBundleSize": "-1",
+          "maxBundleSize": "-1",
+          "minLeafNodesSize": "-1",
+          "maxLeafNodesSize": "-1",
+          "maxDepth": "-1",
+          "defaultPatternAnnotationThreshold": "0.8",
+          "linkThreshold": "2",
+          "dedupCondition": {
+              "matchThreshold": 0.4,
+              "stopWords": ["drink", "string2"]
+          },
+          "footerPercentage": 0.8,
+          "overRideValidThroughFromFooter": false,
+          "listOfValidNodeTypes": [],
+          "linkMatcher": [
+            {
+              "regex": ".*starbucks\\.com.*"
+            }
+          ]
+        },
+        "id": "b4917ca5-ee83-4569-87c7-37feef5474af",
+        "javascript": null,
+        "type": "http://schema.org/Coupon"
+      },
       {
-        "from": {
-          "entityRule": "a0654c06-a290-40f3-b030-849adac4b48b",
-          "matchAttr": ""
+        "attributes": [
+          {
+            "dataTypes": [
+              "Text"
+            ],
+            "javascript": null,
+            "location": [
+              {
+                "xpath": "\"Starbucks\""
+              }
+            ],
+            "mandatory": "true",
+            "name": "http://schema.org/name",
+            "minLength": "",
+            "maxLength": "",
+            "whiteList": [],
+            "blackList": [],
+            "listOfValidNodeTypes": []
+          }
+        ],
+        "bundleInfo": {
+          "clusterAlgo": {
+            "endIdx": -1,
+            "regex": "",
+            "replaceInfo": [
+              {
+                "regexStr": "",
+                "replaceAll": "true",
+                "replacement": ""
+              }
+            ],
+            "startIdx": 0,
+            "type": "SUBSTRING"
+          },
+          "linkMatcher": [
+            {
+              "regex": ".*"
+            }
+          ],
+          "listOfValidNodeTypes": null,
+          "maxBundleSize": -1,
+          "maxDepth": -1,
+          "maxLeafNodesSize": -1,
+          "minBundleSize": -1,
+          "minLeafNodesSize": -1,
+          "defaultPatternAnnotationThreshold": 0.8,
+          "linkThreshold": 2
         },
-        "to": {
-          "entityRule": "6ca5e5b0-6a18-4f9f-a16f-e7b67ed158b7",
-          "matchAttr": ""
+        "id": "b4917ca5-ee83-4569-87c7-37feef5474au",
+        "javascript": null,
+        "type": "http://schema.org/Organization"
+      },
+      {
+        "attributes": [
+          {
+            "blackList": null,
+            "dataTypes": [
+              "Text"
+            ],
+            "javascript": "",
+            "listOfValidNodeTypes": null,
+            "location": null,
+            "mandatory": "true",
+            "maxLength": -1,
+            "minLength": -1,
+            "name": "http://schema.org/url",
+            "whiteList": null
+          }
+        ],
+        "bundleInfo": {
+          "clusterAlgo": {
+            "endIdx": -1,
+            "regex": "",
+            "replaceInfo": [
+              {
+                "regexStr": "",
+                "replaceAll": "true",
+                "replacement": ""
+              }
+            ],
+            "startIdx": 0,
+            "type": "SUBSTRING"
+          },
+          "linkMatcher": null,
+          "listOfValidNodeTypes": null,
+          "maxBundleSize": -1,
+          "maxDepth": -1,
+          "maxLeafNodesSize": -1,
+          "minBundleSize": -1,
+          "minLeafNodesSize": -1,
+          "linkThreshold": 2,
+          "defaultPatternAnnotationThreshold": 0.8
         },
-        "predicate": "http://schema.org/broker",
-        "cardinality": "ONE_TO_ONE"
+        "id": "b4917ca5-ee83-4569-87c7-37feef5474aj",
+        "javascript": null,
+        "type": "http://schema.org/ImageObject"
       }
-    ],
-    "entityNS": null
+    ]
   },
   "metaData": {
-    "useVTDXML": "true",
-    "ignoredValidations": null
+    "debug": "true",
+    "linkAlgoHandler": "LinkExtractor15",
+    "decodeHtmlEntity": "true",
+    "useVTDXML": "false"
   }
 }
