@@ -255,7 +255,7 @@
           evalArray(arr){
             console.log("In the evalArray for", arr);
             if (arr[0] !== "[" || arr[arr.length-1] !== "]"){
-              console.log("In the error");
+              console.log("In the error because the first or the last character of the string do not indicate an array");
               this.errorEntry = true;
             }
             else {
@@ -264,9 +264,25 @@
               console.log("array is sliced", arr);
 
               //Split the array in commas. Do not split if the comma is part of string
+
+
+
+
+              /*This is the work that I am doing on the playground file.
+              Objective is to properly split the string in the commas*/
               let arrElms = arr
               .split(/(?<=(true|false|undefined|null|\]|\}|\/([igmsuy]+)?|"|'|`|(?<!.)(\d+\.)?\d+)),\s*(?=(\[|\{|true[,\]]|false[,\]]|undefined[,\/]|null[,\]]|[\/"'`]))/g);
               //["den fevgo", [1,2,3], undefined, null, false, 34, 'I like it']
+
+
+
+
+
+
+
+
+
+
               console.log("elements are separated:", arrElms);
               for (let i = 0; i < arrElms.length; i++) {
                 console.log("Evaluating the element");
@@ -316,7 +332,7 @@
                     return;
                 }
               } //End of for loop
-            } //End of if statement
+            } //End of else statement
           }, //End of evalArray
 
 
