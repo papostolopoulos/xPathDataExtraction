@@ -177,10 +177,7 @@ function cleanMe(string) {
   ];
 
   for (var i = 0; i < replaceStrArr.length; i++) {
-    if(replaceStrArr[i].oldStr.test(string)){
-      string = string.replace(replaceStrArr[i].oldStr, replaceStrArr[i].newStr).trim();
-      //break;
-    }
+    string = string.replace(replaceStrArr[i].oldStr, replaceStrArr[i].newStr).trim();
   }
 
   while("*©®ǂ‡†±+→§™¹›∞•◊ΔÐð_|^".indexOf(string[string.length-1]) !== -1) string = string.slice(0, string.length-1);

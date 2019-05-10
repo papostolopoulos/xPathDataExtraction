@@ -471,45 +471,12 @@ My version. Added my regular expressions. Need to test and confirm it Works
       {
         "attributes": [
           {
-            "blackList": [
-              {
-                "type": "SUBSTRING",
-                "value": "view deal"
-              },
-              {
-                "type": "SUBSTRING",
-                "value": "view"
-              },
-              {
-                "type": "SUBSTRING",
-                "value": "shop now"
-              },
-              {
-                "type": "REGEX",
-                "value": "over\\s[0-9,]+\\sbought"
-              },
-              {
-                "type": "REGEX",
-                "value": "[0-9,]+\\sratings"
-              },
-              {
-                "type": "REGEX",
-                "value": "ends\\s+[0-2]{0,2}/[0-3]{0,2}"
-              },
-              {
-                "type": "REGEX",
-                "value": "deal$"
-              },
-              {
-                "type": "REGEX",
-                "value": "\\$.*off$"
-              }
-            ],
+            "blackList": [],
             "concat": "true",
             "dataTypes": [
               "Text"
             ],
-            "javascript": null,
+            "javascript": "function transform(data){\n  var negRegexArr = [\n\n  ];\n\n  for (var i = 0; i < negRegexArr.length; i++) {\n    if (negRegexArr[i].test(data)) return null;\n  }\n\n\n  var posRegexArr = [\n    // (10% | $10 | percent | 1/3) (off | (in )savings | discount | (cash)back | reward | gift | value | credit | (promotional )coupon | (mail-in )rebate | (e-)certificate | bonus | sale)\n    /(\\d{1,2}%|(\\$|£|&pound;|€|&euro;)\\d+(\\.\\d{2})?|percent|\\d\\/\\d)\\s*(off|(in )?savings?|discount|(cash(\\s*)?)?back|reward|gift|value|credit|(promotional\\s*)?coupon|(mail-in\\s*)?rebate|(e-)?certificate|bonus|sale)/i,\n    // (extra | up to | save | over | more than | discount of | discounted by | savings of | at least | gift of | down to | as low as | bonus of| get a | on (any)) (10% | $10)\n    /(extra|up\\s*to|sav(e|ings\\s*of)|over|more\\s*than|discount(ed)?\\s*(of|by)|at\\s*least|gift\\s*of|down\\s*to|as\\s*low\\s*as|bonus\\s*of|take|get(\\s*a)?|on(\\s*any)?)\\s*(\\d{1,2}%|(\\$|£|&pound;|€|&euro;)\\d+(\\.\\d{2})?)/i,\n    // was $10.99 | start at $10.99 sale $10.99\n    /(sale:?|was:?|start\\s*at)\\s*(\\$|£|&pound;|€|&euro;)\\d+/i,\n    //on sale | markdown | save on | marked down\n    /on\\s*sale|markdown|save\\s*on|marked\\s*down/i,\n    //anniversary sale\n    /anniversary\\s*sale/i,\n    // free ship | free on orders of | free $5 | free 10% | free delivery | free standard | free gift | free NN\n    /free\\s*(ship|on\\s*orders\\s*of|(\\$|£|&pound;|€|&euro;)\\d|\\d+%|standard|delivery|gift|\\d)/i,\n    // buy one / two / three texttexttext, get\n    /buy\\s*(one|two|three|\\d+),?.*\\sget/i,\n    //(standard | complementary | NN day) (shipping)\n    /(standard|complimentary|\\d+day)\\s*shipping/i,\n    //3 for 2\n    /\\d\\s*for\\s*\\d/i,\n    //(half | 1/2) (price)\n    /(half|\\d\\/\\d)\\s*(price)/i,\n    //BOGO\n    /BOGO/,\n    // (100 | earn | get | gather | collect | your | redeem | reward | worth of) (points | rewards | gift | coupon | (e-)certificate)\n    /(\\d+|earn|get|gather|collect|your|redeem|rewards?|worth\\s*of)\\s*(points|rewards?|gift|coupon|(e-)?certificate|a?\\s*[\\$£€])/i,\n    // (double | triple | NN times the) (points)\n    /(double|triple|\\d\\s*times\\s*the|\\dx(\\s*the)?)\\s*(points)/i,\n    //promo(tion) code\n    /promo(?:tion)\\s*code\\s*/i,\n  ];\n\n  for (var j = 0; j < posRegexArr.length; j++) {\n    if (posRegexArr[j].test(data)) return data.length > 80 ? minimizeMe(data, posRegexArr[j]) : cleanMe(data);\n  }\n\n  return null;\n}\n\n\n\n\n\nfunction minimizeMe(str, reg){\n  var punctuation = [\". \", \"! \", \"| \", \"? \", \": \"]; //Punctuation symbols\n  str = str.replace(/(\\.)(?!com|\\d)([A-z])/g, \"$1 $2\");\n\n  //STAGE 1 - Slice text at the beginning of string\n  var sliceStr = str.slice(0, str.indexOf(str.match(reg)[0])); //Create a substring from the beginning of string up to the beginning of the .match()\n  var sliceStart = 0; //Define a variable where the slice at the beginning of the initial string will happen.\n\n\n  //Iterate through the punctuation symbols.\n  //If the last Index position of the punctuation is larger than the sliceStart variable,\n  //then make the variable equal to the last index position.\n  //That will be later used to slice the string at its beginning\n  for (var i = 0; i < punctuation.length; i++) {\n    if(sliceStr.lastIndexOf(punctuation[i]) > sliceStart) sliceStart = sliceStr.lastIndexOf(punctuation[i]);\n  }\n  //Slice the string from the beginning of the last punctuation mark but before the coupon description.\n  if(sliceStart > 0) str = str.slice(sliceStart + 1).trim();\n\n\n\n\n  //STAGE 2 - Slice text at the end of string\n  var sliceEnd = +Infinity;\n  //Iterate through the punctuation symbols.\n  //If the punctuation symbol's index position is smaller than the sliceEnd variable, then\n  //make the sliceEnd variable equal to the index position of the punctuation.\n  //The sliceEnd will be used as the position where the slicing of the string will happen at it's end.\n  for (var j = 0; j < punctuation.length; j++) {\n    if (str.indexOf(punctuation[j]) < sliceEnd && str.indexOf(punctuation[j]) !== -1) sliceEnd = str.indexOf(punctuation[j]);\n  }\n  //Slice the end of the string\n  str = str.slice(0, sliceEnd).trim();\n\n\n\n\n\n  //STAGE 3 - Remove unecessary characters from the end of the string.\n  return cleanMe(str);\n}\n\n\nfunction cleanMe(string) {\n\n  var replaceStrArr = [\n    //{oldStr: //, newStr: \"$1 $2\"},\n  ];\n\n  for (var i = 0; i < replaceStrArr.length; i++) {\n    string = string.replace(replaceStrArr[i].oldStr, replaceStrArr[i].newStr).trim();\n  }\n\n  while(\"*©®ǂ‡†±+→§™¹›∞•◊ΔÐð_|^\".indexOf(string[string.length-1]) !== -1) string = string.slice(0, string.length-1);\n  while(\"*©®ǂ‡†±+→§™¹›∞•◊ΔÐð_^\".indexOf(string[0]) !== -1) string = string.slice(1);\n\n\n  return string;\n}",
             "listOfValidNodeTypes": [
               {
                 "name": "TEXT",
@@ -524,28 +491,68 @@ My version. Added my regular expressions. Need to test and confirm it Works
                 "type": "attr"
               }
             ],
-            "location": null,
+            "location": [
+              {
+                "xpath": ""
+              }
+            ],
             "mandatory": "true",
-            "maxLength": 200,
-            "minLength": 4,
+            "maxLength": "200",
+            "minLength": "4",
             "allowEmpty": "false",
             "name": "http://schema.org/description",
             "whiteList": [
               {
-                "type": "SUBSTRING",
-                "value": "online code"
+                "value": "(?i)(\\d{1,2}%|(\\$|£|&pound;|€|&euro;)\\d+(\\.\\d{2})?|percent|\\d\\/\\d)\\s*(off|(in )?savings?|discount|(cash(\\s*)?)?back|reward|gift|value|credit|(promotional\\s*)?coupon|(mail-in\\s*)?rebate|(e-)?certificate|bonus|sale)",
+                "type": "REGEX"
               },
               {
-                "type": "SUBSTRING",
-                "value": "offer valid thru"
+                "value": "(?i)(extra|up\\s*to|sav(e|ings\\s*of)|over|more\\s*than|discount(ed)?\\s*(of|by)|at\\s*least|gift\\s*of|down\\s*to|as\\s*low\\s*as|bonus\\s*of|take|get(\\s*a)?|on(\\s*any)?)\\s*(\\d{1,2}%|(\\$|£|&pound;|€|&euro;)\\d+(\\.\\d{2})?)",
+                "type": "REGEX"
               },
               {
-                "type": "SUBSTRING",
-                "value": "$"
+                "value": "(?i)(sale:?|was:?|start\\s*at)\\s*(\\$|£|&pound;|€|&euro;)\\d+",
+                "type": "REGEX"
               },
               {
-                "type": "SUBSTRING",
-                "value": "%"
+                "value": "(?i)on\\s*sale|markdown|save\\s*on|marked\\s*down",
+                "type": "REGEX"
+              },
+              {
+                "value": "(?i)anniversary\\s*sale",
+                "type": "REGEX"
+              },
+              {
+                "value": "(?i)free\\s*(ship|on\\s*orders\\s*of|(\\$|£|&pound;|€|&euro;)\\d|\\d+%|standard|delivery|gift|\\d)",
+                "type": "REGEX"
+              },
+              {
+                "value": "(?i)buy\\s*(one|two|three|\\d+),?.*\\sget",
+                "type": "REGEX"
+              },
+              {
+                "value": "(?i)(standard|complimentary|\\d+day)\\s*shipping",
+                "type": "REGEX"
+              },
+              {
+                "value": "(?i)\\d\\s*for\\s*\\d",
+                "type": "REGEX"
+              },
+              {
+                "value": "(?i)(half|\\d\\/\\d)\\s*(price)",
+                "type": "REGEX"
+              },
+              {
+                "value": "(?i)BOGO",
+                "type": "REGEX"
+              },
+              {
+                "value": "(?i)(\\d+|earn|get|gather|collect|your|redeem|rewards?|worth\\s*of)\\s*(points|rewards?|gift|coupon|(e-)?certificate|a?\\s*[\\$£€])",
+                "type": "REGEX"
+              },
+              {
+                "value": "(?i)(double|triple|\\d\\s*times\\s*the|\\dx(\\s*the)?)\\s*(points)",
+                "type": "REGEX"
               }
             ]
           },
