@@ -337,24 +337,28 @@
                   arrStr = arrStr.trim();
                 }
 
+                //false
                 else if (arrStr.indexOf("false,") === 0 || arrStr.search(/false\s*$/) === 0) {
                   arrElements.push(false);
                   arrStr = arrStr.slice(6);
                   arrStr = arrStr.trim();
                 }
 
+                //null
                 else if (arrStr.indexOf("null,") === 0 || arrStr.search(/null\s*$/) === 0) {
                   arrElements.push(null);
                   arrStr = arrStr.slice(5);
                   arrStr = arrStr.trim();
                 }
 
+                //Undefined
                 else if (arrStr.indexOf("undefined,") === 0 || arrStr.search(/undefined\s*$/) === 0) {
                   arrElements.push(undefined);
                   arrStr = arrStr.slice(10);
                   arrStr = arrStr.trim();
                 }
 
+                //string
                 else if (arrStr.search(/["'`]/) === 0) {
                   let firstQuote = arrStr[0];
                   if (arrStr.indexOf(firstQuote + ",") !== 0) {
@@ -366,6 +370,22 @@
                       arrStr = "";
                   }
                   else return "error";
+                }
+
+                //function
+                else if (arrStr.search(/function\s+[^0-9\|°¬\!#\$%/\(\)\?¡¿\+\{\}\[\]:.\,;@ª^\*<>=\&]*\s*\(([^\|°¬\!#\$%/\(\)\?¡¿\+\{\}\[\]:\.\,;@ª^\*<>=\&]*,?\s*)+\)\s*\{.*\}/) === 0) {
+                  let params = arrStr.slice(arrStr.indexOf("(") + 1, arrStr.indexOf(")")).split(/,\s*/);
+                  if(arrStr.search(/function\s*[^0-9\|°¬\!#\$%/\(\)\?¡¿\+\{\}\[\]:.\,;@ª^\*<>=\&]*\s*\(([^\|°¬\!#\$%/\(\)\?¡¿\+\{\}\[\]:\.\,;@ª^\*<>=\&]*,?\s*)+\)\s*\{.*\},/) !== 1){
+                    params.push(arrStr.slice(arrStr.indexOf("{") + 1, arrStr.indexOf("}, ")));
+                    arrElements.push(new Function(...params));
+                    arrStr = arrStr.slice(arrStr.indexOf("}, ") + 3);
+                  }
+                  else if (arrStr.match(/function\s+[^0-9\|°¬\!#\$%/\(\)\?¡¿\+\{\}\[\]:.\,;@ª^\*<>=\&]*\s*\(([^\|°¬\!#\$%/\(\)\?¡¿\+\{\}\[\]:\.\,;@ª^\*<>=\&]*,?\s*)+\)\s*\{.*\}/)[0].length === arrStr.length) {
+                    params.push(el.slice(el.indexOf("{") + 1, el.lastIndexOf("}")));
+                    arrElements.push(new Function(...params));
+                    arrstr = "";
+                  }
+                  else return "error"
                 }
 
 
@@ -491,6 +511,7 @@
             //How do I deal with tildas where the breaks are not indicating a
             //line break but rather a continuation of a sentence?
             //Get rid of extra quotation marks that might already exist at the input field
+            console.log("In the evalString method");
             return el.replace(/^(?:["'`]+)?(.*[^"'`])(?:["'`]+)?\s*$/gm, "$1").trim();
           },
 

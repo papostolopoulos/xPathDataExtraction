@@ -1,6 +1,6 @@
 function transform(data){
   var negRegexArr = [
-    /^\s*Free\s*(standard)?\s*delivery\s*$/i,
+    // /^\s*Free\s*shipping\s*$/
   ];
 
   for (var i = 0; i < negRegexArr.length; i++) {
@@ -21,8 +21,8 @@ function transform(data){
     /anniversary\s*sale/i,
     // free ship | free on orders of | free $5 | free 10% | free delivery | free standard | free gift | free NN
     /free\s*(ship|on\s*orders\s*of|(\$|£|&pound;|€|&euro;)\d|\d+%|standard|delivery|gift|\d)/i,
-    // buy one / two / three texttexttext, get
-    /buy\s*(one|two|three|\d+),?.*\sget/i,
+    // buy|give one / two / three / $5 / 5, get
+    /(give|buy)\s*(one|two|three|\d+|(\$|£|&pound;|€|&euro;)\d+),?.*\sget/i,
     //(standard | complementary | NN day) (shipping)
     /(standard|complimentary|\d+day)\s*shipping/i,
     //3 for 2
@@ -37,6 +37,7 @@ function transform(data){
     /(double|triple|\d\s*times\s*the|\dx(\s*the)?)\s*(points)/i,
     //promo(tion) code
     /promo(?:tion)\s*code\s*/i,
+    /TAE\s\d{1,2}\soff/i
   ];
 
   for (var j = 0; j < posRegexArr.length; j++) {
@@ -45,6 +46,7 @@ function transform(data){
 
   return null;
 }
+
 
 
 
@@ -95,14 +97,18 @@ function minimizeMe(str, reg){
 function cleanMe(string) {
 
   var replaceStrArr = [
-    {oldStr: /[\*^ˆ¹›]/g, newStr: ""},
-    {oldStr: /(Shop\s*now|Click\s*\&\s*Collect|Get\s*a\s*quote|Order\s*now)\s*$/g, newStr: ""},
-    {oldStr: /^(Or|You'll)\s*/g, newStr: ""},
+    {oldStr: /^\s*(\.\.\.\s*At|\+|CLICK\s*HERE\s*or\s*full\s*terms\s*and\s*conditions\.|Find\s*it\s*with)\s*/, newStr: ""},
+    {oldStr: /Learn\s*More\s*&\s*Apply\s*$/i, newStr: ""},
+    {oldStr: /\*/g, newStr: ""},
+    {oldStr: /TAE\s(\d{1,2})\sOff/i, newStr: "Take $1% Off!"}
   ];
 
   for (var i = 0; i < replaceStrArr.length; i++) {
     string = string.replace(replaceStrArr[i].oldStr, replaceStrArr[i].newStr).trim();
   }
+
+  while("*©®ǂ‡†±+→§™¹›∞•◊ΔÐð_|^+".indexOf(string[string.length-1]) !== -1) string = string.slice(0, string.length-1);
+  while("*©®ǂ‡†±+→§™¹›∞•◊ΔÐð_^+".indexOf(string[0]) !== -1) string = string.slice(1);
 
 
   return string;
