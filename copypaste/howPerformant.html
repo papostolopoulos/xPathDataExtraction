@@ -366,19 +366,31 @@
                 arrStr.search(/\(([^\|°¬\!#\$%/\(\)\?¡¿\+\{\}\[\]:\.\,;@ª^\*<>=\&]*,?\s*)+\)\s*=>\s*\{.*\}/) === 0) {
                   console.log("else if for function");
                   let params = arrStr.slice(arrStr.indexOf("(") + 1, arrStr.indexOf(")")).split(/,\s*/);
-                  if(arrStr.search(/function\s*[^0-9\|°¬\!#\$%/\(\)\?¡¿\+\{\}\[\]:.\,;@ª^\*<>=\&]*\s*\(([^\|°¬\!#\$%/\(\)\?¡¿\+\{\}\[\]:\.\,;@ª^\*<>=\&]*,?\s*)+\)\s*\{.*\},/) !== 1 ||
+                  console.log("params are", params);
+                  //If there is a function and separated by a comma with other array elements
+                  if(arrStr.search(/function\s*[^0-9\|°¬\!#\$%/\(\)\?¡¿\+\{\}\[\]:.\,;@ª^\*<>=\&]*\s*\(([^\|°¬\!#\$%/\(\)\?¡¿\+\{\}\[\]:\.\,;@ª^\*<>=\&]*,?\s*)+\)\s*\{.*\},\s*/) !== -1 ||
                   arrStr.search(/\(([^\|°¬\!#\$%/\(\)\?¡¿\+\{\}\[\]:\.\,;@ª^\*<>=\&]*,?\s*)+\)\s*=>\s*\{.*\},/) !== -1){
+                    console.log("In if for functions");
                     params.push(arrStr.slice(arrStr.indexOf("{") + 1, arrStr.indexOf("}, ")));
                     this.evalArrayElements.push(new Function(...params));
                     arrStr = arrStr.slice(arrStr.indexOf("}, ") + 3);
+                    console.log("arrStr is", arrStr);
                   }
-                  else if (arrStr.match(/function\s+[^0-9\|°¬\!#\$%/\(\)\?¡¿\+\{\}\[\]:.\,;@ª^\*<>=\&]*\s*\(([^\|°¬\!#\$%/\(\)\?¡¿\+\{\}\[\]:\.\,;@ª^\*<>=\&]*,?\s*)+\)\s*\{.*\}/)[0].length === arrStr.length ||
+                  //if the function is the last element of the array
+                  else if (arrStr.match(/function\s*[^0-9\|°¬\!#\$%/\(\)\?¡¿\+\{\}\[\]:.\,;@ª^\*<>=\&]*\s*\(([^\|°¬\!#\$%/\(\)\?¡¿\+\{\}\[\]:\.\,;@ª^\*<>=\&]*,?\s*)+\)\s*\{.*\}/)[0].length === arrStr.length ||
                   arrStr.match(/\(([^\|°¬\!#\$%/\(\)\?¡¿\+\{\}\[\]:\.\,;@ª^\*<>=\&]*,?\s*)+\)\s*=>\s*\{.*\}/)[0].length === arrStr.length) {
-                    params.push(el.slice(el.indexOf("{") + 1, el.lastIndexOf("}")));
+                    console.log("in else if for functions");
+                    params.push(arrStr.slice(arrStr.indexOf("{") + 1, arrStr.lastIndexOf("}")));
                     this.evalArrayElements.push(new Function(...params));
                     arrStr = "";
+                    console.log(arrStr);
                   }
                   else return "error"
+                }
+
+                else {
+                  console.log("failure");
+                  break;
                 }
 
               } //End of the while loop
