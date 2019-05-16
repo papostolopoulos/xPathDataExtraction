@@ -362,35 +362,41 @@
                 }
 
                 //function es5 es6
-                else if (arrStr.search(/function\s+[^0-9\|°¬\!#\$%/\(\)\?¡¿\+\{\}\[\]:.\,;@ª^\*<>=\&]*\s*\(([^\|°¬\!#\$%/\(\)\?¡¿\+\{\}\[\]:\.\,;@ª^\*<>=\&]*,?\s*)+\)\s*\{.*\}/) === 0 ||
+                else if (arrStr.search(/function\s+[^0-9\|°¬\!#\$%/\(\)\?¡¿\+\{\}\[\]:\.\,;@ª^\*<>=\&]*\s*\(([^\|°¬\!#\$%/\(\)\?¡¿\+\{\}\[\]:\.\,;@ª^\*<>=\&]*,?\s*)+\)\s*\{.*\}/) === 0 ||
                 arrStr.search(/\(([^\|°¬\!#\$%/\(\)\?¡¿\+\{\}\[\]:\.\,;@ª^\*<>=\&]*,?\s*)+\)\s*=>\s*\{.*\}/) === 0) {
+                  let es5FunctionRegEx = "function\\s+[^0-9\\|°¬\\!#\\$%/\\(\\)\\?¡¿\\+\\{\\}\\[\\]:\\.\\,;@ª^\\*<>=\\&]*\\s*\\(([^\\|°¬\\!#\\$%/\\(\\)\\?¡¿\\+\\{\\}\\[\\]:\\.\\,;@ª^\\*<>=\\&]*,?\\s*)+\\)\\s*\\{.*\\}";
+                  let es6FunctionRegEx = "\\(([^\\|°¬\\!#\\$%/\\(\\)\\?¡¿\\+\\{\\}\\[\\]:\\.\\,;@ª^\\*<>=\\&]*,?\\s*)+\\)\\s*=>\\s*\\{.*\\}";
                   console.log("else if for function");
                   let params = arrStr.slice(arrStr.indexOf("(") + 1, arrStr.indexOf(")")).split(/,\s*/);
                   console.log("params are", params);
+                  console.log("arrStr is", arrStr.match(/function\s+[^0-9\|°¬\!#\$%/\(\)\?¡¿\+\{\}\[\]:.\,;@ª^\*<>=\&]*\s*\(([^\|°¬\!#\$%/\(\)\?¡¿\+\{\}\[\]:\.\,;@ª^\*<>=\&]*,?\s*)+\)\s*\{.*\}/));
                   //If there is a function and separated by a comma with other array elements
-                  if(arrStr.search(/function\s*[^0-9\|°¬\!#\$%/\(\)\?¡¿\+\{\}\[\]:.\,;@ª^\*<>=\&]*\s*\(([^\|°¬\!#\$%/\(\)\?¡¿\+\{\}\[\]:\.\,;@ª^\*<>=\&]*,?\s*)+\)\s*\{.*\},\s*/) !== -1 ||
-                  arrStr.search(/\(([^\|°¬\!#\$%/\(\)\?¡¿\+\{\}\[\]:\.\,;@ª^\*<>=\&]*,?\s*)+\)\s*=>\s*\{.*\},/) !== -1){
+                  if(arrStr.search(RegExp(es5FunctionRegEx + ",")) !== -1 ||
+                  arrStr.search(RegExp(es6FunctionRegEx + ",")) !== -1){
                     console.log("In if for functions");
                     params.push(arrStr.slice(arrStr.indexOf("{") + 1, arrStr.indexOf("}, ")));
                     this.evalArrayElements.push(new Function(...params));
-                    arrStr = arrStr.slice(arrStr.indexOf("}, ") + 3);
+                    arrStr = arrStr.slice(arrStr.indexOf("}, ") + 3).trim();
                     console.log("arrStr is", arrStr);
                   }
                   //if the function is the last element of the array
-                  else if (arrStr.match(/function\s*[^0-9\|°¬\!#\$%/\(\)\?¡¿\+\{\}\[\]:.\,;@ª^\*<>=\&]*\s*\(([^\|°¬\!#\$%/\(\)\?¡¿\+\{\}\[\]:\.\,;@ª^\*<>=\&]*,?\s*)+\)\s*\{.*\}/)[0].length === arrStr.length ||
-                  arrStr.match(/\(([^\|°¬\!#\$%/\(\)\?¡¿\+\{\}\[\]:\.\,;@ª^\*<>=\&]*,?\s*)+\)\s*=>\s*\{.*\}/)[0].length === arrStr.length) {
+                  else if ((RegExp(es5FunctionRegEx).test(arrStr) && arrStr.match(RegExp(es5FunctionRegEx))[0].length === arrStr.length) ||
+                  RegExp(es6FunctionRegEx).test(arrStr) && arrStr.match(RegExp(es6FunctionRegEx))[0].length === arrStr.length) {
                     console.log("in else if for functions");
                     params.push(arrStr.slice(arrStr.indexOf("{") + 1, arrStr.lastIndexOf("}")));
                     this.evalArrayElements.push(new Function(...params));
                     arrStr = "";
                     console.log(arrStr);
                   }
-                  else return "error"
+                  else {
+                    console.log("did not make it");
+                    return "error";
+                  }
                 }
 
                 else {
-                  console.log("failure");
-                  break;
+                  return "error";
+                  // break;
                 }
 
               } //End of the while loop
@@ -636,6 +642,7 @@
               <div class="divErrorEntry" v-show="errorEntry === true && dataType === 'array'">
                 Incorrect array entry(ies). Make sure you have entered arrays that start and end with
                 square brackets - [].
+                Also make sure that each one of the array elements does not have any errors when entered (example: a mistyped function or a number with incorrect decimals).
                 The values should be separated by a line break and without any extra
                 line breaks at the end of the text.
               </div>
@@ -706,6 +713,7 @@
           }
         }
       });
+
     </script>
 
   </body>

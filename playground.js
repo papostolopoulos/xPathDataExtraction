@@ -1,6 +1,6 @@
 function transform(data){
   var negRegexArr = [
-
+    /Offer\s*(expires|valid)|Valid\s*for\s*up/
   ];
 
   for (var i = 0; i < negRegexArr.length; i++) {
@@ -29,15 +29,14 @@ function transform(data){
     /\d\s*for\s*\d/i,
     //(half | 1/2) (price)
     /(half|\d\/\d)\s*(price)/i,
-    //BOGO
-    /BOGO/,
+    //BOGO | AORPI
+    /BOGO|AORPI/,
     // (100 | earn | get | gather | collect | your | redeem | reward | worth of) (points | rewards | gift | coupon | (e-)certificate)
     /(\d+|earn|get|gather|collect|your|redeem|rewards?|worth\s*of)\s*(points|rewards?|gift|coupon|(e-)?certificate|a?\s*[\$£€])/i,
     // (double | triple | NN times the) (points)
     /(double|triple|\d\s*times\s*the|\dx(\s*the)?)\s*(points)/i,
     //promo(tion) code
     /promo(?:tion)\s*code\s*/i,
-    /on\s*us|reward/i
   ];
 
   for (var j = 0; j < posRegexArr.length; j++) {
@@ -97,10 +96,8 @@ function minimizeMe(str, reg){
 function cleanMe(string) {
 
   var replaceStrArr = [
-    {oldStr: /BOOK\s*TODAY$/i, newStr: ""},
-    {oldStr: /[\*]/g, newStr: ""},
-    {oldStr: /.*AWD\s*[A-Z]\d+/, newStr: ""},
-    {oldStr: /applies\s*to\s*time.*/, newStr: ""}
+    {oldStr: /^((Limited time! )?Plus,?|P\.S\.)\s*/, newStr: ""},
+    {oldStr: /[\*Â]±/g, newStr: ""},
   ];
 
   for (var i = 0; i < replaceStrArr.length; i++) {
