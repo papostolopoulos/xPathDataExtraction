@@ -1,6 +1,7 @@
 function transform(data){
   var negRegexArr = [
-    /Offer\s*(expires|valid)|Valid\s*for\s*up/
+    // /^\s*Free\s*shipping\s*$/
+    // /^Redeem\s*in\s*stores\s*now\s*through/
   ];
 
   for (var i = 0; i < negRegexArr.length; i++) {
@@ -15,22 +16,22 @@ function transform(data){
     /(extra|up\s*to|sav(e|ings\s*of)|over|more\s*than|discount(ed)?\s*(of|by)|at\s*least|gift\s*of|down\s*to|as\s*low\s*as|bonus\s*of|take|get(\s*a)?|on(\s*any)?)\s*(\d{1,2}%|(\$|£|&pound;|€|&euro;)\d+(\.\d{2})?)/i,
     // was $10.99 | start at $10.99 sale $10.99
     /(sale:?|was:?|start\s*at)\s*(\$|£|&pound;|€|&euro;)\d+/i,
-    //on sale | markdown | save on | marked down
-    /on\s*sale|markdown|save\s*on|marked\s*down/i,
+    //on sale | save on | marked down
+    /on\s*sale|save\s*on|marked\s*down/i,
     //anniversary sale
     /anniversary\s*sale/i,
     // free ship | free on orders of | free $5 | free 10% | free delivery | free standard | free gift | free NN
     /free\s*(ship|on\s*orders\s*of|(\$|£|&pound;|€|&euro;)\d|\d+%|standard|delivery|gift|\d)/i,
-    // buy one / two / three texttexttext, get
-    /buy\s*(one|two|three|\d+),?.*\sget/i,
+    // buy|give one / two / three / $5 / 5, get
+    /(give|buy)\s*(one|two|three|\d+|(\$|£|&pound;|€|&euro;)\d+),?.*\sget/i,
     //(standard | complementary | NN day) (shipping)
-    /(standard|complimentary|\d+day)\s*shipping/i,
+    /(standard|complimentary|\d+day|free\s*ground)\s*shipping/i,
     //3 for 2
-    /\d\s*for\s*\d/i,
+    /\d\s*for\s*[\$\d]/i,
     //(half | 1/2) (price)
     /(half|\d\/\d)\s*(price)/i,
-    //BOGO | AORPI
-    /BOGO|AORPI/,
+    //BOGO
+    /BOGO|TAE\s\d{1,2}\soff|After\s*hours|\$\d+\s*coupon|\&\s*under|sale/i,
     // (100 | earn | get | gather | collect | your | redeem | reward | worth of) (points | rewards | gift | coupon | (e-)certificate)
     /(\d+|earn|get|gather|collect|your|redeem|rewards?|worth\s*of)\s*(points|rewards?|gift|coupon|(e-)?certificate|a?\s*[\$£€])/i,
     // (double | triple | NN times the) (points)
@@ -52,7 +53,8 @@ function transform(data){
 
 function minimizeMe(str, reg){
   var punctuation = [". ", "! ", "| ", "? ", ": "]; //Punctuation symbols
-  str = str.replace(/(\.)(?!com|\d)([A-z])/g, "$1 $2");
+  // str = str.replace(/(\.)(?!com|\d)([A-z])/g, "$1 $2");
+  str = str.replace(/U.S./, "US")
 
   //STAGE 1 - Slice text at the beginning of string
   var sliceStr = str.slice(0, str.indexOf(str.match(reg)[0])); //Create a substring from the beginning of string up to the beginning of the .match()
@@ -96,8 +98,10 @@ function minimizeMe(str, reg){
 function cleanMe(string) {
 
   var replaceStrArr = [
-    {oldStr: /^((Limited time! )?Plus,?|P\.S\.)\s*/, newStr: ""},
-    {oldStr: /[\*Â]±/g, newStr: ""},
+    {oldStr: /^\s*(\.{3}\s*At|\+|CLICK\s*HERE\s*or\s*full\s*terms\s*and\s*conditions\.|Find\s*it\s*with)\s*/i, newStr: ""},
+    {oldStr: /Learn\s*More\s*\&\s*Apply\.?|www\.luckybrand\.com\/u\.s\.-shipping\/shipping\.html\s*for\s*full\s*shipping\s*details\./i, newStr: ""},
+    {oldStr: /\*/g, newStr: ""},
+    {oldStr: /TAE\s(\d{1,2})\sOff/i, newStr: "Take $1% Off!"}
   ];
 
   for (var i = 0; i < replaceStrArr.length; i++) {
@@ -105,5 +109,5 @@ function cleanMe(string) {
   }
 
 
-  return string.trim();
+  return string;
 }

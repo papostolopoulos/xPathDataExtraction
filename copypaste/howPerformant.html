@@ -297,6 +297,8 @@
               ];
               let openBracketsStr = "[{";
               let closeBracketsStr = "]}";
+              let es5FunctionRegEx = "function\\s+[^0-9\\|°¬\\!#\\$%/\\(\\)\\?¡¿\\+\\{\\}\\[\\]:\\.\\,;@ª^\\*<>=\\&]*\\s*\\(([^\\|°¬\\!#\\$%/\\(\\)\\?¡¿\\+\\{\\}\\[\\]:\\.\\,;@ª^\\*<>=\\&]*,?\\s*)+\\)\\s*\\{.*\\}";
+              let es6FunctionRegEx = "\\(([^\\|°¬\\!#\\$%/\\(\\)\\?¡¿\\+\\{\\}\\[\\]:\\.\\,;@ª^\\*<>=\\&]*,?\\s*)+\\)\\s*=>\\s*\\{.*\\}";
 
               /*This is the work that I am doing on the playground file.
               Objective is to properly split the string in the commas*/
@@ -362,10 +364,9 @@
                 }
 
                 //function es5 es6
-                else if (arrStr.search(/function\s+[^0-9\|°¬\!#\$%/\(\)\?¡¿\+\{\}\[\]:\.\,;@ª^\*<>=\&]*\s*\(([^\|°¬\!#\$%/\(\)\?¡¿\+\{\}\[\]:\.\,;@ª^\*<>=\&]*,?\s*)+\)\s*\{.*\}/) === 0 ||
-                arrStr.search(/\(([^\|°¬\!#\$%/\(\)\?¡¿\+\{\}\[\]:\.\,;@ª^\*<>=\&]*,?\s*)+\)\s*=>\s*\{.*\}/) === 0) {
-                  let es5FunctionRegEx = "function\\s+[^0-9\\|°¬\\!#\\$%/\\(\\)\\?¡¿\\+\\{\\}\\[\\]:\\.\\,;@ª^\\*<>=\\&]*\\s*\\(([^\\|°¬\\!#\\$%/\\(\\)\\?¡¿\\+\\{\\}\\[\\]:\\.\\,;@ª^\\*<>=\\&]*,?\\s*)+\\)\\s*\\{.*\\}";
-                  let es6FunctionRegEx = "\\(([^\\|°¬\\!#\\$%/\\(\\)\\?¡¿\\+\\{\\}\\[\\]:\\.\\,;@ª^\\*<>=\\&]*,?\\s*)+\\)\\s*=>\\s*\\{.*\\}";
+                else if (arrStr.search(RegExp(es5FunctionRegEx)) === 0 ||
+                arrStr.search(RegExp(es6FunctionRegEx)) === 0) {
+
                   console.log("else if for function");
                   let params = arrStr.slice(arrStr.indexOf("(") + 1, arrStr.indexOf(")")).split(/,\s*/);
                   console.log("params are", params);
@@ -394,34 +395,24 @@
                   }
                 }
 
-                else {
-                  return "error";
-                  // break;
-                }
-
-              } //End of the while loop
-
-
-                //If the first character in the string arrStr is [ {
-                //that means that the first element is an array or object
-                //Other if statements need to follow for undefined, true, false, null, callback
-                //function, immediately invoked function and string
-
-                //Array or object
-                if (arrStr.indexOf("[") === 0 || arrStr.indexOf("{") === 0) {
+                //array or object
+                else if (arrStr.indexOf("[") === 0 || arrStr.indexOf("{") === 0){
                   console.log("in the if statement. The first character is a [ or a {");
                   let idx = openBracketsStr.indexOf(arrStr[0]); //This is the index of
                   //the character that is represented in the array bracketsObjects
-
                   //If the string has a correct opening and closing brackets
                   //(from the sliceArrObj function) then slice to the correct idx AND
                   //Invoke the related function to evaluate the string, array or object
                   if (this.sliceArrObj(bracketsObjects[idx].openBrkt, bracketsObjects[idx].closeBrkt, arrStr)) {
-                    console.log("This is what I will push:", arrStr.substring(0, this.sliceArrObj(bracketsObjects[idx].openBrkt, bracketsObjects[idx].closeBrkt, arrStr)));
                     let arrStrSubstring = arrStr.substring(0, this.sliceArrObj(bracketsObjects[idx].openBrkt, bracketsObjects[idx].closeBrkt, arrStr));
                     console.log("arrStrSubstring is", arrStrSubstring);
                     //Push in this.evalArrayElements array the function for evaluating arrays or objects (recursively), with the related substring
-                    this.evalArrayElements.push(bracketsObjects[idx].runFnctn(arrStrSubstring));
+                    this.evalArrayElements.push([bracketsObjects[idx].runFnctn(arrStrSubstring)]);
+                    /*
+                    Initial string is "[[1,2,3]]"
+                    arrSubstring is "[1,2,3]"
+                    First Push to this.evalArrayElements is [evalArray("[1,2,3]")
+                    */
                     // return bracketsObjects[idx].runFnctn(arrStr.substring(0, this.sliceArrObj(bracketsObjects[idx].openBrkt, bracketsObjects[idx].closeBrkt, arrStr)));
                     //slice the arrayString at the level of the substring
                     arrStr = arrStr.slice(this.sliceArrObj(bracketsObjects[idx].openBrkt, bracketsObjects[idx].closeBrkt, arrStr));
@@ -431,6 +422,13 @@
                   else return "error";
                 }
 
+                //There was no identification of any data type so error is returned
+                else {
+                  console.log("The data type was not matched");
+                  return "error";
+                }
+
+              } //End of the while loop
 
             }// End of the else statement. Initial string arrStr has opening and closing square brackets
             console.log("before the end of the evalArray()", this.evalArrayElements);
