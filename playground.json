@@ -65,7 +65,7 @@
             "dataTypes": [
               "Text"
             ],
-            "javascript": "function transform(data){\n  var removeArr = [\n    /.*(terms|restrictions|starbucks\\.com|(http(s)?:\\/\\/)?(w{3}\\.)?\\S+\\.com|Here's\\s*What\\s*You\\s*Can\\s*do\\s*As\\s*A\\s*Member:|Member\\s*Exclusive\\.\\s*Bonus\\s*Stars|NEW\\!\\s*Everyday\\s*joy).*/ig,\n    /rewards|Share\\s*Your\\s*Rewards|You're\\s*a\\s*step\\s*away\\s*from\\s*Stars|Collect\\s*Stars\\s*faster|Bonus\\s*Stars\\s*\\(With\\s*Whip\\)|Earn\\s*Bonus\\s*Stars\\s*when\\s*you\\s*spend|Keep\\s*earning\\s*Stars\\.\\s*Reload\\s*today\\.|Check\\s*out\\s*offers\\s*and\\s*collect\\s*Bonus\\s*Stars|…and\\s*keep\\s*earning\\s*Stars|…And\\s*earn\\s*1\\s*Bonus\\s*Star|Your\\s*reward\\s*is\\s*already\\s*loaded\\s*to\\s*your\\s*account|Your\\s*Choice\\s*Your\\s*Stars|We’ve\\s*counted\\s*all\\s*the\\s*Stars\\s*up\\s*for\\s*grabs\\s*in\\s*the\\s*dash|At\\s*participating\\s*Starbucks\\s*stores|Starbucks\\s*orders|Step\\s*1/i\n  ];\n\n  for(var i = 0; i < removeArr.length; i++){\n    if(removeArr[i].test(data)){\n      return null;\n    }\n  }\n\n\n  var replaceArr = [\n    {oldStr: /^(.*Happy\\s*Hour\\s*is\\s*starting\\s*at\\s*3\\s*p\\.m\\.|That\\s*means|You'll\\s*get|that\\s*means|Plus,?|And)/i, newStr: \"\"},\n    {oldStr: /(Order\\s*now|View\\s*online|Learn\\s*more(\\s*>)?|On\\s*any\\s*purchase|through|After\\s*2\\s*p\\.m\\.|App\\.)\\s*$/i, newStr: \"\"},\n    {oldStr: /[\\*\\|>]/g, newStr: \"\"},\n    {oldStr: /(Display\\s*images\\s*to\\s*show\\s*real-time\\s*content|Add\\s*to\\s*calendar|Activate\\s*Offer|today\\s*through|Expires|Reload\\s*Now|Pay\\s*With\\s*Your\\s*Registered\\s*Starbucks|Your\\s*free\\s*drink\\s*coupon\\s*will\\s*be\\s*valid|within\\s*app).*/i, newStr: \"\"}\n  ];\n\n  replaceArr.forEach(function(el){\n    data = data.replace(el.oldStr, el.newStr);\n  });\n\n  return data.trim();\n}",
+            "javascript": "function transform(data){\n  var negRegexArr = [\n\n  ];\n\n  for (var i = 0; i < negRegexArr.length; i++) {\n    if (negRegexArr[i].test(data)) return null;\n  }\n\n\n  var posRegexArr = [\n    // (10% | $10 | percent | 1/3) (off | (in )savings | discount | (cash)back | reward | gift | value | credit | (promotional )coupon | (mail-in )rebate | (e-)certificate | bonus | sale)\n    /(\\d{1,2}%|(\\$|£|&pound;|€|&euro;)\\d+(\\.\\d{2})?|percent|\\d\\/\\d)\\s*(off|(in )?savings?|discount|(cash(\\s*)?)?back|reward|gift|value|credit|(promotional\\s*)?coupon|(mail-in\\s*)?rebate|(e-)?certificate|bonus|sale)/i,\n    // (extra | up to | save | over | more than | discount of | discounted by | savings of | at least | gift of | down to | as low as | bonus of| get a | on (any)) (10% | $10)\n    /(extra|up\\s*to|sav(e|ings\\s*of)|over|more\\s*than|discount(ed)?\\s*(of|by)|at\\s*least|gift\\s*of|down\\s*to|as\\s*low\\s*as|bonus\\s*of|take|get(\\s*a)?|on(\\s*any)?)\\s*(\\d{1,2}%|(\\$|£|&pound;|€|&euro;)\\d+(\\.\\d{2})?)/i,\n    // was $10.99 | start at $10.99 sale $10.99\n    /(sale:?|was:?|start\\s*at)\\s*(\\$|£|&pound;|€|&euro;)\\d+/i,\n    //on sale | markdown | save on | marked down\n    /on\\s*sale|markdown|save\\s*on|marked\\s*down/i,\n    //anniversary sale\n    /anniversary\\s*sale/i,\n    // free ship | free on orders of | free $5 | free 10% | free delivery | free standard | free gift | free NN\n    /free\\s*(ship|on\\s*orders\\s*of|(\\$|£|&pound;|€|&euro;)\\d|\\d+%|standard|delivery|gift|\\d)/i,\n    // buy one / two / three texttexttext, get\n    /buy\\s*(one|two|three|\\d+),?.*\\sget/i,\n    //(standard | complementary | NN day) (shipping)\n    /(standard|complimentary|\\d+day)\\s*shipping/i,\n    //3 for 2\n    /\\d\\s*for\\s*\\d/i,\n    //(half | 1/2) (price)\n    /(half|\\d\\/\\d)\\s*(price)/i,\n    //BOGO\n    /BOGO|Exclusive Coupon|B2G1/,\n    // (100 | earn | get | gather | collect | your | redeem | reward | worth of) (points | rewards | gift | coupon | (e-)certificate)\n    /(\\d+|earn|get|gather|collect|your|redeem|rewards?|worth\\s*of)\\s*(points|rewards?|gift|coupon|(e-)?certificate|a?\\s*[\\$£€])/i,\n    // (double | triple | NN times the) (points)\n    /(double|triple|\\d\\s*times\\s*the|\\dx(\\s*the)?)\\s*(points)/i,\n    //promo(tion) code\n    /promo(?:tion)\\s*code\\s*/i,\n    /deal|Hurry|cash back|savings|save|now through| ends soon|free/i\n  ];\n\n  for (var j = 0; j < posRegexArr.length; j++) {\n    if (posRegexArr[j].test(data)) return data.length > 80 ? minimizeMe(data, posRegexArr[j]) : cleanMe(data);\n  }\n\n  return null;\n}\n\n\n\n\n\nfunction minimizeMe(str, reg){\n  var punctuation = [\". \", \"! \", \"| \", \"? \", \": \"]; //Punctuation symbols\n  str = str.replace(/(\\.)(?!com|\\d)([A-z])/g, \"$1 $2\");\n\n  //STAGE 1 - Slice text at the beginning of string\n  var sliceStr = str.slice(0, str.indexOf(str.match(reg)[0])); //Create a substring from the beginning of string up to the beginning of the .match()\n  var sliceStart = 0; //Define a variable where the slice at the beginning of the initial string will happen.\n\n\n  //Iterate through the punctuation symbols.\n  //If the last Index position of the punctuation is larger than the sliceStart variable,\n  //then make the variable equal to the last index position.\n  //That will be later used to slice the string at its beginning\n  for (var i = 0; i < punctuation.length; i++) {\n    if(sliceStr.lastIndexOf(punctuation[i]) > sliceStart) sliceStart = sliceStr.lastIndexOf(punctuation[i]);\n  }\n  //Slice the string from the beginning of the last punctuation mark but before the coupon description.\n  if(sliceStart > 0) str = str.slice(sliceStart + 1).trim();\n\n\n\n\n  //STAGE 2 - Slice text at the end of string\n  var sliceEnd = +Infinity;\n  //Iterate through the punctuation symbols.\n  //If the punctuation symbol's index position is smaller than the sliceEnd variable, then\n  //make the sliceEnd variable equal to the index position of the punctuation.\n  //The sliceEnd will be used as the position where the slicing of the string will happen at it's end.\n  for (var j = 0; j < punctuation.length; j++) {\n    if (str.indexOf(punctuation[j]) < sliceEnd && str.indexOf(punctuation[j]) !== -1) sliceEnd = str.indexOf(punctuation[j]);\n  }\n  //Slice the end of the string\n  str = str.slice(0, sliceEnd).trim();\n\n\n\n\n\n  //STAGE 3 - Remove unecessary characters from the end of the string.\n  return cleanMe(str);\n}\n\n\nfunction cleanMe(string) {\n\n  var replaceStrArr = [\n    {oldStr: /(shop\\s*now|find\\s*store|view\\s*online|does\\s*not\\s*combine|—On\\s*Sale\\s*Now\\s*Thru|view\\s*in\\s*browser).*/i, newStr: \"\"},\n    {oldStr: /^([A-Z][a-z]+,\\s(Plus,\\s*)?|LAST\\s*DAY\\s*Online\\s*Only|Plus,\\s|Online only)/i, newStr: \"\"},\n    {oldStr: /[\\*\\^]/g, newStr: \"\"}\n  ];\n\n  for (var i = 0; i < replaceStrArr.length; i++) {\n    string = string.replace(replaceStrArr[i].oldStr, replaceStrArr[i].newStr).trim();\n  }\n\n\n  return string.trim();\n}",
             "listOfValidNodeTypes": [
               {
                 "name": "TEXT",
@@ -92,7 +92,59 @@
             "name": "http://schema.org/description",
             "whiteList": [
               {
-                "value": "(?i)half\\s*off|%|\\$\\d+\\s*off|stars|earn|free|reward",
+                "value": "(?i)(\\d{1,2}%|(\\$|£|&pound;|€|&euro;)\\d+(\\.\\d{2})?|percent|\\d\\/\\d)\\s*(off|(in )?savings?|discount|(cash(\\s*)?)?back|reward|gift|value|credit|(promotional\\s*)?coupon|(mail-in\\s*)?rebate|(e-)?certificate|bonus|sale)",
+                "type": "REGEX"
+              },
+              {
+                "value": "(?i)(extra|up\\s*to|sav(e|ings\\s*of)|over|more\\s*than|discount(ed)?\\s*(of|by)|at\\s*least|gift\\s*of|down\\s*to|as\\s*low\\s*as|bonus\\s*of|take|get(\\s*a)?|on(\\s*any)?)\\s*(\\d{1,2}%|(\\$|£|&pound;|€|&euro;)\\d+(\\.\\d{2})?)",
+                "type": "REGEX"
+              },
+              {
+                "value": "(?i)(sale:?|was:?|start\\s*at)\\s*(\\$|£|&pound;|€|&euro;)\\d+",
+                "type": "REGEX"
+              },
+              {
+                "value": "(?i)on\\s*sale|markdown|save\\s*on|marked\\s*down",
+                "type": "REGEX"
+              },
+              {
+                "value": "(?i)anniversary\\s*sale",
+                "type": "REGEX"
+              },
+              {
+                "value": "(?i)free\\s*(ship|on\\s*orders\\s*of|(\\$|£|&pound;|€|&euro;)\\d|\\d+%|standard|delivery|gift|\\d)",
+                "type": "REGEX"
+              },
+              {
+                "value": "(?i)buy\\s*(one|two|three|\\d+),?.*\\sget",
+                "type": "REGEX"
+              },
+              {
+                "value": "(?i)(standard|complimentary|\\d+day)\\s*shipping",
+                "type": "REGEX"
+              },
+              {
+                "value": "(?i)\\d\\s*for\\s*\\d",
+                "type": "REGEX"
+              },
+              {
+                "value": "(?i)(half|\\d\\/\\d)\\s*(price)",
+                "type": "REGEX"
+              },
+              {
+                "value": "(?i)BOGO|Exclusive Coupon|B2G1",
+                "type": "REGEX"
+              },
+              {
+                "value": "(?i)(\\d+|earn|get|gather|collect|your|redeem|rewards?|worth\\s*of)\\s*(points|rewards?|gift|coupon|(e-)?certificate|a?\\s*[\\$£€])",
+                "type": "REGEX"
+              },
+              {
+                "value": "(?i)(double|triple|\\d\\s*times\\s*the|\\dx(\\s*the)?)\\s*(points)",
+                "type": "REGEX"
+              },
+              {
+                "value": "(?i)(deal|Hurry|cash back|savings|save|now through|ends soon|free)",
                 "type": "REGEX"
               }
             ]
@@ -112,24 +164,8 @@
                 "type": "SUBSTRING"
               },
               {
-                "value": "(\\d{1,2}\\/){2}\\d{2}\\s*-",
-                "type": "REGEX"
-              },
-              {
-                "value": "24\\s*hours",
-                "type": "REGEX"
-              },
-              {
-                "value": "(?i)(January|February|March|April|May|June|July|August|September|October|November|December)\\s*\\d{1,2}\\s*-",
-                "type": "REGEX"
-              },
-              {
-                "value": "seven (7) days",
+                "value": "This Weekend Only",
                 "type": "SUBSTRING"
-              },
-              {
-                "value": "\\(?7\\)?\\s*days",
-                "type": "REGEX"
               }
             ],
             "dataTypes": [
@@ -258,17 +294,17 @@
           "maxLeafNodesSize": "-1",
           "maxDepth": "-1",
           "defaultPatternAnnotationThreshold": "0.8",
-          "linkThreshold": "2",
+          "linkThreshold": "3",
+          "footerPercentage": "0.8",
           "dedupCondition": {
-              "matchThreshold": 0.4,
-              "stopWords": ["drink", "string2"]
+            "matchThreshold": "",
+            "stopWords": []
           },
-          "footerPercentage": 0.8,
-          "overRideValidThroughFromFooter": false,
+          "overRideValidThroughFromFooter": "false",
           "listOfValidNodeTypes": [],
           "linkMatcher": [
             {
-              "regex": ".*starbucks\\.com.*"
+              "regex": ".*link\\.mail\\.gnc\\.com.*"
             }
           ]
         },
@@ -285,7 +321,7 @@
             "javascript": null,
             "location": [
               {
-                "xpath": "\"Starbucks\""
+                "xpath": "\"mail.gnc.com\""
               }
             ],
             "mandatory": "true",
@@ -379,7 +415,6 @@
   "metaData": {
     "debug": "true",
     "linkAlgoHandler": "LinkExtractor15",
-    "decodeHtmlEntity": "true",
-    "useVTDXML": "false"
+    "decodeHtmlEntity": "true"
   }
 }

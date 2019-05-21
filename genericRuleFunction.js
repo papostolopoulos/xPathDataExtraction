@@ -106,10 +106,10 @@ function transform(data){
     /\d\s*for\s*\d/i,
     //(half | 1/2) (price)
     /(half|\d\/\d)\s*(price)/i,
-    //BOGO
-    /BOGO/,
+    //BOGO | AORPI
+    /BOGO|AORPI/,
     // (100 | earn | get | gather | collect | your | redeem | reward | worth of) (points | rewards | gift | coupon | (e-)certificate)
-    /(\d+|earn|get|gather|collect|your|redeem|rewards?|worth\s*of)\s*(points|rewards?|gift|coupon|(e-)?certificate|a?\s*[\$£€])/i,
+    /(\d+|earn|get|gather|collect|your|redeem|rewards?|worth\s*of)\s*(points|rewards?|gift|coupon|(e-)?certificate|a?\s*(\$|£|&pound;|€|&euro;))/i,
     // (double | triple | NN times the) (points)
     /(double|triple|\d\s*times\s*the|\dx(\s*the)?)\s*(points)/i,
     //promo(tion) code

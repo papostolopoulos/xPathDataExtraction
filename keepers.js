@@ -1046,3 +1046,33 @@ while (data.length > 100 && /[\.\?!]/.test(data[data.length-1]) && data.replace(
 
 //Different hyphens
 "[-–]"
+
+// For GENERIC for the VT dates
+.replace(/January\s*(\d{1,2}),?\s*(\d{4})/, "01/$1/$2")
+.replace(/February\s*(\d{1,2}),?\s*(\d{4})/, "02/$1/$2")
+.replace(/March\s*(\d{1,2}),?\s*(\d{4})/, "03/$1/$2")
+.replace(/April\s*(\d{1,2}),?\s*(\d{4})/, "04/$1/$2")
+.replace(/May\s*(\d{1,2}),?\s*(\d{4})/, "05/$1/$2")
+.replace(/June\s*(\d{1,2}),?\s*(\d{4})/, "06/$1/$2")
+.replace(/July\s*(\d{1,2}),?\s*(\d{4})/, "07/$1/$2")
+.replace(/August\s*(\d{1,2}),?\s*(\d{4})/, "08/$1/$2")
+.replace(/September\s*(\d{1,2}),?\s*(\d{4})/, "09/$1/$2")
+.replace(/October\s*(\d{1,2}),?\s*(\d{4})/, "10/$1/$2")
+.replace(/November\s*(\d{1,2}),?\s*(\d{4})/, "11/$1/$2")
+.replace(/December\s*(\d{1,2}),?\s*(\d{4})/, "12/$1/$2");
+
+//For Linkbased. VT dates. Set already but this is the clean version.
+function transform(data) {
+  if (data) {
+    var monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    var regex = /(\s*\d+)\/(\s*\d+)/i;
+    var match = regex.exec(data);
+    if (match && match[1]) {
+      return monthNames[match[1] - 1] + ', ' + match[2];
+    }
+    else {
+      return data;
+    }
+  }
+  return null;
+}

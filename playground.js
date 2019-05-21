@@ -1,113 +1,41 @@
-function transform(data){
-  var negRegexArr = [
-    // /^\s*Free\s*shipping\s*$/
-    // /^Redeem\s*in\s*stores\s*now\s*through/
-  ];
+function transform(data) {
+  if (data) {
+    var monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    var regex = /(\s*\d+)\/(\s*\d+)/i;
+    var match = regex.exec(data);
+    if (match && match[1]) {
+      return monthNames[match[1] - 1] + ', ' + match[2];
+    }
+    else if (/.*and.*((January|February|March|April|May|June|July|August|September|October|November|December)\s*\d{1,2},\s*\d{4}),\s*at\s*11:59pm.*/.test(data)) {
+      return "10/10/2019";
+      data = data.replace(/.*and.*((January|February|March|April|May|June|July|August|September|October|November|December)\s*\d{1,2},\s*\d{4}),\s*at\s*11:59pm.*/, "$1");
+      var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-  for (var i = 0; i < negRegexArr.length; i++) {
-    if (negRegexArr[i].test(data)) return null;
+      for (var i = 0; i < months.length; i++) {
+        if (data.indexOf(months[i]) !== -1) {
+          data = data.replace(/(January|February|March|April|May|June|July|August|September|October|November|December)\s*(\d{1,2}),\s*(\d{4})/, i + 1 + "/$2/$3");
+          return data;
+        }
+      }
+    }
+
   }
-
-
-  var posRegexArr = [
-    // (10% | $10 | percent | 1/3) (off | (in )savings | discount | (cash)back | reward | gift | value | credit | (promotional )coupon | (mail-in )rebate | (e-)certificate | bonus | sale)
-    /(\d{1,2}%|(\$|£|&pound;|€|&euro;)\d+(\.\d{2})?|percent|\d\/\d)\s*(off|(in )?savings?|discount|(cash(\s*)?)?back|reward|gift|value|credit|(promotional\s*)?coupon|(mail-in\s*)?rebate|(e-)?certificate|bonus|sale)/i,
-    // (extra | up to | save | over | more than | discount of | discounted by | savings of | at least | gift of | down to | as low as | bonus of| get a | on (any)) (10% | $10)
-    /(extra|up\s*to|sav(e|ings\s*of)|over|more\s*than|discount(ed)?\s*(of|by)|at\s*least|gift\s*of|down\s*to|as\s*low\s*as|bonus\s*of|take|get(\s*a)?|on(\s*any)?)\s*(\d{1,2}%|(\$|£|&pound;|€|&euro;)\d+(\.\d{2})?)/i,
-    // was $10.99 | start at $10.99 sale $10.99
-    /(sale:?|was:?|start\s*at)\s*(\$|£|&pound;|€|&euro;)\d+/i,
-    //on sale | save on | marked down
-    /on\s*sale|save\s*on|marked\s*down/i,
-    //anniversary sale
-    /anniversary\s*sale/i,
-    // free ship | free on orders of | free $5 | free 10% | free delivery | free standard | free gift | free NN
-    /free\s*(ship|on\s*orders\s*of|(\$|£|&pound;|€|&euro;)\d|\d+%|standard|delivery|gift|\d)/i,
-    // buy|give one / two / three / $5 / 5, get
-    /(give|buy)\s*(one|two|three|\d+|(\$|£|&pound;|€|&euro;)\d+),?.*\sget/i,
-    //(standard | complementary | NN day) (shipping)
-    /(standard|complimentary|\d+day|free\s*ground)\s*shipping/i,
-    //3 for 2
-    /\d\s*for\s*[\$\d]/i,
-    //(half | 1/2) (price)
-    /(half|\d\/\d)\s*(price)/i,
-    //BOGO
-    /BOGO|TAE\s\d{1,2}\soff|After\s*hours|\$\d+\s*coupon|\&\s*under|sale/i,
-    // (100 | earn | get | gather | collect | your | redeem | reward | worth of) (points | rewards | gift | coupon | (e-)certificate)
-    /(\d+|earn|get|gather|collect|your|redeem|rewards?|worth\s*of)\s*(points|rewards?|gift|coupon|(e-)?certificate|a?\s*[\$£€])/i,
-    // (double | triple | NN times the) (points)
-    /(double|triple|\d\s*times\s*the|\dx(\s*the)?)\s*(points)/i,
-    //promo(tion) code
-    /promo(?:tion)\s*code\s*/i,
-  ];
-
-  for (var j = 0; j < posRegexArr.length; j++) {
-    if (posRegexArr[j].test(data)) return data.length > 80 ? minimizeMe(data, posRegexArr[j]) : cleanMe(data);
-  }
-
   return null;
 }
 
-
-
-
-
-function minimizeMe(str, reg){
-  var punctuation = [". ", "! ", "| ", "? ", ": "]; //Punctuation symbols
-  // str = str.replace(/(\.)(?!com|\d)([A-z])/g, "$1 $2");
-  str = str.replace(/U.S./, "US")
-
-  //STAGE 1 - Slice text at the beginning of string
-  var sliceStr = str.slice(0, str.indexOf(str.match(reg)[0])); //Create a substring from the beginning of string up to the beginning of the .match()
-  var sliceStart = 0; //Define a variable where the slice at the beginning of the initial string will happen.
-
-
-  //Iterate through the punctuation symbols.
-  //If the last Index position of the punctuation is larger than the sliceStart variable,
-  //then make the variable equal to the last index position.
-  //That will be later used to slice the string at its beginning
-  for (var i = 0; i < punctuation.length; i++) {
-    if(sliceStr.lastIndexOf(punctuation[i]) > sliceStart) sliceStart = sliceStr.lastIndexOf(punctuation[i]);
+function transform(data) {
+  if (/.*((January|February|March|April|May|June|July|August|September|October|November|December)\s*\d{1,2},\s*\d{4}),\s*at\s*11:59pm.*/.test(data)) {
+    data = data.replace(/.*((January|February|March|April|May|June|July|August|September|October|November|December)\s*\d{1,2},\s*\d{4}),\s*at\s*11:59pm.*/, "$1");
+    var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    return "10/10/2019";
+    for (var i = 0; i < months.length; i++) {
+      if (data.indexOf(months[i]) !== -1) {
+        data = data.replace(/(January|February|March|April|May|June|July|August|September|October|November|December)\s*(\d{1,2}),\s*(\d{4})/, i + 1 + "/$2/$3");
+        return data;
+      }
+    }
   }
-  //Slice the string from the beginning of the last punctuation mark but before the coupon description.
-  if(sliceStart > 0) str = str.slice(sliceStart + 1).trim();
-
-
-
-
-  //STAGE 2 - Slice text at the end of string
-  var sliceEnd = +Infinity;
-  //Iterate through the punctuation symbols.
-  //If the punctuation symbol's index position is smaller than the sliceEnd variable, then
-  //make the sliceEnd variable equal to the index position of the punctuation.
-  //The sliceEnd will be used as the position where the slicing of the string will happen at it's end.
-  for (var j = 0; j < punctuation.length; j++) {
-    if (str.indexOf(punctuation[j]) < sliceEnd && str.indexOf(punctuation[j]) !== -1) sliceEnd = str.indexOf(punctuation[j]);
-  }
-  //Slice the end of the string
-  str = str.slice(0, sliceEnd).trim();
-
-
-
-
-
-  //STAGE 3 - Remove unecessary characters from the end of the string.
-  return cleanMe(str);
+  return null;
 }
 
-
-function cleanMe(string) {
-
-  var replaceStrArr = [
-    {oldStr: /^\s*(\.{3}\s*At|\+|CLICK\s*HERE\s*or\s*full\s*terms\s*and\s*conditions\.|Find\s*it\s*with)\s*/i, newStr: ""},
-    {oldStr: /Learn\s*More\s*\&\s*Apply\.?|www\.luckybrand\.com\/u\.s\.-shipping\/shipping\.html\s*for\s*full\s*shipping\s*details\./i, newStr: ""},
-    {oldStr: /\*/g, newStr: ""},
-    {oldStr: /TAE\s(\d{1,2})\sOff/i, newStr: "Take $1% Off!"}
-  ];
-
-  for (var i = 0; i < replaceStrArr.length; i++) {
-    string = string.replace(replaceStrArr[i].oldStr, replaceStrArr[i].newStr).trim();
-  }
-
-
-  return string;
-}
+var str = "To qualify for this offer, eGift Cards must be purchased between May 10, 2019, at 12:01am ET and May 12, 2019, at 11:59pm ET (\"Promotion Period\"). This offer is non-transferable and may only be used by the intended recipient. This offer applies only to electronic gift card purchases from Nordstrom.com during the Promotion Period. The promotional card will be sent by July 1, 2019, to the purchaser's email address provided at the time of qualifying purchase. The promotional card will be valid in Nordstrom and Nordstrom Rack stores and online at Nordstrom.com, and EXPIRES AT 11:59PM ET ON JULY 28, 2019. Minimum electronic gift card purchase of $175 USD is required to receive a $20 USD promotional card. Purchases of electronic gift cards from the Nordstrom app are not eligible for this offer. Limit one promotional card per customer. Limit of one promotional card per transaction. Promotional card cannot be reloaded, redeemed for cash (except as required by law) or applied as payment to any account. Promotional card is not valid for purchases of gift cards or previously purchased items. If item purchased with promotional card is returned, promotional card value will be deducted from amounts refunded to original tender. Promotional card may not be purchased, sold, traded or transferred. Void where prohibited.";

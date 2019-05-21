@@ -135,6 +135,23 @@ function evalArray(arrStr, evalArrayElements) {
         }
       }
 
+      //object
+      else if (arrStr.indexOf("{") === 0){
+        console.log("else if for object");
+
+        if (sliceArrObj("{", "}", arrStr)) {
+          let arrStrSubstring = arrStr.substring(0, this.sliceArrObj("{", "}", arrStr));
+          console.log("arrStrSubstring is", arrStrSubstring);
+          //Push in evalArrayElements array the function for evaluating arrays or objects (recursively), with the related substring
+          evalArrayElements.push(evalArray(arrStrSubstring, []));
+
+          //slice the arrayString at the level of the substring
+          arrStr = arrStr.slice(sliceArrObj("{", "}", arrStr) + 1);
+          arrStr = arrStr.trim();
+          return evalArray("[" + arrStr + "]", evalArrayElements);
+        }
+      }
+
       //There was no identification of any data type so error is returned
       else {
         console.log("The data type was not matched");
