@@ -831,6 +831,7 @@ function transform(data){
     {code: 'JPY', symbol: '¥'}, //Japan Yen
     {code: 'JEP', symbol: '£'}, //Jersey Pound
     {code: 'KZT', symbol: 'лв'}, //Kazakhstan Tenge
+    {code: 'KZT', symbol: '₸'}, //Kazakhstan Tenge
     {code: 'KRW', symbol: '₩'}, //Korea (South) Won
     {code: 'KPW', symbol: '₩'}, //Korea (North) Won
     {code: 'KGS', symbol: 'лв'}, //Kyrgyzstan Som
@@ -1044,8 +1045,17 @@ while (data.length > 100 && /[\.\?!]/.test(data[data.length-1]) && data.replace(
   data = data.slice(str.search(/[\.\?!]/)).split("").reverse().join("");
 }
 
+
+
+
+
 //Different hyphens
 "[-–]"
+
+
+
+
+
 
 // For GENERIC for the VT dates
 .replace(/January\s*(\d{1,2}),?\s*(\d{4})/, "01/$1/$2")
@@ -1061,7 +1071,10 @@ while (data.length > 100 && /[\.\?!]/.test(data[data.length-1]) && data.replace(
 .replace(/November\s*(\d{1,2}),?\s*(\d{4})/, "11/$1/$2")
 .replace(/December\s*(\d{1,2}),?\s*(\d{4})/, "12/$1/$2");
 
-//For Linkbased. VT dates. Set already but this is the clean version.
+
+
+
+//For Linkbased. VT dates. Set already in template but this is the clean version where everything is separated in lines.
 function transform(data) {
   if (data) {
     var monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -1075,4 +1088,12 @@ function transform(data) {
     }
   }
   return null;
+}
+
+
+
+
+//Paypal removal of unecessary product description texts
+function transform(data) {
+  return data.replace(/(cid:|bid:|order\s*id:|Item\s*Number|Item\#).*/i, "");
 }
