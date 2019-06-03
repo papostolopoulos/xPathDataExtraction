@@ -1034,6 +1034,15 @@ function transform(data){
 
 
 
+function transform(data){
+  return data.replace(/(?<!Dr|www|P\.O)\.(?!com|\d{2}|O\.?\s+Box)/g,"~~~")
+  .match(/[^\.\?\!\:]*(\$\d|free|%)[^\.\?\!\:]*/ig)
+  .join(". ")
+  .replace(/~~~/g,".");
+}
+
+
+
 var t0 = performance.now();
 transform(str7);
 var t1 = performance.now();
@@ -1095,5 +1104,5 @@ function transform(data) {
 
 //Paypal removal of unecessary product description texts
 function transform(data) {
-  return data.replace(/(cid:|bid:|order\s*id:|Item\s*Number|Item\#).*/i, "");
+  return data.replace(/(cid:|bid:|order\s*id:|Item\s*Number|Item\s*\#|Artikelnr).*/i, "");
 }
