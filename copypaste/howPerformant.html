@@ -160,7 +160,7 @@
             errorEntry: false,
             dataType: "string",
             textAreaValues: "",
-            evalArrayElements: []
+            arrayElements: []
           }
         },
         methods:{
@@ -233,10 +233,10 @@
               //If array selected
               if (this.dataType === "array"){
                 console.log("selected data type: array");
-                if(this.evalArray(startArr[i]) === "error") this.errorEntry = true;
+                if(this.evalArray(startArr[i], this.arrayElements) === "error") this.errorEntry = true;
                 else {
-                  this.evalArrayElements = [];
-                  finalArr.push(this.evalArray(startArr[i]));
+                  this.arrayElements = [];
+                  finalArr.push(this.evalArray(startArr[i], this.arrayElements));
                 }
               }
 
@@ -264,87 +264,66 @@
 
 
 
-
-
-
-
-
-
-
-
-          //I need to test this for all the options. Then need to put
-          //everything in the while loop and test again.
-          evalArray(arrStr) {
-            console.log("In the evalArray for", arrStr);
-            if (arrStr[0] !== "[" || arrStr[arrStr.length-1] !== "]"){
-              console.log("In the error because the first or the last character of the string do not indicate an array");
-              return "error";
-            }
+          evalArray(arrStr, arr) {
+            if (arrStr === "[]") return arr;
             else {
-              arrStr = arrStr.slice(1, arrStr.length-1);
-              console.log("In the else of the eval array. The arrStr after the slice:", arrStr);
-              let bracketsObjects = [
-                {
-                  openBrkt: "[",
-                  closeBrkt: "]",
-                  runFnctn: this.evalArray
-                },
-                {
-                  openBrkt: "{",
-                  closeBrkt: "}",
-                  runFnctn: this.evalObj
-                }
-              ];
-              let openBracketsStr = "[{";
-              let closeBracketsStr = "]}";
-              let es5FunctionRegEx = "function\\s+[^0-9\\|°¬\\!#\\$%/\\(\\)\\?¡¿\\+\\{\\}\\[\\]:\\.\\,;@ª^\\*<>=\\&]*\\s*\\(([^\\|°¬\\!#\\$%/\\(\\)\\?¡¿\\+\\{\\}\\[\\]:\\.\\,;@ª^\\*<>=\\&]*,?\\s*)+\\)\\s*\\{.*\\}";
-              let es6FunctionRegEx = "\\(([^\\|°¬\\!#\\$%/\\(\\)\\?¡¿\\+\\{\\}\\[\\]:\\.\\,;@ª^\\*<>=\\&]*,?\\s*)+\\)\\s*=>\\s*\\{.*\\}";
+              if (arrStr[0] !== "[" || arrStr[arrStr.length-1] !== "]"){
+                console.log("In the error because the first or the last character of the string do not indicate an array");
+                return "error";
+              }
+              else {
+                console.log("In the else of the eval array. The arrStr before the slice:", arrStr);
+                arrStr = arrStr.slice(1, arrStr.length-1);
+                console.log("In the else of the eval array. The arrStr after the slice:", arrStr);
+                let es5FunctionRegEx = "function\\s+[^0-9\\|°¬\\!#\\$%/\\(\\)\\?¡¿\\+\\{\\}\\[\\]:\\.\\,;@ª^\\*<>=\\&]*\\s*\\(([^\\|°¬\\!#\\$%/\\(\\)\\?¡¿\\+\\{\\}\\[\\]:\\.\\,;@ª^\\*<>=\\&]*,?\\s*)+\\)\\s*\\{.*\\}";
+                let es6FunctionRegEx = "\\(([^\\|°¬\\!#\\$%/\\(\\)\\?¡¿\\+\\{\\}\\[\\]:\\.\\,;@ª^\\*<>=\\&]*,?\\s*)+\\)\\s*=>\\s*\\{.*\\}";
 
-              /*This is the work that I am doing on the playground file.
-              Objective is to properly split the string in the commas*/
-
-              while (arrStr.length > 0) {
                 //Number
                 if(arrStr.search(/\d+(\.\d+)?,/) === 0 || arrStr.search(/\d+(\.\d+)?\s*$/) === 0) {
                   console.log("else if for number");
-                  this.evalArrayElements.push(Number(arrStr.match(/\d+(\.\d+)?/)[0]));
+                  arr.push(Number(arrStr.match(/\d+(\.\d+)?/)[0]));
                   console.log(Number(arrStr.match(/\d+(\.\d+)?/)[0]));
                   arrStr = arrStr.slice(arrStr.match(/\d+(\.\d+)?/)[0].length + 1);
                   // arrStr = arrStr.slice(arrStr.indexOf(",") + 1);
                   arrStr = arrStr.trim();
                   console.log("end of else if");
+                  return this.evalArray("[" + arrStr + "]", arr);
                 }
 
                 //true
                 else if (arrStr.indexOf("true,") === 0 || arrStr.search(/true\s*$/) === 0) {
                   console.log("else if for true");
-                  this.evalArrayElements.push(true);
+                  arr.push(true);
                   arrStr = arrStr.slice(5);
                   arrStr = arrStr.trim();
+                  return this.evalArray("[" + arrStr + "]", arr);
                 }
 
                 //false
                 else if (arrStr.indexOf("false,") === 0 || arrStr.search(/false\s*$/) === 0) {
                   console.log("else if for false");
-                  this.evalArrayElements.push(false);
+                  arr.push(false);
                   arrStr = arrStr.slice(6);
                   arrStr = arrStr.trim();
+                  return this.evalArray("[" + arrStr + "]", arr);
                 }
 
                 //null
                 else if (arrStr.indexOf("null,") === 0 || arrStr.search(/null\s*$/) === 0) {
                   console.log("else if for null");
-                  this.evalArrayElements.push(null);
+                  arr.push(null);
                   arrStr = arrStr.slice(5);
                   arrStr = arrStr.trim();
+                  return this.evalArray("[" + arrStr + "]", arr);
                 }
 
                 //Undefined
                 else if (arrStr.indexOf("undefined,") === 0 || arrStr.search(/undefined\s*$/) === 0) {
                   console.log("else if for undefined");
-                  this.evalArrayElements.push(undefined);
+                  arr.push(undefined);
                   arrStr = arrStr.slice(10);
                   arrStr = arrStr.trim();
+                  return this.evalArray("[" + arrStr + "]", arr);
                 }
 
                 //string
@@ -352,20 +331,19 @@
                   console.log("else if for string");
                   let firstQuote = arrStr[0];
                   if (arrStr.indexOf(firstQuote + ",") > 0) {
-                    this.evalArrayElements.push(arrStr.substring(1, arrStr.indexOf(firstQuote + ",")));
+                    arr.push(arrStr.substring(1, arrStr.indexOf(firstQuote + ",")));
                     arrStr = arrStr.slice(arrStr.indexOf(firstQuote + ",") + 2);
                     arrStr = arrStr.trim()
                   }
                   else if (arrStr.lastIndexOf(firstQuote) === arrStr.length-1) {
-                      this.evalArrayElements.push(arrStr.substring(1, arrStr.length-1));
+                      arr.push(arrStr.substring(1, arrStr.length-1));
                       arrStr = "";
                   }
-                  else return "error";
+                  return this.evalArray("[" + arrStr + "]", arr);
                 }
 
                 //function es5 es6
-                else if (arrStr.search(RegExp(es5FunctionRegEx)) === 0 ||
-                arrStr.search(RegExp(es6FunctionRegEx)) === 0) {
+                else if (arrStr.search(RegExp(es5FunctionRegEx)) === 0 ||  arrStr.search(RegExp(es6FunctionRegEx)) === 0) {
 
                   console.log("else if for function");
                   let params = arrStr.slice(arrStr.indexOf("(") + 1, arrStr.indexOf(")")).split(/,\s*/);
@@ -376,7 +354,7 @@
                   arrStr.search(RegExp(es6FunctionRegEx + ",")) !== -1){
                     console.log("In if for functions");
                     params.push(arrStr.slice(arrStr.indexOf("{") + 1, arrStr.indexOf("}, ")));
-                    this.evalArrayElements.push(new Function(...params));
+                    arr.push(new Function(...params));
                     arrStr = arrStr.slice(arrStr.indexOf("}, ") + 3).trim();
                     console.log("arrStr is", arrStr);
                   }
@@ -385,41 +363,45 @@
                   RegExp(es6FunctionRegEx).test(arrStr) && arrStr.match(RegExp(es6FunctionRegEx))[0].length === arrStr.length) {
                     console.log("in else if for functions");
                     params.push(arrStr.slice(arrStr.indexOf("{") + 1, arrStr.lastIndexOf("}")));
-                    this.evalArrayElements.push(new Function(...params));
+                    arr.push(new Function(...params));
                     arrStr = "";
                     console.log(arrStr);
                   }
-                  else {
-                    console.log("did not make it");
-                    return "error";
+                  return this.evalArray("[" + arrStr + "]", arr);
+                }
+
+                //array
+                else if (arrStr.indexOf("[") === 0){
+                  console.log("else if for array");
+
+                  if (this.sliceArrObj("[", "]", arrStr)) {
+                    let arrStrSubstring = arrStr.substring(0, this.sliceArrObj("[", "]", arrStr));
+                    console.log("arrStrSubstring is", arrStrSubstring);
+                    //Push in arr array the function for evaluating arrays or objects (recursively), with the related substring
+                    arr.push(this.evalArray(arrStrSubstring, []));
+
+                    //slice the arrayString at the level of the substring
+                    arrStr = arrStr.slice(this.sliceArrObj("[", "]", arrStr) + 1);
+                    arrStr = arrStr.trim();
+                    return this.evalArray("[" + arrStr + "]", arr);
                   }
                 }
 
-                //array or object
-                else if (arrStr.indexOf("[") === 0 || arrStr.indexOf("{") === 0){
-                  console.log("in the if statement. The first character is a [ or a {");
-                  let idx = openBracketsStr.indexOf(arrStr[0]); //This is the index of
-                  //the character that is represented in the array bracketsObjects
-                  //If the string has a correct opening and closing brackets
-                  //(from the sliceArrObj function) then slice to the correct idx AND
-                  //Invoke the related function to evaluate the string, array or object
-                  if (this.sliceArrObj(bracketsObjects[idx].openBrkt, bracketsObjects[idx].closeBrkt, arrStr)) {
-                    let arrStrSubstring = arrStr.substring(0, this.sliceArrObj(bracketsObjects[idx].openBrkt, bracketsObjects[idx].closeBrkt, arrStr));
+                //object
+                else if (arrStr.indexOf("{") === 0){
+                  console.log("else if for object");
+
+                  if (this.sliceArrObj("{", "}", arrStr)) {
+                    let arrStrSubstring = arrStr.substring(0, this.sliceArrObj("{", "}", arrStr));
                     console.log("arrStrSubstring is", arrStrSubstring);
-                    //Push in this.evalArrayElements array the function for evaluating arrays or objects (recursively), with the related substring
-                    this.evalArrayElements.push([bracketsObjects[idx].runFnctn(arrStrSubstring)]);
-                    /*
-                    Initial string is "[[1,2,3]]"
-                    arrSubstring is "[1,2,3]"
-                    First Push to this.evalArrayElements is [evalArray("[1,2,3]")
-                    */
-                    // return bracketsObjects[idx].runFnctn(arrStr.substring(0, this.sliceArrObj(bracketsObjects[idx].openBrkt, bracketsObjects[idx].closeBrkt, arrStr)));
+                    //Push in arr array the function for evaluating arrays or objects (recursively), with the related substring
+                    arr.push(this.evalArray(arrStrSubstring, []));
+
                     //slice the arrayString at the level of the substring
-                    arrStr = arrStr.slice(this.sliceArrObj(bracketsObjects[idx].openBrkt, bracketsObjects[idx].closeBrkt, arrStr));
+                    arrStr = arrStr.slice(this.sliceArrObj("{", "}", arrStr) + 1);
                     arrStr = arrStr.trim();
-                    console.log("this.evalArrayElements is", this.evalArrayElements);
+                    return this.evalArray("[" + arrStr + "]", arr);
                   }
-                  else return "error";
                 }
 
                 //There was no identification of any data type so error is returned
@@ -427,13 +409,10 @@
                   console.log("The data type was not matched");
                   return "error";
                 }
+              }
+            } //End of top else
+          }, //End of evalArray
 
-              } //End of the while loop
-
-            }// End of the else statement. Initial string arrStr has opening and closing square brackets
-            console.log("before the end of the evalArray()", this.evalArrayElements);
-            return this.evalArrayElements;
-          }, //End of evalArray function
 
 
 
@@ -566,7 +545,7 @@
                 else continue;
               } //End of for loop for substring
               return false;
-          }
+          },
 
         }, //End of methods
         computed: {
