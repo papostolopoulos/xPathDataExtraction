@@ -640,7 +640,7 @@ function transform(data){
     /promo(?:tion)\s*code\s*/i,
     //January|February|March|April|May|June|July|August|September|October|November|December
     /January|February|March|April|May|June|July|August|September|October|November|December/,
-    //Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Friday
+    //Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday
     /Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday/
 
   ];
@@ -1034,6 +1034,15 @@ function transform(data){
 
 
 
+function transform(data){
+  return data.replace(/(?<!Dr|www|P\.O)\.(?!com|\d{2}|O\.?\s+Box)/g,"~~~")
+  .match(/[^\.\?\!\:]*(\$\d|free|%)[^\.\?\!\:]*/ig)
+  .join(". ")
+  .replace(/~~~/g,".");
+}
+
+
+
 var t0 = performance.now();
 transform(str7);
 var t1 = performance.now();
@@ -1095,5 +1104,31 @@ function transform(data) {
 
 //Paypal removal of unecessary product description texts
 function transform(data) {
-  return data.replace(/(cid:|bid:|order\s*id:|Item\s*Number|Item\#).*/i, "");
+  return data.replace(/(cid:|bid:|order\s*id:|Item\s*Number|Item\s*\#|Artikelnr).*/i, "");
+}
+
+
+
+
+//Core structure of arrayObject
+function transform(data){
+  if(!data) return null;
+
+  var replaceArr = [
+    //{oldStr: /.*().*/, newStr: ""}, //.*Full text removal.*
+    //{oldStr: /^().*/i, newStr: ""}, //^Starts with something specific, ends with something- anything.*
+    //{oldStr: /.*()$/i, newStr: ""}, //.*Starts with something-anything, ends with something specific$
+    //{oldStr: /^()$/, newStr: ""}, //^Starts with something specific and ends with something specific$
+    //{oldStr: /^()/, newStr: ""}, //^Starts with Something specific
+    //{oldStr: /.*()/, newStr: ""}, //.*Starts with something - anything
+    //{oldStr: /()$/, newStr: ""}, //Ends with something specific$
+    //{oldStr: /().*/, newStr: ""}, //Ends with something-anything.*
+    //{oldStr: /()/, newStr: ""}, //somewhere in the middle
+  ];
+
+  replaceArr.forEach(function(el){
+  	data = data.replace(el.oldStr, el.newStr).trim();
+  });
+
+  return data;
 }

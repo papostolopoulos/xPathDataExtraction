@@ -1870,9 +1870,9 @@
       }, //End of methods
       computed: {
         fullPath(){
-          let fullPath = this.pathArray.join("");
+          let fullPath = this.pathArray.join(" ");
           let replaceStrArr = [
-            {oldStr: /\)or/g, newStr: "or\n"},
+            {oldStr: /\)or/g, newStr: ")or\n"},
             {oldStr: /\|/g, newStr: "\n|\n"}
           ];
 
