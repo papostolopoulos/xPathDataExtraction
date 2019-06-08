@@ -20,7 +20,7 @@ function pluralToSingular(str){
 
     //4. If a singular noun ends in ‑y and the letter before the -y is a consonant,
     //change the ending to ‑ies to make the noun plural.
-    else if (/.*[^aeiou]ies/i.test(el)) finalStr += el.slice(0, el.lastIndexOf("ies")) + "y ";
+    else if (/.*[^aeiou]ies /i.test(el)) finalStr += el.slice(0, el.lastIndexOf("ies")) + "y ";
 
     //5. If the singular noun ends in -y and the letter before the -y is a vowel,
     //simply add an -s to make it plural.
@@ -29,7 +29,10 @@ function pluralToSingular(str){
     //6. If the singular noun ends in ‑o, add ‑es to make it plural.
     else if (/.*oes/i.test(el)) finalStr += el.slice(0, el.lastIndexOf("es")) + " ";
 
-    //7. To make regular nouns plural, add ‑s to the end.
+    //7. If the singular noun ends in ‑us, the plural ending is frequently ‑i.
+    else if (/.*i/i.test(el)) finalStr += el.slice(0, el.lastIndexOf("i")) + "us ";
+
+    //10. To make regular nouns plural, add ‑s to the end.
     else if (/.*s/i.test(el)) finalStr += el.slice(0, el.lastIndexOf("s")) + " ";
 
     else finalStr += el + " ";
@@ -45,7 +48,8 @@ var str3 = `wife – wives wolf – wolves Exceptions: roof – roofs belief –
 var str4 = `city – cities puppy – puppies`;
 var str5 = `ray – rays boy – boys`;
 var str6 = `potato – potatoes tomato – tomatoes Exceptions: photo – photos piano – pianos halo – halos`;
-var str7 = `cat – cats house – houses`
+var str7 = `cactus – cacti focus – foci`;
+var str10 = `cat – cats house – houses`;
 
 /*
 To make regular nouns plural, add ‑s to the end.
