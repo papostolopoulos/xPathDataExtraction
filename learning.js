@@ -162,8 +162,26 @@ x *= y //=> the value of x becomes 30
   (true or false)
 */
 
+//1. What value will the following comparison operators return?
+5 > 4; //true
+"This is a string" === "This is a string"; //true
+5 == "5"; //true because this is a comparison by value (truthy)
+5 === "5"; //false because this is a comparison by data type and value
++0 === -0; //true
+NaN === NaN; //false because NaN represents a value that inherits the Number objects
+//properties but does not mean that that is is equal to some other value that is NaN
+false === false; //true
+isNaN("Hello") === isNaN("Goodbye"); //true
+[1, 2, 3] === [1, 2, 3]; //false. Array objects are not equal. The elements of the
+//objects might be equal but objects point at different locations in memory.
+//Only if the operants (variable names) point to the same object, then the outcome is true.
+"Hello there".match(/Hello/)[0] === "Hello there".replace(/ there/, ""); //true
+//What is being compared is the product of the methods, not the methods themselves.
+null == undefined //true
+null === undefined //false
 
-/* BOOLEAN OPERATORS
+
+/* BOOLEAN (LOGICAL) OPERATORS
   -
 */
 
@@ -173,7 +191,7 @@ x *= y //=> the value of x becomes 30
 
 
 GOOD RESOURCES FOR READING AND PRACTICING
-https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#Assignment
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators
 */
 
 
