@@ -47,10 +47,6 @@ In JavaScript, primitive are the data types that are not objects.
 
 //1. What will the following pieces of code return?
 true; //==> true
-true || false; //==> true
-false || true; //==> true
-true && false; //==> false
-true && (true || false); //==> true
 5 > 7; //==> false
 5 == "5"; //==> true (truthy value. values are the same, the data types are different)
 5 === "5"; //==> false (false value. values are the same, the data types are different)
@@ -182,15 +178,42 @@ null === undefined //false
 
 
 /* BOOLEAN (LOGICAL) OPERATORS
-  -
+  - The logical operators return one of the values of the operands.
 */
 
+//1. What do the following values return when we use logical operators?
+true || false; //==> true
+false || true; //==> true
+true && false; //==> false
+false && false; //==> false
+true && (true || false); //==> true
+undefined || "hello"; //==> hello
+undefined && null; //==> undefined because undefined is stated first as an operand.
+null && undefined; //==> null because null is stated first as an operand.
 
-/* STRING OPERATORS
-  -
+//In the following cases, null, undefined and "" equalize each other depending on the order used as operands
+undefined || null; //==> null
+null || undefined //==> undefined
+undefined || "" //==> ""
+"" || undefined //==> undefined
+"" || null; //==> null.
+null || ""; //==> ""
+var x; //No value assigned so this is undefined.
+x || null; //==> null
 
 
-GOOD RESOURCES FOR READING AND PRACTICING
+/*
+*STRING OPERATORS
+  - The string operators are used to offer concatenation to the strings.
+*/
+
+//1. What will the following values return?
+var str = "Hello!"
+str + " So good to see you"; //==> "Hello! So good to see you"
+str += " I am glad you are here!";
+str; //==> Hello! I am glad you are here!
+
+/*GOOD RESOURCES FOR READING AND PRACTICING
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators
 */
 
