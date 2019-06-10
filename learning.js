@@ -15,7 +15,7 @@ In JavaScript, primitive are the data types that are not objects.
 */
 
 //1. Can you write a string?
-"Hello, I am a string"
+"Hello, I am a string";
 //2. Can you write a method to change the string to something else?
 "Hello, I am a string".toUpperCase();
 
@@ -220,20 +220,74 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Op
 
 
 
-
-
-
+/*
+------------
+OBJECTS
+------------
+  - In javaScript, an object is a collection of properties.
+  - Each object property is constituted by a name (key) and a value, or an index and a value.
+  - In javaScript, everything that is not a primitive data type is an object type. That
+  includes object literals, arrays and functions.
 
 
 /*
-WHAT IS IT?
-CAN YOU GIVE ME AN EXAMPLE OF CODE TO WRITE?
-CAN YOU REMEMBER IF YOU HAVE USED IT WHILE WORKING?*/
+* OBJECTS
+  - Objects are sets of properties and methods.
+  - Each property is constituted by a string key and a value.
+  - Each method is constituted by a string key and a function.
+*/
+
+//1. Create an object with two properties and a method.
+var person = {
+  name: "John",
+  surname: "Smith",
+  sayHi: function() {
+    return "Hello, my name is John!"
+  }
+}
+//2. Call the name of the person object.
+person.name; //==> "John"
+//3. Make the person object say hi.
+person.sayHi(); //==> "Hello, my name is John"
+
+
 /*
-- OBJECTS
-  * Arrays
-  * Object literals
-  * Functions
+* ARRAYS
+  - Arrays are objects that are structured in a list like setting.
+  - Each one of the elements of the array can be called by:
+    - Calling the array
+    - Calling the index position of the particular element
+  - The array's index starts from 0 and ends at the length of the array minus 1.
+  - The elements of the array can be any javascript datatype (ex, numbers, strings,
+  null, functions, booleans, other arrays, objects etc)
+*/
+
+//1. Create an array with five random numbers.
+var arr = [2, 4, 6, 8, 10];
+//2. Can you call the fourth element of the array?
+arr[0]; //==> 2
+arr[1]; //==> 4
+arr[2]; //==> 6
+arr[3]; //==> 8 (This is the fourth element of the array)
+arr[4]; //==> 10
+//3. Can you subtract the fourth element of the array from the third element of the array?
+arr[3] - arr[2]; //8 - 6 = 2
+//4. Can you create an array with two elements that are both objects?
+var objectsArr = [
+  {name: "John", surname: "Doe", age: 33},
+  {name: "Jane", surname: "Smith", age: 44}
+];
+//5. How can you call the second element of the above array?
+objectsArr[1]; //==> {name: "Jane", surname: "Smith", age: 44}
+//6. How can you call the "age" property of the second element of the above array?
+objectsArr[1].age;
+
+
+/*
+* FUNCTIONS
+  - Functions are types of objects that are used for the execution of proceedures
+  or the calculation of values.
+  - When functions are inside objects, they are called "methods".
 */
 
 
