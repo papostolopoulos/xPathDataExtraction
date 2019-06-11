@@ -387,6 +387,15 @@ function transform(data){
 }
 
 
+view deal|Make sure what you|®
+REDEEM NOW|SIGN UP NOW|TELL ME MORE|find a store|join now|print now|add to cart
+shop now|GET COUPON|GET STARTED|Learn more|See details.|Print coupon|view images
+over\s[0-9,]+\sbought|Thanks for signing up.*|^For members who.*|^You are receiving.*|^always\sbe\sready\sto|^[1234]$|^save now$
+\*|.*important.*|†|\^|®\s\.|^free$|^free\sshipping$|^reward$|^110percent$|Apply\snow$|^unbeatable.*|^backed.*|^HP.*Toner$|Inkjet\sprinters$|^Chairs?$|^Thanks for.*|^Hurry.*
+^PRINT\.|^KEEP THE|^Monitors$|.*free\strial.*|.*and\smore\.|Order\sby.*|(use\s)?coupon\scode.*|\d{15,20}\.?|.*us again\.$|for you\.$|^Start saving$|^Coupon$
+
+
+
 /*
 2. Consolidate all the different regular expressions together, depending on
 if you are modifying:
@@ -399,13 +408,20 @@ if you are modifying:
 function transform(data){
   if(data)
     return data
-    .replace(/.*(2017\,|Online\sonly\.|Free next|stress-free|fast and free|110%|100%).*/,"") //.*Remove whole string..*
-    .replace(/(Save\stime|Take\sthe\sstress|Ends \d|Expires \d).*/,"") //Remove the end of the string
+    .replace(/.*(2017\,|Online\sonly\.|Free next|stress-free|fast and free|110%|100%|free\strial).*/,"") //.*Remove whole string..*
+    .replace(/(Save\stime|Take\sthe\sstress|Ends \d|Expires \d|Thanks for signing up).*/,"") //Remove the end of the string
+    .replace(/view deal|Make sure what you|®|REDEEM NOW|SIGN UP NOW|TELL ME MORE|find a store|join now|print now|add to cart|shop now|GET COUPON|GET STARTED|Learn more|See details.|Print coupon|view images|\*/, "") //Remove part of the string in the middle
     .replace(/(.*)(Now\:\s+\$\d+\.\d+)(.*)/,"$1$2") //Replace part of the string
     .replace(/((\$)(\s+|\n)(\d+)|(\d+)(\s+|\n)(%))/gmi,"$1$3") //Replace part of the string
   else
     return null;
 }
+
+
+
+over\s[0-9,]+\sbought|^For members who.*|^You are receiving.*|^always\sbe\sready\sto|^[1234]$|^save now$
+|.*important.*|†|\^|®\s\.|^free$|^free\sshipping$|^reward$|^110percent$|Apply\snow$|^unbeatable.*|^backed.*|^HP.*Toner$|Inkjet\sprinters$|^Chairs?$|^Thanks for.*|^Hurry.*
+^PRINT\.|^KEEP THE|^Monitors$||.*and\smore\.|Order\sby.*|(use\s)?coupon\scode.*|\d{15,20}\.?|.*us again\.$|for you\.$|^Start saving$|^Coupon$
 
 
 /*
@@ -422,8 +438,8 @@ function transform(data){
   if(!data) return null;
 
   var replaceArr = [
-    //FULL DESCRIPTION REMOVAL
-    //{oldStr: /.*().*/, newStr: ""}, //.*Full text removal.*
+    //FULL STRING REMOVAL
+    //{oldStr: /.*().*/, newStr: ""}, //.*Remove the whole string.*
     //{oldStr: /^().*/i, newStr: ""}, //^Starts with something specific, ends with something- anything.*
     //{oldStr: /.*()$/i, newStr: ""}, //.*Starts with something-anything, ends with something specific$
     //{oldStr: /^()$/, newStr: ""}, //^Starts with something specific and ends with something specific$
