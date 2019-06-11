@@ -369,7 +369,7 @@ over\s[0-9,]+\sbought|Thanks for signing up.*|^For members who.*|^You are receiv
 
 
 /*
-ALTERNATIVE FORMAT
+ALTERNATIVE FORMAT 1
   1. Separate each method on a different line to make it more readable
 */
 
@@ -408,32 +408,80 @@ if you are modifying:
 function transform(data){
   if(data)
     return data
-    .replace(/.*(2017\,|Online\sonly\.|Free next|stress-free|fast and free|110%|100%|free\strial).*/,"") //.*Remove whole string..*
-    .replace(/(Save\stime|Take\sthe\sstress|Ends \d|Expires \d|Thanks for signing up).*/,"") //Remove the end of the string
-    .replace(/view deal|Make sure what you|®|REDEEM NOW|SIGN UP NOW|TELL ME MORE|find a store|join now|print now|add to cart|shop now|GET COUPON|GET STARTED|Learn more|See details.|Print coupon|view images|\*/, "") //Remove part of the string in the middle
-    .replace(/(.*)(Now\:\s+\$\d+\.\d+)(.*)/,"$1$2") //Replace part of the string
-    .replace(/((\$)(\s+|\n)(\d+)|(\d+)(\s+|\n)(%))/gmi,"$1$3") //Replace part of the string
+    .replace(/.*(Free next|stress-free|fast and free|110%|100%|free\s*trial).*/i, "")
+    .replace(/^(You\s*are\s*receiving|unbeatable|Thanks\s*for|backed).*/i, "")
+    .replace(/.*(us again\.)$/i, "")
+    .replace(/^([1234]|save now|110percent|Monitors|reward|Start saving|Coupon|HP.*Toner|Chairs?|Hurry)$/i, "")
+    .replace(/^(always\s*be\s*ready\s*to|For members who.*|PRINT\.|KEEP THE)/i, "")
+    .replace(/.*(2017\,|and\smore\.)/i, "")
+    .replace(/(Apply\s*now|for\s*you\.|Inkjet\s*printers)$/i, "")
+    .replace(/(Thanks for signing up|Ends \d|Expires \d|Order\sby|Save\s*time|Take\s*the\s*stress|Online\sonly\.|(use\s)?coupon\scode.*).*/i, "")
+    .replace(/\*|\†|\^|®\s\.|view\s*deal|Make\s*sure\s*what\s*you|®|REDEEM\s*NOW|SIGN\s*UP\s*NOW|TELL\s*ME\s*MORE|find\s*a\s*store|join\s*now|print\s*now|add\s*to\s*cart|shop\s*now|GET\s*COUPON|GET\s*STARTED|Learn\s*more|See\s*details.|Print\s*coupon|view\s*images|over\s*[0-9,]+\s*bought|\d{15,20}\.?/i, "")
+    .replace(/((\d+)(\s+|\n)(%)|(\$)(\s+|\n)(\d+))/gmi, "$1$3")
+    .replace(/(.*)(Now\:\s+\$\d+\.\d+)(.*)/, "$1$2");
+
   else
     return null;
 }
-
-
-
-over\s[0-9,]+\sbought|^For members who.*|^You are receiving.*|^always\sbe\sready\sto|^[1234]$|^save now$
-|.*important.*|†|\^|®\s\.|^free$|^free\sshipping$|^reward$|^110percent$|Apply\snow$|^unbeatable.*|^backed.*|^HP.*Toner$|Inkjet\sprinters$|^Chairs?$|^Thanks for.*|^Hurry.*
-^PRINT\.|^KEEP THE|^Monitors$||.*and\smore\.|Order\sby.*|(use\s)?coupon\scode.*|\d{15,20}\.?|.*us again\.$|for you\.$|^Start saving$|^Coupon$
 
 
 /*
 3. Comment each method, explaining how the different regular expressions are grouped
 */
 
+function transform(data){
+  if(data)
+    return data
+    .replace(/.*(Free next|stress-free|fast and free|110%|100%|free\s*trial).*/i, "") //.*Full text removal.*
+    .replace(/^(You\s*are\s*receiving|unbeatable|Thanks\s*for|backed).*/i, "") //^Starts with something specific, ends with something- anything
+    .replace(/.*(us again\.)$/i, "") //.*Starts with something-anything, ends with something specific$
+    .replace(/^([1234]|save now|110percent|Monitors|reward|Start saving|Coupon|HP.*Toner|Chairs?|Hurry)$/i, "") //^Starts with something specific and ends with something specific$
+    .replace(/^(always\s*be\s*ready\s*to|For members who.*|PRINT\.|KEEP THE)/i, "") //^Starts with Something specific
+    .replace(/.*(2017\,|and\smore\.)/i, "") //.*Starts with something - anything
+    .replace(/(Apply\s*now|for\s*you\.|Inkjet\s*printers)$/i, "") //Ends with something specific$
+    .replace(/(Thanks for signing up|Ends \d|Expires \d|Order\sby|Save\s*time|Take\s*the\s*stress|Online\sonly\.|(use\s)?coupon\scode.*).*/i, "") //Ends with something-anything.*
+    .replace(/\*|\†|\^|®\s\.|view\s*deal|Make\s*sure\s*what\s*you|®|REDEEM\s*NOW|SIGN\s*UP\s*NOW|TELL\s*ME\s*MORE|find\s*a\s*store|join\s*now|print\s*now|add\s*to\s*cart|shop\s*now|GET\s*COUPON|GET\s*STARTED|Learn\s*more|See\s*details.|Print\s*coupon|view\s*images|over\s*[0-9,]+\s*bought|\d{15,20}\.?/i, "") //somewhere in the middle
+    .replace(/((\d+)(\s+|\n)(%)|(\$)(\s+|\n)(\d+))/gmi, "$1$3")
+    .replace(/(.*)(Now\:\s+\$\d+\.\d+)(.*)/, "$1$2");
+
+  else
+    return null;
+}
+
 
 /*
-4. Get rid of the "else" statement and put || instead. Refer to the notes earlier
-for the logical operators. undefined || null returns null.
+4. Get rid of the "else" statement. If the data is undefined, then null will be returned anyway
 */
 
+function transform(data){
+  if(data)
+    return data
+    .replace(/.*(Free next|stress-free|fast and free|110%|100%|free\s*trial).*/i, "") //.*Full text removal.*
+    .replace(/^(You\s*are\s*receiving|unbeatable|Thanks\s*for|backed).*/i, "") //^Starts with something specific, ends with something- anything
+    .replace(/.*(us again\.)$/i, "") //.*Starts with something-anything, ends with something specific$
+    .replace(/^([1234]|save now|110percent|Monitors|reward|Start saving|Coupon|HP.*Toner|Chairs?|Hurry)$/i, "") //^Starts with something specific and ends with something specific$
+    .replace(/^(always\s*be\s*ready\s*to|For members who.*|PRINT\.|KEEP THE)/i, "") //^Starts with Something specific
+    .replace(/.*(2017\,|and\smore\.)/i, "") //.*Starts with something - anything
+    .replace(/(Apply\s*now|for\s*you\.|Inkjet\s*printers)$/i, "") //Ends with something specific$
+    .replace(/(Thanks for signing up|Ends \d|Expires \d|Order\sby|Save\s*time|Take\s*the\s*stress|Online\sonly\.|(use\s)?coupon\scode.*).*/i, "") //Ends with something-anything.*
+    .replace(/\*|\†|\^|®\s\.|view\s*deal|Make\s*sure\s*what\s*you|®|REDEEM\s*NOW|SIGN\s*UP\s*NOW|TELL\s*ME\s*MORE|find\s*a\s*store|join\s*now|print\s*now|add\s*to\s*cart|shop\s*now|GET\s*COUPON|GET\s*STARTED|Learn\s*more|See\s*details.|Print\s*coupon|view\s*images|over\s*[0-9,]+\s*bought|\d{15,20}\.?/i, "") //somewhere in the middle
+    .replace(/((\d+)(\s+|\n)(%)|(\$)(\s+|\n)(\d+))/gmi, "$1$3")
+    .replace(/(.*)(Now\:\s+\$\d+\.\d+)(.*)/, "$1$2");
+
+    return null;
+}
+
+
+
+/*
+ALTERNATIVE FORMAT 2
+  - In this method, all the regular expressions become properties of object.
+  - All these different objects are elements of an array.
+  - The .replace method is happening repeatedly inside a for loop.
+  - The for loop is responsible for itterating through the array and calling the
+  different object elements.
+
+*/
 function transform(data){
   if(!data) return null;
 
@@ -459,6 +507,24 @@ function transform(data){
   return data;
 }
 
+
+/*
+ABOUT THE FOR LOOP
+  - The for loop is a statement that can be used to iterate through the elements
+  of a string or an array.
+  - At the beginning of the for loop, there is a numeric variable that is used as
+  the index number that helps us iterate through the different elements of the array.
+*/
+
+//1. Create a for loop that logs (prints) all the elements of an array.
+var arr = ["Hello", "how", "are", "you?"]
+for (var i = 0; i < arr.length; i++) {
+  console.log(arr[i]);
+}
+//i =  0, therefore arr[i] === arr[0] === Hello
+//i =  1, therefore arr[i] === arr[1] === how
+//i =  2, therefore arr[i] === arr[2] === are
+//i =  3, therefore arr[i] === arr[3] === you?
 
 
 
@@ -487,17 +553,3 @@ function transform(data){
 
   return data;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-https://www.sololearn.com/Play/JavaScript
