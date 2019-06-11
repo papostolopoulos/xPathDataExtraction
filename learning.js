@@ -46,10 +46,10 @@ In JavaScript, primitive are the data types that are not objects.
 */
 
 //1. What will the following pieces of code return?
-true; //==> true
-5 > 7; //==> false
-5 == "5"; //==> true (truthy value. values are the same, the data types are different)
-5 === "5"; //==> false (false value. values are the same, the data types are different)
+true; // --> true
+5 > 7; // --> false
+5 == "5"; // --> true (truthy value. values are the same, the data types are different)
+5 === "5"; // --> false (false value. values are the same, the data types are different)
 
 //2. Can you think of a time that you use booleans in your code writting?
 var string = "I am a string"
@@ -79,7 +79,7 @@ return null;
 */
 
 //1. Define a variable named x and call it. What will javaScript return?
-var x; //==> undefined
+var x; // --> undefined
 
 
 
@@ -165,7 +165,7 @@ x *= y //=> the value of x becomes 30
 5 === "5"; //false because this is a comparison by data type and value
 +0 === -0; //true
 NaN === NaN; //false because NaN represents a value that inherits the Number objects
-//properties but does not mean that that is is equal to some other value that is NaN
+//properties. It does not mean that is is equal to some other value that is NaN
 false === false; //true
 isNaN("Hello") === isNaN("Goodbye"); //true
 [1, 2, 3] === [1, 2, 3]; //false. Array objects are not equal. The elements of the
@@ -182,24 +182,24 @@ null === undefined //false
 */
 
 //1. What do the following values return when we use logical operators?
-true || false; //==> true
-false || true; //==> true
-true && false; //==> false
-false && false; //==> false
-true && (true || false); //==> true
-undefined || "hello"; //==> hello
-undefined && null; //==> undefined because undefined is stated first as an operand.
-null && undefined; //==> null because null is stated first as an operand.
+true || false; // --> true
+false || true; // --> true
+true && false; // --> false
+false && false; // --> false
+true && (true || false); // --> true
+undefined || "hello"; // --> hello
+undefined && null; // --> undefined because undefined is stated first as an operand.
+null && undefined; // --> null because null is stated first as an operand.
 
 //In the following cases, null, undefined and "" equalize each other depending on the order used as operands
-undefined || null; //==> null
-null || undefined //==> undefined
-undefined || "" //==> ""
-"" || undefined //==> undefined
-"" || null; //==> null.
-null || ""; //==> ""
+undefined || null; // --> null
+null || undefined // --> undefined
+undefined || "" // --> ""
+"" || undefined // --> undefined
+"" || null; // --> null.
+null || ""; // --> ""
 var x; //No value assigned so this is undefined.
-x || null; //==> null
+x || null; // --> null
 
 
 /*
@@ -209,9 +209,9 @@ x || null; //==> null
 
 //1. What will the following values return?
 var str = "Hello!"
-str + " So good to see you"; //==> "Hello! So good to see you"
+str + " So good to see you"; // --> "Hello! So good to see you"
 str += " I am glad you are here!";
-str; //==> Hello! I am glad you are here!
+str; // --> Hello! I am glad you are here!
 
 /*GOOD RESOURCES FOR READING AND PRACTICING
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators
@@ -246,9 +246,9 @@ var person = {
   }
 }
 //2. Call the name of the person object.
-person.name; //==> "John"
+person.name; // --> "John"
 //3. Make the person object say hi.
-person.sayHi(); //==> "Hello, my name is John"
+person.sayHi(); // --> "Hello, my name is John"
 
 
 /*
@@ -265,22 +265,22 @@ person.sayHi(); //==> "Hello, my name is John"
 //1. Create an array with five random numbers.
 var arr = [2, 4, 6, 8, 10];
 //2. Can you call the fourth element of the array?
-arr[0]; //==> 2
-arr[1]; //==> 4
-arr[2]; //==> 6
-arr[3]; //==> 8 (This is the fourth element of the array)
-arr[4]; //==> 10
+arr[0]; // --> 2
+arr[1]; // --> 4
+arr[2]; // --> 6
+arr[3]; // --> 8 (This is the fourth element of the array)
+arr[4]; // --> 10
 //3. Can you subtract the fourth element of the array from the third element of the array?
-arr[3] - arr[2]; //8 - 6 = 2
+arr[3] - arr[2]; // --> 8 - 6
 //4. Can you create an array with two elements that are both objects?
 var objectsArr = [
   {name: "John", surname: "Doe", age: 33},
   {name: "Jane", surname: "Smith", age: 44}
 ];
 //5. How can you call the second element of the above array?
-objectsArr[1]; //==> {name: "Jane", surname: "Smith", age: 44}
+objectsArr[1]; // --> {name: "Jane", surname: "Smith", age: 44}
 //6. How can you call the "age" property of the second element of the above array?
-objectsArr[1].age;
+objectsArr[1].age; // --> 44
 
 
 /*
@@ -288,17 +288,68 @@ objectsArr[1].age;
   - Functions are types of objects that are used for the execution of proceedures
   or the calculation of values.
   - When functions are inside objects, they are called "methods".
+  - Functions can be invoked many different times with different sets of arguments.
+*/
+
+//1. Create a function that takes two string parameters, one for language and one for name.
+//These two arguments have to be returned as a concatenated string.
+function sayHi(lan, name){
+  return lan + name;
+}
+//2. Invoke the above function with different sets of arguments.
+var enHi = "Hi, my name is ";
+var esHi = "Hola mi nombre es ";
+var name1 = "Rick";
+var name2 = "Liz";
+
+sayHi(enHi, name2);
+sayHi(esHi, name1);
+
+
+
+
+
+
+/*
+------------------------------------------------------------------------
+// WHY DO THE ABOVE MATTER?
+// HOW CAN THEY HELP US THINK DIFFERENT WAYS WE WRITE THE SDE RULES?
+------------------------------------------------------------------------
+  - When we write SDE rules, there are cases where we need to change the "data" string.
+  - A common way to accomplish that is by using some built in javaScript methods like:
+    - .replace();
+    - .match();
+    - .trim();
+    - .exec();
+    - .substring();
+    - .split();
+    - .join();
+    - .slice();
+  - Since we get several strings from different emails, we have to capture all the
+  different scenarions and do string modifications.
+  - Yet, adding a lot of methods in a function, combined with a lot of regular expressions
+  can result in
+    - Difficult to manage code
+    - Code that when revisited, it is hard to understand which logic was followed
+    - The code is not always performant. The same code can be written in different
+    more effective ways.
 */
 
 
 
-function transform() {
-  console.log("5." + false || true);
-}
 
-
-
-//USE THIS AS AN EXAMPLE. SHOW PEOPLE HOW THEY CAN USE AN ARRAY WITH OBJECTS TO SIMPLIFY THIS FORMAT
+/*
+EXAMPLE
+  - In the following example, there is a function that has several .replace() methods
+  concatenated with each other.
+  Moreover, addigional blacklisted strings were added in the blacklist for a
+  linkbased rule.
+  - The way that the function and the blacklisted items are structured, it is
+  difficult to revisit the code and do modifications if needed.
+  - Also it is more likely to have duplications or errors in the way the regular
+  expressions are concatenated since there is no relationship between the different
+  strings
+*/
 function transform(data){
   if(data)
     return data.replace(/Save\stime.*|Take\sthe\sstress.*/,"").replace(/.*2017\,|Online\sonly\..*/,"").replace(/(.*)(Now\:\s+\$\d+\.\d+)(.*)/,"$1$2").replace(/(\d+)(\s+|\n)(%)/gmi,"$1$3").replace(/(\$)(\s+|\n)(\d+)/gmi,"$1$3").replace(/.*(Free next|stress-free|fast and free|110%|100%).*/i,"").replace(/(Ends \d|Expires \d).*/,"");
@@ -316,21 +367,70 @@ over\s[0-9,]+\sbought|Thanks for signing up.*|^For members who.*|^You are receiv
 
 
 
-//Emphasize how you can comment out specific parts of your code (like inside the array)
-//so you can properly debug it.
+
+/*
+ALTERNATIVE FORMAT
+  1. Separate each method on a different line to make it more readable
+*/
+
+function transform(data){
+  if(data)
+    return data.replace(/Save\stime.*|Take\sthe\sstress.*/,"")
+    .replace(/.*2017\,|Online\sonly\..*/,"")
+    .replace(/.*(Free next|stress-free|fast and free|110%|100%).*/i,"")
+    .replace(/(Ends \d|Expires \d).*/,"");
+    .replace(/(.*)(Now\:\s+\$\d+\.\d+)(.*)/,"$1$2")
+    .replace(/(\d+)(\s+|\n)(%)/gmi,"$1$3")
+    .replace(/(\$)(\s+|\n)(\d+)/gmi,"$1$3")
+  else
+    return null;
+}
 
 
+/*
+2. Consolidate all the different regular expressions together, depending on
+if you are modifying:
+  - The whole string
+  - The beginning of the string
+  - The end of the string
+  - The middle of the string
+*/
+
+function transform(data){
+  if(data)
+    return data
+    .replace(/.*(2017\,|Online\sonly\.|Free next|stress-free|fast and free|110%|100%).*/,"") //.*Remove whole string..*
+    .replace(/(Save\stime|Take\sthe\sstress|Ends \d|Expires \d).*/,"") //Remove the end of the string
+    .replace(/(.*)(Now\:\s+\$\d+\.\d+)(.*)/,"$1$2") //Replace part of the string
+    .replace(/((\$)(\s+|\n)(\d+)|(\d+)(\s+|\n)(%))/gmi,"$1$3") //Replace part of the string
+  else
+    return null;
+}
+
+
+/*
+3. Comment each method, explaining how the different regular expressions are grouped
+*/
+
+
+/*
+4. Get rid of the "else" statement and put || instead. Refer to the notes earlier
+for the logical operators. undefined || null returns null.
+*/
 
 function transform(data){
   if(!data) return null;
 
   var replaceArr = [
+    //FULL DESCRIPTION REMOVAL
     //{oldStr: /.*().*/, newStr: ""}, //.*Full text removal.*
     //{oldStr: /^().*/i, newStr: ""}, //^Starts with something specific, ends with something- anything.*
     //{oldStr: /.*()$/i, newStr: ""}, //.*Starts with something-anything, ends with something specific$
     //{oldStr: /^()$/, newStr: ""}, //^Starts with something specific and ends with something specific$
-    //{oldStr: /^()/, newStr: ""}, //^Starts with Something specific
+
+    //PARTIAL STRING REMOVAL
     //{oldStr: /.*()/, newStr: ""}, //.*Starts with something - anything
+    //{oldStr: /^()/, newStr: ""}, //^Starts with Something specific
     //{oldStr: /()$/, newStr: ""}, //Ends with something specific$
     //{oldStr: /().*/, newStr: ""}, //Ends with something-anything.*
     //{oldStr: /()/, newStr: ""}, //somewhere in the middle
@@ -339,10 +439,6 @@ function transform(data){
   for (var i = 0; i < replaceArr.length; i++) {
     data = data.replace(replaceArr[i].oldStr, replaceArr[i].newStr);
   }
-
-  // replaceArr.forEach(function(el){
-  // 	data = data.replace(el.oldStr, el.newStr).trim();
-  // });
 
   return data;
 }
@@ -367,12 +463,11 @@ function transform(data){
     {oldStr: /\*|\†|\^|®\s\.|view\s*deal|Make\s*sure\s*what\s*you|®|REDEEM\s*NOW|SIGN\s*UP\s*NOW|TELL\s*ME\s*MORE|find\s*a\s*store|join\s*now|print\s*now|add\s*to\s*cart|shop\s*now|GET\s*COUPON|GET\s*STARTED|Learn\s*more|See\s*details.|Print\s*coupon|view\s*images|over\s*[0-9,]+\s*bought|\d{15,20}\.?/i, newStr: ""}, //somewhere in the middle
     {oldStr: /((\d+)(\s+|\n)(%)|(\$)(\s+|\n)(\d+))/gmi, newStr: "$1$3"},
     {oldStr: /(.*)(Now\:\s+\$\d+\.\d+)(.*)/, newStr: "$1$2"},
-    {oldStr: //, newStr: ""},
   ];
 
-  replaceArr.forEach(function(el){
-  	data = data.replace(el.oldStr, el.newStr).trim();
-  });
+  for (var i = 0; i < replaceArr.length; i++) {
+    data = data.replace(replaceArr[i].oldStr, replaceArr[i].newStr);
+  }
 
   return data;
 }

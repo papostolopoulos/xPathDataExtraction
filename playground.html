@@ -1,1299 +1,950 @@
-<!--  --><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
- <head>
-
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta name="viewport" content="initial-scale=1.0,width=device-width">
-  <title></title>
-  <style type="text/css">
-@media only screen and (min-width:601px) {
-        .rollover:hover > img,
-        * [summary=rollover]:hover > img{
-          max-height: 0px !important;
-        }
-        .rollover:hover > div img,
-        * [summary=rollover]:hover > div img{
-          max-height: none !important;
-        }
-}
-</style>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width">
 <style type="text/css">
-
-    /* SUPER TEMPLATE CSS STYLES APPLIED TO ALL SENDS */
-
-    /* EMAIL CLIENT RESETS */
-    .ReadMsgBody { width: 100%; }
-    .ExternalClass { width:100%; }
-    .ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div {
-        line-height: 100%;
-    }
-    #outlook a { padding:0; }
-    p { margin: 1em 0; }
-    a img { border:0 none; }
-    h1, h2, h3, h4, h5, h6 { color: #000001 !important; }
-    h1 a, h2 a, h3 a, h4 a, h5 a, h6 a { color: #0000FF !important; }
-    table td { border-collapse: collapse; }
-    table { border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; }
-    @-ms-viewport{
-        width: device-width;
-    }
-    div[style*="margin: 16px 0"] { margin:0 !important; }
-    /*Above code is designed to remove left padding in Android Kit-Kat.
-        https://litmus.com/community/code/4194-why-is-email-not-centered-on-android-4-4*/
-
-    a[x-apple-data-detectors] {
-        color: inherit !important;
-        text-decoration: none !important;
-        font-size: inherit !important;
-        font-family: inherit !important;
-        font-weight: inherit !important;
-        line-height: inherit !important;
-    }
-    /*EMAIL CLIENT RESETS_ENDS*/
-
-
-
-    div.hideMyAmp {
-        display:none;
-        font-size:0;
-        line-height:0;
-        mso-hide:all;
-    }
-    html, body {
-        overflow-x: visible;
-        margin:0;
-        padding:0;
-        font-family:arial,sans-serif;
-    }
-
-    a:link {
-        text-decoration: none;
-        color: #000000;
-    }
-
-    a:visited {
-        text-decoration: none;
-    color: #000000;
-    }
-
-    a:hover {
-        text-decoration: none;
-        color: #000000;
-    }
-
-    a:active {
-        text-decoration: none;
-        color: #000000;
-    }
-
-    .gendernavdesktop {
-        padding-left: 10px;
-    }
-
-    table {
-        mso-table-lspace:0pt;
-        mso-table-rspace:0pt;
-        border-collapse: collapse;
-    }
-
-    /* WEB FONTS */
-    @font-face {
-    font-family: 'blender-bold';
-    src:  url('https://www.fanatics.com/content/content/common/fonts/blender-bold.woff') format('woff'),
-          url('https://www.fanatics.com/content/content/common/fonts/blender-bold.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    }
-
-
-    .CustomFont {
-   font-family:'blender-bold', Arial, sans-serif !important;
-    }
-
-
-
-    /* DESKTOP ONLY CLASSES */
-    @media only screen and (min-width:601px) {
-      .desktop-only {
-        display: block !important;
-      }
-      .mobile-only {
-        display: none !important;
-      }
-      .desktopfont {
-          font-size: 14px !important;
-          text-decoration: underline;
-      }
-    }
-
-
-    /* MOBILE CLASSES */
-    @media screen and (max-width: 600px) {
-        html, body {
-            width:100% !important;
-            overflow-x: visible !important;
-            margin: 0 auto !important;
-            min-width:320px !important;
-        }
-        table.mobile_image img {
-                width:100% !important;
-                height:auto !important;
-        }
-        table.resetwidth {
-            width: auto !important;
-        }
-        table.bottomBump {
-            margin-bottom:10px !important;
-        }
-        table.twobythree td {
-            width:50% !important;
-        }
-        div.showHiddenNav, div.mobile-show {
-            line-height:100% !important;
-            display:block !important;
-            overflow:visible !important;
-        }
-        div.showHiddenNav img, div.mobile-show img {
-            display:block !important;
-            width:auto !important;
-            height:auto !important;
-        }
-        div.showHiddenNav td, div.mobile-show td {
-            border-bottom:#dedede 1px solid !important;
-            /*display:block !important;*/
-            padding-top:20px !important;
-            padding-bottom:20px !important;
-        }
-        div.showHiddenNav td::last-of-type, div.mobile-show td::last-of-type {
-            border-bottom:#ffffff 1px solid !important;
-        }
-        td.drop,th.drop,td.stack {
-            display:block !important;
-            width:100% !important;
-        }
-        td.removePadding {
-            padding: 0 !important;
-        }
-        td.font_changeto12px {
-            font-size:12px !important;
-        }
-        td.mobile_padding {
-            padding:0 0% !important;
-        }
-        img.mobile_image {
-            width:100% !important;
-            height:auto !important;
-        }
-        .gendernav {
-            font-size:35px !important;
-            width:100% !important;
-            height:auto !important;
-            line-height:40px !important;
-            text-align:center !important;
-            padding-left:0px !important;
-        }
-
-        *.hideThis,*.hide_this,*.mobile-hidden {
-            display:none !important;
-            visibility: hidden !important;
-            font-size:0 !important;
-        }
-
-        @-ms-viewport {
-        width: 320px;
-        }
-        @viewport {
-          width: 320px;
-        }
-        .mobile-only {
-          display: block !important;
-        }
-        .desktop-only {
-          display: none !important;
-        }
-
-    }
-
-
-    /* MJML general styling */
-     #outlook a { padding: 0; }
-     .ReadMsgBody { width: 100%; }
-     .ExternalClass { width: 100%; }
-     .ExternalClass * { line-height:100%; }
-     body { margin: 0; padding: 0; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
-     table, td { border-collapse:collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
-     img { border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; }
-     p { display: block; margin: 13px 0; }
-  </style>
-  <!--[if !mso]><!-->
-  <style type="text/css">
-     @media only screen and (max-width:600px) {
-     @-ms-viewport { width:320px; }
-     @viewport { width:320px; }
-     }
-  </style>
-  <!--<![endif]-->
-  <!--[if mso]>
-  <xml>
-     <o:OfficeDocumentSettings>
-        <o:AllowPNG/>
-        <o:PixelsPerInch>96</o:PixelsPerInch>
-     </o:OfficeDocumentSettings>
-  </xml>
-  <![endif]-->
-  <!--[if lte mso 11]>
-  <style type="text/css">
-     .outlook-group-fix {
-     width:100% !important;
-     }
-  </style>
-  <![endif]-->
-  <style type="text/css">
-     @media only screen and (min-width:601px) {
-     .mj-column-per-100 { width:100%!important; }
-     .mj-column-per-100 { width:100%!important; }
-     .mj-column-per-33 { width:33.333333333333336%!important; }
-     }
-</style>
-<!--[if mso]>
-<style>
-
-</style>
-<![endif]-->
- </head>
- <body width="100%" style="padding:0px; margin:0px;"><style type="text/css">
-div.preheader
-{ display: none !important; }
-</style>
-<div class="preheader" style="font-size: 1px; display: none !important;"></div>
-  <!--Content Block 'CampaignVariables' (Subject Line and Preheader)-->
-
-
-  <!--/Content Block 'CampaignVariables' (Subject Line and Preheader)-->
-  <table width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="" style="background-color:">
-   <tbody>
-    <tr>
-     <td valign="top" align="center">
-      <table width="600" cellspacing="0" cellpadding="0" border="0" bgcolor="">
-       <tbody>
-        <tr>
-         <td valign="top" align="center">
-<table cellpadding="0" cellspacing="0" border="0" width="100%">
-    <tr>
-        <td align="center" valign="top">
-            <table cellpadding="0" cellspacing="0" border="0" width="90%">
-                <tr>
-                    <td align="left" valign="top" style="font-family:arial,sans-serif;font-size:10px;color:#666666;line-height:120%;">
-
-                        The Freshest Sports Apparel Styles<br>
-                    </td>
-                </tr>
-            </table>
-        </td>
-    </tr>
-</table>
-
-
-
-
-
-
-<table cellpadding="0" cellspacing="0" border="0" width="100%" bgcolor="#1b1b1d">
-    <tr>
-        <td align="center" valign="top" bgcolor="#1b1b1d">
-
-            <a href="https://cl.exct.net/?qs=99e83978c38390b99dd1a09c1888ed4492adb3b9dd895af50aa37ddf74a527ec81dd4c2c1c02d0fea0aba8a0bdbd89b483707e4e3b364a79045ba7826d33b449" target="_blank" >
-                <img src="http://image.exct.net/lib/fe651570716304757314/m/1/FansEdge_Header.png" alt="FansEdge" width="350" height="100" style="display:inline-block;" border="0" />
-            </a>
-        </td>
-    </tr>
-</table>
-
-
-<table class="mobile-hidden" cellpadding="0" cellspacing="0" border="0" width="100%" class="mobile_image" bgcolor="#1b1b1d">
-    <tr>
-        <td align="left" valign="top">
-
-            <a href="https://cl.exct.net/?qs=99e83978c38390b9d1029f898cda9e89b0b4bd6f072ab8d2b6cfd167b2bb310159014e773a7bc017a886dfaf770e3cc89473a00090cd449673488c53f9d2aa1b"  target="_blank" style="text-decoration: none;color:#000001;">
-            <img src="http://image.exct.net/lib/fe6015707d6c0d7e7415/m/1/DesktopNav_01.png" alt="College" width="110" height="50" style="display:block;border:0px;font-family:arial,sans-serif;color:#000001;font-size:12px;"></a>
-        </td>
-        <td align="left" valign="top">
-
-            <a href="https://cl.exct.net/?qs=99e83978c38390b9254083b64ecc40604abe93f50e37796cbffd2f665e28cb74d58e54234dbb0f84797d3469da4ebf30b60ae4f7162455af89237967e93bba3d"  target="_blank" style="text-decoration: none;color:#000001;">
-            <img src="http://image.exct.net/lib/fe6015707d6c0d7e7415/m/1/DesktopNav_02.png" alt="NFL" width="91" height="50" style="display:block;border:0px;font-family:arial,sans-serif;color:#000001;font-size:12px;"></a>
-        </td>
-        <td align="left" valign="top">
-
-            <a href="https://cl.exct.net/?qs=99e83978c38390b9ae85668512fe636d9537ab3de7a9a5b5d5d6092e736094d24ccd2db77054c58a33c520f0a4ae8736de01d0dc82841a57ede494f5cce29c88"  target="_blank" style="text-decoration: none;color:#000001;">
-            <img src="http://image.exct.net/lib/fe6015707d6c0d7e7415/m/1/DesktopNav_03.png" alt="MLB" width="103" height="50" style="display:block;border:0px;font-family:arial,sans-serif;color:#000001;font-size:12px;"></a>
-        </td>
-        <td align="left" valign="top">
-
-            <a href="https://cl.exct.net/?qs=99e83978c38390b94058c94f8e069fdd426103835682aa61f4659c1b5cd5f258691941c363a2dd93f059f7dc99cad4c5b64e9471a3d1eebb0b1e28a56366094e"  target="_blank" style="text-decoration: none;color:#000001;">
-            <img src="http://image.exct.net/lib/fe6015707d6c0d7e7415/m/1/DesktopNav_04.png" alt="NBA" width="108" height="50" style="display:block;border:0px;font-family:arial,sans-serif;color:#000001;font-size:12px;"></a>
-        </td>
-        <td align="left" valign="top">
-
-            <a href="https://cl.exct.net/?qs=99e83978c38390b9c13c58df551e33ff6ba2244187fa6d5d211e706adca3ff50cefdf74b2e7a28d1db82cf1638d76545df714ed177c89994ca42ec4b848fb1d8"  target="_blank" style="text-decoration: none;color:#000001;">
-            <img src="http://image.exct.net/lib/fe6015707d6c0d7e7415/m/1/DesktopNav_05.png" alt="NHL" width="97" height="50" style="display:block;border:0px;font-family:arial,sans-serif;color:#000001;font-size:12px;"></a>
-        </td>
-        <td align="left" valign="top">
-
-            <a href="https://cl.exct.net/?qs=99e83978c38390b96af300ccb3521af297ea244b4eea4fd0c21c4e0031cd9f605408eba48e70ca6b10d60f600200d4be96c7560f2f8e72061e910075c8fcefb8"  target="_blank" style="text-decoration: none;color:#000001;">
-            <img src="http://image.exct.net/lib/fe6015707d6c0d7e7415/m/1/DesktopNav_06.png" alt="SALE" width="91" height="50" style="display:block;border:0px;font-family:arial,sans-serif;color:#ff0000;font-size:12px;"></a>
-        </td>
-    </tr>
-</table>
-          <!--Content Block 'PromoBanner' (Promo Banner)-->
-          <!--/Content Block 'PromoBanner' (Promo Banner)-->
-          <!--Content Block 'ASpot' (A-Spot)-->
-          <table border="0" cellpadding="0" cellspacing="0" width="100%" align="center">
-           <tbody>
-            <tr>
-             <td valign="top" align="left"> <a href="https://cl.exct.net/?qs=99e83978c38390b98995ab9840244613828aa1e4dd4a3b3317c5084fd1b613a23a014768b2b1727ee0126fd2b3d7169c0c5af9cd55b2b22ea889b68f752897ec" target="_blank" > <img src="http://fanatics.frgimages.com/CompleteMailer/images/WFT/EML19_FE_0602_MD60_EmailFH.jpg" class="mobile_image" style="display:block;" width="600" alt=""></a> </td>
-            </tr>
-           </tbody>
-          </table>
-          <!--/Content Block 'ASpot' (A-Spot)-->
-          <!--Content Block 'FullWidthBanner' (Headline Image 1)-->
-          <!--/Content Block 'FullWidthBanner' (Headline Image 1)-->
-          <!--Content Block 'ProductGrid' (ProductGrid Module 1)-->
-<table cellpadding="0" cellspacing="0" border="0" width="600">
-        <tr>
-            <td colspan="3" style="padding:5px;font-family:Arial,helvetica,sans-serif;font-size:8pt;font-weight:normal;text-align:center;color:#000000;background-color:#ffffff;text-decoration:normal;">
-                Sale prices shown are valid for 6/1/2019 only.
-            </td>
-        </tr>
-    </table>
-
-
-
-
-<div style="width:600px;padding:10px 0px;">
-<table cellpadding="0" cellspacing="0" border="0" width="600" bgcolor="#ffffff">
-    <tr>
-
-
-
-        <td align="center" valign="top" width="200">
-            <table cellpadding="0" cellspacing="0" border="0" width="190">
-                <tr>
-                    <td align="center" valign="top" width="190" style="padding:0px;font-family:Arial,helvetica,sans-serif;font-size:10pt;font-weight:normal;text-align:center;color:#000000;background-color:#ffffff;padding:10px 0px 0px 0px;text-decoration:none;">
-                        <a href="https://cl.exct.net/?qs=99e83978c38390b9fd6ad8a1f5df6355045bbe6e69dba07167371c4d669061565df61675172422f29c92c8ad8f6116c1fa96d1084e013efedc819a77114d81df" >
-                        <img src="http://images.footballfanatics.com/FFImage/thumb.aspx?i=/productImages/_1461000/ff_1461771_xl.jpg&w=380" width="190" align="center" alt="Saginaw Valley State Cardinals 12'' Tier Round Clock"></a>
-                    </td>
-                </tr>
-            </table>
-
-            <table cellpadding="0" cellspacing="0" border="0" width="190">
-                <tr>
-                    <td align="center" valign="top" width="190"  style="padding:0px;font-family:Arial,helvetica,sans-serif;font-size:10pt;font-weight:normal;text-align:center;color:#000000;background-color:#ffffff;">
-                        <a href="https://cl.exct.net/?qs=99e83978c38390b9a38532e1cdabd0a31fb57ed5ee9f34349bfe00f2ec587984cef520ab1042a31ef038fd1b4c54949f36a536eef87c5c30fbdbe0602f7694f5" >
-                        <span style="text-decoration:line-through;">$24.99</span>
-
-                        </a>
-                    </td>
-                </tr>
-            </table>
-            <table cellpadding="0" cellspacing="0" border="0" width="190">
-                <tr>
-                    <td align="center" valign="top" width="190"  style="padding:0px;font-family:Arial,helvetica,sans-serif;font-size:14pt;font-weight:800;text-align:center;color:#F00;background-color:#ffffff;text-decoration:none;">
-                        <a href="https://cl.exct.net/?qs=99e83978c38390b9a38532e1cdabd0a31fb57ed5ee9f34349bfe00f2ec587984cef520ab1042a31ef038fd1b4c54949f36a536eef87c5c30fbdbe0602f7694f5"  style="color:#F00;text-decoration:none;">$6.99</a>
-                    </td>
-                </tr>
-            </table>
-
-
-            <table cellpadding="0" cellspacing="0" border="0" width="190" align="center">
-                <tr>
-                    <td align="center" valign="top" width="190" style="font-family:Arial,helvetica,sans-serif;font-size:10pt;font-weight:normal;text-align:center;color:#000000;background-color:#ffffff;padding:2px 0px 20px 0px;text-decoration:none;">
-                        <a href="https://cl.exct.net/?qs=99e83978c38390b98be249665edb48b7fa2f6743c1d9ebfae17a773d422683f31fac357c6094f89a5b2d4d454d41393189b66c149121d76b238b220124bece0a" style="color:#000000;text-decoration:none;" >Saginaw Valley State Cardinals 12'' Tier Round Clock</a>
-                    </td>
-                </tr>
-            </table>
-
-        </td>
-
-
-
-
-        <td align="center" valign="top" width="200">
-            <table cellpadding="0" cellspacing="0" border="0" width="190">
-                <tr>
-                    <td align="center" valign="top" width="190" style="padding:0px;font-family:Arial,helvetica,sans-serif;font-size:10pt;font-weight:normal;text-align:center;color:#000000;background-color:#ffffff;padding:10px 0px 0px 0px;text-decoration:none;">
-                        <a href="https://cl.exct.net/?qs=99e83978c38390b9ec9508c96aa3265d02c30a69e6f7a7d44663b64ae515975af9ea51008fc2dbb7ad31f53b820f28db655bce3c161bf594b4d5d589d41db57b" >
-                        <img src="http://images.footballfanatics.com/FFImage/thumb.aspx?i=/productImages/_1460000/ff_1460509_full.jpg&w=380" width="190" align="center" alt="Saginaw Valley State Cardinals 4'' Tier Circle Car Magnet"></a>
-                    </td>
-                </tr>
-            </table>
-
-            <table cellpadding="0" cellspacing="0" border="0" width="190">
-                <tr>
-                    <td align="center" valign="top" width="190"  style="padding:0px;font-family:Arial,helvetica,sans-serif;font-size:10pt;font-weight:normal;text-align:center;color:#000000;background-color:#ffffff;">
-                        <a href="https://cl.exct.net/?qs=99e83978c38390b9ec9800e7e19187625a0164b68277c6056ee050b3ebf68054775cb5398b750f15de0fffa112617ec54ce7466dcb0bf09c984d183dd09b6253" >
-                        <span style="text-decoration:line-through;">$7.99</span>
-
-                        </a>
-                    </td>
-                </tr>
-            </table>
-            <table cellpadding="0" cellspacing="0" border="0" width="190">
-                <tr>
-                    <td align="center" valign="top" width="190"  style="padding:0px;font-family:Arial,helvetica,sans-serif;font-size:14pt;font-weight:800;text-align:center;color:#F00;background-color:#ffffff;text-decoration:none;">
-                        <a href="https://cl.exct.net/?qs=99e83978c38390b9ec9800e7e19187625a0164b68277c6056ee050b3ebf68054775cb5398b750f15de0fffa112617ec54ce7466dcb0bf09c984d183dd09b6253"  style="color:#F00;text-decoration:none;">$2.99</a>
-                    </td>
-                </tr>
-            </table>
-
-
-            <table cellpadding="0" cellspacing="0" border="0" width="190" align="center">
-                <tr>
-                    <td align="center" valign="top" width="190" style="font-family:Arial,helvetica,sans-serif;font-size:10pt;font-weight:normal;text-align:center;color:#000000;background-color:#ffffff;padding:2px 0px 20px 0px;text-decoration:none;">
-                        <a href="https://cl.exct.net/?qs=99e83978c38390b9956dd807ff0b5c54dc762fba517cba86cbd287d7f7a61c2aef3c460d0ea6a8be03baf2efbbe4508e6f662c5393d6f3c49e00993a494a41f1" style="color:#000000;text-decoration:none;" >Saginaw Valley State Cardinals 4'' Tier Circle Car Magnet</a>
-                    </td>
-                </tr>
-            </table>
-
-        </td>
-
-
-
-
-        <td align="center" valign="top" width="200">
-            <table cellpadding="0" cellspacing="0" border="0" width="190">
-                <tr>
-                    <td align="center" valign="top" width="190" style="padding:0px;font-family:Arial,helvetica,sans-serif;font-size:10pt;font-weight:normal;text-align:center;color:#000000;background-color:#ffffff;padding:10px 0px 0px 0px;text-decoration:none;">
-                        <a href="https://cl.exct.net/?qs=99e83978c38390b9dc0b16a00777b15007ef3d55229f3aa6f8961f9c6e28dbcbccbfdb23332a40f7a5fb63c48bbb66dc15d8211e4fb7bb24080aa5a9ce5991ed" >
-                        <img src="http://images.footballfanatics.com/FFImage/thumb.aspx?i=/productImages/_1462000/ff_1462538_xl.jpg&w=380" width="190" align="center" alt="Saginaw Valley State Cardinals Wooden Tier Door Hanger - Cardinal"></a>
-                    </td>
-                </tr>
-            </table>
-
-            <table cellpadding="0" cellspacing="0" border="0" width="190">
-                <tr>
-                    <td align="center" valign="top" width="190"  style="padding:0px;font-family:Arial,helvetica,sans-serif;font-size:10pt;font-weight:normal;text-align:center;color:#000000;background-color:#ffffff;">
-                        <a href="https://cl.exct.net/?qs=99e83978c38390b9748f36440628db43c4886ee317b758d0c9988dadddd57f45a307eafec11ad921073d3d1bb173b19bc0d20f40588b78b8e742481a435c9236" >
-                        <span style="text-decoration:line-through;">$14.99</span>
-
-                        </a>
-                    </td>
-                </tr>
-            </table>
-            <table cellpadding="0" cellspacing="0" border="0" width="190">
-                <tr>
-                    <td align="center" valign="top" width="190"  style="padding:0px;font-family:Arial,helvetica,sans-serif;font-size:14pt;font-weight:800;text-align:center;color:#F00;background-color:#ffffff;text-decoration:none;">
-                        <a href="https://cl.exct.net/?qs=99e83978c38390b9748f36440628db43c4886ee317b758d0c9988dadddd57f45a307eafec11ad921073d3d1bb173b19bc0d20f40588b78b8e742481a435c9236"  style="color:#F00;text-decoration:none;">$4.99</a>
-                    </td>
-                </tr>
-            </table>
-
-
-            <table cellpadding="0" cellspacing="0" border="0" width="190" align="center">
-                <tr>
-                    <td align="center" valign="top" width="190" style="font-family:Arial,helvetica,sans-serif;font-size:10pt;font-weight:normal;text-align:center;color:#000000;background-color:#ffffff;padding:2px 0px 20px 0px;text-decoration:none;">
-                        <a href="https://cl.exct.net/?qs=99e83978c38390b94b823e5065428facec77abc7f514cbb29320884b3d8715a73edf9e4d27f863d3101ffc6cc7c60ce4840207076e6e03fd34bdee0d9e7c149f" style="color:#000000;text-decoration:none;" >Saginaw Valley State Cardinals Wooden Tier Door Hanger - Cardinal</a>
-                    </td>
-                </tr>
-            </table>
-
-        </td>
-
-        </tr>
-            <tr>
-
-
-
-        <td align="center" valign="top" width="200">
-            <table cellpadding="0" cellspacing="0" border="0" width="190">
-                <tr>
-                    <td align="center" valign="top" width="190" style="padding:0px;font-family:Arial,helvetica,sans-serif;font-size:10pt;font-weight:normal;text-align:center;color:#000000;background-color:#ffffff;padding:10px 0px 0px 0px;text-decoration:none;">
-                        <a href="https://cl.exct.net/?qs=99e83978c38390b9d2cd42e51e14268c07d55d124f7e7edd8110b2577cbdfc21ea6ecebf65ca56a28e5a9e23aefb3273ff814de0ee0b09554920ba65960d109f" >
-                        <img src="http://images.footballfanatics.com/FFImage/thumb.aspx?i=/productImages/_3318000/ff_3318672_full.jpg&w=380" width="190" align="center" alt="Saginaw Valley State Cardinals 19&quot; x 30&quot; Starter Mat"></a>
-                    </td>
-                </tr>
-            </table>
-
-            <table cellpadding="0" cellspacing="0" border="0" width="190">
-                <tr>
-                    <td align="center" valign="top" width="190"  style="padding:0px;font-family:Arial,helvetica,sans-serif;font-size:10pt;font-weight:normal;text-align:center;color:#000000;background-color:#ffffff;">
-                        <a href="https://cl.exct.net/?qs=99e83978c38390b9914b377319dd156ffde527cd0477331c5b28add6d94a244ca3d72078a59b68b8eb33ef54785f50894e4023b9aee71bb3f8ea95063f04cddd" >
-
-                        </a>
-                    </td>
-                </tr>
-            </table>
-
-
-            <table cellpadding="0" cellspacing="0" border="0" width="190" align="center">
-                <tr>
-                    <td align="center" valign="top" width="190" style="font-family:Arial,helvetica,sans-serif;font-size:10pt;font-weight:normal;text-align:center;color:#000000;background-color:#ffffff;padding:2px 0px 20px 0px;text-decoration:none;">
-                        <a href="https://cl.exct.net/?qs=99e83978c38390b9e3f12a4a45863f8429990a48956b10c5e9dde1f769ec6217f5e86fdd2d68373e910ccf5f9ac9c768f75a929071223aa9418360f2598cead1" style="color:#000000;text-decoration:none;" >Saginaw Valley State Cardinals 19&quot; x 30&quot; Starter Mat</a>
-                    </td>
-                </tr>
-            </table>
-
-        </td>
-
-
-
-
-        <td align="center" valign="top" width="200">
-            <table cellpadding="0" cellspacing="0" border="0" width="190">
-                <tr>
-                    <td align="center" valign="top" width="190" style="padding:0px;font-family:Arial,helvetica,sans-serif;font-size:10pt;font-weight:normal;text-align:center;color:#000000;background-color:#ffffff;padding:10px 0px 0px 0px;text-decoration:none;">
-                        <a href="https://cl.exct.net/?qs=99e83978c38390b9ecd04be1094daa5d56db73d7ce3abb6cfb3f31d29debeb62e1f8f9f1b19b3790b508e2e0736d21ac0dc9153764939a5eda05d8199b21e6eb" >
-                        <img src="http://images.footballfanatics.com/FFImage/thumb.aspx?i=/productImages/_3320000/ff_3320252_full.jpg&w=380" width="190" align="center" alt="Saginaw Valley State Cardinals 19.5&quot; x 31.25&quot; Medallion Door Mat"></a>
-                    </td>
-                </tr>
-            </table>
-
-            <table cellpadding="0" cellspacing="0" border="0" width="190">
-                <tr>
-                    <td align="center" valign="top" width="190"  style="padding:0px;font-family:Arial,helvetica,sans-serif;font-size:10pt;font-weight:normal;text-align:center;color:#000000;background-color:#ffffff;">
-                        <a href="https://cl.exct.net/?qs=99e83978c38390b928932dbd16398df1e77bef7448811f9ea70edba679c99456443140ba4f426767a3c88f43a7bd5e9e8a35aa607910f5e0ad5c0591baf71052" >
-
-                        </a>
-                    </td>
-                </tr>
-            </table>
-
-
-            <table cellpadding="0" cellspacing="0" border="0" width="190" align="center">
-                <tr>
-                    <td align="center" valign="top" width="190" style="font-family:Arial,helvetica,sans-serif;font-size:10pt;font-weight:normal;text-align:center;color:#000000;background-color:#ffffff;padding:2px 0px 20px 0px;text-decoration:none;">
-                        <a href="https://cl.exct.net/?qs=99e83978c38390b993f6d487b4c78063ee80e0fc0e21bdde5151386f79328e2f00a86abf7095f263e9497d03d8809b816ff2277ba069eda5204b7af996a06fd5" style="color:#000000;text-decoration:none;" >Saginaw Valley State Cardinals 19.5&quot; x 31.25&quot; Medallion Door Mat</a>
-                    </td>
-                </tr>
-            </table>
-
-        </td>
-
-
-
-
-        <td align="center" valign="top" width="200">
-            <table cellpadding="0" cellspacing="0" border="0" width="190">
-                <tr>
-                    <td align="center" valign="top" width="190" style="padding:0px;font-family:Arial,helvetica,sans-serif;font-size:10pt;font-weight:normal;text-align:center;color:#000000;background-color:#ffffff;padding:10px 0px 0px 0px;text-decoration:none;">
-                        <a href="https://cl.exct.net/?qs=99e83978c38390b91236b7edd0048cfeb2fc7bca4774ac842e96cb4d8c3d2118c8d905fed5f38250f4595267260df5c724c28fb8c5cd76d787fef428ee34d8a2" >
-                        <img src="http://images.footballfanatics.com/FFImage/thumb.aspx?i=/productImages/_3319000/ff_3319177_full.jpg&w=380" width="190" align="center" alt="Saginaw Valley State Cardinals 20.5&quot; x 32.5&quot; Football Mat"></a>
-                    </td>
-                </tr>
-            </table>
-
-            <table cellpadding="0" cellspacing="0" border="0" width="190">
-                <tr>
-                    <td align="center" valign="top" width="190"  style="padding:0px;font-family:Arial,helvetica,sans-serif;font-size:10pt;font-weight:normal;text-align:center;color:#000000;background-color:#ffffff;">
-                        <a href="https://cl.exct.net/?qs=99e83978c38390b9cf6ab0a4bb514dda9202589985deffdd9689b0a97142a86163f160e5d9bfa9811fab0d2ffd24309f568fdc75666b8d8007444365af1b209c" >
-
-                        </a>
-                    </td>
-                </tr>
-            </table>
-
-
-            <table cellpadding="0" cellspacing="0" border="0" width="190" align="center">
-                <tr>
-                    <td align="center" valign="top" width="190" style="font-family:Arial,helvetica,sans-serif;font-size:10pt;font-weight:normal;text-align:center;color:#000000;background-color:#ffffff;padding:2px 0px 20px 0px;text-decoration:none;">
-                        <a href="https://cl.exct.net/?qs=99e83978c38390b95fe79805b3c37084d9cf4b883d185461aa0a8767bafde11946b08f0ed82b1563aefcdeb9831f1444e388ae37c31dcbb3c2093919dad68ed5" style="color:#000000;text-decoration:none;" >Saginaw Valley State Cardinals 20.5&quot; x 32.5&quot; Football Mat</a>
-                    </td>
-                </tr>
-            </table>
-
-        </td>
-
-        </tr>
-            <tr>
-
-
-
-    </tr>
-</table>
+			/* /\/\/\/\/\/\/\/\/ CLIENT-SPECIFIC STYLES /\/\/\/\/\/\/\/\/ */
+			#outlook a{padding:0;} /* Force Outlook to provide a "view in browser" message */
+			.ReadMsgBody{width:100%;} .ExternalClass{width:100%;} /* Force Hotmail to display emails at full width */
+			.ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div {line-height: 100%;} /* Force Hotmail to display normal line spacing */
+			html, body, table, td, p, a, li, blockquote{-webkit-text-size-adjust:100%; -ms-text-size-adjust:100%;} /* Prevent WebKit and Windows mobile changing default text sizes */
+			table, td{mso-table-lspace:0pt; mso-table-rspace:0pt; border-collapse: collapse; border:none;} /* Remove spacing between tables in Outlook 2007 and up */
+			img{-ms-interpolation-mode:bicubic;} /* Allow smoother rendering of resized image in Internet Explorer */
+			/* /\/\/\/\/\/\/\/\/ RESET STYLES /\/\/\/\/\/\/\/\/ */
+			img{border:0; height:auto; line-height:100%; outline:none; text-decoration:none;}
+			table{border-collapse:collapse !important;}
+			table.mobile-nav{display: none;}
+		</style>
+<style type="text/css">
+			@media (max-width: 480px) {
+			table.nav {
+			display: none !important;
+			}
+			table.mobile-nav {
+			display: block !important;
+			}
+			}
+		</style>
+</head>
+<body class="mobile-width-override" style="background: rgb(255, 255, 255); zoom: 100%;">
+<div style="display:none;font-size:1px;line-height:1px;max-height:0px;max-width:0px;opacity:0;overflow:hidden;mso-hide:all;">It's confirmed! You just scored something big: Activate your coupons</div>
+<div style="display:none;font-size:1px;line-height:1px;max-height:0px;max-width:0px;opacity:0;overflow:hidden;mso-hide:all;">&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;
+&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;</div>
+<!-- PromotionCard -->
+<div itemscope="" itemtype="http://schema.org/PromotionCard">
+<meta itemprop="image" content="http://media.jomashop.com/6166/Users/20864/global/promotab_header.jpg">
 </div>
-
-
-
-
-          <!--/Content Block 'ProductGrid' (ProductGrid Module 1)-->
-          <!--Content Block 'FullWidthBanner' (Headline Image 2)-->
-          <!--/Content Block 'FullWidthBanner' (Headline Image 2)-->
-          <!--Content Block 'ProductGrid' (ProductGrid Module 2)-->
-
-
-
-
-<div style="width:600px;padding:10px 0px;">
-<table cellpadding="0" cellspacing="0" border="0" width="600" bgcolor="#ffffff">
-    <tr>
-
-
-
-        <td align="center" valign="top" width="200">
-            <table cellpadding="0" cellspacing="0" border="0" width="190">
-                <tr>
-                    <td align="center" valign="top" width="190" style="padding:0px;font-family:Arial,helvetica,sans-serif;font-size:10pt;font-weight:normal;text-align:center;color:#000000;background-color:#ffffff;padding:10px 0px 0px 0px;text-decoration:none;">
-                        <a href="https://cl.exct.net/?qs=99e83978c38390b921c7b8d8ffcd4ed0c7f46e7e4029f1292fc282867241466d6fc1554f1da31933fc73fc7220885108d3ebb5033258367bcfa831091eef11db" >
-                        <img src="http://images.footballfanatics.com/FFImage/thumb.aspx?i=/productImages/_1461000/ff_1461771_xl.jpg&w=380" width="190" align="center" alt="Saginaw Valley State Cardinals 12'' Tier Round Clock"></a>
-                    </td>
-                </tr>
-            </table>
-
-            <table cellpadding="0" cellspacing="0" border="0" width="190">
-                <tr>
-                    <td align="center" valign="top" width="190"  style="padding:0px;font-family:Arial,helvetica,sans-serif;font-size:10pt;font-weight:normal;text-align:center;color:#000000;background-color:#ffffff;">
-                        <a href="https://cl.exct.net/?qs=99e83978c38390b93bcf951485574b5852b9307fa42b665cc5a301095d46d3d5283478c754acd4397350c89757380c2c0c995c33fad79bf3e2e36ab053dbde57" >
-                        <span style="text-decoration:line-through;">$24.99</span>
-
-                        </a>
-                    </td>
-                </tr>
-            </table>
-            <table cellpadding="0" cellspacing="0" border="0" width="190">
-                <tr>
-                    <td align="center" valign="top" width="190"  style="padding:0px;font-family:Arial,helvetica,sans-serif;font-size:14pt;font-weight:800;text-align:center;color:#F00;background-color:#ffffff;text-decoration:none;">
-                        <a href="https://cl.exct.net/?qs=99e83978c38390b93bcf951485574b5852b9307fa42b665cc5a301095d46d3d5283478c754acd4397350c89757380c2c0c995c33fad79bf3e2e36ab053dbde57"  style="color:#F00;text-decoration:none;">$6.99</a>
-                    </td>
-                </tr>
-            </table>
-
-
-            <table cellpadding="0" cellspacing="0" border="0" width="190" align="center">
-                <tr>
-                    <td align="center" valign="top" width="190" style="font-family:Arial,helvetica,sans-serif;font-size:10pt;font-weight:normal;text-align:center;color:#000000;background-color:#ffffff;padding:2px 0px 20px 0px;text-decoration:none;">
-                        <a href="https://cl.exct.net/?qs=99e83978c38390b9a23bae88ccaf67e70ef9263aa61b78fb05e491fe676cfc91d63873985e090619890ef83a8c0293b6b8998e0dc49c98cd905386483280e3f2" style="color:#000000;text-decoration:none;" >Saginaw Valley State Cardinals 12'' Tier Round Clock</a>
-                    </td>
-                </tr>
-            </table>
-
-        </td>
-
-
-
-
-        <td align="center" valign="top" width="200">
-            <table cellpadding="0" cellspacing="0" border="0" width="190">
-                <tr>
-                    <td align="center" valign="top" width="190" style="padding:0px;font-family:Arial,helvetica,sans-serif;font-size:10pt;font-weight:normal;text-align:center;color:#000000;background-color:#ffffff;padding:10px 0px 0px 0px;text-decoration:none;">
-                        <a href="https://cl.exct.net/?qs=99e83978c38390b9bf3ae8568b23c3bce82d28052ada34c5a57191a3005c6c1f75572395e45ea2ddad0dd1cfe5805ba3eeaa5b85cd652f7a2b88a385d23067ea" >
-                        <img src="http://images.footballfanatics.com/FFImage/thumb.aspx?i=/productImages/_1460000/ff_1460509_full.jpg&w=380" width="190" align="center" alt="Saginaw Valley State Cardinals 4'' Tier Circle Car Magnet"></a>
-                    </td>
-                </tr>
-            </table>
-
-            <table cellpadding="0" cellspacing="0" border="0" width="190">
-                <tr>
-                    <td align="center" valign="top" width="190"  style="padding:0px;font-family:Arial,helvetica,sans-serif;font-size:10pt;font-weight:normal;text-align:center;color:#000000;background-color:#ffffff;">
-                        <a href="https://cl.exct.net/?qs=99e83978c38390b926c7d3f1d5e2d4a34951321b65afddbdd96d179a6962296429b2fa47d9376edf91a8425d0ac194fb86726f5be89caa282c91e080b3a81c1d" >
-                        <span style="text-decoration:line-through;">$7.99</span>
-
-                        </a>
-                    </td>
-                </tr>
-            </table>
-            <table cellpadding="0" cellspacing="0" border="0" width="190">
-                <tr>
-                    <td align="center" valign="top" width="190"  style="padding:0px;font-family:Arial,helvetica,sans-serif;font-size:14pt;font-weight:800;text-align:center;color:#F00;background-color:#ffffff;text-decoration:none;">
-                        <a href="https://cl.exct.net/?qs=99e83978c38390b926c7d3f1d5e2d4a34951321b65afddbdd96d179a6962296429b2fa47d9376edf91a8425d0ac194fb86726f5be89caa282c91e080b3a81c1d"  style="color:#F00;text-decoration:none;">$2.99</a>
-                    </td>
-                </tr>
-            </table>
-
-
-            <table cellpadding="0" cellspacing="0" border="0" width="190" align="center">
-                <tr>
-                    <td align="center" valign="top" width="190" style="font-family:Arial,helvetica,sans-serif;font-size:10pt;font-weight:normal;text-align:center;color:#000000;background-color:#ffffff;padding:2px 0px 20px 0px;text-decoration:none;">
-                        <a href="https://cl.exct.net/?qs=99e83978c38390b9eda1d1efc961e9e7215f5d1736fc2f4b2374aadfc8cb9bc567dcc80d499b71040bf8b062f3816ac9d04375caf81888b83937c7c3df323bdc" style="color:#000000;text-decoration:none;" >Saginaw Valley State Cardinals 4'' Tier Circle Car Magnet</a>
-                    </td>
-                </tr>
-            </table>
-
-        </td>
-
-
-
-
-        <td align="center" valign="top" width="200">
-            <table cellpadding="0" cellspacing="0" border="0" width="190">
-                <tr>
-                    <td align="center" valign="top" width="190" style="padding:0px;font-family:Arial,helvetica,sans-serif;font-size:10pt;font-weight:normal;text-align:center;color:#000000;background-color:#ffffff;padding:10px 0px 0px 0px;text-decoration:none;">
-                        <a href="https://cl.exct.net/?qs=99e83978c38390b979d6450c421235bfeb4fc0b743575c76cff96670446919483bfa10e5abba2da3efd322353aa80be3336da897076224ddb46d45dcea84ded3" >
-                        <img src="http://images.footballfanatics.com/FFImage/thumb.aspx?i=/productImages/_1462000/ff_1462538_xl.jpg&w=380" width="190" align="center" alt="Saginaw Valley State Cardinals Wooden Tier Door Hanger - Cardinal"></a>
-                    </td>
-                </tr>
-            </table>
-
-            <table cellpadding="0" cellspacing="0" border="0" width="190">
-                <tr>
-                    <td align="center" valign="top" width="190"  style="padding:0px;font-family:Arial,helvetica,sans-serif;font-size:10pt;font-weight:normal;text-align:center;color:#000000;background-color:#ffffff;">
-                        <a href="https://cl.exct.net/?qs=99e83978c38390b9754bc625b3b5329e248140a2fc55538184474e6cd5935fddcfe9fffdadaa41c0807c4d876685eab30c2317c22c400e3f195e27a54f9813b4" >
-                        <span style="text-decoration:line-through;">$14.99</span>
-
-                        </a>
-                    </td>
-                </tr>
-            </table>
-            <table cellpadding="0" cellspacing="0" border="0" width="190">
-                <tr>
-                    <td align="center" valign="top" width="190"  style="padding:0px;font-family:Arial,helvetica,sans-serif;font-size:14pt;font-weight:800;text-align:center;color:#F00;background-color:#ffffff;text-decoration:none;">
-                        <a href="https://cl.exct.net/?qs=99e83978c38390b9754bc625b3b5329e248140a2fc55538184474e6cd5935fddcfe9fffdadaa41c0807c4d876685eab30c2317c22c400e3f195e27a54f9813b4"  style="color:#F00;text-decoration:none;">$4.99</a>
-                    </td>
-                </tr>
-            </table>
-
-
-            <table cellpadding="0" cellspacing="0" border="0" width="190" align="center">
-                <tr>
-                    <td align="center" valign="top" width="190" style="font-family:Arial,helvetica,sans-serif;font-size:10pt;font-weight:normal;text-align:center;color:#000000;background-color:#ffffff;padding:2px 0px 20px 0px;text-decoration:none;">
-                        <a href="https://cl.exct.net/?qs=99e83978c38390b9e096a58c1470f6e89a3fc9122472d28cba05f32d021a8b9fe5ff02963f4b6cf4241c52b63927c0d2278e7efebc34aad005da6daacb88d5dd" style="color:#000000;text-decoration:none;" >Saginaw Valley State Cardinals Wooden Tier Door Hanger - Cardinal</a>
-                    </td>
-                </tr>
-            </table>
-
-        </td>
-
-        </tr>
-            <tr>
-
-
-
-        <td align="center" valign="top" width="200">
-            <table cellpadding="0" cellspacing="0" border="0" width="190">
-                <tr>
-                    <td align="center" valign="top" width="190" style="padding:0px;font-family:Arial,helvetica,sans-serif;font-size:10pt;font-weight:normal;text-align:center;color:#000000;background-color:#ffffff;padding:10px 0px 0px 0px;text-decoration:none;">
-                        <a href="https://cl.exct.net/?qs=99e83978c38390b98716eb1982e011decb3eb6318e43539d7f50f96830295c8c749c587235479a27e3ac843cb27ea706adb72ba2203b011814c3f8b409f1239b" >
-                        <img src="http://images.footballfanatics.com/FFImage/thumb.aspx?i=/productImages/_3318000/ff_3318672_full.jpg&w=380" width="190" align="center" alt="Saginaw Valley State Cardinals 19&quot; x 30&quot; Starter Mat"></a>
-                    </td>
-                </tr>
-            </table>
-
-            <table cellpadding="0" cellspacing="0" border="0" width="190">
-                <tr>
-                    <td align="center" valign="top" width="190"  style="padding:0px;font-family:Arial,helvetica,sans-serif;font-size:10pt;font-weight:normal;text-align:center;color:#000000;background-color:#ffffff;">
-                        <a href="https://cl.exct.net/?qs=99e83978c38390b9c8cf71c6284cc3688eba7a9dbc325177723f99fc73a4aa640c609a2347c32cae26763d83c6fc1e18159402f560e5b4946f94e9b5882b6351" >
-
-                        </a>
-                    </td>
-                </tr>
-            </table>
-
-
-            <table cellpadding="0" cellspacing="0" border="0" width="190" align="center">
-                <tr>
-                    <td align="center" valign="top" width="190" style="font-family:Arial,helvetica,sans-serif;font-size:10pt;font-weight:normal;text-align:center;color:#000000;background-color:#ffffff;padding:2px 0px 20px 0px;text-decoration:none;">
-                        <a href="https://cl.exct.net/?qs=99e83978c38390b98626be74e75bcc914f590bd6fafe7d37b208ebb57eb095e9d1da3ba8fc789f5b56912301bc8fb2a770f49e00831895b9c1b4776aa0a0253b" style="color:#000000;text-decoration:none;" >Saginaw Valley State Cardinals 19&quot; x 30&quot; Starter Mat</a>
-                    </td>
-                </tr>
-            </table>
-
-        </td>
-
-
-
-
-        <td align="center" valign="top" width="200">
-            <table cellpadding="0" cellspacing="0" border="0" width="190">
-                <tr>
-                    <td align="center" valign="top" width="190" style="padding:0px;font-family:Arial,helvetica,sans-serif;font-size:10pt;font-weight:normal;text-align:center;color:#000000;background-color:#ffffff;padding:10px 0px 0px 0px;text-decoration:none;">
-                        <a href="https://cl.exct.net/?qs=99e83978c38390b96fce1d2a59ac32fec0c9bf3c997cb88a6fdfd3e3f77379cb7554445c2ac48f50faf4f7e7d0245b9e3f57c478c312240d48e213d8c77cb548" >
-                        <img src="http://images.footballfanatics.com/FFImage/thumb.aspx?i=/productImages/_3320000/ff_3320252_full.jpg&w=380" width="190" align="center" alt="Saginaw Valley State Cardinals 19.5&quot; x 31.25&quot; Medallion Door Mat"></a>
-                    </td>
-                </tr>
-            </table>
-
-            <table cellpadding="0" cellspacing="0" border="0" width="190">
-                <tr>
-                    <td align="center" valign="top" width="190"  style="padding:0px;font-family:Arial,helvetica,sans-serif;font-size:10pt;font-weight:normal;text-align:center;color:#000000;background-color:#ffffff;">
-                        <a href="https://cl.exct.net/?qs=99e83978c38390b952c2f4cc263a32287684a81e82f7dc5d4845dd98d591519890eafa87ff809170056b44524ca3f658fa1fd5b800c5075fd5c65f243f5b0d2f" >
-
-                        </a>
-                    </td>
-                </tr>
-            </table>
-
-
-            <table cellpadding="0" cellspacing="0" border="0" width="190" align="center">
-                <tr>
-                    <td align="center" valign="top" width="190" style="font-family:Arial,helvetica,sans-serif;font-size:10pt;font-weight:normal;text-align:center;color:#000000;background-color:#ffffff;padding:2px 0px 20px 0px;text-decoration:none;">
-                        <a href="https://cl.exct.net/?qs=99e83978c38390b9e590477c0023ffa245a6132f7ad5af82347711feb636c29592057efbefd933d5fb29735c9f3fe0cd3ad772261d71543279b116859b89f74a" style="color:#000000;text-decoration:none;" >Saginaw Valley State Cardinals 19.5&quot; x 31.25&quot; Medallion Door Mat</a>
-                    </td>
-                </tr>
-            </table>
-
-        </td>
-
-
-
-
-        <td align="center" valign="top" width="200">
-            <table cellpadding="0" cellspacing="0" border="0" width="190">
-                <tr>
-                    <td align="center" valign="top" width="190" style="padding:0px;font-family:Arial,helvetica,sans-serif;font-size:10pt;font-weight:normal;text-align:center;color:#000000;background-color:#ffffff;padding:10px 0px 0px 0px;text-decoration:none;">
-                        <a href="https://cl.exct.net/?qs=99e83978c38390b97e3c60b6fc4e7c743ac0e13de4f20d85a314062ee655122da3fde1d3a3389bc19eb2db4037379a0be2eb1048537500f677ac96f6ae745c03" >
-                        <img src="http://images.footballfanatics.com/FFImage/thumb.aspx?i=/productImages/_3319000/ff_3319177_full.jpg&w=380" width="190" align="center" alt="Saginaw Valley State Cardinals 20.5&quot; x 32.5&quot; Football Mat"></a>
-                    </td>
-                </tr>
-            </table>
-
-            <table cellpadding="0" cellspacing="0" border="0" width="190">
-                <tr>
-                    <td align="center" valign="top" width="190"  style="padding:0px;font-family:Arial,helvetica,sans-serif;font-size:10pt;font-weight:normal;text-align:center;color:#000000;background-color:#ffffff;">
-                        <a href="https://cl.exct.net/?qs=99e83978c38390b914f11a30dd6418146762ba583a3e2710ceae245bf66b9fd3f7ca97b27c29a26342a8eaf393f81a32859bc58e945c67bb7f84b971f92e6be3" >
-
-                        </a>
-                    </td>
-                </tr>
-            </table>
-
-
-            <table cellpadding="0" cellspacing="0" border="0" width="190" align="center">
-                <tr>
-                    <td align="center" valign="top" width="190" style="font-family:Arial,helvetica,sans-serif;font-size:10pt;font-weight:normal;text-align:center;color:#000000;background-color:#ffffff;padding:2px 0px 20px 0px;text-decoration:none;">
-                        <a href="https://cl.exct.net/?qs=99e83978c38390b9b1ee1ea94cbb4f047b5ee2b6901e6f5115c06e353365eca7ea473f4e809c1616522acd99fa8a68189a9e947fe4b42be020be03e8ce60e1da" style="color:#000000;text-decoration:none;" >Saginaw Valley State Cardinals 20.5&quot; x 32.5&quot; Football Mat</a>
-                    </td>
-                </tr>
-            </table>
-
-        </td>
-
-        </tr>
-            <tr>
-
-
-
-    </tr>
-</table>
+<!-- Custom Logo -->
+<div itemscope="" itemtype="http://schema.org/Organization">
+<meta itemprop="name" content="Jomashop.com">
+<meta itemprop="logo" content="http://media.jomashop.com/6166/Users/20864/global/promotab_logo.jpg">
 </div>
-
-
-
-
-          <!--/Content Block 'ProductGrid' (ProductGrid Module 2)-->
-          <!--Content Block 'FullWidthBanner' (Headline Image 3)-->
-          <!--/Content Block 'FullWidthBanner' (Headline Image 3)-->
-          <!--Content Block 'ProductGrid' (ProductGrid Module 3)-->
-
-
-
-
-<div style="width:600px;padding:10px 0px;">
-<table cellpadding="0" cellspacing="0" border="0" width="600" bgcolor="#ffffff">
-    <tr>
-
-
-
-        <td align="center" valign="top" width="200">
-            <table cellpadding="0" cellspacing="0" border="0" width="190">
-                <tr>
-                    <td align="center" valign="top" width="190" style="padding:0px;font-family:Arial,helvetica,sans-serif;font-size:10pt;font-weight:normal;text-align:center;color:#000000;background-color:#ffffff;padding:10px 0px 0px 0px;text-decoration:none;">
-                        <a href="https://cl.exct.net/?qs=99e83978c38390b9f8f4bb47ed87e62cefc93ccf1055b10e58bd6c9986ac64f1b25991037cce222160606cca0865619881ca8fba5cc913ba682fee901671c365" >
-                        <img src="http://images.footballfanatics.com/FFImage/thumb.aspx?i=/productImages/_1461000/ff_1461771_xl.jpg&w=380" width="190" align="center" alt="Saginaw Valley State Cardinals 12'' Tier Round Clock"></a>
-                    </td>
-                </tr>
-            </table>
-
-            <table cellpadding="0" cellspacing="0" border="0" width="190">
-                <tr>
-                    <td align="center" valign="top" width="190"  style="padding:0px;font-family:Arial,helvetica,sans-serif;font-size:10pt;font-weight:normal;text-align:center;color:#000000;background-color:#ffffff;">
-                        <a href="https://cl.exct.net/?qs=99e83978c38390b939a47ab24662e798fa75c3dd162455dea0b3f9cdca273f954149579a52b5f69a76dbaee7441b6f45b70c5e79591c2fdf217b1edc1d44000e" >
-                        <span style="text-decoration:line-through;">$24.99</span>
-
-                        </a>
-                    </td>
-                </tr>
-            </table>
-            <table cellpadding="0" cellspacing="0" border="0" width="190">
-                <tr>
-                    <td align="center" valign="top" width="190"  style="padding:0px;font-family:Arial,helvetica,sans-serif;font-size:14pt;font-weight:800;text-align:center;color:#F00;background-color:#ffffff;text-decoration:none;">
-                        <a href="https://cl.exct.net/?qs=99e83978c38390b939a47ab24662e798fa75c3dd162455dea0b3f9cdca273f954149579a52b5f69a76dbaee7441b6f45b70c5e79591c2fdf217b1edc1d44000e"  style="color:#F00;text-decoration:none;">$6.99</a>
-                    </td>
-                </tr>
-            </table>
-
-
-            <table cellpadding="0" cellspacing="0" border="0" width="190" align="center">
-                <tr>
-                    <td align="center" valign="top" width="190" style="font-family:Arial,helvetica,sans-serif;font-size:10pt;font-weight:normal;text-align:center;color:#000000;background-color:#ffffff;padding:2px 0px 20px 0px;text-decoration:none;">
-                        <a href="https://cl.exct.net/?qs=99e83978c38390b99e039cc2e750e6d2288d9ae920e73aa4572367541ec3114ade4527ddf8f12f20e075a841c8565ed92836662394086cf8f793da777f75eb69" style="color:#000000;text-decoration:none;" >Saginaw Valley State Cardinals 12'' Tier Round Clock</a>
-                    </td>
-                </tr>
-            </table>
-
-        </td>
-
-
-
-
-        <td align="center" valign="top" width="200">
-            <table cellpadding="0" cellspacing="0" border="0" width="190">
-                <tr>
-                    <td align="center" valign="top" width="190" style="padding:0px;font-family:Arial,helvetica,sans-serif;font-size:10pt;font-weight:normal;text-align:center;color:#000000;background-color:#ffffff;padding:10px 0px 0px 0px;text-decoration:none;">
-                        <a href="https://cl.exct.net/?qs=99e83978c38390b9d1ea7ec7e9ea5ae54135351d5e204b9d6c200eedb7543388feff9b31bef4ad4c9a8aac7976e85cd9217c973c0ee18afb2631b1fc2b795a53" >
-                        <img src="http://images.footballfanatics.com/FFImage/thumb.aspx?i=/productImages/_1460000/ff_1460509_full.jpg&w=380" width="190" align="center" alt="Saginaw Valley State Cardinals 4'' Tier Circle Car Magnet"></a>
-                    </td>
-                </tr>
-            </table>
-
-            <table cellpadding="0" cellspacing="0" border="0" width="190">
-                <tr>
-                    <td align="center" valign="top" width="190"  style="padding:0px;font-family:Arial,helvetica,sans-serif;font-size:10pt;font-weight:normal;text-align:center;color:#000000;background-color:#ffffff;">
-                        <a href="https://cl.exct.net/?qs=99e83978c38390b90d4783ef516c6d8e25f68bcf3a91f35056714cf7c0ee34d2ebe30ad681ce0aa1dcc5fcff6c55b1a9785f87120886555d95b708714a1ac9da" >
-                        <span style="text-decoration:line-through;">$7.99</span>
-
-                        </a>
-                    </td>
-                </tr>
-            </table>
-            <table cellpadding="0" cellspacing="0" border="0" width="190">
-                <tr>
-                    <td align="center" valign="top" width="190"  style="padding:0px;font-family:Arial,helvetica,sans-serif;font-size:14pt;font-weight:800;text-align:center;color:#F00;background-color:#ffffff;text-decoration:none;">
-                        <a href="https://cl.exct.net/?qs=99e83978c38390b90d4783ef516c6d8e25f68bcf3a91f35056714cf7c0ee34d2ebe30ad681ce0aa1dcc5fcff6c55b1a9785f87120886555d95b708714a1ac9da"  style="color:#F00;text-decoration:none;">$2.99</a>
-                    </td>
-                </tr>
-            </table>
-
-
-            <table cellpadding="0" cellspacing="0" border="0" width="190" align="center">
-                <tr>
-                    <td align="center" valign="top" width="190" style="font-family:Arial,helvetica,sans-serif;font-size:10pt;font-weight:normal;text-align:center;color:#000000;background-color:#ffffff;padding:2px 0px 20px 0px;text-decoration:none;">
-                        <a href="https://cl.exct.net/?qs=99e83978c38390b9e7764f5408855f0ff80cb6deb2062d603b67c40d1392ea4b2489bcc148a0dcad5c33d1b87d8dd2300737625102f4f6c2dd97776ab0292d22" style="color:#000000;text-decoration:none;" >Saginaw Valley State Cardinals 4'' Tier Circle Car Magnet</a>
-                    </td>
-                </tr>
-            </table>
-
-        </td>
-
-
-
-
-        <td align="center" valign="top" width="200">
-            <table cellpadding="0" cellspacing="0" border="0" width="190">
-                <tr>
-                    <td align="center" valign="top" width="190" style="padding:0px;font-family:Arial,helvetica,sans-serif;font-size:10pt;font-weight:normal;text-align:center;color:#000000;background-color:#ffffff;padding:10px 0px 0px 0px;text-decoration:none;">
-                        <a href="https://cl.exct.net/?qs=99e83978c38390b91622f549d6902a615f14c4e2355be4fe4fb28a3ae0a8181668e8af7c4145e09fa80e2f79274357ac85ff756c79a46788881716edff21e478" >
-                        <img src="http://images.footballfanatics.com/FFImage/thumb.aspx?i=/productImages/_1462000/ff_1462538_xl.jpg&w=380" width="190" align="center" alt="Saginaw Valley State Cardinals Wooden Tier Door Hanger - Cardinal"></a>
-                    </td>
-                </tr>
-            </table>
-
-            <table cellpadding="0" cellspacing="0" border="0" width="190">
-                <tr>
-                    <td align="center" valign="top" width="190"  style="padding:0px;font-family:Arial,helvetica,sans-serif;font-size:10pt;font-weight:normal;text-align:center;color:#000000;background-color:#ffffff;">
-                        <a href="https://cl.exct.net/?qs=99e83978c38390b9500521b5484850c7f6fcd29a085e437a9f7e980ec75cd2f8fb55a41f87c4c7e4a3188d151063935bb310edbedc542bed0910e5c3f3184ec2" >
-                        <span style="text-decoration:line-through;">$14.99</span>
-
-                        </a>
-                    </td>
-                </tr>
-            </table>
-            <table cellpadding="0" cellspacing="0" border="0" width="190">
-                <tr>
-                    <td align="center" valign="top" width="190"  style="padding:0px;font-family:Arial,helvetica,sans-serif;font-size:14pt;font-weight:800;text-align:center;color:#F00;background-color:#ffffff;text-decoration:none;">
-                        <a href="https://cl.exct.net/?qs=99e83978c38390b9500521b5484850c7f6fcd29a085e437a9f7e980ec75cd2f8fb55a41f87c4c7e4a3188d151063935bb310edbedc542bed0910e5c3f3184ec2"  style="color:#F00;text-decoration:none;">$4.99</a>
-                    </td>
-                </tr>
-            </table>
-
-
-            <table cellpadding="0" cellspacing="0" border="0" width="190" align="center">
-                <tr>
-                    <td align="center" valign="top" width="190" style="font-family:Arial,helvetica,sans-serif;font-size:10pt;font-weight:normal;text-align:center;color:#000000;background-color:#ffffff;padding:2px 0px 20px 0px;text-decoration:none;">
-                        <a href="https://cl.exct.net/?qs=99e83978c38390b9e6cbfb5f4fe61ad307341a22eb45799afc467b1c7ae3ecfe5d4ca5378cc4d12c6cc0b8784a631aab5bbae7fa991957d794b0de53c4d44d67" style="color:#000000;text-decoration:none;" >Saginaw Valley State Cardinals Wooden Tier Door Hanger - Cardinal</a>
-                    </td>
-                </tr>
-            </table>
-
-        </td>
-
-        </tr>
-            <tr>
-
-
-
-        <td align="center" valign="top" width="200">
-            <table cellpadding="0" cellspacing="0" border="0" width="190">
-                <tr>
-                    <td align="center" valign="top" width="190" style="padding:0px;font-family:Arial,helvetica,sans-serif;font-size:10pt;font-weight:normal;text-align:center;color:#000000;background-color:#ffffff;padding:10px 0px 0px 0px;text-decoration:none;">
-                        <a href="https://cl.exct.net/?qs=99e83978c38390b9ca840690b5146b53c5ac51282639738783250a38f67e0027d11e1e78d4b80f0c0d82f6f80c237fb7502b6ae2a96a5341f54e26b5ecef8070" >
-                        <img src="http://images.footballfanatics.com/FFImage/thumb.aspx?i=/productImages/_3318000/ff_3318672_full.jpg&w=380" width="190" align="center" alt="Saginaw Valley State Cardinals 19&quot; x 30&quot; Starter Mat"></a>
-                    </td>
-                </tr>
-            </table>
-
-            <table cellpadding="0" cellspacing="0" border="0" width="190">
-                <tr>
-                    <td align="center" valign="top" width="190"  style="padding:0px;font-family:Arial,helvetica,sans-serif;font-size:10pt;font-weight:normal;text-align:center;color:#000000;background-color:#ffffff;">
-                        <a href="https://cl.exct.net/?qs=99e83978c38390b9c2fc6339e76b79a574714f6724ce30278d29c565194b86725c847204e04a3ac97584ff9798bf9ac472d2352c349c1fde57fec8ed67adcfbc" >
-
-                        </a>
-                    </td>
-                </tr>
-            </table>
-
-
-            <table cellpadding="0" cellspacing="0" border="0" width="190" align="center">
-                <tr>
-                    <td align="center" valign="top" width="190" style="font-family:Arial,helvetica,sans-serif;font-size:10pt;font-weight:normal;text-align:center;color:#000000;background-color:#ffffff;padding:2px 0px 20px 0px;text-decoration:none;">
-                        <a href="https://cl.exct.net/?qs=99e83978c38390b912217730208b52c7e495ced3551a1753ecd3374fa38ce22fa591ae5fbb13b226438910ac659705ffe103905b7fc3aa1aa3ce625e1dee81c2" style="color:#000000;text-decoration:none;" >Saginaw Valley State Cardinals 19&quot; x 30&quot; Starter Mat</a>
-                    </td>
-                </tr>
-            </table>
-
-        </td>
-
-
-
-
-        <td align="center" valign="top" width="200">
-            <table cellpadding="0" cellspacing="0" border="0" width="190">
-                <tr>
-                    <td align="center" valign="top" width="190" style="padding:0px;font-family:Arial,helvetica,sans-serif;font-size:10pt;font-weight:normal;text-align:center;color:#000000;background-color:#ffffff;padding:10px 0px 0px 0px;text-decoration:none;">
-                        <a href="https://cl.exct.net/?qs=99e83978c38390b915c8789604dcec884769a378f36eee13d8c4de212018007c16c1634990cbbcad5343c326815f03f436c1667a6785a885386c3bbe560afabe" >
-                        <img src="http://images.footballfanatics.com/FFImage/thumb.aspx?i=/productImages/_3320000/ff_3320252_full.jpg&w=380" width="190" align="center" alt="Saginaw Valley State Cardinals 19.5&quot; x 31.25&quot; Medallion Door Mat"></a>
-                    </td>
-                </tr>
-            </table>
-
-            <table cellpadding="0" cellspacing="0" border="0" width="190">
-                <tr>
-                    <td align="center" valign="top" width="190"  style="padding:0px;font-family:Arial,helvetica,sans-serif;font-size:10pt;font-weight:normal;text-align:center;color:#000000;background-color:#ffffff;">
-                        <a href="https://cl.exct.net/?qs=99e83978c38390b9cf906405a093c9876498ac7a61c7e206cf6b7878b844bd59928a6a1bd36b6dfd175b3743c8f54a45e239fbe39f4586807ce40a7a8b7b2b51" >
-
-                        </a>
-                    </td>
-                </tr>
-            </table>
-
-
-            <table cellpadding="0" cellspacing="0" border="0" width="190" align="center">
-                <tr>
-                    <td align="center" valign="top" width="190" style="font-family:Arial,helvetica,sans-serif;font-size:10pt;font-weight:normal;text-align:center;color:#000000;background-color:#ffffff;padding:2px 0px 20px 0px;text-decoration:none;">
-                        <a href="https://cl.exct.net/?qs=99e83978c38390b9d019df2105d9ca96595a96fa03d6d2469225826a94ac75e5749c3c2f4b28d21cd59f09d561e92acc4d2de9a7535533ab0ed41cda1cab4c69" style="color:#000000;text-decoration:none;" >Saginaw Valley State Cardinals 19.5&quot; x 31.25&quot; Medallion Door Mat</a>
-                    </td>
-                </tr>
-            </table>
-
-        </td>
-
-
-
-
-        <td align="center" valign="top" width="200">
-            <table cellpadding="0" cellspacing="0" border="0" width="190">
-                <tr>
-                    <td align="center" valign="top" width="190" style="padding:0px;font-family:Arial,helvetica,sans-serif;font-size:10pt;font-weight:normal;text-align:center;color:#000000;background-color:#ffffff;padding:10px 0px 0px 0px;text-decoration:none;">
-                        <a href="https://cl.exct.net/?qs=99e83978c38390b9c105175704aca7cbe0f505fefc6fdbde03f9bbd7ec98476f3c0268b817aedb64106580a764de4577fd98fe6356b0da32414ece4d57d3b8e0" >
-                        <img src="http://images.footballfanatics.com/FFImage/thumb.aspx?i=/productImages/_3319000/ff_3319177_full.jpg&w=380" width="190" align="center" alt="Saginaw Valley State Cardinals 20.5&quot; x 32.5&quot; Football Mat"></a>
-                    </td>
-                </tr>
-            </table>
-
-            <table cellpadding="0" cellspacing="0" border="0" width="190">
-                <tr>
-                    <td align="center" valign="top" width="190"  style="padding:0px;font-family:Arial,helvetica,sans-serif;font-size:10pt;font-weight:normal;text-align:center;color:#000000;background-color:#ffffff;">
-                        <a href="https://cl.exct.net/?qs=99e83978c38390b9e7b118216739046038d1ad8799c2eb9c251407bcdeb2d7084b06cb5e273f1dc8ca650ad890485a2d1b683b0efbc983cde3cd09f85ccad018" >
-
-                        </a>
-                    </td>
-                </tr>
-            </table>
-
-
-            <table cellpadding="0" cellspacing="0" border="0" width="190" align="center">
-                <tr>
-                    <td align="center" valign="top" width="190" style="font-family:Arial,helvetica,sans-serif;font-size:10pt;font-weight:normal;text-align:center;color:#000000;background-color:#ffffff;padding:2px 0px 20px 0px;text-decoration:none;">
-                        <a href="https://cl.exct.net/?qs=99e83978c38390b90535d25a8c36a47353cd5acea4929838958684ca5fe77cd501aea14d97d1124556ac471b04090256e5f5e4ad95b154822c36a389b213b549" style="color:#000000;text-decoration:none;" >Saginaw Valley State Cardinals 20.5&quot; x 32.5&quot; Football Mat</a>
-                    </td>
-                </tr>
-            </table>
-
-        </td>
-
-        </tr>
-            <tr>
-
-
-
-    </tr>
-</table>
-</div>
-
-
-
-
-          <!--/Content Block 'ProductGrid' (ProductGrid Module 3)-->
-          <!--Content Block 'FullWidthBanner' (F-Spot)-->
-          <!--/Content Block 'FullWidthBanner' (F-Spot)-->
-          <!--Content Block 'FullWidthBanner' (G-Spot)-->
-          <!--/Content Block 'FullWidthBanner' (G-Spot)-->
-          <!--Content Block 'FullWidthBanner' (H-Spot)-->
-          <!--/Content Block 'FullWidthBanner' (H-Spot)-->
-          <!--Content Block 'FullWidthBanner' (I-Spot)-->
-          <!--/Content Block 'FullWidthBanner' (I-Spot)-->
-          <!--Content Block 'FullWidthBanner' (J-Spot)-->
-          <!--/Content Block 'FullWidthBanner' (J-Spot)-->
-          <!--Content Block 'BottomBannersToggles' (Scheduled Content)-->
-          <!---->
-          <!--/Content Block 'BottomBannersToggles' (Scheduled Content)--> <table width="600" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff">
-    <tr>
-
-
-
-            <td valign="top" align="center">
-                <a href="https://cl.exct.net/?qs=99e83978c38390b964cae38a8b82147216798413bded9af993c88cb239df09e10fdd986743311af0547f503ff7a705c354fe94a8b7267d416ad0fb3c420b34f7" >
-                <img src="http://fanatics.frgimages.com/CompleteMailer/images/TTButtons/FE_TEAMBUTTON_NCAA.jpg"></a>
-            </td>
-
-
-
-
-
-
-
-            <td valign="top" align="center">
-                <a href="https://cl.exct.net/?qs=e333541f7b70903c8d79439bcfee41719f80264f0367a9931701d8fbeeb71b5acce96f14716373659e353b3eeee248a742149765c823a5bc79d5b63005098416" >
-                <img src="http://fanatics.frgimages.com/CompleteMailer/images/TTButtons/FE_TEAMBUTTON_MICH.jpg"></a>
-            </td>
-
-
-
-
-
-
-
-
-        <td valign="top" align="center">
-            <a href="https://cl.exct.net/?qs=99e83978c38390b9f71260109407b8655225b71fe3956c3121e7be7140470dd3bd5dabd9deca044d8c709b081bee1938c79559bc540b82f199548901b9ec92ee" >
-            <img src="http://fanatics.frgimages.com/CompleteMailer/images/TTButtons/FE_Add_Team.jpg"></a>
-        </td>
-
-
-    </tr>
-</table><!--[if !mso]><!-- -->
-<div class="mobile-only showHiddenNav" style="overflow:hidden; line-height:0px; mso-hide:all !important;display:none; font-size:0px;">
-
-  <table cellpadding="0" cellspacing="0" border="0" width="100%">
-    <tr>
-      <td class="mobile-only showHiddenNav CustomFont" style="font-size:20px;font-weight:bold;" align="left" valign="top" >
-
-
-
-<a href="https://cl.exct.net/?qs=e333541f7b70903c80b3fd19beac86e56f7a5efb913636dc1b0476c10cf00a1b0f9c4f1592c372cf92b92e8fbb3cc7f4fd14ac37a38f97b3f0a77d73e7ac550e" target="_blank" >
-      <table border="0" width="100%" cellspacing="0" cellpadding="0" >
-         <tr>
-            <td width="100%" align="left" background="#1b1b1d" style="align:left; text-align:left; padding:10px 10px 10px 10px;background-color:#1b1b1d;color:#ffffff;font-size: 24px;line-height:125%;">College</td>
-         </tr>
-      </table>
-   </a>
-
-
-<a href="https://cl.exct.net/?qs=e333541f7b70903c4e72543c94b7d859c941b10c91ae799f22c09d9cc6f35d9d49c5e5bfd808be51d962dcd1b6f92437dded6b4503d5dff0d17dbc08da9e444d" target="_blank" >
-      <table border="0" width="100%" cellspacing="0" cellpadding="0" >
-         <tr>
-            <td width="100%" align="left" background="#1b1b1d" style="align:left; text-align:left; padding:10px 10px 10px 10px;background-color:#1b1b1d;color:#ffffff;font-size: 24px;line-height:125%;">NFL</td>
-         </tr>
-      </table>
-   </a>
-
-
-<a href="https://cl.exct.net/?qs=e333541f7b70903ced2d5a84559039f304492c786892337c209564946873af5ad76cd80ae779476f1f374cd21dae278c51f9a608212e8b96ac4012cb054aa4c6" target="_blank" >
-      <table border="0" width="100%" cellspacing="0" cellpadding="0" >
-         <tr>
-            <td width="100%" align="left" background="#1b1b1d" style="align:left; text-align:left; padding:10px 10px 10px 10px;background-color:#1b1b1d;color:#ffffff;font-size: 24px;line-height:125%;">MLB</td>
-         </tr>
-      </table>
-   </a>
-
-
-<a href="https://cl.exct.net/?qs=e333541f7b70903cdd6a2518502d6860a56e4a08cc88abb4a5c0748d9132bc8c53965912243820f19079ff61cf2e67f08387f0f962ab33941778982b1cba149a" target="_blank" >
-      <table border="0" width="100%" cellspacing="0" cellpadding="0" >
-         <tr>
-            <td width="100%" align="left" background="#1b1b1d" style="align:left; text-align:left; padding:10px 10px 10px 10px;background-color:#1b1b1d;color:#ffffff;font-size: 24px;line-height:125%;">NBA</td>
-         </tr>
-      </table>
-   </a>
-
-
-<a href="https://cl.exct.net/?qs=e333541f7b70903ca2f80ea555a5b7f840e61f1e96d72a0e2b78c6a6e2d8a52982ce3787fda2b6ef968753f0b9a955a6e9d8c2a7a5af4b697ab3adadeabf70de" target="_blank" >
-      <table border="0" width="100%" cellspacing="0" cellpadding="0" >
-         <tr>
-            <td width="100%" align="left" background="#1b1b1d" style="align:left; text-align:left; padding:10px 10px 10px 10px;background-color:#1b1b1d;color:#ffffff;font-size: 24px;line-height:125%;">NHL</td>
-         </tr>
-      </table>
-   </a>
-
-
-<a href="https://cl.exct.net/?qs=e333541f7b70903c0615917c13d94648b2d2a79e830f5d5d3a64c75cd529ce0c9260b05ee2f456a8b9c158381670e34b51d65c79c5dacc1baf62324cc6bf85b9" target="_blank" >
-      <table border="0" width="100%" cellspacing="0" cellpadding="0" >
-         <tr>
-            <td width="100%" align="left" background="#1b1b1d" style="align:left; text-align:left; padding:10px 10px 10px 10px;background-color:#1b1b1d;color:#ffffff;font-size: 24px;line-height:125%;">Sale</td>
-         </tr>
-      </table>
-   </a>
-
-
+<!-- Deal Badge -->
+<div itemscope="" itemtype="http://schema.org/DiscountOffer">
+<meta itemprop="description" content="Free Shipping">
+<meta itemprop="discountCode" content="FASTSHIP">
+<meta itemprop="availabilityStarts" content="2019-01-15T00:00:00Z">
+<meta itemprop="availabilityEnds" content="2019-05-15T00:00:00Z">
+<table class="mobile-width-override bodyTbl" width="100%" height="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff">
+<tbody>
+<tr>
+<td valign="top" bgcolor="#ffffff" align="center">
+<table class="mobile-width-override" width="750" cellspacing="0" cellpadding="0" border="0" align="center">
+<tbody>
+<tr>
+<td valign="top" bgcolor="#ffffff" align="center">
+<table class="mobile-width-override no-overflow" width="750" cellspacing="0" cellpadding="0" border="0" align="center">
+<tbody>
+<tr>
+<td style="padding-top: 30px; padding-bottom: 30px;" valign="middle" align="center">
+<a href="http://enews.jomashop.com/q/rgxggTd8ng0XO-SnpDoRttif1XpbriDSk19ZcOJdm8xMTFAeWFob28uY29tw4g8RrJFpdud52NLyxS3wbjN4fkezw">
+<img src="http://media.jomashop.com/6166/Users/20864/global/jomashopLogo.gif" alt="Jomashop" style="display:block;" width="268" border="0">
+</a>
 </td>
 </tr>
-</table>
-</div>
-<!--<![endif]-->
-
-
-
-<div style="display:none;">
-
-</div>
-
-<table width='600' border='0' cellspacing='0' cellpadding='0' align='center' style='border-collapse: collapse;'>
-	<tr>
-		<td align='center' valign='top'>
-				<a href='https://cl.exct.net/?qs=e333541f7b70903c806500b5bb0e0b00792e8609dddd649350f5ac2aca624d2274200931b7c57de35f1925ebe73d9569d896143ee63953de094e19758b718fff' target='_blank' >
-			<img src='http://fanatics.frgimages.com/CompleteMailer/images/2018/fe_loyalty_infographicc.jpg' width='600' alt='' border='0' style='display:block;' />
-			</a>
-		</td>
-	</tr>
-</table>
-
-
-
-
-<table cellpadding="0" cellspacing="0" border="0" width="600px">
-    <tr>
-        <td align="center" bgcolor="#1b1b1d" style="text-align:center;padding-top:12px;background-color:#1b1b1d;font-family:Arial, Helvetica, sans-serif; font-size:12px; padding:0px 0px 10px 0px; color:#ffffff; line-height:16px; " width="600"><br /><br />
-
-
-
-DISCLAIMER - Limited time offer. Exclusions, terms and conditions apply. Click <a href="https://cl.exct.net/?qs=e333541f7b70903c1e50e1c9695ef6051f60dd758eb71489c12bbce5e461ef3dad77bf2b4bbdfe2ffb40b03de6564fa9a4264153b5e906be237a74881f767cac" target="_blank"  style="color:#e4c022;text-decoration:underline;font-weight:normal;">here</a> for details. Offer may be modified or terminated at any time without notice. <br /><br />
-*Personalized Picks are personal to you & may not be included in the offer/discount.<br /><br />
+<tr>
+<td style="padding-right: 20px;padding-left: 20px;">
+<!-- /////// Navigation //////// -->
+<table class="nav" width="100%" cellspacing="0" cellpadding="0" border="0">
+<tbody>
+<tr>
+<td class="col" valign="middle" align="center">
+<a href="http://enews.jomashop.com/q/ub8ttObRlt0Xi6oPdc2-nkd_HxGbdvxydzHZcOJdm8xMTFAeWFob28uY29tw4gG7DYwL5VdraDLz73qPg_V3RO03g" target="_blank" style="font-family: Helvetica, Arial, sans-serif; font-size: 16px; color: #000000; text-decoration: none;font-weight: bold;">
+WATCHES BY BRAND
+</a>
 </td>
-    </tr>
-    <tr>
-        <td align="center" bgcolor="#1b1b1d" style="text-align:center;padding:0px 0px 15px 0px; background-color:#1b1b1d;font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#ffffff; line-height:18px; " width="600" class="mobile-content">
-        <table border="0" cellpadding="0" cellspacing="0" width="96%">
-            <tr>
-                <td align="center" bgcolor="#1b1b1d" style="text-align:center;padding:0px 10px 0px 10px; background-color:#1b1b1d;font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#ffffff; line-height:18px;">
-                This email was sent to <a href="mailto:jillferg22@yahoo.com" style="color:#e4c022; text-decoration:none;">jillferg22@yahoo.com</a><br />
-                by FansEdge.com. 8100 Nations Way, Jacksonville, FL 32256<br /><br />
-                To ensure delivery to your inbox, add <a href="mailto:shop@e.fansedge.com" style="color:#e4c022; text-decoration:none;font-weight:normal;" alias="
-Footer|2|AddToAddressBook">shop@e.fansedge.com</a> to your address book. <br class="hideThis" />
-                <!-- If you have any questions, contact our <a href="https://fansedge.custhelp.com/app/home/theme/teamfanshop" target="_blank" alias="Customer Help Center" style="color:#e4c022;text-decoration:underline;font-weight:normal;">Customer Help Center</a>. <br class="mobile-hidden" /> -->
-                This email was sent from a notification only address.<br /><br />
-                <a href="https://cl.exct.net/?qs=e333541f7b70903cd4bed753e0336d4822a82cf86fb8b79ee596e5702dc7cf162c60b18611829c0f1b7670ef2ba3252ac7990c415b989764f03bc52ba7ddd6f9" target="_blank"  style="color:#e4c022; text-decoration:underline;">Update Email Preferences</a> | <a href="https://cl.exct.net/?qs=e333541f7b70903c0486e62f83db139c4b3eabce90db24d3b9f04d496ef113d885f11f04e3294d157381fb4636f9aa8270085dd9447bc971657669d4ed8a405b" target="_blank"  style="color:#e4c022; text-decoration:underline;">Unsubscribe</a><br /><br />
-
-                <a href="https://view.exacttarget.com/?qs=3bfe1deb1055fea91f31903932bc1b9e0efada602cb7624a70c61e81d7ff9b7686c1cd805a18e4afa5a5c29789d369fccf10db7945e2e5ea0dba5cfbdfb3e13b1d147530a8237869518b65f3cb8cb96f" target="_blank"  style="color:#1b1b1d; text-decoration:underline;">VIWP</a>
-                </td>
-            </tr>
-        </table>
-        </td>
-    </tr>
-</table> </td>
-        </tr>
-       </tbody>
-      </table> </td>
-    </tr>
-   </tbody>
-  </table>
-  <img src="https://cl.exct.net/open.aspx?ffcb10-fe9615777360057c70-fe2915707461027b701d75-fe5f15707d6c0d7e7416-ff9a1170-fe2d1570746201797d1776-ff63137171&d=10093" width="1" height="1"></custom>
-
-
- </body>
+<td class="col" valign="middle" align="center">
+<a href="http://enews.jomashop.com/q/AsVAAj039A0XqHstdrJowvPOPz7D25HxvwTZcOJdm8xMTFAeWFob28uY29tw4gDp8DvxYjc4neL3rinWWlzPAabBQ" target="_blank" style="font-family: Helvetica, Arial, sans-serif; font-size: 16px; color: #000000; text-decoration: none;">
+MEN'S
+</a>
+</td>
+<td class="col" valign="middle" align="center">
+<a href="http://enews.jomashop.com/q/RfaxxpH07x0XtTlVcmz-EPfm_AARmfKgUv9ZcOJdm8xMTFAeWFob28uY29tw4gz9NwizOZeLKbL6yEDs8TT1cfXdg" target="_blank" style="font-family: Helvetica, Arial, sans-serif; font-size: 16px; color: #000000; text-decoration: none;">
+LADIES
+</a>
+</td>
+<td class="col" valign="middle" align="center">
+<a href="http://enews.jomashop.com/q/Q7QBBeO0-B0XVXGmlSoF-Ac4uletF8ctgYYZcOJdm8xMTFAeWFob28uY29tw4gdtBdLvt7c6wTL6jfiuKF3AH7UWw" target="_blank" style="font-family: Helvetica, Arial, sans-serif; font-size: 16px; color: #000000; text-decoration: none;">
+JEWELRY
+</a>
+</td>
+<td class="col" valign="middle" align="center">
+<a href="http://enews.jomashop.com/q/tPneeuCdRe0XEqFJvCW7RniLDKdZ7TObXpyZcOJdm8xMTFAeWFob28uY29tw4gB89sBNz3fKzELRO8JVUt9uQ_Lag" target="_blank" style="font-family: Helvetica, Arial, sans-serif; font-size: 16px; color: #000000; text-decoration: none;">
+HANDBAGS
+</a>
+</td>
+<td class="col" valign="middle" align="center">
+<a href="http://enews.jomashop.com/q/x8eUURH8dU0XCODoqu7o6EGhg-E90jnkSSDZcOJdm8xMTFAeWFob28uY29tw4gRjas6qn3dp8CLmJNh3l0QFk4yqg" target="_blank" style="font-family: Helvetica, Arial, sans-serif; font-size: 16px; color: #000000; text-decoration: none;">
+GIFTS
+</a>
+</td>
+</tr>
+<tr>
+<td height="20">
+&nbsp;
+</td>
+</tr>
+</tbody>
+</table>
+<!-- /////// End Navigation //////// -->
+</td>
+</tr>
+<tr>
+<td style="padding-top: 10px;padding-bottom: 10px;padding-left: 20px;padding-right: 20px;" bgcolor="#0d0d0d">
+<table width="100%" cellspacing="0" cellpadding="0" border="0">
+<tbody>
+<tr>
+<td style="text-align:center;color:#ffffff;font-family: Arial, Arial, sans-serif; font-size: 17px;" valign="middle" height="30" align="center">
+<a href="http://enews.jomashop.com/q/r68ddC9xhd0XxdmCMMSem_6H5o_llQdL1ZLZcOJdm8xMTFAeWFob28uY29tw4go9pUgRN3dIn2LdiCvAR_xxaveUg" style="color: #ffffff;text-decoration: none;text-align: center;">
+GUARANTEED FATHER'S DAY DELIVERY <span style="color:#f4d18c">Details &raquo;</span>
+</a>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td style="padding: 40px 0" bgcolor="#ffffff">
+<table width="100%" cellspacing="0" cellpadding="0" border="0">
+<tbody>
+<tr>
+<td style="color:#444444;font-family: Georgia, sans-serif; font-size: 38px;font-style: italic;text-align: center;" valign="middle" height="30px" align="center"><span style="color: #D80D0D;">Limited</span> Time Offers</td>
+</tr>
+<tr>
+<td>
+<table width="130" cellspacing="0" cellpadding="0" border="0" align="center">
+<tbody>
+<tr>
+<td style="border-bottom: 2px solid #000000;" width="130" height="20">&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<!-- Begin Event Section -->
+<tr>
+<td valign="center" bgcolor="#ffffff" align="center">
+<table width="100%" cellspacing="0" cellpadding="0" border="0">
+<tbody>
+<tr>
+<td width="24">
+&nbsp;
+</td>
+<td width="351">
+<table width="100%" cellspacing="0" cellpadding="0" border="0">
+<tbody>
+<tr>
+<td style="font-family: Arial, Helvetica, sans-serif;font-size: 32px;padding-top: 20px;padding-bottom: 10px;" align="center">
+ORIS
+</td>
+</tr>
+<tr>
+<td style="font-family: Georgia, sans-serif;font-style: italic;font-size: 18px;line-height: 24px;" align="center">
+Artelier Translucent Skeleton Dial
+</td>
+</tr>
+<tr>
+<td style="font-family: Georgia, sans-serif;font-style: italic;font-size: 18px;line-height: 24px;padding-bottom: 20px;" align="center">
+Automatic Men's Leather Watch
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td width="351">
+<table width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#f2f2f2">
+<tbody>
+<tr>
+<td style="font-family: Arial, Helvetica, sans-serif;font-size: 18px;padding-top: 20px;line-height: 24px;" align="center">
+TAKE AN EXTRA $400 OFF
+</td>
+</tr>
+<tr>
+<td style="font-family: Arial, Helvetica, sans-serif;font-size: 18px;line-height: 24px;" align="center">
+THIS ORIS WATCH
+</td>
+</tr>
+<tr>
+<td style="padding-bottom: 20px;padding-top: 20px;font-family: Georgia, sans-serif;font-style: italic;font-size: 18px;line-height: 24px;" align="center">
+use code - <span style="color: #D80D0D;font-size: 20px;">EXRS400</span> -
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td width="24">
+&nbsp;
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td height="20">&nbsp;</td>
+</tr>
+<tr>
+<td valign="center" bgcolor="#ffffff" align="center">
+<table width="100%" cellspacing="0" cellpadding="0" border="0">
+<tbody>
+<tr>
+<td width="24">
+&nbsp;
+</td>
+<td width="702">
+<a href="http://enews.jomashop.com/q/T2OooP6Hbo0Xasl2FNHeH-TJl1JHwPWCKo6ZcOJdm8xMTFAeWFob28uY29tw4gE_XNt_7MdYToL9vlFsD3oSBvxyw">
+<img class="product-image" src="http://media.jomashop.com/6166/Users/20864/Exclusive/20190605/big_banner_ORIS_artelier.jpg" width="702">
+</a>
+</td>
+<td width="24">
+&nbsp;
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td height="20">&nbsp;</td>
+</tr>
+<tr>
+<td valign="center" bgcolor="#ffffff" align="center">
+<table width="100%" cellspacing="0" cellpadding="0" border="0">
+<tbody>
+<tr>
+<td width="24">
+&nbsp;
+</td>
+<td width="226" valign="center">
+<table width="100%" cellspacing="0" cellpadding="0" border="0">
+<tbody>
+<tr>
+<td style="font-family: Arial, Helvetica, sans-serif;font-size: 18px;line-height: 24px;padding-top: 20px;padding-bottom: 5px;" align="center">
+RETAIL $3,000.00
+</td>
+</tr>
+<tr>
+<td style="font-family: Arial, Helvetica, sans-serif;font-size: 18px;line-height: 24px;padding-bottom: 10px;text-decoration: line-through;" align="center">
+SALE $1,395.00
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td width="250" valign="center">
+<table width="100%" cellspacing="0" cellpadding="0" border="0">
+<tbody>
+<tr>
+<td style="font-family: Georgia, sans-serif;font-size: 36px;line-height: 46px;font-style: italic;color: #D80D0D;padding-top: 10px;padding-bottom: 5px;" align="center">
+$995.00
+</td>
+</tr>
+<tr>
+<td style="font-family: Georgia, sans-serif;font-size: 18px;line-height: 24px;font-style: italic;padding-bottom: 10px;" align="center">
+after coupon - exp 06/11
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td width="226" valign="center">
+<table width="100%" cellspacing="0" cellpadding="0" border="0">
+<tbody>
+<tr>
+<td align="center">
+<a href="http://enews.jomashop.com/q/TQ_33u9eM30XJ_b_osFmWbhWV_q-fFTkXhmZcOJdm8xMTFAeWFob28uY29tw4gzJMY7ABCd7RcLQ1FSdexxeMSXHg">
+<img src="http://media.jomashop.com/6166/Users/20864/global/buynowBtn.gif">
+</a>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td width="24">
+&nbsp;
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<!-- End Event Section -->
+<tr>
+<td style="padding-top: 10px;padding-bottom: 40px;" bgcolor="#ffffff">
+<table width="100%" cellspacing="0" cellpadding="0" border="0">
+<tbody>
+<tr>
+<td>
+<table width="130" cellspacing="0" cellpadding="0" border="0" align="center">
+<tbody>
+<tr>
+<td style="border-bottom: 2px solid #000000;" width="130" height="20">&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<!-- Begin Event Section -->
+<tr>
+<td valign="center" bgcolor="#ffffff" align="center">
+<table width="100%" cellspacing="0" cellpadding="0" border="0">
+<tbody>
+<tr>
+<td width="24">
+&nbsp;
+</td>
+<td width="351">
+<table width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#f2f2f2">
+<tbody>
+<tr>
+<td style="font-family: Arial, Helvetica, sans-serif;font-size: 18px;padding-top: 20px;line-height: 24px;" align="center">
+TAKE AN EXTRA $300 OFF
+</td>
+</tr>
+<tr>
+<td style="font-family: Arial, Helvetica, sans-serif;font-size: 17px;line-height: 24px;" align="center">
+THESE SWISS MILITARY WATCHES
+</td>
+</tr>
+<tr>
+<td style="padding-bottom: 20px;padding-top: 20px;font-family: Georgia, sans-serif;font-style: italic;font-size: 18px;line-height: 24px;" align="center">
+use code - <span style="color: #D80D0D;font-size: 20px;">EXSWM300</span> -
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td width="351">
+<table width="100%" cellspacing="0" cellpadding="0" border="0">
+<tbody>
+<tr>
+<td style="font-family: Arial, Helvetica, sans-serif;font-size: 32px;padding-top: 20px;padding-bottom: 10px;" align="center">
+SWISS MILITARY
+</td>
+</tr>
+<tr>
+<td style="font-family: Georgia, sans-serif;font-style: italic;font-size: 18px;line-height: 24px;" align="center">
+Invincible Series Automatic
+</td>
+</tr>
+<tr>
+<td style="font-family: Georgia, sans-serif;font-style: italic;font-size: 18px;line-height: 24px;padding-bottom: 20px;" align="center">Men's Watches in 5 Styles
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td width="24">
+&nbsp;
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td height="20">&nbsp;</td>
+</tr>
+<tr>
+<td valign="center" bgcolor="#ffffff" align="center">
+<table width="100%" cellspacing="0" cellpadding="0" border="0">
+<tbody>
+<tr>
+<td width="24">
+&nbsp;
+</td>
+<td width="702">
+<a href="http://enews.jomashop.com/q/B3effx5BVf0XjZt-Damq8jKVURFyhyiglSmZcOJdm8xMTFAeWFob28uY29tw4gdOBE_u7KdI6yL-cXrp2LJ9nzkQg">
+<img class="product-image" src="http://media.jomashop.com/6166/Users/20864/Exclusive/20190605/big_banner_SM_invincible.jpg" width="702">
+</a>
+</td>
+<td width="24">
+&nbsp;
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td height="20">&nbsp;</td>
+</tr>
+<tr>
+<td valign="center" bgcolor="#ffffff" align="center">
+<table width="100%" cellspacing="0" cellpadding="0" border="0">
+<tbody>
+<tr>
+<td width="24">
+&nbsp;
+</td>
+<td width="226" valign="center">
+<table width="100%" cellspacing="0" cellpadding="0" border="0">
+<tbody>
+<tr>
+<td style="font-family: Arial, Helvetica, sans-serif;font-size: 18px;line-height: 24px;padding-top: 20px;padding-bottom: 5px;" align="center">
+RETAIL $3,000.00
+</td>
+</tr>
+<tr>
+<td style="font-family: Arial, Helvetica, sans-serif;font-size: 18px;line-height: 24px;padding-bottom: 10px;text-decoration: line-through;" align="center">
+SALE $1,395.00
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td width="250" valign="center">
+<table width="100%" cellspacing="0" cellpadding="0" border="0">
+<tbody>
+<tr>
+<td style="font-family: Georgia, sans-serif;font-size: 38px;line-height: 46px;font-style: italic;color: #D80D0D;padding-top: 10px;padding-bottom: 5px;" align="center">
+$395.00
+</td>
+</tr>
+<tr>
+<td style="font-family: Georgia, sans-serif;font-size: 18px;line-height: 24px;font-style: italic;padding-bottom: 10px;" align="center">
+after coupon - exp 06/11
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td width="226" valign="center">
+<table width="100%" cellspacing="0" cellpadding="0" border="0">
+<tbody>
+<tr>
+<td align="center">
+<a href="http://enews.jomashop.com/q/NEXttxIkFt0XDUKy449Tqo9r56znW45khIKZcOJdm8xMTFAeWFob28uY29tw4geXhHGhxVcZIxLVTDWFr81wnF8QQ">
+<img src="http://media.jomashop.com/6166/Users/20864/global/buynowBtn.gif">
+</a>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td width="24">
+&nbsp;
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<!-- End Event Section -->
+<tr>
+<td style="padding-top: 10px;padding-bottom: 40px;" bgcolor="#ffffff">
+<table width="100%" cellspacing="0" cellpadding="0" border="0">
+<tbody>
+<tr>
+<td>
+<table width="130" cellspacing="0" cellpadding="0" border="0" align="center">
+<tbody>
+<tr>
+<td style="border-bottom: 2px solid #000000;" width="130" height="20">&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<!-- Begin Event Section -->
+<tr>
+<td valign="center" bgcolor="#ffffff" align="center">
+<table width="100%" cellspacing="0" cellpadding="0" border="0">
+<tbody>
+<tr>
+<td width="24">
+&nbsp;
+</td>
+<td width="351">
+<table width="100%" cellspacing="0" cellpadding="0" border="0">
+<tbody>
+<tr>
+<td style="font-family: Arial, Helvetica, sans-serif;font-size: 32px;padding-top: 20px;padding-bottom: 10px;" align="center">
+CITIZEN
+</td>
+</tr>
+<tr>
+<td style="font-family: Georgia, sans-serif;font-style: italic;font-size: 18px;line-height: 24px;" align="center">
+Chandler Multifunction
+</td>
+</tr>
+<tr>
+<td style="font-family: Georgia, sans-serif;font-style: italic;font-size: 18px;line-height: 24px;padding-bottom: 20px;" align="center">
+Black Dial Men's Watch
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td width="351">
+<table width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#f2f2f2">
+<tbody>
+<tr>
+<td style="font-family: Arial, Helvetica, sans-serif;font-size: 18px;padding-top: 20px;line-height: 24px;" align="center">
+TAKE AN EXTRA $25 OFF
+</td>
+</tr>
+<tr>
+<td style="font-family: Arial, Helvetica, sans-serif;font-size: 18px;line-height: 20px;" align="center">
+THIS CITIZEN WATCH
+</td>
+</tr>
+<tr>
+<td style="padding-bottom: 20px;padding-top: 20px;font-family: Georgia, sans-serif;font-style: italic;font-size: 18px;line-height: 24px;" align="center">
+use code - <span style="color: #D80D0D;font-size: 20px;">EXCZ25</span> -
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td width="24">
+&nbsp;
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td height="20">&nbsp;</td>
+</tr>
+<tr>
+<td valign="center" bgcolor="#ffffff" align="center">
+<table width="100%" cellspacing="0" cellpadding="0" border="0">
+<tbody>
+<tr>
+<td width="24">
+&nbsp;
+</td>
+<td width="702">
+<a href="http://enews.jomashop.com/q/E7MppHibEp0XTxUjbe6f6IoWJRSu--umT-LZcOJdm8xMTFAeWFob28uY29tw4gijfZneUbebQ5L1_NHACgOtYIz3w">
+<img class="product-image" src="http://media.jomashop.com/6166/Users/20864/Exclusive/20190605/big_banner_CITIZEN_chandler.jpg" width="702">
+</a>
+</td>
+<td width="24">
+&nbsp;
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td height="20">&nbsp;</td>
+</tr>
+<tr>
+<td valign="center" bgcolor="#ffffff" align="center">
+<table width="100%" cellspacing="0" cellpadding="0" border="0">
+<tbody>
+<tr>
+<td width="24">
+&nbsp;
+</td>
+<td width="226" valign="center">
+<table width="100%" cellspacing="0" cellpadding="0" border="0">
+<tbody>
+<tr>
+<td style="font-family: Arial, Helvetica, sans-serif;font-size: 18px;line-height: 24px;padding-top: 20px;padding-bottom: 5px;" align="center">
+RETAIL $275.00
+</td>
+</tr>
+<tr>
+<td style="font-family: Arial, Helvetica, sans-serif;font-size: 18px;line-height: 24px;padding-bottom: 10px;text-decoration: line-through;" align="center">
+SALE $121.99
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td width="250" valign="center">
+<table width="100%" cellspacing="0" cellpadding="0" border="0">
+<tbody>
+<tr>
+<td style="font-family: Georgia, sans-serif;font-size: 38px;line-height: 46px;font-style: italic;color: #D80D0D;padding-top: 10px;padding-bottom: 5px;" align="center">
+$96.99
+</td>
+</tr>
+<tr>
+<td style="font-family: Georgia, sans-serif;font-size: 18px;line-height: 24px;font-style: italic;padding-bottom: 10px;" align="center">
+after coupon - exp 06/11
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td width="226" valign="center">
+<table width="100%" cellspacing="0" cellpadding="0" border="0">
+<tbody>
+<tr>
+<td align="center">
+<a href="http://enews.jomashop.com/q/svXkkia7uk0XJ4_vYLP2e6cbpR0XfdOkD7SZcOJdm8xMTFAeWFob28uY29tw4gUXtuIHOXc5-QLtZda-qLJPVl_aA">
+<img src="http://media.jomashop.com/6166/Users/20864/global/buynowBtn.gif">
+</a>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td width="24">
+&nbsp;
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<!-- End Event Section -->
+<tr>
+<td height="20">&nbsp;</td>
+</tr>
+<!-- Begin Events Ending Soon Section -->
+<tr>
+<td style="padding-top: 40px;padding-bottom: 40px;" bgcolor="#ffffff">
+<table width="100%" cellspacing="0" cellpadding="0" border="0">
+<tbody>
+<tr>
+<td style="color:#444444;font-family: Georgia, sans-serif; font-size: 28px;font-style: italic;text-align: center;" valign="middle" height="30px" align="center">
+Great Deals Happening Right Now
+</td>
+</tr>
+<tr>
+<td>
+<table width="118" cellspacing="0" cellpadding="0" border="0" align="center">
+<tbody>
+<tr>
+<td style="border-bottom: 1px solid #000000;" width="118" height="20">&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<!-- Begin Top Banner -->
+<tr>
+<td valign="center" bgcolor="#ffffff" align="center">
+<table width="100%" cellspacing="0" cellpadding="0" border="0">
+<tbody>
+<tr>
+<td width="24">
+&nbsp;
+</td>
+<td width="702">
+<a href="http://enews.jomashop.com/q/lCbEEj1wJE0XBMp380sv7uVIYEUW3V6X9NtZcOJdm8xMTFAeWFob28uY29tw4gQRBcUN52eZ39LSzewYGXNikkUWg">
+<img class="product-image" src="http://media.jomashop.com/6166/Users/20864/20190605/db_old_sale_full_fd.jpg" style="" width="702">
+</a>
+</td>
+<td width="24">
+&nbsp;
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td height="23">&nbsp;</td>
+</tr>
+<tr>
+<td valign="center" bgcolor="#ffffff" align="center">
+<table width="100%" cellspacing="0" cellpadding="0" border="0">
+<tbody>
+<tr>
+<td width="24">
+&nbsp;
+</td>
+<td width="350">
+<a href="http://enews.jomashop.com/q/S4QhhSv1Xh0XqMHA5jLBHhS_2GouS9vxr8PZcOJdm8xMTFAeWFob28uY29tw4gzgNOBE7mfLY_L7X6dsT6tiMYHSA">
+<img class="product-image" src="http://media.jomashop.com/6166/Users/20864/20190605/omega_old_sale.jpg">
+</a>
+</td>
+<td width="2">
+&nbsp;
+</td>
+<td width="350">
+<a href="http://enews.jomashop.com/q/zMRggydarg0X3Nl7rdw2HRJzefqbXQb9ZwJZcOJdm8xMTFAeWFob28uY29tw4gxn20o_7Ae6dfLsYq-cC1p6M55sg">
+<img class="product-image" src="http://media.jomashop.com/6166/Users/20864/20190605/baume_old_sale.jpg">
+</a>
+</td>
+<td width="24">
+&nbsp;
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td height="23">&nbsp;</td>
+</tr>
+<tr>
+<td valign="center" bgcolor="#ffffff" align="center">
+<table width="100%" cellspacing="0" cellpadding="0" border="0">
+<tbody>
+<tr>
+<td width="24">
+&nbsp;
+</td>
+<td width="350">
+<a href="http://enews.jomashop.com/q/jdouupKFPu0XBi9367ph7uVPzEuLsBTXtgkZcOJdm8xMTFAeWFob28uY29tw4gRn2vLLrueYdBLrBdR2Nxhsk55qQ">
+<img class="product-image" src="http://media.jomashop.com/6166/Users/20864/20190605/mk_old_sale.jpg">
+</a>
+</td>
+<td width="2">
+&nbsp;
+</td>
+<td width="350">
+<a href="http://enews.jomashop.com/q/v4_99yJ_-90X1_7Iy7XerGwKo6VxHUeHsbdZcOJdm8xMTFAeWFob28uY29tw4ghJnDILIReJcBLENo3pSN8QoydxQ">
+<img class="product-image" src="http://media.jomashop.com/6166/Users/20864/20190605/lambo_old_sale.jpg">
+</a>
+</td>
+<td width="24">
+&nbsp;
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td height="24">&nbsp;</td>
+</tr>
+<tr>
+<td valign="center" bgcolor="#ffffff" align="center">
+<table width="100%" cellspacing="0" cellpadding="0" border="0">
+<tbody>
+<tr>
+<td width="24">
+&nbsp;
+</td>
+<td width="702">
+<a href="http://enews.jomashop.com/q/bcd885YFm80XnexCA_bKmo62fTtXNeeUty_ZcOJdm8xMTFAeWFob28uY29tw4gMu_C-NpJcaxULv6s_mwXr1zrrxA">
+<img class="product-image" src="http://media.jomashop.com/6166/Users/20864/20190605/jensen_old_sale_full.jpg" style="" width="702">
+</a>
+</td>
+<td width="24">
+&nbsp;
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<!-- End Top Banner -->
+<!-- End Events Ending Soon Section -->
+<tr>
+<td height="60">&nbsp;</td>
+</tr>
+<tr>
+<td valign="middle" bgcolor="#ffffff" align="center">
+<table width="100%" cellspacing="0" cellpadding="0" border="0">
+<tbody>
+<tr>
+<td style="font-family: Georgia, Times New Roman, serif; font-style:italic; font-size: 15px; color: #333333;" width="25%" valign="top" align="center">
+<img src="http://media.jomashop.com/6166/Users/20864/global/watchICO.gif" alt="Find your dream watch" style="display:block;" width="57" border="0"><br>
+<a href="http://enews.jomashop.com/q/Sod77rUTL70XcwFdLvabsJX_FyT8iUySqD3ZcOJdm8xMTFAeWFob28uY29tw4gs2qbX7GNcLrfLkZ86O6QdRLtunQ" target="_blank" style="color: #333333;">Find Your<br>
+Dream Watch</a>
+</td>
+<td style="font-family: Georgia, Times New Roman, serif; font-style:italic; font-size: 15px; color: #333333;" width="25%" valign="top" align="center">
+<img src="http://media.jomashop.com/6166/Users/20864/global/purseICO.gif" alt="Shop Handbags" style="display:block;" width="57" border="0"><br>
+<a href="http://enews.jomashop.com/q/xJAUUfrXKU0XbVMwTRvQDPQOd9ttjbtdo-3ZcOJdm8xMTFAeWFob28uY29tw4gI4hjmxP7frRoLqB1Yd0m-aSuMZQ" target="_blank" style="color: #333333;">Shop Handbags<br>
+&amp; Accessories</a>
+</td>
+<td style="font-family: Georgia, Times New Roman, serif; font-style:italic; font-size: 15px; color: #333333;" width="25%" valign="top" align="center">
+<img src="http://media.jomashop.com/6166/Users/20864/global/penICO.gif" alt="Shop Fine Pens" style="display:block;" width="57" border="0"><br>
+<a href="http://enews.jomashop.com/q/C94__Kz0h_0Xrh93gkli79VRfEa2ke6RfP9ZcOJdm8xMTFAeWFob28uY29tw4girrX8H1pdb2mLAsngaMftz4K-0Q" target="_blank" style="color: #333333;">Shop Fine<br>
+Pens</a>
+</td>
+<td style="font-family: Georgia, Times New Roman, serif; font-style:italic; font-size: 15px; color: #333333;" width="25%" valign="top" align="center">
+<img src="http://media.jomashop.com/6166/Users/20864/global/jewelryICO.gif" alt="Shop Crystals and Jewelry" style="display:block;" width="57" border="0"><br>
+<a href="http://enews.jomashop.com/q/FMtvvXDoqv0XmcS0n-Fxj39-Z6BVljqt4l3ZcOJdm8xMTFAeWFob28uY29tw4gZdu4ep6Oer6OL0hfl1_70tm3fvg" target="_blank" style="color: #333333;">Shop Crystals<br>
+&amp; Jewelry</a>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td height="60px">&nbsp;</td>
+</tr>
+<tr>
+<td>
+<table width="100%" cellspacing="0" cellpadding="0" border="0">
+<tbody>
+<tr>
+<td valign="middle" align="center">
+<a href="http://enews.jomashop.com/q/5Zr66KyT460XLzkEV7PT00SjGVHqGQ6--6XZcOJdm8xMTFAeWFob28uY29tw4g9GucM4HPfriILh7Wjx153Zfxvmg">
+<img class="bottom-banner" src="http://media.jomashop.com/6166/Users/20864/global/all_sales_banner.jpg">
+</a>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td height="40px">&nbsp;</td>
+</tr>
+<tr>
+<td>
+<table class="mobile-nav" width="100%" cellspacing="0" cellpadding="0" border="0">
+<tbody>
+<tr>
+<td class="mobile-nav-td" style="border-top: solid 1px #dedede;border-bottom: solid 1px #dedede;" width="750" valign="middle" height="65" align="center">
+<a href="http://enews.jomashop.com/q/wY0VVYO8uV0XmdwkGkPd8kYnDbwc9HaAffjZcOJdm8xMTFAeWFob28uY29tw4gTirlJupJebjsL9p2Pq0VJp0Yu4w" target="_blank" style="text-decoration:none !important;font-family: Helvetica, Arial, sans-serif;font-size: 26px;color: #000000;text-decoration: none;padding-bottom: 20px;padding-top: 20px;padding-left: 328px;padding-right: 328px;">
+LADIES
+</a>
+</td>
+</tr>
+<tr>
+<td class="mobile-nav-td" style="border-bottom: solid 1px #dedede;" width="750" valign="middle" height="65" align="center">
+<a href="http://enews.jomashop.com/q/CxunnXUXon0XLkXF8YYPjHGSa2gPL-fCuV-ZcOJdm8xMTFAeWFob28uY29tw4gWDvk3TX8frmPLMm-LLhVnFVA_4g" target="_blank" style="text-decoration:none !important;font-family: Helvetica, Arial, sans-serif;font-size: 26px;color: #000000;text-decoration: none;padding-bottom: 20px;padding-top: 20px;padding-left: 334px;padding-right: 334px;">
+MEN'S
+</a>
+</td>
+</tr>
+<tr>
+<td class="mobile-nav-td" style="border-bottom: solid 1px #dedede;" width="750" valign="middle" height="65" align="center">
+<a href="http://enews.jomashop.com/q/r6QrrQNFpr0XycMRqhL3Mb6Qg-uDEW6CL54ZcOJdm8xMTFAeWFob28uY29tw4gCl8C-lGWdYxXLByfCsRavfQJbBA" target="_blank" style="text-decoration:none !important;font-family: Helvetica, Arial, sans-serif;font-size: 26px;color: #000000;text-decoration: none;padding-bottom: 20px;padding-top: 20px;padding-left: 241px;padding-right: 241px;">
+WATCHES BY BRAND
+</a>
+</td>
+</tr>
+<tr>
+<td class="mobile-nav-td" style="border-bottom: solid 1px #dedede;" width="750" valign="middle" height="65" align="center">
+<a href="http://enews.jomashop.com/q/nnO88rkIR80XUHKVOccvEMfHfehOEjM1ikXZcOJdm8xMTFAeWFob28uY29tw4gxW2fswL7dIvWL5yvTzBcECs1pmQ" target="_blank" style="text-decoration:none !important;font-family: Helvetica, Arial, sans-serif;font-size: 26px;color: #000000;text-decoration: none;padding-bottom: 20px;padding-top: 20px;padding-left: 336px;padding-right: 336px;">
+GIFTS
+</a>
+</td>
+</tr>
+<tr>
+<td class="mobile-nav-td" style="border-bottom: solid 1px #dedede;" width="750" valign="middle" height="65" align="center">
+<a href="http://enews.jomashop.com/q/lsdddWdk0d0XE7bcMDGKUQuT6kb-I1E_pVlZcOJdm8xMTFAeWFob28uY29tw4go_5P53ocdbhnLO8fFcesw3av6SQ" target="_blank" style="text-decoration:none !important;font-family: Helvetica, Arial, sans-serif;font-size: 26px;color: #000000;text-decoration: none;padding-bottom: 20px;padding-top: 20px;padding-left: 313px;padding-right: 313px;">
+JEWELRY
+</a>
+</td>
+</tr>
+<tr>
+<td class="mobile-nav-td" style="border-bottom: solid 1px #dedede;" width="750" valign="middle" height="65" align="center">
+<a href="http://enews.jomashop.com/q/zJiRRB8-7R0X76Z7sVjmHSJVo4m7fG5iusTZcOJdm8xMTFAeWFob28uY29tw4gOvgTCreVeqSVLiZV6W9LfajL8FQ" target="_blank" style="text-decoration:none !important;font-family: Helvetica, Arial, sans-serif;font-size: 26px;color: #000000;text-decoration: none;padding-bottom: 20px;padding-top: 20px;padding-left: 302px;padding-right: 302px;">
+HANDBAGS
+</a>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td style="padding-top: 24px; padding-bottom: 30px;">
+<!-- /////// Sharing //////// -->
+<table width="100%" cellspacing="0" cellpadding="0" border="0">
+<tbody>
+<tr>
+<td width="350" valign="middle" align="right">
+<table cellspacing="0" cellpadding="0" border="0">
+<tbody>
+<tr>
+<td style="font-family: Helvetica, Arial, sans-serif;font-size: 16px;color: #000000;text-decoration: none;line-height: 40px;">
+CALL US: (877) 834-1434
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td width="50">&nbsp;</td>
+<td class="social-media-container" width="350" valign="middle" align="left">
+<table cellspacing="0" cellpadding="0" border="0">
+<tbody>
+<tr>
+<td width="80">
+<a href="http://enews.jomashop.com/q/DOF88gJhj80XfnAvePtXeMc0bDfoJOAd4z9ZcOJdm8xMTFAeWFob28uY29tw4g1DGiqpxucKVdLegNCa0JGX9w1pA" target="_blank" style="display:block;padding-right: 10px; padding-left: 10px;">
+<img src="http://media.jomashop.com/6166/Users/20864/global/fbIco.gif" alt="Facebook" style="display:block;padding-right: 10px; padding-left: 10px;" width="40" border="0">
+</a>
+</td>
+<td width="80">
+<a href="http://enews.jomashop.com/q/ccrUU5k3wU0Xa0UvzT0FeSc73gdmzFrwNljZcOJdm8xMTFAeWFob28uY29tw4gbto6WKdRdKKLLX6drHXi3dmbePA" target="_blank" style="display:block;padding-right: 10px; padding-left: 10px;">
+<img src="http://media.jomashop.com/6166/Users/20864/global/twIco.gif" alt="Twitter" style="display:block;padding-right: 10px; padding-left: 10px;" width="40" border="0">
+</a>
+</td>
+<td width="80">
+<a href="http://enews.jomashop.com/q/f5I--22Un-0XJXx5f9RRzqlVQ8z4hJMoZWjZcOJdm8xMTFAeWFob28uY29tw4giZ5DVFuOf4oCLrCqP8dAmvIGaRQ" target="_blank" style="display:block;padding-right: 10px; padding-left: 10px;">
+<img src="http://media.jomashop.com/6166/Users/20864/global/insIco.gif" alt="Instagram" style="display:block;padding-right: 10px; padding-left: 10px;" width="40" border="0">
+</a>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<!-- /////// End Sharing //////// -->
+</td>
+</tr>
+<tr>
+<td class="disclaimer-container" style="padding-bottom: 50px; font-family: Helvetica, Arial, sans-serif; font-size: 10px; color: #999999;" valign="middle" align="center">
+<!-- /////// Disclaimer //////// -->
+*This limited time offer is redeemable online or by phone at 877-834-1434 and cannot be combined with any other coupons, discounts, or promotions.<br>
+The Citizen offer is valid on <a href="http://enews.jomashop.com/q/jmAUUNbHwU0XEjbO5yh0HT3BocW0mV1qldtZcOJdm8xMTFAeWFob28uY29tw4g-E02T4mKdrZ8L9G_9Q6AZzvBJMA">Item No. BU2055-16E</a> only. The Oris offer is valid on <a href="http://enews.jomashop.com/q/sM3YYA4wiY0XBcxcmZFaU-ufNgGtZOgYVNXZcOJdm8xMTFAeWFob28uY29tw4gozXCU1xucaOSLyUCcPtgrf6sxxA">Item No. 01 734 7684 4051-07 1 21 73FC</a> only.
+<br>
+The Swiss Military coupon is valid on <a href="http://enews.jomashop.com/q/JQHaaCIxOa0XWHP9HEch0vidqyPJV4lAftmZcOJdm8xMTFAeWFob28uY29tw4gN6omEzxReYGjL8e-7t3EF6D-uIA">these styles</a> only. Offer is not valid on previous purchases. Expires 05/26/19. Other exclusions may apply.<br>
+<br>
+This email was sent to vo111@yahoo.com by:<br>
+Jomashop.com 140 58th St. | Brooklyn | NY | 11220 Disclaimer: Jomashop is not responsible for typographical errors.<br>
+<br>
+<a href="http://enews.jomashop.com/q/18buBDNxNIdfa8uZGvuZHmFPKw6tAH6DgK3cXFqQnihkcxGQ-T8ZGRdUs" style="color: #333333; font-family: Arial, Arial, sans-serif; font-size: 10px;">View the online version</a> |
+<a href="http://enews.jomashop.com/q/WMD55wZWB50XblUwlkKuDSQDF9g9XX7OWPRZcOJdm8xMTFAeWFob28uY29tw4g4KgqlypDfI4aLg2Qnr6heOuisLA" target="_blank" style="color: #333333; font-family: Arial, Arial, sans-serif; font-size: 10px;">Click here to unsubscribe</a>
+<!-- /////// End Disclaimer //////// -->
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<img src="http://enews.jomashop.com/q/URT11ZM6O1fouVmbvc-Vfb_AK1BIO8px-a" alt="" width="20" height="1"></body>
 </html>

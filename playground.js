@@ -1,21 +1,3 @@
 function transform(data){
-  if(!data) return null;
-
-  var replaceArr = [
-    //{oldStr: /.*().*/, newStr: ""}, //.*Full text removal.*
-    //{oldStr: /^().*/i, newStr: ""}, //^Starts with something specific, ends with something- anything.*
-    //{oldStr: /.*()$/i, newStr: ""}, //.*Starts with something-anything, ends with something specific$
-    //{oldStr: /^()$/, newStr: ""}, //^Starts with something specific and ends with something specific$
-    //{oldStr: /^()/, newStr: ""}, //^Starts with Something specific
-    //{oldStr: /.*()/, newStr: ""}, //.*Starts with something - anything
-    //{oldStr: /()$/i, newStr: ""}, //Ends with something specific$
-    {oldStr: /(Excludes|VALID|Exclusions|IN\s*STORE\s*ONLY|GET\s*COUPON).*/i, newStr: ""}, //Ends with something-anything.*
-    //{oldStr: /()/g, newStr: ""}, //somewhere in the middle
-  ];
-
-  replaceArr.forEach(function(el){
-  	data = data.replace(el.oldStr, el.newStr).trim();
-  });
-
-  return data;
+   return data.length > 150 ? data.replace(/(\.)(\d)/g,"~~~$2").match(/[^\.\?\!]*(?:(?:Valid for 20 oz. fountain drink and cameo popcorn)|(?:free\srefill)|(?:collectible)|(?:FREE large popcorn refill)|(?:concession bonus)|(?:good for one free)|(?:FREE ICEE)|(?:on\sdiscount)|(?:only\s\$))[^\.\?\!]*/gi)[0].toString().replace(/(\~\~\~)(\d)/g,".$2").replace(/.*Concession\s*perks/i,"").trim() + ".": data;
 }
