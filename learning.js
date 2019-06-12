@@ -231,7 +231,7 @@ OBJECTS
 
 
 /*
-* OBJECTS
+* OBJECTS (Object literals)
   - Objects are sets of properties and methods.
   - Each property is constituted by a string key and a value.
   - Each method is constituted by a string key and a function.
@@ -312,11 +312,10 @@ sayHi(esHi, name1);
 
 /*
 ------------------------------------------------------------------------
-// WHY DO THE ABOVE MATTER?
-// HOW CAN THEY HELP US THINK DIFFERENT WAYS WE WRITE THE SDE RULES?
+// TECHNIQUES OF WRITING CODE THAT IS CLEAN AND EASY TO READ - REVISIT - COLLABORATE ON
 ------------------------------------------------------------------------
   - When we write SDE rules, there are cases where we need to change the "data" string.
-  - A common way to accomplish that is by using some built in javaScript methods like:
+  - A way to accomplish that is by using some built in javaScript methods like:
     - .replace();
     - .match();
     - .trim();
@@ -331,9 +330,17 @@ sayHi(esHi, name1);
   can result in
     - Difficult to manage code
     - Code that when revisited, it is hard to understand which logic was followed
+    - It might be difficult for other colleagues to understand the code we have written
     - The code is not always performant. The same code can be written in different
     more effective ways.
 */
+
+
+
+
+
+
+
 
 
 
@@ -342,9 +349,8 @@ sayHi(esHi, name1);
 EXAMPLE
   - In the following example, there is a function that has several .replace() methods
   concatenated with each other.
-  Moreover, addigional blacklisted strings were added in the blacklist for a
-  linkbased rule.
-  - The way that the function and the blacklisted items are structured, it is
+  - Moreover, additional strings were added in the blacklist for a linkbased rule.
+  - The way that the function and the blacklisted items are structured makes it
   difficult to revisit the code and do modifications if needed.
   - Also it is more likely to have duplications or errors in the way the regular
   expressions are concatenated since there is no relationship between the different
@@ -369,7 +375,9 @@ over\s[0-9,]+\sbought|Thanks for signing up.*|^For members who.*|^You are receiv
 
 
 /*
+---------------------
 ALTERNATIVE FORMAT 1
+---------------------
   1. Separate each method on a different line to make it more readable
 */
 
@@ -418,7 +426,7 @@ function transform(data){
     .replace(/(Thanks for signing up|Ends \d|Expires \d|Order\sby|Save\s*time|Take\s*the\s*stress|Online\sonly\.|(use\s)?coupon\scode.*).*/i, "")
     .replace(/\*|\†|\^|®\s\.|view\s*deal|Make\s*sure\s*what\s*you|®|REDEEM\s*NOW|SIGN\s*UP\s*NOW|TELL\s*ME\s*MORE|find\s*a\s*store|join\s*now|print\s*now|add\s*to\s*cart|shop\s*now|GET\s*COUPON|GET\s*STARTED|Learn\s*more|See\s*details.|Print\s*coupon|view\s*images|over\s*[0-9,]+\s*bought|\d{15,20}\.?/i, "")
     .replace(/((\d+)(\s+|\n)(%)|(\$)(\s+|\n)(\d+))/gmi, "$1$3")
-    .replace(/(.*)(Now\:\s+\$\d+\.\d+)(.*)/, "$1$2");
+    .replace(/(.*)(Now\:\s+\$\d+\.\d+)(.*)/gmi, "$1$2");
 
   else
     return null;
@@ -427,26 +435,31 @@ function transform(data){
 
 /*
 3. Comment each method, explaining how the different regular expressions are grouped
+This can help you with the management of the regular expressions and possible debugging
+you might need to do.
+Also it is more readable.
 */
 
-function transform(data){
-  if(data)
+function transform(data) {
+  if (true) {
     return data
-    .replace(/.*(Free next|stress-free|fast and free|110%|100%|free\s*trial).*/i, "") //.*Full text removal.*
-    .replace(/^(You\s*are\s*receiving|unbeatable|Thanks\s*for|backed).*/i, "") //^Starts with something specific, ends with something- anything
-    .replace(/.*(us again\.)$/i, "") //.*Starts with something-anything, ends with something specific$
-    .replace(/^([1234]|save now|110percent|Monitors|reward|Start saving|Coupon|HP.*Toner|Chairs?|Hurry)$/i, "") //^Starts with something specific and ends with something specific$
-    .replace(/^(always\s*be\s*ready\s*to|For members who.*|PRINT\.|KEEP THE)/i, "") //^Starts with Something specific
-    .replace(/.*(2017\,|and\smore\.)/i, "") //.*Starts with something - anything
-    .replace(/(Apply\s*now|for\s*you\.|Inkjet\s*printers)$/i, "") //Ends with something specific$
-    .replace(/(Thanks for signing up|Ends \d|Expires \d|Order\sby|Save\s*time|Take\s*the\s*stress|Online\sonly\.|(use\s)?coupon\scode.*).*/i, "") //Ends with something-anything.*
-    .replace(/\*|\†|\^|®\s\.|view\s*deal|Make\s*sure\s*what\s*you|®|REDEEM\s*NOW|SIGN\s*UP\s*NOW|TELL\s*ME\s*MORE|find\s*a\s*store|join\s*now|print\s*now|add\s*to\s*cart|shop\s*now|GET\s*COUPON|GET\s*STARTED|Learn\s*more|See\s*details.|Print\s*coupon|view\s*images|over\s*[0-9,]+\s*bought|\d{15,20}\.?/i, "") //somewhere in the middle
+    .replace(/.*(Free next|stress-free|fast and free|110%|100%|free\s*trial).*/i, "") // .*Find text in the middle of string and remove all.*
+    .replace(/^(You\s*are\s*receiving|unbeatable|Thanks\s*for|backed).*/i, "")  // ^Find text in the beginning of the string and remove all.*
+    .replace(/.*(us again\.)$/i, "") // .*Find text in the end of the string and remove all$
+    .replace(/^([1234]|save now|110percent|Monitors|reward|Start saving|Coupon|HP.*Toner|Chairs?|Hurry)$/i, "") // ^Find text at the beginning and the end of the string and remove all$
+    .replace(/^(always\s*be\s*ready\s*to|For members who.*|PRINT\.|KEEP THE)/i, "") // ^Find text at the beginning of the string
+    .replace(/.*(2017\,|and\smore\.)/i, "") //.*Find text in the middle, remove everything before that
+    .replace(/(Apply\s*now|for\s*you\.|Inkjet\s*printers)$/i, "") // Find text at the end of the string$
+    .replace(/(Thanks for signing up|Ends \d|Expires \d|Order\sby|Save\s*time|Take\s*the\s*stress|Online\sonly\.|(use\s)?coupon\scode.*).*/i, "") // Find text in the middle, remove everything after that.*
+    .replace(/\*|\†|\^|®\s\.|view\s*deal|Make\s*sure\s*what\s*you|®|REDEEM\s*NOW|SIGN\s*UP\s*NOW|TELL\s*ME\s*MORE|find\s*a\s*store|join\s*now|print\s*now|add\s*to\s*cart|shop\s*now|GET\s*COUPON|GET\s*STARTED|Learn\s*more|See\s*details.|Print\s*coupon|view\s*images|over\s*[0-9,]+\s*bought|\d{15,20}\.?/i, "") // Find text in the middle of the string
     .replace(/((\d+)(\s+|\n)(%)|(\$)(\s+|\n)(\d+))/gmi, "$1$3")
     .replace(/(.*)(Now\:\s+\$\d+\.\d+)(.*)/, "$1$2");
+  }
+  else return null;
 
-  else
-    return null;
 }
+
+
 
 
 /*
@@ -473,39 +486,7 @@ function transform(data){
 
 
 
-/*
-ALTERNATIVE FORMAT 2
-  - In this method, all the regular expressions become properties of object.
-  - All these different objects are elements of an array.
-  - The .replace method is happening repeatedly inside a for loop.
-  - The for loop is responsible for itterating through the array and calling the
-  different object elements.
 
-*/
-function transform(data){
-  if(!data) return null;
-
-  var replaceArr = [
-    //FULL STRING REMOVAL
-    //{oldStr: /.*().*/, newStr: ""}, //.*Remove the whole string.*
-    //{oldStr: /^().*/i, newStr: ""}, //^Starts with something specific, ends with something- anything.*
-    //{oldStr: /.*()$/i, newStr: ""}, //.*Starts with something-anything, ends with something specific$
-    //{oldStr: /^()$/, newStr: ""}, //^Starts with something specific and ends with something specific$
-
-    //PARTIAL STRING REMOVAL
-    //{oldStr: /.*()/, newStr: ""}, //.*Starts with something - anything
-    //{oldStr: /^()/, newStr: ""}, //^Starts with Something specific
-    //{oldStr: /()$/, newStr: ""}, //Ends with something specific$
-    //{oldStr: /().*/, newStr: ""}, //Ends with something-anything.*
-    //{oldStr: /()/, newStr: ""}, //somewhere in the middle
-  ];
-
-  for (var i = 0; i < replaceArr.length; i++) {
-    data = data.replace(replaceArr[i].oldStr, replaceArr[i].newStr);
-  }
-
-  return data;
-}
 
 
 /*
@@ -517,7 +498,7 @@ ABOUT THE FOR LOOP
 */
 
 //1. Create a for loop that logs (prints) all the elements of an array.
-var arr = ["Hello", "how", "are", "you?"]
+var arr = ["Hello", "how", "are", "you?"];
 for (var i = 0; i < arr.length; i++) {
   console.log(arr[i]);
 }
@@ -529,20 +510,115 @@ for (var i = 0; i < arr.length; i++) {
 
 
 
-//After adding all the regex Rules
+
+/*
+------------------------
+ALTERNATIVE FORMAT 2
+------------------------
+- In this method, all the regular expressions within the .replace() methods become
+elements of an array.
+- The array elements are invoked by using a for loop statement.
+*/
+
+
 function transform(data){
   if(!data) return null;
 
   var replaceArr = [
-    {oldStr: /.*(Free next|stress-free|fast and free|110%|100%|free\s*trial).*/i, newStr: ""}, //.*Full text removal.*
-    {oldStr: /^(You\s*are\s*receiving|unbeatable|Thanks\s*for|backed).*/i, newStr: ""}, //^Starts with something specific, ends with something- anything
-    {oldStr: /.*(us again\.)$/i, newStr: ""}, //.*Starts with something-anything, ends with something specific$
-    {oldStr: /^([1234]|save now|110percent|Monitors|reward|Start saving|Coupon|HP.*Toner|Chairs?|Hurry)$/i, newStr: ""}, //^Starts with something specific and ends with something specific$
-    {oldStr: /^(always\s*be\s*ready\s*to|For members who.*|PRINT\.|KEEP THE)/i, newStr: ""}, //^Starts with Something specific
-    {oldStr: /.*(2017\,|and\smore\.)/i, newStr: ""}, //.*Starts with something - anything
-    {oldStr: /(Apply\s*now|for\s*you\.|Inkjet\s*printers)$/i, newStr: ""}, //Ends with something specific$
-    {oldStr: /(Thanks for signing up|Ends \d|Expires \d|Order\sby|Save\s*time|Take\s*the\s*stress|Online\sonly\.|(use\s)?coupon\scode.*).*/i, newStr: ""}, //Ends with something-anything.*
-    {oldStr: /\*|\†|\^|®\s\.|view\s*deal|Make\s*sure\s*what\s*you|®|REDEEM\s*NOW|SIGN\s*UP\s*NOW|TELL\s*ME\s*MORE|find\s*a\s*store|join\s*now|print\s*now|add\s*to\s*cart|shop\s*now|GET\s*COUPON|GET\s*STARTED|Learn\s*more|See\s*details.|Print\s*coupon|view\s*images|over\s*[0-9,]+\s*bought|\d{15,20}\.?/i, newStr: ""}, //somewhere in the middle
+    //FULL TEXT REMOVAL
+    /.*(Free next|stress-free|fast and free|110%|100%|free\s*trial).*/i, // .*Find text in the middle of string.*
+    /^(You\s*are\s*receiving|unbeatable|Thanks\s*for|backed).*/i, // ^Find text in the beginning of the string.*
+    /.*(us again\.)$/i, // .*Find text in the end of the string$
+    /^([1234]|save now|110percent|Monitors|reward|Start saving|Coupon|HP.*Toner|Chairs?|Hurry)$/i, // ^Find text at the beginning and the end of the string$
+
+    //PARTIAL TEXT REMOVAL
+    /^(always\s*be\s*ready\s*to|For members who.*|PRINT\.|KEEP THE)/i, // ^Find text at the beginning of the string
+    /(Apply\s*now|for\s*you\.|Inkjet\s*printers)$/i, // Find text at the end of the string$
+    /.*(2017\,|and\smore\.)/i, // .*Find text in the middle, remove everything before that
+    /(Thanks for signing up|Ends \d|Expires \d|Order\sby|Save\s*time|Take\s*the\s*stress|Online\sonly\.|(use\s)?coupon\scode).*/i, // Find text in the middle, remove everything after that.*
+    /(\*|\†|\^|®\s\.|view\s*deal|Make\s*sure\s*what\s*you|®|REDEEM\s*NOW|SIGN\s*UP\s*NOW|TELL\s*ME\s*MORE|find\s*a\s*store|join\s*now|print\s*now|add\s*to\s*cart|shop\s*now|GET\s*COUPON|GET\s*STARTED|Learn\s*more|See\s*details.|Print\s*coupon|view\s*images|over\s*[0-9,]+\s*bought|\d{15,20}\.?)/i, // Find text in the middle of the string
+  ];
+
+  //Loop through the array and remove unwanted strings
+  for (var i = 0; i < replaceArr.length; i++) {
+    data = data.replace(replaceArr[i], "");
+  }
+
+  //Reorder strings
+  data = data
+  .replace(/((\d+)(\s+|\n)(%)|(\$)(\s+|\n)(\d+))/gmi, "$1$3")
+  .replace(/(.*)(Now\:\s+\$\d+\.\d+)(.*)/, "$1$2");
+
+
+  return data;
+}
+
+
+
+
+
+
+/*
+-------------------------
+ALTERNATIVE FORMAT 3
+-------------------------
+  - In this method, all the regular expressions become properties of objects.
+  - All these different objects are elements of an array.
+  - The .replace method is happening repeatedly inside a for loop.
+  - The for loop is responsible for itterating through the array and calling the
+  different object elements.
+
+*/
+function transform(data){
+  if(!data) return null;
+
+  var replaceArr = [
+    //FULL TEXT REMOVAL
+    // {oldStr: /.*().*/i, newStr: ""}, // .*Find text in the middle of string.*
+    // {oldStr: /^().*/i, newStr: ""}, // ^Find text in the beginning of the string.*
+    // {oldStr: /.*()$/i, newStr: ""}, // .*Find text in the end of the string$
+    // {oldStr: /^()$/i, newStr: ""}, // ^Find text at the beginning and the end of the string$
+    //
+    // PARTIAL TEXT REMOVAL
+    // {oldStr: /^()/i, newStr: ""}, // ^Find text at the beginning of the string
+    // {oldStr: /()$/i, newStr: ""}, // Find text at the end of the string$
+    // {oldStr: /.*()/i, newStr: ""}, // .*Find text in the middle, remove everything before that
+    // {oldStr: /().*/i, newStr: ""}, // Find text in the middle, remove everything after that.*
+    // {oldStr: /()/i, newStr: ""}, // Find text in the middle of the string
+  ];
+
+  for (var i = 0; i < replaceArr.length; i++) {
+    data = data.replace(replaceArr[i].oldStr, replaceArr[i].newStr);
+  }
+
+  return data;
+}
+
+
+
+
+/*
+  - Likewise, you can create an array with different object elements.
+  - Each element is an object that has two properties.
+  - The first property is the one that identifies the string to be modified or removed
+  - The second property is the string that we are going to use for replacement.
+*/
+function transform(data){
+  if(!data) return null;
+
+  var replaceArr = [
+    //FULL TEXT REMOVAL
+    {oldStr: /.*(Free next|stress-free|fast and free|110%|100%|free\s*trial).*/i, newStr: ""}, //.*Find text in the middle of string*
+    {oldStr: /^(You\s*are\s*receiving|unbeatable|Thanks\s*for|backed).*/i, newStr: ""}, //^Find text in the beginning of the string.*
+    {oldStr: /.*(us again\.)$/i, newStr: ""}, //.*Find text in the end of the string$
+    {oldStr: /^([1234]|save now|110percent|Monitors|reward|Start saving|Coupon|HP.*Toner|Chairs?|Hurry)$/i, newStr: ""}, //^Find text at the beginning and the end of the string$
+
+    //PARTIAL TEXT REMOVAL
+    {oldStr: /^(always\s*be\s*ready\s*to|For members who.*|PRINT\.|KEEP THE)/i, newStr: ""}, //^Find text at the beginning of the string
+    {oldStr: /(Apply\s*now|for\s*you\.|Inkjet\s*printers)$/i, newStr: ""}, //Find text at the end of the string
+    {oldStr: /.*(2017\,|and\smore\.)/i, newStr: ""}, //.*Find text in the middle, remove everything before that
+    {oldStr: /(Thanks for signing up|Ends \d|Expires \d|Order\sby|Save\s*time|Take\s*the\s*stress|Online\sonly\.|(use\s)?coupon\scode).*/i, newStr: ""}, //Find text in the middle, remove everything after that.*
+    {oldStr: /(\*|\†|\^|®\s\.|view\s*deal|Make\s*sure\s*what\s*you|®|REDEEM\s*NOW|SIGN\s*UP\s*NOW|TELL\s*ME\s*MORE|find\s*a\s*store|join\s*now|print\s*now|add\s*to\s*cart|shop\s*now|GET\s*COUPON|GET\s*STARTED|Learn\s*more|See\s*details.|Print\s*coupon|view\s*images|over\s*[0-9,]+\s*bought|\d{15,20}\.?)/i, newStr: ""}, //Find text in the middle of the string
     {oldStr: /((\d+)(\s+|\n)(%)|(\$)(\s+|\n)(\d+))/gmi, newStr: "$1$3"},
     {oldStr: /(.*)(Now\:\s+\$\d+\.\d+)(.*)/, newStr: "$1$2"},
   ];

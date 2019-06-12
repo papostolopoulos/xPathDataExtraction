@@ -1115,18 +1115,18 @@ function transform(data){
   if(!data) return null;
 
   var replaceArr = [
-    //FULL DESCRIPTION REMOVAL
-    //{oldStr: /.*().*/, newStr: ""}, //.*Full text removal.*
-    //{oldStr: /^().*/i, newStr: ""}, //^Starts with something specific, ends with something- anything.*
-    //{oldStr: /.*()$/i, newStr: ""}, //.*Starts with something-anything, ends with something specific$
-    //{oldStr: /^()$/, newStr: ""}, //^Starts with something specific and ends with something specific$
-
-    //PARTIAL STRING REMOVAL
-    //{oldStr: /.*()/, newStr: ""}, //.*Starts with something - anything
-    //{oldStr: /^()/, newStr: ""}, //^Starts with Something specific
-    //{oldStr: /()$/, newStr: ""}, //Ends with something specific$
-    //{oldStr: /().*/, newStr: ""}, //Ends with something-anything.*
-    //{oldStr: /()/, newStr: ""}, //somewhere in the middle
+    //FULL TEXT REMOVAL
+    // {oldStr: /.*().*/i, newStr: ""}, // .*Find text in the middle of string.*
+    // {oldStr: /^().*/i, newStr: ""}, // ^Find text in the beginning of the string.*
+    // {oldStr: /.*()$/i, newStr: ""}, // .*Find text in the end of the string$
+    // {oldStr: /^()$/i, newStr: ""}, // ^Find text at the beginning and the end of the string$
+    //
+    // //PARTIAL TEXT REMOVAL
+    // {oldStr: /^()/i, newStr: ""}, // ^Find text at the beginning of the string
+    // {oldStr: /()$/i, newStr: ""}, // Find text at the end of the string$
+    // {oldStr: /.*()/i, newStr: ""}, // .*Find text in the middle, remove everything before that
+    // {oldStr: /().*/i, newStr: ""}, // Find text in the middle, remove everything after that.*
+    // {oldStr: /()/i, newStr: ""}, // Find text in the middle of the string
   ];
 
   replaceArr.forEach(function(el){

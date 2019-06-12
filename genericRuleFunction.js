@@ -88,14 +88,14 @@ function transform(data){
   var posRegexArr = [
     // (10% | $10 | percent | 1/3) (off | (in )savings | discount | (cash)back | reward | gift | value | credit | (promotional )coupon | (mail-in )rebate | (e-)certificate | bonus | sale)
     /(\d{1,2}%|(\$|£|&pound;|€|&euro;)\d+(\.\d{2})?|percent|\d\/\d)\s*(off|(in )?savings?|discount|(cash(\s*)?)?back|reward|gift|value|credit|(promotional\s*)?coupon|(mail-in\s*)?rebate|(e-)?certificate|bonus|sale)/i,
-    // (extra | up to | save | over | more than | discount of | discounted by | savings of | at least | gift of | down to | as low as | bonus of| get a | on (any) | pnly) (10% | $10)
-    /(extra|up\s*to|sav(e|ings\s*of)|over|more\s*than|discount(ed)?\s*(of|by)|at\s*least|gift\s*of|down\s*to|as\s*low\s*as|bonus\s*of|take|get(\s*a)?|on(\s*any)?|only)\s*(\d{1,2}%|(\$|£|&pound;|€|&euro;)\d+(\.\d{2})?)/i,
+    // (extra | up to | save | over | more than | discount of | discounted by | savings of | at least | gift of | down to | as low as | bonus of| get a | on (any) | only | enjoy) (10% | $10)
+    /(extra|up\s*to|sav(e|ings\s*of)|over|more\s*than|discount(ed)?\s*(of|by)|at\s*least|gift\s*of|down\s*to|as\s*low\s*as|bonus\s*of|take|get(\s*a)?|on(\s*any)?|only|enjoy)\s*(\d{1,2}%|(\$|£|&pound;|€|&euro;)\d+(\.\d{2})?)/i,
     // was $10.99 | start at $10.99 sale $10.99
     /(sale:?|was:?|start\s*at)\s*(\$|£|&pound;|€|&euro;)\d+/i,
     //on sale | markdown | save on | marked down
     /on\s*sale|markdown|save\s*on|marked\s*down/i,
-    //anniversary sale
-    /anniversary\s*sale/i,
+    //(anniversary|flash) sale
+    /(anniversary|flash)\s*sale/i,
     // free ship | free on orders of | free $5 | free 10% | free delivery | free standard | free gift | free NN
     /free\s*(ship|on\s*orders\s*of|(\$|£|&pound;|€|&euro;)\d|\d+%|standard|delivery|gift|\d)/i,
     // buy one / two / three texttexttext, get
