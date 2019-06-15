@@ -77,13 +77,13 @@ function minimizeMe(str, reg){
 function cleanMe(string) {
   //All regular expressions that represent text partial sentence removal go to replaceStrArr
   var replaceStrArr = [
-    {oldStr: /([a-z0-9])([A-Z])/g, newStr: "$1 $2"},
-    {oldStr: /(% OFF)(\w)/gi, newStr: "$1 $2"},
-    {oldStr: /(A-z)(YOUR NEXT VISIT)(A-z)/gi, newStr: "$1 $2 $3"},
-    {oldStr: /(Up to \d{2}% Off:Select Patio Furniture) Up to \d{2}% Off:Select Patio Furniture/, "$1"},
-    {oldStr: /Clearancesale/, newStr: "Clearance sale"},
+    //{oldStr: /([a-z0-9])([A-Z])/g, newStr: "$1 $2"},
+    //{oldStr: /(% OFF)(\w)/gi, newStr: "$1 $2"},
+    //{oldStr: /(A-z)(YOUR NEXT VISIT)(A-z)/gi, newStr: "$1 $2 $3"},
+    //{oldStr: /(Up to \d{2}% Off:Select Patio Furniture) Up to \d{2}% Off:Select Patio Furniture/, newStr: "$1"},
+    //{oldStr: /Clearancesale/, newStr: "Clearance sale"},
     // {oldStr: /^\s*()/ig, newStr: ""}, // ^Find text at the beginning of the string
-    {oldStr: /(Limited Time Only|Choose from thousands)$/i, newStr: ""}, // Find text at the end of the string$
+    //{oldStr: /(Limited Time Only|Choose from thousands)$/i, newStr: ""}, // Find text at the end of the string$
     // {oldStr: /.*()/i, newStr: ""}, // .*Find text in the middle, remove everything before that
     // {oldStr: /().*/i, newStr: ""}, // Find text in the middle, remove everything after that.*
     {oldStr: /([¶\*©®ǂ‡^†±→§™¹›]|OFFER ENDS TUESDAY \d{1,2}\/\d{1,2}|BROWSE NOW)/ig, newStr: ""}, // Find text in the middle of the string
