@@ -163,13 +163,17 @@
             errorEntry: false,
             dataType: "string",
             textAreaValues: "",
-            arrayElements: []
+            arrayElements: [],
+            objectElements: {}
           }
         },
         methods:{
-          textAreaValuesSplit(elem){
+          //takes all the values in the textArea and splits them on every line break
+          //Depending on the dataType selected, it converts them from string to the right
+          //data type. Then it returns an array of all the elements.
+          processAndSendValues(elem){
             this.errorEntry = false;
-            console.log("In the start of the textAreaValuesSplit()");
+            console.log("In the start of the processAndSendValues()");
             let startArr = this.textAreaValues.split("\n");
             let finalArr = [];
 
@@ -192,9 +196,14 @@
               for (let i = 0; i < objectsArr.length; i++) {
                 objectsArr[i][0] === "{" ? objectsArr[i] = objectsArr[i] : objectsArr[i] = "{" + objectsArr[i];
                 console.log("Result from function selection before the evalFunction:", objectsArr[i]);
-                this.evalObject(objectsArr[i]) === "error" ? this.errorEntry = true : finalArr.push(this.evalObject(objectsArr[i]));
+                if (this.evalObject(objectsArr[i], this.objectElements) === "error") this.errorEntry = true;
+                else {
+                  this.objectElements = {};
+                  this.arrayElements = [];
+                  finalArr.push(this.evalObject(objectsArr[i]), this.objectElements);
+                } //End of else
               }
-            }
+            } //End of if object selected
 
             //If string selected - Not sure about this
             if (this.dataType === "string"){
@@ -239,6 +248,7 @@
                 if(this.evalArray(startArr[i], this.arrayElements) === "error") this.errorEntry = true;
                 else {
                   this.arrayElements = [];
+                  this.objectElements = {};
                   finalArr.push(this.evalArray(startArr[i], this.arrayElements));
                 }
               }
@@ -261,7 +271,7 @@
             } //End of for loop
 
             return finalArr;
-          }, //End of textAreaValuesSplit
+          }, //End of processAndSendValues
 
 
 
@@ -571,7 +581,7 @@
                 - in order to run the function several times, -
                 separate them with a line break"
                 v-model="textAreaValues"
-                @keyup="textAreaValuesSplit($event.target.value)">
+                @keyup="processAndSendValues($event.target.value)">
 
               </textarea>
             </label>
@@ -580,39 +590,39 @@
               <form>
                 <label class="labelArgumentsDataTypes">
                   Array:
-                  <input type="radio" name="inputRadioDataType" value="array" v-model="dataType" @change="textAreaValuesSplit($event.target.value)">
+                  <input type="radio" name="inputRadioDataType" value="array" v-model="dataType" @change="processAndSendValues($event.target.value)">
                 </label>
                 <label class="labelArgumentsDataTypes">
                   Boolean:
-                  <input type="radio" name="inputRadioDataType" value="boolean" v-model="dataType" @change="textAreaValuesSplit($event.target.value)">
+                  <input type="radio" name="inputRadioDataType" value="boolean" v-model="dataType" @change="processAndSendValues($event.target.value)">
                 </label>
                 <label class="labelArgumentsDataTypes">
                   Null:
-                  <input type="radio" name="inputRadioDataType" value="null" v-model="dataType" @change="textAreaValuesSplit($event.target.value)">
+                  <input type="radio" name="inputRadioDataType" value="null" v-model="dataType" @change="processAndSendValues($event.target.value)">
                 </label>
                 <label class="labelArgumentsDataTypes">
                   Number:
-                  <input type="radio" name="inputRadioDataType" value="number" v-model="dataType" @change="textAreaValuesSplit($event.target.value)">
+                  <input type="radio" name="inputRadioDataType" value="number" v-model="dataType" @change="processAndSendValues($event.target.value)">
                 </label>
                 <label class="labelArgumentsDataTypes">
                   Object literal:
-                  <input type="radio" name="inputRadioDataType" value="object" v-model="dataType" @change="textAreaValuesSplit($event.target.value)">
+                  <input type="radio" name="inputRadioDataType" value="object" v-model="dataType" @change="processAndSendValues($event.target.value)">
                 </label>
                 <label class="labelArgumentsDataTypes">
                   RegExp:
-                  <input type="radio" name="inputRadioDataType" value="regexp" v-model="dataType" @change="textAreaValuesSplit($event.target.value)">
+                  <input type="radio" name="inputRadioDataType" value="regexp" v-model="dataType" @change="processAndSendValues($event.target.value)">
                 </label>
                 <label class="labelArgumentsDataTypes">
                   String:
-                  <input type="radio" name="inputRadioDataType" value="string" v-model="dataType" @change="textAreaValuesSplit($event.target.value)">
+                  <input type="radio" name="inputRadioDataType" value="string" v-model="dataType" @change="processAndSendValues($event.target.value)">
                 </label>
                 <label class="labelArgumentsDataTypes">
                   Undefined:
-                  <input type="radio" name="inputRadioDataType" value="undefined" v-model="dataType" @change="textAreaValuesSplit($event.target.value)">
+                  <input type="radio" name="inputRadioDataType" value="undefined" v-model="dataType" @change="processAndSendValues($event.target.value)">
                 </label>
                 <label class="labelArgumentsDataTypes">
                   callback function:
-                  <input type="radio" name="inputRadioDataType" value="function" v-model="dataType" @change="textAreaValuesSplit($event.target.value)">
+                  <input type="radio" name="inputRadioDataType" value="function" v-model="dataType" @change="processAndSendValues($event.target.value)">
                 </label>
               </form>
 

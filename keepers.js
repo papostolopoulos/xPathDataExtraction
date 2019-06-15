@@ -1110,7 +1110,7 @@ function transform(data) {
 
 
 
-//Core structure of arrayObject
+//Core structure of replaceArr
 function transform(data){
   if(!data) return null;
 

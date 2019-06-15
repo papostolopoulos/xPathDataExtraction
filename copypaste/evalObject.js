@@ -1,38 +1,52 @@
-var test1 = "[1, 2, 3]"; //ok
-var test2 = "[1, 2, 'Hello']" //ok
-var test3 = "[1, 2, [3, 4]]" //ok
-var test4 = "[function (){return 'I love it'}, 88, undefined, null, 'grand array']"; //ok
-var test5 = "[[1,2,3]]"; //ok
-var test6 = "[1, 2, [3, 4], [5]]"; //ok
-var test7 = "[[1,2,3],[3, 4], [5], 'hamos']"; //ok
-
-
+var obj = {};
 var test1 =
-{
+`{
   name: "simon",
   age: 33,
   hasCar: false,
   hasKids: null,
   favoriteFlavors: ["banana", "strawberry"],
+  isUndefined: undefined,
   saysHi: function() {
     return "Hello there " + this.name;
   }
-};
+}`;
+
+var test2 = "{name: \"Mary\", age: 55}"
 /*
 WHEN YOU ARE DONE, YOU NEED TO CHANGE THE sliceArrObj TO this.sliceArrObj
 the evalObject( to this.evalObject(
-and the evalArrayElements to this.evalArrayElements
+and the obj to this.obj
 */
 
-function evalObject(objStr, evalArrayElements) {
-  if (objStr === "{}") return evalArrayElements;
+
+function evalObject(el){
+  el = el.trim();
+  if (!el.startsWith("{") || !el.endsWith("}")) return "error";
+  console.log("In eval Object. el is", el, "Need to convert from string to object");
+
+  //Put quotes in the keys of the object so it can pass the JSON.parse
+  el = el.replace(/([\{,])(\s*)(\w)/g, "$1$2\"$3") //Add quote in start of the key
+  .replace(/(\w)(\s*)(:)/g, "$1$2\"$3") //Add quote in end of the key
+  .replace(/(undefined)(,\n)/, "\"$1\"$2")
+  .replace(/(:\s)(function\\s+[^0-9\\|°¬\\!#\\$%/\\(\\)\\?¡¿\\+\\{\\}\\[\\]:\\.\\,;@ª^\\*<>=\\&]*\\s*\\(([^\\|°¬\\!#\\$%/\\(\\)\\?¡¿\\+\\{\\}\\[\\]:\\.\\,;@ª^\\*<>=\\&]*,?\\s*)+\\)\\s*\\{.*\\}([,\n\r"\w]))/, "$1\"$2\"$3")
+  console.log("After the replacements, the string is:", el);
+  let parsedEl = JSON.parse(el);
+  console.log(parsedEl);
+  return parsedEl;
+}
+
+
+
+function evalObject(objStr, obj) {
+  if (objStr === "{}") return obj;
   else {
     if (objStr[0] !== "{" || objStr[objStr.length-1] !== "}"){
-      console.log("In the error because the first or the last character of the string do not indicate an array");
+      console.log("In the error because the first or the last character of the string do not indicate an object");
       return "error";
     }
     else {
-      console.log("In the else of the eval array. The objStr before the slice:", objStr);
+      console.log("In the else of the evalObject. The objStr before the slice:", objStr);
       objStr = objStr.slice(1, objStr.length-1);
       console.log("In the else of the eval array. The objStr after the slice:", objStr);
       let es5FunctionRegEx = "function\\s+[^0-9\\|°¬\\!#\\$%/\\(\\)\\?¡¿\\+\\{\\}\\[\\]:\\.\\,;@ª^\\*<>=\\&]*\\s*\\(([^\\|°¬\\!#\\$%/\\(\\)\\?¡¿\\+\\{\\}\\[\\]:\\.\\,;@ª^\\*<>=\\&]*,?\\s*)+\\)\\s*\\{.*\\}";
@@ -41,49 +55,49 @@ function evalObject(objStr, evalArrayElements) {
       //Number
       if(objStr.search(/\d+(\.\d+)?,/) === 0 || objStr.search(/\d+(\.\d+)?\s*$/) === 0) {
         console.log("else if for number");
-        evalArrayElements.push(Number(objStr.match(/\d+(\.\d+)?/)[0]));
+        obj.push(Number(objStr.match(/\d+(\.\d+)?/)[0]));
         console.log(Number(objStr.match(/\d+(\.\d+)?/)[0]));
         objStr = objStr.slice(objStr.match(/\d+(\.\d+)?/)[0].length + 1);
         // objStr = objStr.slice(objStr.indexOf(",") + 1);
         objStr = objStr.trim();
         console.log("end of else if");
-        return evalObject("{" + objStr + "}", evalArrayElements);
+        return evalObject("{" + objStr + "}", obj);
       }
 
       //true
       else if (objStr.indexOf("true,") === 0 || objStr.search(/true\s*$/) === 0) {
         console.log("else if for true");
-        evalArrayElements.push(true);
+        obj.push(true);
         objStr = objStr.slice(5);
         objStr = objStr.trim();
-        return evalObject("{" + objStr + "}", evalArrayElements);
+        return evalObject("{" + objStr + "}", obj);
       }
 
       //false
       else if (objStr.indexOf("false,") === 0 || objStr.search(/false\s*$/) === 0) {
         console.log("else if for false");
-        evalArrayElements.push(false);
+        obj.push(false);
         objStr = objStr.slice(6);
         objStr = objStr.trim();
-        return evalObject("{" + objStr + "}", evalArrayElements);
+        return evalObject("{" + objStr + "}", obj);
       }
 
       //null
       else if (objStr.indexOf("null,") === 0 || objStr.search(/null\s*$/) === 0) {
         console.log("else if for null");
-        evalArrayElements.push(null);
+        obj.push(null);
         objStr = objStr.slice(5);
         objStr = objStr.trim();
-        return evalObject("{" + objStr + "}", evalArrayElements);
+        return evalObject("{" + objStr + "}", obj);
       }
 
       //Undefined
       else if (objStr.indexOf("undefined,") === 0 || objStr.search(/undefined\s*$/) === 0) {
         console.log("else if for undefined");
-        evalArrayElements.push(undefined);
+        obj.push(undefined);
         objStr = objStr.slice(10);
         objStr = objStr.trim();
-        return evalObject("{" + objStr + "}", evalArrayElements);
+        return evalObject("{" + objStr + "}", obj);
       }
 
       //string
@@ -91,15 +105,15 @@ function evalObject(objStr, evalArrayElements) {
         console.log("else if for string");
         let firstQuote = objStr[0];
         if (objStr.indexOf(firstQuote + ",") > 0) {
-          evalArrayElements.push(objStr.substring(1, objStr.indexOf(firstQuote + ",")));
+          obj.push(objStr.substring(1, objStr.indexOf(firstQuote + ",")));
           objStr = objStr.slice(objStr.indexOf(firstQuote + ",") + 2);
           objStr = objStr.trim()
         }
         else if (objStr.lastIndexOf(firstQuote) === objStr.length-1) {
-            evalArrayElements.push(objStr.substring(1, objStr.length-1));
+            obj.push(objStr.substring(1, objStr.length-1));
             objStr = "";
         }
-        return evalObject("{" + objStr + "}", evalArrayElements);
+        return evalObject("{" + objStr + "}", obj);
       }
 
       //function es5 es6
@@ -114,7 +128,7 @@ function evalObject(objStr, evalArrayElements) {
         objStr.search(RegExp(es6FunctionRegEx + ",")) !== -1){
           console.log("In if for functions");
           params.push(objStr.slice(objStr.indexOf("{") + 1, objStr.indexOf("}, ")));
-          evalArrayElements.push(new Function(...params));
+          obj.push(new Function(...params));
           objStr = objStr.slice(objStr.indexOf("}, ") + 3).trim();
           console.log("objStr is", objStr);
         }
@@ -123,11 +137,11 @@ function evalObject(objStr, evalArrayElements) {
         RegExp(es6FunctionRegEx).test(objStr) && objStr.match(RegExp(es6FunctionRegEx))[0].length === objStr.length) {
           console.log("in else if for functions");
           params.push(objStr.slice(objStr.indexOf("{") + 1, objStr.lastIndexOf("}")));
-          evalArrayElements.push(new Function(...params));
+          obj.push(new Function(...params));
           objStr = "";
           console.log(objStr);
         }
-        return evalObject("{" + objStr + "}", evalArrayElements);
+        return evalObject("{" + objStr + "}", obj);
       }
 
       //array
@@ -137,13 +151,13 @@ function evalObject(objStr, evalArrayElements) {
         if (sliceArrObj("{", "}", objStr)) {
           let objStrSubstring = objStr.substring(0, this.sliceArrObj("{", "}", objStr));
           console.log("objStrSubstring is", objStrSubstring);
-          //Push in evalArrayElements array the function for evaluating arrays or objects (recursively), with the related substring
-          evalArrayElements.push(evalObject(objStrSubstring, []));
+          //Push in obj array the function for evaluating arrays or objects (recursively), with the related substring
+          obj.push(evalObject(objStrSubstring, []));
 
           //slice the arrayString at the level of the substring
           objStr = objStr.slice(sliceArrObj("{", "}", objStr) + 1);
           objStr = objStr.trim();
-          return evalObject("{" + objStr + "}", evalArrayElements);
+          return evalObject("{" + objStr + "}", obj);
         }
       }
 
@@ -154,13 +168,13 @@ function evalObject(objStr, evalArrayElements) {
         if (sliceArrObj("{", "}", objStr)) {
           let objStrSubstring = objStr.substring(0, this.sliceArrObj("{", "}", objStr));
           console.log("objStrSubstring is", objStrSubstring);
-          //Push in evalArrayElements array the function for evaluating arrays or objects (recursively), with the related substring
-          evalArrayElements.push(evalObject(objStrSubstring, []));
+          //Push in obj array the function for evaluating arrays or objects (recursively), with the related substring
+          obj.push(evalObject(objStrSubstring, []));
 
           //slice the arrayString at the level of the substring
           objStr = objStr.slice(sliceArrObj("{", "}", objStr) + 1);
           objStr = objStr.trim();
-          return evalObject("{" + objStr + "}", evalArrayElements);
+          return evalObject("{" + objStr + "}", obj);
         }
       }
 

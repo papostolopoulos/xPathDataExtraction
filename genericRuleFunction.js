@@ -9,10 +9,12 @@ function transform(data){
 
 
   var posRegexArr = [
-    // (10% | $10 | percent | 1/3) (off | (in )savings | discount | (cash)back | reward | gift | value | credit | (promotional )coupon | (mail-in )rebate | (e-)certificate | bonus | sale)
+    // (10% | $10 | percent | 1/3)
+    // (off | (in )savings | discount | (cash)back | reward | gift | value | credit | (promotional )coupon | (mail-in )rebate | (e-)certificate | bonus | sale)
     /(\d{1,2}%|(\$|£|&pound;|€|&euro;)\d+(\.\d{2})?|percent|\d\/\d)\s*(off|(in )?savings?|discount|(cash(\s*)?)?back|reward|gift|value|credit|(promotional\s*)?coupon|(mail-in\s*)?rebate|(e-)?certificate|bonus|sale)/i,
-    // (extra | up to | save | over | more than | discount of | discounted by | savings of | at least | gift of | down to | as low as | bonus of| get a | on (any) | only | enjoy) (10% | $10)
-    /(extra|up\s*to|sav(e|ings\s*of)|over|more\s*than|discount(ed)?\s*(of|by)|at\s*least|gift\s*of|down\s*to|as\s*low\s*as|bonus\s*of|take|get(\s*a)?|on(\s*any)?|only|enjoy)\s*(\d{1,2}%|(\$|£|&pound;|€|&euro;)\d+(\.\d{2})?)/i,
+    // (extra | up to | save | over | more than | discount of | discounted by | savings of | at least | gift of | down to | as low as | bonus of| get a | on (any) | only | enjoy | reduced by)
+    // (10% | $10)
+    /(extra|up\s*to|sav(e|ings\s*of)|over|more\s*than|discount(ed)?\s*(of|by)|at\s*least|gift\s*of|down\s*to|as\s*low\s*as|bonus\s*of|take|get(\s*a)?|on(\s*any)?|only|enjoy|reduced\s*by)\s*(\d{1,2}%|(\$|£|&pound;|€|&euro;)\d+(\.\d{2})?)/i,
     // was $10.99 | start at $10.99 sale $10.99
     /(sale:?|was:?|start\s*at)\s*(\$|£|&pound;|€|&euro;)\d+/i,
     //on sale | markdown | save on | marked down
@@ -29,8 +31,8 @@ function transform(data){
     /\d\s*for\s*\d/i,
     //(half | 1/2) (price)
     /(half|\d\/\d)\s*(price)/i,
-    //BOGO | AORPI
-    /BOGO|AORPI/,
+    //BOGO | AORPI | B1G3
+    /BOGO|AORPI|BOG\d|B\dG\d/,
     // (100 | earn | get | gather | collect | your | redeem | reward | worth of) (points | rewards | gift | coupon | (e-)certificate)
     /(\d+|earn|get|gather|collect|your|redeem|rewards?|worth\s*of)\s*(points|rewards?|gift|coupon|(e-)?certificate|a?\s*(\$|£|&pound;|€|&euro;))/i,
     // (double | triple | NN times the) (points)
@@ -116,6 +118,171 @@ function cleanMe(string) {
 
   string = string.replace(/[¶\*©®ǂ‡^†±→§™¹›]/g, "");
 
+
+  return string;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function transform(data){
+  return data.replace(/(?<!Dr|www|P\.O)\.(?!com|\d{2}|O\.?\s+Box)/g,"~~~")
+  .match(/[^\.\?\!\:\|]*(\$\d|free|%)[^\.\?\!\:\|]*/ig)
+  .join(". ")
+  .replace(/~~~/g,".");
+}
+
+
+
+var regex1 = /foo/g;
+var regex2 = /bar/y;
+var flags = (regex1.flags + regex2.flags).split("").sort().join("").replace(/(.)(?=.*\1)/g, "");
+var regex3 = new RegExp(expression_one.source + expression_two.source, flags);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// --------------------
+// ALTERNATIVE VERSION
+// --------------------
+
+
+
+
+function transform(data){
+  //All regular expressions that indicate full text removal go in negRegexArr
+  var negRegexArr = [
+
+  ];
+
+  for (var i = 0; i < negRegexArr.length; i++) {
+    if (negRegexArr[i].test(data)) return null;
+  }
+
+  //All the regular expressions that indicate a coupon go in posRegexArr.
+  //Remove what you do not need, add what you need
+  var posRegexArr = [
+    // (10% | $10 | percent | 1/3)
+    // (off | (in )savings | discount | (cash)back | reward | gift | value | credit | (promotional )coupon | (mail-in )rebate | (e-)certificate | bonus | sale)
+    /(\d{1,2}%|(\$|£|&pound;|€|&euro;)\d+(\.\d{2})?|percent|\d\/\d)\s*(off|(in )?savings?|discount|(cash(\s*)?)?back|reward|gift|value|credit|(promotional\s*)?coupon|(mail-in\s*)?rebate|(e-)?certificate|bonus|sale)/i,
+    // (extra | up to | save | over | more than | discount of | discounted by | savings of | at least | gift of | down to | as low as | bonus of| get a | on (any) | only | enjoy | reduced by)
+    // (10% | $10)
+    /(extra|up\s*to|sav(e|ings\s*of)|over|more\s*than|discount(ed)?\s*(of|by)|at\s*least|gift\s*of|down\s*to|as\s*low\s*as|bonus\s*of|take|get(\s*a)?|on(\s*any)?|only|enjoy|reduced\s*by)\s*(\d{1,2}%|(\$|£|&pound;|€|&euro;)\d+(\.\d{2})?)/i,
+    // (was | start at | sale | under) $10.99
+    /(sale:?|was:?|start\s*at|under)\s*(\$|£|&pound;|€|&euro;)\d+/i,
+    //on sale | markdown | sa(vl)e on | marked down
+    /on\s*sale|markdown|sa[vl]e\s*on|marked\s*down/i,
+    //(anniversary|flash) sale
+    /(anniversary|flash)\s*sale/i,
+    // free (ship | on orders of | $5 | 10% | delivery | standard | gift | NN)
+    /free\s*(ship|on\s*orders\s*of|(\$|£|&pound;|€|&euro;)\d|\d+%|standard|delivery|gift|\d)/i,
+    // buy one / two / three texttexttext, get
+    /buy\s*(one|two|three|\d+),?.*\sget/i,
+    //(standard | complementary | NN day) (shipping)
+    /(standard|complimentary|\d+day)\s*shipping/i,
+    //3 for 2
+    /\d\s*for\s*\d/i,
+    //(half | 1/2) (price)
+    /(half|\d\/\d)\s*(price)/i,
+    //BOGO | AORPI | B1G3
+    /BOGO|AORPI|BOG\d|B\dG\d/,
+    // (100 | earn | get | gather | collect | your | redeem | reward | worth of)
+    // (points | rewards | gift | coupon | (e-)certificate)
+    /(\d+|earn|get|gather|collect|your|redeem|rewards?|worth\s*of)\s*(points|rewards?|gift|coupon|(e-)?certificate|a?\s*(\$|£|&pound;|€|&euro;))/i,
+    // (double | triple | NN times the) (points)
+    /(double|triple|\d\s*times\s*the|\dx(\s*the)?)\s*(points)/i,
+    //promo(tion) code
+    /promo(?:tion)\s*code/i,
+  ];
+
+  for (var j = 0; j < posRegexArr.length; j++) {
+    if (posRegexArr[j].test(data)) return data.length > 80 ? minimizeMe(data, posRegexArr[j]) : cleanMe(data);
+  }
+
+  return null;
+}
+
+
+
+
+function minimizeMe(str, reg){
+  //Create variable with characters used to identify the beginning and the end of the string.
+  var punctuation = /[^\.\?\!\:\|]*/;
+
+  str = str
+  .replace(/(?<=Dr|www|P\.O)\.(?=com|\d{2}|O\.?\s+Box)/g,"~~~") //Replace full stops (.) that should not be removed.
+  .replace(/(?<=\d{1,2}):(?=\d{2})/, "→→→") //Replace all the colons (:) that should not be removed.
+  .match(RegExp(punctuation.source + reg.source + punctuation.source, "ig")) //Match only the sentences with coupons
+  .join("") //join the array elements from the .match method
+  .replace(/~~~/, ".") // Bring back the full stops that should not be removed
+  .replace(/→→→/, ":");  // Bring back the colons that should not be removed
+
+  //Send the minimized string to the cleanMe function in order to remove pieces of string.
+  return cleanMe(str);
+}
+
+
+
+
+function cleanMe(string) {
+  //All regular expressions that represent text partial sentence removal go to replaceStrArr
+  var replaceStrArr = [
+    // {oldStr: /^()/i, newStr: ""}, // ^Find text at the beginning of the string
+    // {oldStr: /()$/i, newStr: ""}, // Find text at the end of the string$
+    // {oldStr: /.*()/i, newStr: ""}, // .*Find text in the middle, remove everything before that
+    // {oldStr: /().*/i, newStr: ""}, // Find text in the middle, remove everything after that.*
+    {oldStr: /([¶\*©®ǂ‡^†±→§™¹›])/i, newStr: ""}, // Find text in the middle of the string
+  ];
+
+  for (var k = 0; k < replaceStrArr.length; k++) {
+    string = string.replace(replaceStrArr[k].oldStr, replaceStrArr[k].newStr).trim();
+  }
 
   return string;
 }
