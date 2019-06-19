@@ -54,7 +54,10 @@ function transform(data){
 
 function minimizeMe(str, reg){
   var punctuation = [". ", "! ", "| ", "? ", ": "]; //Punctuation symbols
-  str = str.replace(/(\.)(?!com|\d)([A-z])/g, "$1 $2");
+  str = str
+  .replace(/(Dr|www|P\.O)\./g,"$1~~~") //Replace full stops (.) that should not be removed.
+  .replace(/\.(com|\d{2}|O\.?\s+Box)/g, "~~~$1")
+  .replace(/(\d{1,2}):(\d{2})/, "$1→→→$2"); //Replace all the colons (:) that should not be removed.
 
   //STAGE 1 - Slice text at the beginning of string
   var sliceStr = str.slice(0, str.indexOf(str.match(reg)[0])); //Create a substring from the beginning of string up to the beginning of the .match()
@@ -86,7 +89,7 @@ function minimizeMe(str, reg){
   //Slice the end of the string
   str = str.slice(0, sliceEnd).trim();
 
-
+  str = str.replace(/~~~/g, ".").replace(/→→→/, ":");
 
 
 
@@ -98,84 +101,19 @@ function minimizeMe(str, reg){
 function cleanMe(string) {
 
   var replaceStrArr = [
-    //FULL TEXT REMOVAL
-    // {oldStr: /.*().*/i, newStr: ""}, // .*Find text in the middle of string.*
-    // {oldStr: /^().*/i, newStr: ""}, // ^Find text in the beginning of the string.*
-    // {oldStr: /.*()$/i, newStr: ""}, // .*Find text in the end of the string$
-    // {oldStr: /^()$/i, newStr: ""}, // ^Find text at the beginning and the end of the string$
-    //
-    // PARTIAL TEXT REMOVAL
     // {oldStr: /^()/i, newStr: ""}, // ^Find text at the beginning of the string
     // {oldStr: /()$/i, newStr: ""}, // Find text at the end of the string$
     // {oldStr: /.*()/i, newStr: ""}, // .*Find text in the middle, remove everything before that
     // {oldStr: /().*/i, newStr: ""}, // Find text in the middle, remove everything after that.*
-    // {oldStr: /()/i, newStr: ""}, // Find text in the middle of the string
+    {oldStr: /([¶\*©®ǂ‡^†±→§™¹›])/g, newStr: ""}, // Find text in the middle of the string
   ];
 
   for (var i = 0; i < replaceStrArr.length; i++) {
     string = string.replace(replaceStrArr[i].oldStr, replaceStrArr[i].newStr).trim();
   }
 
-  string = string.replace(/[¶\*©®ǂ‡^†±→§™¹›]/g, "");
-
-
   return string;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function transform(data){
-  return data.replace(/(?<!Dr|www|P\.O)\.(?!com|\d{2}|O\.?\s+Box)/g,"~~~")
-  .match(/[^\.\?\!\:\|]*(\$\d|free|%)[^\.\?\!\:\|]*/ig)
-  .join(". ")
-  .replace(/~~~/g,".");
-}
-
-
-
-var regex1 = /foo/g;
-var regex2 = /bar/y;
-var flags = (regex1.flags + regex2.flags).split("").sort().join("").replace(/(.)(?=.*\1)/g, "");
-var regex3 = new RegExp(expression_one.source + expression_two.source, flags);
-
-
-
-
-
-
-
-
-
 
 
 
@@ -216,8 +154,8 @@ function transform(data){
     /(extra|up\s*to|sav(e|ings\s*of)|over|more\s*than|discount(ed)?\s*(of|by)|at\s*least|gift\s*of|down\s*to|as\s*low\s*as|bonus\s*of|take|get(\s*a)?|on(\s*any)?|only|enjoy|reduced\s*by)\s*(\d{1,2}%|(\$|£|&pound;|€|&euro;)\d+(\.\d{2})?)/i,
     // (was | start at | sale | under) $10.99
     /(sale:?|was:?|start\s*at|under)\s*(\$|£|&pound;|€|&euro;)\d+/i,
-    //on sale | markdown | sa(vl)e on | marked down
-    /on\s*sale|markdown|sa[vl]e\s*on|marked\s*down/i,
+    // on sale | markdown | sa(vl)e on | marked down
+    /(on\s*sale|markdown|sa[vl]e\s*on|marked\s*down)/i,
     //(anniversary|flash) sale
     /(anniversary|flash)\s*sale/i,
     // free (ship | on orders of | $5 | 10% | delivery | standard | gift | NN)
@@ -231,7 +169,7 @@ function transform(data){
     //(half | 1/2) (price)
     /(half|\d\/\d)\s*(price)/i,
     //BOGO | AORPI | B1G3
-    /BOGO|AORPI|BOG\d|B\dG\d/,
+    /(BOGO|AORPI|BOG\d|B\dG\d)/,
     // (100 | earn | get | gather | collect | your | redeem | reward | worth of)
     // (points | rewards | gift | coupon | (e-)certificate)
     /(\d+|earn|get|gather|collect|your|redeem|rewards?|worth\s*of)\s*(points|rewards?|gift|coupon|(e-)?certificate|a?\s*(\$|£|&pound;|€|&euro;))/i,
@@ -256,10 +194,11 @@ function minimizeMe(str, reg){
   var punctuation = /[^\.\?\!\:\|]*/;
 
   str = str
-  .replace(/(?<=Dr|www|P\.O)\.(?=com|\d{2}|O\.?\s+Box)/g,"~~~") //Replace full stops (.) that should not be removed.
-  .replace(/(?<=\d{1,2}):(?=\d{2})/, "→→→") //Replace all the colons (:) that should not be removed.
+  .replace(/(Dr|www|P\.O)\./g,"$1~~~") //Replace full stops (.) that should not be removed.
+  .replace(/\.(com|\d{2}|O\.?\s+Box)/g, "~~~$1")
+  .replace(/(\d{1,2}):(\d{2})/, "$1→→→$2") //Replace all the colons (:) that should not be removed.
   .match(RegExp(punctuation.source + reg.source + punctuation.source, "ig")) //Match only the sentences with coupons
-  .join("") //join the array elements from the .match method
+  .join(". ") //join the array elements from the .match method
   .replace(/~~~/, ".") // Bring back the full stops that should not be removed
   .replace(/→→→/, ":");  // Bring back the colons that should not be removed
 

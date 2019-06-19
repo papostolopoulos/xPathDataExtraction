@@ -447,7 +447,7 @@
             !el.endsWith("}")) return "error";
 
             let params = el.slice(el.indexOf("(") + 1, el.indexOf(")")).split(/,\s*/);
-            params.push(el.slice(el.indexOf("{") + 1, el.indexOf("}")));
+            params.push(el.slice(el.indexOf("{") + 1, el.lastIndexOf("}")));
             console.log(params);
 
 
