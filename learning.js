@@ -208,7 +208,7 @@ x || null; // --> null
 */
 
 //1. What will the following values return?
-var str = "Hello!"
+var str = "Hello!";
 str + " So good to see you"; // --> "Hello! So good to see you"
 str += " I am glad you are here!";
 str; // --> Hello! I am glad you are here!
@@ -441,7 +441,7 @@ Also it is more readable.
 */
 
 function transform(data) {
-  if (true) {
+  if (data) {
     return data
     .replace(/.*(Free next|stress-free|fast and free|110%|100%|free\s*trial).*/i, "") // .*Find text in the middle of string and remove all.*
     .replace(/^(You\s*are\s*receiving|unbeatable|Thanks\s*for|backed).*/i, "")  // ^Find text in the beginning of the string and remove all.*
@@ -621,6 +621,7 @@ function transform(data){
     {oldStr: /(\*|\†|\^|®\s\.|view\s*deal|Make\s*sure\s*what\s*you|®|REDEEM\s*NOW|SIGN\s*UP\s*NOW|TELL\s*ME\s*MORE|find\s*a\s*store|join\s*now|print\s*now|add\s*to\s*cart|shop\s*now|GET\s*COUPON|GET\s*STARTED|Learn\s*more|See\s*details.|Print\s*coupon|view\s*images|over\s*[0-9,]+\s*bought|\d{15,20}\.?)/i, newStr: ""}, //Find text in the middle of the string
     {oldStr: /((\d+)(\s+|\n)(%)|(\$)(\s+|\n)(\d+))/gmi, newStr: "$1$3"},
     {oldStr: /(.*)(Now\:\s+\$\d+\.\d+)(.*)/, newStr: "$1$2"},
+    {oldStr: /Shop now/, newStr: "Hello"}
   ];
 
   for (var i = 0; i < replaceArr.length; i++) {

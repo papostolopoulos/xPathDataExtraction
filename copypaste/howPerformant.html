@@ -16,6 +16,10 @@
         font-family: sans-serif;
       }
 
+      h1{
+        font-size: 3vw;
+      }
+
       #main{
         display: grid;
         grid-template-columns: 33.3% 66.6%;
@@ -70,6 +74,20 @@
 
       .sectionFunction1, .sectionFunction2{
         width: 50%;
+        padding: 10px;
+      }
+
+      .divFunctionPasteArea{
+        position: sticky;
+        top: 0;
+        height: 20vh;
+      }
+
+      .textAreaFunctionPaste{
+        width: 100%;
+        height: 100%;
+        padding: 5px;
+        font-size: 0.8em;
       }
 
       .sectionFunction1{
@@ -127,8 +145,16 @@
 
         <section class="sectionPasteFunctions">
           <section class="sectionFunction1">
-            <h1>Function 1</h1>
-            This is for function 1 - sectionFunction1 <br>
+            <div class="divFunctionPasteArea">
+              <h1>Function 1</h1>
+              <textarea
+              name="textAreaFunction1"
+              class="textAreaFunctionPaste"
+              placeholder="Paste your function in this field"
+              ></textarea>
+              <button type="button" name="button" @click="testFunctionPerformance()">test function</button>
+            </div>
+
           </section>
 
 
@@ -171,13 +197,15 @@
           //takes all the values in the textArea and splits them on every line break
           //Depending on the dataType selected, it converts them from string to the right
           //data type. Then it returns an array of all the elements.
-          processAndSendValues(elem){
-            this.errorEntry = false;
-            console.log("In the start of the processAndSendValues()");
-            let startArr = this.textAreaValues.split("\n");
-            let finalArr = [];
+          processTextAreaValues(){
+            //if parameter slot is open but no string is entered, then return nothing
+            // if(this.textAreaValues.length === 0) return;
 
-            if(this.textAreaValues.length === 0) return;
+            console.log("In the start of the processTextAreaValues()");
+            this.errorEntry = false;
+            let finalArr = [];
+            let startArr = this.textAreaValues.split("\n");
+
 
             //If function selected
             if (this.dataType === "function"){
@@ -270,13 +298,15 @@
                 this.evalUndefined(startArr[i]) === "error" ? this.errorEntry = true : finalArr.push(this.evalUndefined(startArr[i]));
             } //End of for loop
 
-            return finalArr;
-          }, //End of processAndSendValues
+            console.log("The array to be sent to the main component is:", finalArr);
+
+            //Update the new data in the app component every time there is a change
+            //in the textArea or the radio buttons
+            app._data.argumentsArr[this.argIdNum - 1] = finalArr;
+          }, //End of processTextAreaValues
 
 
-
-
-
+          //Evaluates if the array is properly structured
           evalArray(arrStr, arr) {
             if (arrStr === "[]") return arr;
             else {
@@ -407,8 +437,8 @@
                   if (this.sliceArrObj("{", "}", arrStr)) {
                     let arrStrSubstring = arrStr.substring(0, this.sliceArrObj("{", "}", arrStr));
                     console.log("arrStrSubstring is", arrStrSubstring);
-                    //Push in arr array the function for evaluating arrays or objects (recursively), with the related substring
-                    arr.push(this.evalArray(arrStrSubstring, []));
+                    //Push in arr array the function for evaluating objects, with the related substring
+                    arr.push(this.evalObject(arrStrSubstring, {}));
 
                     //slice the arrayString at the level of the substring
                     arrStr = arrStr.slice(this.sliceArrObj("{", "}", arrStr) + 1);
@@ -427,9 +457,7 @@
           }, //End of evalArray
 
 
-
-
-
+          //Evaluates if the Boolean is properly structured
           evalBoolean(el){
             if (el === "true") return true;
             if (el === "false") return false;
@@ -437,7 +465,7 @@
           },
 
 
-
+          //Evaluates if the function is properly structured
           evalFunction(el){
             el = el.trim();
             console.log("In evalFunction. The el in the evaFunction is:", el);
@@ -455,38 +483,74 @@
           },
 
 
-
+          //Evaluates if the null is properly structured
           evalNull(el){
             return el === "null" ? null : "error";
           },
 
 
-
+          //Evaluates if the number is properly structured
           evalNumber(el){
             return isNaN(Number(el)) ? "error" : Number(el);
           },
 
 
-
-
-          evalObject(el){
+          //evaluates if the object is properly structured
+          evalObject(el, obj){
             el = el.trim();
+            if (el === "{}") return obj;
+
             if (!el.startsWith("{") || !el.endsWith("}")) return "error";
             console.log("In eval Object. el is", el, "Need to convert from string to object");
 
             //Put quotes in the keys of the object so it can pass the JSON.parse
-            el = el.replace(/(\{)(\s*)(\w)/g, "$1$2\"$3")
-            .replace(/(\w)(\s*)(:)/g, "$1$2\"$3")
-            .replace(/(,)(\s*)(\w)/g, "$1$2\"$3");
-            console.log("After the replacements, the string is:", el);
-            let parsedEl = JSON.parse(el);
-            console.log(parsedEl);
-            return parsedEl;
+            //Put quotes in all the "undefined" as well
+            el = el
+            .replace(/([\{,])(\s*)(\w+)(\s*)(:)/g, "$1$2\"$3\"$4$5") //Add quotes at the start and the end of the keys
+            .replace(/(:\s+)(undefined)([,\n])/, "$1\"$2\"$3"); //put quotes around all the undefined
+            console.log("After the addition of quotations in the keys:", el);
+
+            // IF THERE IS A FUNCTION AS A VALUE OF ONE OF THE OBJECT'S PROPERTIES:
+            // 1. Create a variable that is pulling out all the functions from the obj.
+            // 2. replace unecessary text at the beginning and end of each element.
+            // 3. Replace all the double quotes to single quotes and replace all the line breaks
+            if ((/(:\s)(function\s*\((?:[^\|°¬\!#\$%/\(\)\?¡¿\+\{\}\[\]:\.\,;@ª^\*<>=\&]*,?\s*)*\)\s*\{[\S\s]+\})(,?\s)/g).test(el)) {
+              let functionStrings =
+              el
+              .match(/(:\s)(function\s*\((?:[^\|°¬\!#\$%/\(\)\?¡¿\+\{\}\[\]:\.\,;@ª^\*<>=\&]*,?\s*)*\)\s*\{[\S\s]+\})(,?\s)/g)
+              .map((ele) => ele.slice(ele.indexOf("function"), ele.lastIndexOf("}") + 1))
+              .map((elm) => elm.replace(/"/g, "'").replace(/\n/g, ""));
+              console.log(functionStrings);
+
+              //Replace all the function strings into "A function goes here"
+              el = el.replace(/(:\s)(function\s*\((?:[^\|°¬\!#\$%/\(\)\?¡¿\+\{\}\[\]:\.\,;@ª^\*<>=\&]*,?\s*)*\)\s*\{[\S\s]+\})(,?\s)/g, "$1A function goes here$3");
+
+              //Add all the functions back in the object as -cleaned- string formats
+              while (functionStrings.length > 0) {
+                el = el.replace(/A function goes here/, '"' + functionStrings.shift() + '"');
+              }
+            }
+
+
+            //Parse the string into an object
+            obj = JSON.parse(el);
+
+            for(let key in obj){
+              if (obj[key] === "undefined") obj[key] = undefined;
+              if (/function.*\}/.test(obj[key])) {
+                let params = obj[key].slice(obj[key].indexOf("(") + 1, obj[key].indexOf(")")).split(/,\s*/);
+                params.push(obj[key].slice(obj[key].indexOf("{") + 1, obj[key].lastIndexOf("}")));
+
+                obj[key] = new Function(...params);
+              }
+
+              //What if the string is an array?
+            } //End of the for loop
+            return obj;
           },
 
 
-
-
+          // evaluates if the regular expression is properly structured
           evalRegExp(el){
             let elFlags = el.slice(el.lastIndexOf("/") + 1);
             let flags = "igmsuy";
@@ -495,7 +559,6 @@
 
             //The last character is not a /
             if (elFlags === 0 && el.length - 1 !== el.lastIndexOf("/")) return "error";
-
 
             //some of the flag characters are incorrect
             if (elFlags.length > 0) {
@@ -517,14 +580,11 @@
               else return "error";
             }
 
-
-
             return new RegExp(source, elFlags);
           },
 
 
-
-
+          //Evaluates if the string is properly structured
           evalString(el){
             //Should I be removing the quotes or not?
             //How do I deal with tildas where the breaks are not indicating a
@@ -535,17 +595,14 @@
           },
 
 
-
-
+          //Evaluates if the undefined is properly structured
           evalUndefined(el){
             return el === "undefined" ? undefined : "error";
           },
 
 
-
-
-          //finds if the opening and closing brackets are structured correctly in an array or
-          //an object
+          //finds if the opening and closing brackets are structured correctly
+          //in an array or an object
           sliceArrObj(openBrkt, closeBrkt, arr) {
               let counter = 1;
               let subStr = arr.slice(1);
@@ -565,7 +622,10 @@
           //Create the ID for the div tag that includes the arguments textArea
           argIdNum(){
             return this.$attrs.id.replace(/[A-z]/g, "");
-          }
+          },
+          // sendTextAreaValues(){
+          //   return processTextAreaValues();
+          // }
 
         },
         template:
@@ -575,13 +635,9 @@
             <label class="labelArgumentsDataTypes">
               <textarea
                 class="textAreaArgumentsPaste"
-                placeholder="
-                Enter the function's argument.
-                If you are entering more than one arguments,
-                - in order to run the function several times, -
-                separate them with a line break"
+                placeholder="Enter the function's argument.\nIf you are entering more than one options for the same argument, separate them with a line break"
                 v-model="textAreaValues"
-                @keyup="processAndSendValues($event.target.value)">
+                @keyup="processTextAreaValues($event.target.value)">
 
               </textarea>
             </label>
@@ -590,39 +646,39 @@
               <form>
                 <label class="labelArgumentsDataTypes">
                   Array:
-                  <input type="radio" name="inputRadioDataType" value="array" v-model="dataType" @change="processAndSendValues($event.target.value)">
+                  <input type="radio" name="inputRadioDataType" value="array" v-model="dataType" @change="processTextAreaValues($event.target.value)">
                 </label>
                 <label class="labelArgumentsDataTypes">
                   Boolean:
-                  <input type="radio" name="inputRadioDataType" value="boolean" v-model="dataType" @change="processAndSendValues($event.target.value)">
+                  <input type="radio" name="inputRadioDataType" value="boolean" v-model="dataType" @change="processTextAreaValues($event.target.value)">
                 </label>
                 <label class="labelArgumentsDataTypes">
                   Null:
-                  <input type="radio" name="inputRadioDataType" value="null" v-model="dataType" @change="processAndSendValues($event.target.value)">
+                  <input type="radio" name="inputRadioDataType" value="null" v-model="dataType" @change="processTextAreaValues($event.target.value)">
                 </label>
                 <label class="labelArgumentsDataTypes">
                   Number:
-                  <input type="radio" name="inputRadioDataType" value="number" v-model="dataType" @change="processAndSendValues($event.target.value)">
+                  <input type="radio" name="inputRadioDataType" value="number" v-model="dataType" @change="processTextAreaValues($event.target.value)">
                 </label>
                 <label class="labelArgumentsDataTypes">
                   Object literal:
-                  <input type="radio" name="inputRadioDataType" value="object" v-model="dataType" @change="processAndSendValues($event.target.value)">
+                  <input type="radio" name="inputRadioDataType" value="object" v-model="dataType" @change="processTextAreaValues($event.target.value)">
                 </label>
                 <label class="labelArgumentsDataTypes">
                   RegExp:
-                  <input type="radio" name="inputRadioDataType" value="regexp" v-model="dataType" @change="processAndSendValues($event.target.value)">
+                  <input type="radio" name="inputRadioDataType" value="regexp" v-model="dataType" @change="processTextAreaValues($event.target.value)">
                 </label>
                 <label class="labelArgumentsDataTypes">
                   String:
-                  <input type="radio" name="inputRadioDataType" value="string" v-model="dataType" @change="processAndSendValues($event.target.value)">
+                  <input type="radio" name="inputRadioDataType" value="string" v-model="dataType" @change="processTextAreaValues($event.target.value)">
                 </label>
                 <label class="labelArgumentsDataTypes">
                   Undefined:
-                  <input type="radio" name="inputRadioDataType" value="undefined" v-model="dataType" @change="processAndSendValues($event.target.value)">
+                  <input type="radio" name="inputRadioDataType" value="undefined" v-model="dataType" @change="processTextAreaValues($event.target.value)">
                 </label>
                 <label class="labelArgumentsDataTypes">
                   callback function:
-                  <input type="radio" name="inputRadioDataType" value="function" v-model="dataType" @change="processAndSendValues($event.target.value)">
+                  <input type="radio" name="inputRadioDataType" value="function" v-model="dataType" @change="processTextAreaValues($event.target.value)">
                 </label>
               </form>
 
@@ -692,15 +748,34 @@
         el: "#main",
         data: {
           numOfArgumentsSets: 0,
-          argumentsArr: []
+          argumentsArr: [],
         },
         methods: {
+          //updates the length of the argumentsArr based on the addition or subtraction
+          //of new components
           changeArgumentsArrLength(){
-            // Access the components through app.$children
-            Number(this.numOfArgumentsSets) > this.argumentsArr.length ?
-            this.argumentsArr.push("") :
-            this.argumentsArr.pop();
+            /*
+            I need to decide if I want to keep this if statement or if an argument
+            with an empty string should be placed every time I add a new textArea.
+            The ternary operator that is commented out does that.
+            This if statement just pops off an element every time I substract a text
+            area.
+            */
+            while (Number(this.numOfArgumentsSets) < this.argumentsArr.length) {
+              this.argumentsArr.pop();
+            }
+            // Number(this.numOfArgumentsSets) > this.argumentsArr.length ?
+            // this.argumentsArr.push("") :
+            // this.argumentsArr.pop();
+          },
+          testFunctionPerformance(){
+            console.log(event);
+            console.log(event.target.previousElementSibling.value);
+            console.log("something happened");
           }
+        }, //End of methods
+        computed: {
+
         }
       });
 

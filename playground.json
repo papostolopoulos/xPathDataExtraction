@@ -1,399 +1,332 @@
 {
-  "metaData": {
-    "decodeHtmlEntity": "true",
-    "debug": "true",
-    "enableCouponFilter": "50",
-    "linkAlgoHandler": "LinkExtractor15"
-  },
   "extract": {
-    "edgeRules": [],
+    "extractEmbedded": false,
+    "source": null,
     "schema": [
       {
+        "url": "http://ws.rmf.yahoo.com:4080/rmf/v1/schema?type=schema.org&name=y.2.0&format=json",
         "ns": "http://schema.org",
         "context": {
           "@type": [
             "Coupon"
           ]
-        },
-        "url": "http://ws.rmf.yahoo.com:4080/rmf/v1/schema?type=schema.org&name=y.2.0&format=json"
+        }
       }
     ],
     "entityRules": [
       {
-        "entityIdRef": "",
+        "id": "0386bd07-e736-4a45-9305-400e673ab76d",
         "repeating": true,
-        "attributes": [],
         "locations": [
           "/"
         ],
-        "id": "f66018c8-423b-459b-b55a-c639d92daf68",
         "type": "http://schema.org/Coupon",
-        "javascript": null
+        "javascript": null,
+        "entityIdRef": null,
+        "attributes": []
       }
     ],
-    "source": null,
-    "entityNS": null,
-    "extractEmbedded": false
+    "edgeRules": [],
+    "entityNS": null
   },
-  "extractLn": {
-    "edgeRules": [
-      {
-        "predicate": "http://schema.org/broker",
-        "from": {
-          "entityRule": "b4917ca5-ee83-4569-87c7-37feef5474af",
-          "matchAttr": null
-        },
-        "to": {
-          "entityRule": "b4917ca5-ee83-4569-87c7-37feef5474au",
-          "matchAttr": null
-        },
-        "cardinality": "ONE_TO_ONE"
-      },
-      {
-        "predicate": "http://schema.org/image",
-        "from": {
-          "entityRule": "b4917ca5-ee83-4569-87c7-37feef5474af",
-          "matchAttr": null
-        },
-        "to": {
-          "entityRule": "b4917ca5-ee83-4569-87c7-37feef5474aj",
-          "matchAttr": null
-        },
-        "cardinality": "ONE_TO_ONE"
-      }
-    ],
+  "metaData": {
+    "useVTDXML": "true",
+    "ignoredValidations": null,
+    "footerRatio": "0.3",
+    "footerRatioFallBack": "0.4"
+  },
+  "extractV2": {
     "entityRules": [
       {
-        "bundleInfo": {
-          "minBundleSize": "-1",
-          "maxBundleSize": "-1",
-          "minLeafNodesSize": "-1",
-          "maxLeafNodesSize": "-1",
-          "maxDepth": "-1",
-          "defaultPatternAnnotationThreshold": "0.8",
-          "linkThreshold": "2",
-          "footerPercentage": "0.8",
-          "dedupCondition": {
-            "matchThreshold": "",
-            "stopWords": []
-          },
-          "overRideValidThroughFromFooter": "false",
-          "listOfValidNodeTypes": [],
-          "linkMatcher": [
-            {
-              "regex": ".*"
-            }
-          ]
-        },
-        "attributes": [
-          {
-            "dataTypes": [
-              "Text"
-            ],
-            "minLength": "4",
-            "blackList": [
-              {
-                "value": "(?i)offer valid for a limited time only[!.]?",
-                "type": "REGEX"
-              },
-              {
-                "value": "(?i)offer valid online[!.]?",
-                "type": "REGEX"
-              },
-              {
-                "value": "(?i)over\\\\s[0-9,]+\\\\sbought",
-                "type": "REGEX"
-              },
-              {
-                "value": "(?i)over\\\\s[0-9,]+\\\\sbought[!.]?",
-                "type": "REGEX"
-              },
-              {
-                "value": "(?i)[0-9,]+\\\\sratings[!.]?",
-                "type": "REGEX"
-              },
-              {
-                "value": "(?i)view deal[!.]?",
-                "type": "REGEX"
-              },
-              {
-                "value": "(?i)shop now[!.]?",
-                "type": "REGEX"
-              },
-              {
-                "value": "(?i)click here[!.]?",
-                "type": "REGEX"
-              },
-              {
-                "value": "(?i)learn more[!.]?",
-                "type": "REGEX"
-              }
-            ],
-            "name": "http://schema.org/description",
-            "location": [
-              {
-                "xpath": ""
-              }
-            ],
-            "whiteList": [
-              {
-                "value": "%",
-                "type": "SUBSTRING"
-              },
-              {
-                "value": "$",
-                "type": "SUBSTRING"
-              },
-              {
-                "value": "(?i)offer valid",
-                "type": "REGEX"
-              },
-              {
-                "value": "(?i)save",
-                "type": "REGEX"
-              },
-              {
-                "value": "(?i)sale",
-                "type": "REGEX"
-              },
-              {
-                "value": "(?i)online code",
-                "type": "REGEX"
-              }
-            ],
-            "concat": "true",
-            "listOfValidNodeTypes": [
-              {
-                "name": "TEXT",
-                "type": "node"
-              },
-              {
-                "name": "ALT",
-                "type": "attr"
-              },
-              {
-                "name": "HREF",
-                "type": "attr"
-              }
-            ],
-            "mandatory": "true",
-            "javascript": null,
-            "maxLength": "400"
-          },
-          {
-            "dataTypes": [
-              "DateTime"
-            ],
-            "minLength": -1,
-            "blackList": [
-              {
-                "type": "REGEX",
-                "value": "(?i)valid through"
-              },
-              {
-                "type": "REGEX",
-                "value": "(?i)sale ends"
-              },
-              {
-                "type": "REGEX",
-                "value": "(?i)end"
-              }
-            ],
-            "name": "http://schema.org/validThrough",
-            "location": null,
-            "whiteList": [],
-            "listOfValidNodeTypes": null,
-            "mandatory": "true",
-            "javascript": "function transform(data) {if (data) {var monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];var regex = /(\\\\s*\\\\d+)\\\\/(\\\\s*\\\\d+)/i;var match = regex.exec(data);if (match && match[1]) {return monthNames[match[1] - 1] + ', ' + match[2];}else{return data;}}return null;}",
-            "maxLength": -1
-          },
-          {
-            "dataTypes": [
-              "DateTime"
-            ],
-            "minLength": -1,
-            "blackList": [
-              {
-                "type": "REGEX",
-                "value": "(?i)valid through"
-              },
-              {
-                "type": "REGEX",
-                "value": "(?i)sale ends"
-              },
-              {
-                "type": "REGEX",
-                "value": "(?i)end"
-              }
-            ],
-            "name": "http://schema.org/validFrom",
-            "location": null,
-            "whiteList": [],
-            "listOfValidNodeTypes": null,
-            "mandatory": "true",
-            "javascript": "function transform(data) {if (data) {var monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];var regex = /(\\\\s*\\\\d+)\\\\/(\\\\s*\\\\d+)/i;var match = regex.exec(data);if (match && match[1]) {return monthNames[match[1] - 1] + ', ' + match[2];}else{return data;}}return null;}",
-            "maxLength": -1
-          },
-          {
-            "dataTypes": [
-              "Number"
-            ],
-            "minLength": -1,
-            "blackList": [],
-            "name": "http://schema.org/offerPrice",
-            "location": null,
-            "whiteList": [
-              {
-                "type": "REGEX",
-                "value": "(?i)free shipping"
-              }
-            ],
-            "listOfValidNodeTypes": null,
-            "mandatory": "true",
-            "javascript": null,
-            "maxLength": -1
-          },
-          {
-            "dataTypes": [
-              "Number"
-            ],
-            "minLength": -1,
-            "blackList": [],
-            "name": "http://schema.org/originalPrice",
-            "location": null,
-            "whiteList": [
-              {
-                "type": "REGEX",
-                "value": "(?i)free shipping"
-              }
-            ],
-            "listOfValidNodeTypes": null,
-            "mandatory": "true",
-            "javascript": null,
-            "maxLength": -1
-          },
-          {
-            "dataTypes": [
-              "Text"
-            ],
-            "minLength": -1,
-            "blackList": null,
-            "name": "http://schema.org/priceCurrency",
-            "location": null,
-            "whiteList": null,
-            "listOfValidNodeTypes": null,
-            "mandatory": "true",
-            "javascript": "function transform(data){content=data.trim();if(content&&content.startsWith('C$')){return'CAD'}else if(content&&content.startsWith('$')){return'USD'}else{return null}};",
-            "maxLength": -1
-          },
-          {
-            "dataTypes": [
-              "Text"
-            ],
-            "minLength": -1,
-            "blackList": null,
-            "name": "http://schema.org/url",
-            "location": null,
-            "whiteList": null,
-            "listOfValidNodeTypes": null,
-            "mandatory": "true",
-            "javascript": "",
-            "maxLength": -1
-          }
-        ],
-        "id": "b4917ca5-ee83-4569-87c7-37feef5474af",
+        "id": "f0cb28cf-6320-4046-82e9-0bf962223333",
         "type": "http://schema.org/Coupon",
-        "javascript": null
-      },
-      {
-        "bundleInfo": {
-          "maxDepth": -1,
-          "clusterAlgo": {
-            "regex": "",
-            "endIdx": -1,
-            "startIdx": 0,
-            "type": "SUBSTRING",
-            "replaceInfo": [
-              {
-                "replaceAll": "true",
-                "replacement": "",
-                "regexStr": ""
-              }
-            ]
-          },
-          "maxBundleSize": -1,
-          "minBundleSize": -1,
-          "defaultPatternAnnotationThreshold": 0.8,
-          "maxLeafNodesSize": -1,
-          "minLeafNodesSize": -1,
-          "listOfValidNodeTypes": null,
-          "linkMatcher": null,
-          "linkThreshold": 2
-        },
         "attributes": [
           {
+            "repeating": true,
+            "locations": {
+              "1": [
+                {
+                  "xpath": "//img[contains(translate(@alt, 'OF', 'of'), \"% off\") or \ncontains(translate(@alt, 'REWAD', 'rewad'), \"reward\") or \ncontains(translate(@alt, 'COUPN', 'coupn'), \"coupon\") or \ncontains(translate(@alt, 'CASH', 'cash'), \"cash\") or \ncontains(translate(@alt, 'SHIPNG', 'shipng'), \"shipping\") or \ncontains(translate(@alt, \"ENDSTOAY\", \"endstoay\"), \"ends today\") or \ncontains(translate(@alt, \"FINALHOURS\", \"finalhours\"), \"final hours\") or\ncontains(translate(@alt, \"FREGIFT\", \"fregift\"), \"free gift\") or \ncontains(translate(@alt, \"TODAYNL\", \"todaynl\"), \"today only\") or\ncontains(@alt,\"$\") and (contains(@alt,\"valid\") or contains(translate(@alt, \"OF\", \"of\"), \"off\")) or \ncontains(translate(@alt, 'FRE', 'fre'), 'free') or \ncontains(translate(@alt, \"SALE\", \"sale\"), \"sale\") or\n(contains(translate(@alt, \"BUY\", \"buy\"), \"buy\") and contains(translate(@alt, \"GET\", \"get\"), \"get\"))]/@alt",
+                  "js": "function transform(data, prevData) {\n  \n  var data = data.replace(/\\*/g,\"\").replace(/(.*)(free\\sship)(.*)/i,\"$2$3\").replace(/^\\$\\d+\\soff\\s\\$\\d+$|^\\d+%\\soff$|-[A-z.!\\s]{5,30}$/,\"\")\n  \n    var invalid = /\\@import\\s+url|^Your purchases|subject\\sto\\schange|^\\d+\\% off $/i;\n  \n    var percentOff = /\\d+%?\\s*off/i;\n  \tvar limitedTime = /today only|tomorrow only|only.*through|ends today/i;\n    var freeStuff = /.*\\sfree\\s.*/i;\n    var percentDiscount = /\\d+%\\s*discount/i;\n    var dollarOff = /\\d+(?:\\.\\d+)?\\s*off/i;\n    var percentBack = /\\d+%\\s*back/i;\n\n    var percentReward = /\\d+%\\s*reward/i;\n    var percentCoupon = /(\\d+%|\\$\\d+)\\s*(?:promotional\\s+)?coupon/i;\n    var percentSaving = /\\d+%\\s*saving/i;\n\n    var earnUpto = /earn\\s*((?:up\\s*to\\s*)|(?:at\\s*least\\s*))?\\d+%/i;\n\n    var save = /save\\s*((?:up\\s*to\\s*)|(?:at\\s*least\\s*))?\\d+%/i;\n  \n    var offers = /\\s+offer[s]?\\s+/i;\n    var promoCode = /promo(?:tion)\\s+code\\s+/i;\n    var negPromoCode = /^into\\sthe/i;\n    \n\tvar dollarValid = /\\$.*valid/i;\n  \n    var earnedReward = /\\sbody\\sworks\\sreward/i;\n    var freeShip = /free\\sship|shipping\\son\\sorders\\sof\\s\\$/i;\n\n    if (!data || data == \"\") {\n        return null;\n    }\n\tvar match = invalid.exec(data);\n    if (match){\n      return null;\n    }\n  \n    match = percentOff.exec(data);\n    if (match){\n      return formatDescription(data);\n    }\n  \n    match = limitedTime.exec(data);\n    if (match){\n      var data = data.replace(/(today\\sonly|tomorrow\\sonly)(.*)(\\W.*)(\\$.*)/i,\"$1 $4\").replace(/.*fresh.*/,\"\")\n      return formatDescription(data);\n    }  \n  \n    match = freeStuff.exec(data);\n    if (match){\n      \n      \n      return formatDescription(data);\n    }\n  \n      match = percentDiscount.exec(data);\n    if (match){\n      return formatDescription(data);\n    }\n  \n    match = dollarOff.exec(data);\n    if (match){\n      return formatDescription(data);\n    }\n  \n    match = percentBack.exec(data);\n    if (match){\n      return formatDescription(data);\n    }\n  \n    match = percentReward.exec(data);\n    if (match){\n      return formatDescription(data);\n    }\n  \n    match = percentCoupon.exec(data);\n    if (match){\n      return formatDescription(data);\n    }\n  \n    match = percentSaving.exec(data);\n    if (match){\n      return formatDescription(data);\n    }\n  \n    match = earnUpto.exec(data);\n    if (match){\n      return formatDescription(data);\n    }\n  \n    match = save.exec(data);\n    if (match){\n      return formatDescription(data);\n    }\n  \n      match = dollarValid.exec(data);\n    if (match){\n      return formatDescription(data);\n    }\n  \n    match = offers.exec(data);\n    if (match){\n      if(data.length > 100){\n        return null;\n      }\n      else if(data.length < 50){\n        var digitMatch = /(\\d+%|\\$\\d+)\\s+/;\n        var match1 = digitMatch.exec(data);\n        if(match1) {\n          return formatDescription(data);\n        }\n      }\n      else {\n        return formatDescription(data);\n      }\n    }\n  \n    match = promoCode.exec(data);\n    if (match){\n      var match2 = negPromoCode.exec(data);\n      if( !match2)\n      return formatDescription(data);\n    }\n \n    match = earnedReward.exec(data);\n    if (match){\n      return formatDescription(data);\n    }\n    match = freeShip.exec(data);\n    if (match){\n      return formatDescription(data);\n    }\n  \n    return null;\n}\n\nfunction formatDescription(desc){\n  if (desc){\n  var sliceAttr = desc.length > 100 ? desc.replace(/(\\.)(\\d)/g,\"~~~$2\").match(/[^\\.\\?\\!]*(?:(?:\\$\\d)|(?:free)|(?:only)|(?:valid)|(?:ends)|(?:\\%))[^\\.\\?\\!]*/gi).join(\".\").replace(/(\\~\\~\\~)(\\d)/g,\".$2\") + \".\" : desc;\n  var cleanMe = sliceAttr.replace(/\\*/g,\"\").trim();\n    return cleanMe;\n}\n}\n\nfunction min(posList, max){\n    var selPos = max;\n    for(var i = 0; i < posList.length; i++) {\n        if(posList[i] == -1){\n            continue;\n        }\n        if(selPos > posList[i]){\n          selPos = posList[i];\n        }\n    }\n    return selPos;\n}\n",
+                  "glue": "",
+                  "regex": "",
+                  "nodeType": "NODE_LIST"
+                }
+              ],
+              "4": [
+                {
+                  "xpath": "//b[contains(translate(., 'OF', 'of'), \"% off\") or \ncontains(translate(., 'REWAD', 'rewad'), \"reward\") or \ncontains(translate(., 'COUPN', 'coupn'), \"coupon\") or \ncontains(translate(., 'CASH', 'cash'), \"cash\") or \ncontains(translate(., 'SHIPNG', 'shipng'), \"shipping\") or \ncontains(translate(., \"ENDSTOAY\", \"endstoay\"), \"ends today\") or \ncontains(translate(., \"FINALHOURS\", \"finalhours\"), \"final hours\") or\ncontains(translate(., \"FREGIFT\", \"fregift\"), \"free gift\") or \ncontains(translate(., \"TODAYNL\", \"todaynl\"), \"today only\") or\ncontains(.,\"$\") and (contains(.,\"valid\") or contains(translate(., \"OF\", \"of\"), \"off\")) or \ncontains(translate(., 'FRE', 'fre'), 'free') or \ncontains(translate(., \"SALE\", \"sale\"), \"sale\") or\n(contains(translate(., \"BUY\", \"buy\"), \"buy\") and contains(translate(., \"GET\", \"get\"), \"get\"))]",
+                  "js": "function transform(data, prevData) {\n  \n  var data = data.replace(/[*†]|amp;|\\d+\\% Off Entire Purchase|&acirc;|(Tomorrow|Today) Only.*Online Only:/g,\"\").replace(/(.*)(free\\sship)(.*)/i,\"$2$3\")\n  \n    var invalid = /\\@import\\s+url|survey|^Tomorrow only\\!$/i;\n  \n    var percentOff = /\\d+%?\\s*off/i;\n  \tvar limitedTime = /today only|tomorrow only|only.*through/i;\n    var freeStuff = /.*\\sfree\\s.*/i;\n    var percentDiscount = /\\d+%\\s*discount/i;\n    var dollarOff = /\\d+(?:\\.\\d+)?\\s*off/i;\n    var percentBack = /\\d+%\\s*back/i;\n\n    var percentReward = /\\d+%\\s*reward/i;\n    var percentCoupon = /(\\d+%|\\$\\d+)\\s*(?:promotional\\s+)?coupon/i;\n    var percentSaving = /\\d+%\\s*saving/i;\n\n    var earnUpto = /earn\\s*((?:up\\s*to\\s*)|(?:at\\s*least\\s*))?\\d+%/i;\n\n    var save = /save\\s*((?:up\\s*to\\s*)|(?:at\\s*least\\s*))?\\d+%/i;\n  \n    var offers = /\\s+offer[s]?\\s+/i;\n    var promoCode = /promo(?:tion)\\s+code\\s+/i;\n    var negPromoCode = /^into\\sthe/i;\n    \n\n  \n    var earnedReward = /\\sbody\\sworks\\sreward/i;\n    var freeShip = /free\\sship|shipping\\son\\sorders\\sof\\s\\$/i;\n\n    if (!data || data == \"\") {\n        return null;\n    }\n\tvar match = invalid.exec(data);\n    if (match){\n      return null;\n    }\n  \n    match = percentOff.exec(data);\n    if (match){\n      return formatDescription(data);\n    }\n  \n    match = limitedTime.exec(data);\n    if (match){\n      var data = data.replace(/(today\\sonly|tomorrow\\sonly)(.*)(\\W.*)(\\$.*)/i,\"$1 $4\")\n      return formatDescription(data);\n    }  \n  \n    match = freeStuff.exec(data);\n    if (match){\n      \n      \n      return formatDescription(data);\n    }\n  \n      match = percentDiscount.exec(data);\n    if (match){\n      return formatDescription(data);\n    }\n  \n    match = dollarOff.exec(data);\n    if (match){\n      return formatDescription(data);\n    }\n  \n    match = percentBack.exec(data);\n    if (match){\n      return formatDescription(data);\n    }\n  \n    match = percentReward.exec(data);\n    if (match){\n      return formatDescription(data);\n    }\n  \n    match = percentCoupon.exec(data);\n    if (match){\n      return formatDescription(data);\n    }\n  \n    match = percentSaving.exec(data);\n    if (match){\n      return formatDescription(data);\n    }\n  \n    match = earnUpto.exec(data);\n    if (match){\n      return formatDescription(data);\n    }\n  \n    match = save.exec(data);\n    if (match){\n      return formatDescription(data);\n    }\n  \n    match = offers.exec(data);\n    if (match){\n      if(data.length > 100){\n        return null;\n      }\n      else if(data.length < 50){\n        var digitMatch = /(\\d+%|\\$\\d+)\\s+/;\n        var match1 = digitMatch.exec(data);\n        if(match1) {\n          return formatDescription(data);\n        }\n      }\n      else {\n        return formatDescription(data);\n      }\n    }\n  \n    match = promoCode.exec(data);\n    if (match){\n      var match2 = negPromoCode.exec(data);\n      if( !match2)\n      return formatDescription(data);\n    }\n \n    match = earnedReward.exec(data);\n    if (match){\n      return formatDescription(data);\n    }\n    match = freeShip.exec(data);\n    if (match){\n      return formatDescription(data);\n    }\n  \n    return null;\n}\n\nfunction formatDescription(desc){\n    if(desc && desc.length > 100){\n        var tPos = [desc.indexOf(\". \", 80) , desc.indexOf(\"! \", 80) , desc.indexOf(\"? \", 80), desc.indexOf(\"; \", 80)];\n        \n        var splitPos = min(tPos, desc.length - 1)\n        return desc.substr(0, splitPos + 1);\n    }\n    return desc;\n}\n\nfunction min(posList, max){\n    var selPos = max;\n    for(var i = 0; i < posList.length; i++) {\n        if(posList[i] == -1){\n            continue;\n        }\n        if(selPos > posList[i]){\n          selPos = posList[i];\n        }\n    }\n    return selPos;\n}\n",
+                  "glue": "",
+                  "regex": "",
+                  "nodeType": "NODE_LIST"
+                }
+              ],
+              "5": [
+                {
+                  "xpath": "//text()[contains(translate(., 'OF', 'of'), \"% off\") or \ncontains(translate(., 'REWAD', 'rewad'), \"reward\") or \ncontains(translate(., 'COUPN', 'coupn'), \"coupon\") or \ncontains(translate(., 'CASH', 'cash'), \"cash\") or \ncontains(translate(., 'SHIPNG', 'shipng'), \"shipping\") or \ncontains(translate(., \"ENDSTOAY\", \"endstoay\"), \"ends today\") or \ncontains(translate(., \"FINALHOURS\", \"finalhours\"), \"final hours\") or\ncontains(translate(., \"FREGIFT\", \"fregift\"), \"free gift\") or \ncontains(translate(., \"TODAYNL\", \"todaynl\"), \"today only\") or\ncontains(.,\"$\") and (contains(.,\"valid\") or contains(translate(., \"OF\", \"of\"), \"off\")) or \ncontains(translate(., 'FRE', 'fre'), 'free') or \ncontains(translate(., \"SALE\", \"sale\"), \"sale\") or\n(contains(translate(., \"BUY\", \"buy\"), \"buy\") and contains(translate(., \"GET\", \"get\"), \"get\"))]",
+                  "js": "function transform(data, prevData) {\n  \n  var data = data.replace(/[†*]|^thank you for your recent.*|\\W*$|\\d+\\% Off Entire Purchase|&sup1;|&acirc;|&dagger;|(Tomorrow|Today) Only.*Online Only:/ig,\"\").replace(/(.*)(free\\sship)(.*)/i,\"$2$3\")\n  \n    var invalid = /\\@import\\s+url|^as a va|^tell us|survey|^today only|your experience|cannot\\sbe\\scombined|subject\\sto\\schange|visit my.*rewards program/i;\n  \n    var percentOff = /\\d+%?\\s*off/i;\n    var freeStuff = /buy\\s\\d\\sget\\s\\d\\sfree|buy\\s\\d,\\sget\\s\\d\\sfree/i;\n    var percentDiscount = /\\d+%\\s*discount/i;\n    var dollarOff = /\\d+(?:\\.\\d+)?\\s*off/i;\n    var percentBack = /\\d+%\\s*back/i;\n    var throughString = /\\d\\sfor\\s\\$.*through/;\n    var dayOnly = /(tomorrow|today)\\sonly/i;\n\n    var percentReward = /\\d+%\\s*reward/i;\n    var percentCoupon = /(\\d+%|\\$\\d+)\\s*(?:promotional\\s+)?coupon/i;\n    var percentSaving = /\\d+%\\s*saving/i;\n\n    var earnUpto = /earn\\s*((?:up\\s*to\\s*)|(?:at\\s*least\\s*))?\\d+%/i;\n\n    var save = /save\\s*((?:up\\s*to\\s*)|(?:at\\s*least\\s*))?\\d+%/i;\n  \n    var offers = /\\s+offer[s]?\\s+/i;\n    var promoCode = /promo(?:tion)\\s+code\\s+/i;\n    var negPromoCode = /^into\\sthe/i;\n  \n  \tvar dollarRefill = /\\$.*Refills/i;\n    \n    var dollarDeal = /\\$.*\\son\\s.*to.*/i;\n  \n    var earnedReward = /\\sbody\\sworks\\sreward/i;\n    var freeShip = /free\\sship|shipping\\son\\sorders\\sof\\s\\$/i;\n\n    if (!data || data == \"\") {\n        return null;\n    }\n\tvar match = invalid.exec(data);\n    if (match){\n      return null;\n    }\n  \n    match = percentOff.exec(data);\n    if (match){\n      return formatDescription(data);\n    }\n\n    match = freeStuff.exec(data);\n    if (match){\n      return formatDescription(data);\n    } \n  \n  \tmatch = dollarRefill.exec(data);\n    if (match){\n      return formatDescription(data);\n    } \n  \n      match = percentDiscount.exec(data);\n    if (match){\n      return formatDescription(data);\n    }\n  \n      match = dollarDeal.exec(data);\n    if (match){\n      return formatDescription(data);\n    }\n  \n        match = dayOnly.exec(data);\n    if (match){\n      return formatDescription(data);\n    }\n  \n  \n    match = dollarOff.exec(data);\n    if (match){\n      return formatDescription(data);\n    }\n  \n    match = percentBack.exec(data);\n    if (match){\n      return formatDescription(data);\n    }\n  \n      match = throughString.exec(data);\n    if (match){\n      return formatDescription(data);\n    }\n  \n    match = percentReward.exec(data);\n    if (match){\n      return formatDescription(data);\n    }\n  \n    match = percentCoupon.exec(data);\n    if (match){\n      return formatDescription(data);\n    }\n  \n    match = percentSaving.exec(data);\n    if (match){\n      return formatDescription(data);\n    }\n  \n    match = earnUpto.exec(data);\n    if (match){\n      return formatDescription(data);\n    }\n  \n    match = save.exec(data);\n    if (match){\n      return formatDescription(data);\n    }\n  \n    match = offers.exec(data);\n    if (match){\n      if(data.length > 100){\n        return null;\n      }\n      else if(data.length < 50){\n        var digitMatch = /(\\d+%|\\$\\d+)\\s+/;\n        var match1 = digitMatch.exec(data);\n        if(match1) {\n          return formatDescription(data);\n        }\n      }\n      else {\n        return formatDescription(data);\n      }\n    }\n  \n    match = promoCode.exec(data);\n    if (match){\n      var match2 = negPromoCode.exec(data);\n      if( !match2)\n      return formatDescription(data);\n    }\n  \n\n    match = earnedReward.exec(data);\n    if (match){\n      return formatDescription(data);\n    }\n    match = freeShip.exec(data);\n    if (match){\n      return formatDescription(data);\n    }\n  \n    return null;\n}\n\nfunction formatDescription(desc){\n    if(desc && desc.length > 100){\n        var tPos = [desc.indexOf(\". \", 80) , desc.indexOf(\"! \", 80) , desc.indexOf(\"? \", 80), desc.indexOf(\"; \", 80)];\n        \n        var splitPos = min(tPos, desc.length - 1)\n        return desc.substr(0, splitPos + 1);\n    }\n    return desc;\n}\n\nfunction min(posList, max){\n    var selPos = max;\n    for(var i = 0; i < posList.length; i++) {\n        if(posList[i] == -1){\n            continue;\n        }\n        if(selPos > posList[i]){\n          selPos = posList[i];\n        }\n    }\n    return selPos;\n}\n",
+                  "glue": "",
+                  "regex": "",
+                  "nodeType": "NODE_LIST"
+                }
+              ]
+            },
+            "name": "http://schema.org/description",
             "dataTypes": [
               "Text"
             ],
-            "name": "http://schema.org/name",
-            "location": [
-              {
-                "xpath": "news.rivers.com.au"
-              }
-            ],
-            "mandatory": "true",
-            "javascript": null
-          }
-        ],
-        "id": "b4917ca5-ee83-4569-87c7-37feef5474au",
-        "type": "http://schema.org/Organization",
-        "javascript": null
-      },
-      {
-        "bundleInfo": {
-          "maxDepth": -1,
-          "clusterAlgo": {
-            "regex": "",
-            "endIdx": -1,
-            "startIdx": 0,
-            "type": "SUBSTRING",
-            "replaceInfo": [
-              {
-                "replaceAll": "true",
-                "replacement": "",
-                "regexStr": ""
-              }
-            ]
+            "dedupCondition": {
+              "matchThreshold": "0.35",
+              "stopWords": [
+                "Limited Time Only! In Stores & Online",
+                "Use Code: FALLSPADAY - SHOP!",
+                "or More through October 21, 2018",
+                "Don't miss",
+                "purchase",
+                "Limited Time Only!",
+                "grab this +",
+                "In Stores only!",
+                "in stores",
+                "through January 13, 2019.",
+                "Print this email",
+                "or provide on mobile",
+                "phone at a U.S."
+              ]
+            }
           },
-          "maxBundleSize": -1,
-          "minBundleSize": -1,
-          "defaultPatternAnnotationThreshold": 0.8,
-          "maxLeafNodesSize": -1,
-          "minLeafNodesSize": -1,
-          "listOfValidNodeTypes": null,
-          "linkMatcher": null,
-          "linkThreshold": 2
-        },
-        "attributes": [
           {
+            "repeating": true,
+            "locations": {
+              "1": [
+                {
+                  "xpath": "//text()[contains(translate(., 'VALID', 'valid'), ' valid ') or contains(translate(., 'T', 't'), ' through ') or contains(translate(., 'ENDS', 'ends'), ' ends ') or contains(translate(., 'PROMCDE', 'promcde'), ' promo code') or  contains(translate(., 'PURCHASE', 'purchase'), ' purchase ') or contains(translate(., 'OFERGD', 'ofergd'), ' offer good') or (contains(.,\"on\") and contains(.,\"to\"))]",
+                  "js": "function transform(attrValue, prevValue) {\n\tif (!attrValue) {\n\t\treturn null;\n\t}\n\t// normalize values\n\tattrValue = attrValue.replace(/(at|\\@)/, ' ').replace(/[\\.,]{2}/, ',').replace(/\\s([-,\\.])\\s/, \"$1 \").replace(/\\s{2,}/, ' ');\n\n\tvar tm = getTime(attrValue);\n\tvar dt = getDate(attrValue, tm);\n\tvar output = \"\";\n\n\tif (dt) {\n\t\toutput = dt;\n\t} else {\n\t\treturn null;\n\t}\n\tif (tm) {\n\t\toutput += \" \" + tm;\n\t}\n\treturn output;\n}\nfunction getTime(strValue) {\n\tvar regTimeFull = /\\d+\\:\\d+\\s*(?:[ap]\\.?m\\.?)?\\s*(?:(?:[ecmp][sd]?t)|(?:\\s*[\\+|\\-]\\s*\\d{4})|gmt|utc)?/ig;\n\tvar regTimeHour = /\\d+\\s*(?:[ap]\\.?m\\.?)\\s*(?:(?:[ecmp][sd]?t)|(?:\\s*[\\+|\\-]\\s*\\d{4})|gmt|utc)?/ig;\n\n\tvar tm = matchDatePAttern(strValue, regTimeFull);\n\tif (tm) {\n\t\treturn tm;\n\t}\n\n\tvar tm = matchDatePAttern(strValue, regTimeHour);\n\tif (tm) {\n\t\treturn tm;\n\t}\n\treturn null;\n}\n\nfunction getDate(strValue, tm) {\n\n\t// Tue, 4 Aug 2015\n\tvar regDDMMMYYYY = /\\d{1,2}(?:nd|rd|st|th)?[,\\.\\-\\/]?\\s*(?:jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may?|jun(?:e)?|jul(?:y)?|aug(?:ust)?|sep(?:t(?:ember)?)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)[,\\.\\-\\/]?\\s*\\d{4}/ig;\n\n\t// Tue Aug 4, 2015\n\tvar regEEEMMMDDYYYY = /(?:sun(day)?|mon(day)?|tue(s(day)?)?|wed(nesday)?|thu(r(s(day)?)?)?|fri(day)?|sat(urday)?)[,\\.\\-\\/]?\\s*(?:jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may?|jun(?:e)?|jul(?:y)?|aug(?:ust)?|sep(?:t(?:ember)?)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)[,\\.\\-\\/]?\\s*\\d{1,2}(?:nd|rd|st|th)?[,\\.\\-\\/]?\\s*\\d{4}/ig;\n\n\t// Aug 4, 2015\n\tvar regMMMDDYYYY = /(?:jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may?|jun(?:e)?|jul(?:y)?|aug(?:ust)?|sep(?:t(?:ember)?)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)[,\\.\\-\\/]?\\s*\\d{1,2}(?:nd|rd|st|th)?[,\\.\\-\\/]?\\s*\\d{4}/ig;\n\n\t// Tue. Aug. 4\n\tvar regEEEMMMDD = /(?:sun(day)?|mon(day)?|tue(s(day)?)?|wed(nesday)?|thu(r(s(day)?)?)?|fri(day)?|sat(urday)?)[,\\.\\-\\/]?\\s*(?:jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may?|jun(?:e)?|jul(?:y)?|aug(?:ust)?|sep(?:t(?:ember)?)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)[,\\.\\-\\/]?\\s*\\d{1,2}(?:nd|rd|st|th)?/ig;\n\n\t// Tue 04Aug\n\tvar regEEEDDMMM = /(?:sun(day)?|mon(day)?|tue(s(day)?)?|wed(nesday)?|thu(r(s(day)?)?)?|fri(day)?|sat(urday)?)[,\\.\\-\\/]?\\s*\\d{1,2}(?:nd|rd|st|th)?[,\\.\\-]?\\s*(?:jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may?|jun(?:e)?|jul(?:y)?|aug(?:ust)?|sep(?:t(?:ember)?)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)/ig;\n\n\t// Tue-8/4/2015\n\tvar regEEEMMDDYYYY = /(?:sun(day)?|mon(day)?|tue(s(day)?)?|wed(nesday)?|thu(r(s(day)?)?)?|fri(day)?|sat(urday)?)[,\\.\\-\\/]?\\s*\\d{1,2}[,\\.\\-\\/]\\s*\\d{1,2}[,\\.\\-\\/]\\s*\\d{2,4}/ig;\n\n\t// 2015-08-04 01:11 -0700\n\tvar regYYYYMMDD = /\\d{4}[,\\.\\-\\/]\\s*\\d{1,2}[,\\.\\-\\/]\\s*\\d{1,2}/g;\n\n\t// 8-04-2015\n\t// 8/4/15 10:08 AM (10:08)\n\tvar regMMDDYYY = /(?:\\d{1,2}\\s*\\/\\s*\\d{1,2}\\s*\\/\\s*\\d{2,4})|(?:\\d{1,2}\\s*\\-\\s*\\d{1,2}\\s*\\-\\s*\\d{2,4})|(?:\\d{1,2}\\s*\\.\\s*\\d{1,2}\\s*\\.\\s*\\d{2,4})/g;\n\n\t// 04 Aug 15-Tue 10:8 AM\n\tvar regDDMMMYYY = /\\d+(?:nd|rd|st|th)?[,\\.\\-\\/]?\\s*(?:jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may?|jun(?:e)?|jul(?:y)?|aug(?:ust)?|sep(?:t(?:ember)?)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)[,\\.\\-\\/]?\\s*\\d+[,\\.\\-\\/\\s]/ig;\n\n\tvar regDDMMMYYY_anti = /(?:jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may?|jun(?:e)?|jul(?:y)?|aug(?:ust)?|sep(?:t(?:ember)?)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)[,\\.\\-\\/]?\\s\\d+(?:nd|rd|st|th)?[,\\.\\-\\/]?\\s*(?:jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may?|jun(?:e)?|jul(?:y)?|aug(?:ust)?|sep(?:t(?:ember)?)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)[,\\.\\-\\/]?\\s*\\d+[,\\.\\-\\/\\s]/ig;\n    \n\t// Aug 04 10:8 AM\n\tvar regMMMDD = /(?:jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may?|jun(?:e)?|jul(?:y)?|aug(?:ust)?|sep(?:t(?:ember)?)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)[,\\.\\-\\/]?\\s*\\d+(?:nd|rd|st|th)?[,\\.\\-\\/\\s]/ig;\n\n\t// 04Aug 10:8 AM\n\tvar regDDMMM = /\\d+(?:nd|rd|st|th)?[,\\.\\-\\/]?\\s*(?:jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may?|jun(?:e)?|jul(?:y)?|aug(?:ust)?|sep(?:t(?:ember)?)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)/ig;\n\n\t// 10/15\n\tvar regMMDD = /\\d{1,2}[\\/]\\d{1,2}/g;\n\t// var regTOMORROW = /tomorrow/ig;\n\n\tvar dt = matchDatePAttern(strValue, regDDMMMYYYY);\n\tif (dt) {\n\t\t// d MMM yyyy HH:mm:ss, d MMM yyyy h:mm a, d MMM yyyy h a, d MMM yyyy\n\t\treturn dt.replace(/august/i, 'aug').replace(/(?:nd|rd|st|th)/, ' ').replace(/[,\\.\\-\\/]/g, ' ').replace(/\\s+/g, ' ');\n\t}\n\n\tdt = matchDatePAttern(strValue, regEEEMMMDDYYYY);\n\tif (dt) {\n\t\t// E MMM d, yyyy h:m a, E MMM d, yyyy\n\t\treturn dt.replace(/august/i, 'aug').replace(/(?:nd|rd|st|th)/, ' ').replace(/[,\\.\\-\\/]/g, ' ').replace(/\\s+/g, ' ').trim().replace(/\\s(\\d{4})$/, ', $1')\n\t}\n\n\tdt = matchDatePAttern(strValue, regMMMDDYYYY);\n\tif (dt) {\n\t\t// MMM d, yyyy h:mm a, MMM d, yyyy h, MMM d, yyyy\n\t\treturn dt.replace(/[,\\.\\-\\/]/g, ' ').replace(/\\s+/g, ' ').trim().replace(/\\s(\\d{4})$/, ', $1');\n\t}\n\n\tdt = matchDatePAttern(strValue, regEEEMMMDD);\n\tif (dt) {\n\t\t// \"E MMM d HH:mm:ss z yyyy\" , \"E MMM d h:m a\" , \"E MMM d\"\n\t\treturn dt.replace(/august/i, 'aug').replace(/(?:nd|rd|st|th)/, ' ').replace(/[,\\.\\-\\/]/g, ' ').replace(/\\s+/g, ' ').trim();\n\t}\n\n\tdt = matchDatePAttern(strValue, regEEEDDMMM);\n\tif (dt) {\n\t\tif (tm) {\n\t\t\t// E ddMMM h:mm a\n\t\t\treturn dt.replace(/august/i, 'aug').replace(/(?:nd|rd|st|th)/, ' ').replace(/[,\\.\\-\\/]/g, ' ').replace(/\\s+/g, ' ').replace(/(\\d{1,2})\\s/, '$1').trim();\n\t\t} else {\n\t\t\t// E d MMM\n\t\t\treturn dt.replace(/august/i, 'aug').replace(/(?:nd|rd|st|th)/, ' ').replace(/[,\\.\\-\\/]/g, ' ').replace(/(\\d{1,2})/, ' $1 ').replace(/\\s+/g, ' ').trim();\n\t\t}\n\n\t}\n\n\tdt = matchDatePAttern(strValue, regEEEMMDDYYYY);\n\tif (dt) {\n\t\t// E, M/d/yyyy h:m a, E, M/d/yy h:m a, E, M/d/yy HH:mm, E, M/d/yy\n\t\treturn dt.replace(/[,\\.\\-\\/]/g, ' ').replace(/\\s+/g, ' ').trim().replace(/\\s/g, '/').replace(/^(.{3})\\//, '$1, ');\n\t}\n\n\tdt = matchDatePAttern(strValue, regYYYYMMDD);\n\tif (dt) {\n\t\tif (tm) {\n\t\t\t// yyyy-MM-dd'T'H:mma, yyyy-MM-dd'T'H:mm\n\t\t\treturn dt.replace(/[,\\.\\-\\/]/g, ' ').replace(/\\s+/g, ' ').trim().replace(/\\s/g, '-') + 'T';\n\t\t} else {\n\t\t\t// yyyy-MM-dd\n\t\t\treturn dt.replace(/[,\\.\\-\\/]/g, ' ').replace(/\\s+/g, ' ').trim().replace(/\\s/g, '-');\n\t\t}\n\t}\n\n\tdt = matchDatePAttern(strValue, regMMDDYYY);\n\tif (dt) {\n\t\tif (tm) {\n\t\t\t// M/d/yy h:m a\n\t\t\treturn dt.replace(/[\\.\\-\\/]/g, ' ').replace(/\\s+/g, ' ').trim().replace(/\\s/g, '/');\n\t\t} else {\n\t\t\t// \"MM-dd-yyyy\"\n\t\t\treturn dt.replace(/[\\.\\-\\/]/g, ' ').replace(/\\s+/g, ' ').trim().replace(/\\s/g, '-');\n\t\t}\n\t}\n\n\tdt = matchDatePAttern(strValue, regDDMMMYYY);\n\tif (dt) {\n\t  dt = dt.replace(/august/i, 'aug').replace(/(?:nd|rd|st|th)/, ' ').replace(/[,\\.\\-\\/]/g, ' ').replace(/\\s+/g, ' ').trim().replace(/\\s/g, '-');\n\t  var dt2 = matchDatePAttern(strValue, regDDMMMYYY_anti);\n\t  if(dt2){\n\t    dt = dt.substr(dt.indexOf('-')+1 ).replace('-', ', ');\n\t  }\n\t  // dd-MMM-yyyy h:m a, dd-MMM-yyyy\n\t  return dt;\n\t}\n\n\tdt = matchDatePAttern(strValue, regMMMDD);\n\tif (dt) {\n\t\t// MMM dd h:m a , MMM d\n\t\treturn dt.replace(/[,\\.\\-\\/]/g, ' ').replace(/(\\d{1,2})/, ' $1 ').replace(/\\s+/g, ' ').trim();\n\t}\n\n\tdt = matchDatePAttern(strValue, regDDMMM);\n\tif (dt) {\n\t\tif (tm) {\n\t\t\t// ddMMM h:m a\n\t\t\treturn dt.replace(/[,\\.\\-\\/]/g, \"\").replace(/\\s*/g, '').trim();\n\t\t} else {\n\t\t\t// MMM d\n\t\t\treturn dt.replace(/[,\\.\\-\\/]/g, ' ').replace(/(\\d{1,2})/, ' $1 ').replace(/\\s+/g, ' ').replace(/(\\d{1,2})(.+)/, '$2 $1').replace(/\\s+/g, ' ').trim();\n\t\t}\n\t}\n\n\tdt = matchDatePAttern(strValue, regMMDD);\n\tif (dt) {\n        var parts = dt.split('/');\n      \tvar monthNames = [\"\", \"Jan\", \"Feb\", \"Mar\", \"Apr\", \"May\", \"Jun\", \"Jul\",\n                          \"Aug\", \"Sep\", \"Oct\", \"Nov\", \"Dec\"];\n      \n\t\treturn monthNames[parts[0]-0] + \", \" + parts[1];\n\t}\n\n\treturn null;\n}\n\nfunction matchDatePAttern(strValue, regex) {\n\tvar m;\n\tvar oldM;\n\twhile ((m = regex.exec(strValue)) !== null) {\n\t\t// This is necessary to avoid infinite loops with zero-width matches\n\t\tif (m.index === regex.lastIndex) {\n\t\t\tregex.lastIndex++;\n\t\t}\n\t\toldM = m;\n\t}\n\tif (oldM) {\n\t\treturn oldM[0];\n\t}\n\treturn null;\n}",
+                  "glue": "",
+                  "regex": "",
+                  "nodeType": "NODE_LIST"
+                }
+              ],
+              "2": [
+                {
+                  "xpath": "//img[contains(translate(@alt, 'OF', 'of'), \" off \") or contains(@alt, \"0%\") or contains(@alt, \"1%\") or contains(@alt, \"2%\") or contains(@alt, \"3%\") or contains(@alt, \"4%\") or contains(@alt, \"5%\") or contains(@alt, \"6%\") or contains(@alt, \"7%\") or contains(@alt, \"8%\") or contains(@alt, \"9%\") or contains(translate(@alt, 'REWAD', 'rewad'), \"reward\") or contains(translate(@alt, 'COUPN', 'coupn'), \"coupon\") or contains(translate(@alt, 'CASH', 'cash'), \"cash\") or contains(translate(@alt, 'SHIPNG', 'shipng'), \"shipping\") or contains(@alt,\"Ends Today\") or contains(@alt,\"free gift\")or contains(@alt,\"$\") and contains(@alt,\"valid\") or contains(translate(@alt, 'FRE', 'fre'), 'free')]/@alt",
+                  "js": "function transform(attrValue, prevValue) {\n\tif (!attrValue) {\n\t\treturn null;\n\t}\n\t// normalize values\n\tattrValue = attrValue.replace(/(at|\\@)/, ' ').replace(/[\\.,]{2}/, ',').replace(/\\s([-,\\.])\\s/, \"$1 \").replace(/\\s{2,}/, ' ').replace(/win.*|Semi-Annual Sale.*/i,\"\").replace(/Print\\sthis.*/,\"\").replace(/This\\soffer.*/,\"\");\n\n\tvar tm = getTime(attrValue);\n\tvar dt = getDate(attrValue, tm);\n\tvar output = \"\";\n\n\tif (dt) {\n\t\toutput = dt;\n\t} else {\n\t\treturn null;\n\t}\n\tif (tm) {\n\t\toutput += \" \" + tm;\n\t}\n\treturn output;\n}\nfunction getTime(strValue) {\n\tvar regTimeFull = /\\d+\\:\\d+\\s*(?:[ap]\\.?m\\.?)?\\s*(?:(?:[ecmp][sd]?t)|(?:\\s*[\\+|\\-]\\s*\\d{4})|gmt|utc)?/ig;\n\tvar regTimeHour = /\\d+\\s*(?:[ap]\\.?m\\.?)\\s*(?:(?:[ecmp][sd]?t)|(?:\\s*[\\+|\\-]\\s*\\d{4})|gmt|utc)?/ig;\n\n\tvar tm = matchDatePAttern(strValue, regTimeFull);\n\tif (tm) {\n\t\treturn tm;\n\t}\n\n\tvar tm = matchDatePAttern(strValue, regTimeHour);\n\tif (tm) {\n\t\treturn tm;\n\t}\n\treturn null;\n}\n\nfunction getDate(strValue, tm) {\n\n\t// Tue, 4 Aug 2015\n\tvar regDDMMMYYYY = /\\d{1,2}(?:nd|rd|st|th)?[,\\.\\-\\/]?\\s*(?:jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may?|jun(?:e)?|jul(?:y)?|aug(?:ust)?|sep(?:t(?:ember)?)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)[,\\.\\-\\/]?\\s*\\d{4}/ig;\n\n\t// Tue Aug 4, 2015\n\tvar regEEEMMMDDYYYY = /(?:sun(day)?|mon(day)?|tue(s(day)?)?|wed(nesday)?|thu(r(s(day)?)?)?|fri(day)?|sat(urday)?)[,\\.\\-\\/]?\\s*(?:jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may?|jun(?:e)?|jul(?:y)?|aug(?:ust)?|sep(?:t(?:ember)?)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)[,\\.\\-\\/]?\\s*\\d{1,2}(?:nd|rd|st|th)?[,\\.\\-\\/]?\\s*\\d{4}/ig;\n\n\t// Aug 4, 2015\n\tvar regMMMDDYYYY = /(?:jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may?|jun(?:e)?|jul(?:y)?|aug(?:ust)?|sep(?:t(?:ember)?)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)[,\\.\\-\\/]?\\s*\\d{1,2}(?:nd|rd|st|th)?[,\\.\\-\\/]?\\s*\\d{4}/ig;\n\n\t// Tue. Aug. 4\n\tvar regEEEMMMDD = /(?:sun(day)?|mon(day)?|tue(s(day)?)?|wed(nesday)?|thu(r(s(day)?)?)?|fri(day)?|sat(urday)?)[,\\.\\-\\/]?\\s*(?:jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may?|jun(?:e)?|jul(?:y)?|aug(?:ust)?|sep(?:t(?:ember)?)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)[,\\.\\-\\/]?\\s*\\d{1,2}(?:nd|rd|st|th)?/ig;\n\n\t// Tue 04Aug\n\tvar regEEEDDMMM = /(?:sun(day)?|mon(day)?|tue(s(day)?)?|wed(nesday)?|thu(r(s(day)?)?)?|fri(day)?|sat(urday)?)[,\\.\\-\\/]?\\s*\\d{1,2}(?:nd|rd|st|th)?[,\\.\\-]?\\s*(?:jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may?|jun(?:e)?|jul(?:y)?|aug(?:ust)?|sep(?:t(?:ember)?)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)/ig;\n\n\t// Tue-8/4/2015\n\tvar regEEEMMDDYYYY = /(?:sun(day)?|mon(day)?|tue(s(day)?)?|wed(nesday)?|thu(r(s(day)?)?)?|fri(day)?|sat(urday)?)[,\\.\\-\\/]?\\s*\\d{1,2}[,\\.\\-\\/]\\s*\\d{1,2}[,\\.\\-\\/]\\s*\\d{2,4}/ig;\n\n\t// 2015-08-04 01:11 -0700\n\tvar regYYYYMMDD = /\\d{4}[,\\.\\-\\/]\\s*\\d{1,2}[,\\.\\-\\/]\\s*\\d{1,2}/g;\n\n\t// 8-04-2015\n\t// 8/4/15 10:08 AM (10:08)\n\tvar regMMDDYYY = /(?:\\d{1,2}\\s*\\/\\s*\\d{1,2}\\s*\\/\\s*\\d{2,4})|(?:\\d{1,2}\\s*\\-\\s*\\d{1,2}\\s*\\-\\s*\\d{2,4})|(?:\\d{1,2}\\s*\\.\\s*\\d{1,2}\\s*\\.\\s*\\d{2,4})/g;\n\n\t// 04 Aug 15-Tue 10:8 AM\n\tvar regDDMMMYYY = /\\d+(?:nd|rd|st|th)?[,\\.\\-\\/]?\\s*(?:jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may?|jun(?:e)?|jul(?:y)?|aug(?:ust)?|sep(?:t(?:ember)?)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)[,\\.\\-\\/]?\\s*\\d+[,\\.\\-\\/\\s]/ig;\n\n\tvar regDDMMMYYY_anti = /(?:jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may?|jun(?:e)?|jul(?:y)?|aug(?:ust)?|sep(?:t(?:ember)?)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)[,\\.\\-\\/]?\\s\\d+(?:nd|rd|st|th)?[,\\.\\-\\/]?\\s*(?:jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may?|jun(?:e)?|jul(?:y)?|aug(?:ust)?|sep(?:t(?:ember)?)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)[,\\.\\-\\/]?\\s*\\d+[,\\.\\-\\/\\s]/ig;\n    \n\t// Aug 04 10:8 AM\n\tvar regMMMDD = /(?:jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may?|jun(?:e)?|jul(?:y)?|aug(?:ust)?|sep(?:t(?:ember)?)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)[,\\.\\-\\/]?\\s*\\d+(?:nd|rd|st|th)?[,\\.\\-\\/\\s]/ig;\n\n\t// 04Aug 10:8 AM\n\tvar regDDMMM = /\\d+(?:nd|rd|st|th)?[,\\.\\-\\/]?\\s*(?:jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may?|jun(?:e)?|jul(?:y)?|aug(?:ust)?|sep(?:t(?:ember)?)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)/ig;\n\n\t// 10/15\n\tvar regMMDD = /\\d{1,2}[\\/]\\d{1,2}/g;\n\t// var regTOMORROW = /tomorrow/ig;\n\n\tvar dt = matchDatePAttern(strValue, regDDMMMYYYY);\n\tif (dt) {\n\t\t// d MMM yyyy HH:mm:ss, d MMM yyyy h:mm a, d MMM yyyy h a, d MMM yyyy\n\t\treturn dt.replace(/august/i, 'aug').replace(/(?:nd|rd|st|th)/, ' ').replace(/[,\\.\\-\\/]/g, ' ').replace(/\\s+/g, ' ');\n\t}\n\n\tdt = matchDatePAttern(strValue, regEEEMMMDDYYYY);\n\tif (dt) {\n\t\t// E MMM d, yyyy h:m a, E MMM d, yyyy\n\t\treturn dt.replace(/august/i, 'aug').replace(/(?:nd|rd|st|th)/, ' ').replace(/[,\\.\\-\\/]/g, ' ').replace(/\\s+/g, ' ').trim().replace(/\\s(\\d{4})$/, ', $1')\n\t}\n\n\tdt = matchDatePAttern(strValue, regMMMDDYYYY);\n\tif (dt) {\n\t\t// MMM d, yyyy h:mm a, MMM d, yyyy h, MMM d, yyyy\n\t\treturn dt.replace(/[,\\.\\-\\/]/g, ' ').replace(/\\s+/g, ' ').trim().replace(/\\s(\\d{4})$/, ', $1');\n\t}\n\n\tdt = matchDatePAttern(strValue, regEEEMMMDD);\n\tif (dt) {\n\t\t// \"E MMM d HH:mm:ss z yyyy\" , \"E MMM d h:m a\" , \"E MMM d\"\n\t\treturn dt.replace(/august/i, 'aug').replace(/(?:nd|rd|st|th)/, ' ').replace(/[,\\.\\-\\/]/g, ' ').replace(/\\s+/g, ' ').trim();\n\t}\n\n\tdt = matchDatePAttern(strValue, regEEEDDMMM);\n\tif (dt) {\n\t\tif (tm) {\n\t\t\t// E ddMMM h:mm a\n\t\t\treturn dt.replace(/august/i, 'aug').replace(/(?:nd|rd|st|th)/, ' ').replace(/[,\\.\\-\\/]/g, ' ').replace(/\\s+/g, ' ').replace(/(\\d{1,2})\\s/, '$1').trim();\n\t\t} else {\n\t\t\t// E d MMM\n\t\t\treturn dt.replace(/august/i, 'aug').replace(/(?:nd|rd|st|th)/, ' ').replace(/[,\\.\\-\\/]/g, ' ').replace(/(\\d{1,2})/, ' $1 ').replace(/\\s+/g, ' ').trim();\n\t\t}\n\n\t}\n\n\tdt = matchDatePAttern(strValue, regEEEMMDDYYYY);\n\tif (dt) {\n\t\t// E, M/d/yyyy h:m a, E, M/d/yy h:m a, E, M/d/yy HH:mm, E, M/d/yy\n\t\treturn dt.replace(/[,\\.\\-\\/]/g, ' ').replace(/\\s+/g, ' ').trim().replace(/\\s/g, '/').replace(/^(.{3})\\//, '$1, ');\n\t}\n\n\tdt = matchDatePAttern(strValue, regYYYYMMDD);\n\tif (dt) {\n\t\tif (tm) {\n\t\t\t// yyyy-MM-dd'T'H:mma, yyyy-MM-dd'T'H:mm\n\t\t\treturn dt.replace(/[,\\.\\-\\/]/g, ' ').replace(/\\s+/g, ' ').trim().replace(/\\s/g, '-') + 'T';\n\t\t} else {\n\t\t\t// yyyy-MM-dd\n\t\t\treturn dt.replace(/[,\\.\\-\\/]/g, ' ').replace(/\\s+/g, ' ').trim().replace(/\\s/g, '-');\n\t\t}\n\t}\n\n\tdt = matchDatePAttern(strValue, regMMDDYYY);\n\tif (dt) {\n\t\tif (tm) {\n\t\t\t// M/d/yy h:m a\n\t\t\treturn dt.replace(/[\\.\\-\\/]/g, ' ').replace(/\\s+/g, ' ').trim().replace(/\\s/g, '/');\n\t\t} else {\n\t\t\t// \"MM-dd-yyyy\"\n\t\t\treturn dt.replace(/[\\.\\-\\/]/g, ' ').replace(/\\s+/g, ' ').trim().replace(/\\s/g, '-');\n\t\t}\n\t}\n\n\tdt = matchDatePAttern(strValue, regDDMMMYYY);\n\tif (dt) {\n\t  dt = dt.replace(/august/i, 'aug').replace(/(?:nd|rd|st|th)/, ' ').replace(/[,\\.\\-\\/]/g, ' ').replace(/\\s+/g, ' ').trim().replace(/\\s/g, '-');\n\t  var dt2 = matchDatePAttern(strValue, regDDMMMYYY_anti);\n\t  if(dt2){\n\t    dt = dt.substr(dt.indexOf('-')+1 ).replace('-', ', ');\n\t  }\n\t  // dd-MMM-yyyy h:m a, dd-MMM-yyyy\n\t  return dt;\n\t}\n\n\tdt = matchDatePAttern(strValue, regMMMDD);\n\tif (dt) {\n\t\t// MMM dd h:m a , MMM d\n\t\treturn dt.replace(/[,\\.\\-\\/]/g, ' ').replace(/(\\d{1,2})/, ' $1 ').replace(/\\s+/g, ' ').trim();\n\t}\n\n\tdt = matchDatePAttern(strValue, regDDMMM);\n\tif (dt) {\n\t\tif (tm) {\n\t\t\t// ddMMM h:m a\n\t\t\treturn dt.replace(/[,\\.\\-\\/]/g, \"\").replace(/\\s*/g, '').trim();\n\t\t} else {\n\t\t\t// MMM d\n\t\t\treturn dt.replace(/[,\\.\\-\\/]/g, ' ').replace(/(\\d{1,2})/, ' $1 ').replace(/\\s+/g, ' ').replace(/(\\d{1,2})(.+)/, '$2 $1').replace(/\\s+/g, ' ').trim();\n\t\t}\n\t}\n\n\tdt = matchDatePAttern(strValue, regMMDD);\n\tif (dt) {\n        var parts = dt.split('/');\n      \tvar monthNames = [\"\", \"Jan\", \"Feb\", \"Mar\", \"Apr\", \"May\", \"Jun\", \"Jul\",\n                          \"Aug\", \"Sep\", \"Oct\", \"Nov\", \"Dec\"];\n      \n\t\treturn monthNames[parts[0]-0] + \", \" + parts[1];\n\t}\n\n\treturn null;\n}\n\nfunction matchDatePAttern(strValue, regex) {\n\tvar m;\n\tvar oldM;\n\twhile ((m = regex.exec(strValue)) !== null) {\n\t\t// This is necessary to avoid infinite loops with zero-width matches\n\t\tif (m.index === regex.lastIndex) {\n\t\t\tregex.lastIndex++;\n\t\t}\n\t\toldM = m;\n\t}\n\tif (oldM) {\n\t\treturn oldM[0];\n\t}\n\treturn null;\n}",
+                  "glue": "",
+                  "regex": "",
+                  "nodeType": "NODE_LIST"
+                }
+              ],
+              "3": [
+                {
+                  "xpath": "//img[contains(translate(@title, 'VALID', 'valid'), ' valid ') or contains(translate(@title, 'T', 't'), ' through ') or contains(translate(@title, 'ENDS', 'ends'), ' ends ') or contains(translate(@title, 'PROMCDE', 'promcde'), ' promo code') or  contains(translate(@title, 'PURCHASE', 'purchase'), ' purchase ') or contains(translate(@title, 'OFERGD', 'ofergd'), ' offer good')]/@title",
+                  "js": "function transform(attrValue, prevValue) {\n\tif (!attrValue) {\n\t\treturn null;\n\t}\n\t// normalize values\n\tattrValue = attrValue.replace(/(at|\\@)/, ' ').replace(/[\\.,]{2}/, ',').replace(/\\s([-,\\.])\\s/, \"$1 \").replace(/\\s{2,}/, ' ');\n\n\tvar tm = getTime(attrValue);\n\tvar dt = getDate(attrValue, tm);\n\tvar output = \"\";\n\n\tif (dt) {\n\t\toutput = dt;\n\t} else {\n\t\treturn null;\n\t}\n\tif (tm) {\n\t\toutput += \" \" + tm;\n\t}\n\treturn output;\n}\nfunction getTime(strValue) {\n\tvar regTimeFull = /\\d+\\:\\d+\\s*(?:[ap]\\.?m\\.?)?\\s*(?:(?:[ecmp][sd]?t)|(?:\\s*[\\+|\\-]\\s*\\d{4})|gmt|utc)?/ig;\n\tvar regTimeHour = /\\d+\\s*(?:[ap]\\.?m\\.?)\\s*(?:(?:[ecmp][sd]?t)|(?:\\s*[\\+|\\-]\\s*\\d{4})|gmt|utc)?/ig;\n\n\tvar tm = matchDatePAttern(strValue, regTimeFull);\n\tif (tm) {\n\t\treturn tm;\n\t}\n\n\tvar tm = matchDatePAttern(strValue, regTimeHour);\n\tif (tm) {\n\t\treturn tm;\n\t}\n\treturn null;\n}\n\nfunction getDate(strValue, tm) {\n\n\t// Tue, 4 Aug 2015\n\tvar regDDMMMYYYY = /\\d{1,2}(?:nd|rd|st|th)?[,\\.\\-\\/]?\\s*(?:jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may?|jun(?:e)?|jul(?:y)?|aug(?:ust)?|sep(?:t(?:ember)?)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)[,\\.\\-\\/]?\\s*\\d{4}/ig;\n\n\t// Tue Aug 4, 2015\n\tvar regEEEMMMDDYYYY = /(?:sun(day)?|mon(day)?|tue(s(day)?)?|wed(nesday)?|thu(r(s(day)?)?)?|fri(day)?|sat(urday)?)[,\\.\\-\\/]?\\s*(?:jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may?|jun(?:e)?|jul(?:y)?|aug(?:ust)?|sep(?:t(?:ember)?)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)[,\\.\\-\\/]?\\s*\\d{1,2}(?:nd|rd|st|th)?[,\\.\\-\\/]?\\s*\\d{4}/ig;\n\n\t// Aug 4, 2015\n\tvar regMMMDDYYYY = /(?:jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may?|jun(?:e)?|jul(?:y)?|aug(?:ust)?|sep(?:t(?:ember)?)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)[,\\.\\-\\/]?\\s*\\d{1,2}(?:nd|rd|st|th)?[,\\.\\-\\/]?\\s*\\d{4}/ig;\n\n\t// Tue. Aug. 4\n\tvar regEEEMMMDD = /(?:sun(day)?|mon(day)?|tue(s(day)?)?|wed(nesday)?|thu(r(s(day)?)?)?|fri(day)?|sat(urday)?)[,\\.\\-\\/]?\\s*(?:jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may?|jun(?:e)?|jul(?:y)?|aug(?:ust)?|sep(?:t(?:ember)?)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)[,\\.\\-\\/]?\\s*\\d{1,2}(?:nd|rd|st|th)?/ig;\n\n\t// Tue 04Aug\n\tvar regEEEDDMMM = /(?:sun(day)?|mon(day)?|tue(s(day)?)?|wed(nesday)?|thu(r(s(day)?)?)?|fri(day)?|sat(urday)?)[,\\.\\-\\/]?\\s*\\d{1,2}(?:nd|rd|st|th)?[,\\.\\-]?\\s*(?:jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may?|jun(?:e)?|jul(?:y)?|aug(?:ust)?|sep(?:t(?:ember)?)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)/ig;\n\n\t// Tue-8/4/2015\n\tvar regEEEMMDDYYYY = /(?:sun(day)?|mon(day)?|tue(s(day)?)?|wed(nesday)?|thu(r(s(day)?)?)?|fri(day)?|sat(urday)?)[,\\.\\-\\/]?\\s*\\d{1,2}[,\\.\\-\\/]\\s*\\d{1,2}[,\\.\\-\\/]\\s*\\d{2,4}/ig;\n\n\t// 2015-08-04 01:11 -0700\n\tvar regYYYYMMDD = /\\d{4}[,\\.\\-\\/]\\s*\\d{1,2}[,\\.\\-\\/]\\s*\\d{1,2}/g;\n\n\t// 8-04-2015\n\t// 8/4/15 10:08 AM (10:08)\n\tvar regMMDDYYY = /(?:\\d{1,2}\\s*\\/\\s*\\d{1,2}\\s*\\/\\s*\\d{2,4})|(?:\\d{1,2}\\s*\\-\\s*\\d{1,2}\\s*\\-\\s*\\d{2,4})|(?:\\d{1,2}\\s*\\.\\s*\\d{1,2}\\s*\\.\\s*\\d{2,4})/g;\n\n\t// 04 Aug 15-Tue 10:8 AM\n\tvar regDDMMMYYY = /\\d+(?:nd|rd|st|th)?[,\\.\\-\\/]?\\s*(?:jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may?|jun(?:e)?|jul(?:y)?|aug(?:ust)?|sep(?:t(?:ember)?)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)[,\\.\\-\\/]?\\s*\\d+[,\\.\\-\\/\\s]/ig;\n\n\tvar regDDMMMYYY_anti = /(?:jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may?|jun(?:e)?|jul(?:y)?|aug(?:ust)?|sep(?:t(?:ember)?)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)[,\\.\\-\\/]?\\s\\d+(?:nd|rd|st|th)?[,\\.\\-\\/]?\\s*(?:jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may?|jun(?:e)?|jul(?:y)?|aug(?:ust)?|sep(?:t(?:ember)?)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)[,\\.\\-\\/]?\\s*\\d+[,\\.\\-\\/\\s]/ig;\n    \n\t// Aug 04 10:8 AM\n\tvar regMMMDD = /(?:jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may?|jun(?:e)?|jul(?:y)?|aug(?:ust)?|sep(?:t(?:ember)?)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)[,\\.\\-\\/]?\\s*\\d+(?:nd|rd|st|th)?[,\\.\\-\\/\\s]/ig;\n\n\t// 04Aug 10:8 AM\n\tvar regDDMMM = /\\d+(?:nd|rd|st|th)?[,\\.\\-\\/]?\\s*(?:jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may?|jun(?:e)?|jul(?:y)?|aug(?:ust)?|sep(?:t(?:ember)?)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)/ig;\n\n\t// 10/15\n\tvar regMMDD = /\\d{1,2}[\\/]\\d{1,2}/g;\n\t// var regTOMORROW = /tomorrow/ig;\n\n\tvar dt = matchDatePAttern(strValue, regDDMMMYYYY);\n\tif (dt) {\n\t\t// d MMM yyyy HH:mm:ss, d MMM yyyy h:mm a, d MMM yyyy h a, d MMM yyyy\n\t\treturn dt.replace(/august/i, 'aug').replace(/(?:nd|rd|st|th)/, ' ').replace(/[,\\.\\-\\/]/g, ' ').replace(/\\s+/g, ' ');\n\t}\n\n\tdt = matchDatePAttern(strValue, regEEEMMMDDYYYY);\n\tif (dt) {\n\t\t// E MMM d, yyyy h:m a, E MMM d, yyyy\n\t\treturn dt.replace(/august/i, 'aug').replace(/(?:nd|rd|st|th)/, ' ').replace(/[,\\.\\-\\/]/g, ' ').replace(/\\s+/g, ' ').trim().replace(/\\s(\\d{4})$/, ', $1')\n\t}\n\n\tdt = matchDatePAttern(strValue, regMMMDDYYYY);\n\tif (dt) {\n\t\t// MMM d, yyyy h:mm a, MMM d, yyyy h, MMM d, yyyy\n\t\treturn dt.replace(/[,\\.\\-\\/]/g, ' ').replace(/\\s+/g, ' ').trim().replace(/\\s(\\d{4})$/, ', $1');\n\t}\n\n\tdt = matchDatePAttern(strValue, regEEEMMMDD);\n\tif (dt) {\n\t\t// \"E MMM d HH:mm:ss z yyyy\" , \"E MMM d h:m a\" , \"E MMM d\"\n\t\treturn dt.replace(/august/i, 'aug').replace(/(?:nd|rd|st|th)/, ' ').replace(/[,\\.\\-\\/]/g, ' ').replace(/\\s+/g, ' ').trim();\n\t}\n\n\tdt = matchDatePAttern(strValue, regEEEDDMMM);\n\tif (dt) {\n\t\tif (tm) {\n\t\t\t// E ddMMM h:mm a\n\t\t\treturn dt.replace(/august/i, 'aug').replace(/(?:nd|rd|st|th)/, ' ').replace(/[,\\.\\-\\/]/g, ' ').replace(/\\s+/g, ' ').replace(/(\\d{1,2})\\s/, '$1').trim();\n\t\t} else {\n\t\t\t// E d MMM\n\t\t\treturn dt.replace(/august/i, 'aug').replace(/(?:nd|rd|st|th)/, ' ').replace(/[,\\.\\-\\/]/g, ' ').replace(/(\\d{1,2})/, ' $1 ').replace(/\\s+/g, ' ').trim();\n\t\t}\n\n\t}\n\n\tdt = matchDatePAttern(strValue, regEEEMMDDYYYY);\n\tif (dt) {\n\t\t// E, M/d/yyyy h:m a, E, M/d/yy h:m a, E, M/d/yy HH:mm, E, M/d/yy\n\t\treturn dt.replace(/[,\\.\\-\\/]/g, ' ').replace(/\\s+/g, ' ').trim().replace(/\\s/g, '/').replace(/^(.{3})\\//, '$1, ');\n\t}\n\n\tdt = matchDatePAttern(strValue, regYYYYMMDD);\n\tif (dt) {\n\t\tif (tm) {\n\t\t\t// yyyy-MM-dd'T'H:mma, yyyy-MM-dd'T'H:mm\n\t\t\treturn dt.replace(/[,\\.\\-\\/]/g, ' ').replace(/\\s+/g, ' ').trim().replace(/\\s/g, '-') + 'T';\n\t\t} else {\n\t\t\t// yyyy-MM-dd\n\t\t\treturn dt.replace(/[,\\.\\-\\/]/g, ' ').replace(/\\s+/g, ' ').trim().replace(/\\s/g, '-');\n\t\t}\n\t}\n\n\tdt = matchDatePAttern(strValue, regMMDDYYY);\n\tif (dt) {\n\t\tif (tm) {\n\t\t\t// M/d/yy h:m a\n\t\t\treturn dt.replace(/[\\.\\-\\/]/g, ' ').replace(/\\s+/g, ' ').trim().replace(/\\s/g, '/');\n\t\t} else {\n\t\t\t// \"MM-dd-yyyy\"\n\t\t\treturn dt.replace(/[\\.\\-\\/]/g, ' ').replace(/\\s+/g, ' ').trim().replace(/\\s/g, '-');\n\t\t}\n\t}\n\n\tdt = matchDatePAttern(strValue, regDDMMMYYY);\n\tif (dt) {\n\t  dt = dt.replace(/august/i, 'aug').replace(/(?:nd|rd|st|th)/, ' ').replace(/[,\\.\\-\\/]/g, ' ').replace(/\\s+/g, ' ').trim().replace(/\\s/g, '-');\n\t  var dt2 = matchDatePAttern(strValue, regDDMMMYYY_anti);\n\t  if(dt2){\n\t    dt = dt.substr(dt.indexOf('-')+1 ).replace('-', ', ');\n\t  }\n\t  // dd-MMM-yyyy h:m a, dd-MMM-yyyy\n\t  return dt;\n\t}\n\n\tdt = matchDatePAttern(strValue, regMMMDD);\n\tif (dt) {\n\t\t// MMM dd h:m a , MMM d\n\t\treturn dt.replace(/[,\\.\\-\\/]/g, ' ').replace(/(\\d{1,2})/, ' $1 ').replace(/\\s+/g, ' ').trim();\n\t}\n\n\tdt = matchDatePAttern(strValue, regDDMMM);\n\tif (dt) {\n\t\tif (tm) {\n\t\t\t// ddMMM h:m a\n\t\t\treturn dt.replace(/[,\\.\\-\\/]/g, \"\").replace(/\\s*/g, '').trim();\n\t\t} else {\n\t\t\t// MMM d\n\t\t\treturn dt.replace(/[,\\.\\-\\/]/g, ' ').replace(/(\\d{1,2})/, ' $1 ').replace(/\\s+/g, ' ').replace(/(\\d{1,2})(.+)/, '$2 $1').replace(/\\s+/g, ' ').trim();\n\t\t}\n\t}\n\n\tdt = matchDatePAttern(strValue, regMMDD);\n\tif (dt) {\n        var parts = dt.split('/');\n      \tvar monthNames = [\"\", \"Jan\", \"Feb\", \"Mar\", \"Apr\", \"May\", \"Jun\", \"Jul\",\n                          \"Aug\", \"Sep\", \"Oct\", \"Nov\", \"Dec\"];\n      \n\t\treturn monthNames[parts[0]-0] + \", \" + parts[1];\n\t}\n\n\treturn null;\n}\n\nfunction matchDatePAttern(strValue, regex) {\n\tvar m;\n\tvar oldM;\n\twhile ((m = regex.exec(strValue)) !== null) {\n\t\t// This is necessary to avoid infinite loops with zero-width matches\n\t\tif (m.index === regex.lastIndex) {\n\t\t\tregex.lastIndex++;\n\t\t}\n\t\toldM = m;\n\t}\n\tif (oldM) {\n\t\treturn oldM[0];\n\t}\n\treturn null;\n}",
+                  "glue": "",
+                  "regex": "",
+                  "nodeType": "NODE_LIST"
+                }
+              ]
+            },
+            "name": "http://schema.org/validThrough",
             "dataTypes": [
-              "Text"
+              "DateTime"
             ],
-            "minLength": -1,
-            "blackList": null,
+            "dedupCondition": {
+              "matchThreshold": ".6",
+              "stopWords": []
+            }
+          },
+          {
+            "repeating": true,
+            "locations": {
+              "1": [
+                {
+                  "xpath": "//img[contains(translate(@alt, 'OF', 'of'), \" off \") or contains(@alt, \"0%\") or contains(@alt, \"1%\") or contains(@alt, \"2%\") or contains(@alt, \"3%\") or contains(@alt, \"4%\") or contains(@alt, \"5%\") or contains(@alt, \"6%\") or contains(@alt, \"7%\") or contains(@alt, \"8%\") or contains(@alt, \"9%\") or contains(translate(@alt, 'REWAD', 'rewad'), \"reward\") or contains(translate(@alt, 'COUPN', 'coupn'), \"coupon\") or contains(translate(@alt, 'CASH', 'cash'), \"cash\") or contains(translate(@alt, 'SHIPNG', 'shipng'), \"shipping\") or contains(@alt,\"Ends Today\") or contains(@alt,\"free gift\")or contains(@alt,\"$\") and contains(@alt,\"valid\")]/parent::a[1]/@href",
+                  "js": "",
+                  "glue": "",
+                  "regex": "",
+                  "nodeType": "NODE_LIST"
+                }
+              ],
+              "2": [
+                {
+                  "xpath": "//img[contains(translate(@title, 'OF', 'of'), \" off \") or contains(@title, \"0%\") or contains(@title, \"1%\") or contains(@title, \"2%\") or contains(@title, \"3%\") or contains(@title, \"4%\") or contains(@title, \"5%\") or contains(@title, \"6%\") or contains(@title, \"7%\") or contains(@title, \"8%\") or contains(@title, \"9%\") or contains(translate(@title, 'REWAD', 'rewad'), \"reward\") or contains(translate(@title, 'COUPN', 'coupn'), \"coupon\") or contains(translate(@title, 'CASH', 'cash'), \"cash\") or contains(translate(@title, 'CODE', 'code'), \"code\") or contains(translate(@title, 'SHIPNG', 'shipng'), \"shipping\") or contains(@title,\"Ends Today\") or contains(@title,\"free gift\")or contains(@title,\"$\") and contains(@title,\"valid\")]/parent::a[1]/@href",
+                  "js": "",
+                  "glue": "",
+                  "regex": "",
+                  "nodeType": "NODE_LIST"
+                }
+              ],
+              "3": [
+                {
+                  "xpath": "//img[contains(translate(@title, 'OF', 'of'), \" off \") or contains(@title, \"0%\") or contains(@title, \"1%\") or contains(@title, \"2%\") or contains(@title, \"3%\") or contains(@title, \"4%\") or contains(@title, \"5%\") or contains(@title, \"6%\") or contains(@title, \"7%\") or contains(@title, \"8%\") or contains(@title, \"9%\") or contains(translate(@title, 'REWAD', 'rewad'), \"reward\") or contains(translate(@title, 'COUPN', 'coupn'), \"coupon\") or contains(translate(@title, 'CASH', 'cash'), \"cash\") or contains(translate(@title, 'CODE', 'code'), \"code\") or contains(translate(@title, 'SHIPNG', 'shipng'), \"shipping\") or contains(@title,\"Ends Today\") or contains(@title,\"free gift\")or contains(@title,\"$\") and contains(@title,\"valid\")]/@href",
+                  "js": "",
+                  "glue": "",
+                  "regex": "",
+                  "nodeType": "NODE_LIST"
+                }
+              ],
+              "4": [
+                {
+                  "xpath": "//a[contains(.,\"Web Browser\")]/@href",
+                  "js": "",
+                  "glue": "",
+                  "regex": "",
+                  "nodeType": "NODE_LIST"
+                }
+              ]
+            },
             "name": "http://schema.org/url",
-            "location": null,
-            "whiteList": null,
-            "listOfValidNodeTypes": null,
-            "mandatory": "true",
-            "javascript": null,
-            "maxLength": -1
+            "dataTypes": [
+              "URL"
+            ],
+            "dedupCondition": {
+              "matchThreshold": ".7",
+              "stopWords": []
+            }
+          }
+        ]
+      },
+      {
+        "id": "5aabd401-e355-41b2-9c9d-9e9ee3a1e70c",
+        "type": "http://schema.org/Organization",
+        "attributes": [
+          {
+            "repeating": true,
+            "locations": {
+              "1": [
+                {
+                  "xpath": "\"Bath & Body Works\"",
+                  "js": "",
+                  "glue": "",
+                  "regex": "",
+                  "nodeType": "STRING"
+                }
+              ]
+            },
+            "name": "http://schema.org/name",
+            "dataTypes": [
+              "Text"
+            ],
+            "dedupCondition": null
+          }
+        ]
+      },
+      {
+        "id": "a3f2df32-7b35-4c77-8513-72ac9e26648e",
+        "type": "http://schema.org/ImageObject",
+        "attributes": [
+          {
+            "repeating": true,
+            "locations": {
+              "1": [
+                {
+                  "xpath": "//img[contains(translate(@alt, 'OF', 'of'), \" off \") or contains(@alt, \"0%\") or contains(@alt, \"1%\") or contains(@alt, \"2%\") or contains(@alt, \"3%\") or contains(@alt, \"4%\") or contains(@alt, \"5%\") or contains(@alt, \"6%\") or contains(@alt, \"7%\") or contains(@alt, \"8%\") or contains(@alt, \"9%\") or contains(translate(@alt, 'REWAD', 'rewad'), \"reward\") or contains(translate(@alt, 'COUPN', 'coupn'), \"coupon\") or contains(translate(@alt, 'CASH', 'cash'), \"cash\") or contains(translate(@alt, 'SHIPNG', 'shipng'), \"shipping\") or contains(@alt,\"Ends Today\") or contains(@alt,\"free gift\")or contains(@alt,\"$\") and contains(@alt,\"valid\")]/@src",
+                  "js": "",
+                  "glue": "",
+                  "regex": "",
+                  "nodeType": "NODE_LIST"
+                }
+              ],
+              "2": [
+                {
+                  "xpath": "//img[contains(translate(@title, 'OF', 'of'), \" off \") or contains(@title, \"0%\") or contains(@title, \"1%\") or contains(@title, \"2%\") or contains(@title, \"3%\") or contains(@title, \"4%\") or contains(@title, \"5%\") or contains(@title, \"6%\") or contains(@title, \"7%\") or contains(@title, \"8%\") or contains(@title, \"9%\") or contains(translate(@title, 'REWAD', 'rewad'), \"reward\") or contains(translate(@title, 'COUPN', 'coupn'), \"coupon\") or contains(translate(@title, 'CASH', 'cash'), \"cash\") or contains(translate(@title, 'CODE', 'code'), \"code\") or contains(translate(@title, 'SHIPNG', 'shipng'), \"shipping\") or contains(@title,\"Ends Today\") or contains(@title,\"free gift\")or contains(@title,\"$\") and contains(@title,\"valid\")]/@src",
+                  "js": "",
+                  "glue": "",
+                  "regex": "",
+                  "nodeType": "NODE_LIST"
+                }
+              ],
+              "3": [
+                {
+                  "xpath": "//img[contains(translate(@alt, 'OF', 'of'), \" off \") or contains(@alt, \"0%\") or contains(@alt, \"1%\") or contains(@alt, \"2%\") or contains(@alt, \"3%\") or contains(@alt, \"4%\") or contains(@alt, \"5%\") or contains(@alt, \"6%\") or contains(@alt, \"7%\") or contains(@alt, \"8%\") or contains(@alt, \"9%\") or contains(translate(@alt, 'REWAD', 'rewad'), \"reward\") or contains(translate(@alt, 'COUPN', 'coupn'), \"coupon\") or contains(translate(@alt, 'CASH', 'cash'), \"cash\") or contains(translate(@alt, 'SHIPNG', 'shipng'), \"shipping\") or contains(@alt,\"Ends Today\") or contains(@alt,\"free gift\") ]/@src",
+                  "js": "",
+                  "glue": "",
+                  "regex": "",
+                  "nodeType": "NODE_LIST"
+                }
+              ]
+            },
+            "name": "http://schema.org/url",
+            "dataTypes": [
+              "URL"
+            ],
+            "dedupCondition": {
+              "matchThreshold": ".7",
+              "stopWords": []
+            }
+          },
+          {
+            "repeating": true,
+            "locations": {
+              "1": [
+                {
+                  "xpath": "//img[contains(translate(@alt, 'OF', 'of'), \" off \") or contains(@alt, \"0%\") or contains(@alt, \"1%\") or contains(@alt, \"2%\") or contains(@alt, \"3%\") or contains(@alt, \"4%\") or contains(@alt, \"5%\") or contains(@alt, \"6%\") or contains(@alt, \"7%\") or contains(@alt, \"8%\") or contains(@alt, \"9%\") or contains(translate(@alt, 'REWAD', 'rewad'), \"reward\") or contains(translate(@alt, 'COUPN', 'coupn'), \"coupon\") or contains(translate(@alt, 'CASH', 'cash'), \"cash\") or contains(translate(@alt, 'CODE', 'code'), \"code\") or contains(translate(@alt, 'SHIPNG', 'shipng'), \"shipping\")]/@alt",
+                  "js": "",
+                  "glue": "",
+                  "regex": "",
+                  "nodeType": "NODE_LIST"
+                }
+              ],
+              "2": [
+                {
+                  "xpath": "//img[contains(translate(@title, 'OF', 'of'), \" off \") or contains(@title, \"0%\") or contains(@title, \"1%\") or contains(@title, \"2%\") or contains(@title, \"3%\") or contains(@title, \"4%\") or contains(@title, \"5%\") or contains(@title, \"6%\") or contains(@title, \"7%\") or contains(@title, \"8%\") or contains(@title, \"9%\") or contains(translate(@title, 'REWAD', 'rewad'), \"reward\") or contains(translate(@title, 'COUPN', 'coupn'), \"coupon\") or contains(translate(@title, 'CASH', 'cash'), \"cash\") or contains(translate(@title, 'CODE', 'code'), \"code\") or contains(translate(@title, 'SHIPNG', 'shipng'), \"shipping\")]/@title",
+                  "js": "",
+                  "glue": "",
+                  "regex": "",
+                  "nodeType": "NODE_LIST"
+                }
+              ],
+              "3": [
+                {
+                  "xpath": "//img[contains(translate(@alt, 'OF', 'of'), \" off \") or contains(@alt, \"0%\") or contains(@alt, \"1%\") or contains(@alt, \"2%\") or contains(@alt, \"3%\") or contains(@alt, \"4%\") or contains(@alt, \"5%\") or contains(@alt, \"6%\") or contains(@alt, \"7%\") or contains(@alt, \"8%\") or contains(@alt, \"9%\") or contains(translate(@alt, 'REWAD', 'rewad'), \"reward\") or contains(translate(@alt, 'COUPN', 'coupn'), \"coupon\") or contains(translate(@alt, 'CASH', 'cash'), \"cash\") or contains(translate(@alt, 'SHIPNG', 'shipng'), \"shipping\") or contains(@alt,\"Ends Today\") or contains(@alt,\"free gift\") ]/@alt",
+                  "js": "",
+                  "glue": "",
+                  "regex": "",
+                  "nodeType": "NODE_LIST"
+                }
+              ]
+            },
+            "name": "http://schema.org/__test",
+            "transient": true,
+            "dataTypes": [
+              "Text"
+            ],
+            "dedupCondition": {
+              "matchThreshold": ".7",
+              "stopWords": []
+            }
           }
         ],
-        "id": "b4917ca5-ee83-4569-87c7-37feef5474aj",
-        "type": "http://schema.org/ImageObject",
-        "javascript": null
+        "attributeMatchConditions": null
+      }
+    ],
+    "edgeRules": [
+      {
+        "from": {
+          "entityRule": "f0cb28cf-6320-4046-82e9-0bf962223333",
+          "matchAttr": ""
+        },
+        "to": {
+          "entityRule": "5aabd401-e355-41b2-9c9d-9e9ee3a1e70c",
+          "matchAttr": ""
+        },
+        "predicate": "http://schema.org/broker",
+        "cardinality": "MANY_TO_ONE"
+      },
+      {
+        "from": {
+          "entityRule": "f0cb28cf-6320-4046-82e9-0bf962223333",
+          "matchAttr": "http://schema.org/description"
+        },
+        "to": {
+          "entityRule": "a3f2df32-7b35-4c77-8513-72ac9e26648e",
+          "matchAttr": "http://schema.org/__test"
+        },
+        "predicate": "http://schema.org/image",
+        "cardinality": "ONE_TO_ONE",
+        "matchThreshold": "0.8"
       }
     ]
-  }
+  },
+  "preCleanInfo": []
 }
