@@ -621,7 +621,6 @@ function transform(data){
     {oldStr: /(\*|\†|\^|®\s\.|view\s*deal|Make\s*sure\s*what\s*you|®|REDEEM\s*NOW|SIGN\s*UP\s*NOW|TELL\s*ME\s*MORE|find\s*a\s*store|join\s*now|print\s*now|add\s*to\s*cart|shop\s*now|GET\s*COUPON|GET\s*STARTED|Learn\s*more|See\s*details.|Print\s*coupon|view\s*images|over\s*[0-9,]+\s*bought|\d{15,20}\.?)/i, newStr: ""}, //Find text in the middle of the string
     {oldStr: /((\d+)(\s+|\n)(%)|(\$)(\s+|\n)(\d+))/gmi, newStr: "$1$3"},
     {oldStr: /(.*)(Now\:\s+\$\d+\.\d+)(.*)/, newStr: "$1$2"},
-    {oldStr: /Shop now/, newStr: "Hello"}
   ];
 
   for (var i = 0; i < replaceArr.length; i++) {

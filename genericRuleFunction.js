@@ -167,7 +167,7 @@ function transform(data){
     //3 for 2
     /\d\s*for\s*\d/i,
     //(half | 1/2) (price)
-    /(half|\d\/\d)\s*(price)/i,
+    /((half|\d\/\d)\s*(price))/i,
     //BOGO | AORPI | B1G3
     /(BOGO|AORPI|BOG\d|B\dG\d)/,
     // (100 | earn | get | gather | collect | your | redeem | reward | worth of)

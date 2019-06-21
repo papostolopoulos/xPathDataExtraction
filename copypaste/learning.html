@@ -6,22 +6,65 @@
 
     <style media="screen">
 
+      *{
+        padding: 0;
+        margin: 0;
+      }
+
       body{
         font-family: sans-serif;
         display: flex;
         justify-content: center;
+        line-height: 1.5em;
+        background-color: rgb(230, 230, 230);
       }
 
-      .asideTag{
-        width: 25%;
+      li{
+        margin-left: 20px;
       }
+
+      .listInList{
+        padding-left: 20px;
+      }
+
+      h1{
+        font-size: 2em;
+        text-align: center;
+        line-height: 2em;
+      }
+
+      h2{
+        font-size: 1.8em;
+        text-align: center;
+        line-height: 1.8em;
+      }
+
+      h3{
+        font-size: 1.3em;
+        padding: 15px 10px 0 10px;
+        color: rgb(102, 102, 102);
+      }
+
+      /* .asideTag{
+        width: 30%;
+      } */
 
       .mainContent{
-        width: 75%;
+        width: 70%;
+        background-color: rgb(255,255,255);
+      }
+
+      .chapter-area{
+        padding: 30px 0;
+        border-bottom: 2px solid rgb(217, 217, 217);
+      }
+
+      .article-area p, .article-area ul{
+        padding: 0 20px;
       }
 
       code{
-        white-space: pre;
+        white-space: pre-wrap;
         font-family: "Monaco";
         background-color: black;
         color: white;
@@ -31,13 +74,13 @@
       .test-area{
         background-color: rgb(217, 217, 217);
         padding-top: 10px;
-        margin-bottom: 40px;
+        margin: 20px 0;
       }
 
-      .test-area p{
+      .test-area p, .test-area ul{
         font-style: italic;
         margin: 10px 0 5px 0;
-        padding-left: 5px;
+        padding: 0 10px;
       }
 
       .code-area{
@@ -52,6 +95,7 @@
 
       .code-area span{
         color: rgb(204, 204, 204);
+        color: rgb(204, 204, 0);
       }
     </style>
   </head>
@@ -59,25 +103,32 @@
 
 
   <body>
-    <aside class="asideTag">
+    <!-- <aside class="asideTag">
 
-    </aside>
+    </aside> -->
     <section class="mainContent">
-      <div class="chapterArea">
-        <h1>Basic JavaScript knowledge for SDE</h1>
-        <p>This page includes general knowledge about JavaScript and some general techniques that relate to JavaScript for SDE.</p>
+      <div class="chapter-area">
+        <article class="article-area">
+          <h1>Basic JavaScript knowledge for SDE</h1>
+          <p>
+            This page includes general knowledge about JavaScript and some general
+            techniques that relate to JavaScript for SDE.
+          </p>
+        </article>
       </div>
 
 
-      <div class="chapterArea">
-        <h2>Primitive Data Types</h2>
-        <p>In JavaScript, primitive are the data types that are not objects.</p>
-        <ul>
-          <li>They are immutable (they never change)</li>
-          <li>They do not have any methods (but they can aquire them)</li>
-        </ul>
+      <div class="chapter-area">
+        <article class="article-area">
+          <h2>Primitive Data Types</h2>
+          <p>In JavaScript, primitive are the data types that are not objects.</p>
+          <ul>
+            <li>They are immutable (they never change)</li>
+            <li>They do not have any methods (but they can aquire them)</li>
+          </ul>
+        </article>
 
-        <article class="article-chapter">
+        <article class="article-area">
           <h3>STRINGS</h3>
             <p>Strings are holding data in a text form.</p>
             <ul>
@@ -100,7 +151,7 @@
         </article>
 
 
-        <article class="article-chapter">
+        <article class="article-area">
           <h3>NUMBERS</h3>
             <p>Unlike other probramming languages, numbers are not separated into integers and floats</p>
             <p>That is because javaScript considers all the numbers as floating points.</p>
@@ -127,7 +178,7 @@
         </article>
 
 
-        <article class="article-chapter">
+        <article class="article-area">
           <h3>BOOLEANS</h3>
           <p>Boolean is a data type that can only have two values. true or false</p>
           <p>In javaScript it is mostly used to define is a certain piece of code should
@@ -140,24 +191,26 @@
                 <code>
                   true; <span>// true</span>
                   5 &gt; 7; <span>// false</span>
-                  5 == "5"; <span>// true (truthy value. values are the same, the data types are different)</span>
-                  5 === "5"; <span>// false (false value. values are the same, the data types are different)</span>
+                  5 == "5"; <span>// true (truthy value. values are the same,
+                  // the data types are different)</span>
+                  5 === "5"; <span>// false (false value. values are the same,
+                  // the data types are different)</span>
                 </code>
-                <p>Can you think of a time that you use booleans in your code writting?</p>
-                <div class="code-area">
-                  <code>
-                    var string = "I am a string"
-                    if (string.length &lt; 14) {
-                      string = string + " and I need to grow bigger";
-                    }
-                  </code>
-                </div>
+              </div>
+              <p>Can you think of a time that you use booleans in your code writting?</p>
+              <div class="code-area">
+                <code>
+                  var string = "I am a string"
+                  if (string.length &lt; 14) {
+                    string = string + " and I need to grow bigger";
+                  }
+                </code>
               </div>
             </div>
         </article>
 
 
-        <article class="article-chapter">
+        <article class="article-area">
           <h3>NULL</h3>
             <p>null represents the intentional absence of any other value.</p>
             <p>The null data type has only one value, which is null.</p>
@@ -171,15 +224,16 @@
             <p>What will the following method return when you run it? Why?</p>
             <div class="code-area">
               <code>
-                "Hello, how are you?".match(/Goodbye/); <span>// null because the match() method</span>
-                <span>//returns null when there is no match between the string and the regular expression argument</span>
+                "Hello, how are you?".match(/Goodbye/);
+                <span>// null because the match() method returns null when there is
+                // no match between the string and the regular expression argument</span>
               </code>
             </div>
           </div>
         </article>
 
 
-        <article class="article-chapter">
+        <article class="article-area">
           <h3>UNDEFINED</h3>
             <p>undefined is used when a variable, statement or function is not assigned or does
             not return a value.</p>
@@ -198,7 +252,7 @@
 
 
 
-        <article class="chapterArea">
+        <article class="article-area">
           <h3>SYMBOL</h3>
           <p>A unique and immutable primitive value and may be used as the key
           of an Object property</p>
@@ -206,13 +260,13 @@
 
 
 
-        <article class="chapterArea">
+        <article class="article-area">
           <h3>BIGINT</h3>
           <p>A numeric primitive that can represent integers with arbitrary precision.</p>
         </article>
 
 
-        <article class="chapterArea">
+        <article class="article-area">
           <h3>GOOD SOURCES FOR READING AND PRACTICING:</h3>
           <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures" target="_blank">
             Mozilla Developer Network - Data structures
@@ -221,7 +275,7 @@
             Solo Learn. Introduction to JavaScript (requires creation of account)
           </a>
         </article>
-      </div class="chapterArea">
+      </div class="chapter-area">
 
 
 
@@ -230,19 +284,21 @@
 
 
 
-      <div class="chapterArea">
-        <h2>Operators</h2>
-        <p>
-          Operators are used in javaScript to compare values, calculate arithmetic operations
-          assign values do concatenations etc.
-        </p>
-        <p>
-          Overall, the operators are used to operate the operands (Values expressed through
-          primitive values, functions and objects).
-        </p>
+      <div class="chapter-area">
+        <article class="article-area">
+          <h2>Operators</h2>
+          <p>
+            Operators are used in javaScript to compare values, calculate arithmetic operations
+            assign values do concatenations etc.
+          </p>
+          <p>
+            Overall, the operators are used to operate the operands (Values expressed through
+            primitive values, functions and objects).
+          </p>
+        </article>
 
 
-        <article class="article-chapter">
+        <article class="article-area">
           <h3>ARITHMETIC OPERATORS</h3>
           <p>
             Arithmetic operators take the numerical values (either primitives or variables)
@@ -287,7 +343,7 @@
         </article>
 
 
-        <article class="article-chapter">
+        <article class="article-area">
           <h3>ASSIGNMENT OPERATORS</h3>
           <p>
             Assignment operators are used to assign values to the left operands
@@ -319,7 +375,7 @@
         </article>
 
 
-        <article class="article-chapter">
+        <article class="article-area">
           <h3>COMPARISON OPERATORS</h3>
           <p>
             The comparison operators compare two operands and return a boolean
@@ -337,8 +393,8 @@
                 5 == "5"; <span>//true because this is a comparison by value (truthy)</span>
                 5 === "5"; <span>//false because this is a comparison by data type and value</span>
                 +0 === -0; <span>//true</span>
-                NaN === NaN; <span>//false because NaN represents a value that inherits the Number objects</span>
-                //properties. It does not mean that is is equal to some other value that is NaN
+                NaN === NaN; <span>//false because NaN represents a value that inherits the Number objects
+                //properties. It does not mean that is is equal to some other value that is NaN</span>
                 false === false; <span>//true</span>
                 isNaN("Hello") === isNaN("Goodbye"); <span>//true</span>
                 [1, 2, 3] === [1, 2, 3]; <span>//false. Array objects are not equal. The elements of the
@@ -355,8 +411,8 @@
         </article>
 
 
-        <article class="article-chapter">
-          /<h3>BOOLEAN (LOGICAL) OPERATORS</h3>
+        <article class="article-area">
+          <h3>BOOLEAN (LOGICAL) OPERATORS</h3>
           <p>The logical operators return one of the values of the operands.</p>
           <div class="test-area">
             <p>
@@ -370,7 +426,8 @@
                 false && false; <span>// false</span>
                 true && (true || false); <span>// true</span>
                 undefined || "hello"; <span>// hello</span>
-                undefined && null; <span>// undefined because undefined is stated first as an operand.</span>
+                undefined && null; <span>// undefined because undefined is stated
+                //first as an operand.</span>
                 null && undefined; <span>// null because null is stated first as an operand.</span>
 
               <span>//In the following cases, null, undefined and "" equalize each
@@ -389,7 +446,7 @@
         </article>
 
 
-        <article class="article-chapter">
+        <article class="article-area">
           <h3>STRING OPERATORS</h3>
           <p>The string operators are used to offer concatenation to the strings.</p>
 
@@ -399,27 +456,27 @@
               What will the following values return?
             </p>
             <div class="code-area">
-              var str = "Hello!";
-              str + " So good to see you"; <span>// "Hello! So good to see you"</span>
-              str += " I am glad you are here!";
-              str; <span>// Hello! I am glad you are here!</span>
+              <code>
+                var str = "Hello!";
+                str + " So good to see you"; <span>// "Hello! So good to see you"</span>
+                str += " I am glad you are here!";
+                str; <span>// Hello! I am glad you are here!</span>
+              </code>
             </div>
           </div>
         </article>
 
 
-        <article class="article-chapter">
+        <article class="article-area">
           <h3>GOOD RESOURCES FOR READING AND PRACTICING</h3>
           <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators" target="_blank">
             Mozilla Developer Network - Expressions and Operators
           </a>
-
-          */
         </article>
 
 
 
-      </div class="chapterArea">
+      </div class="chapter-area">
 
 
 
@@ -430,21 +487,23 @@
 
 
 
-      <div class="chapterArea">
-        <h2>Objects</h2>
-        <p>
-          In javaScript, an object is a collection of properties.
-        </p>
-        <p>
-          Each object property is constituted by a name (key) and a value, or an index and a value.
-        </p>
-        <p>
-          In javaScript, everything that is not a primitive data type is an object type. That
-          includes object literals, arrays and functions.
-        </p>
+      <div class="chapter-area">
+        <article class="article-area">
+          <h2>Objects</h2>
+          <p>
+            In javaScript, an object is a collection of properties.
+          </p>
+          <p>
+            Each object property is constituted by a name (key) and a value, or an index and a value.
+          </p>
+          <p>
+            In javaScript, everything that is not a primitive data type is an object type. That
+            includes object literals, arrays and functions.
+          </p>
+        </article>
 
 
-        <article class="article-chapter">
+        <article class="article-area">
           <h3>OBJECTS (Object literals)</h3>
           <p>Objects are sets of properties and methods.</p>
           <p>Each property is constituted by a string key and a value.</p>
@@ -467,86 +526,138 @@
             <div class="code-area">
               <code>person.name; <span>// "John"</span></code>
             </div>
+            <p>Make the person object say hi.</p>
+            <div class="code-area">
+              <code>
+                person.sayHi(); <span>// "Hello, my name is John"</span>
+              </code>
+            </div>
           </div>
         </article>
 
 
-
-
-        */
-
-        //1.
-        //2.
-
-        //3. Make the person object say hi.
-        person.sayHi(); //  "Hello, my name is John"
-
-
-        /*
-        <h3>ARRAYS</h3>
-          <li>Arrays are objects that are structured in a list like setting.</li>
-          <li>Each one of the elements of the array can be called by:</li>
+        <article class="article-area">
+          <h3>ARRAYS</h3>
+          <p>Arrays are objects that are structured in a list like setting.</p>
+          <p>Each one of the elements of the array can be called by:</p>
+          <ul>
             <li>Calling the array</li>
             <li>Calling the index position of the particular element</li>
-          <li>The array's index starts from 0 and ends at the length of the array minus 1.</li>
-          <li>The elements of the array can be any javascript datatype (ex, numbers, strings,</li>
-          null, functions, booleans, other arrays, objects etc)
-        */
+            <li>The array's index starts from 0 and ends at the length of the array minus 1.</li>
+            <li>The elements of the array can be any javascript datatype (ex, numbers, strings,
+            null, functions, booleans, other arrays, objects etc)</li>
+          </ul>
 
-        //1. Create an array with five random numbers.
-        var arr = [2, 4, 6, 8, 10];
-        //2. Can you call the fourth element of the array?
-        arr[0]; //  2
-        arr[1]; //  4
-        arr[2]; //  6
-        arr[3]; //  8 (This is the fourth element of the array)
-        arr[4]; //  10
-        //3. Can you subtract the fourth element of the array from the third element of the array?
-        arr[3] <li>arr[2]; //  8 - 6</li>
-        //4. Can you create an array with two elements that are both objects?
-        var objectsArr = [
-          {name: "John", surname: "Doe", age: 33},
-          {name: "Jane", surname: "Smith", age: 44}
-        ];
-        //5. How can you call the second element of the above array?
-        objectsArr[1]; //  {name: "Jane", surname: "Smith", age: 44}
-        //6. How can you call the "age" property of the second element of the above array?
-        objectsArr[1].age; //  44
+          <div class="test-area">
+            <p>
+              Create an array with five random numbers.
+            </p>
+            <div class="code-area">
+              var arr = [2, 4, 6, 8, 10];
+            </div>
+            <p>
+              Can you call the fourth element of the array?
+            </p>
+            <div class="code-area">
+              <code>
+                arr[0]; <span>// 2</span>
+                arr[1]; <span>// 4</span>
+                arr[2]; <span>// 6</span>
+                arr[3]; <span>// 8 (This is the fourth element of the array)</span>
+                arr[4]; <span>// 10</span>
+              </code>
+            </div>
+            <p>
+              Can you subtract the fourth element of the array from the third element of the array?
+            </p>
+            <div class="code-area">
+              <code>
+                arr[3] - arr[2]; <span>//It is like calculating 8 - 6</span>
+              </code>
+            </div>
+            <p>
+              Can you create an array with two elements that are both objects?
+            </p>
+            <div class="code-area">
+              <code>
+                var objectsArr = [
+                {name: "John", surname: "Doe", age: 33},
+                {name: "Jane", surname: "Smith", age: 44}
+                ];
+              </code>
+            </div>
+            <p>
+              How can you call the second element of the above array?
+            </p>
+            <div class="code-area">
+              <code>
+                objectsArr[1]; <span>// {name: "Jane", surname: "Smith", age: 44}</span>
+              </code>
+            </div>
+            <p>
+              How can you call the "age" property of the second element of the above array?
+            </p>
+            <div class="code-area">
+              <code>
+                objectsArr[1].age; <span>// 44</span>
+              </code>
+            </div>
+          </div>
+        </article>
 
 
-        /*
-        <h3>FUNCTIONS</h3>
-          <li>Functions are types of objects that are used for the execution of proceedures</li>
-          or the calculation of values.
-          <li>When functions are inside objects, they are called "methods".</li>
-          <li>Functions can be invoked many different times with different sets of arguments.</li>
-        */
+        <article class="article-area">
+          <h3>FUNCTIONS</h3>
+            <p>Functions are types of objects that are used for the execution of proceedures
+            or the calculation of values.</p>
+            <p>When functions are inside objects, they are called "methods".</p>
+            <p>Functions can be invoked many different times with different sets of arguments.</p>
 
-        //1. Create a function that takes two string parameters, one for language and one for name.
-        //These two arguments have to be returned as a concatenated string.
-        function sayHi(lan, name){
-          return lan + name;
-        }
-        //2. Invoke the above function with different sets of arguments.
-        var enHi = "Hi, my name is ";
-        var esHi = "Hola mi nombre es ";
-        var name1 = "Rick";
-        var name2 = "Liz";
+            <div class="test-area">
+              <p>
+                Create a function that takes two string parameters, one for language and one for name.
+                These two arguments have to be returned as a concatenated string.
+              </p>
+              <div class="code-area">
+                <code>
+                  function sayHi(lan, name){
+                    return lan + name;
+                  }
+                </code>
+              </div>
+              <p>
+                Invoke the above function with different sets of arguments.
+              </p>
+              <div class="code-area">
+                var enHi = "Hi, my name is ";
+                var esHi = "Hola mi nombre es ";
+                var name1 = "Rick";
+                var name2 = "Liz";
 
-        sayHi(enHi, name2);
-        sayHi(esHi, name1);
+                sayHi(enHi, name2);
+                sayHi(esHi, name1);
+              </div>
+            </div>
+        </article>
+      </div class="chapter-area">
 
 
 
 
 
+      <div class="chapter-area">
 
-        /*
-        ------------------------------------------------------------------------
-        // TECHNIQUES OF WRITING CODE THAT IS CLEAN AND EASY TO READ <li>REVISIT - COLLABORATE ON</li>
-        ------------------------------------------------------------------------
-          <li>When we write SDE rules, there are cases where we need to change the "data" string.</li>
-          <li>A way to accomplish that is by using some built in javaScript methods like:</li>
+        <article class="article-area">
+          <h2>Methods of writing clean, reusable, collaborative js code in SDE</h2>
+          <p>
+            When we write SDE rules, there are cases where we need to modify the "data" string.
+            This happens through the creation of javaScript functions that help us transform the
+            string to a format that is more readable and more appropriate for the coupon language.
+          </p>
+          <p>
+            Some of the built in javaScript methods used to accomplish the above are:
+          </p>
+          <ul>
             <li>.replace();</li>
             <li>.match();</li>
             <li>.trim();</li>
@@ -555,314 +666,440 @@
             <li>.split();</li>
             <li>.join();</li>
             <li>.slice();</li>
-          <li>Since we get several strings from different emails, we have to capture all the</li>
-          different scenarions and do string modifications.
-          <li>Yet, adding a lot of methods in a function, combined with a lot of regular expressions</li>
-          can result in
-            <li>Difficult to manage code</li>
-            <li>Code that when revisited, it is hard to understand which logic was followed</li>
-            <li>It might be difficult for other colleagues to understand the code we have written</li>
-            <li>The code is not always performant. The same code can be written in different</li>
-            more effective ways.
-        */
-
-
-
-
-
-
-
-
-
-
-
-        /*
-        EXAMPLE
-          <li>In the following example, there is a function that has several .replace() methods</li>
-          concatenated with each other.
-          <li>Moreover, additional strings were added in the blacklist for a linkbased rule.</li>
-          <li>The way that the function and the blacklisted items are structured makes it</li>
-          difficult to revisit the code and do modifications if needed.
-          <li>Also it is more likely to have duplications or errors in the way the regular</li>
-          expressions are concatenated since there is no relationship between the different
-          strings
-        */
-        function transform(data){
-          if(data)
-            return data.replace(/Save\stime.*|Take\sthe\sstress.*/,"").replace(/.*2017\,|Online\sonly\..*/,"").replace(/(.*)(Now\:\s+\$\d+\.\d+)(.*)/,"$1$2").replace(/(\d+)(\s+|\n)(%)/gmi,"$1$3").replace(/(\$)(\s+|\n)(\d+)/gmi,"$1$3").replace(/.*(Free next|stress-free|fast and free|110%|100%).*/i,"").replace(/(Ends \d|Expires \d).*/,"");
-          else
-            return null;
-        }
-
-
-        view deal|Make sure what you|®
-        REDEEM NOW|SIGN UP NOW|TELL ME MORE|find a store|join now|print now|add to cart
-        shop now|GET COUPON|GET STARTED|Learn more|See details.|Print coupon|view images
-        over\s[0-9,]+\sbought|Thanks for signing up.*|^For members who.*|^You are receiving.*|^always\sbe\sready\sto|^[1234]$|^save now$
-        \*|.*important.*|†|\^|®\s\.|^free$|^free\sshipping$|^reward$|^110percent$|Apply\snow$|^unbeatable.*|^backed.*|^HP.*Toner$|Inkjet\sprinters$|^Chairs?$|^Thanks for.*|^Hurry.*
-        ^PRINT\.|^KEEP THE|^Monitors$|.*free\strial.*|.*and\smore\.|Order\sby.*|(use\s)?coupon\scode.*|\d{15,20}\.?|.*us again\.$|for you\.$|^Start saving$|^Coupon$
-
-
-
-
-        /*
-        ---------------------
-        ALTERNATIVE FORMAT 1
-        ---------------------
-          1. Separate each method on a different line to make it more readable
-        */
-
-        function transform(data){
-          if(data)
-            return data.replace(/Save\stime.*|Take\sthe\sstress.*/,"")
-            .replace(/.*2017\,|Online\sonly\..*/,"")
-            .replace(/.*(Free next|stress-free|fast and free|110%|100%).*/i,"")
-            .replace(/(Ends \d|Expires \d).*/,"");
-            .replace(/(.*)(Now\:\s+\$\d+\.\d+)(.*)/,"$1$2")
-            .replace(/(\d+)(\s+|\n)(%)/gmi,"$1$3")
-            .replace(/(\$)(\s+|\n)(\d+)/gmi,"$1$3")
-          else
-            return null;
-        }
-
-
-        view deal|Make sure what you|®
-        REDEEM NOW|SIGN UP NOW|TELL ME MORE|find a store|join now|print now|add to cart
-        shop now|GET COUPON|GET STARTED|Learn more|See details.|Print coupon|view images
-        over\s[0-9,]+\sbought|Thanks for signing up.*|^For members who.*|^You are receiving.*|^always\sbe\sready\sto|^[1234]$|^save now$
-        \*|.*important.*|†|\^|®\s\.|^free$|^free\sshipping$|^reward$|^110percent$|Apply\snow$|^unbeatable.*|^backed.*|^HP.*Toner$|Inkjet\sprinters$|^Chairs?$|^Thanks for.*|^Hurry.*
-        ^PRINT\.|^KEEP THE|^Monitors$|.*free\strial.*|.*and\smore\.|Order\sby.*|(use\s)?coupon\scode.*|\d{15,20}\.?|.*us again\.$|for you\.$|^Start saving$|^Coupon$
-
-
-
-        /*
-        2. Consolidate all the different regular expressions together, depending on
-        if you are modifying:
-          <li>The whole string</li>
-          <li>The beginning of the string</li>
-          <li>The end of the string</li>
-          <li>The middle of the string</li>
-        */
-
-        function transform(data){
-          if(data)
-            return data
-            .replace(/.*(Free next|stress-free|fast and free|110%|100%|free\s*trial).*/i, "")
-            .replace(/^(You\s*are\s*receiving|unbeatable|Thanks\s*for|backed).*/i, "")
-            .replace(/.*(us again\.)$/i, "")
-            .replace(/^([1234]|save now|110percent|Monitors|reward|Start saving|Coupon|HP.*Toner|Chairs?|Hurry)$/i, "")
-            .replace(/^(always\s*be\s*ready\s*to|For members who.*|PRINT\.|KEEP THE)/i, "")
-            .replace(/.*(2017\,|and\smore\.)/i, "")
-            .replace(/(Apply\s*now|for\s*you\.|Inkjet\s*printers)$/i, "")
-            .replace(/(Thanks for signing up|Ends \d|Expires \d|Order\sby|Save\s*time|Take\s*the\s*stress|Online\sonly\.|(use\s)?coupon\scode.*).*/i, "")
-            .replace(/\*|\†|\^|®\s\.|view\s*deal|Make\s*sure\s*what\s*you|®|REDEEM\s*NOW|SIGN\s*UP\s*NOW|TELL\s*ME\s*MORE|find\s*a\s*store|join\s*now|print\s*now|add\s*to\s*cart|shop\s*now|GET\s*COUPON|GET\s*STARTED|Learn\s*more|See\s*details.|Print\s*coupon|view\s*images|over\s*[0-9,]+\s*bought|\d{15,20}\.?/i, "")
-            .replace(/((\d+)(\s+|\n)(%)|(\$)(\s+|\n)(\d+))/gmi, "$1$3")
-            .replace(/(.*)(Now\:\s+\$\d+\.\d+)(.*)/gmi, "$1$2");
-
-          else
-            return null;
-        }
-
-
-        /*
-        3. Comment each method, explaining how the different regular expressions are grouped
-        This can help you with the management of the regular expressions and possible debugging
-        you might need to do.
-        Also it is more readable.
-        */
-
-        function transform(data) {
-          if (data) {
-            return data
-            .replace(/.*(Free next|stress-free|fast and free|110%|100%|free\s*trial).*/i, "") // .*Find text in the middle of string and remove all.*
-            .replace(/^(You\s*are\s*receiving|unbeatable|Thanks\s*for|backed).*/i, "")  // ^Find text in the beginning of the string and remove all.*
-            .replace(/.*(us again\.)$/i, "") // .*Find text in the end of the string and remove all$
-            .replace(/^([1234]|save now|110percent|Monitors|reward|Start saving|Coupon|HP.*Toner|Chairs?|Hurry)$/i, "") // ^Find text at the beginning and the end of the string and remove all$
-            .replace(/^(always\s*be\s*ready\s*to|For members who.*|PRINT\.|KEEP THE)/i, "") // ^Find text at the beginning of the string
-            .replace(/.*(2017\,|and\smore\.)/i, "") //.*Find text in the middle, remove everything before that
-            .replace(/(Apply\s*now|for\s*you\.|Inkjet\s*printers)$/i, "") // Find text at the end of the string$
-            .replace(/(Thanks for signing up|Ends \d|Expires \d|Order\sby|Save\s*time|Take\s*the\s*stress|Online\sonly\.|(use\s)?coupon\scode.*).*/i, "") // Find text in the middle, remove everything after that.*
-            .replace(/\*|\†|\^|®\s\.|view\s*deal|Make\s*sure\s*what\s*you|®|REDEEM\s*NOW|SIGN\s*UP\s*NOW|TELL\s*ME\s*MORE|find\s*a\s*store|join\s*now|print\s*now|add\s*to\s*cart|shop\s*now|GET\s*COUPON|GET\s*STARTED|Learn\s*more|See\s*details.|Print\s*coupon|view\s*images|over\s*[0-9,]+\s*bought|\d{15,20}\.?/i, "") // Find text in the middle of the string
-            .replace(/((\d+)(\s+|\n)(%)|(\$)(\s+|\n)(\d+))/gmi, "$1$3")
-            .replace(/(.*)(Now\:\s+\$\d+\.\d+)(.*)/, "$1$2");
-          }
-          else return null;
-
-        }
-
-
-
-
-        /*
-        4. Get rid of the "else" statement. If the data is undefined, then null will be returned anyway
-        */
-
-        function transform(data){
-          if(data)
-            return data
-            .replace(/.*(Free next|stress-free|fast and free|110%|100%|free\s*trial).*/i, "") //.*Full text removal.*
-            .replace(/^(You\s*are\s*receiving|unbeatable|Thanks\s*for|backed).*/i, "") //^Starts with something specific, ends with something<li>anything</li>
-            .replace(/.*(us again\.)$/i, "") //.*Starts with something-anything, ends with something specific$
-            .replace(/^([1234]|save now|110percent|Monitors|reward|Start saving|Coupon|HP.*Toner|Chairs?|Hurry)$/i, "") //^Starts with something specific and ends with something specific$
-            .replace(/^(always\s*be\s*ready\s*to|For members who.*|PRINT\.|KEEP THE)/i, "") //^Starts with Something specific
-            .replace(/.*(2017\,|and\smore\.)/i, "") //.*Starts with something <li>anything</li>
-            .replace(/(Apply\s*now|for\s*you\.|Inkjet\s*printers)$/i, "") //Ends with something specific$
-            .replace(/(Thanks for signing up|Ends \d|Expires \d|Order\sby|Save\s*time|Take\s*the\s*stress|Online\sonly\.|(use\s)?coupon\scode.*).*/i, "") //Ends with something-anything.*
-            .replace(/\*|\†|\^|®\s\.|view\s*deal|Make\s*sure\s*what\s*you|®|REDEEM\s*NOW|SIGN\s*UP\s*NOW|TELL\s*ME\s*MORE|find\s*a\s*store|join\s*now|print\s*now|add\s*to\s*cart|shop\s*now|GET\s*COUPON|GET\s*STARTED|Learn\s*more|See\s*details.|Print\s*coupon|view\s*images|over\s*[0-9,]+\s*bought|\d{15,20}\.?/i, "") //somewhere in the middle
-            .replace(/((\d+)(\s+|\n)(%)|(\$)(\s+|\n)(\d+))/gmi, "$1$3")
-            .replace(/(.*)(Now\:\s+\$\d+\.\d+)(.*)/, "$1$2");
-
-            return null;
-        }
-
-
-
-
-
-
-        /*
-        ABOUT THE FOR LOOP
-          <li>The for loop is a statement that can be used to iterate through the elements</li>
-          of a string or an array.
-          <li>At the beginning of the for loop, there is a numeric variable that is used as</li>
-          the index number that helps us iterate through the different elements of the array.
-        */
-
-        //1. Create a for loop that logs (prints) all the elements of an array.
-        var arr = ["Hello", "how", "are", "you?"];
-        for (var i = 0; i < arr.length; i++) {
-          console.log(arr[i]);
-        }
-        //i =  0, therefore arr[i] === arr[0] === Hello
-        //i =  1, therefore arr[i] === arr[1] === how
-        //i =  2, therefore arr[i] === arr[2] === are
-        //i =  3, therefore arr[i] === arr[3] === you?
-
-
-
-
-
-        /*
-        ------------------------
-        ALTERNATIVE FORMAT 2
-        ------------------------
-        <li>In this method, all the regular expressions within the .replace() methods become</li>
-        elements of an array.
-        <li>The array elements are invoked by using a for loop statement.</li>
-        */
-
-
-        function transform(data){
-          if(!data) return null;
-
-          var replaceArr = [
-            //FULL TEXT REMOVAL
-            /.*(Free next|stress-free|fast and free|110%|100%|free\s*trial).*/i, // .*Find text in the middle of string.*
-            /^(You\s*are\s*receiving|unbeatable|Thanks\s*for|backed).*/i, // ^Find text in the beginning of the string.*
-            /.*(us again\.)$/i, // .*Find text in the end of the string$
-            /^([1234]|save now|110percent|Monitors|reward|Start saving|Coupon|HP.*Toner|Chairs?|Hurry)$/i, // ^Find text at the beginning and the end of the string$
-
-            //PARTIAL TEXT REMOVAL
-            /^(always\s*be\s*ready\s*to|For members who.*|PRINT\.|KEEP THE)/i, // ^Find text at the beginning of the string
-            /(Apply\s*now|for\s*you\.|Inkjet\s*printers)$/i, // Find text at the end of the string$
-            /.*(2017\,|and\smore\.)/i, // .*Find text in the middle, remove everything before that
-            /(Thanks for signing up|Ends \d|Expires \d|Order\sby|Save\s*time|Take\s*the\s*stress|Online\sonly\.|(use\s)?coupon\scode).*/i, // Find text in the middle, remove everything after that.*
-            /(\*|\†|\^|®\s\.|view\s*deal|Make\s*sure\s*what\s*you|®|REDEEM\s*NOW|SIGN\s*UP\s*NOW|TELL\s*ME\s*MORE|find\s*a\s*store|join\s*now|print\s*now|add\s*to\s*cart|shop\s*now|GET\s*COUPON|GET\s*STARTED|Learn\s*more|See\s*details.|Print\s*coupon|view\s*images|over\s*[0-9,]+\s*bought|\d{15,20}\.?)/i, // Find text in the middle of the string
-          ];
-
-          //Loop through the array and remove unwanted strings
-          for (var i = 0; i < replaceArr.length; i++) {
-            data = data.replace(replaceArr[i], "");
-          }
-
-          //Reorder strings
-          data = data
-          .replace(/((\d+)(\s+|\n)(%)|(\$)(\s+|\n)(\d+))/gmi, "$1$3")
-          .replace(/(.*)(Now\:\s+\$\d+\.\d+)(.*)/, "$1$2");
-
-
-          return data;
-        }
-
-
-
-
-
-
-        /*
-        -------------------------
-        ALTERNATIVE FORMAT 3
-        -------------------------
-          <li>In this method, all the regular expressions become properties of objects.</li>
-          <li>All these different objects are elements of an array.</li>
-          <li>The .replace method is happening repeatedly inside a for loop.</li>
-          <li>The for loop is responsible for itterating through the array and calling the</li>
-          different object elements.
-
-        */
-        function transform(data){
-          if(!data) return null;
-
-          var replaceArr = [
-            //FULL TEXT REMOVAL
-            // {oldStr: /.*().*/i, newStr: ""}, // .*Find text in the middle of string.*
-            // {oldStr: /^().*/i, newStr: ""}, // ^Find text in the beginning of the string.*
-            // {oldStr: /.*()$/i, newStr: ""}, // .*Find text in the end of the string$
-            // {oldStr: /^()$/i, newStr: ""}, // ^Find text at the beginning and the end of the string$
-            //
-            // PARTIAL TEXT REMOVAL
-            // {oldStr: /^()/i, newStr: ""}, // ^Find text at the beginning of the string
-            // {oldStr: /()$/i, newStr: ""}, // Find text at the end of the string$
-            // {oldStr: /.*()/i, newStr: ""}, // .*Find text in the middle, remove everything before that
-            // {oldStr: /().*/i, newStr: ""}, // Find text in the middle, remove everything after that.*
-            // {oldStr: /()/i, newStr: ""}, // Find text in the middle of the string
-          ];
-
-          for (var i = 0; i < replaceArr.length; i++) {
-            data = data.replace(replaceArr[i].oldStr, replaceArr[i].newStr);
-          }
-
-          return data;
-        }
-
-
-
-
-        /*
-          <li>Likewise, you can create an array with different object elements.</li>
-          <li>Each element is an object that has two properties.</li>
-          <li>The first property is the one that identifies the string to be modified or removed</li>
-          <li>The second property is the string that we are going to use for replacement.</li>
-        */
-        function transform(data){
-          if(!data) return null;
-
-          var replaceArr = [
-            //FULL TEXT REMOVAL
-            {oldStr: /.*(Free next|stress-free|fast and free|110%|100%|free\s*trial).*/i, newStr: ""}, //.*Find text in the middle of string*
-            {oldStr: /^(You\s*are\s*receiving|unbeatable|Thanks\s*for|backed).*/i, newStr: ""}, //^Find text in the beginning of the string.*
-            {oldStr: /.*(us again\.)$/i, newStr: ""}, //.*Find text in the end of the string$
-            {oldStr: /^([1234]|save now|110percent|Monitors|reward|Start saving|Coupon|HP.*Toner|Chairs?|Hurry)$/i, newStr: ""}, //^Find text at the beginning and the end of the string$
-
-            //PARTIAL TEXT REMOVAL
-            {oldStr: /^(always\s*be\s*ready\s*to|For members who.*|PRINT\.|KEEP THE)/i, newStr: ""}, //^Find text at the beginning of the string
-            {oldStr: /(Apply\s*now|for\s*you\.|Inkjet\s*printers)$/i, newStr: ""}, //Find text at the end of the string
-            {oldStr: /.*(2017\,|and\smore\.)/i, newStr: ""}, //.*Find text in the middle, remove everything before that
-            {oldStr: /(Thanks for signing up|Ends \d|Expires \d|Order\sby|Save\s*time|Take\s*the\s*stress|Online\sonly\.|(use\s)?coupon\scode).*/i, newStr: ""}, //Find text in the middle, remove everything after that.*
-            {oldStr: /(\*|\†|\^|®\s\.|view\s*deal|Make\s*sure\s*what\s*you|®|REDEEM\s*NOW|SIGN\s*UP\s*NOW|TELL\s*ME\s*MORE|find\s*a\s*store|join\s*now|print\s*now|add\s*to\s*cart|shop\s*now|GET\s*COUPON|GET\s*STARTED|Learn\s*more|See\s*details.|Print\s*coupon|view\s*images|over\s*[0-9,]+\s*bought|\d{15,20}\.?)/i, newStr: ""}, //Find text in the middle of the string
-            {oldStr: /((\d+)(\s+|\n)(%)|(\$)(\s+|\n)(\d+))/gmi, newStr: "$1$3"},
-            {oldStr: /(.*)(Now\:\s+\$\d+\.\d+)(.*)/, newStr: "$1$2"},
-            {oldStr: /Shop now/, newStr: "Hello"}
-          ];
-
-          for (var i = 0; i < replaceArr.length; i++) {
-            data = data.replace(replaceArr[i].oldStr, replaceArr[i].newStr);
-          }
-
-          return data;
-        }
-
-      </div class="chapterArea">
+          </ul>
+          <p>Since we get several strings from different emails, we have to capture all the
+            different scenarions and do string modifications.</p>
+            <p>Yet, adding a lot of methods in a function, combined with a lot of regular expressions
+              can result in</p>
+              <ul>
+                <li>Difficult to manage code</li>
+                <li>Code that when revisited, it is hard to understand which logic was followed</li>
+                <li>It might be difficult for other colleagues to understand the code we have written</li>
+                <li>The code is not always performant. The same code can be written in different
+                  more effective ways.</li>
+                </ul>
+        </article>
+
+
+        <article class="article-area">
+          <h3>EXAMPLE</h3>
+          <p>
+            In the following example, there is a function that has several .replace() methods
+            concatenated with each other.
+          </p>
+          <p>
+            Moreover, additional strings were added in the blacklist for a linkbased rule.
+          </p>
+          <p>
+            The way that the function and the blacklisted items are structured makes it
+            difficult to revisit the code and do modifications if needed.
+          </p>
+          <p>
+            Also it is more likely to have duplications or errors in the way the regular
+            expressions are concatenated since there is no relationship between the different
+            strings
+          </p>
+
+          <div class="test-area">
+            <p>
+              This example has a function that was pulled from a linkbased rule and
+              all the regulare expressions that were placed in the blacklist slots. You
+              can see how the way the code is written, it is difficult to read and understand.
+            </p>
+            <div class="code-area">
+              <code>
+                function transform(data){
+                  if(data)
+                  return data.replace(/Save\stime.*|Take\sthe\sstress.*/,"").replace(/.*2017\,|Online\sonly\..*/,"").replace(/(.*)(Now\:\s+\$\d+\.\d+)(.*)/,"$1$2").replace(/(\d+)(\s+|\n)(%)/gmi,"$1$3").replace(/(\$)(\s+|\n)(\d+)/gmi,"$1$3").replace(/.*(Free next|stress-free|fast and free|110%|100%).*/i,"").replace(/(Ends \d|Expires \d).*/,"");
+                  else
+                  return null;
+
+
+                  //BLACKLISTED ITEMS
+                  view deal|Make sure what you|®
+                  REDEEM NOW|SIGN UP NOW|TELL ME MORE|find a store|join now|print now|add to cart
+                  shop now|GET COUPON|GET STARTED|Learn more|See details.|Print coupon|view images
+                  over\s[0-9,]+\sbought|Thanks for signing up.*|^For members who.*|^You are receiving.*|^always\sbe\sready\sto|^[1234]$|^save now$
+                  \*|.*important.*|†|\^|®\s\.|^free$|^free\sshipping$|^reward$|^110percent$|Apply\snow$|^unbeatable.*|^backed.*|^HP.*Toner$|Inkjet\sprinters$|^Chairs?$|^Thanks for.*|^Hurry.*
+                  ^PRINT\.|^KEEP THE|^Monitors$|.*free\strial.*|.*and\smore\.|Order\sby.*|(use\s)?coupon\scode.*|\d{15,20}\.?|.*us again\.$|for you\.$|^Start saving$|^Coupon$
+                </code>
+              </div>
+            </div>
+        </article>
+
+
+        <article class="article-area">
+          <h3>ALTERNATIVE FORMAT 1</h3>
+          <p>
+            The following example gives you an idea of writting your code in a more
+            clean and easy to manage way by:
+            <ul>
+              <li>using different lines for each method</li>
+              <li>adding comments on each line explaining what it does</li>
+              <li>
+                consolidating the regular expressions on each line based on if you
+                want to modify text from
+              </li>
+              <ul class="listInList">
+                <li>Remove the whole string</li>
+                <li>Remove string from the middle and forward</li>
+                <li>Remove string from the middle and backwards</li>
+                <li>Remove string from the beginning</li>
+                <li>Remove string from the end</li>
+                <li>Remove string from the middle</li>
+                <li>Replace string with different string</li>
+              </ul>
+            </ul>
+          </p>
+          <div class="test-area">
+            <p>1. Separate each method on a different line to make it more readable</p>
+            <div class="code-area">
+              <code>
+                function transform(data){
+                  if(data)
+                  return data.replace(/Save\stime.*|Take\sthe\sstress.*/,"")
+                  .replace(/.*2017\,|Online\sonly\..*/,"")
+                  .replace(/.*(Free next|stress-free|fast and free|110%|100%).*/i,"")
+                  .replace(/(Ends \d|Expires \d).*/,"");
+                  .replace(/(.*)(Now\:\s+\$\d+\.\d+)(.*)/,"$1$2")
+                  .replace(/(\d+)(\s+|\n)(%)/gmi,"$1$3")
+                  .replace(/(\$)(\s+|\n)(\d+)/gmi,"$1$3")
+                  else
+                  return null;
+                }
+
+                //BLACKLISTED ITEMS
+                view deal|Make sure what you|®
+                REDEEM NOW|SIGN UP NOW|TELL ME MORE|find a store|join now|print now|add to cart
+                shop now|GET COUPON|GET STARTED|Learn more|See details.|Print coupon|view images
+                over\s[0-9,]+\sbought|Thanks for signing up.*|^For members who.*|^You are receiving.*|^always\sbe\sready\sto|^[1234]$|^save now$
+                \*|.*important.*|†|\^|®\s\.|^free$|^free\sshipping$|^reward$|^110percent$|Apply\snow$|^unbeatable.*|^backed.*|^HP.*Toner$|Inkjet\sprinters$|^Chairs?$|^Thanks for.*|^Hurry.*
+                ^PRINT\.|^KEEP THE|^Monitors$|.*free\strial.*|.*and\smore\.|Order\sby.*|(use\s)?coupon\scode.*|\d{15,20}\.?|.*us again\.$|for you\.$|^Start saving$|^Coupon$
+              </code>
+            </div>
+            <p>
+              2. Consolidate all the different regular expressions together, depending on
+              if you are modifying:
+            </p>
+            <ul>
+              <li>The whole string</li>
+              <li>The beginning of the string</li>
+              <li>The end of the string</li>
+              <li>The middle of the string</li>
+            </ul>
+            <div class="code-area">
+              <code>
+                function transform(data){
+                  if(data)
+                  return data
+                  .replace(/.*(Free next|stress-free|fast and free|110%|100%|free\s*trial).*/i, "")
+                  .replace(/^(You\s*are\s*receiving|unbeatable|Thanks\s*for|backed).*/i, "")
+                  .replace(/.*(us again\.)$/i, "")
+                  .replace(/^([1234]|save now|110percent|Monitors|reward|Start saving|Coupon|HP.*Toner|Chairs?|Hurry)$/i, "")
+                  .replace(/^(always\s*be\s*ready\s*to|For members who.*|PRINT\.|KEEP THE)/i, "")
+                  .replace(/.*(2017\,|and\smore\.)/i, "")
+                  .replace(/(Apply\s*now|for\s*you\.|Inkjet\s*printers)$/i, "")
+                  .replace(/(Thanks for signing up|Ends \d|Expires \d|Order\sby|Save\s*time|Take\s*the\s*stress|Online\sonly\.|(use\s)?coupon\scode.*).*/i, "")
+                  .replace(/\*|\†|\^|®\s\.|view\s*deal|Make\s*sure\s*what\s*you|®|REDEEM\s*NOW|SIGN\s*UP\s*NOW|TELL\s*ME\s*MORE|find\s*a\s*store|join\s*now|print\s*now|add\s*to\s*cart|shop\s*now|GET\s*COUPON|GET\s*STARTED|Learn\s*more|See\s*details.|Print\s*coupon|view\s*images|over\s*[0-9,]+\s*bought|\d{15,20}\.?/i, "")
+                  .replace(/((\d+)(\s+|\n)(%)|(\$)(\s+|\n)(\d+))/gmi, "$1$3")
+                  .replace(/(.*)(Now\:\s+\$\d+\.\d+)(.*)/gmi, "$1$2");
+
+                  else
+                  return null;
+                }
+              </code>
+            </div>
+            <p>
+              3. Comment each method, explaining how the different regular expressions are grouped
+              This can help you with the management of the regular expressions and possible debugging
+              you might need to do. Also it is more readable.
+            </p>
+            <div class="test-area">
+              <div class="code-area">
+                <code>
+                  function transform(data) {
+                    if (data) {
+                      return data
+
+                      <span>// .*Find text in the middle of string and remove all.*</span>
+                      .replace(/.*(Free next|stress-free|fast and free|110%|100%|free\s*trial).*/i, "")
+
+                      <span>// ^Find text in the beginning of the string and remove all.*</span>
+                      .replace(/^(You\s*are\s*receiving|unbeatable|Thanks\s*for|backed).*/i, "")
+
+                      <span>// .*Find text in the end of the string and remove all$</span>
+                      .replace(/.*(us again\.)$/i, "")
+
+                      <span>// ^Find text at the beginning and the end of the string and remove all$</span>
+                      .replace(/^([1234]|save now|110percent|Monitors|reward|Start saving|Coupon|HP.*Toner|Chairs?|Hurry)$/i, "")
+
+                      <span>// ^Find text at the beginning of the string</span>
+                      .replace(/^(always\s*be\s*ready\s*to|For members who.*|PRINT\.|KEEP THE)/i, "")
+
+                      <span>//.*Find text in the middle, remove everything before that</span>
+                      .replace(/.*(2017\,|and\smore\.)/i, "")
+
+                      <span>// Find text at the end of the string$</span>
+                      .replace(/(Apply\s*now|for\s*you\.|Inkjet\s*printers)$/i, "")
+
+                      <span>// Find text in the middle, remove everything after that.*</span>
+                      .replace(/(Thanks for signing up|Ends \d|Expires \d|Order\sby|Save\s*time|Take\s*the\s*stress|Online\sonly\.|(use\s)?coupon\scode.*).*/i, "")
+
+                      <span>// Find text in the middle of the string</span>
+                      .replace(/\*|\†|\^|®\s\.|view\s*deal|Make\s*sure\s*what\s*you|®|REDEEM\s*NOW|SIGN\s*UP\s*NOW|TELL\s*ME\s*MORE|find\s*a\s*store|join\s*now|print\s*now|add\s*to\s*cart|shop\s*now|GET\s*COUPON|GET\s*STARTED|Learn\s*more|See\s*details.|Print\s*coupon|view\s*images|over\s*[0-9,]+\s*bought|\d{15,20}\.?/i, "")
+
+                      .replace(/((\d+)(\s+|\n)(%)|(\$)(\s+|\n)(\d+))/gmi, "$1$3")
+                      .replace(/(.*)(Now\:\s+\$\d+\.\d+)(.*)/, "$1$2");
+                    }
+                    else {
+                      return null;
+                    }
+                  }
+                </code>
+              </div>
+            </div>
+            <p>
+              4. Get rid of the "else" statement. If the data is undefined, then the if statement will
+              not be run. You just need to return null at the end of the function.
+            </p>
+            <div class="code-area">
+              <code>
+                function transform(data) {
+                  if (data) {
+                    return data
+                    <span>// .*Find text in the middle of string and remove all.*</span>
+                    .replace(/.*(Free next|stress-free|fast and free|110%|100%|free\s*trial).*/i, "")
+
+                    <span>// ^Find text in the beginning of the string and remove all.*</span>
+                    .replace(/^(You\s*are\s*receiving|unbeatable|Thanks\s*for|backed).*/i, "")
+
+                    <span>// .*Find text in the end of the string and remove all$</span>
+                    .replace(/.*(us again\.)$/i, "")
+
+                    <span>// ^Find text at the beginning and the end of the string and remove all$</span>
+                    .replace(/^([1234]|save now|110percent|Monitors|reward|Start saving|Coupon|HP.*Toner|Chairs?|Hurry)$/i, "")
+
+                    <span>// ^Find text at the beginning of the string</span>
+                    .replace(/^(always\s*be\s*ready\s*to|For members who.*|PRINT\.|KEEP THE)/i, "")
+
+                    <span>//.*Find text in the middle, remove everything before that</span>
+                    .replace(/.*(2017\,|and\smore\.)/i, "")
+
+                    <span>// Find text at the end of the string$</span>
+                    .replace(/(Apply\s*now|for\s*you\.|Inkjet\s*printers)$/i, "")
+
+                    <span>// Find text in the middle, remove everything after that.*</span>
+                    .replace(/(Thanks for signing up|Ends \d|Expires \d|Order\sby|Save\s*time|Take\s*the\s*stress|Online\sonly\.|(use\s)?coupon\scode.*).*/i, "")
+
+                    <span>// Find text in the middle of the string</span>
+                    .replace(/\*|\†|\^|®\s\.|view\s*deal|Make\s*sure\s*what\s*you|®|REDEEM\s*NOW|SIGN\s*UP\s*NOW|TELL\s*ME\s*MORE|find\s*a\s*store|join\s*now|print\s*now|add\s*to\s*cart|shop\s*now|GET\s*COUPON|GET\s*STARTED|Learn\s*more|See\s*details.|Print\s*coupon|view\s*images|over\s*[0-9,]+\s*bought|\d{15,20}\.?/i, "")
+
+                    .replace(/((\d+)(\s+|\n)(%)|(\$)(\s+|\n)(\d+))/gmi, "$1$3")
+                    .replace(/(.*)(Now\:\s+\$\d+\.\d+)(.*)/, "$1$2");
+                  }
+
+                  return null;
+                }
+              </code>
+            </div>
+          </div>
+        </article>
+
+
+        <article class="article-area">
+          <h3>INCORPORATION OF THE FOR LOOP IN THE ABOVE FUNCTION</h3>
+          <p>
+            The for loop is a statement that can be used to iterate through the elements
+            of a string or an array.
+          </p>
+          <p>
+            At the beginning of the for loop, there is a numeric variable that is used as
+            the index number that helps us iterate through the different elements of the array.
+          </p>
+
+          <div class="test-area">
+            <p>
+              Create a for loop that logs (prints) all the elements of an array.
+            </p>
+            <div class="code-area">
+              <code>
+                var arr = ["Hello", "how", "are", "you?"];
+                for (var i = 0; i &lt; arr.length; i++) {
+                  console.log(arr[i]);
+                }
+
+                <span>//In the first iteration, i =  0, therefore arr[i] === arr[0] === Hello
+                //In the second iteration, i =  1, therefore arr[i] === arr[1] === how
+                //In the third iteration, i =  2, therefore arr[i] === arr[2] === are
+                //In the fourth iteration, i =  3, therefore arr[i] === arr[3] === you?</span>
+              </code>
+            </div>
+          </div>
+        </article>
+
+
+        <article class="article-area">
+          <h3>ALTERNATIVE FORMAT 2</h3>
+          <p>
+            In this method, all the regular expressions within the .replace() methods become
+          elements of an array.The array elements are invoked by using a for loop statement.
+        </p>
+
+          <div class="text-area">
+            <p>
+              Another change in this function is that the if statement at the beginning of
+              the function is not examining if data exists but if data does not exist (!data).
+              If so, then return null at the beginning of the function and exit it.
+            </p>
+            <div class="code-area">
+              <code>
+                function transform(data){
+                  if(!data) return null;
+
+                  var replaceArr = [
+                  <span>//FULL TEXT REMOVAL</span>
+                  <span>// .*Find text in the middle of string.*</span>
+                  /.*(Free next|stress-free|fast and free|110%|100%|free\s*trial).*/i,
+                  <span>// ^Find text in the beginning of the string.*</span>
+                  /^(You\s*are\s*receiving|unbeatable|Thanks\s*for|backed).*/i,
+                  <span>// .*Find text in the end of the string$</span>
+                  /.*(us again\.)$/i,
+                  <span>// ^Find text at the beginning and the end of the string$</span>
+                  /^([1234]|save now|110percent|Monitors|reward|Start saving|Coupon|HP.*Toner|Chairs?|Hurry)$/i,
+
+                  <span>//PARTIAL TEXT REMOVAL</span>
+                  <span>// ^Find text at the beginning of the string</span>
+                  /^(always\s*be\s*ready\s*to|For members who.*|PRINT\.|KEEP THE)/i,
+                  <span>// Find text at the end of the string$</span>
+                  /(Apply\s*now|for\s*you\.|Inkjet\s*printers)$/i,
+                  <span>// .*Find text in the middle, remove everything before that</span>
+                  /.*(2017\,|and\smore\.)/i,
+                  <span>// Find text in the middle, remove everything after that.*</span>
+                  /(Thanks for signing up|Ends \d|Expires \d|Order\sby|Save\s*time|Take\s*the\s*stress|Online\sonly\.|(use\s)?coupon\scode).*/i,
+                  <span>// Find text in the middle of the string</span>
+                  /(\*|\†|\^|®\s\.|view\s*deal|Make\s*sure\s*what\s*you|®|REDEEM\s*NOW|SIGN\s*UP\s*NOW|TELL\s*ME\s*MORE|find\s*a\s*store|join\s*now|print\s*now|add\s*to\s*cart|shop\s*now|GET\s*COUPON|GET\s*STARTED|Learn\s*more|See\s*details.|Print\s*coupon|view\s*images|over\s*[0-9,]+\s*bought|\d{15,20}\.?)/i,
+                  ];
+
+
+                  <span>//Loop through the array and remove unwanted strings</span>
+                  for (var i = 0; i &lt; replaceArr.length; i++) {
+                    data = data.replace(replaceArr[i], "");
+                  }
+
+
+                  <span>//Reorder strings</span>
+                  data = data
+                  .replace(/((\d+)(\s+|\n)(%)|(\$)(\s+|\n)(\d+))/gmi, "$1$3")
+                  .replace(/(.*)(Now\:\s+\$\d+\.\d+)(.*)/, "$1$2");
+
+                  return data;
+                }
+              </code>
+            </div>
+          </div>
+        </article>
+
+
+        <article class="article-area">
+          <h3>ALTERNATIVE FORMAT 3</h3>
+          <p>The format suggested below has the following characteristics:</p>
+          <ul>
+            <li>All the regular expressions become properties of objects.</li>
+            <li>All these different objects are elements of an array.</li>
+            <li>The .replace() method is happening repeatedly inside a for loop.</li>
+            <li>The for loop is responsible for iterating through the array and calling the
+              different object elements.</li>
+            <li>
+              One of the properties in the object (oldStr) represents the regular
+              expression. The other one (newStr) represents the string that will be the
+              replacement to the regex.
+            </li>
+          </ul>
+
+            <div class="test-area">
+              <p>
+                The following code constitutes the skeleton that can be used for
+                adding the regular Expressions
+              </p>
+              <div class="code-area">
+                <code>
+                  function transform(data){
+                    if(!data) return null;
+
+                    var replaceArr = [
+                    <span>//FULL TEXT REMOVAL
+                    // {oldStr: /.*().*/i, newStr: ""}, // .*Find text in the middle of string.*
+                    // {oldStr: /^().*/i, newStr: ""}, // ^Find text in the beginning of the string.*
+                    // {oldStr: /.*()$/i, newStr: ""}, // .*Find text in the end of the string$
+                    // {oldStr: /^()$/i, newStr: ""}, // ^Find text at the beginning and the end of the string$
+                    //
+                    // PARTIAL TEXT REMOVAL
+                    // {oldStr: /^()/i, newStr: ""}, // ^Find text at the beginning of the string
+                    // {oldStr: /()$/i, newStr: ""}, // Find text at the end of the string$
+                    // {oldStr: /.*()/i, newStr: ""}, // .*Find text in the middle, remove everything before that
+                    // {oldStr: /().*/i, newStr: ""}, // Find text in the middle, remove everything after that.*
+                    // {oldStr: /()/i, newStr: ""}, // Find text in the middle of the string</span>
+                    ];
+
+                    for (var i = 0; i &lt; replaceArr.length; i++) {
+                      data = data.replace(replaceArr[i].oldStr, replaceArr[i].newStr);
+                    }
+
+                    return data;
+                  }
+                </code>
+              </div>
+              <p>
+                Having the above function as a skeleton, you can add all the regular expressions
+                you need based on the types of modifications you want to do in your strings
+              </p>
+              <div class="code-area">
+                <code>
+                  function transform(data){
+                    if(!data) return null;
+
+                    var replaceArr = [
+                    <span>//FULL TEXT REMOVAL</span>
+                    <span>//.*Find text in the middle of string*</span>
+                    {oldStr: /.*(Free next|stress-free|fast and free|110%|100%|free\s*trial).*/i, newStr: ""},
+                    <span>//^Find text in the beginning of the string.*</span>
+                    {oldStr: /^(You\s*are\s*receiving|unbeatable|Thanks\s*for|backed).*/i, newStr: ""},
+                    <span>//.*Find text in the end of the string$</span>
+                    {oldStr: /.*(us again\.)$/i, newStr: ""},
+                    <span>//^Find text at the beginning and the end of the string$</span>
+                    {oldStr: /^([1234]|save now|110percent|Monitors|reward|Start saving|Coupon|HP.*Toner|Chairs?|Hurry)$/i, newStr: ""},
+
+                    <span>//PARTIAL TEXT REMOVAL</span>
+                    <span>//^Find text at the beginning of the string</span>
+                    {oldStr: /^(always\s*be\s*ready\s*to|For members who.*|PRINT\.|KEEP THE)/i, newStr: ""},
+                    <span>//Find text at the end of the string</span>
+                    {oldStr: /(Apply\s*now|for\s*you\.|Inkjet\s*printers)$/i, newStr: ""},
+                    <span>//.*Find text in the middle, remove everything before that</span>
+                    {oldStr: /.*(2017\,|and\smore\.)/i, newStr: ""},
+                    <span>//Find text in the middle, remove everything after that.*</span>
+                    {oldStr: /(Thanks for signing up|Ends \d|Expires \d|Order\sby|Save\s*time|Take\s*the\s*stress|Online\sonly\.|(use\s)?coupon\scode).*/i, newStr: ""},
+                    <span>//Find text in the middle of the string</span>
+                    {oldStr: /(\*|\†|\^|®\s\.|view\s*deal|Make\s*sure\s*what\s*you|®|REDEEM\s*NOW|SIGN\s*UP\s*NOW|TELL\s*ME\s*MORE|find\s*a\s*store|join\s*now|print\s*now|add\s*to\s*cart|shop\s*now|GET\s*COUPON|GET\s*STARTED|Learn\s*more|See\s*details.|Print\s*coupon|view\s*images|over\s*[0-9,]+\s*bought|\d{15,20}\.?)/i, newStr: ""},
+                    <span>// Other modifications</span>
+                    {oldStr: /((\d+)(\s+|\n)(%)|(\$)(\s+|\n)(\d+))/gmi, newStr: "$1$3"},
+                    {oldStr: /(.*)(Now\:\s+\$\d+\.\d+)(.*)/, newStr: "$1$2"},
+                    ];
+
+
+                    for (var i = 0; i &lt; replaceArr.length; i++) {
+                      data = data.replace(replaceArr[i].oldStr, replaceArr[i].newStr);
+                    }
+
+                    return data;
+                  }
+                </code>
+              </div>
+            </div>
+        </article>
+
+
+
+      </div>
 
     </section>
 
