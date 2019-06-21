@@ -268,12 +268,16 @@
 
         <article class="article-area">
           <h3>GOOD SOURCES FOR READING AND PRACTICING:</h3>
-          <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures" target="_blank">
-            Mozilla Developer Network - Data structures
-          </a> <br>
-          <a href="https://www.sololearn.com/Play/JavaScript">
-            Solo Learn. Introduction to JavaScript (requires creation of account)
-          </a>
+          <p>
+            <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures" target="_blank">
+              Mozilla Developer Network - Data structures
+            </a>
+          </p>
+          <p>
+            <a href="https://www.sololearn.com/Play/JavaScript">
+              Solo Learn. Introduction to JavaScript (requires creation of account)
+            </a>
+          </p>
         </article>
       </div class="chapter-area">
 
@@ -349,17 +353,21 @@
             Assignment operators are used to assign values to the left operands
             they are handling.
           </p>
-          <ul>
-            <li><code>x = y</code> // x = y</li>
-            <li><code>x += y</code> // x = x + y</li>
-            <li><code>x -= y</code> // x = x - y</li>
-            <li><code>x *= y</code> // x = x * y</li>
-            <li><code>x /= y</code> // x = x / y</li>
-            <li><code>x %= y</code> // x = x % y (Remainder)</li>
-            <li><code>x **= y</code> </li>
-            <li><code>x **= y</code> // x = x ** y (Power of)</li>
-          </ul>
           <div class="test-area">
+            <p>You can use the asignment operators to assign values from primitive data
+            types or from functions</p>
+            <div class="code-area">
+              <code>
+                var x = 8, y = 5;
+                x = y <span>// x = 5</span>
+                x += y <span>// x = 8 + 5</span>
+                x -= y <span>// x = 8 - 5</span>
+                x *= y <span>// x = 8 * 5</span>
+                x /= y <span>// x = 8 / 5</span>
+                x %= y <span>// x = 8 % 5 (3) (Remainder)</span>
+                x **= y <span>// x = 8 ** 5 (32768) (Power of)</span>
+              </code>
+            </div>
             <p>
               How will the following assignment operators affect the operands?
             </p>
@@ -469,9 +477,11 @@
 
         <article class="article-area">
           <h3>GOOD RESOURCES FOR READING AND PRACTICING</h3>
-          <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators" target="_blank">
-            Mozilla Developer Network - Expressions and Operators
-          </a>
+          <p>
+            <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators" target="_blank">
+              Mozilla Developer Network - Expressions and Operators
+            </a>
+          </p>
         </article>
 
 
@@ -524,7 +534,9 @@
             </div>
             <p>Call the name of the person object.</p>
             <div class="code-area">
-              <code>person.name; <span>// "John"</span></code>
+              <code>
+                person.name; <span>// "John"</span>
+              </code>
             </div>
             <p>Make the person object say hi.</p>
             <div class="code-area">
@@ -553,7 +565,9 @@
               Create an array with five random numbers.
             </p>
             <div class="code-area">
-              var arr = [2, 4, 6, 8, 10];
+              <code>
+                var arr = [2, 4, 6, 8, 10];
+              </code>
             </div>
             <p>
               Can you call the fourth element of the array?
@@ -629,13 +643,15 @@
                 Invoke the above function with different sets of arguments.
               </p>
               <div class="code-area">
-                var enHi = "Hi, my name is ";
-                var esHi = "Hola mi nombre es ";
-                var name1 = "Rick";
-                var name2 = "Liz";
+                <code>
+                  var enHi = "Hi, my name is ";
+                  var esHi = "Hola mi nombre es ";
+                  var name1 = "Rick";
+                  var name2 = "Liz";
 
-                sayHi(enHi, name2);
-                sayHi(esHi, name1);
+                  sayHi(enHi, name2);
+                  sayHi(esHi, name1);
+                </code>
               </div>
             </div>
         </article>
