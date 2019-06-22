@@ -1,25 +1,11 @@
-function transform(data){
-  if(!data) return null;
-
-  var replaceArr = [
-    //FULL TEXT REMOVAL
-    {oldStr: /.*(New Winners Each Week).*/i, newStr: ""}, // .*Find text in the middle of string.*
-    {oldStr: /^(Use code).*/i, newStr: ""}, // ^Find text in the beginning of the string.*
-    // {oldStr: /.*()$/i, newStr: ""}, // .*Find text in the end of the string$
-    // {oldStr: /^()$/i, newStr: ""}, // ^Find text at the beginning and the end of the string$
-    //
-    // //PARTIAL TEXT REMOVAL
-    {oldStr: /^(Plus,)/i, newStr: ""}, // ^Find text at the beginning of the string
-    // {oldStr: /()$/i, newStr: ""}, // Find text at the end of the string$
-    // {oldStr: /.*()/i, newStr: ""}, // .*Find text in the middle, remove everything before that
-    {oldStr: /(View Online|until (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)?|use code|See (Site for )?Details|Exclusions Apply).*/i, newStr: ""}, // Find text in the middle, remove everything after that.*
-    {oldStr: /(—|\*|\||Limited time only|ends tomorrow|\d+ (Days|Hours) Only)/gi, newStr: ""}, // Find text in the middle of the string
-    {oldStr: /([a-z])([A-Z])/g, newStr: "$1 $2"},
-  ];
-
-  replaceArr.forEach(function(el){
-  	data = data.replace(el.oldStr, el.newStr).trim();
-  });
-
-  return data;
+function transform(data,node,headers){
+  if(/(today|one day) only|ends at midnight/i.exec(data)) {
+    var n = headers.get("Date");
+    var n1 = new Date(n * 1000);
+    var day1 = n1.getDate();
+    var mon1 = n1.getMonth();
+    var vt = new Date("1970", mon1, day1);
+    return vt;
+  }
+  return "";
 }

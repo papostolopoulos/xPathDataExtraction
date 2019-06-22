@@ -1135,3 +1135,23 @@ function transform(data){
 
   return data;
 }
+
+
+
+
+//FUNCTION FOR THE ROOT XPATH FOR REMOVING COUPONS THAT INCLUDE SPECIFIC TEXT
+function transform(data) {
+  var n=data.get("http://schema.org/description")[0];
+  if(n.match(/View in browser/i)) return null;
+  return data;
+}
+
+//--------------------------
+function transform(data) {
+  	if (Util.getSchemaAttributeFirstValue(data, "http://schema.org/url")
+    .match(/com\/lib\/fe9a13707564037d72\/m\/26\/2016\_BRUS\_Foot\_07z\_sale|com\/lib\/fe9a13707564037d72\/m\/28\/2016\_BRUS\_mFoot\_02z\_sale\_retina|com\/lib\/fe9a13707564037d72\/m\/37\/2017\_BRUS\_Foot\_text|com\/lib\/fe9a13707564037d72\/m\/26\/2016\_BRUS\_Head\_01z\_BRlogo\_DT|com\/lib\/fe9a13707564037d72\/m\/27\/2016\_BRUS\_Foot\_ShopFactoryStore|com\/lib\/fe9a13707564037d72\/m\/28\/2016\_BRUS\_Foot\_ShopFactoryStore\_m\_r/)) {
+        	return null;
+  	}
+
+  	return data;
+	}

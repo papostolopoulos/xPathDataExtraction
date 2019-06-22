@@ -1,702 +1,1834 @@
-<!--  --><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
- <head>
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="format-detection" content="telephone=no">
+<meta name="format-detection" content="date">
+<!--[if !mso]><!-- --><meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!--<![endif]-->
+<title></title>
+<style type="text/css">
+div, p, a, li, td {
+	-webkit-text-size-adjust: none;
+	-ms-text-size-adjust: none;
+}
+body, p {
+	margin: 0;
+	padding: 0;
+}
+table td {
+	border-collapse: collapse;
+}
+.ExternalClass {
+	width: 100%;
+}
+.ExternalClass * {
+	line-height: 110%
+}
+img {
+	-ms-interpolation-mode: bicubic;
+}
+* a {
+	color: inherit;
+	text-decoration: none;
+}
+</style>
+<!--[if !mso]><!-- -->
+<style type="text/css">
+@font-face {
+	font-family: 'Lato';
+	font-style: normal;
+	font-weight: 100;
+	src: local('Lato Hairline'), local('Lato-Hairline'), url(https://fonts.gstatic.com/s/lato/v11/eFRpvGLEW31oiexbYNx7Y_esZW2xOQ-xsNqO47m55DA.woff2) format('woff2');
+ unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+}
+</style>
+<!--<![endif]-->
+<!--[if !mso]><!-- -->
+<style type="text/css">
+@font-face {
+	font-family: 'Lato';
+	font-style: normal;
+	font-weight: 100;
+	src: local('Lato Hairline'), local('Lato-Hairline'), url(https://fonts.gstatic.com/s/lato/v11/GtRkRNTnri0g82CjKnEB0Q.woff2) format('woff2');
+unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+</style>
+<!--<![endif]-->
+<!--[if !mso]><!-- -->
+<style type="text/css">
+@font-face {
+	font-family: 'Lato';
+	font-style: normal;
+	font-weight: 400;
+	src: local('Lato Regular'), local('Lato-Regular'), url(https://fonts.gstatic.com/s/lato/v11/UyBMtLsHKBKXelqf4x7VRQ.woff2) format('woff2');
+unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+}
+</style>
+<!--<![endif]-->
+<!--[if !mso]><!-- -->
+<style type="text/css">
+@font-face {
+	font-family: 'Lato';
+	font-style: normal;
+	font-weight: 400;
+	src: local('Lato Regular'), local('Lato-Regular'), url(https://fonts.gstatic.com/s/lato/v11/1YwB1sO8YE1Lyjf12WNiUA.woff2) format('woff2');
+unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+</style>
+<!--<![endif]-->
+<!--[if !mso]><!-- -->
+<style type="text/css">
+@font-face {
+	font-family: 'Lato';
+	font-style: normal;
+	font-weight: 700;
+	src: local('Lato Bold'), local('Lato-Bold'), url(https://fonts.gstatic.com/s/lato/v11/ObQr5XYcoH0WBoUxiaYK3_Y6323mHUZFJMgTvxaG2iE.woff2) format('woff2');
+unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+}
+</style>
+<!--<![endif]-->
+<!--[if !mso]><!-- -->
+<style type="text/css">
+@font-face {
+	font-family: 'Lato';
+	font-style: normal;
+	font-weight: 700;
+	src: local('Lato Bold'), local('Lato-Bold'), url(https://fonts.gstatic.com/s/lato/v11/H2DMvhDLycM56KNuAtbJYA.woff2) format('woff2');
+unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+</style>
+<!--<![endif]-->
+<style>
+/* control text changed to links by phones */
+@media only screen {
+body {
+	width: 100%!important;
+	min-width: 100%!important;
+}
+a[x-apple-data-detectors] {
+	color: inherit!important;
+	text-decoration: none!important;
+	font-size: inherit!important;
+	font-family: inherit!important;
+	font-weight: inherit!important;
+	line-height: inherit!important;
+}
+}
+</style>
+<style>
+/* responsive version */
+@media screen and (max-device-width: 600px), screen and (max-width: 600px) {
+.navlink {
+	font-size: 18px!important;
+	line-height: 22px!important;
+	margin: 0px 5px 0px 5px!important;
+}
+.nomob, .gmailtable-nomob, .gmailblock-nomob {
+	display: none!important;
+	width: 0px!important;
+	height: 0px!important;
+}
+.mobshow {
+	display: block!important;
+	overflow: visible!important;
+	float: none!important;
+	width: 100%!important;
+	max-width: 100%!important;
+	height: auto!important;
+	max-height: inherit!important;
+}
+.logo {
+	width: 200px!important;
+	height: auto!important;
+}
+.onecolumn620 {
+	width: 100%!important;
+	height: auto!important;
+	max-width: 100%!important;
+	min-width: 100%!important;
+}
+.onecolumn {
+	width: 100%!important;
+	height: auto!important;
+	max-width: 100%!important;
+	min-width: 100%!important;
+}
+.wrapto100pc {
+	width: 100%!important;
+	height: auto!important;
+	max-width: 100%!important;
+	min-width: 100%!important;
+}
+.wrapto100pctable {
+	width: 100%!important;
+	height: auto!important;
+	max-width: 100%!important;
+	min-width: 100%!important;
+	display: table!important;
+}
+.wrapto100pcmax {
+	width: auto!important;
+	height: auto!important;
+	max-width: 100%!important;
+	display: block!important;
+}
+.height-auto {
+	height: auto!important;
+}
+.noborder {
+	border: none!important;
+}
+/* fonts */
 
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta name="viewport" content="initial-scale=1.0,width=device-width">
-  <title></title>
-  <style type="text/css">
-@media only screen and (min-width:601px) {
-        .rollover:hover > img,
-        * [summary=rollover]:hover > img{
-          max-height: 0px !important;
-        }
-        .rollover:hover > div img,
-        * [summary=rollover]:hover > div img{
-          max-height: none !important;
-        }
+.mobilealignleft {
+	text-align: left!important;
+}
+.mobilealigncenter {
+	text-align: center!important;
+}
+.mobilealignright {
+	text-align: right!important;
+}
+.mobilealignright img, .mobilealignleft img, .mobilealigncenter img {
+	display: inline-table !important;
+}
+.fontsize18 {
+	font-size: 18px!important;
+	line-height: 22px!important;
+}
+.fontsize13 {
+	font-size: 13px!important;
+	line-height: 18px!important;
+}
+.headline {
+	font-size: 18px!important;
+	line-height: 22px!important;
+}
+.ctatext {
+	font-size: 15px!important;
+}
+/* reverse stacking */
+
+.display-table {
+	display: table!important;
+	width: 100%!important;
+}
+.display-footer {
+	display: table-footer-group!important;
+	width: 100%!important;
+}
+.display-header {
+	display: table-header-group!important;
+	width: 100%!important;
+}
+.sidebar {
+	background-color: #fef8fa!important;
+	border-top: 1px solid #e52676!important;
+}
+.balancetext {
+	font-size: 14px!important;
+	line-height: 22px!important;
+}
+/*custom styles*/
+
+}
+</style>
+<style>
+/*hamburger code*/
+
+@media screen and (max-device-width:600px), screen and (max-width:600px) {
+/*button*/
+
+#menubutton {
+	float: right;
+}
+#menuhamburger {
+	display: block!important;
+	cursor: pointer;
+	-webkit-tap-highlight-color: transparent;
+	background-color: #333;
+	padding: 15px;
+	width: 20px;
+}
+#menuhamburger > b {
+	background-color: #ffffff;
+	display: block;
+	height: 4px;
+}
+#menuhamburger > b + b {
+	margin-top: 5px;
+}
+#mobilemenuwraptd {
+	padding: 20px 20px 0 20px;
+}
+/*menu on/off */
+
+#mobilemenu {
+	width: 100%;
+	max-height: 0;
+	overflow: hidden;
+	-o-transition: max-height .20s linear;
+	-moz-transition: max-height .20s linear;
+	-ms-transition: max-height .20s linear;
+	-webkit-transition: max-height .20s linear;
+	transition: max-height .20s linear;
+	background-color: #ffffff;
+}
+#menucheckbox:checked + table #mobilemenu {
+	max-height: 450px;
+}
+#mobilemenuwrap {
+	width: 100%!important;
+	height: auto!important;
+	display: table!important;
+	display: block!important;
+	width: 100%!important;
+	max-height: inherit!important;
+	overflow: visible!important;
+}
+.hamburgermoblink {
+	border-radius: 3px;
+	display: block;
+	margin-bottom: 20px;
+	padding: 10px;
+}
+}
+
+/*end of hamburger css*/
+</style>
+<style>
+/* Yahoo and apple mail reset on desktop */
+
+@media screen and (min-width: 600px) {
+.onecolumn {
+	width: 600px!important;
+	height: auto!important;
+}
+.onecolumn620 {
+	width: 620px!important;
+	height: auto!important;
+}
 }
 </style>
 <style type="text/css">
-
-    /* SUPER TEMPLATE CSS STYLES APPLIED TO ALL SENDS */
-
-    /* EMAIL CLIENT RESETS */
-    .ReadMsgBody { width: 100%; }
-    .ExternalClass { width:100%; }
-    .ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div {
-        line-height: 100%;
-    }
-    #outlook a { padding:0; }
-    p { margin: 1em 0; }
-    a img { border:0 none; }
-    h1, h2, h3, h4, h5, h6 { color: #000001 !important; }
-    h1 a, h2 a, h3 a, h4 a, h5 a, h6 a { color: #0000FF !important; }
-    table td { border-collapse: collapse; }
-    table { border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; }
-    @-ms-viewport{
-        width: device-width;
-    }
-    div[style*="margin: 16px 0"] { margin:0 !important; }
-    /*Above code is designed to remove left padding in Android Kit-Kat.
-        https://litmus.com/community/code/4194-why-is-email-not-centered-on-android-4-4*/
-
-    a[x-apple-data-detectors] {
-        color: inherit !important;
-        text-decoration: none !important;
-        font-size: inherit !important;
-        font-family: inherit !important;
-        font-weight: inherit !important;
-        line-height: inherit !important;
-    }
-    /*EMAIL CLIENT RESETS_ENDS*/
-
-
-
-    div.hideMyAmp {
-        display:none;
-        font-size:0;
-        line-height:0;
-        mso-hide:all;
-    }
-    html, body {
-        overflow-x: visible;
-        margin:0;
-        padding:0;
-        font-family:arial,sans-serif;
-    }
-
-    a:link {
-        text-decoration: none;
-        color: #000000;
-    }
-
-    a:visited {
-        text-decoration: none;
-    color: #000000;
-    }
-
-    a:hover {
-        text-decoration: none;
-        color: #000000;
-    }
-
-    a:active {
-        text-decoration: none;
-        color: #000000;
-    }
-
-    .gendernavdesktop {
-        padding-left: 10px;
-    }
-
-    table {
-        mso-table-lspace:0pt;
-        mso-table-rspace:0pt;
-        border-collapse: collapse;
-    }
-
-    /* WEB FONTS */
-    @font-face {
-    font-family: 'nexablack';
-    src:  url('https://www.fanatics.com/content/content/common/fonts/nexablack.woff') format('woff'),
-          url('https://www.fanatics.com/content/content/common/fonts/nexablack.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    }
-
-
-    .CustomFont {
-   font-family:'nexablack', Arial, sans-serif !important;
-    }
-
-
-
-    /* DESKTOP ONLY CLASSES */
-    @media only screen and (min-width:601px) {
-      .desktop-only {
-        display: block !important;
-      }
-      .mobile-only {
-        display: none !important;
-      }
-      .desktopfont {
-          font-size: 14px !important;
-          text-decoration: underline;
-      }
-    }
-
-
-    /* MOBILE CLASSES */
-    @media screen and (max-width: 600px) {
-        html, body {
-            width:100% !important;
-            overflow-x: visible !important;
-            margin: 0 auto !important;
-            min-width:320px !important;
-        }
-        table.mobile_image img {
-                width:100% !important;
-                height:auto !important;
-        }
-        table.resetwidth {
-            width: auto !important;
-        }
-        table.bottomBump {
-            margin-bottom:10px !important;
-        }
-        table.twobythree td {
-            width:50% !important;
-        }
-        div.showHiddenNav, div.mobile-show {
-            line-height:100% !important;
-            display:block !important;
-            overflow:visible !important;
-        }
-        div.showHiddenNav img, div.mobile-show img {
-            display:block !important;
-            width:auto !important;
-            height:auto !important;
-        }
-        div.showHiddenNav td, div.mobile-show td {
-            border-bottom:#dedede 1px solid !important;
-            /*display:block !important;*/
-            padding-top:20px !important;
-            padding-bottom:20px !important;
-        }
-        div.showHiddenNav td::last-of-type, div.mobile-show td::last-of-type {
-            border-bottom:#ffffff 1px solid !important;
-        }
-        td.drop,th.drop,td.stack {
-            display:block !important;
-            width:100% !important;
-        }
-        td.removePadding {
-            padding: 0 !important;
-        }
-        td.font_changeto12px {
-            font-size:12px !important;
-        }
-        td.mobile_padding {
-            padding:0 0% !important;
-        }
-        img.mobile_image {
-            width:100% !important;
-            height:auto !important;
-        }
-        .gendernav {
-            font-size:35px !important;
-            width:100% !important;
-            height:auto !important;
-            line-height:40px !important;
-            text-align:center !important;
-            padding-left:0px !important;
-        }
-
-        *.hideThis,*.hide_this,*.mobile-hidden {
-            display:none !important;
-            visibility: hidden !important;
-            font-size:0 !important;
-        }
-
-        @-ms-viewport {
-        width: 320px;
-        }
-        @viewport {
-          width: 320px;
-        }
-        .mobile-only {
-          display: block !important;
-        }
-        .desktop-only {
-          display: none !important;
-        }
-
-    }
-
-
-    /* MJML general styling */
-     #outlook a { padding: 0; }
-     .ReadMsgBody { width: 100%; }
-     .ExternalClass { width: 100%; }
-     .ExternalClass * { line-height:100%; }
-     body { margin: 0; padding: 0; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
-     table, td { border-collapse:collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
-     img { border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; }
-     p { display: block; margin: 13px 0; }
-  </style>
-  <!--[if !mso]><!-->
-  <style type="text/css">
-     @media only screen and (max-width:600px) {
-     @-ms-viewport { width:320px; }
-     @viewport { width:320px; }
-     }
-  </style>
-  <!--<![endif]-->
-  <!--[if mso]>
-  <xml>
-     <o:OfficeDocumentSettings>
-        <o:AllowPNG/>
-        <o:PixelsPerInch>96</o:PixelsPerInch>
-     </o:OfficeDocumentSettings>
-  </xml>
-  <![endif]-->
-  <!--[if lte mso 11]>
-  <style type="text/css">
-     .outlook-group-fix {
-     width:100% !important;
-     }
-  </style>
-  <![endif]-->
-  <style type="text/css">
-     @media only screen and (min-width:601px) {
-     .mj-column-per-100 { width:100%!important; }
-     .mj-column-per-100 { width:100%!important; }
-     .mj-column-per-33 { width:33.333333333333336%!important; }
-     }
+@media screen and (max-device-width:600px), screen and (max-width:600px) {
+u + .body .gmailhide {
+	display: none!important;
+}
+u + .body .gmailcenter {
+	text-align: center!important;
+}
+u + .body .gmailstack {
+	display: block!important;
+}
+u + .body .gmailblock-nomob {
+	display: block!important;
+	width: auto!important;
+	height: auto!important;
+}
+u + .body .gmailtable-nomob {
+	display: table!important;
+	width: auto!important;
+	height: auto!important;
+}
+u + .body .hamburgermoblink {
+	display: none!important;
+}
+u + .body .menubutton {
+	display: none!important;
+}
+u + .body #menuhamburger {
+	display: none!important;
+}
+u + .body #menuhamburger b {
+	display: none!important;
+}
+u + #body a {
+    color: inherit;
+    text-decoration: none;
+    font-size: inherit;
+    font-family: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+}
+}
 </style>
-<!--[if mso]>
-<style>
 
+<!--[if !mso]><!-- -->
+<style>
+@import url(https://fonts.googleapis.com/css?family=Lato);
+</style>
+<!--<![endif]-->
+
+<!--[if !mso]><!-- --><style>
+@font-face {
+font-family:'sangbleuregular';
+src: url('https://images.emlcdn.net/cdn/547/QH3c4547cf/debenhamssangbleuregularweb.woff2') format('woff2'),
+ url('https://images.emlcdn.net/cdn/547/QH3c4547cf/debenhamssangbleuregularweb.woff') format('woff');
+}
+</style>
+<!--<![endif]-->
+
+<!--[if !mso]><!-- --><style>
+@font-face {
+font-family:'sangbleumedium';
+src: url('https://images.emlcdn.net/cdn/547/QH3c4547cf/debenhamssangbleumediumweb.woff2') format('woff2'),
+ url('https://images.emlcdn.net/cdn/547/QH3c4547cf/debenhamssangbleumediumweb.woff') format('woff');
+}
+</style>
+<!--<![endif]-->
+
+<!--[if !mso]><!-- --><style>
+@font-face {
+font-family:'sangbleulight';
+src: url('https://images.emlcdn.net/cdn/547/QH3c4547cf/debenhamssangbleulightweb.woff2') format('woff2'),
+ url('https://images.emlcdn.net/cdn/547/QH3c4547cf/debenhamssangbleulightweb.woff') format('woff');
+}
+</style>
+<!--<![endif]-->
+
+<!--[if gte mso 9]>
+  <xml>
+  <o:OfficeDocumentSettings>
+    <o:AllowPNG/>
+    <o:PixelsPerInch>96</o:PixelsPerInch>
+  </o:OfficeDocumentSettings>
+  </xml>
+<![endif]-->
+
+<!--[if gte mso 15]>
+<style type="text/css" media="all">
+tr { font-size:1px; mso-line-height-alt:0; mso-margin-top-alt:1px; }
 </style>
 <![endif]-->
- </head>
- <body width="100%" style="padding:0px; margin:0px;"><style type="text/css">
+
+</head>
+<body id="body" yahoo="fix" leftmargin="0" topmargin="0" rightmargin="0" bgcolor="#ffffff" class="body"><style type="text/css">
 div.preheader
 { display: none !important; }
 </style>
-<div class="preheader" style="font-size: 1px; display: none !important;"></div>
-  <!--Content Block 'CampaignVariables' (Subject Line and Preheader)-->
+<div class="preheader" style="font-size: 1px; display: none !important;">Shop our rave-ready menswear! Plus, Converse, Vans & more for festival-friendly footwear you can rely on ></div>
+
+<!-- document level editables -->
+<!-- end document level editables -->
 
 
+    <table border="0" cellspacing="0" cellpadding="0" width="100%">
+      <tr>
+        <td align="center">
+<!--[if (gte mso 9)|(IE)]><table border="0" cellspacing="0" cellpadding="0" width="600"><tr><td align="center"><![endif]-->
 
-  <!--/Content Block 'CampaignVariables' (Subject Line and Preheader)-->
-  <table width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="" style="background-color:">
-   <tbody>
+          <table width="100%" border="0" cellspacing="0" cellpadding="0" style="max-width:600px;" class="onecolumn">
+            <tr>
+              <td align="center"><table width="95%" border="0" cellspacing="0" cellpadding="0" align="center">
+
+                  <tr>
+                    <td align="center" class="mobilealigncenter" style="color:#6a6a6a; font-family: 'sangbleuregular', Palatino, Arial, Helvetica, sans-serif; font-size:12px; line-height:18px;padding-bottom:10px;">
+Having trouble reading this email?
+                      &nbsp;<a target="_blank"  href="http://view.e.debenhams.com/?qs=03b04438093ab1afd810cb6481ba6f052517e8ff4e2fce9232c4274c784aff89dbe9c88fa20b26ab76936a78bb9ad8723ec36d44c4a66c812d2ff0425ebc6863761cf00f33d6acc73141f3b6fd1d3493ae811a68af568a80" style="color:#6a6a6a; text-decoration:underline;">
+                      View it online</a>
+</td>
+                  </tr>
+                </table></td>
+            </tr>
+          </table>
+
+          <!--[if (gte mso 9)|(IE)]></td></tr></table><![endif]-->
+</td>
+      </tr>
+    </table>
+
+    <table border="0" cellspacing="0" cellpadding="0" width="100%">
+      <tr>
+        <td align="center">
+<!--[if (gte mso 9)|(IE)]><table border="0" cellspacing="0" cellpadding="0" width="600"><tr><td align="center"><![endif]-->
+
+          <table width="100%" border="0" cellspacing="0" cellpadding="0" style="max-width:600px;" class="onecolumn">
+            <tr>
+              <td align="center"><table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+                  <tr>
+                    <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="25" alt=""></td>
+                  </tr>
+                  <tr>
+                    <td align="center"><a target="_blank"  href="http://click.e.debenhams.com/?qs=66d54ebd34be2bc5c3681deb70f45a6f678cd3ff9bf4319de7d1d2b51a1838545fab383230f0cf3fe5fb7a3bb8f98d091cf37870949ad714"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/imagesdebenhamslogo480.png" width="240" height="36" alt="Debenhams" class="logo"></a></td>
+                  </tr>
+                  <tr>
+                    <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="25" alt=""></td>
+                  </tr>
+                </table></td>
+            </tr>
+          </table>
+
+          <!--[if (gte mso 9)|(IE)]></td></tr></table><![endif]-->
+</td>
+      </tr>
+    </table>
+
+
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td style="font-size:0px">&nbsp;</td>
+        <td width="600" class="onecolumn" align="center">
+<table border="0" cellspacing="0" cellpadding="0" class="wrapto100pc">
+            <tr>
+              <td align="center" valign="top" style="font-size:0px; line-height:0px;">
+<div style="width:360px; display:inline-block; vertical-align:top;" class="wrapto100pc">
+                  <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                      <td width="33%" align="center"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <tr>
+                            <td valign="bottom" align="center" style="padding:10px 10px 0px 10px;font-size:16px; font-family: 'sangbleuregular', Arial, Helvetica, sans-serif; line-height:24px;"><a target="_blank"  style="text-decoration:none;  color:#000001; font-size:16px; line-height:24px;" class="navlink" href="http://click.e.debenhams.com/?qs=66d54ebd34be2bc5848961d507c72050ba9aa2f774666138117fcbdb2812439d4a357ed833be9cb2f606967082d1f4d08c029ee2df996e92">Men</a></td>
+                          </tr>
+                        </table></td>
+                      <td width="33%" align="center"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <tr>
+                            <td valign="bottom" align="center" style="padding:10px 10px 0px 10px;font-size:16px; font-family: 'sangbleuregular', Arial, Helvetica, sans-serif; line-height:24px;"><a target="_blank"  style="text-decoration:none;  color:#000001; font-size:16px; line-height:24px;" class="navlink" href="http://click.e.debenhams.com/?qs=66d54ebd34be2bc52403288660b9c5a1085be9a1027e53890489e6adcc5d420730b364d509fc57398943e023adbf56d8c15117659b8b587c">Women</a></td>
+                          </tr>
+                        </table></td>
+                      <td width="33%" align="center"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <tr>
+                            <td valign="bottom" align="center" style="padding:10px 10px 0px 10px;font-size:16px; font-family: 'sangbleuregular', Arial, Helvetica, sans-serif; line-height:24px;"><a target="_blank"  style="text-decoration:none;  color:#000001; font-size:16px; line-height:24px;" class="navlink" href="http://click.e.debenhams.com/?qs=66d54ebd34be2bc5dd785bc0eb71fe4f6b8c3e65873d714af6762f899b58bcc0596f59019e0156569b5e86230f5b170ab933b8b06e02dd51">Beauty</a></td>
+                          </tr>
+                        </table></td>
+                    </tr>
+                  </table>
+                </div>
+
+                <!--[if (gte mso 9)|(IE)]></td><td align="center" valign="top" style="font-size:0px; line-height:0px;"><![endif]-->
+
+                <div style="width:240px; display:inline-block; vertical-align:top;" class="wrapto100pc">
+                  <table width="100%" border="0" cellpadding="0" cellspacing="0" class="nomob">
+                    <tr>
+                      <td width="50%" align="center"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <tr>
+                            <td valign="bottom" align="center" style="padding:10px 10px 0px 10px;font-size:16px; font-family: 'sangbleuregular', Arial, Helvetica, sans-serif; line-height:24px;"><a target="_blank"  style="text-decoration:none;  color:#000001; font-size:16px; line-height:24px;" class="navlink" href="http://click.e.debenhams.com/?qs=66d54ebd34be2bc506b8e1ca797b619d8dcf82b232732a498e78c23b1becd79cd58258b1f6d98a9b707a9c7feec2351b0c78a3e0ec018af9">Home</a></td>
+                          </tr>
+                        </table></td>
+                      <td width="50%" align="center"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <tr>
+                            <td valign="bottom" align="center" style="padding:10px 10px 0px 10px;font-size:16px; font-family: 'sangbleuregular', Arial, Helvetica, sans-serif; line-height:24px;"><a target="_blank"  style="text-decoration:none;  color:#000001; font-size:16px; line-height:24px;" class="navlink" href="http://click.e.debenhams.com/?qs=66d54ebd34be2bc515be8d6f06d9d951464e28dd7d31da40f42f7d4ed0c1fe881f8caf78a64aa68602d9f13e363417444d5a2c33bd27dc0a">Kids</a></td>
+                          </tr>
+                        </table></td>
+                    </tr>
+                  </table>
+                </div>
+</td>
+            </tr>
+          </table>
+          <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+            <tr>
+              <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="10" alt=""></td>
+            </tr>
+          </table>
+</td>
+        <td style="font-size:0px">&nbsp;</td>
+      </tr>
+    </table>
+
+    <!--end module-->
+  <table border="0" cellspacing="0" cellpadding="0" width="100%">
     <tr>
-     <td valign="top" align="center">
-      <table width="600" cellspacing="0" cellpadding="0" border="0" bgcolor="">
-       <tbody>
-        <tr>
-         <td valign="top" align="center"> <!-- NORTH AMERICA FANATICS HEADER -->
+      <td align="center">
+<!--[if (gte mso 9)|(IE)]><table border="0" cellspacing="0" cellpadding="0" width="600"><tr><td align="center"><![endif]-->
 
-<table>
-    <tr>
-        <td align="left" bgcolor="#ffffff" valign="top" style="background-color:#ffffff; padding:10px 0px 0px 10px; font-family:Arial, Helvetica, sans-serif; text-align:left; font-size:12px; line-height:18px; color:#666666;" width="600" class="">
-
-            Your USA Order Ships Free
-         </td>
-    </tr>
-</table>
-
-
-<table cellpadding="0" cellspacing="0" border="0" width="600" height="125">
-    <tr>
-        <td align="left" width="400" height="125">
-
-            <a href="https://cl.exct.net/?qs=0a47f50aa7f347c9b00e7e010f30dcd9df578c80947fb73729e92c981ff54bc2303eabdfd9188f9b2cdfd84a853fe4ba9de0b9452688fd61689452b2c73a94a7" >
-            <img width="250" src="http://fanatics.frgimages.com/CompleteMailer/images/2017/fanatics-lock-up_retina.png" align="left" valign="middle" border="0" style="display:block;" />
-            </a>
-        </td>
-        <td align="left" valign="bottom" width="200" style="padding-bottom:15px">
-            <a href="https://cl.exct.net/?qs=e5fd113c55cba2eaf0f2688fb28415ab93510069518b47b403df2b4bc47af8311a04d50c242982809e71f00aec463436f070261ca4d882c0cc9475607c107392" >
-            <img src="https://fanatics.frgimages.com/CompleteMailer/images/2018/rewards_prompt_nofc_1.png" align="center" valign="bottom">
-            </a>
-
-        </td>
-    </tr>
-</table>
-
-
-
-
-<table class="mobile-hidden" cellpadding="0" cellspacing="0" border="0" width="100%">
-    <tr>
-        <td align="left" valign="top" bgcolor="#091f40">
-            <table cellpadding="0" cellspacing="0" border="0" width="100%">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" style="max-width:600px;" class="onecolumn" align="center">
+          <tr>
+            <td align="center" bgcolor="#f0f0f0"><table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
                 <tr>
-                    <td align="left" valign="top" style="padding:15px 0;">
-                        <table cellpadding="0" cellspacing="0" border="0" width="100%">
-                            <tr>
-
-                                <td width="20%" align="center" valign="top" style="font-family:arial,sans-serif;font-size:14px;color:#ffffff;font-weight:bold;line-height:100%;">
-                                    <a href="https://cl.exct.net/?qs=0a47f50aa7f347c9dde36cf93d291daabb8eb4fb2c1c70c44d3b4d58530a6108d976a092462bd1e1f71f0fd86d3794a1e940c8f1149c2c5ac90174a88e7ae766" target="_blank"  style="color:#ffffff; text-decoration:none;">
-                                    <span style="text-decoration:none;color:#ffffff;">
-                                        COLLEGE
-                                    </span></a>
-                                </td>
-
-                                <td width="16%" align="center" valign="top" style="font-family:arial,sans-serif;font-size:14px;color:#ffffff;font-weight:bold;line-height:100%;">
-                                    <a href="https://cl.exct.net/?qs=0a47f50aa7f347c9868ea3df1c369f0c66ac994f6ad4874fcf81a1663e3034febd7bc640abbc40157f0a6a95eca417d74e7b15587df2f505f2650b4146cf4c16" target="_blank"  style="color:#ffffff; text-decoration:none;">
-                                    <span style="text-decoration:none;color:#ffffff;">
-                                        MLB
-                                    </span></a>
-                                </td>
-
-                                <td width="16%" align="center" valign="top" style="font-family:arial,sans-serif;font-size:14px;color:#ffffff;font-weight:bold;line-height:100%;">
-                                    <a href="https://cl.exct.net/?qs=0a47f50aa7f347c9f42fc8fc2e957ff501aec820acadf51fe6353237f2889dae7e73ac2659da93fdd66ebf805ebdb52e97285165aabbea31ae3f4618fafd720e" target="_blank"  style="color:#ffffff; text-decoration:none;">
-                                    <span style="text-decoration:none;color:#ffffff;">
-                                        NFL
-                                    </span></a>
-                                </td>
-
-                                <td width="16%" align="center" valign="top" style="font-family:arial,sans-serif;font-size:14px;color:#ffffff;font-weight:bold;line-height:100%;">
-                                    <a href="https://cl.exct.net/?qs=0a47f50aa7f347c901b29c993a1d0ad4f452157ab4ff931d15993d8cbfb425d9874a6da7663c8eeb02d2940a9590b2c27c152cdda6e9d8b10232ba7d1fb052a1" target="_blank"  style="color:#ffffff; text-decoration:none;">
-                                    <span style="text-decoration:none;color:#ffffff;">
-                                        NBA
-                                    </span></a>
-                                </td>
-
-                                <td width="16%" align="center" valign="top" style="font-family:arial,sans-serif;font-size:14px;color:#ffffff;font-weight:bold;line-height:100%;">
-                                    <a href="https://cl.exct.net/?qs=0a47f50aa7f347c983af1e30a09c9a2baad8706e67714ece891d580905feec2610c4f39ebf37ef5066b1bddb90adddbe6e476ce3a9af796fd80ac0eae3bce123" target="_blank"  style="color:#ffffff; text-decoration:none;">
-                                    <span style="text-decoration:none;color:#ffffff;">
-                                        NHL
-                                    </span></a>
-                                </td>
-
-                                <td width="16%" align="center" valign="top" style="font-family:arial,sans-serif;font-size:14px;color:#ffffff;font-weight:bold;line-height:100%;">
-                                    <a href="https://cl.exct.net/?qs=0a47f50aa7f347c995904793ede4fcf6b2c1a8fc18e9c3e5acc944005ea8147747ae63a4cebd4c04d1508b44cbfdec2b2e43e413fbdccd2a66d7aec23dc5d6b6" target="_blank"  style="color:#ffffff; text-decoration:none;">
-                                    <span style="text-decoration:none;color:#ffffff;">
-                                        SALE
-                                    </span></a>
-                                </td>
-
-
-                            </tr>
-                        </table>
-                    </td>
+                  <td align="center"><a target="_blank"  href="http://click.e.debenhams.com/?qs=66d54ebd34be2bc5400af54fa2c5221dddcbd24a8e8b2e56d7f4d469045bbf71834d868a4ceaa1ba56571f85310a4a1a5f5ef22830310637">
+                    <img style="display:block;" border="0" src="http://debenhams.scene7.com/is/content/Debenhams/emailmarketing/REDO%2DHero%5F01.gif" width="600" class="wrapto100pc"></a></td>
                 </tr>
-            </table>
-        </td>
+              </table></td>
+          </tr>
+
+        </table>
+        <table border="0" cellspacing="0" cellpadding="0">
+
+        </table>
+
+        <!--[if (gte mso 9)|(IE)]></td></tr></table><![endif]-->
+</td>
     </tr>
-</table>
-          <!--Content Block 'PromoBanner' (Promo Banner)-->
-          <table border="0" cellpadding="0" cellspacing="0" width="100%" align="center">
-           <tbody>
+  </table>
+
+    <table border="0" cellspacing="0" cellpadding="0" width="100%" bgcolor="#ffffff">
+      <tr>
+        <td align="center" bgcolor="#ffffff">
+<!--[if (gte mso 9)|(IE)]><table border="0" cellspacing="0" cellpadding="0" width="600"><tr><td align="left"><![endif]-->
+
+          <table width="100%" border="0" cellspacing="0" cellpadding="0" style="max-width:600px;" class="onecolumn" align="center" bgcolor="#ffffff">
             <tr>
-             <td valign="top" align="left"> <a href="https://cl.exct.net/?qs=7238a97658c5e7c898c376cd251cd7879c709beec692535065181482eda9b1f48cfc84b388c9da70fb674471d8e8d84fdf1deb16b7f94407e66b4ad79e37b4e8" target="_blank" > <img src="http://fanatics.frgimages.com/CompleteMailer/images/WFT/fanatics_fsnm_tonight.jpg" class="mobile_image" style="display:block;" width="600" alt=""></a> </td>
-            </tr>
-           </tbody>
-          </table>
-          <!--/Content Block 'PromoBanner' (Promo Banner)-->
-          <!--Content Block 'ASpot' (A-Spot)-->
-          <table border="0" cellpadding="0" cellspacing="0" width="100%" align="center">
-           <tbody>
-            <tr>
-             <td valign="top" align="left"> <a href="https://cl.exct.net/?qs=7238a97658c5e7c8b5b6259e8c13f3ba2cbb33d9ce79724b872e2d4ee003fff7766f27be7067a9c71f452126f77cca881defa77616d3d8cfda77b6219e91a6f0" target="_blank" > <img src="http://fanatics.frgimages.com/CompleteMailer/images/WFT/whitebar.jpg" class="mobile_image" style="display:block;" width="600" alt=""></a> </td>
-            </tr>
-           </tbody>
-          </table>
-          <!--/Content Block 'ASpot' (A-Spot)-->
-          <!--Content Block 'FullWidthBanner' (Headline Image 1)-->
-          <!--/Content Block 'FullWidthBanner' (Headline Image 1)-->
-          <!--Content Block 'ProductGrid' (ProductGrid Module 1)-->
+              <td align="center" bgcolor="#ffffff" style="border-top: ##000000 5px solid;"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td width="10"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="10" height="1" alt=""></td>
+                    <td valign="top">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                          <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="10" alt=""></td>
+                        </tr>
+                      </table>
+                      <table width="100%" border="0" cellspacing="0" cellpadding="0" class="wrapto100pc" align="center">
+                        <tr>
+                          <td width="10"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="10" height="1" alt=""></td>
+                          <td valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                              <tr>
+                                <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="10" alt=""></td>
+                              </tr>
+                              <tr>
+                                <td width="100%"><table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+                                    <tr>
+                                      <td align="center" style="padding:0px 0px 5px 0px; color:#000001; font-size:20px; font-family: 'sangbleuregular', Palatino, Arial, Helvetica, sans-serif; line-height:28px;" class="mobilealigncenter">
+Dance until the sun comes up in our rave-ready menswear.
+                                          </td>
+                                    </tr>
+                                  </table></td>
+                              </tr>
+                            </table></td>
+                          <td width="10"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="10" height="1" alt=""></td>
+                        </tr>
+                      </table>
+                      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                          <td style="font-size:0; vertical-align:top; text-align:center;"><table width="100%" border="0" cellspacing="0" cellpadding="0" class="wrapto100pc" align="left">
+                              <tr>
+                                <td width="10"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="10" height="1" alt=""></td>
+                                <td>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+                                    <tr>
+                                      <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="10" alt=""></td>
+                                    </tr>
+                                    <tr>
+                                      <td valign="top" bgcolor="#ffffff"><table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#ffffff">
+                                          <tr>
+                                            <td valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                <tr>
+                                                  <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                      <tr>
+                                                        <td bgcolor="#000000" align="center" style="color:#ffffff; font-size:20px; font-family: 'sangbleuregular', Palatino, Arial, Helvetica, sans-serif; line-height:24px; padding:5px 5px 6px 5px; border: 1px #000000 solid; -webkit-border-radius:0; -moz-border-radius:0; border-radius:0;" class="mobilealigncenter"><a target="_blank"  style="color:#ffffff; text-decoration:none; display:block; padding:5px 5px 5px 5px;" href="http://click.e.debenhams.com/?qs=66d54ebd34be2bc5e02ee2168f23977d22cf660846e7bc9737b40e21d5fd553920bcf271a3201fa2feb654d23bf48ce98bb5a35a4ac865d3">Shop men's festival &#x203A;</a></td>
+                                                      </tr>
+                                                    </table></td>
+                                                </tr>
+                                              </table></td>
+                                          </tr>
+                                        </table></td>
+                                    </tr>
+                                    <tr>
+                                      <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="10" alt=""></td>
+                                    </tr>
+                                  </table>
+                                  <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+                                    <tr>
+                                      <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="10" alt=""></td>
+                                    </tr>
+                                    <tr>
+                                      <td valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+                                          <tr>
+                                            <td valign="top" bgcolor="#ffffff"><table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#ffffff">
+                                                <tr>
+                                                  <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                      <tr>
+                                                        <td bgcolor="#000000" align="center" style="color:#ffffff; font-size:20px; font-family: 'sangbleuregular', Palatino, Arial, Helvetica, sans-serif; line-height:24px; padding:5px 5px 6px 5px; border: 1px #000000 solid; -webkit-border-radius:0; -moz-border-radius:0; border-radius:0;" class="mobilealigncenter"><a target="_blank"  style="color:#ffffff; text-decoration:none; display:block; padding:5px 5px 5px 5px;" href="http://click.e.debenhams.com/?qs=66d54ebd34be2bc5e386f1e75cfdaf564290ac57bb3e6ffd732f737a87a7d52780b723dc618eba6636cf53b652f3a4c8ba347f91be5173d0">Shop all menswear &#x203A;</a></td>
+                                                      </tr>
+                                                    </table></td>
+                                                </tr>
+                                              </table></td>
+                                          </tr>
+                                        </table></td>
+                                    </tr>
+                                    <tr>
+                                      <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="10" alt=""></td>
+                                    </tr>
+                                  </table>
 
 
-
-
-<div style="width:600px;padding:10px 0px;">
-<table cellpadding="0" cellspacing="0" border="0" width="600" bgcolor="#ffffff">
-    <tr>
-
-
-
-
-          <!--/Content Block 'ProductGrid' (ProductGrid Module 1)-->
-          <!--Content Block 'FullWidthBanner' (Headline Image 2)-->
-          <!--/Content Block 'FullWidthBanner' (Headline Image 2)-->
-          <!--Content Block 'ProductGrid' (ProductGrid Module 2)-->
-
-
-
-
-<div style="width:600px;padding:10px 0px;">
-<table cellpadding="0" cellspacing="0" border="0" width="600" bgcolor="#ffffff">
-    <tr>
-
-
-
-
-          <!--/Content Block 'ProductGrid' (ProductGrid Module 2)-->
-          <!--Content Block 'FullWidthBanner' (Headline Image 3)-->
-          <!--/Content Block 'FullWidthBanner' (Headline Image 3)-->
-          <!--Content Block 'ProductGrid' (ProductGrid Module 3)-->
-
-
-
-
-<div style="width:600px;padding:10px 0px;">
-<table cellpadding="0" cellspacing="0" border="0" width="600" bgcolor="#ffffff">
-    <tr>
-
-
-
-
-          <!--/Content Block 'ProductGrid' (ProductGrid Module 3)-->
-          <!--Content Block 'FullWidthBanner' (F-Spot)-->
-          <!--/Content Block 'FullWidthBanner' (F-Spot)-->
-          <!--Content Block 'FullWidthBanner' (G-Spot)-->
-          <!--/Content Block 'FullWidthBanner' (G-Spot)-->
-          <!--Content Block 'FullWidthBanner' (H-Spot)-->
-          <!--/Content Block 'FullWidthBanner' (H-Spot)-->
-          <!--Content Block 'FullWidthBanner' (I-Spot)-->
-          <!--/Content Block 'FullWidthBanner' (I-Spot)-->
-          <!--Content Block 'FullWidthBanner' (J-Spot)-->
-          <!--/Content Block 'FullWidthBanner' (J-Spot)-->
-          <!--Content Block 'BottomBannersToggles' (Scheduled Content)-->
-          <!---->
-          <!--/Content Block 'BottomBannersToggles' (Scheduled Content)-->
-
-<table width="600" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff">
-    <tr>
-
-
-
-            <td valign="top" align="center">
-                <a href="https://cl.exct.net/?qs=0a47f50aa7f347c99d0fb6d8edaf3b57af2320b61940297a14d4b9c25acf2f7620b882506cff26336e8103f5300fbc0bed0f40ede06ba945e8f0ce25237b60a9" >
-                <img src="http://fanatics.frgimages.com/CompleteMailer/images/TTButtons/FA_Shop_All.jpg"></a>
-            </td>
-
-
-
-
-
-
-
-
-        <td valign="top" align="center">
-            <a href="https://cl.exct.net/?qs=0a47f50aa7f347c93e57adcfc54c6190206d5b1036ef6f56a9ee95d36aa94b686f2594ad09e96b943d1134ad7a0ee8073f9a92809d40fa6d0571a15f35ef589a" >
-            <img src="http://fanatics.frgimages.com/CompleteMailer/images/TTButtons/FA_Add_Team.jpg"></a>
-        </td>
-
-        <td valign="top" align="center">
-            <a href="https://cl.exct.net/?qs=0a47f50aa7f347c93d63c9e3abb75f9111a8a30cdc7485872d60c04557a07450cf3a21278cfc365b677913453fdc602fa62067f0e32130d1d8f406bbd52158b4" >
-            <img src="http://fanatics.frgimages.com/CompleteMailer/images/TTButtons/FA_Add_Team.jpg"></a>
-        </td>
-
-
-    </tr>
-</table><!--[if !mso]><!-- -->
-<div class="mobile-only showHiddenNav" style="overflow:hidden; line-height:0px; mso-hide:all !important;display:none; font-size:0px;">
-
-  <table cellpadding="0" cellspacing="0" border="0" width="100%">
-    <tr>
-      <td class="mobile-only showHiddenNav CustomFont" style="font-size:20px;font-weight:bold;" align="left" valign="top" >
-
-
-
-<a href="https://cl.exct.net/?qs=0a47f50aa7f347c9390dc02941d1c8e42df413663c8c9b81f40b0788970e804670a11c7fa468a14d1addc430af39fb987a4dd50aa1436f841af9dadb25767fc3" target="_blank" >
-      <table border="0" width="100%" cellspacing="0" cellpadding="0" >
-         <tr>
-            <td width="100%" align="left" background="#091f40" style="align:left; text-align:left; padding:10px 10px 10px 10px;background-color:#091f40;color:#ffffff;font-size: 24px;line-height:125%;">COLLEGE</td>
-         </tr>
-      </table>
-   </a>
-
-
-<a href="https://cl.exct.net/?qs=0a47f50aa7f347c9ab2d893ed2af90aea4bf550349b419d43052db6428f744283b9233050c9c4be1c90479883e204a9ab781d0f51b28e9b0d67edd004a92094d" target="_blank" >
-      <table border="0" width="100%" cellspacing="0" cellpadding="0" >
-         <tr>
-            <td width="100%" align="left" background="#091f40" style="align:left; text-align:left; padding:10px 10px 10px 10px;background-color:#091f40;color:#ffffff;font-size: 24px;line-height:125%;">MLB</td>
-         </tr>
-      </table>
-   </a>
-
-
-<a href="https://cl.exct.net/?qs=0a47f50aa7f347c9c4eb200a574b7c53bf22c1c66589db7cff1370e6b6239cfbaa6875e68f05d2a26bdc105282ac11cb43dc538fce1d45559de97d8e53496baf" target="_blank" >
-      <table border="0" width="100%" cellspacing="0" cellpadding="0" >
-         <tr>
-            <td width="100%" align="left" background="#091f40" style="align:left; text-align:left; padding:10px 10px 10px 10px;background-color:#091f40;color:#ffffff;font-size: 24px;line-height:125%;">NFL</td>
-         </tr>
-      </table>
-   </a>
-
-
-<a href="https://cl.exct.net/?qs=0a47f50aa7f347c9d77a10bd8a9493a2b8b851d61a8049254de822e1b82a693b8d88d38365684b69fc9ce25572aa4c09a30997ce7def03027fe72c69eb58e7f3" target="_blank" >
-      <table border="0" width="100%" cellspacing="0" cellpadding="0" >
-         <tr>
-            <td width="100%" align="left" background="#091f40" style="align:left; text-align:left; padding:10px 10px 10px 10px;background-color:#091f40;color:#ffffff;font-size: 24px;line-height:125%;">NBA</td>
-         </tr>
-      </table>
-   </a>
-
-
-<a href="https://cl.exct.net/?qs=0a47f50aa7f347c923995c49a53c8b88f54ddeb7f0e17e4899c6065da27c292506c85490d6b3dd131ac36966c2bb9591fa59f9e33f27aac558d55e329d776d26" target="_blank" >
-      <table border="0" width="100%" cellspacing="0" cellpadding="0" >
-         <tr>
-            <td width="100%" align="left" background="#091f40" style="align:left; text-align:left; padding:10px 10px 10px 10px;background-color:#091f40;color:#ffffff;font-size: 24px;line-height:125%;">NHL</td>
-         </tr>
-      </table>
-   </a>
-
-
-<a href="https://cl.exct.net/?qs=0a47f50aa7f347c9dceb8ffd10b4a4e217b51ba43aa7b14a06e243bf4f9340cd78f7479c9bdefde2d2aa1c07cf78bc4cfeec25c03de56b5c2b3a6ef158b3a6af" target="_blank" >
-      <table border="0" width="100%" cellspacing="0" cellpadding="0" >
-         <tr>
-            <td width="100%" align="left" background="#091f40" style="align:left; text-align:left; padding:10px 10px 10px 10px;background-color:#091f40;color:#ffffff;font-size: 24px;line-height:125%;">SALE</td>
-         </tr>
-      </table>
-   </a>
 
 
 </td>
-</tr>
-</table>
-</div>
-<!--<![endif]-->
+                                <td width="10"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="10" height="1" alt=""></td>
+                              </tr>
+                            </table></td>
+                        </tr>
+                      </table>
+                      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                          <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="20" alt=""></td>
+                        </tr>
+                      </table>
+</td>
+                    <td width="10"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="10" height="1" alt=""></td>
+                  </tr>
+                </table></td>
+            </tr>
+          </table>
+          <table border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="20" alt=""></td>
+            </tr>
+          </table>
 
+          <!--[if (gte mso 9)|(IE)]></td></tr></table><![endif]-->
+</td>
+      </tr>
+    </table>
 
-<table cellpadding="0" cellspacing="0" border="0" width="600" bgcolor="#ffffff" align="center" style="background-color:#ffffff;">
-  <tr> <!-- REWARDS BANNER -->
-    <td align="center" valign="top" bgcolor="#ffffff">
+  <table border="0" cellspacing="0" cellpadding="0" width="100%">
+    <tr>
+      <td align="center">
+<!--[if (gte mso 9)|(IE)]><table border="0" cellspacing="0" cellpadding="0" width="600"><tr><td align="center"><![endif]-->
 
-    <table cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td align="left" valign="top">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" style="max-width:600px;" class="onecolumn" align="center">
+          <tr>
+            <td align="center" bgcolor="#f0f0f0"><table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+                <tr>
+                  <td align="center"><a target="_blank"  href="http://click.e.debenhams.com/?qs=66d54ebd34be2bc512ba5b5a1959ba9b65cee5f90c6df523db69fa62483c05237f79dcb0f1c0c753adf8caff41381168493efbdfbde70115">
+                    <img style="display:block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/mens.jpg" width="600" height="600" class="wrapto100pc"></a></td>
+                </tr>
+              </table></td>
+          </tr>
 
+        </table>
+        <table border="0" cellspacing="0" cellpadding="0">
 
+        </table>
 
-<div style="display:none;">
-
-</div>
-
-<table width='600' border='0' cellspacing='0' cellpadding='0' align='center' style='border-collapse: collapse;'>
-	<tr>
-		<td align='center' valign='top'>
-				<a href='https://cl.exct.net/?qs=e5fd113c55cba2ea590b85bb2cee505bc8e986c718d609a2ec3ad47a63155b30cce9217f65e45eba4d3faf541c1ae54d32cd7648e421a1862ebc25eabe4fca93' target='_blank' >
-			<img src='http://fanatics.frgimages.com/CompleteMailer/images/2018/Rewards_Footer_Member_2018_Template_m_01.png' width='600' alt='' border='0' style='display:block;' />
-			</a>
-		</td>
-	</tr>
-</table>
-
-          </td>
-        </tr>
-      </table>
-
-
-
-    </td>
-  </tr>
-  <tr> <!-- SOCIAL BUTTONS -->
-    <td>
-      <table cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color:#ffffff;padding:10px 0px 10px 0px;">
-        <tr>
-          <td style="background-color:#ffffff;padding:10px 0px 10px 0px;" bgcolor="#ffffff" align="center" width="600" class="mobile-content">
-            <hr width="95%" align="center" style="height:1px; border:0; background-color:#354c6e;" />
-          </td>
-        </tr>
-        <tr>
-          <td style="background-color:#ffffff;padding:0px 0px 0px 0px;" bgcolor="#ffffff" width="600">
-            <table border="0" cellpadding="0" cellspacing="0" width="100%" height="50" style="background-color:#ffffff;display:block;padding:0px 0px 0px 0px;" bgcolor="#ffffff">
-              <tr>
-                <td width="100%" height="50" align="center">
-                  <table border="0" cellpadding="0" cellspacing="0" width="100%" height="50" style="background-color:#ffffff;display:block;padding:0px 0px 0px 0px;" bgcolor="#ffffff">
-                    <tr>
-                      <td align="center" style="background-color:#ffffff;" bgcolor="#ffffff" width="100">
-
-                        <a href="https://cl.exct.net/?qs=0a47f50aa7f347c958edd264cdcd1399769ca166bd1271ff88d051ca40f6a653fc10408dc15ce6a49746e84393f18ea86b44494a4d8481b0" >
-                        <img src="https://fanatics.frgimages.com/CompleteMailer/images/templates/2018_Template_55.png" alt="Facebook" width="39" style="display:block; margin:auto;" border="0" /></a>
-                      </td>
-                      <td align="center" style="background-color:#ffffff;" bgcolor="#ffffff" width="100">
-
-                        <a href="https://cl.exct.net/?qs=0a47f50aa7f347c9f6b4cc075f01ef45a5c0f770bb74fc8b15f6b3a677c9fddc5e58f05e8d1b35c82e83d971537587e5277ed61f6e26c57c" >
-                        <img src="https://fanatics.frgimages.com/CompleteMailer/images/templates/2018_Template_63.png" alt="Twitter" width="44" style="display:block; margin:auto;" border="0" /></a>
-                      </td>
-                      <td align="center" style="background-color:#ffffff;" bgcolor="#ffffff" width="100">
-
-                        <a href="https://cl.exct.net/?qs=0a47f50aa7f347c92d113b73bdf2bb786ab20a30ea016ed70fea0b80d084b4f813dd3ae753ebf57c1c9b864cc66ed2b946c93681d242a64c" >
-                        <img src="https://fanatics.frgimages.com/CompleteMailer/images/templates/2018_Template_65.png" alt="Google+" width="56" style="display:block; margin:auto;" border="0" /></a>
-                      </td>
-                      <td align="center" style="background-color:#ffffff;" bgcolor="#ffffff" width="100">
-
-                        <a href="https://cl.exct.net/?qs=0a47f50aa7f347c9fba90a0eb0474678a74985ae6ce3c3ca5b2d26e9f48ae5c2852fc632392e044cc14abedb70731b4acd5b149f0498cbba" >
-                        <img src="https://fanatics.frgimages.com/CompleteMailer/images/templates/2018_Template_57.png" alt="youtube" width="51" style="display:block; margin:auto;" border="0" /></a>
-                      </td>
-                      <td align="center" style="background-color:#ffffff;" bgcolor="#ffffff" width="100">
-
-                        <a href="https://cl.exct.net/?qs=0a47f50aa7f347c92899d54902ae25fdc455dcda8cd8b4a4edb77f5d3459134273c89efa2427dda6a5f1a2ea186680935a2c895e547ce397" >
-                        <img src="https://fanatics.frgimages.com/CompleteMailer/images/templates/2018_Template_59.png" alt="Pinterest" width="44" style="display:block; margin:auto;" border="0" /></a>
-                      </td>
-                      <td align="center" style="background-color:#ffffff;" bgcolor="#ffffff" width="100">
-
-                        <a href="https://cl.exct.net/?qs=0a47f50aa7f347c9192efec2126bf9d8e7054882cdcb67dbb64de96333b81e7bab54c90fea5f712d72d32753c7bfd89c5de97e7ebe29592d" >
-                        <img src="https://fanatics.frgimages.com/CompleteMailer/images/templates/2018_Template_67.png" alt="Blog" width="36" style="display:block; margin:auto;" border="0" /></a>
-                      </td>
-                    </tr>
-                  </table>
-                </td>
-              </tr>
-            </table>
-          </td>
-        </tr>
-        <tr>
-          <td style="background-color:#ffffff;padding:10px 0px 10px 0px; " bgcolor="#ffffff" align="center" width="600" class="mobile-content">
-            <hr width="95%" align="center" style="height:1px; border:0; background-color:#354c6e;" />
-          </td>
-        </tr>
-      </table>
-    </td>
-  </tr>
-
-  <tr> <!-- APP IMAGES -->
-    <td style="background-color:#ffffff;padding:10px 0px 10px 0px; " bgcolor="#ffffff" align="center" width="600" class="mobile-content">
-      <table border="0" width="100%" cellpadding="0" cellspacing="0">
-        <tr>
-          <td style="text-align:right; padding:0px 10px 0px 0px;" class="">
-
-            <a href="https://cl.exct.net/?qs=0a47f50aa7f347c9eda728eb651dc8180922eba750e2e5c12acc5a86fe90f169d20cc41967d5d995bddcd9cc4a96c7a5a44159745476946e" >
-            <img src="https://fanatics.frgimages.com/CompleteMailer/images/templates/2018_Template_90.png" alt="iOS" width="143" height="51" style="display:inline-block;" border="0" /></a>
-          </td>
-          <td style="text-align:left;padding:0px 0px 0px 10px;" class="">
-
-            <a href="https://cl.exct.net/?qs=0a47f50aa7f347c9b1be0decdf6a523c87c8ea9ff6d398f540d1cc941c3fcb47780923475401632d229bce523206b867694091d3408737ad" >
-            <img src="https://fanatics.frgimages.com/CompleteMailer/images/templates/2018_Template_92.png" alt="Android" width="126" height="51" style="display:inline-block;" border="0" /></a>
-          </td>
-        </tr>
-      </table>
-    </td>
-  </tr>
-
-</table>
-
-<table>
-  <tr> <!-- FOOTER TEXT -->
-    <td align="left" bgcolor="#ffffff" style="text-align:center;padding-top:12px;background-color:#ffffff;font-family:Arial, Helvetica, sans-serif; font-size:12px; padding:0px 0px 10px 0px; color:#b5b5b5; line-height:16px; " width="600">
-
-
-
-DISCLAIMER - Limited time offer. Exclusions, terms and conditions apply. Click <a href="https://cl.exct.net/?qs=0a47f50aa7f347c9186acf042e25a1888941f36ff441a41b617800cd912039982556263a7eba8aecc5e761fc3e2224f1ea36178a223e9bacda1b29299c83c0bc" target="_blank"  style="color:#b5b5b5;text-decoration:underline;font-weight:normal;">here</a> for details. Offer may be modified or terminated at any time without notice. <br /><br />
-*Personalized Picks are personal to you & may not be included in the offer/discount.<br /><br />
-
-          *FanCash balance as of 5/22/2019 12:00:00 AM
-    </td>
-  </tr>
-  <tr>
-    <td align="left" bgcolor="#ffffff" style="text-align:center;padding-top:12px;background-color:#ffffff;font-family:Arial, Helvetica, sans-serif; font-size:12px; padding:0px 0px 10px 0px; color:#b5b5b5; line-height:16px; " width="600">
-      This email was sent to <a href="#" style="color:#b5b5b5; text-decoration:none;">brentloving@yahoo.com</a><br />
-      by Fanatics, Inc., 8100 Nations Way, Jacksonville, FL 32256<br /><br />
-      To ensure delivery to your inbox, add <a href="#" style="color:#b5b5b5; text-decoration:none;font-weight:normal;">shop@e.fanatics.com</a> to your address book. <br class="mobile-hidden" />
-      If you have any questions, contact our <a href="https://cl.exct.net/?qs=0a47f50aa7f347c9a5aa3323077d9eb1c0b1f691851bc7c3cfaabd754bd390e991c96a44fe5c276e2087fcd64b02027b75576a0a7daaf415" target="_blank"  style="color:#b5b5b5;text-decoration:underline;font-weight:normal;">Customer Service Center</a>. <br class="mobile-hidden" />
-      This email was sent from a notification only address.<br /><br />
-      <a href="https://cl.exct.net/?qs=0a47f50aa7f347c937d907ff4961207901b108d9b9c5db1264d40367653093a59929b505f82808682bef5523c02f20d35e1247d2f7234b7d" target="_blank"  style="color:#b5b5b5; text-decoration:underline;">Privacy Policy</a>
-        | <a href="https://cl.exct.net/?qs=0a47f50aa7f347c9e53a9c75f985e7ed4c68d912ca6c1089fe75bd74d9add0b2fb8c4b0d83833c5da5a72827d6a7ba7da29557e175e2a1d91166b24c88946d33" target="_blank"  style="color:#b5b5b5; text-decoration:underline;">Unsubscribe</a><br /><br />
-
-      <a href="https://view.exacttarget.com/?qs=c4c8e1e0d619d52882807dd99b5a18375f0e0c1b47308af7b1ec2b088cc5a9d1bff648b13ac7c3822f4386d21937bccc37492fc3500849468c28394c70f1eb8e18665db2ef9cfdbc7ff24785ae40a052" target="_blank"  style="color:#ffffff; text-decoration:underline;">VIWP</a> <br />
-    </td>
-  </tr>
-
-
-
-</table> </td>
-        </tr>
-       </tbody>
-      </table> </td>
+        <!--[if (gte mso 9)|(IE)]></td></tr></table><![endif]-->
+</td>
     </tr>
-   </tbody>
   </table>
-  <img src="https://cl.exct.net/open.aspx?ffcb10-fe8e1577706d047477-fe22157577660d7e7c1278-fe6015707d6c0d7e7415-ff9a1170-fe21157577670d7a721d73-ff2b12737d67&d=10092" width="1" height="1"></custom>
+
+    <table border="0" cellspacing="0" cellpadding="0" width="100%" bgcolor="#ffffff">
+      <tr>
+        <td align="center" bgcolor="#ffffff">
+<!--[if (gte mso 9)|(IE)]><table border="0" cellspacing="0" cellpadding="0" width="600"><tr><td align="left"><![endif]-->
+
+          <table width="100%" border="0" cellspacing="0" cellpadding="0" style="max-width:600px;" class="onecolumn" align="center" bgcolor="#ffffff">
+            <tr>
+              <td align="center" bgcolor="#ffffff" style="border-top: ##000000 5px solid;"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td width="10"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="10" height="1" alt=""></td>
+                    <td valign="top">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                          <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="10" alt=""></td>
+                        </tr>
+                      </table>
+                      <table width="100%" border="0" cellspacing="0" cellpadding="0" class="wrapto100pc" align="center">
+                        <tr>
+                          <td width="10"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="10" height="1" alt=""></td>
+                          <td valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                              <tr>
+                                <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="10" alt=""></td>
+                              </tr>
+                              <tr>
+                                <td width="100%"><table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+                                    <tr>
+                                      <td align="center" style="padding:0px 0px 5px 0px; color:#000001; font-size:20px; font-family: 'sangbleuregular', Palatino, Arial, Helvetica, sans-serif; line-height:28px;" class="mobilealigncenter">
+This festival-approved outfit will take you from the main stage to the dance tent with ease.
+                                          </td>
+                                    </tr>
+                                  </table></td>
+                              </tr>
+                            </table></td>
+                          <td width="10"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="10" height="1" alt=""></td>
+                        </tr>
+                      </table>
+                      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                          <td style="font-size:0; vertical-align:top; text-align:center;"><table width="100%" border="0" cellspacing="0" cellpadding="0" class="wrapto100pc" align="left">
+                              <tr>
+                                <td width="10"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="10" height="1" alt=""></td>
+                                <td>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+                                    <tr>
+                                      <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="10" alt=""></td>
+                                    </tr>
+                                    <tr>
+                                      <td valign="top" bgcolor="#ffffff"><table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#ffffff">
+                                          <tr>
+                                            <td valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                <tr>
+                                                  <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                      <tr>
+                                                        <td bgcolor="#000000" align="center" style="color:#ffffff; font-size:20px; font-family: 'sangbleuregular', Palatino, Arial, Helvetica, sans-serif; line-height:24px; padding:5px 5px 6px 5px; border: 1px #000000 solid; -webkit-border-radius:0; -moz-border-radius:0; border-radius:0;" class="mobilealigncenter"><a target="_blank"  style="color:#ffffff; text-decoration:none; display:block; padding:5px 5px 5px 5px;" href="http://click.e.debenhams.com/?qs=66d54ebd34be2bc5d8d176b01e87ecb2da092151335e456e5264b5ff8f55ad2703f3a9340808b9802fd22a8b787e663ef4f17746057a1281">Shop shirts &#x203A;</a></td>
+                                                      </tr>
+                                                    </table></td>
+                                                </tr>
+                                              </table></td>
+                                          </tr>
+                                        </table></td>
+                                    </tr>
+                                    <tr>
+                                      <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="10" alt=""></td>
+                                    </tr>
+                                  </table>
+                                  <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+                                    <tr>
+                                      <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="10" alt=""></td>
+                                    </tr>
+                                    <tr>
+                                      <td valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+                                          <tr>
+                                            <td valign="top" bgcolor="#ffffff"><table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#ffffff">
+                                                <tr>
+                                                  <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                      <tr>
+                                                        <td bgcolor="#000000" align="center" style="color:#ffffff; font-size:20px; font-family: 'sangbleuregular', Palatino, Arial, Helvetica, sans-serif; line-height:24px; padding:5px 5px 6px 5px; border: 1px #000000 solid; -webkit-border-radius:0; -moz-border-radius:0; border-radius:0;" class="mobilealigncenter"><a target="_blank"  style="color:#ffffff; text-decoration:none; display:block; padding:5px 5px 5px 5px;" href="http://click.e.debenhams.com/?qs=66d54ebd34be2bc5edabe06efc52673ba5d92f180d2054d15141b6ae927ffe50de2e59e593881575f68706dbb0019badb7e560adcabd0ba9">Shop shorts &#x203A;</a></td>
+                                                      </tr>
+                                                    </table></td>
+                                                </tr>
+                                              </table></td>
+                                          </tr>
+                                        </table></td>
+                                    </tr>
+                                    <tr>
+                                      <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="10" alt=""></td>
+                                    </tr>
+                                  </table>
 
 
- </body>
+
+
+</td>
+                                <td width="10"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="10" height="1" alt=""></td>
+                              </tr>
+                            </table></td>
+                        </tr>
+                      </table>
+                      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                          <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="20" alt=""></td>
+                        </tr>
+                      </table>
+</td>
+                    <td width="10"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="10" height="1" alt=""></td>
+                  </tr>
+                </table></td>
+            </tr>
+          </table>
+          <table border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="20" alt=""></td>
+            </tr>
+          </table>
+
+          <!--[if (gte mso 9)|(IE)]></td></tr></table><![endif]-->
+</td>
+      </tr>
+    </table>
+
+  <table border="0" cellspacing="0" cellpadding="0" width="100%">
+    <tr>
+      <td align="center">
+<!--[if (gte mso 9)|(IE)]><table border="0" cellspacing="0" cellpadding="0" width="600"><tr><td align="center"><![endif]-->
+
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" style="max-width:600px;" class="onecolumn" align="center">
+          <tr>
+            <td align="center" bgcolor="#f0f0f0"><table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+                <tr>
+                  <td align="center"><a target="_blank"  href="http://click.e.debenhams.com/?qs=66d54ebd34be2bc57188a5e4927d035b32c4854eb1cf25bda6edf3ec0231c0c055a3eb3d3909928b65c411b40f1f4c1b3b22eb9f4cffc5f3">
+                    <img style="display:block;" border="0" src="http://debenhams.scene7.com/is/content/Debenhams/emailmarketing/Mens%2DLevis%2DGIF%5F02.gif" width="600" height="600" class="wrapto100pc"></a></td>
+                </tr>
+              </table></td>
+          </tr>
+
+        </table>
+        <table border="0" cellspacing="0" cellpadding="0">
+
+        </table>
+
+        <!--[if (gte mso 9)|(IE)]></td></tr></table><![endif]-->
+</td>
+    </tr>
+  </table>
+
+    <table border="0" cellspacing="0" cellpadding="0" width="100%" bgcolor="#ffffff">
+      <tr>
+        <td align="center" bgcolor="#ffffff">
+<!--[if (gte mso 9)|(IE)]><table border="0" cellspacing="0" cellpadding="0" width="600"><tr><td align="left"><![endif]-->
+
+          <table width="100%" border="0" cellspacing="0" cellpadding="0" style="max-width:600px;" class="onecolumn" align="center" bgcolor="#ffffff">
+            <tr>
+              <td align="center" bgcolor="#ffffff" style="border-top: ##000000 5px solid;"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td width="10"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="10" height="1" alt=""></td>
+                    <td valign="top">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                          <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="10" alt=""></td>
+                        </tr>
+                      </table>
+                      <table width="100%" border="0" cellspacing="0" cellpadding="0" class="wrapto100pc" align="center">
+                        <tr>
+                          <td width="10"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="10" height="1" alt=""></td>
+                          <td valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                              <tr>
+                                <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="10" alt=""></td>
+                              </tr>
+                              <tr>
+                                <td width="100%"><table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+                                    <tr>
+                                      <td align="center" style="padding:0px 0px 5px 0px; color:#000001; font-size:20px; font-family: 'sangbleuregular', Palatino, Arial, Helvetica, sans-serif; line-height:28px;" class="mobilealigncenter">
+Don't leave your Levi's at home when you're heading to see your favourite bands this summer.
+                                          </td>
+                                    </tr>
+                                  </table></td>
+                              </tr>
+                            </table></td>
+                          <td width="10"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="10" height="1" alt=""></td>
+                        </tr>
+                      </table>
+                      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                          <td style="font-size:0; vertical-align:top; text-align:center;"><table width="100%" border="0" cellspacing="0" cellpadding="0" class="wrapto100pc" align="left">
+                              <tr>
+                                <td width="10"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="10" height="1" alt=""></td>
+                                <td>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+                                    <tr>
+                                      <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="10" alt=""></td>
+                                    </tr>
+                                    <tr>
+                                      <td valign="top" bgcolor="#ffffff"><table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#ffffff">
+                                          <tr>
+                                            <td valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                <tr>
+                                                  <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                      <tr>
+                                                        <td bgcolor="#000000" align="center" style="color:#ffffff; font-size:20px; font-family: 'sangbleuregular', Palatino, Arial, Helvetica, sans-serif; line-height:24px; padding:5px 5px 6px 5px; border: 1px #000000 solid; -webkit-border-radius:0; -moz-border-radius:0; border-radius:0;" class="mobilealigncenter"><a target="_blank"  style="color:#ffffff; text-decoration:none; display:block; padding:5px 5px 5px 5px;" href="http://click.e.debenhams.com/?qs=66d54ebd34be2bc539a3f32f0cdf6327f053cae4b305a1861c4cfdb1ccfad08a967c6940bacd8bfd326136fbde15e068be933a09d5e3d7b8">Shop Levi's t-shirts &#x203A;</a></td>
+                                                      </tr>
+                                                    </table></td>
+                                                </tr>
+                                              </table></td>
+                                          </tr>
+                                        </table></td>
+                                    </tr>
+                                    <tr>
+                                      <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="10" alt=""></td>
+                                    </tr>
+                                  </table>
+                                  <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+                                    <tr>
+                                      <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="10" alt=""></td>
+                                    </tr>
+                                    <tr>
+                                      <td valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+                                          <tr>
+                                            <td valign="top" bgcolor="#ffffff"><table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#ffffff">
+                                                <tr>
+                                                  <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                      <tr>
+                                                        <td bgcolor="#000000" align="center" style="color:#ffffff; font-size:20px; font-family: 'sangbleuregular', Palatino, Arial, Helvetica, sans-serif; line-height:24px; padding:5px 5px 6px 5px; border: 1px #000000 solid; -webkit-border-radius:0; -moz-border-radius:0; border-radius:0;" class="mobilealigncenter"><a target="_blank"  style="color:#ffffff; text-decoration:none; display:block; padding:5px 5px 5px 5px;" href="http://click.e.debenhams.com/?qs=66d54ebd34be2bc59bdaf0545d8e3ef57f286aca1cc3380abad947618260e3074bd5eb7e0df3e4b452da0d0cfb40c47b0922c4def22d8269">Shop Levi's jeans &#x203A;</a></td>
+                                                      </tr>
+                                                    </table></td>
+                                                </tr>
+                                              </table></td>
+                                          </tr>
+                                        </table></td>
+                                    </tr>
+                                    <tr>
+                                      <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="10" alt=""></td>
+                                    </tr>
+                                  </table>
+                                  <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+                                    <tr>
+                                      <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="10" alt=""></td>
+                                    </tr>
+                                    <tr>
+                                      <td valign="top" bgcolor="#ffffff"><table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#ffffff">
+                                          <tr>
+                                            <td valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                <tr>
+                                                  <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                      <tr>
+                                                        <td align="center" bgcolor="#000000" style="color:#ffffff; font-size:20px; font-family: 'sangbleuregular', Palatino, Arial, Helvetica, sans-serif; line-height:24px; padding:5px 5px 6px 5px; border: 1px #000000 solid; -webkit-border-radius:0; -moz-border-radius:0; border-radius:0;" class="mobilealigncenter"><a target="_blank"  style="color:#ffffff; text-decoration:none; display:block; padding:5px 5px 5px 5px;" href="http://click.e.debenhams.com/?qs=66d54ebd34be2bc59d01dab73d4ac379d2f522246ae6e33e94d862c545051396526f0efb0aacb58e2511045e6e35ec4d52e27d11e3b4d1b7">Shop all Levi's &#x203A;</a></td>
+                                                      </tr>
+                                                    </table></td>
+                                                </tr>
+                                              </table></td>
+                                          </tr>
+                                        </table></td>
+                                    </tr>
+                                    <tr>
+                                      <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="10" alt=""></td>
+                                    </tr>
+                                  </table>
+
+
+
+</td>
+                                <td width="10"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="10" height="1" alt=""></td>
+                              </tr>
+                            </table></td>
+                        </tr>
+                      </table>
+                      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                          <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="20" alt=""></td>
+                        </tr>
+                      </table>
+</td>
+                    <td width="10"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="10" height="1" alt=""></td>
+                  </tr>
+                </table></td>
+            </tr>
+          </table>
+          <table border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="20" alt=""></td>
+            </tr>
+          </table>
+
+          <!--[if (gte mso 9)|(IE)]></td></tr></table><![endif]-->
+</td>
+      </tr>
+    </table>
+
+  <table border="0" cellspacing="0" cellpadding="0" width="100%">
+    <tr>
+      <td align="center">
+<!--[if (gte mso 9)|(IE)]><table border="0" cellspacing="0" cellpadding="0" width="600"><tr><td align="center"><![endif]-->
+
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" style="max-width:600px;" class="onecolumn" align="center">
+          <tr>
+            <td align="center" bgcolor="#f0f0f0"><table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+                <tr>
+                  <td align="center"><a target="_blank"  href="http://click.e.debenhams.com/?qs=66d54ebd34be2bc5b1942e7d5fc3866aa46826176fbe4290b0b7d59f91cc1afec2a1899fdb80d7cf09421c0256b9dba6231b5d31b7c74cc5">
+                    <img style="display:block;" border="0" src="http://debenhams.scene7.com/is/content/Debenhams/emailmarketing/REDO%2DConverse%2DGIF%5F02.gif" width="600" height="600" class="wrapto100pc"></a></td>
+                </tr>
+              </table></td>
+          </tr>
+
+        </table>
+        <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="20" alt=""></td>
+          </tr>
+        </table>
+
+        <!--[if (gte mso 9)|(IE)]></td></tr></table><![endif]-->
+</td>
+    </tr>
+  </table>
+
+  <table border="0" cellspacing="0" cellpadding="0" width="100%">
+    <tr>
+      <td align="center">
+<!--[if (gte mso 9)|(IE)]><table border="0" cellspacing="0" cellpadding="0" width="600"><tr><td align="center"><![endif]-->
+
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" style="max-width:600px;" class="onecolumn" align="center">
+          <tr>
+            <td align="center" bgcolor="#f0f0f0"><table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+                <tr>
+                  <td align="center"><a target="_blank"  href="http://click.e.debenhams.com/?qs=66d54ebd34be2bc52a0b04d8cd88eb7f778af4a379822f42d9049a9791ceddaf2a8ae057853c60211cdab3065f8f34cde8a667324d627105">
+                    <img style="display:block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/Logos.jpg" width="600" class="wrapto100pc"></a></td>
+                </tr>
+              </table></td>
+          </tr>
+
+        </table>
+        <table border="0" cellspacing="0" cellpadding="0">
+
+        </table>
+
+        <!--[if (gte mso 9)|(IE)]></td></tr></table><![endif]-->
+</td>
+    </tr>
+  </table>
+
+    <table border="0" cellspacing="0" cellpadding="0" width="100%" bgcolor="#ffffff">
+      <tr>
+        <td align="center" bgcolor="#ffffff">
+<!--[if (gte mso 9)|(IE)]><table border="0" cellspacing="0" cellpadding="0" width="600"><tr><td align="left"><![endif]-->
+
+          <table width="100%" border="0" cellspacing="0" cellpadding="0" style="max-width:600px;" class="onecolumn" align="center" bgcolor="#ffffff">
+            <tr>
+              <td align="center" bgcolor="#ffffff" style="border-top: ##000000 5px solid;"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td width="10"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="10" height="1" alt=""></td>
+                    <td valign="top">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                          <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="10" alt=""></td>
+                        </tr>
+                      </table>
+                      <table width="100%" border="0" cellspacing="0" cellpadding="0" class="wrapto100pc" align="center">
+                        <tr>
+                          <td width="10"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="10" height="1" alt=""></td>
+                          <td valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                              <tr>
+                                <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="10" alt=""></td>
+                              </tr>
+                              <tr>
+                                <td width="100%"><table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+                                    <tr>
+                                      <td align="center" style="padding:0px 0px 5px 0px; color:#000001; font-size:20px; font-family: 'sangbleuregular', Palatino, Arial, Helvetica, sans-serif; line-height:28px;" class="mobilealigncenter">
+Dance through summer in our festival-friendly footwear you can rely on.
+                                          </td>
+                                    </tr>
+                                  </table></td>
+                              </tr>
+                            </table></td>
+                          <td width="10"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="10" height="1" alt=""></td>
+                        </tr>
+                      </table>
+                      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                          <td style="font-size:0; vertical-align:top; text-align:center;"><table width="100%" border="0" cellspacing="0" cellpadding="0" class="wrapto100pc" align="left">
+                              <tr>
+                                <td width="10"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="10" height="1" alt=""></td>
+                                <td>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+                                    <tr>
+                                      <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="10" alt=""></td>
+                                    </tr>
+                                    <tr>
+                                      <td valign="top" bgcolor="#ffffff"><table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#ffffff">
+                                          <tr>
+                                            <td valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                <tr>
+                                                  <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                      <tr>
+                                                        <td bgcolor="#000000" align="center" style="color:#ffffff; font-size:20px; font-family: 'sangbleuregular', Palatino, Arial, Helvetica, sans-serif; line-height:24px; padding:5px 5px 6px 5px; border: 1px #000000 solid; -webkit-border-radius:0; -moz-border-radius:0; border-radius:0;" class="mobilealigncenter"><a target="_blank"  style="color:#ffffff; text-decoration:none; display:block; padding:5px 5px 5px 5px;" href="http://click.e.debenhams.com/?qs=66d54ebd34be2bc56e342a1a1206e70cc9ca22823401c5745738f020e58df3547326aead4fd5a4e7fd5b65033747923578963691ad54a43c">Shop Converse &#x203A;</a></td>
+                                                      </tr>
+                                                    </table></td>
+                                                </tr>
+                                              </table></td>
+                                          </tr>
+                                        </table></td>
+                                    </tr>
+                                    <tr>
+                                      <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="10" alt=""></td>
+                                    </tr>
+                                  </table>
+                                  <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+                                    <tr>
+                                      <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="10" alt=""></td>
+                                    </tr>
+                                    <tr>
+                                      <td valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+                                          <tr>
+                                            <td valign="top" bgcolor="#ffffff"><table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#ffffff">
+                                                <tr>
+                                                  <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                      <tr>
+                                                        <td bgcolor="#000000" align="center" style="color:#ffffff; font-size:20px; font-family: 'sangbleuregular', Palatino, Arial, Helvetica, sans-serif; line-height:24px; padding:5px 5px 6px 5px; border: 1px #000000 solid; -webkit-border-radius:0; -moz-border-radius:0; border-radius:0;" class="mobilealigncenter"><a target="_blank"  style="color:#ffffff; text-decoration:none; display:block; padding:5px 5px 5px 5px;" href="http://click.e.debenhams.com/?qs=66d54ebd34be2bc5691f01a54dea2c89a63ea702f0391add4bc09e01f3657b5e13f97f82b3162f7180aabc9c1ed97eb13bf8b1f2c4b05cd6">Shop trainers  &#x203A;</a></td>
+                                                      </tr>
+                                                    </table></td>
+                                                </tr>
+                                              </table></td>
+                                          </tr>
+                                        </table></td>
+                                    </tr>
+                                    <tr>
+                                      <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="10" alt=""></td>
+                                    </tr>
+                                  </table>
+                                  <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+                                    <tr>
+                                      <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="10" alt=""></td>
+                                    </tr>
+                                    <tr>
+                                      <td valign="top" bgcolor="#ffffff"><table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#ffffff">
+                                          <tr>
+                                            <td valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                <tr>
+                                                  <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                      <tr>
+                                                        <td align="center" bgcolor="#000000" style="color:#ffffff; font-size:20px; font-family: 'sangbleuregular', Palatino, Arial, Helvetica, sans-serif; line-height:24px; padding:5px 5px 6px 5px; border: 1px #000000 solid; -webkit-border-radius:0; -moz-border-radius:0; border-radius:0;" class="mobilealigncenter"><a target="_blank"  style="color:#ffffff; text-decoration:none; display:block; padding:5px 5px 5px 5px;" href="http://click.e.debenhams.com/?qs=66d54ebd34be2bc5857c988842b50def23d6f53dafa47106a3ebe751c03a1dc473e7e0c80d71aba49e4d803b8def2fa70c9083e474d87ae9">Shop all shoes & boots &#x203A;</a></td>
+                                                      </tr>
+                                                    </table></td>
+                                                </tr>
+                                              </table></td>
+                                          </tr>
+                                        </table></td>
+                                    </tr>
+                                    <tr>
+                                      <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="10" alt=""></td>
+                                    </tr>
+                                  </table>
+
+
+
+</td>
+                                <td width="10"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="10" height="1" alt=""></td>
+                              </tr>
+                            </table></td>
+                        </tr>
+                      </table>
+                      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                          <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="20" alt=""></td>
+                        </tr>
+                      </table>
+</td>
+                    <td width="10"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="10" height="1" alt=""></td>
+                  </tr>
+                </table></td>
+            </tr>
+          </table>
+          <table border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="20" alt=""></td>
+            </tr>
+          </table>
+
+          <!--[if (gte mso 9)|(IE)]></td></tr></table><![endif]-->
+</td>
+      </tr>
+    </table>
+
+  <table border="0" cellspacing="0" cellpadding="0" width="100%">
+    <tr>
+      <td align="center">
+<!--[if (gte mso 9)|(IE)]><table border="0" cellspacing="0" cellpadding="0" width="600"><tr><td align="center"><![endif]-->
+
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" style="max-width:600px;" class="onecolumn" align="center">
+          <tr>
+            <td align="center" bgcolor="#f0f0f0"><table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+                <tr>
+                  <td align="center"><a target="_blank"  href="http://click.e.debenhams.com/?qs=66d54ebd34be2bc5a4c2046bb2660d51e1e794b7daab71b7923d6b1c67a7b5e40e90ed04f0ddc814163f1468ffaaf3c8de5cad54cdb65477">
+                    <img style="display:block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/kit.jpg" width="600" height="600" class="wrapto100pc"></a></td>
+                </tr>
+              </table></td>
+          </tr>
+
+        </table>
+        <table border="0" cellspacing="0" cellpadding="0">
+
+        </table>
+
+        <!--[if (gte mso 9)|(IE)]></td></tr></table><![endif]-->
+</td>
+    </tr>
+  </table>
+
+    <table border="0" cellspacing="0" cellpadding="0" width="100%" bgcolor="#ffffff">
+      <tr>
+        <td align="center" bgcolor="#ffffff">
+<!--[if (gte mso 9)|(IE)]><table border="0" cellspacing="0" cellpadding="0" width="600"><tr><td align="left"><![endif]-->
+
+          <table width="100%" border="0" cellspacing="0" cellpadding="0" style="max-width:600px;" class="onecolumn" align="center" bgcolor="#ffffff">
+            <tr>
+              <td align="center" bgcolor="#ffffff" style="border-top: ##000000 5px solid;"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td width="10"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="10" height="1" alt=""></td>
+                    <td valign="top">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                          <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="10" alt=""></td>
+                        </tr>
+                      </table>
+                      <table width="100%" border="0" cellspacing="0" cellpadding="0" class="wrapto100pc" align="center">
+                        <tr>
+                          <td width="10"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="10" height="1" alt=""></td>
+                          <td valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                              <tr>
+                                <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="10" alt=""></td>
+                              </tr>
+                              <tr>
+                                <td width="100%"><table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+                                    <tr>
+                                      <td align="center" style="padding:0px 0px 5px 0px; color:#000001; font-size:20px; font-family: 'sangbleuregular', Palatino, Arial, Helvetica, sans-serif; line-height:28px;" class="mobilealigncenter">
+Get kitted out in this season's most wanted accessories, from sunglasses to backpacks.
+                                          </td>
+                                    </tr>
+                                  </table></td>
+                              </tr>
+                            </table></td>
+                          <td width="10"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="10" height="1" alt=""></td>
+                        </tr>
+                      </table>
+                      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                          <td style="font-size:0; vertical-align:top; text-align:center;"><table width="100%" border="0" cellspacing="0" cellpadding="0" class="wrapto100pc" align="left">
+                              <tr>
+                                <td width="10"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="10" height="1" alt=""></td>
+                                <td>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+                                    <tr>
+                                      <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="10" alt=""></td>
+                                    </tr>
+                                    <tr>
+                                      <td valign="top" bgcolor="#ffffff"><table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#ffffff">
+                                          <tr>
+                                            <td valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                <tr>
+                                                  <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                      <tr>
+                                                        <td bgcolor="#000000" align="center" style="color:#ffffff; font-size:20px; font-family: 'sangbleuregular', Palatino, Arial, Helvetica, sans-serif; line-height:24px; padding:5px 5px 6px 5px; border: 1px #000000 solid; -webkit-border-radius:0; -moz-border-radius:0; border-radius:0;" class="mobilealigncenter"><a target="_blank"  style="color:#ffffff; text-decoration:none; display:block; padding:5px 5px 5px 5px;" href="http://click.e.debenhams.com/?qs=66d54ebd34be2bc5e880ee9a15e6824f365c3e288b9662571db3a2802c8dd1236454eb0e38dd4f9011d504c489a081f3152ec99a3eced764">Shop bags &#x203A;</a></td>
+                                                      </tr>
+                                                    </table></td>
+                                                </tr>
+                                              </table></td>
+                                          </tr>
+                                        </table></td>
+                                    </tr>
+                                    <tr>
+                                      <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="10" alt=""></td>
+                                    </tr>
+                                  </table>
+                                  <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+                                    <tr>
+                                      <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="10" alt=""></td>
+                                    </tr>
+                                    <tr>
+                                      <td valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+                                          <tr>
+                                            <td valign="top" bgcolor="#ffffff"><table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#ffffff">
+                                                <tr>
+                                                  <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                      <tr>
+                                                        <td bgcolor="#000000" align="center" style="color:#ffffff; font-size:20px; font-family: 'sangbleuregular', Palatino, Arial, Helvetica, sans-serif; line-height:24px; padding:5px 5px 6px 5px; border: 1px #000000 solid; -webkit-border-radius:0; -moz-border-radius:0; border-radius:0;" class="mobilealigncenter"><a target="_blank"  style="color:#ffffff; text-decoration:none; display:block; padding:5px 5px 5px 5px;" href="http://click.e.debenhams.com/?qs=66d54ebd34be2bc5ed4a9bbb0a00282c0898d343b498f1e7765a05b4eef69151439a47f25eb56b965ab5c99ebd3b7b52357505ae1d5c2914">Shop backpacks &#x203A;</a></td>
+                                                      </tr>
+                                                    </table></td>
+                                                </tr>
+                                              </table></td>
+                                          </tr>
+                                        </table></td>
+                                    </tr>
+                                    <tr>
+                                      <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="10" alt=""></td>
+                                    </tr>
+                                  </table>
+                                  <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+                                    <tr>
+                                      <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="10" alt=""></td>
+                                    </tr>
+                                    <tr>
+                                      <td valign="top" bgcolor="#ffffff"><table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#ffffff">
+                                          <tr>
+                                            <td valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                <tr>
+                                                  <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                      <tr>
+                                                        <td align="center" bgcolor="#000000" style="color:#ffffff; font-size:20px; font-family: 'sangbleuregular', Palatino, Arial, Helvetica, sans-serif; line-height:24px; padding:5px 5px 6px 5px; border: 1px #000000 solid; -webkit-border-radius:0; -moz-border-radius:0; border-radius:0;" class="mobilealigncenter"><a target="_blank"  style="color:#ffffff; text-decoration:none; display:block; padding:5px 5px 5px 5px;" href="http://click.e.debenhams.com/?qs=66d54ebd34be2bc5dd8e5c0145e33d546158800d4dd657566e463cfa38acc6ad2c327fffec628e2cef6db3bd0e1d2d533ac38885c7b27579">Shop sunglasses &#x203A;</a></td>
+                                                      </tr>
+                                                    </table></td>
+                                                </tr>
+                                              </table></td>
+                                          </tr>
+                                        </table></td>
+                                    </tr>
+                                    <tr>
+                                      <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="10" alt=""></td>
+                                    </tr>
+                                  </table>
+                                  <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+                                    <tr>
+                                      <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="10" alt=""></td>
+                                    </tr>
+                                    <tr>
+                                      <td valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+                                          <tr>
+                                            <td valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                <tr>
+                                                  <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                      <tr>
+                                                        <td bgcolor="#000000" align="center" style="color:#ffffff; font-size:20px; font-family: 'sangbleuregular', Palatino, Arial, Helvetica, sans-serif; line-height:24px; padding:5px 5px 6px 5px; border: 1px #000000 solid; -webkit-border-radius:0; -moz-border-radius:0; border-radius:0;" class="mobilealigncenter"><a target="_blank"  style="color:#ffffff; text-decoration:none; display:block; padding:5px 5px 5px 5px;" href="http://click.e.debenhams.com/?qs=66d54ebd34be2bc564e1b8451993779f353013149a4b465c2fda14409669419af9b37d1617f759386c83e4af5a1bd048e1b2756ad5d76383">Shop all accessories &#x203A;</a></td>
+                                                      </tr>
+                                                    </table></td>
+                                                </tr>
+                                              </table></td>
+                                          </tr>
+                                        </table></td>
+                                    </tr>
+                                    <tr>
+                                      <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="10" alt=""></td>
+                                    </tr>
+                                  </table>
+
+
+</td>
+                                <td width="10"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="10" height="1" alt=""></td>
+                              </tr>
+                            </table></td>
+                        </tr>
+                      </table>
+                      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                          <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="20" alt=""></td>
+                        </tr>
+                      </table>
+</td>
+                    <td width="10"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="10" height="1" alt=""></td>
+                  </tr>
+                </table></td>
+            </tr>
+          </table>
+          <table border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="20" alt=""></td>
+            </tr>
+          </table>
+
+          <!--[if (gte mso 9)|(IE)]></td></tr></table><![endif]-->
+</td>
+      </tr>
+    </table>
+
+  <table border="0" cellspacing="0" cellpadding="0" width="100%">
+    <tr>
+      <td align="center">
+<!--[if (gte mso 9)|(IE)]><table border="0" cellspacing="0" cellpadding="0" width="600"><tr><td align="center"><![endif]-->
+
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" style="max-width:600px;" class="onecolumn" align="center">
+          <tr>
+            <td align="center" bgcolor="#f0f0f0"><table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+                <tr>
+                  <td align="center"><a target="_blank"  href="http://click.e.debenhams.com/?qs=66d54ebd34be2bc50eaaf00ca1ec9f508c200f9b4f72649ad9f0e05bedb75dfb521c8efffc0c0092730aae08bd3980f02211f7a3ebae2621">
+                    <img style="display:block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/kids.jpg" width="600" height="600" class="wrapto100pc"></a></td>
+                </tr>
+              </table></td>
+          </tr>
+
+        </table>
+        <table border="0" cellspacing="0" cellpadding="0">
+
+        </table>
+
+        <!--[if (gte mso 9)|(IE)]></td></tr></table><![endif]-->
+</td>
+    </tr>
+  </table>
+
+    <table border="0" cellspacing="0" cellpadding="0" width="100%" bgcolor="#ffffff">
+      <tr>
+        <td align="center" bgcolor="#ffffff">
+<!--[if (gte mso 9)|(IE)]><table border="0" cellspacing="0" cellpadding="0" width="600"><tr><td align="left"><![endif]-->
+
+          <table width="100%" border="0" cellspacing="0" cellpadding="0" style="max-width:600px;" class="onecolumn" align="center" bgcolor="#ffffff">
+            <tr>
+              <td align="center" bgcolor="#ffffff" style="border-top: ##000000 5px solid;"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td width="10"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="10" height="1" alt=""></td>
+                    <td valign="top">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                          <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="10" alt=""></td>
+                        </tr>
+                      </table>
+                      <table width="100%" border="0" cellspacing="0" cellpadding="0" class="wrapto100pc" align="center">
+                        <tr>
+                          <td width="10"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="10" height="1" alt=""></td>
+                          <td valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                              <tr>
+                                <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="10" alt=""></td>
+                              </tr>
+                              <tr>
+                                <td width="100%"><table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+                                    <tr>
+                                      <td align="center" style="padding:0px 0px 5px 0px; color:#000001; font-size:20px; font-family: 'sangbleuregular', Palatino, Arial, Helvetica, sans-serif; line-height:28px;" class="mobilealigncenter">
+Kit out the kids in colourful clothing and accessories this family festival season.
+                                          </td>
+                                    </tr>
+                                  </table></td>
+                              </tr>
+                            </table></td>
+                          <td width="10"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="10" height="1" alt=""></td>
+                        </tr>
+                      </table>
+                      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                          <td style="font-size:0; vertical-align:top; text-align:center;"><table width="100%" border="0" cellspacing="0" cellpadding="0" class="wrapto100pc" align="left">
+                              <tr>
+                                <td width="10"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="10" height="1" alt=""></td>
+                                <td>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+                                    <tr>
+                                      <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="10" alt=""></td>
+                                    </tr>
+                                    <tr>
+                                      <td valign="top" bgcolor="#ffffff"><table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#ffffff">
+                                          <tr>
+                                            <td valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                <tr>
+                                                  <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                      <tr>
+                                                        <td bgcolor="#000000" align="center" style="color:#ffffff; font-size:20px; font-family: 'sangbleuregular', Palatino, Arial, Helvetica, sans-serif; line-height:24px; padding:5px 5px 6px 5px; border: 1px #000000 solid; -webkit-border-radius:0; -moz-border-radius:0; border-radius:0;" class="mobilealigncenter"><a target="_blank"  style="color:#ffffff; text-decoration:none; display:block; padding:5px 5px 5px 5px;" href="http://click.e.debenhams.com/?qs=66d54ebd34be2bc5872fe9fe8d5f0cee6f51612dbfa7e407d70f318ff3d43fce5f963a45000f3b390f6a2483037f4710d2af0130e0663301">Shop kids' festival &#x203A;</a></td>
+                                                      </tr>
+                                                    </table></td>
+                                                </tr>
+                                              </table></td>
+                                          </tr>
+                                        </table></td>
+                                    </tr>
+                                    <tr>
+                                      <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="10" alt=""></td>
+                                    </tr>
+                                  </table>
+
+
+
+
+
+</td>
+                                <td width="10"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="10" height="1" alt=""></td>
+                              </tr>
+                            </table></td>
+                        </tr>
+                      </table>
+                      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                          <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="20" alt=""></td>
+                        </tr>
+                      </table>
+</td>
+                    <td width="10"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="10" height="1" alt=""></td>
+                  </tr>
+                </table></td>
+            </tr>
+          </table>
+          <table border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="20" alt=""></td>
+            </tr>
+          </table>
+
+          <!--[if (gte mso 9)|(IE)]></td></tr></table><![endif]-->
+</td>
+      </tr>
+    </table>
+
+    <table border="0" cellspacing="0" cellpadding="0" width="100%" bgcolor="#ffffff">
+      <tr>
+        <td align="center" bgcolor="#ffffff">
+<!--[if (gte mso 9)|(IE)]><table border="0" cellspacing="0" cellpadding="0" width="600"><tr><td align="left"><![endif]-->
+
+          <table width="100%" border="0" cellspacing="0" cellpadding="0" style="max-width:600px;" class="onecolumn" align="center" bgcolor="#db0a5b">
+            <tr>
+              <td align="center" bgcolor="#db0a5b" style="border-top: ##ffc600 5px solid;"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td width="10"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="10" height="1" alt=""></td>
+                    <td valign="top">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                          <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="10" alt=""></td>
+                        </tr>
+                      </table>
+                      <table width="100%" border="0" cellspacing="0" cellpadding="0" class="wrapto100pc" align="center">
+                        <tr>
+                          <td width="10"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="10" height="1" alt=""></td>
+                          <td valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                              <tr>
+                                <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="10" alt=""></td>
+                              </tr>
+                              <tr>
+                                <td width="100%"><table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+                                    <tr>
+                                      <td align="center" style="padding:0px 0px 5px 0px; color:#ffffff; font-size:25px; font-family: 'sangbleuregular', Palatino, Arial, Helvetica, sans-serif; line-height:33px;" class="mobilealigncenter">
+Don't forget to shop the up to half price* sale
+                                          </td>
+                                    </tr>
+                                  </table></td>
+                              </tr>
+                            </table></td>
+                          <td width="10"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="10" height="1" alt=""></td>
+                        </tr>
+                      </table>
+                      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                          <td style="font-size:0; vertical-align:top; text-align:center;"><table width="100%" border="0" cellspacing="0" cellpadding="0" class="wrapto100pc" align="left">
+                              <tr>
+                                <td width="10"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="10" height="1" alt=""></td>
+                                <td>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+                                    <tr>
+                                      <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="10" alt=""></td>
+                                    </tr>
+                                    <tr>
+                                      <td valign="top" bgcolor="#db0a5b"><table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#db0a5b">
+                                          <tr>
+                                            <td valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                <tr>
+                                                  <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                      <tr>
+                                                        <td bgcolor="#ffc600" align="center" style="color:#000001; font-size:20px; font-family: 'sangbleuregular', Palatino, Arial, Helvetica, sans-serif; line-height:24px; padding:5px 5px 6px 5px; border: 1px #ffc600 solid; -webkit-border-radius:0; -moz-border-radius:0; border-radius:0;" class="mobilealigncenter"><a target="_blank"  style="color:#000001; text-decoration:none; display:block; padding:5px 5px 5px 5px;" href="http://click.e.debenhams.com/?qs=66d54ebd34be2bc594dbfbf74595778c5b7df9dd35f8b9b61ac1329fb1dda0487f6216651946d04f2c50d4a6ee0e50dfd02d75a82ca08b77">Shop now &#x203A;</a></td>
+                                                      </tr>
+                                                    </table></td>
+                                                </tr>
+                                              </table></td>
+                                          </tr>
+                                        </table></td>
+                                    </tr>
+                                    <tr>
+                                      <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="10" alt=""></td>
+                                    </tr>
+                                  </table>
+
+
+
+
+
+</td>
+                                <td width="10"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="10" height="1" alt=""></td>
+                              </tr>
+                            </table></td>
+                        </tr>
+                      </table>
+                      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                          <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="20" alt=""></td>
+                        </tr>
+                      </table>
+</td>
+                    <td width="10"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="10" height="1" alt=""></td>
+                  </tr>
+                </table></td>
+            </tr>
+          </table>
+          <table border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="20" alt=""></td>
+            </tr>
+          </table>
+
+          <!--[if (gte mso 9)|(IE)]></td></tr></table><![endif]-->
+</td>
+      </tr>
+    </table>
+
+    <table border="0" cellspacing="0" cellpadding="0" width="100%">
+      <tr>
+        <td align="center">
+<!--[if (gte mso 9)|(IE)]><table border="0" cellspacing="0" cellpadding="0" width="600"><tr><td align="center"><![endif]-->
+
+          <table width="100%" border="0" cellspacing="0" cellpadding="0" style="max-width:600px;" class="onecolumn">
+            <tr>
+              <td align="center"><table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+                  <tr>
+                    <td bgcolor="#000000" style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="2" alt=""></td>
+                  </tr>
+                  <tr>
+                    <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="10" alt=""></td>
+                  </tr>
+                </table></td>
+            </tr>
+          </table>
+
+          <!--[if (gte mso 9)|(IE)]></td></tr></table><![endif]-->
+</td>
+      </tr>
+    </table>
+
+    <table border="0" cellspacing="0" cellpadding="0" width="100%" bgcolor="#ffffff">
+      <tr>
+        <td align="center">
+<!--[if (gte mso 9)|(IE)]><table border="0" cellspacing="0" cellpadding="0" width="640"><tr><td align="center"><![endif]-->
+
+          <table width="100%" border="0" cellspacing="0" cellpadding="0" style="max-width:600px;" class="onecolumn">
+            <tr>
+              <td width="20"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="20" height="1" alt=""></td>
+              <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td align="center"><table width="100%" border="0" cellpadding="0" cellspacing="0">
+                        <tr>
+                          <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="20" alt=""></td>
+                        </tr>
+                        <tr>
+                          <td align="center" valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                              <tr>
+                                <td style="font-size:0; text-align:center; vertical-align:top;">
+<!--[if (gte mso 9)|(IE)]><table border="0" cellspacing="0" cellpadding="0" width="590"><tr><td align="left"><![endif]-->
+
+                                  <div style="width:280px; display:inline-block; vertical-align:top;" class="wrapto100pc">
+                                    <table width="280" border="0" cellspacing="0" cellpadding="0" class="wrapto100pc" align="left">
+                                      <tr>
+                                        <td valign="top" align="center" style="padding:10px 0px 10px 0px;"><a target="_blank"  href="http://click.e.debenhams.com/?qs=66d54ebd34be2bc5c8fae76869cb44f78c254bbcd406e235d9bd9e77dffcd6fbe545a18c2053f70db574cd9d3ed0554d5b2e0e28f5c81be4"><img style="display:block" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/Freeclickandcollect.jpg" width="136" height="50" class="wrapto100pcmax" alt="Click and collect"></a></td>
+                                        <td valign="top" align="center" style="padding:10px 0px 10px 0px;"><a target="_blank"  href="http://click.e.debenhams.com/?qs=66d54ebd34be2bc5a3a78530257f3407954391225d6fd1d6b072f6f6349628d819f41e0ee9cc5f2f203eb52e380e7814a8ab9a0c8ae470f4"><img style="display:block" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/delveryoptions.jpg" width="136" height="50" class="wrapto100pcmax" alt="Delivery options"></a></td>
+                                      </tr>
+                                    </table>
+                                  </div>
+
+</td>
+<td align="center" valign="top" style="font-size:0px; line-height:0px;">
+
+                                  <div style="width:280px; display:inline-block; vertical-align:top;" class="wrapto100pc">
+                                    <table width="280" border="0" cellspacing="0" cellpadding="0" class="wrapto100pc" align="left">
+                                      <tr>
+                                        <td valign="top" align="center" style="padding:10px 0px 10px 0px;"><a target="_blank"  href="http://click.e.debenhams.com/?qs=66d54ebd34be2bc5ba8e43d3cd01eaef8b9158e1447346a4f87312f08b1fb5c5f2bfffad4713457f42f4a2af8945cdf31ee7c96e35c59d57"><img style="display:block" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/personalshopper.jpg" width="136" height="50" class="wrapto100pcmax" alt="Personal shopper"></a></td>
+                                        <td valign="top" align="center" style="padding:10px 0px 10px 0px;"><a target="_blank"  href="http://click.e.debenhams.com/?qs=66d54ebd34be2bc586dd3167d63a783657e874ec7186936b69dc82e67a6474073117d5991b01d4b61e45ff8b64d7a91dcef24a800c3153eb"><img style="display:block" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/StoreFind.jpg" width="136" height="50" class="wrapto100pcmax" alt="Store finder"></a></td>
+                                      </tr>
+                                    </table>
+                                  </div>
+
+                                  <!--[if (gte mso 9)|(IE)]></td></tr></table><![endif]-->
+</td>
+                              </tr>
+                            </table></td>
+                        </tr>
+                      </table></td>
+                  </tr>
+                  <tr>
+                    <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="10" alt=""></td>
+                  </tr>
+                  <tr>
+                    <td bgcolor="#d2d2d2" style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="1" alt=""></td>
+                  </tr>
+                  <tr>
+                    <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="10" alt=""></td>
+                  </tr>
+                </table></td>
+              <td width="20"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="20" height="1" alt=""></td>
+            </tr>
+          </table>
+
+          <!--[if (gte mso 9)|(IE)]></td></tr></table><![endif]-->
+</td>
+      </tr>
+    </table>
+
+    <table border="0" cellspacing="0" cellpadding="0" width="100%" bgcolor="#ffffff">
+      <tr>
+        <td align="center">
+<!--[if (gte mso 9)|(IE)]><table border="0" cellspacing="0" cellpadding="0" width="640"><tr><td align="center"><![endif]-->
+
+          <table width="100%" border="0" cellspacing="0" cellpadding="0" style="max-width:600px;" class="onecolumn">
+            <tr>
+              <td width="20"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="20" height="1" alt=""></td>
+              <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td align="center"><table border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                          <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="20" alt=""></td>
+                        </tr>
+                        <tr>
+                          <td align="center" valign="top"><table align="center" border="0" cellspacing="0" cellpadding="0">
+                              <tr>
+                                <td align="center" valign="top" style="padding:5px 5px 5px 5px;"><a target="_blank"  href="http://click.e.debenhams.com/?qs=66d54ebd34be2bc52dc6991cf651d20d427300ea385c6beb83830ccdd4c15eeba5dde353294fc469f516c78b45ad1e6ebf211d788eb7d509">
+                                  <img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/DABODFacebook.png" width="34" height="34"></a></td>
+                                <td align="center" valign="top" style="padding:5px 5px 5px 5px;"><a target="_blank"  href="http://click.e.debenhams.com/?qs=66d54ebd34be2bc55e2fee8c29253e3b137f20058317862c60893b59107eb4350ae0cc24a9aa58db9c069c64eadd9b8263259cf9bc989928">
+                                  <img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/DABODTwitter.png" width="34" height="34"></a></td>
+                                <td align="center" valign="top" style="padding:5px 5px 5px 5px;"><a target="_blank"  href="http://click.e.debenhams.com/?qs=66d54ebd34be2bc5edd2ea593dbd4409bd014672d41489ec0a11dee95180452721f7fbec7b23e3bfbc4397d700f14a2b2f92e217ff45adb6">
+                                  <img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/DABODPinterest.png" width="34" height="34"></a></td>
+                                <td align="center" valign="top" style="padding:5px 5px 5px 5px;"><a target="_blank"  href="http://click.e.debenhams.com/?qs=66d54ebd34be2bc57b1bf3dcc440b86c2e7e00d4872d3714751a860e2b2138558d37fa179211d2a8d7c82173b18af78524e0a9eb5aba103c">
+                                  <img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/DABODInstagram.png" width="34" height="34"></a></td>
+                                <td align="center" valign="top" style="padding:5px 5px 5px 5px;"><a target="_blank"  href="http://click.e.debenhams.com/?qs=66d54ebd34be2bc56976f7f5b8405f1961fe87c2072772f3b01adbd76401c9e787df081a1812a172c4988ba2d498789cc8b078634001f79d">
+                                  <img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/DABODYoutube.png" width="34" height="34"></a></td>
+                                <td align="center" valign="top" style="padding:5px 5px 5px 5px;"><a target="_blank"  href="http://click.e.debenhams.com/?qs=66d54ebd34be2bc5f434df6742b07acb2e9a66b7fc6e96e6b3387826c7389eb1f8df25c29747c2f751f03bc3883ba46faa242664c3a581a1">
+                                  <img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/dabodstorefinder.png" width="34" height="34"></a></td>
+                              </tr>
+                            </table></td>
+                        </tr>
+						<tr>
+						<td align="center">
+							<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td align="center" valign="top" style="font-size:0;">
+        <table border="0" cellspacing="0" cellpadding="0" class="wrapto100pctable" style="display:inline-block;">
+          <tr>
+               <td align="left" class="fontsize13" style="padding:20px 10px 10px 10px; color:#000000; font-size:16px; line-height:20px; font-family: 'sangbleuregular', Palatino, Arial, Helvetica, sans-serif;">
+                                    <a target="_blank"  style="color:#000000; text-decoration:underline;" href="http://click.e.debenhams.com/?qs=66d54ebd34be2bc525d8dd2f7ca782f5a9b5090a536ba59317011aad665c38c98f5211f32d3cd42f58ee3176da6aa061102569825a02f5b1">
+                                    Beauty Club Community&nbsp;&#x203A;
+                                    </a> </td>
+          </tr>
+        </table>
+
+
+  </td>
+<td align="center" valign="top" style="font-size:0;">
+
+
+        <table border="0" cellspacing="0" cellpadding="0" class="wrapto100pctable" style="display:inline-block;">
+          <tr>
+              <td align="right" class="fontsize13" style="padding:20px 10px 10px 10px; color:#000000; font-size:16px; line-height:20px; font-family: 'sangbleuregular', Palatino, Arial, Helvetica, sans-serif;">
+                                    <a target="_blank"  style="color:#000000; text-decoration:underline;" href="http://click.e.debenhams.com/?qs=66d54ebd34be2bc5a11c8cfa7f80c4b058b53698cf01d5e4bd7e2bd23f86b48629956b3fcbea79ccaa057ec25ab55103277a919577061041">
+                                    Style Debrief&nbsp;&#x203A;
+                                    </a> </td>
+          </tr>
+        </table>
+    </td>
+  </tr>
+</table>
+							</td>
+						</tr>
+
+
+
+
+
+
+
+                      </table></td>
+                  </tr>
+                  <tr>
+                    <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="10" alt=""></td>
+                  </tr>
+                  <tr>
+                    <td bgcolor="#d2d2d2" style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="1" alt=""></td>
+                  </tr>
+                  <tr>
+                    <td style="font-size:1px; line-height:1px;"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="1" height="10" alt=""></td>
+                  </tr>
+                </table></td>
+              <td width="20"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="20" height="1" alt=""></td>
+            </tr>
+          </table>
+
+          <!--[if (gte mso 9)|(IE)]></td></tr></table><![endif]-->
+</td>
+      </tr>
+    </table>
+
+    <table border="0" cellspacing="0" cellpadding="0" width="100%">
+      <tr>
+        <td align="center" bgcolor="#ffffff">
+<!--[if (gte mso 9)|(IE)]><table border="0" cellspacing="0" cellpadding="0" width="600"><tr><td align="center"><![endif]-->
+
+          <table width="100%" border="0" cellspacing="0" cellpadding="0" style="max-width:600px;" class="onecolumn">
+            <tr>
+              <td width="20"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="20" height="1" alt=""></td>
+              <td align="center" style="padding:0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+                  <tr>
+                    <td align="left" style="padding:10px 0px 10px 0px; color:#666666; font-size:12px; line-height:20px; font-family: 'sangbleuregular', Palatino, Arial, sans-serif;" class="mobilealignleft">To ensure you continue to receive our emails, please add <a target="_blank" style="color:#666666; text-decoration:underline;" alias="Footer - important-info@e.debenhams.com_43" href="mailto:important-info@e.debenhams.com?cmp=EMC_M_UK_20190619_43_WK42WEDMW19&scvid=2050007125">important-info@e.debenhams.com</a> to your address book</td>
+                  </tr>
+                  <tr>
+                    <td align="left" style="padding:0px 0px 10px 0px; color:#666666; font-size:12px; line-height:20px; font-family: 'sangbleuregular', Palatino, Arial, sans-serif;" class="mobilealignleft">*Selected lines.<br><br>For full terms and conditions please see <a  href="http://click.e.debenhams.com/?qs=66d54ebd34be2bc55934f23742b0c9d7f8fcd58dc903d0f6c0325bfaf9e42f9f54e4e536270e9685bd840e476204ace7f1c05894351942ef" style="color:#666666; text-decoration: underline;" target="_blank">debenhams.com/customer-service/terms-and-conditions</a>.<br> <br> <a  href="http://click.e.debenhams.com/?qs=66d54ebd34be2bc5f125af07c1f0d1d39ad40098da7aac687d43e43f2b8650151e3cdfa6fd72385b5c272985a772470d6fcdfaf18c14c450" style="color:#666666; text-decoration:  underline;" target="_blank">Update your UK/ROI email preferences</a> if you prefer to receive our Republic of Ireland emails.
+<br> <br> <a  href="https://pages.e.debenhams.com/page.aspx?qs=330c754b5e92df742e8213d911a14f36861077f17b72cad5a7156f321f9c1992fca4e0338ed138bc689c683460fabbeabd234e58f7df2d6dd19b9cfd79b75c18b7332fad83e2b45ac217ff9620c0cf11a180a25ffc4b5f93" style="color:#666666; text-decoration:  underline;" target="_blank">Unsubscribe</a> from all Debenhams emails. If you are a Loyalty customer, by unsubscribing from all emails you are requesting to no longer receive Loyalty related email communications such as statements and reward expiry.<br> <br> Debenhams Retail Ltd, Registered in England, Company No. 83395. Registered offices: 334-348 Oxford Street, London, W1C 1JG</td>
+                  </tr>
+                </table></td>
+              <td width="20"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="20" height="1" alt=""></td>
+            </tr>
+          </table>
+
+          <!--[if (gte mso 9)|(IE)]></td></tr></table><![endif]-->
+</td>
+      </tr>
+      <tr>
+        <td align="center">
+<!--[if (gte mso 9)|(IE)]><table border="0" cellspacing="0" cellpadding="0" width="600"><tr><td align="center"><![endif]-->
+
+          <table width="100%" border="0" cellspacing="0" cellpadding="0" style="max-width:600px;" class="onecolumn" bgcolor="#000001">
+            <tr>
+              <td width="20"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="20" height="1" alt=""></td>
+              <td align="center" style="padding:10px 0px 10px 0px;"><table border="0" cellpadding="0" cellspacing="0" width="100%" align="center">
+                  <tr>
+                    <td align="left" style="color:#ffffff; font-size:12px; line-height:20px; font-family: 'sangbleuregular', Palatino, Arial, sans-serif;" class="mobilealignleft">
+<a target="_blank" style="color:#ffffff; text-decoration:none;"  href="http://click.e.debenhams.com/?qs=66d54ebd34be2bc536e5c1e2b4414ea27191f470bb110e1ef2a6fef8bd46e53e18d90bce8bc4df0c48c738d5b975f32d89357b5caf45f6e3">Privacy</a> | <a target="_blank" style="color:#ffffff; text-decoration:none;"  href="http://click.e.debenhams.com/?qs=66d54ebd34be2bc5554117aa67310116d54ffcd3363c558290d92d215b72bc13738bfa0506d63ed59f057b02dbcc671acb586a9a7bdd1432">Terms&nbsp;&amp;&nbsp;Conditions</a> | <a target="_blank" style="color:#ffffff; text-decoration:none;"  href="http://click.e.debenhams.com/?qs=66d54ebd34be2bc5ca86bb3f433b2831354365646f1814d542d7845bceb7acd71dbfa6327f7ef7091e415f6bc433b4d93a8d5e82f633d7bd">Contact&nbsp;Us</a> | <a target="_blank" style="color:#ffffff; text-decoration:none;"  href="http://click.e.debenhams.com/?qs=66d54ebd34be2bc5ca447a5c5ca6333064abd18c8caa5680aae342ce173031cdc9f48992b823fd65ded3350757f18d64cbf63b0bb1e8323a">Returns</a> |
+<a target="_blank" style="color:#ffffff; text-decoration:none;"  href="http://click.e.debenhams.com/?qs=66d54ebd34be2bc52865e05815de7adbf6c25795ad89902b489d66e5a12d3a34ac46a462345dc14c74cb3056ae0c39e8715247507e037713">International&nbsp;Delivery</a>
+</td>
+                  </tr>
+                  <tr>
+                    <td align="left" style="color:#ffffff; font-size:12px; line-height:20px; font-family: 'sangbleuregular', Palatino, Arial, sans-serif;" class="mobilealignleft">
+                        Copyright © Debenhams Retail Ltd 2019. All&nbsp;rights&nbsp;reserved
+                      </td>
+                  </tr>
+                </table></td>
+              <td width="20"><img style="display: block;" border="0" src="http://images.emlcdn.net/cdn/547/97f0a14e-6a65-4e1f-8630-b090a8b551f5/091ac6c2c100dd3a0d16b825591a411c277ea248.gif" width="20" height="1" alt=""></td>
+            </tr>
+          </table>
+
+          <!--[if (gte mso 9)|(IE)]></td></tr></table><![endif]-->
+</td>
+      </tr>
+    </table>
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td><img src="http://click.e.debenhams.com/open.aspx?ffcb10-fe951175766404797c-fdf315797c67017c7715747c-fe9915707d62057f71-fefc1671766c01-fe2a1175776d067a751073-ff67157476" width="1" height="1"></td>
+    </tr>
+  </tbody>
+</table>
+</body>
 </html>
