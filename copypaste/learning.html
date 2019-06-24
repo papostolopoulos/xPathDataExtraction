@@ -414,8 +414,8 @@
                 //then the outcome is true.</span>
                 "Hello there".match(/Hello/)[0] === "Hello there".replace(/ there/, ""); <span>//true
                 //What is being compared is the product of the methods, not the methods themselves.</span>
-                null == undefined <span>//true</span>
-                null === undefined <span>//false</span>
+                null == undefined; <span>//true</span>
+                null === undefined; <span>//false</span>
               </code>
             </div>
           </div>
@@ -444,12 +444,12 @@
               <span>//In the following cases, null, undefined and "" equalize each
               //other depending on the order used as operands</span>
               undefined || null; <span>// null</span>
-              null || undefined <span>// undefined</span>
-              undefined || "" <span>// ""</span>
-              "" || undefined <span>// undefined</span>
+              null || undefined; <span>// undefined</span>
+              undefined || ""; <span>// ""</span>
+              "" || undefined; <span>// undefined</span>
               "" || null; <span>// null.</span>
               null || ""; <span>// ""</span>
-              var x; <span>//No value assigned so this is undefined.</span>
+              var x; <span>// No value assigned so this is undefined.</span>
               x || null; <span>// null</span>
               </code>
             </div>
