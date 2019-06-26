@@ -1,11 +1,27 @@
-function transform(data,node,headers){
-  if(/(today|one day) only|ends at midnight/i.exec(data)) {
-    var n = headers.get("Date");
-    var n1 = new Date(n * 1000);
-    var day1 = n1.getDate();
-    var mon1 = n1.getMonth();
-    var vt = new Date("1970", mon1, day1);
-    return vt;
-  }
-  return "";
+function transform(data){
+  if(!data || /valid/i.test(data)) return null;
+
+  var replaceArr = [
+    // {oldStr: /^()/i, newStr: ""}, // ^Find text at the beginning of the string
+    // {oldStr: /()$/i, newStr: ""}, // Find text at the end of the string$
+    // {oldStr: /.*()/i, newStr: ""}, // .*Find text in the middle, remove everything before that
+    // {oldStr: /().*/i, newStr: ""}, // Find text in the middle, remove everything after that.*
+    // {oldStr: /()/i, newStr: ""}, // Find text in the middle of the string
+    // {oldStr: /(\$\d+\.\d{2})([A-z])/, newStr: "$1 $2"}
+  ];
+
+  replaceArr.forEach(function(el){
+  	data = data.replace(el.oldStr, el.newStr).trim();
+  });
+
+  return data;
+}
+
+
+
+function transform(data){
+  if(data)
+    return data.replace(/\!/,"! ").replace(/Wine[A-Z]/,"Wine ").replace(/Free.*/,"| Free").replace(/\w+day.*PM|Questions.*/,"").trim();
+  else
+    return "";
 }
