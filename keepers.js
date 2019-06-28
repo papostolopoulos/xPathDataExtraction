@@ -1126,7 +1126,7 @@ function transform(data){
     // {oldStr: /()$/i, newStr: ""}, // Find text at the end of the string$
     // {oldStr: /.*()/i, newStr: ""}, // .*Find text in the middle, remove everything before that
     // {oldStr: /().*/i, newStr: ""}, // Find text in the middle, remove everything after that.*
-    // {oldStr: /()/i, newStr: ""}, // Find text in the middle of the string
+    // {oldStr: /([*©®ǂ‡†±+→§™¹›∞•◊ΔÐð_|^])/ig, newStr: ""}, // Find text in the middle of the string
   ];
 
   replaceArr.forEach(function(el){

@@ -6,7 +6,8 @@
       href="favicon.ico">
     <meta charset="utf-8">
     <title>How Performant - Test the performance of JavaScript functions</title>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+    <script src="vue.js"></script>
 
     <style media="screen">
       *{
@@ -120,7 +121,7 @@
           <div class="divNumOfArgumentsSets">
             <h1>Function arguments</h1>
             <label class="labelNumOfArgumentsSets">
-              Enter number of sets:
+              Enter number of function arguments:
               <input type="number"
               name="inputNumOfArgumentsSets"
               id="inputNumOfArgumentsSets"
@@ -131,6 +132,17 @@
               width="4"
               >
             </label>
+            <!-- <p>
+              Paste your arguments in the following slots.
+              One data type per slot.
+              If you want to run your function multiple times and with different
+              arguments each time then paste them in the same slot with a line break.
+              If a different amount of arguments is going to be pasted on each slot,
+              then the function will be run as many times as the slot with the most
+              arguments pasted. In order to match the difference between arguments,
+              then there will be an iteration of the less arguments in the final
+              function invocations.
+            </p> -->
           </div>
 
 
@@ -304,7 +316,7 @@
 
             //Update the new data in the app component every time there is a change
             //in the textArea or the radio buttons
-            app._data.argumentsArr[this.argIdNum - 1] = finalArr;
+            app.$data.argumentsArr[this.argIdNum - 1] = finalArr;
           }, //End of processTextAreaValues
 
 
@@ -461,8 +473,8 @@
 
           //Evaluates if the Boolean is properly structured
           evalBoolean(el){
-            if (el === "true") return true;
-            if (el === "false") return false;
+            if (el.trim() === "true") return true;
+            if (el.trim() === "false") return false;
             return "error";
           },
 
@@ -486,13 +498,13 @@
 
           //Evaluates if the null is properly structured
           evalNull(el){
-            return el === "null" ? null : "error";
+            return el.trim() === "null" ? null : "error";
           },
 
 
           //Evaluates if the number is properly structured
           evalNumber(el){
-            return isNaN(Number(el)) ? "error" : Number(el);
+            return isNaN(Number(el.trim())) ? "error" : Number(el);
           },
 
 
@@ -553,6 +565,7 @@
 
           // evaluates if the regular expression is properly structured
           evalRegExp(el){
+            el = el.trim();
             let elFlags = el.slice(el.lastIndexOf("/") + 1);
             let flags = "igmsuy";
             let source = el.slice(1, el.lastIndexOf("/"));
@@ -632,11 +645,11 @@
         template:
         `
           <div class="divFunctionArgument" :key="set">
-            <h2>Argument Set {{argIdNum}}</h2>
+            <h2>Argument {{argIdNum}}</h2>
             <label class="labelArgumentsDataTypes">
               <textarea
                 class="textAreaArgumentsPaste"
-                placeholder="Enter the function's argument.\nIf you are entering more than one options for the same argument, separate them with a line break"
+                placeholder="Enter the function's argument.\nIf you are entering more than one options for the same argument type, separate them with a line break"
                 v-model="textAreaValues"
                 @keyup="processTextAreaValues($event.target.value)">
 
@@ -748,12 +761,12 @@
       let app = new Vue({
         el: "#main",
         data: {
-          numOfArgumentsSets: 0,
-          argumentsArr: [],
+          numOfArgumentsSets: 0, //number of components - number of arguments for functions
+          argumentsArr: [], //The array that has all the initial arguments
           function1String: "",
           function2String: "",
           hasError: false,
-          maxElementsNum: 0
+          maxElementsNum: 0 //The most number of elements that an argument set has
         },
         methods: {
           //updates the length of the argumentsArr based on the addition or subtraction
@@ -802,10 +815,6 @@
             // if both function strings are empty, return without running function
             if (this.function1String === "" && this.function2String === "") return;
 
-            console.log(event);
-            console.log(event.target.previousElementSibling.value);
-            console.log(event.target.previousElementSibling.name.replace(/textArea/, "").toLowerCase());
-
             //Create function. Evaluate if it is a valid function
             let function1 = this.function1String !== "" ? this.evalFunction(this.function1String) : "";
             let function2 = this.function2String !== "" ? this.evalFunction(this.function2String) : "";
@@ -813,27 +822,39 @@
             // If one of the tow functions has an error, return without running function
             if (function1 === "error" || function2 === "error") return;
 
+            //How can I make sure that if any elements are removed from the argument slots, this recalculates
+            let leveledArguments = this.levelArguments();
+
             console.log("Invoking", function1());
+            console.log("leveledArguments is ", leveledArguments);
+
+            //need to iterate through each element of each argument and add it as
+            //a param in the function to be invoked.
+            for (var i = 0; i < leveledArguments.length; i++) {
+              this.numOfArgumentsSets[i]
+            }
 
 
-          }
-        }, //End of methods
-        computed: {
+          },
+
+
+          /*Take all the array elements from this.argumensArr and convert them in
+          array elements of the same length.*/
           levelArguments(){
-            //This probably needs to be a method that gets invoked every time we test function?
+            console.log("invoking levelArguments()");
 
-
-            //Zero the maxElementsNum first
+            //Zero the this.maxElementsNum first
             this.maxElementsNum = 0;
-            //if the this.argumentsArr.length === 0 then return?
+            let args = this.argumentsArr.slice();
+
             if (this.argumentsArr.length === 0) return;
+
 
             // Iterate through all the elements of this.argumentsArr.
             // If the length of the element is larger than the this.maxElementsNum
             // then the this.maxElementsNum has to become equal to the element's length.
             for (let i = 0; i < this.argumentsArr.length; i++) {
-              let argumentsArrElement = this.argumentsArr[i];
-              if (argumentsArrElement.length > this.maxElementsNum) this.maxElementsNum = argumentsArrElement.length;
+              if (args[i].length > this.maxElementsNum) this.maxElementsNum = args[i].length;
             }
 
 
@@ -841,17 +862,39 @@
             // If the element's length is less than the this.maxElementsNum
             // Create a nested loop with i < element's length
             // push elements from the beginning of the element
-            // every time after you push, check if the element's length is equal to the this.maxElementsNum
-            // If so, then break
-            for (let j = 0; j < this.argumentsArr.length; j++) {
-              let argumentsArrElement = this.argumentsArr[j];
-              if (argumentsArrElement.length < this.maxElementsNum) {
-                this.argumentsArr[j].push(this.argumentsArr[j][j]);
+            // every time after you push, check if the element's length is equal
+            // to the this.maxElementsNum. If so, then break
+            for (let j = 0; j < args.length; j++) {
+              let element = args[j];
+              if (element.length < this.maxElementsNum) {
+                for (let k = 0; k < this.maxElementsNum; k++) {
+                  args[j].push(element[k]);
+                  if(args[j].length === this.maxElementsNum) break;
+                }
               }
             }
 
-          } //End of level arguments
-        } //End of methods
+            this.refreshArgumentsArr();
+            console.log("The argumentsArr is ", this.argumentsArr);
+            return args;
+          }, //End of levelArguments()
+
+
+          //used to return the array to its initial status
+          refreshArgumentsArr(){
+            for (var i = 0; i < app.$children.length; i++) {
+              app.$children[i].processTextAreaValues();
+            }
+
+            //need to iterate through the children of the component
+            //If the elements of the children are less or more than the elements
+            //of each respective argument in the this.argumentsArr, then update
+            //Should I create a separate property in the instance that updates from
+            //The argumentsArr through the levelArguments?
+          }
+        }, //End of methods
+        computed: {
+        } //End of computed
       });
 
     </script>
