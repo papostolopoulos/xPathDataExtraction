@@ -831,7 +831,7 @@
             //need to iterate through each element of each argument and add it as
             //a param in the function to be invoked.
             for (var i = 0; i < leveledArguments.length; i++) {
-              this.numOfArgumentsSets[i]
+              this.numOfArgumentsSets[i];
             }
 
 
@@ -866,6 +866,7 @@
             // to the this.maxElementsNum. If so, then break
             for (let j = 0; j < args.length; j++) {
               let element = args[j];
+              console.log("Looping through j for loop. element is", element);
               if (element.length < this.maxElementsNum) {
                 for (let k = 0; k < this.maxElementsNum; k++) {
                   args[j].push(element[k]);
@@ -874,9 +875,9 @@
               }
             }
 
-            this.refreshArgumentsArr();
+            // this.refreshArgumentsArr();
             console.log("The argumentsArr is ", this.argumentsArr);
-            return args;
+            return this.arrayFlip(args);
           }, //End of levelArguments()
 
 
@@ -891,6 +892,24 @@
             //of each respective argument in the this.argumentsArr, then update
             //Should I create a separate property in the instance that updates from
             //The argumentsArr through the levelArguments?
+          },
+
+
+          arrayFlip(arr) {
+            console.log("In the arrayFlip");
+            let endArr = [];
+
+            for (let i = 0; i < arr[0].length; i++) {
+              endArr.push([]);
+            }
+
+            for (let j = 0; j < arr.length; j++) {
+              for (let k = 0; k < arr[j].length; k++) {
+                endArr[k].push(arr[j][k]);
+              }
+            }
+
+            return endArr;
           }
         }, //End of methods
         computed: {
