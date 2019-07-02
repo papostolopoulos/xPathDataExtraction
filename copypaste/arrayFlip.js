@@ -27,6 +27,16 @@ function helloThere(name) {
 }
 
 
-LOOK AT LINE 878. DO YOU NEED TO OPEN THIS? ANSWER: NOT AT THIS LINE
-YOU PROBABLY NEED TO MOVE THIS SOMEWHERE ELSE. SO THAT THE ARRAY IS MODIFIED AGAIN
-BEFORE THE FUNCTION INVOCATIONÍ
+/*
+WHERE DO I INVOKE this.refreshArgumentsArr()? Perhaps at the beginning of
+this.testFunctionPerformance (when the submit button is clicked). That would mean
+that for each component,
+I would need to save the product of processTextAreaValues in an array that will be
+pulled every time the refreshArgumentsArr is invoked.
+*/
+// LOOK AT LINE 878. DO YOU NEED TO OPEN THIS? ANSWER: NOT AT THIS LINE
+// YOU PROBABLY NEED TO MOVE THIS SOMEWHERE ELSE. SO THAT THE ARRAY IS MODIFIED AGAIN
+// BEFORE THE FUNCTION INVOCATION
+
+
+// SEE LINE 825. MOVED this.refreshArgumentsArr

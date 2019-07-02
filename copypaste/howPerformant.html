@@ -822,6 +822,8 @@
             // If one of the tow functions has an error, return without running function
             if (function1 === "error" || function2 === "error") return;
 
+            this.refreshArgumentsArr();
+
             //How can I make sure that if any elements are removed from the argument slots, this recalculates
             let leveledArguments = this.levelArguments();
 
