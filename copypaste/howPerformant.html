@@ -225,7 +225,8 @@
             //If function selected
             if (this.dataType === "function"){
               console.log("selected data type = function");
-              let functionsArr = this.textAreaValues.split(/(?<=\})\s+((?=function)|(?=(var|let|const)\s[A-z_\$]\w*\s*=\s*function))/);
+              let functionsArr = this.textAreaValues.split(/(?<=\})(\s*\n\s*)((?=function)|(?=(var|let|const)\s[A-z_\$]\w*\s*=\s*function))/);
+              console.log("the functionsArr is", functionsArr);
               for (let i = 0; i < functionsArr.length; i++) {
                 console.log("Result from function selection before the evalFunction:", functionsArr[i]);
                 this.evalFunction(functionsArr[i]) === "error" ? this.errorEntry = true : finalArr.push(this.evalFunction(functionsArr[i]));
@@ -326,7 +327,9 @@
             console.log("Beginning of evalArray. arrStr is:", arrStr, typeof arrStr);
             if (arrStr === "[]"){
               console.log("In if statement. arrStr is empty so we are returning ", arr);
-              return arr;
+              let finishEval = arr.slice();
+              arr = [];
+              return finishEval;
             }
             else{ // if(/\[.+\]/.test(arrStr))
               if (arrStr[0] !== "[" || arrStr[arrStr.length-1] !== "]"){
