@@ -219,6 +219,7 @@
             this.errorEntry = false;
             let finalArr = [];
             let startArr = this.textAreaValues.split("\n");
+            console.log(`The array created after the split for iteration and evaluation is:`, startArr);
 
 
             //If function selected
@@ -282,7 +283,7 @@
 
 
             for (let i = 0; i < startArr.length; i++) {
-              console.log("In the for loop for i:", i);
+              console.log("In the for loop for i:", i, "and startArr[i]:", startArr[i]);
 
               //If array selected
               if (this.dataType === "array"){
@@ -322,8 +323,12 @@
 
           //Evaluates if the array is properly structured
           evalArray(arrStr, arr) {
-            if (arrStr === "[]") return arr;
-            else {
+            console.log("Beginning of evalArray. arrStr is:", arrStr, typeof arrStr);
+            if (arrStr === "[]"){
+              console.log("In if statement. arrStr is empty so we are returning ", arr);
+              return arr;
+            }
+            else{ // if(/\[.+\]/.test(arrStr))
               if (arrStr[0] !== "[" || arrStr[arrStr.length-1] !== "]"){
                 console.log("In the error because the first or the last character of the string do not indicate an array");
                 return "error";
@@ -337,13 +342,12 @@
 
                 //Number
                 if(arrStr.search(/\d+(\.\d+)?,/) === 0 || arrStr.search(/\d+(\.\d+)?\s*$/) === 0) {
-                  console.log("else if for number");
+                  console.log("else if for number to be pushed:", Number(arrStr.match(/\d+(\.\d+)?/)[0]));
                   arr.push(Number(arrStr.match(/\d+(\.\d+)?/)[0]));
-                  console.log(Number(arrStr.match(/\d+(\.\d+)?/)[0]));
                   arrStr = arrStr.slice(arrStr.match(/\d+(\.\d+)?/)[0].length + 1);
                   // arrStr = arrStr.slice(arrStr.indexOf(",") + 1);
                   arrStr = arrStr.trim();
-                  console.log("end of else if");
+                  console.log("end of else if with arrStr being:", arrStr);
                   return this.evalArray("[" + arrStr + "]", arr);
                 }
 
