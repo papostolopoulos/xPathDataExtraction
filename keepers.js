@@ -29,7 +29,7 @@ function transform(data) {
   var finalStrArr = "";
   //loop through all the regular expressions inside the expirTextArr to see if there is a match
   //If there is a match, then add the (N)N/(N)N/(NNNN) in finalStrArr and split it.
-  for (var i = 0; i < expirTextArr.length; i++) {
+  for (var j = 0; j < expirTextArr.length; j++) {
    var el = expirTextArr[i];
 
    if (data.match(el)) {
@@ -78,8 +78,8 @@ function transform(data) {
   var finalStrArr = "";
   //loop through all the regular expressions inside the expirTextArr to see if there is a match
   //If there is a match, then add the (N)N/(N)N/(NNNN) in finalStrArr and split it.
-  for (var i = 0; i < expirTextArr.length; i++) {
-   var el = expirTextArr[i];
+  for (var k = 0; k < expirTextArr.length; k++) {
+   var el = expirTextArr[k];
 
    if (data.match(el)) {
     finalStrArr= data.match(el)[0].replace(/[\.A-Za-z]/g,"").trim().split("/");
@@ -88,7 +88,7 @@ function transform(data) {
   }
 
   if (finalStrArr.length === 0) return null;
-  if (!finalStrArr[2]) finalStrArr[2] = "1970"
+  if (!finalStrArr[2]) finalStrArr[2] = "1970";
 
   //---PHASE 4---
   //Return a concatenation (this can be expanded based on other information like currency data)
@@ -517,7 +517,7 @@ function transform(data,node,headers){
 
 
 
-  var todayToDay = /PM\sCT\sTODAY\s-\s\d{1,2}\sCT\s(.*)\s\|/
+  var todayToDay = /PM\sCT\sTODAY\s-\s\d{1,2}\sCT\s(.*)\s\|/;
   if(todayToDay.exec(data)) {
     var daysOfWeek = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
     var emailDate = new Date(headers.Date * 1000);
@@ -616,7 +616,7 @@ function transform(data) {
 
 
 //REGEX $OFF
-// For linkbased when ignoring casing, put this at the front: (?i)
+// For linkbased when ignoring casing, put this at the front:
 function transform(data){
 
   var posRegexArr = [
@@ -648,43 +648,43 @@ function transform(data){
 
   //Free
   var free = /[Ff][Rr][Ee]{2}/;
-  var freeShipping = /(?i)free\sshipping/;
-  var freeOnOrdersOf = /(?i)free\son\sorders\sof\s\$/;
-  var buyNumberGetNumberFree = /(?i)buy\s(one|two|three|\d),?\sget\s(one|two|three|\d)\s(free|\d{1,2}% off)/;
-  var cashback = /(?i)cash\s?back/;
+  var freeShipping = /free\sshipping/;
+  var freeOnOrdersOf = /free\son\sorders\sof\s\$/;
+  var buyNumberGetNumberFree = /buy\s(one|two|three|\d),?\sget\s(one|two|three|\d)\s(free|\d{1,2}% off)/;
+  var cashback = /cash\s?back/;
 
   //$
   var dollarOff = /\$\d+(\.\d{1,2})?\s([Oo][Ff]{2})/;
-  var saveDollarNum = /(?i)save\s((over|more\sthan|up\sto(\san\sextra)?)\s)?\$\d+/;
-  var savingsOfDollar = /(?i)savings\sof\s\$/;
-  var dollarReward = /(?i)\$\d{1,3}\sreward/;
-  var downToAmmount = /(?i)down\sto\s\$\d{1,}(\.\d{2})?/i;
-  var dollarValue = /(?i)\(\?$\d{1,4}\svalue\)?/; //Parenthesis included in this
-  var dollarDiscount = /(?i)\$\d+(\.\d{2})?\sdiscount/;
-  var discountOfDollar = /(?i)discount\sof\s\$\d+(\.\d{2})?/;
-  var asLowAsDollar = /(?i)as\slow\sas\$/;
-  var dollarcredit = /(?i)\$\d+\scredit/;
+  var saveDollarNum = /save\s((over|more\sthan|up\sto(\san\sextra)?)\s)?\$\d+/;
+  var savingsOfDollar = /savings\sof\s\$/;
+  var dollarReward = /\$\d{1,3}\sreward/;
+  var downToAmmount = /down\sto\s\$\d{1,}(\.\d{2})?/i;
+  var dollarValue = /\(\?$\d{1,4}\svalue\)?/; //Parenthesis included in this
+  var dollarDiscount = /\$\d+(\.\d{2})?\sdiscount/;
+  var discountOfDollar = /discount\sof\s\$\d+(\.\d{2})?/;
+  var asLowAsDollar = /as\slow\sas\$/;
+  var dollarcredit = /\$\d+\scredit/;
 
   //%
   var percentOff = /%\s([Oo][Ff]{2})/;
-  var percentSavings = /(?i)%\ssavings/;
-  var extraNumberPercent = /(?i)extra\s\d{1,2}%/
-  var upTpNumPercent = /(?i)up\sto\s\d{1,2}%/i;
-  var saveNumPercent = /(?i)save\s((over|more\sthan|up\sto)\s)?\d{1,2}%/;
-  var discountOfPercent = /(?i)discount\sof\s\d+%/;
-  var percentDiscount = /(?i)\d+%\sdiscount/;
-  var discountedByDollarPercent = /(?i)discounted\sby\s\$?\d{1,2}%?/;
-  var percentSavings = /(?i)%\ssavings/;
+  var percentSavings = /%\ssavings/;
+  var extraNumberPercent = /extra\s\d{1,2}%/;
+  var upTpNumPercent = /up\sto\s\d{1,2}%/i;
+  var saveNumPercent = /save\s((over|more\sthan|up\sto)\s)?\d{1,2}%/;
+  var discountOfPercent = /discount\sof\s\d+%/;
+  var percentDiscount = /\d+%\sdiscount/;
+  var discountedByDollarPercent = /discounted\sby\s\$?\d{1,2}%?/;
+  var percentSavings = /%\ssavings/;
 
   //Points
   var numberPoints = /\d+\s?[Pp][Oo][Ii][Nn][Tt][Ss]/;
-  var earnNumberPoints = /(?i)earn\s\d+\spoints/;
+  var earnNumberPoints = /earn\s\d+\spoints/;
 
   //Coupon
-  var couponColon = /(?i)coupon:/i;
-  var couponCodeColon = /(?i)coupon\scode:/i;
+  var couponColon = /coupon:/i;
+  var couponCodeColon = /coupon\scode:/i;
 
-  var urlCouponRoot = /https?:\/\/(www\.)?/ //plus the url extension PLUS .*
+  var urlCouponRoot = /https?:\/\/(www\.)?/; //plus the url extension PLUS .*
 }
 
 
@@ -918,7 +918,7 @@ function transfrom(data){
   ];
 
   arabicNumbers.forEach(function(el){
-    data = data.replace(el.arabic, el.western)
+    data = data.replace(el.arabic, el.western);
   });
 
   return data;
@@ -1126,7 +1126,7 @@ function transform(data){
     // {oldStr: /()$/i, newStr: ""}, // Find text at the end of the string$
     // {oldStr: /.*()/i, newStr: ""}, // .*Find text in the middle, remove everything before that
     // {oldStr: /().*/i, newStr: ""}, // Find text in the middle, remove everything after that.*
-    // {oldStr: /([*©®ǂ‡†±+→§™¹›∞•◊ΔÐð_|^])/ig, newStr: ""}, // Find text in the middle of the string
+    // {oldStr: /([\*©®ǂ‡†±+→§™¹›∞•◊ΔÐð_|^])/ig, newStr: ""}, // Find text in the middle of the string
   ];
 
   replaceArr.forEach(function(el){

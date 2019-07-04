@@ -18,7 +18,7 @@
       }
 
       h1{
-        font-size: 3vw;
+        font-size: 2em;
       }
 
       #main{
@@ -212,8 +212,8 @@
           //Depending on the dataType selected, it converts them from string to the right
           //data type. Then it returns an array of all the elements.
           processTextAreaValues(){
-            //if parameter slot is open but no string is entered, then return nothing
-            // if(this.textAreaValues.length === 0) return;
+            event.stopImmediatePropagation();
+
 
             console.log("In the start of the processTextAreaValues()");
             this.errorEntry = false;
@@ -225,13 +225,20 @@
             //If function selected
             if (this.dataType === "function"){
               console.log("selected data type = function");
-              let functionsArr = this.textAreaValues.split(/(?<=\})(\s*\n\s*)((?=function)|(?=(var|let|const)\s[A-z_\$]\w*\s*=\s*function))/);
+              let functionsArr = this.textAreaValues.split(/(?<=\})\s*((?=function)|(?=(var|let|const)\s[A-z_\$]\w*\s*=\s*function))/);
               console.log("the functionsArr is", functionsArr);
               for (let i = 0; i < functionsArr.length; i++) {
-                console.log("Result from function selection before the evalFunction:", functionsArr[i]);
-                this.evalFunction(functionsArr[i]) === "error" ? this.errorEntry = true : finalArr.push(this.evalFunction(functionsArr[i]));
+                if (functionsArr[i] === "" || functionsArr[i] === undefined){
+                  functionsArr.splice(i, 1);
+                  i--;
+                }
+                else {
+                  console.log("Result from function selection before the evalFunction:", functionsArr[i]);
+                  this.evalFunction(functionsArr[i]) === "error" ? this.errorEntry = true : finalArr.push(this.evalFunction(functionsArr[i]));
+                }
               }
-            }
+              return;
+            } //end of if for function
 
             //If object selected
             if (this.dataType === "object"){
@@ -247,6 +254,7 @@
                   finalArr.push(this.evalObject(objectsArr[i]), this.objectElements);
                 } //End of else
               }
+              return;
             } //End of if object selected
 
             //If string selected - Not sure about this
@@ -278,7 +286,7 @@
               for (let i = 0; i < stringsArr.length; i++) {
                 this.evalString(stringsArr[i]) === "error" ? this.errorEntry = true : finalArr.push(this.evalString(stringsArr[i]));
               }
-
+              return;
             } //End of if this.dataType === string
 
 
@@ -295,7 +303,7 @@
                   this.objectElements = {};
                   finalArr.push(this.evalArray(startArr[i], this.arrayElements));
                 }
-              }
+              } //end of array being selected
 
               //If boolean selected
               if (this.dataType === "boolean")
@@ -324,6 +332,7 @@
 
           //Evaluates if the array is properly structured
           evalArray(arrStr, arr) {
+            event.stopImmediatePropagation();
             console.log("Beginning of evalArray. arrStr is:", arrStr, typeof arrStr);
             if (arrStr === "[]"){
               console.log("In if statement. arrStr is empty so we are returning ", arr);
@@ -480,6 +489,7 @@
 
           //Evaluates if the Boolean is properly structured
           evalBoolean(el){
+            event.stopImmediatePropagation();
             if (el.trim() === "true") return true;
             if (el.trim() === "false") return false;
             return "error";
@@ -488,8 +498,10 @@
 
           //Evaluates if the function is properly structured
           evalFunction(el){
+            event.stopImmediatePropagation();
             el = el.trim();
             console.log("In evalFunction. The el in the evaFunction is:", el);
+            // console.log(event);
 
             if (!el.startsWith("function") ||
             !el.search(/(var|let|const)\s[A-z_\$]\w*\s*=\s*\(([A-z_\$]\w*,?\s*)*\)\s*=>/ !== 0) ||
@@ -505,18 +517,21 @@
 
           //Evaluates if the null is properly structured
           evalNull(el){
+            event.stopImmediatePropagation();
             return el.trim() === "null" ? null : "error";
           },
 
 
           //Evaluates if the number is properly structured
           evalNumber(el){
+            event.stopImmediatePropagation();
             return isNaN(Number(el.trim())) ? "error" : Number(el);
           },
 
 
           //evaluates if the object is properly structured
           evalObject(el, obj){
+            event.stopImmediatePropagation();
             el = el.trim();
             if (el === "{}") return obj;
 
@@ -572,6 +587,7 @@
 
           // evaluates if the regular expression is properly structured
           evalRegExp(el){
+            event.stopImmediatePropagation();
             el = el.trim();
             let elFlags = el.slice(el.lastIndexOf("/") + 1);
             let flags = "igmsuy";
@@ -607,6 +623,7 @@
 
           //Evaluates if the string is properly structured
           evalString(el){
+            event.stopImmediatePropagation();
             //Should I be removing the quotes or not?
             //How do I deal with tildas where the breaks are not indicating a
             //line break but rather a continuation of a sentence?
@@ -618,6 +635,7 @@
 
           //Evaluates if the undefined is properly structured
           evalUndefined(el){
+            event.stopImmediatePropagation();
             return el === "undefined" ? undefined : "error";
           },
 
@@ -834,8 +852,8 @@
             //How can I make sure that if any elements are removed from the argument slots, this recalculates
             let leveledArguments = this.levelArguments();
 
-            console.log("Invoking", function1());
-            console.log("leveledArguments is ", leveledArguments);
+            console.log("Invoking", function1(...leveledArguments[0]));
+            console.log("leveledArguments is ", leveledArguments[0]);
 
             //need to iterate through each element of each argument and add it as
             //a param in the function to be invoked.
@@ -885,7 +903,7 @@
             }
 
             // this.refreshArgumentsArr();
-            console.log("The argumentsArr is ", this.argumentsArr);
+            console.log("The argumentsArr is ", args);
             return this.arrayFlip(args);
           }, //End of levelArguments()
 
@@ -905,7 +923,7 @@
 
 
           arrayFlip(arr) {
-            console.log("In the arrayFlip");
+            console.log("In the arrayFlip with arr =", arr);
             let endArr = [];
 
             for (let i = 0; i < arr[0].length; i++) {
@@ -917,7 +935,7 @@
                 endArr[k].push(arr[j][k]);
               }
             }
-
+            console.log("Endarr is ", endArr);
             return endArr;
           }
         }, //End of methods
