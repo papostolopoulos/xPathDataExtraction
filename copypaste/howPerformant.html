@@ -212,7 +212,7 @@
           //Depending on the dataType selected, it converts them from string to the right
           //data type. Then it returns an array of all the elements.
           processTextAreaValues(){
-            event.stopImmediatePropagation();
+            //event.stopImmediatePropagation();
 
 
             console.log("In the start of the processTextAreaValues()");
@@ -234,7 +234,12 @@
                 }
                 else {
                   console.log("Result from function selection before the evalFunction:", functionsArr[i]);
-                  this.evalFunction(functionsArr[i]) === "error" ? this.errorEntry = true : finalArr.push(this.evalFunction(functionsArr[i]));
+                  let evalFunctionProduct = this.evalFunction(functionsArr[i]);
+                  if (evalFunctionProduct === "error") {
+                    this.errorEntry = true;
+                    return;
+                  }
+                  finalArr.push(evalFunctionProduct);
                 }
               }
               return;
@@ -247,20 +252,25 @@
               for (let i = 0; i < objectsArr.length; i++) {
                 objectsArr[i][0] === "{" ? objectsArr[i] = objectsArr[i] : objectsArr[i] = "{" + objectsArr[i];
                 console.log("Result from function selection before the evalFunction:", objectsArr[i]);
-                if (this.evalObject(objectsArr[i], this.objectElements) === "error") this.errorEntry = true;
+                let evalObjectProduct = this.evalObject(objectsArr[i], this.objectElements);
+                if (evalObjectProduct === "error"){
+                  this.errorEntry = true;
+                  return;
+                }
                 else {
                   this.objectElements = {};
                   this.arrayElements = [];
-                  finalArr.push(this.evalObject(objectsArr[i]), this.objectElements);
+                  finalArr.push(evalObjectProduct);
                 } //End of else
               }
               return;
             } //End of if object selected
 
-            //If string selected - Not sure about this
+            //If string selected - Not sure about this - Need to see if I want to trigger alerts when string
+            //starts as an array or object or says true or false or starts with number etc
             if (this.dataType === "string"){
-              console.log("selected dataType = string");
               let stringsArr = this.textAreaValues.split(/\n/);
+              console.log("selected dataType = string and stringsArr is", stringsArr);
 
               //Find if there are tildas (`) in the strings. That might mean sentences
               //that are spanning to different lines so they need to be connected
@@ -284,7 +294,13 @@
               } //End of if(pairTildas)
 
               for (let i = 0; i < stringsArr.length; i++) {
-                this.evalString(stringsArr[i]) === "error" ? this.errorEntry = true : finalArr.push(this.evalString(stringsArr[i]));
+                console.log("iterating through the stringsArr for running the string eval for i =", i);
+                let evalStringProduct = this.evalString(stringsArr[i]);
+                if (evalStringProduct === "error") {
+                  this.errorEntry = true;
+                  return;
+                }
+                finalArr.push(evalStringProduct);
               }
               return;
             } //End of if this.dataType === string
@@ -297,42 +313,81 @@
               //If array selected
               if (this.dataType === "array"){
                 console.log("selected data type: array");
-                if(this.evalArray(startArr[i], this.arrayElements) === "error") this.errorEntry = true;
+                let evalArrayProduct = this.evalArray(startArr[i], this.arrayElements);
+                if(evalArrayProcuct === "error"){
+                  this.errorEntry = true;
+                  return;
+                }
                 else {
                   this.arrayElements = [];
                   this.objectElements = {};
-                  finalArr.push(this.evalArray(startArr[i], this.arrayElements));
+                  finalArr.push(evalArrayProcuct);
                 }
               } //end of array being selected
 
               //If boolean selected
-              if (this.dataType === "boolean")
-                this.evalBoolean(startArr[i]) === "error" ? this.errorEntry = true : finalArr.push(this.evalBoolean(startArr[i]));
+              if (this.dataType === "boolean"){
+                let evalBooleanProduct = this.evalBoolean(startArr[i]);
+                if (evalBooleanProduct === "error") {
+                  this.errorEntry = true;
+                  return;
+                }
+                 finalArr.push(evalBooleanProduct);
+              }
               //If null selected
-              if (this.dataType === "null")
-                this.evalNull(startArr[i]) === "error" ? this.errorEntry = true : finalArr.push(this.evalNull(startArr[i]));
+              if (this.dataType === "null"){
+                let evalNullProduct = this.evalNull(startArr[i]);
+                if (evalNullProduct === "error") {
+                  this.errorEntry = true;
+                  return;
+                }
+                finalArr.push(evalNullProduct);
+              }
               //If number selected
-              if (this.dataType === "number")
-                this.evalNumber(startArr[i]) === "error" ? this.errorEntry = true : finalArr.push(this.evalNumber(startArr[i]));
+              if (this.dataType === "number"){
+                let evalNumberProduct = this.evalNumber(startArr[i]);
+                if (evalNumberProduct === "error") {
+                  this.errorEntry = true
+                  return;
+                }
+                finalArr.push(evalNumberProduct);
+              }
               //If regexp selected
-              if (this.dataType === "regexp")
-                this.evalRegExp(startArr[i]) === "error" ? this.errorEntry = true : finalArr.push(this.evalRegExp(startArr[i]));
+              if (this.dataType === "regexp"){
+                let evalRegExpProduct = this.evalRegExp(startArr[i]);
+                if (evalRegExpProduct === "error") {
+                  this.errorEntry = true;
+                  return;
+                }
+                finalArr.push(evalRegExpProduct);
+              }
               //If undefined selected
-              if (this.dataType === "undefined")
-                this.evalUndefined(startArr[i]) === "error" ? this.errorEntry = true : finalArr.push(this.evalUndefined(startArr[i]));
+              if (this.dataType === "undefined"){
+                let evalUndefinedProduct = this.evalUndefined(startArr[i]);
+                if (evalUndefinedProduct === "error") {
+                  this.errorEntry = true;
+                  return;
+                }
+                finalArr.push(evalUndefinedProduct);
+              }
             } //End of for loop
 
             console.log("The array to be sent to the main component is:", finalArr);
 
             //Update the new data in the app component every time there is a change
             //in the textArea or the radio buttons
-            app.$data.argumentsArr[this.argIdNum - 1] = finalArr;
+
+            // I AM CLOSING THE NEXT LINE AND I AM RETURNING FINAL ARRAY INSTEAD because
+            // THE ARRAY WILL BE PULLED FROM THE refreshArgumentsArr() that is in the MAIN
+            // vue component
+            // app.$data.argumentsArr[this.argIdNum - 1] = finalArr;
+            return finalArr;
           }, //End of processTextAreaValues
 
 
           //Evaluates if the array is properly structured
           evalArray(arrStr, arr) {
-            event.stopImmediatePropagation();
+            //event.stopImmediatePropagation();
             console.log("Beginning of evalArray. arrStr is:", arrStr, typeof arrStr);
             if (arrStr === "[]"){
               console.log("In if statement. arrStr is empty so we are returning ", arr);
@@ -489,7 +544,7 @@
 
           //Evaluates if the Boolean is properly structured
           evalBoolean(el){
-            event.stopImmediatePropagation();
+            //event.stopImmediatePropagation();
             if (el.trim() === "true") return true;
             if (el.trim() === "false") return false;
             return "error";
@@ -498,7 +553,7 @@
 
           //Evaluates if the function is properly structured
           evalFunction(el){
-            event.stopImmediatePropagation();
+            //event.stopImmediatePropagation();
             el = el.trim();
             console.log("In evalFunction. The el in the evaFunction is:", el);
             // console.log(event);
@@ -517,21 +572,21 @@
 
           //Evaluates if the null is properly structured
           evalNull(el){
-            event.stopImmediatePropagation();
+            //event.stopImmediatePropagation();
             return el.trim() === "null" ? null : "error";
           },
 
 
           //Evaluates if the number is properly structured
           evalNumber(el){
-            event.stopImmediatePropagation();
+            //event.stopImmediatePropagation();
             return isNaN(Number(el.trim())) ? "error" : Number(el);
           },
 
 
           //evaluates if the object is properly structured
           evalObject(el, obj){
-            event.stopImmediatePropagation();
+            //event.stopImmediatePropagation();
             el = el.trim();
             if (el === "{}") return obj;
 
@@ -587,7 +642,7 @@
 
           // evaluates if the regular expression is properly structured
           evalRegExp(el){
-            event.stopImmediatePropagation();
+            //event.stopImmediatePropagation();
             el = el.trim();
             let elFlags = el.slice(el.lastIndexOf("/") + 1);
             let flags = "igmsuy";
@@ -623,19 +678,17 @@
 
           //Evaluates if the string is properly structured
           evalString(el){
-            event.stopImmediatePropagation();
-            //Should I be removing the quotes or not?
-            //How do I deal with tildas where the breaks are not indicating a
-            //line break but rather a continuation of a sentence?
+            //event.stopImmediatePropagation();
+            console.log("In the evalString method for el", el);
+
             //Get rid of extra quotation marks that might already exist at the input field
-            console.log("In the evalString method");
             return el.replace(/^(?:["'`]+)?(.*[^"'`])(?:["'`]+)?\s*$/gm, "$1").trim();
           },
 
 
           //Evaluates if the undefined is properly structured
           evalUndefined(el){
-            event.stopImmediatePropagation();
+            //event.stopImmediatePropagation();
             return el === "undefined" ? undefined : "error";
           },
 
@@ -813,7 +866,7 @@
           },
 
 
-          //Evaluate the strings that are pasted in the textAreas and confirm they
+          //Evaluate the strings that are pasted in the function textAreas and confirm they
           //are valid functions
           evalFunction(el){
             this.hasError = false;
@@ -837,6 +890,7 @@
 
 
           testFunctionPerformance(){
+            console.log("starting function testFunctionPerformance");
             // if both function strings are empty, return without running function
             if (this.function1String === "" && this.function2String === "") return;
 
@@ -847,11 +901,12 @@
             // If one of the tow functions has an error, return without running function
             if (function1 === "error" || function2 === "error") return;
 
+            //return the argumentsArr in its initial status
             this.refreshArgumentsArr();
 
             //How can I make sure that if any elements are removed from the argument slots, this recalculates
             let leveledArguments = this.levelArguments();
-
+            console.log(this.levelArguments());
             console.log("Invoking", function1(...leveledArguments[0]));
             console.log("leveledArguments is ", leveledArguments[0]);
 
@@ -873,7 +928,7 @@
             //Zero the this.maxElementsNum first
             this.maxElementsNum = 0;
             let args = this.argumentsArr.slice();
-
+            console.log("this.argumentsArr is", this.argumentsArr);
             if (this.argumentsArr.length === 0) return;
 
 
@@ -910,8 +965,9 @@
 
           //used to return the array to its initial status
           refreshArgumentsArr(){
+            console.log("In function refreshArgumentsArr. Will run processTextAreaValues through this");
             for (var i = 0; i < app.$children.length; i++) {
-              app.$children[i].processTextAreaValues();
+              this.argumentsArr.push(app.$children[i].processTextAreaValues());
             }
 
             //need to iterate through the children of the component
