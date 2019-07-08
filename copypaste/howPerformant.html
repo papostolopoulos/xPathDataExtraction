@@ -47,10 +47,6 @@
         width: 50px;
       }
 
-      .divArgumentsSets{
-        overflow: auto;
-      }
-
       .divFunctionArgument{
         margin-top: 10px;
       }
@@ -76,12 +72,24 @@
       .sectionFunction1, .sectionFunction2{
         width: 50%;
         padding: 10px;
+        height: 95vh;
+      }
+
+      .sectionFunction1{
+        overflow: auto;
+        background-color: lightgreen;
+      }
+
+      .sectionFunction2{
+        overflow: auto;
+        background-color: pink;
       }
 
       .divFunctionPasteArea{
         position: sticky;
         top: 0;
-        height: 20vh;
+        height: 180px;
+        margin-bottom: 80px;
       }
 
       .textAreaFunctionPaste{
@@ -91,12 +99,8 @@
         font-size: 0.8em;
       }
 
-      .sectionFunction1{
-        background-color: lightgreen;
-      }
-
-      .sectionFunction2{
-        background-color: pink;
+      .divFunctionResultsArea{
+        overflow: auto;
       }
 
       #footer{
@@ -167,6 +171,12 @@
               placeholder="Paste your function in this field"
               ></textarea>
               <button type="button" name="button" @click="testFunctionPerformance()">test function</button>
+              <div class="divFunctionMS">
+                <h3>The total milliseconds are {{function1Totalms}}</h3>
+              </div>
+            </div>
+            <div class="divFunctionResultsArea">
+
             </div>
 
           </section>
@@ -212,7 +222,7 @@
           //Depending on the dataType selected, it converts them from string to the right
           //data type. Then it returns an array of all the elements.
           processTextAreaValues(){
-            //event.stopImmediatePropagation();
+
 
 
             console.log("In the start of the processTextAreaValues()");
@@ -242,7 +252,7 @@
                   finalArr.push(evalFunctionProduct);
                 }
               }
-              return;
+              return finalArr;
             } //end of if for function
 
             //If object selected
@@ -263,7 +273,7 @@
                   finalArr.push(evalObjectProduct);
                 } //End of else
               }
-              return;
+              return finalArr;
             } //End of if object selected
 
             //If string selected - Not sure about this - Need to see if I want to trigger alerts when string
@@ -294,7 +304,6 @@
               } //End of if(pairTildas)
 
               for (let i = 0; i < stringsArr.length; i++) {
-                console.log("iterating through the stringsArr for running the string eval for i =", i);
                 let evalStringProduct = this.evalString(stringsArr[i]);
                 if (evalStringProduct === "error") {
                   this.errorEntry = true;
@@ -302,7 +311,7 @@
                 }
                 finalArr.push(evalStringProduct);
               }
-              return;
+              return finalArr;
             } //End of if this.dataType === string
 
 
@@ -314,14 +323,14 @@
               if (this.dataType === "array"){
                 console.log("selected data type: array");
                 let evalArrayProduct = this.evalArray(startArr[i], this.arrayElements);
-                if(evalArrayProcuct === "error"){
+                if(evalArrayProduct === "error"){
                   this.errorEntry = true;
                   return;
                 }
                 else {
                   this.arrayElements = [];
                   this.objectElements = {};
-                  finalArr.push(evalArrayProcuct);
+                  finalArr.push(evalArrayProduct);
                 }
               } //end of array being selected
 
@@ -387,7 +396,7 @@
 
           //Evaluates if the array is properly structured
           evalArray(arrStr, arr) {
-            //event.stopImmediatePropagation();
+
             console.log("Beginning of evalArray. arrStr is:", arrStr, typeof arrStr);
             if (arrStr === "[]"){
               console.log("In if statement. arrStr is empty so we are returning ", arr);
@@ -544,7 +553,7 @@
 
           //Evaluates if the Boolean is properly structured
           evalBoolean(el){
-            //event.stopImmediatePropagation();
+
             if (el.trim() === "true") return true;
             if (el.trim() === "false") return false;
             return "error";
@@ -553,7 +562,7 @@
 
           //Evaluates if the function is properly structured
           evalFunction(el){
-            //event.stopImmediatePropagation();
+
             el = el.trim();
             console.log("In evalFunction. The el in the evaFunction is:", el);
             // console.log(event);
@@ -572,21 +581,21 @@
 
           //Evaluates if the null is properly structured
           evalNull(el){
-            //event.stopImmediatePropagation();
+
             return el.trim() === "null" ? null : "error";
           },
 
 
           //Evaluates if the number is properly structured
           evalNumber(el){
-            //event.stopImmediatePropagation();
+
             return isNaN(Number(el.trim())) ? "error" : Number(el);
           },
 
 
           //evaluates if the object is properly structured
           evalObject(el, obj){
-            //event.stopImmediatePropagation();
+
             el = el.trim();
             if (el === "{}") return obj;
 
@@ -642,7 +651,7 @@
 
           // evaluates if the regular expression is properly structured
           evalRegExp(el){
-            //event.stopImmediatePropagation();
+
             el = el.trim();
             let elFlags = el.slice(el.lastIndexOf("/") + 1);
             let flags = "igmsuy";
@@ -678,7 +687,7 @@
 
           //Evaluates if the string is properly structured
           evalString(el){
-            //event.stopImmediatePropagation();
+
             console.log("In the evalString method for el", el);
 
             //Get rid of extra quotation marks that might already exist at the input field
@@ -688,7 +697,7 @@
 
           //Evaluates if the undefined is properly structured
           evalUndefined(el){
-            //event.stopImmediatePropagation();
+
             return el === "undefined" ? undefined : "error";
           },
 
@@ -843,6 +852,10 @@
           argumentsArr: [], //The array that has all the initial arguments
           function1String: "",
           function2String: "",
+          function1Result: [],
+          function2Result: [],
+          function1Totalms: 0,
+          function2Totalms: 0,
           hasError: false,
           maxElementsNum: 0 //The most number of elements that an argument set has
         },
@@ -868,10 +881,10 @@
 
           //Evaluate the strings that are pasted in the function textAreas and confirm they
           //are valid functions
-          evalFunction(el){
+          evalMainFunctions(el){
             this.hasError = false;
             el = el.trim();
-            console.log("In evalFunction. The el in the evaFunction is:", el);
+            console.log("In evalMainFunctions. The el in the evaFunction is:", el);
 
             if (!el.startsWith("function") ||
             !el.search(/(var|let|const)\s[A-z_\$]\w*\s*=\s*\(([A-z_\$]\w*,?\s*)*\)\s*=>/ !== 0) ||
@@ -895,8 +908,8 @@
             if (this.function1String === "" && this.function2String === "") return;
 
             //Create function. Evaluate if it is a valid function
-            let function1 = this.function1String !== "" ? this.evalFunction(this.function1String) : "";
-            let function2 = this.function2String !== "" ? this.evalFunction(this.function2String) : "";
+            let function1 = this.function1String !== "" ? this.evalMainFunctions(this.function1String) : "";
+            let function2 = this.function2String !== "" ? this.evalMainFunctions(this.function2String) : "";
 
             // If one of the tow functions has an error, return without running function
             if (function1 === "error" || function2 === "error") return;
@@ -907,13 +920,18 @@
             //How can I make sure that if any elements are removed from the argument slots, this recalculates
             let leveledArguments = this.levelArguments();
             console.log(this.levelArguments());
-            console.log("Invoking", function1(...leveledArguments[0]));
             console.log("leveledArguments is ", leveledArguments[0]);
 
             //need to iterate through each element of each argument and add it as
             //a param in the function to be invoked.
-            for (var i = 0; i < leveledArguments.length; i++) {
-              this.numOfArgumentsSets[i];
+            for (let i = 0; i < leveledArguments.length; i++) {
+              let timeStart = performance.now();
+              function1(...leveledArguments[i]);
+              let timeEnd = performance.now();
+
+              this.function1Totalms += timeEnd - timeStart;
+              console.log("Invoking", function1(...leveledArguments[i]));
+              console.log("The time it took to invoke was", (timeEnd - timeStart), "milliseconds");
             }
 
 
@@ -958,7 +976,7 @@
             }
 
             // this.refreshArgumentsArr();
-            console.log("The argumentsArr is ", args);
+            console.log("In the end of this.levelArguments(), the argumentsArr is ", args, "About to start the arrayFlip()");
             return this.arrayFlip(args);
           }, //End of levelArguments()
 
@@ -966,9 +984,13 @@
           //used to return the array to its initial status
           refreshArgumentsArr(){
             console.log("In function refreshArgumentsArr. Will run processTextAreaValues through this");
-            for (var i = 0; i < app.$children.length; i++) {
+            this.argumentsArr = [];
+            console.log("this.numOfArgumentsSets is", this.numOfArgumentsSets);
+            for (var i = 0; i < Number(this.numOfArgumentsSets); i++) {
               this.argumentsArr.push(app.$children[i].processTextAreaValues());
             }
+
+            console.log("after the iteration in refreshArgumentsArr, the argumentsArr is", this.argumentsArr);
 
             //need to iterate through the children of the component
             //If the elements of the children are less or more than the elements
