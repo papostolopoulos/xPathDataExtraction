@@ -172,19 +172,50 @@
               ></textarea>
               <button type="button" name="button" @click="testFunctionPerformance()">test function</button>
               <div class="divFunctionMS">
-                <h3>The total milliseconds are {{function1Totalms}}</h3>
+                <h3>The total milliseconds to run all the functions are {{function1Totalms}}</h3>
+              </div>
+              <div class="divFunctionErrorAlertArea" v-show="function1Error">
+                {{function1ErrorMessage}}
+              </div>
+              <div class="divFunctionErrorAlertArea" v-show="hasError">
+                {{errorMessage}}
+              </div>
+              <div class="divFunctionResultsArea"
+              v-for="result in function1Result">
+                {{result}}
               </div>
             </div>
-            <div class="divFunctionResultsArea">
 
-            </div>
 
           </section>
 
 
 
           <section class="sectionFunction2">
-            This is for function 2 - sectionFunction2
+            <div class="divFunctionPasteArea">
+              <h1>Function 2</h1>
+              <textarea
+              id="textAreaFunction2"
+              v-model="function2String"
+              name="textAreaFunction2"
+              class="textAreaFunctionPaste"
+              placeholder="Paste your function in this field"
+              ></textarea>
+              <button type="button" name="button" @click="testFunctionPerformance()">test function</button>
+              <div class="divFunctionMS">
+                <h3>The total milliseconds to run all the functions are {{function2Totalms}}</h3>
+              </div>
+              <div class="divFunctionErrorAlertArea" v-show="function2Error">
+                {{function2ErrorMessage}}
+              </div>
+              <div class="divFunctionErrorAlertArea" v-show="hasError">
+                {{errorMessage}}
+              </div>
+              <div class="divFunctionResultsArea"
+              v-for="result in function2Result">
+                {{result}}
+              </div>
+            </div>
           </section>
         </section>
 
@@ -194,7 +225,7 @@
       <footer id="footer">
         How Performant? Compare JavaScript functions |
         <a href="http://addeventlistener.xyz" target="_blank">@papostolopoulos</a> |
-        May 2019
+        September 2019
       </footer>
     </div>
 
@@ -222,8 +253,6 @@
           //Depending on the dataType selected, it converts them from string to the right
           //data type. Then it returns an array of all the elements.
           processTextAreaValues(){
-
-
 
             console.log("In the start of the processTextAreaValues()");
             this.errorEntry = false;
@@ -856,7 +885,12 @@
           function2Result: [],
           function1Totalms: 0,
           function2Totalms: 0,
+          function1Error: false,
+          function2Error: false,
+          function1ErrorMessage: "",
+          function2ErrorMessage: "",
           hasError: false,
+          errorMessage: "Hello",
           maxElementsNum: 0 //The most number of elements that an argument set has
         },
         methods: {
@@ -884,20 +918,83 @@
           evalMainFunctions(el){
             this.hasError = false;
             el = el.trim();
-            console.log("In evalMainFunctions. The el in the evaFunction is:", el);
-
-            if (!el.startsWith("function") ||
-            !el.search(/(var|let|const)\s[A-z_\$]\w*\s*=\s*\(([A-z_\$]\w*,?\s*)*\)\s*=>/ !== 0) ||
-            !el.endsWith("}")) {
-              this.hasError = true;
-              return "";
+            if (el === this.function1String.trim()) {
+              console.log("Entering the if statement for function1");
+              this.function1Error = false;
+              if (this.evalFunctionStartEnd(el)) {
+                console.log("deeper for 1");
+                this.function1Error = true;
+                this.function1ErrorMessage = "There is a syntax error at the beginning or the end of your function. Please fix the syntax error and submit again.";
+                return "error";
+              }
             }
+            else if(el === this.function2String.trim()){
+              console.log("entering the if statement for function2");
+              this.function2Error = false;
+              if (this.evalFunctionStartEnd(el)) {
+                console.log("deeper for 2");
+                this.function2Error = true;
+                this.function2ErrorMessage = "There is a syntax error at the beginning or the end of your function. Please fix the syntax error and submit again.";
+                return "error";
+              }
+            }
+            // this.function1Error = false;
+            // this.function2Error = false;
+
+            // el = el.trim();
+            // console.log("In evalMainFunctions. The el in the evaFunction is:", el);
+            //
+            // if (!el.startsWith("function") ||
+            // !el.search(/(var|let|const)\s[A-z_\$]\w*\s*=\s*\(([A-z_\$]\w*,?\s*)*\)\s*=>/ !== 0) ||
+            // !el.endsWith("}")) {
+            //   if (el === this.function1String.trim()) {
+            //     this.function1Error = true;
+            //     this.function1ErrorMessage = "There is a syntax error at the beginning or the end of your function. Please fix the syntax error and submit again.";
+            //     return "error";
+            //   }
+            //   else if (el === this.function2String.trim()) {
+            //     this.function2Error = true;
+            //     this.function2ErrorMessage = "There is a syntax error at the beginning or the end of your function. Please fix the syntax error and submit again.";
+            //     return "error";
+            //   }
+            //   else{
+            //     this.function1Error = false;
+            //     this.function2Error = false;
+            //   }
+            //   // this.hasError = true;
+            //   // this.errorMessage = "There is a syntax error at the beginning or the end of your function. Please fix the syntax error and submit again.";
+            //   // return "error";
+            // }
 
             let params = el.slice(el.indexOf("(") + 1, el.indexOf(")")).split(/,\s*/);
             params.push(el.slice(el.indexOf("{") + 1, el.lastIndexOf("}")));
             console.log("The function parameters are:", params);
+            console.log("about to return the new function");
 
-            return new Function(...params);
+            let newFunction = new Function(...params);
+
+            //See if there are syntax errors in the function
+            this.catchErrors(newFunction);
+            // try {
+            //   new Function(...params);
+            // }
+            // catch(error) {
+            //   console.error(error);
+            //   this.hasError = true;
+            //   this.errorMessage = error.toString();
+            // }
+            return newFunction;
+          },
+
+
+
+          //
+          evalFunctionStartEnd(e){
+            if (!e.startsWith("function") ||
+            !e.search(/(var|let|const)\s[A-z_\$]\w*\s*=\s*\(([A-z_\$]\w*,?\s*)*\)\s*=>/ !== 0) ||
+            !e.endsWith("}")) return true;
+
+            return false;
           },
 
 
@@ -908,33 +1005,92 @@
             if (this.function1String === "" && this.function2String === "") return;
 
             //Create function. Evaluate if it is a valid function
-            let function1 = this.function1String !== "" ? this.evalMainFunctions(this.function1String) : "";
-            let function2 = this.function2String !== "" ? this.evalMainFunctions(this.function2String) : "";
+            let function1, function2;
 
-            // If one of the tow functions has an error, return without running function
+            if (this.function1String !== "") function1 = this.evalMainFunctions(this.function1String);
+            if (this.function2String !== "") function2 = this.evalMainFunctions(this.function2String);
+
+
+            // If one of the two functions has an error, return without running function
+            //PERHAPS I NEED TO EXPAND THIS WITH AN ERROR ALERT
+            console.log("function1: ", function1, "function2: ", function2);
             if (function1 === "error" || function2 === "error") return;
 
             //return the argumentsArr in its initial status
             this.refreshArgumentsArr();
+            //return function1Result and function2Result in its initial status
+            this.refreshFunctionResults();
+            this.function1Totalms = 0;
+            this.function2Totalms = 0;
+            this.function1Result = [];
+            this.function2Result = [];
 
             //How can I make sure that if any elements are removed from the argument slots, this recalculates
             let leveledArguments = this.levelArguments();
             console.log(this.levelArguments());
-            console.log("leveledArguments is ", leveledArguments[0]);
+            console.log("leveledArguments is ", leveledArguments);
+            //To be pushed in function1Result or function2Result
 
-            //need to iterate through each element of each argument and add it as
-            //a param in the function to be invoked.
-            for (let i = 0; i < leveledArguments.length; i++) {
+            if (function1){
+              this.function1Result = this.functionExtraction(function1, leveledArguments);
+              for (let i = 0; i < this.function1Result.length; i++) {
+                this.function1Totalms += this.function1Result[i].ms
+              }
+            }
+            if (function2){
+              this.function2Result = this.functionExtraction(function2, leveledArguments);
+              for (let i = 0; i < this.function2Result.length; i++) {
+                this.function2Totalms += this.function2Result[i].ms
+              }
+            }
+          },
+
+
+          //calculates performance and returns function's product and ms.
+          //What is returned is an array with objects with properties that have keys
+          //"ms" and "output"
+          functionExtraction(func, funcArguments){
+            let finalOutput = [];
+            console.log("about to start functionExtraction");
+            console.log(`the data used are:
+              func: ${func}
+              funcArguments: ${funcArguments}`);
+
+              //Test if the function has any errors
+              this.catchErrors(func);
+
+            // If there are no arguments used in the function, then return the function's
+            // product without any parameters
+            if (!funcArguments) {
+              let functionResult = {};
               let timeStart = performance.now();
-              function1(...leveledArguments[i]);
+              func();
               let timeEnd = performance.now();
 
-              this.function1Totalms += timeEnd - timeStart;
-              console.log("Invoking", function1(...leveledArguments[i]));
-              console.log("The time it took to invoke was", (timeEnd - timeStart), "milliseconds");
+              functionResult.ms = timeEnd - timeStart; //Adding ms of function in object
+              functionResult.output = func();
+              finalOutput.push(functionResult);
+
+              console.log("Invoking func()", func());
+              console.log(`The time it took to invoke was, ${timeEnd - timeStart}, milliseconds`);
             }
+            else {
+              for (let i = 0; i < funcArguments.length; i++) {
+                let functionResult = {};
+                let timeStart = performance.now();
+                func(...funcArguments[i]);
+                let timeEnd = performance.now();
 
+                functionResult.ms = timeEnd - timeStart;
+                functionResult.output = func(...funcArguments[i]);
+                finalOutput.push(functionResult);
+                console.log("Invoking func(...params)", func(...funcArguments[i]));
+                console.log(`The time it took to invoke was, ${timeEnd - timeStart}, milliseconds`);
+              } //End of for loop
 
+            } //end of else statement
+
+            return finalOutput;
           },
 
 
@@ -1000,6 +1156,15 @@
           },
 
 
+          //used to zero out function1Result and function2Result
+          refreshFunctionResults(){
+            this.function1Result = [];
+            this.function2Result = [];
+          },
+
+
+          //used to flip the array's elements from rows to columns so that every element
+          //of the array is a set of different arguments.
           arrayFlip(arr) {
             console.log("In the arrayFlip with arr =", arr);
             let endArr = [];
@@ -1015,6 +1180,19 @@
             }
             console.log("Endarr is ", endArr);
             return endArr;
+          },
+
+
+
+          catchErrors(fnctn){
+            try {
+              fnctn();
+            }
+            catch(error) {
+              console.error(error);
+              this.hasError = true;
+              this.errorMessage = error.toString();
+            }
           }
         }, //End of methods
         computed: {
