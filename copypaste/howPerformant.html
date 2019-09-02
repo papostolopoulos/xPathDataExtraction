@@ -5,6 +5,7 @@
       type="image/png"
       href="favicon.ico">
     <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
     <title>How Performant - Test the performance of JavaScript functions</title>
     <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
     <script src="vue.js"></script>
@@ -19,6 +20,41 @@
 
       h1{
         font-size: 2em;
+        color: rgb(51, 51, 51);
+        font-family: "Montserrat", sans-serif;
+      }
+
+      #container{
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-rows: 7vh 90vh 3vh;
+        grid-template-areas:
+        "header"
+        "main"
+        "footer"
+      }
+
+      #header{
+        grid-area: header;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+        background-color: rgb(51, 51, 51);
+        color: rgb(255, 255, 255);
+      }
+
+      .title{
+        font-family: "Montserrat", sans-serif;
+        font-size: 2em;
+        font-variant: small-caps;
+
+      }
+
+      .subtitle{
+        font-size: .8em;
+        font-weight: bold;
       }
 
       #main{
@@ -28,12 +64,11 @@
         grid-template-areas:
         "sectionPasteParams sectionPasteFunctions"
         "sectionPasteParams sectionPasteFunctions";
-        height: 95vh;
+        grid-area: main;
       }
 
       .sectionPasteParams{
         padding: 10px;
-        background-color: lightblue;
         grid-area: sectionPasteParams;
         overflow: auto;
       }
@@ -43,8 +78,35 @@
         top: 0;
       }
 
+      .divNumOfArgumentsSets hr{
+        border: 1px solid rgb(51,51,51);
+        margin-top: 10px;
+      }
+
+      .divInputNumOfArguments{
+        display: flex;
+        justify-content: center;
+      }
+
       #inputNumOfArgumentsSets{
-        width: 50px;
+        width: 80px;
+        text-align: center;
+        font-size: 1.5em;
+        border: 2px solid rgb(51,51,51);
+        padding: 5px;
+        /* padding-left: 10px; */
+      }
+
+      #inputNumOfArgumentsSets:focus{
+        background-color: rgb(230, 230, 230);
+        outline: none;
+      }
+
+
+
+      .divDataTypeContainer{
+        display: flex;
+        flex-wrap: wrap;
       }
 
       .divFunctionArgument{
@@ -67,12 +129,13 @@
         display: flex;
         align-content: center;
         justify-content: center;
+        height: 90vh;
       }
 
       .sectionFunction1, .sectionFunction2{
         width: 50%;
         padding: 10px;
-        height: 95vh;
+        height: 90vh;
       }
 
       .sectionFunction1{
@@ -105,8 +168,8 @@
 
       #footer{
         background: rgb(0,0,0);
-        height: 5vh;
-        line-height: 5vh;
+        grid-area: footer;
+        line-height: 3vh;
         text-align: center;
         font-size: 1.4rem;
         border-top: 3px solid black;
@@ -120,22 +183,38 @@
   </head>
   <body>
     <div id="container">
+      <header id="header">
+        <div class="title">
+          How Performant?
+        </div>
+        <div class="subtitle">
+          Compare JavaScript Functions
+        </div>
+      </header>
       <main id="main">
         <section class="sectionPasteParams">
           <div class="divNumOfArgumentsSets">
             <h1>Function arguments</h1>
-            <label class="labelNumOfArgumentsSets">
-              Enter number of function arguments:
-              <input type="number"
-              name="inputNumOfArgumentsSets"
-              id="inputNumOfArgumentsSets"
-              v-model="numOfArgumentsSets"
-              @change="changeArgumentsArrLength()"
-              min="0"
-              max="20"
-              width="4"
-              >
-            </label>
+            <div class="divInputNumOfArguments">
+              <label class="labelNumOfArgumentsSets">
+                Number of function arguments:
+                <input type="number"
+                name="inputNumOfArgumentsSets"
+                id="inputNumOfArgumentsSets"
+                v-model="numOfArgumentsSets"
+                @change="changeArgumentsArrLength($event)"
+                @keyup="changeArgumentsArrLength($event)"
+                min="0"
+                max="10"
+                width="2"
+                >
+              </label>
+              <!-- <div class="divNumOfArgumentsError" v-show="numOfArgumentsError">
+                The error goes here and it looks really good
+              </div> -->
+            </div>
+
+            <hr>
             <!-- <p>
               Paste your arguments in the following slots.
               One data type per slot.
@@ -177,9 +256,6 @@
               <div class="divFunctionErrorAlertArea" v-show="function1Error">
                 {{function1ErrorMessage}}
               </div>
-              <div class="divFunctionErrorAlertArea" v-show="hasError">
-                {{errorMessage}}
-              </div>
               <div class="divFunctionResultsArea"
               v-for="result in function1Result">
                 {{result}}
@@ -208,9 +284,6 @@
               <div class="divFunctionErrorAlertArea" v-show="function2Error">
                 {{function2ErrorMessage}}
               </div>
-              <div class="divFunctionErrorAlertArea" v-show="hasError">
-                {{errorMessage}}
-              </div>
               <div class="divFunctionResultsArea"
               v-for="result in function2Result">
                 {{result}}
@@ -223,7 +296,6 @@
       </main>
 
       <footer id="footer">
-        How Performant? Compare JavaScript functions |
         <a href="http://addeventlistener.xyz" target="_blank">@papostolopoulos</a> |
         September 2019
       </footer>
@@ -774,42 +846,62 @@
             <h4>Argument data type:</h4>
             <div class="divLabelDataType">
               <form>
-                <label class="labelArgumentsDataTypes">
-                  Array:
-                  <input type="radio" name="inputRadioDataType" value="array" v-model="dataType" @change="processTextAreaValues($event.target.value)">
-                </label>
-                <label class="labelArgumentsDataTypes">
-                  Boolean:
-                  <input type="radio" name="inputRadioDataType" value="boolean" v-model="dataType" @change="processTextAreaValues($event.target.value)">
-                </label>
-                <label class="labelArgumentsDataTypes">
-                  Null:
-                  <input type="radio" name="inputRadioDataType" value="null" v-model="dataType" @change="processTextAreaValues($event.target.value)">
-                </label>
-                <label class="labelArgumentsDataTypes">
-                  Number:
-                  <input type="radio" name="inputRadioDataType" value="number" v-model="dataType" @change="processTextAreaValues($event.target.value)">
-                </label>
-                <label class="labelArgumentsDataTypes">
-                  Object literal:
-                  <input type="radio" name="inputRadioDataType" value="object" v-model="dataType" @change="processTextAreaValues($event.target.value)">
-                </label>
-                <label class="labelArgumentsDataTypes">
-                  RegExp:
-                  <input type="radio" name="inputRadioDataType" value="regexp" v-model="dataType" @change="processTextAreaValues($event.target.value)">
-                </label>
-                <label class="labelArgumentsDataTypes">
-                  String:
-                  <input type="radio" name="inputRadioDataType" value="string" v-model="dataType" @change="processTextAreaValues($event.target.value)">
-                </label>
-                <label class="labelArgumentsDataTypes">
-                  Undefined:
-                  <input type="radio" name="inputRadioDataType" value="undefined" v-model="dataType" @change="processTextAreaValues($event.target.value)">
-                </label>
-                <label class="labelArgumentsDataTypes">
-                  callback function:
-                  <input type="radio" name="inputRadioDataType" value="function" v-model="dataType" @change="processTextAreaValues($event.target.value)">
-                </label>
+                <div class="divDataTypeContainer">
+                  <div class="divLabelDataTypeSingle">
+                    <label class="labelArgumentsDataTypes">
+                      Array:
+                      <input type="radio" name="inputRadioDataType" value="array" v-model="dataType" @change="processTextAreaValues($event.target.value)">
+                    </label>
+                  </div>
+                  <div class="divLabelDataTypeSingle">
+                    <label class="labelArgumentsDataTypes">
+                      Boolean:
+                      <input type="radio" name="inputRadioDataType" value="boolean" v-model="dataType" @change="processTextAreaValues($event.target.value)">
+                    </label>
+                  </div>
+                  <div class="divLabelDataTypeSingle">
+                    <label class="labelArgumentsDataTypes">
+                      Null:
+                      <input type="radio" name="inputRadioDataType" value="null" v-model="dataType" @change="processTextAreaValues($event.target.value)">
+                    </label>
+                  </div>
+                  <div class="divLabelDataTypeSingle">
+                    <label class="labelArgumentsDataTypes">
+                      Number:
+                      <input type="radio" name="inputRadioDataType" value="number" v-model="dataType" @change="processTextAreaValues($event.target.value)">
+                    </label>
+                  </div>
+                  <div class="divLabelDataTypeSingle">
+                    <label class="labelArgumentsDataTypes">
+                      Object literal:
+                      <input type="radio" name="inputRadioDataType" value="object" v-model="dataType" @change="processTextAreaValues($event.target.value)">
+                    </label>
+                  </div>
+                  <div class="divLabelDataTypeSingle">
+                    <label class="labelArgumentsDataTypes">
+                      RegExp:
+                      <input type="radio" name="inputRadioDataType" value="regexp" v-model="dataType" @change="processTextAreaValues($event.target.value)">
+                    </label>
+                  </div>
+                  <div class="divLabelDataTypeSingle">
+                    <label class="labelArgumentsDataTypes">
+                      String:
+                      <input type="radio" name="inputRadioDataType" value="string" v-model="dataType" @change="processTextAreaValues($event.target.value)">
+                    </label>
+                  </div>
+                  <div class="divLabelDataTypeSingle">
+                    <label class="labelArgumentsDataTypes">
+                      Undefined:
+                      <input type="radio" name="inputRadioDataType" value="undefined" v-model="dataType" @change="processTextAreaValues($event.target.value)">
+                    </label>
+                  </div>
+                  <div class="divLabelDataTypeSingle">
+                    <label class="labelArgumentsDataTypes">
+                      callback function:
+                      <input type="radio" name="inputRadioDataType" value="function" v-model="dataType" @change="processTextAreaValues($event.target.value)">
+                    </label>
+                  </div>
+                </div>
               </form>
 
             </div> <!--End of divLabelDataType-->
@@ -878,6 +970,7 @@
         el: "#main",
         data: {
           numOfArgumentsSets: 0, //number of components - number of arguments for functions
+          numOfArgumentsError: false,
           argumentsArr: [], //The array that has all the initial arguments
           function1String: "",
           function2String: "",
@@ -889,14 +982,16 @@
           function2Error: false,
           function1ErrorMessage: "",
           function2ErrorMessage: "",
-          hasError: false,
-          errorMessage: "Hello",
           maxElementsNum: 0 //The most number of elements that an argument set has
         },
         methods: {
           //updates the length of the argumentsArr based on the addition or subtraction
           //of new components
-          changeArgumentsArrLength(){
+          changeArgumentsArrLength(event){
+            console.log(event);
+            if (event.target.value > 10) {
+              event.target.value = 10;
+            }
             /*
             I need to decide if I want to keep this if statement or if an argument
             with an empty string should be placed every time I add a new textArea.
@@ -916,7 +1011,6 @@
           //Evaluate the strings that are pasted in the function textAreas and confirm they
           //are valid functions
           evalMainFunctions(el){
-            this.hasError = false;
             el = el.trim();
             if (el === this.function1String.trim()) {
               console.log("Entering the if statement for function1");
@@ -938,52 +1032,31 @@
                 return "error";
               }
             }
-            // this.function1Error = false;
-            // this.function2Error = false;
 
-            // el = el.trim();
-            // console.log("In evalMainFunctions. The el in the evaFunction is:", el);
-            //
-            // if (!el.startsWith("function") ||
-            // !el.search(/(var|let|const)\s[A-z_\$]\w*\s*=\s*\(([A-z_\$]\w*,?\s*)*\)\s*=>/ !== 0) ||
-            // !el.endsWith("}")) {
-            //   if (el === this.function1String.trim()) {
-            //     this.function1Error = true;
-            //     this.function1ErrorMessage = "There is a syntax error at the beginning or the end of your function. Please fix the syntax error and submit again.";
-            //     return "error";
-            //   }
-            //   else if (el === this.function2String.trim()) {
-            //     this.function2Error = true;
-            //     this.function2ErrorMessage = "There is a syntax error at the beginning or the end of your function. Please fix the syntax error and submit again.";
-            //     return "error";
-            //   }
-            //   else{
-            //     this.function1Error = false;
-            //     this.function2Error = false;
-            //   }
-            //   // this.hasError = true;
-            //   // this.errorMessage = "There is a syntax error at the beginning or the end of your function. Please fix the syntax error and submit again.";
-            //   // return "error";
-            // }
 
             let params = el.slice(el.indexOf("(") + 1, el.indexOf(")")).split(/,\s*/);
             params.push(el.slice(el.indexOf("{") + 1, el.lastIndexOf("}")));
             console.log("The function parameters are:", params);
             console.log("about to return the new function");
 
-            let newFunction = new Function(...params);
 
-            //See if there are syntax errors in the function
-            this.catchErrors(newFunction);
-            // try {
-            //   new Function(...params);
-            // }
-            // catch(error) {
-            //   console.error(error);
-            //   this.hasError = true;
-            //   this.errorMessage = error.toString();
-            // }
-            return newFunction;
+            try {
+              new Function(...params)
+            }
+            catch (error) {
+              console.log("caught");
+              if (el === this.function1String.trim()) {
+                this.function1Error = true;
+                this.function1ErrorMessage = error.toString();
+              }
+              if (el === this.function2String.trim())
+              {
+                this.function2Error = true;
+                this.function2ErrorMessage = error.toString();
+              }
+            }
+
+            return new Function(...params);
           },
 
 
@@ -1032,13 +1105,13 @@
             //To be pushed in function1Result or function2Result
 
             if (function1){
-              this.function1Result = this.functionExtraction(function1, leveledArguments);
+              this.function1Result = this.functionExtraction(function1, leveledArguments, 1);
               for (let i = 0; i < this.function1Result.length; i++) {
                 this.function1Totalms += this.function1Result[i].ms
               }
             }
             if (function2){
-              this.function2Result = this.functionExtraction(function2, leveledArguments);
+              this.function2Result = this.functionExtraction(function2, leveledArguments, 2);
               for (let i = 0; i < this.function2Result.length; i++) {
                 this.function2Totalms += this.function2Result[i].ms
               }
@@ -1049,7 +1122,7 @@
           //calculates performance and returns function's product and ms.
           //What is returned is an array with objects with properties that have keys
           //"ms" and "output"
-          functionExtraction(func, funcArguments){
+          functionExtraction(func, funcArguments, num){
             let finalOutput = [];
             console.log("about to start functionExtraction");
             console.log(`the data used are:
@@ -1057,7 +1130,7 @@
               funcArguments: ${funcArguments}`);
 
               //Test if the function has any errors
-              this.catchErrors(func);
+              this.catchErrors(func, num);
 
             // If there are no arguments used in the function, then return the function's
             // product without any parameters
@@ -1184,16 +1257,25 @@
 
 
 
-          catchErrors(fnctn){
+          catchErrors(fnctn, num){
             try {
               fnctn();
             }
             catch(error) {
               console.error(error);
-              this.hasError = true;
-              this.errorMessage = error.toString();
+              if (num === 1) {
+                this.function1Error = true;
+                this.function1ErrorMessage = error.toString();
+              }
+              else if (num === 2) {
+                this.function2Error = true;
+                this.function2ErrorMessage = error.toString();
+              }
+
             }
-          }
+          },
+
+
         }, //End of methods
         computed: {
         } //End of computed
