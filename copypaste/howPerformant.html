@@ -20,7 +20,6 @@
 
       h1{
         font-size: 2em;
-        color: rgb(51, 51, 51);
         font-family: "Montserrat", sans-serif;
       }
 
@@ -41,8 +40,9 @@
         height: 100%;
         justify-content: center;
         align-items: center;
-        background-color: rgb(51, 51, 51);
-        color: rgb(255, 255, 255);
+        background-color: rgb(227, 114, 34); /*tangerine e37222*/
+        color: rgba(255, 255, 255, .8);
+
       }
 
       .title{
@@ -68,18 +68,21 @@
       }
 
       .sectionPasteParams{
-        padding: 10px;
+        padding: 0 10px 10px 10px;
         grid-area: sectionPasteParams;
         overflow: auto;
+        background-color: rgb(102, 185, 191); /*powder 66b9bf*/
+        color: rgba(255, 255, 255, .8);
       }
 
       .divNumOfArgumentsSets{
         position: sticky;
         top: 0;
+        background-color: rgb(102, 185, 191); /*powder 66b9bf*/
       }
 
       .divNumOfArgumentsSets hr{
-        border: 1px solid rgb(51,51,51);
+        border: 3px solid rgb(7, 136, 155); /*teal 07889b*/
         margin-top: 10px;
       }
 
@@ -92,17 +95,20 @@
         width: 80px;
         text-align: center;
         font-size: 1.5em;
-        border: 2px solid rgb(51,51,51);
-        padding: 5px;
-        /* padding-left: 10px; */
+        border: 2px solid rgb(7, 136, 155); /*teal 07889b*/
+        color: rgb(7, 136, 155); /*teal 07889b*/
+        padding: 5px 5px 5px 20px;
       }
 
       #inputNumOfArgumentsSets:focus{
-        background-color: rgb(230, 230, 230);
+        background-color: rgb(206, 247, 253);/*90% from teal 07889b*/
+        color: rgb(7, 136, 155); /*teal 07889b*/
         outline: none;
       }
 
-
+      #inputNumOfArgumentsSets:hover{
+        cursor: pointer;
+      }
 
       .divDataTypeContainer{
         display: flex;
@@ -111,17 +117,113 @@
 
       .divFunctionArgument{
         margin-top: 10px;
+        border-bottom: 1px solid rgb(7, 136, 155); /*teal 07889b*/
+        padding-bottom: 10px;
       }
 
       .textAreaArgumentsPaste{
         width: 100%;
         height: 10vh;
         padding: 5px;
+        margin-top: 5px;
         font-size: 0.8em;
+        color: rgb(7, 136, 155); /*teal 07889b*/
+        outline: none;
+        border: 1px solid rgb(7, 136, 155); /*teal 07889b*/
+      }
+
+      .textAreaArgumentsPaste:focus{
+        background-color: rgb(206, 247, 253);/*90% from teal 07889b*/
+      }
+
+      .divLabelDataTypeSingle{
+        display: flex;
+        align-items: center;
       }
 
       .labelArgumentsDataTypes{
         margin-right: 10px;
+        height: 30px;
+        line-height: 30px;
+        position: relative;
+      }
+
+      .labelArgumentsDataTypes:hover{
+        cursor: pointer;
+        color: rgb(7, 136, 155); /*teal 07889b*/
+      }
+
+      .labelArgumentsDataTypes:hover .spanFakeRadio{
+        background-color: rgb(7, 136, 155);
+      }
+
+      .labelArgumentsDataTypes:active{
+        color: rgb(227, 114, 34); /*tangerine e37222*/;
+      }
+
+      .labelArgumentsDataTypes:active .spanFakeRadio{
+        background-color: rgb(227, 114, 34); /*tangerine e37222*/;
+      }
+
+      input[name*="inputRadioDataType"]{
+        position: absolute;
+        opacity: 0;
+      }
+
+      input[name*="inputRadioDataType"]:checked + span + span{
+        color: rgb(7, 136, 155); /*teal 07889b*/;
+      }
+
+      input[name*="inputRadioDataType"]:checked + span{
+        background-color: rgb(7, 136, 155); /*teal 07889b*/;
+      }
+
+      input[name*="inputRadioDataType"]:checked + span:after{
+        display: block;
+      }
+
+      .spanFakeRadio{
+        position: absolute;
+        top: 5px;
+        left: 0;
+        height: 20px;
+        width: 20px;
+        background-color: rgba(255, 255, 255, .8);
+        border-radius: 50%;
+        border: 1px solid rgb(7, 136, 155); /*teal 07889b*/
+      }
+
+      .spanFakeRadio:after{
+        content:"";
+        position: absolute;
+        display: none;
+        top: 5px;
+      	left: 5px;
+      	width: 8px;
+      	height: 8px;
+      	border-radius: 50%;
+      	background-color: rgba(255, 255, 255, .8);
+      }
+
+      .spanFakeRadio:hover{
+        background-color: rgb(7, 136, 155); /*teal 07889b*/
+      }
+
+      .spanFakeRadio:active{
+        background-color: rgb(227, 114, 34); /*tangerine e37222*/;
+      }
+
+      .spanRadioExplanation{
+        padding-left: 25px;
+      }
+
+      input:hover{
+        cursor: pointer;
+      }
+
+      .divErrorEntry{
+        padding-top: 10px;
+        color: rgba(128, 0, 0, .8);
       }
 
       .sectionPasteFunctions{
@@ -134,18 +236,20 @@
 
       .sectionFunction1, .sectionFunction2{
         width: 50%;
-        padding: 10px;
+        padding: 0 10px 10px 10px;
         height: 90vh;
+        color: rgba(255, 255, 255, .8);
       }
 
       .sectionFunction1{
         overflow: auto;
-        background-color: lightgreen;
+        background-color: rgb(238, 170, 123) /*tan*/;
+        border-right: 2px solid rgba(255, 255, 255, .8);
       }
 
       .sectionFunction2{
         overflow: auto;
-        background-color: pink;
+        background-color: rgb(238, 170, 123) /*tan*/;
       }
 
       .divFunctionPasteArea{
@@ -160,24 +264,75 @@
         height: 100%;
         padding: 5px;
         font-size: 0.8em;
+        outline: none;
+        border: 2px solid rgb(227, 114, 34); /*tangerine e37222*/;
+        color: rgb(227, 114, 34); /*tangerine e37222*/;
+      }
+
+      .textAreaFunctionPaste:focus{
+        background-color: rgb(249, 226, 210) /*80% of tangerine e37222*/
+      }
+
+      .buttonTestFunction{
+        font-size: 1.2em;
+        padding: 5px;
+        margin-bottom: 10px;
+        border: 2px solid rgb(227, 114, 34); /*tangerine e37222*/;
+        color: rgb(227, 114, 34); /*tangerine e37222*/;
+        outline: none;
+      }
+
+      .buttonTestFunction:hover{
+        background-color: rgb(227, 114, 34); /*tangerine e37222*/;
+        color: rgba(255, 255, 255, .8);
+        cursor: pointer;
+      }
+
+      .buttonTestFunction:active{
+        background-color: rgb(102, 185, 191); /*powder 66b9bf*/
+        border: 2px solid rgb(7, 136, 155); /*teal 07889b*/
+        color: rgba(255, 255, 255, .8);
+        cursor: pointer;
+      }
+
+      .divFunctionErrorAlertArea{
+        padding-top: 10px;
+        color: rgba(128, 0, 0, .8);
       }
 
       .divFunctionResultsArea{
         overflow: auto;
+        margin: 5px 0 15px 0;
+      }
+
+      .divFunctionResultsArea hr{
+        border: 1px solid rgba(255, 255, 255, .8);
+        margin-top: 5px;
+      }
+
+      .spanOutput, .spanMs{
+        display: block;
+      }
+
+      .spanOutput b, .spanMs b{
+        color: rgb(227, 114, 34); /*tangerine e37222*/
       }
 
       #footer{
-        background: rgb(0,0,0);
+        background-color: rgb(227, 114, 34); /*tangerine e37222*/
         grid-area: footer;
         line-height: 3vh;
         text-align: center;
-        font-size: 1.4rem;
-        border-top: 3px solid black;
-        color: white;
+        font-size: 1.2rem;
+        color: rgba(255, 255, 255, .8);
       }
 
       #footer a{
-        color: white;
+        color: rgba(255, 255, 255, .8);
+      }
+
+      #footer a:hover{
+        color: rgba(255, 255, 255);
       }
     </style>
   </head>
@@ -249,16 +404,24 @@
               class="textAreaFunctionPaste"
               placeholder="Paste your function in this field"
               ></textarea>
-              <button type="button" name="button" @click="testFunctionPerformance()">test function</button>
+              <button type="button" name="button" class="buttonTestFunction" @click="testFunctionPerformance()">test function</button>
               <div class="divFunctionMS">
-                <h3>The total milliseconds to run all the functions are {{function1Totalms}}</h3>
+                <h3>Total milliseconds for all functions: {{function1Totalms.toFixed(2)}}</h3>
               </div>
               <div class="divFunctionErrorAlertArea" v-show="function1Error">
                 {{function1ErrorMessage}}
               </div>
               <div class="divFunctionResultsArea"
               v-for="result in function1Result">
-                {{result}}
+              <span class="spanOutput">
+                <b>Output:</b>
+                <span>{{result.output}}</span>
+              </span>
+              <span class="spanMs">
+                <b>ms:</b>
+                <span>{{result.ms}}</span>
+              </span>
+              <hr>
               </div>
             </div>
 
@@ -277,9 +440,9 @@
               class="textAreaFunctionPaste"
               placeholder="Paste your function in this field"
               ></textarea>
-              <button type="button" name="button" @click="testFunctionPerformance()">test function</button>
+              <button type="button" name="button" class="buttonTestFunction" @click="testFunctionPerformance()">test function</button>
               <div class="divFunctionMS">
-                <h3>The total milliseconds to run all the functions are {{function2Totalms}}</h3>
+                <h3>Total milliseconds for all functions: {{function2Totalms.toFixed(2)}}</h3>
               </div>
               <div class="divFunctionErrorAlertArea" v-show="function2Error">
                 {{function2ErrorMessage}}
@@ -497,6 +660,7 @@
 
           //Evaluates if the array is properly structured
           evalArray(arrStr, arr) {
+            if(arrStr === "") return;
 
             console.log("Beginning of evalArray. arrStr is:", arrStr, typeof arrStr);
             if (arrStr === "[]"){
@@ -657,6 +821,7 @@
 
             if (el.trim() === "true") return true;
             if (el.trim() === "false") return false;
+            if (el.trim() === "") return;
             return "error";
           },
 
@@ -682,7 +847,7 @@
 
           //Evaluates if the null is properly structured
           evalNull(el){
-
+            if (el.trim() === "") return;
             return el.trim() === "null" ? null : "error";
           },
 
@@ -696,8 +861,10 @@
 
           //evaluates if the object is properly structured
           evalObject(el, obj){
+            console.log("el is", el);
 
             el = el.trim();
+            if (el === "{") return;
             if (el === "{}") return obj;
 
             if (!el.startsWith("{") || !el.endsWith("}")) return "error";
@@ -754,6 +921,7 @@
           evalRegExp(el){
 
             el = el.trim();
+            if(el === "") return;
             let elFlags = el.slice(el.lastIndexOf("/") + 1);
             let flags = "igmsuy";
             let source = el.slice(1, el.lastIndexOf("/"));
@@ -798,7 +966,7 @@
 
           //Evaluates if the undefined is properly structured
           evalUndefined(el){
-
+            if(el === "") return;
             return el === "undefined" ? undefined : "error";
           },
 
@@ -834,7 +1002,7 @@
         `
           <div class="divFunctionArgument" :key="set">
             <h2>Argument {{argIdNum}}</h2>
-            <label class="labelArgumentsDataTypes">
+            <label class="labelArgumentsText">
               <textarea
                 class="textAreaArgumentsPaste"
                 placeholder="Enter the function's argument.\nIf you are entering more than one options for the same argument type, separate them with a line break"
@@ -849,56 +1017,115 @@
                 <div class="divDataTypeContainer">
                   <div class="divLabelDataTypeSingle">
                     <label class="labelArgumentsDataTypes">
-                      Array:
-                      <input type="radio" name="inputRadioDataType" value="array" v-model="dataType" @change="processTextAreaValues($event.target.value)">
+                      <input type="radio"
+                      class="inputRadioDataType"
+                      name="inputRadioDataType"
+                      value="array" v-model="dataType"
+                      @change="processTextAreaValues($event.target.value)"
+                      >
+                      <span class="spanFakeRadio"></span>
+                      <span class="spanRadioExplanation">Array</span>
                     </label>
                   </div>
                   <div class="divLabelDataTypeSingle">
                     <label class="labelArgumentsDataTypes">
-                      Boolean:
-                      <input type="radio" name="inputRadioDataType" value="boolean" v-model="dataType" @change="processTextAreaValues($event.target.value)">
+                      <input type="radio"
+                      class="inputRadioDataType"
+                      name="inputRadioDataType"
+                      value="boolean"
+                      v-model="dataType"
+                      @change="processTextAreaValues($event.target.value)"
+                      >
+                      <span class="spanFakeRadio"></span>
+                      <span class="spanRadioExplanation">Boolean</span>
                     </label>
                   </div>
                   <div class="divLabelDataTypeSingle">
                     <label class="labelArgumentsDataTypes">
-                      Null:
-                      <input type="radio" name="inputRadioDataType" value="null" v-model="dataType" @change="processTextAreaValues($event.target.value)">
+                      <input type="radio"
+                      class="inputRadioDataType"
+                      name="inputRadioDataType" value="null"
+                      v-model="dataType"
+                      @change="processTextAreaValues($event.target.value)"
+                      >
+                      <span class="spanFakeRadio"></span>
+                      <span class="spanRadioExplanation">Null</span>
                     </label>
                   </div>
                   <div class="divLabelDataTypeSingle">
                     <label class="labelArgumentsDataTypes">
-                      Number:
-                      <input type="radio" name="inputRadioDataType" value="number" v-model="dataType" @change="processTextAreaValues($event.target.value)">
+                      <input type="radio"
+                      class="inputRadioDataType"
+                      name="inputRadioDataType"
+                      value="number" v-model="dataType"
+                      @change="processTextAreaValues($event.target.value)"
+                      >
+                      <span class="spanFakeRadio"></span>
+                      <span class="spanRadioExplanation">Number</span>
                     </label>
                   </div>
                   <div class="divLabelDataTypeSingle">
                     <label class="labelArgumentsDataTypes">
-                      Object literal:
-                      <input type="radio" name="inputRadioDataType" value="object" v-model="dataType" @change="processTextAreaValues($event.target.value)">
+                      <input type="radio"
+                      class="inputRadioDataType"
+                      name="inputRadioDataType"
+                      value="object"
+                      v-model="dataType"
+                      @change="processTextAreaValues($event.target.value)"
+                      >
+                      <span class="spanFakeRadio"></span>
+                      <span class="spanRadioExplanation">Object literal</span>
                     </label>
                   </div>
                   <div class="divLabelDataTypeSingle">
                     <label class="labelArgumentsDataTypes">
-                      RegExp:
-                      <input type="radio" name="inputRadioDataType" value="regexp" v-model="dataType" @change="processTextAreaValues($event.target.value)">
+                      <input type="radio"
+                      class="inputRadioDataType"
+                      name="inputRadioDataType"
+                      value="regexp"
+                      v-model="dataType"
+                      @change="processTextAreaValues($event.target.value)"
+                      >
+                      <span class="spanFakeRadio"></span>
+                      <span class="spanRadioExplanation">RegExp</span>
                     </label>
                   </div>
                   <div class="divLabelDataTypeSingle">
                     <label class="labelArgumentsDataTypes">
-                      String:
-                      <input type="radio" name="inputRadioDataType" value="string" v-model="dataType" @change="processTextAreaValues($event.target.value)">
+                      <input type="radio"
+                      class="inputRadioDataType"
+                      name="inputRadioDataType"
+                      value="string"
+                      v-model="dataType"
+                      @change="processTextAreaValues($event.target.value)"
+                      >
+                      <span class="spanFakeRadio"></span>
+                      <span class="spanRadioExplanation">String</span>
                     </label>
                   </div>
                   <div class="divLabelDataTypeSingle">
                     <label class="labelArgumentsDataTypes">
-                      Undefined:
-                      <input type="radio" name="inputRadioDataType" value="undefined" v-model="dataType" @change="processTextAreaValues($event.target.value)">
+                      <input type="radio"
+                      class="inputRadioDataType"
+                      name="inputRadioDataType"
+                      value="undefined" v-model="dataType"
+                      @change="processTextAreaValues($event.target.value)"
+                      >
+                      <span class="spanFakeRadio"></span>
+                      <span class="spanRadioExplanation">Undefined</span>
                     </label>
                   </div>
                   <div class="divLabelDataTypeSingle">
                     <label class="labelArgumentsDataTypes">
-                      callback function:
-                      <input type="radio" name="inputRadioDataType" value="function" v-model="dataType" @change="processTextAreaValues($event.target.value)">
+                      <input type="radio"
+                      class="inputRadioDataType"
+                      name="inputRadioDataType"
+                      value="function"
+                      v-model="dataType"
+                      @change="processTextAreaValues($event.target.value)"
+                      >
+                      <span class="spanFakeRadio"></span>
+                      <span class="spanRadioExplanation">Callback function</span>
                     </label>
                   </div>
                 </div>
@@ -988,10 +1215,7 @@
           //updates the length of the argumentsArr based on the addition or subtraction
           //of new components
           changeArgumentsArrLength(event){
-            console.log(event);
-            if (event.target.value > 10) {
-              event.target.value = 10;
-            }
+            if (event.target.value > 10) event.target.value = 10;
             /*
             I need to decide if I want to keep this if statement or if an argument
             with an empty string should be placed every time I add a new textArea.
