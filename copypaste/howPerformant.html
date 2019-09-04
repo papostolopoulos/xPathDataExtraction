@@ -19,6 +19,10 @@
         font-family: sans-serif;
       }
 
+      body{
+        background-color: rgb(227, 114, 34); /*tangerine e37222*/
+      }
+
       h1{
         font-size: 2em;
         font-family: "Montserrat", sans-serif;
@@ -76,6 +80,7 @@
         background-color: rgb(102, 185, 191); /*powder 66b9bf*/
         color: rgba(255, 255, 255, .8);
         border-right: 2px solid rgb(7, 136, 155); /*teal 07889b*/
+        border-left: 2px solid rgb(7, 136, 155); /*teal 07889b*/
       }
 
       .divNumOfArgumentsSets{
@@ -471,7 +476,7 @@
               v-model="function1String"
               name="textAreaFunction1"
               class="textAreaFunctionPaste"
-              placeholder="Paste your function in this field"
+              placeholder="Type or paste your function in this field"
               ></textarea>
               <button type="button" name="button" class="buttonTestFunction" @click="testFunctionPerformance()">test function</button>
               <div class="divFunctionMS">
@@ -509,7 +514,7 @@
               v-model="function2String"
               name="textAreaFunction2"
               class="textAreaFunctionPaste"
-              placeholder="Paste your function in this field"
+              placeholder="Type or paste your function in this field"
               ></textarea>
               <button type="button" name="button" class="buttonTestFunction" @click="testFunctionPerformance()">test function</button>
               <div class="divFunctionMS">
