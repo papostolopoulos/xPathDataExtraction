@@ -1,3 +1,17 @@
+/*
+I love apples
+I like oranges
+I do not like bananas
+I don't like papayas
+I like grapes
+
+5
+3
+2
+8
+12
+*/
+
 var str1 = "I love apples";
 var str2 = "I like oranges";
 var str3 = "I do not like bananas";
@@ -21,6 +35,6 @@ function loveFruit1(str, num){
 
 function loveFruit2(str, num){
   return /I\s(love|like)/.test(str) ?
-  `${str}. Please give me ${num}` :
+  `${str}. Please give me ${num.toString()}` :
   `${str}. I don't want any of your fruit!`;
 }
