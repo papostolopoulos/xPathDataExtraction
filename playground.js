@@ -1,13 +1,26 @@
-//To use for testing how the function is run in howPerforman.html
-function hello(data){
-  for(var i = 0; i<data.length; i++){
-    console.log(data[i]);
-  }
+var str1 = "I love apples";
+var str2 = "I like oranges";
+var str3 = "I do not like bananas";
+var str4 = "I don't like papayas";
+var str5 = "I like grapes";
 
-  if(data.indexOf("M") === -1){
-    return "There is no M";
+var num1 = 5;
+var num2 = 3;
+var num3 = 2;
+var num4 = 8;
+var num5 = 12;
+
+function loveFruit1(str, num){
+  if (str.indexOf("I like") !== -1 || str.indexOf("I love") !== -1) {
+      return str + ". Please give me " + num.toString();
   }
-  else{
-    return "Hello there " + data;
+  else {
+    return str + ". I don't want any of your fruit!";
   }
+}
+
+function loveFruit2(str, num){
+  return /I\s(love|like)/.test(str) ?
+  `${str}. Please give me ${num}` :
+  `${str}. I don't want any of your fruit!`;
 }

@@ -6,6 +6,7 @@
       href="favicon.ico">
     <meta charset="utf-8">
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
     <title>How Performant - Test the performance of JavaScript functions</title>
     <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
     <script src="vue.js"></script>
@@ -42,6 +43,7 @@
         align-items: center;
         background-color: rgb(227, 114, 34); /*tangerine e37222*/
         color: rgba(255, 255, 255, .8);
+        border-bottom: 2px solid rgb(7, 136, 155); /*teal 07889b*/
 
       }
 
@@ -73,6 +75,7 @@
         overflow: auto;
         background-color: rgb(102, 185, 191); /*powder 66b9bf*/
         color: rgba(255, 255, 255, .8);
+        border-right: 2px solid rgb(7, 136, 155); /*teal 07889b*/
       }
 
       .divNumOfArgumentsSets{
@@ -239,12 +242,22 @@
         padding: 0 10px 10px 10px;
         height: 90vh;
         color: rgba(255, 255, 255, .8);
+        transition: width 2s, padding 2s;
       }
 
       .sectionFunction1{
         overflow: auto;
-        background-color: rgb(238, 170, 123) /*tan*/;
-        border-right: 2px solid rgba(255, 255, 255, .8);
+        background-color: rgb(238, 170, 123) /*tan eeaa7b*/;
+        border-right: 2px solid rgb(227, 114, 34); /*tangerine e37222*/
+      }
+
+      .sectionFunction1Expanded{
+        width: 100%;
+      }
+
+      .sectionFunction2Shrank{
+        width: 0;
+        padding: 0;
       }
 
       .sectionFunction2{
@@ -259,14 +272,42 @@
         margin-bottom: 80px;
       }
 
+      #divFunction1HeaderContainer{
+        display: grid;
+        grid-template-columns: 93% 7%;
+        grid-template-rows: 100%;
+        grid-template-areas:
+        "header1 arrow";
+      }
+
+      .divFunction1Header{
+        grid-area: header1;
+      }
+
+      .divFunction1Arrow{
+        grid-area: arrow;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 2s;
+      }
+
+      .divFunction1Arrow:hover{
+        cursor: pointer;
+      }
+
+      .divFunction1ArrowRotated{
+        transform: rotate(-180deg);
+      }
+
       .textAreaFunctionPaste{
         width: 100%;
         height: 100%;
         padding: 5px;
         font-size: 0.8em;
         outline: none;
-        border: 2px solid rgb(227, 114, 34); /*tangerine e37222*/;
-        color: rgb(227, 114, 34); /*tangerine e37222*/;
+        border: 2px solid rgb(227, 114, 34); /*tangerine e37222*/
+        color: rgb(227, 114, 34); /*tangerine e37222*/
       }
 
       .textAreaFunctionPaste:focus{
@@ -302,7 +343,16 @@
 
       .divFunctionResultsArea{
         overflow: auto;
-        margin: 5px 0 15px 0;
+        padding: 15px 0 0 0;
+        font-size: 1em;
+        margin: 0;
+        transition: font-size 1s, margin 1s;
+      }
+
+      .divFunctionResultsArea:hover{
+        font-size: 1.3em;
+        margin: 0 -10px;
+        z-index:1;
       }
 
       .divFunctionResultsArea hr{
@@ -310,8 +360,13 @@
         margin-top: 5px;
       }
 
+      .divFunctionResultsArea:nth-child(even){
+        background-color: rgb(243, 197, 165); /*80% of tan eeaa7b*/
+      }
+
       .spanOutput, .spanMs{
         display: block;
+        padding-left: 10px;
       }
 
       .spanOutput b, .spanMs b{
@@ -325,6 +380,7 @@
         text-align: center;
         font-size: 1.2rem;
         color: rgba(255, 255, 255, .8);
+        border-top: 2px solid rgb(7, 136, 155); /*teal 07889b*/
       }
 
       #footer a{
@@ -343,7 +399,7 @@
           How Performant?
         </div>
         <div class="subtitle">
-          Compare JavaScript Functions
+          Compare JavaScript Functions - See their execution time
         </div>
       </header>
       <main id="main">
@@ -394,9 +450,21 @@
 
 
         <section class="sectionPasteFunctions">
-          <section class="sectionFunction1">
+          <section class="sectionFunction1"
+          :class="{'sectionFunction1Expanded': expandSectionFunction1}"
+          >
             <div class="divFunctionPasteArea">
-              <h1>Function 1</h1>
+              <div class="divFunctionHeading" id="divFunction1HeaderContainer">
+                <div class="divFunction1Header">
+                  <h1>Function 1</h1>
+                </div>
+                <div class="divFunction1Arrow"
+                :class="{'divFunction1ArrowRotated': function1ArrowRotate}"
+                @click="adjustFunction1Field($event)"
+                >
+                  <i class="fas fa-arrow-alt-circle-right fa-2x"></i>
+                </div>
+              </div>
               <textarea
               id="textAreaFunction1"
               v-model="function1String"
@@ -430,7 +498,9 @@
 
 
 
-          <section class="sectionFunction2">
+          <section class="sectionFunction2"
+          :class="{'sectionFunction2Shrank': shrinkSectionFunction2}"
+          >
             <div class="divFunctionPasteArea">
               <h1>Function 2</h1>
               <textarea
@@ -449,7 +519,15 @@
               </div>
               <div class="divFunctionResultsArea"
               v-for="result in function2Result">
-                {{result}}
+              <span class="spanOutput">
+                <b>Output:</b>
+                <span>{{result.output}}</span>
+              </span>
+              <span class="spanMs">
+                <b>ms:</b>
+                <span>{{result.ms}}</span>
+              </span>
+              <hr>
               </div>
             </div>
           </section>
@@ -1196,6 +1274,9 @@
       let app = new Vue({
         el: "#main",
         data: {
+          expandSectionFunction1: false,
+          shrinkSectionFunction2: false,
+          function1ArrowRotate: false,
           numOfArgumentsSets: 0, //number of components - number of arguments for functions
           numOfArgumentsError: false,
           argumentsArr: [], //The array that has all the initial arguments
@@ -1212,6 +1293,23 @@
           maxElementsNum: 0 //The most number of elements that an argument set has
         },
         methods: {
+          // Expands or decreases the width of sectionFunction1
+          adjustFunction1Field(event){
+            console.log("before the ternary", this.expandSectionFunction1);
+            if (this.expandSectionFunction1 === false) {
+              this.expandSectionFunction1 = true;
+              this.shrinkSectionFunction2 = true;
+              this.function1ArrowRotate = true;
+            }
+            else {
+              this.expandSectionFunction1 = false;
+              this.shrinkSectionFunction2 = false;
+              this.function1ArrowRotate = false;
+            }
+            console.log("after the ternary", this.expandSectionFunction1);
+          },
+
+
           //updates the length of the argumentsArr based on the addition or subtraction
           //of new components
           changeArgumentsArrLength(event){
@@ -1354,7 +1452,7 @@
               funcArguments: ${funcArguments}`);
 
               //Test if the function has any errors
-              this.catchErrors(func, num);
+              this.catchErrors(func, funcArguments, num);
 
             // If there are no arguments used in the function, then return the function's
             // product without any parameters
@@ -1481,9 +1579,15 @@
 
 
 
-          catchErrors(fnctn, num){
+          catchErrors(fnctn, args, num){
             try {
-              fnctn();
+              /*If arguments exist, they are in an array. I am selecting the
+              first element of the array and I am using the spread operator to
+              get the arguments. They I test the function against these arguments
+              only. I am assuming that all the arguments are in good shape. because
+              they were tested in prior functions*/
+              if (!args) fnctn();
+              else fnctn(...args[0]);
             }
             catch(error) {
               console.error(error);
