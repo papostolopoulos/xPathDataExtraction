@@ -1587,13 +1587,15 @@
 
           catchErrors(fnctn, args, num){
             try {
-              /*If arguments exist, they are in an array. I am selecting the
-              first element of the array and I am using the spread operator to
-              get the arguments. They I test the function against these arguments
-              only. I am assuming that all the arguments are in good shape. because
-              they were tested in prior functions*/
+              /*If arguments exist, they are in an array. Therefore I use a for
+              loop to go over them and confirm that all are working. Otherwise, 
+              throw an error*/
               if (!args) fnctn();
-              else fnctn(...args[0]);
+              else{
+                for (var i = 0; i < args.length; i++) {
+                  fnctn(...args[i]);
+                }
+              }
             }
             catch(error) {
               console.error(error);

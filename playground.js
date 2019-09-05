@@ -4,12 +4,16 @@ I like oranges
 I do not like bananas
 I don't like papayas
 I like grapes
+I dislike avocados
+I like watermelons a lot!
 
 5
 3
 2
 8
 12
+3
+9
 */
 
 var str1 = "I love apples";
